@@ -1,44 +1,45 @@
 {
-	"schemaVersion": 1,
-	"id": "distant-moons",
-	"version": "${version}",
-	"name": "Under Distant Moons",
-	"description": "This is an example description! Tell everyone what your mod is about!",
-	"authors": [
-		"Me!"
-	],
-	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
-	},
-	"license": "CC0-1.0",
-	"icon": "assets/distant-moons/icon.png",
-	"environment": "*",
-	"entrypoints": {
-		"main": [
-			"syrenyx.distantmoons.UnderDistantMoons"
-		],
-		"client": [
-			"syrenyx.distantmoons.UnderDistantMoonsClient"
-		],
-		"fabric-datagen": [
-			"syrenyx.distantmoons.UnderDistantMoonsDataGenerator"
-		]
-	},
-	"mixins": [
-		"distant-moons.mixins.json",
-		{
-			"config": "distant-moons.client.mixins.json",
-			"environment": "client"
-		}
-	],
-	"depends": {
-		"fabricloader": ">=0.17.2",
-		"minecraft": "~1.21.8",
-		"java": ">=21",
-		"fabric-api": "*"
-	},
-	"suggests": {
-		"another-mod": "*"
-	}
+  "schemaVersion": 1,
+  "id": "distant-moons",
+  "version": "${version}",
+  "name": "Under Distant Moons",
+  "description": "This is an example description! Tell everyone what your mod is about!",
+  "authors": [
+    "Syrenyx",
+    "Galbroath"
+  ],
+  "contact": {
+    "homepage": "https://github.com/Syrenyx/UnderDistantMoons",
+    "sources": "https://github.com/Syrenyx/UnderDistantMoons"
+  },
+  "license": "CC0-1.0",
+  "icon": "assets/distant-moons/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "syrenyx.distantmoons.UnderDistantMoons"
+    ],
+    "client": [
+      "syrenyx.distantmoons.UnderDistantMoonsClient"
+    ],
+    "fabric-datagen": [
+      "syrenyx.distantmoons.UnderDistantMoonsDataGenerator"
+    ]
+  },
+  "mixins": [
+    "distant-moons.mixins.json",
+    {
+      "config": "distant-moons.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=0.17.2",
+    "minecraft": "~1.21.8",
+    "java": ">=21",
+    "fabric-api": "*"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
 }
