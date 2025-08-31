@@ -1,0 +1,12 @@
+{
+  "display": {
+    "description": {
+      "translate": "affliction.distant-moons.curse_of_the_night"
+    },
+    "icon": "distant-moons:curse_of_the_night",
+    "color": 0
+  },
+  "stages": 3,
+  "progression_limit": 100,
+  "persistent": true
+}
