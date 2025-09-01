@@ -2,8 +2,10 @@ package syrenyx.distantmoons;
 
 import net.fabricmc.api.ModInitializer;
 
+import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import syrenyx.distantmoons.initializers.Registries;
 
 public class UnderDistantMoons implements ModInitializer {
 
@@ -14,6 +16,11 @@ public class UnderDistantMoons implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		LOGGER.info("Initializing Modded Content");
+    Registries.initialize();
     LOGGER.info("Content Successfully Initialized");
 	}
+
+  public static Identifier identifierOf(String id) {
+    return Identifier.of(MOD_ID, id);
+  }
 }
