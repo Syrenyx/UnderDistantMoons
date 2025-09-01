@@ -5,6 +5,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.component.ComponentMap;
 import net.minecraft.registry.entry.RegistryElementCodec;
 import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.registry.entry.RegistryFixedCodec;
 import net.minecraft.util.dynamic.Codecs;
 import syrenyx.distantmoons.initializers.component.AfflictionEffectComponentTypes;
 import syrenyx.distantmoons.references.RegistryKeys;
@@ -33,4 +34,5 @@ public record Affliction(
       .apply(instance, Affliction::new)
   );
   public static final Codec<RegistryEntry<Affliction>> ENTRY_CODEC = RegistryElementCodec.of(RegistryKeys.AFFLICTION, CODEC);
+  public static final Codec<RegistryEntry<Affliction>> FIXED_ENTRY_CODEC = RegistryFixedCodec.of(RegistryKeys.AFFLICTION);
 }

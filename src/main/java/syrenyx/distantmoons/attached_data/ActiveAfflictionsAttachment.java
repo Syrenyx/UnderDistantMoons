@@ -15,11 +15,12 @@ import syrenyx.distantmoons.initializers.AttachmentTypes;
 import java.util.HashMap;
 import java.util.Map;
 
+@SuppressWarnings("UnstableApiUsage")
 public record ActiveAfflictionsAttachment(Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions) {
 
   public static Codec<ActiveAfflictionsAttachment> CODEC = RecordCodecBuilder.create(instance -> instance
       .group(
-          Codec.unboundedMap(Affliction.ENTRY_CODEC, AfflictionInstance.CODEC).fieldOf("activeAfflictions").forGetter(ActiveAfflictionsAttachment::activeAfflictions)
+          Codec.unboundedMap(Affliction.FIXED_ENTRY_CODEC, AfflictionInstance.CODEC).fieldOf("activeAfflictions").forGetter(ActiveAfflictionsAttachment::activeAfflictions)
       )
       .apply(instance, ActiveAfflictionsAttachment::new)
   );
