@@ -147,9 +147,7 @@ public abstract class AfflictionCommand {
   ) throws CommandSyntaxException {
     int result = 0;
     for (Entity target : targets) {
-      if (!(target instanceof LivingEntity livingEntity)) continue;
-      AfflictionManager.setAffliction(livingEntity, affliction);
-      result++;
+      if (target instanceof LivingEntity livingEntity && AfflictionManager.setAffliction(livingEntity, affliction)) result++;
     }
     if (result == 0) throw SET_FAILED_EXCEPTION.create();
     if (targets.size() == 1) source.sendFeedback(() -> Text.translatable("commands.affliction.set.success.single", affliction.affliction().value().description(), targets.iterator().next().getDisplayName()), true);

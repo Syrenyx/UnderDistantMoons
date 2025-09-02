@@ -2,18 +2,24 @@ package syrenyx.distantmoons.affliction;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.entity.EntityType;
+import net.minecraft.registry.RegistryCodecs;
 import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.registry.entry.RegistryEntryList;
 import net.minecraft.registry.entry.RegistryFixedCodec;
 import net.minecraft.text.Text;
 import net.minecraft.text.TextCodecs;
 import syrenyx.distantmoons.references.RegistryKeys;
 
-public record Affliction(Text description, boolean persistent) {
+import java.util.Optional;
+
+public record Affliction(Text description, boolean persistent, Optional<RegistryEntryList<EntityType<?>>> immuneEntities) {
 
   public static final Codec<Affliction> CODEC = RecordCodecBuilder.create(instance -> instance
       .group(
           TextCodecs.CODEC.fieldOf("description").forGetter(Affliction::description),
-          Codec.BOOL.optionalFieldOf("persistent", false).forGetter(Affliction::persistent)
+          Codec.BOOL.optionalFieldOf("persistent", false).forGetter(Affliction::persistent),
+          RegistryCodecs.entryList(net.minecraft.registry.RegistryKeys.ENTITY_TYPE).optionalFieldOf("immune_entities").forGetter(Affliction::immuneEntities)
       )
       .apply(instance, Affliction::new)
   );

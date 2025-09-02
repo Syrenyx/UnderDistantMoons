@@ -20,12 +20,15 @@ public abstract class AfflictionManager {
     return true;
   }
 
-  public static void setAffliction(LivingEntity entity, AfflictionInstance afflictionInstance) {
+  public static boolean setAffliction(LivingEntity entity, AfflictionInstance afflictionInstance) {
+    if (isImmune(entity, afflictionInstance.affliction())) return false;
     Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
     activeAfflictions.put(afflictionInstance.affliction(), afflictionInstance);
+    return true;
   }
 
   public static boolean giveAffliction(LivingEntity entity, AfflictionInstance afflictionInstance) {
+    if (isImmune(entity, afflictionInstance.affliction())) return false;
     Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
     AfflictionInstance activeAffliction = activeAfflictions.putIfAbsent(afflictionInstance.affliction(), afflictionInstance);
     if (activeAffliction == null) return true;
@@ -48,5 +51,10 @@ public abstract class AfflictionManager {
     return entity instanceof PlayerEntity player
         ? PersistentStateManager.getPlayerState(player).livingEntityAttachment().activeAfflictions()
         : LivingEntityAttachment.getOrCreate(entity).activeAfflictions();
+  }
+
+  private static boolean isImmune(LivingEntity entity, RegistryEntry<Affliction> affliction) {
+    if (affliction.value().immuneEntities().isEmpty()) return false;
+    return affliction.value().immuneEntities().get().contains(entity.getType().getRegistryEntry());
   }
 }

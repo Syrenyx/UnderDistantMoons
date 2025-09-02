@@ -3,6 +3,7 @@
     "translate": "affliction.distant-moons.curse"
   },
   "persistent": true,
+  "immune_entities": "#minecraft:undead",
   "tick_progression": {},
   "effects": {}
 }
