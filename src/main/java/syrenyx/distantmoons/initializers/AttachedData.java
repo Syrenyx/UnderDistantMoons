@@ -4,7 +4,7 @@ import com.mojang.serialization.Codec;
 import net.fabricmc.fabric.api.attachment.v1.AttachmentRegistry;
 import net.fabricmc.fabric.api.attachment.v1.AttachmentType;
 import syrenyx.distantmoons.UnderDistantMoons;
-import syrenyx.distantmoons.attached_data.LivingEntityAttachment;
+import syrenyx.distantmoons.data.attachment.LivingEntityAttachment;
 
 @SuppressWarnings("UnstableApiUsage")
 public abstract class AttachedData {

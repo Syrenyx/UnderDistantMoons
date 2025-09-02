@@ -1,4 +1,4 @@
-package syrenyx.distantmoons.attached_data;
+package syrenyx.distantmoons.data.attachment;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -23,6 +23,10 @@ public record LivingEntityAttachment(Map<RegistryEntry<Affliction>, AfflictionIn
 
   public LivingEntityAttachment(Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions) {
     this.activeAfflictions = new HashMap<>(activeAfflictions);
+  }
+
+  public static LivingEntityAttachment newDefault() {
+    return new LivingEntityAttachment(new HashMap<>());
   }
 
   public static LivingEntityAttachment getOrCreate(LivingEntity entity) {
