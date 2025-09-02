@@ -5,6 +5,5 @@
   "max_stage": 3,
   "persistent": true,
   "immune_entities": "#minecraft:undead",
-  "tick_progression": {},
   "effects": {}
 }

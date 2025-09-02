@@ -15,15 +15,33 @@ public class AfflictionInstance {
       .apply(instance, AfflictionInstance::new)
   );
   private final RegistryEntry<Affliction> affliction;
+  private float progression;
   private int stage;
+
+  public AfflictionInstance(RegistryEntry<Affliction> affliction, float progression, int stage) {
+    this.affliction = affliction;
+    this.progression = progression;
+    this.stage = stage;
+  }
 
   public AfflictionInstance(RegistryEntry<Affliction> affliction, int stage) {
     this.affliction = affliction;
+    this.progression = 0.0F;
     this.stage = stage;
+  }
+
+  public AfflictionInstance(RegistryEntry<Affliction> affliction) {
+    this.affliction = affliction;
+    this.progression = 0.0F;
+    this.stage = Affliction.DEFAULT_STAGE;
   }
 
   public RegistryEntry<Affliction> affliction() {
     return this.affliction;
+  }
+
+  public float progression() {
+    return this.progression;
   }
 
   public int stage() {
@@ -34,7 +52,12 @@ public class AfflictionInstance {
     this.stage = stage;
   }
 
+  public void addToProgression(float value) {
+    this.progression += value;
+  }
+
   public void limitToAllowedValues() {
-    this.stage = Math.min(this.stage, this.affliction.value().maxStage());
+    this.progression = Math.max(0.0F, Math.min(this.progression, Affliction.MAX_PROGRESSION));
+    this.stage = Math.max(1, Math.min(this.stage, this.affliction.value().maxStage()));
   }
 }

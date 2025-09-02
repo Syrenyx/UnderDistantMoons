@@ -36,7 +36,7 @@ public abstract class AfflictionManager {
     AfflictionInstance activeAffliction = activeAfflictions.putIfAbsent(afflictionInstance.affliction(), afflictionInstance);
     if (activeAffliction == null) return true;
     boolean result = false;
-    if (afflictionInstance.stage() > activeAffliction.stage()) {
+    if (afflictionInstance.stage() > activeAffliction.stage() || afflictionInstance.stage() == activeAffliction.stage() && afflictionInstance.progression() > activeAffliction.progression()) {
       activeAffliction.setStage(afflictionInstance.stage());
       result = true;
     }
@@ -47,6 +47,15 @@ public abstract class AfflictionManager {
     Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(player);
     for (RegistryEntry<Affliction> affliction : activeAfflictions.keySet()) {
       if (!affliction.value().persistent()) activeAfflictions.remove(affliction);
+    }
+  }
+
+  public static void handleTick(LivingEntity entity) {
+    Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
+    for (AfflictionInstance afflictionInstance : activeAfflictions.values()) {
+      if (afflictionInstance.affliction().value().tickProgression().isEmpty()) continue;
+      afflictionInstance.addToProgression(afflictionInstance.affliction().value().tickProgression().get().getValue(afflictionInstance.stage()));
+      afflictionInstance.limitToAllowedValues();
     }
   }
 

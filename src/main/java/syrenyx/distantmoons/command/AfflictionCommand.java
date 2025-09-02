@@ -2,6 +2,7 @@ package syrenyx.distantmoons.command;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.arguments.FloatArgumentType;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
@@ -62,8 +63,7 @@ public abstract class AfflictionCommand {
                         context.getSource(),
                         EntityArgumentType.getEntities(context, "targets"),
                         new AfflictionInstance(
-                            RegistryEntryReferenceArgumentType.getRegistryEntry(context, "affliction", RegistryKeys.AFFLICTION_REGISTRY_KEY),
-                            Affliction.DEFAULT_STAGE
+                            RegistryEntryReferenceArgumentType.getRegistryEntry(context, "affliction", RegistryKeys.AFFLICTION_REGISTRY_KEY)
                         )
                     ))
                     .then(CommandManager
@@ -76,6 +76,18 @@ public abstract class AfflictionCommand {
                                 IntegerArgumentType.getInteger(context, "stage")
                             )
                         ))
+                        .then(CommandManager
+                            .argument("progression", FloatArgumentType.floatArg(0.0F, Affliction.MAX_PROGRESSION))
+                            .executes(context -> executeGive(
+                                context.getSource(),
+                                EntityArgumentType.getEntities(context, "targets"),
+                                new AfflictionInstance(
+                                    RegistryEntryReferenceArgumentType.getRegistryEntry(context, "affliction", RegistryKeys.AFFLICTION_REGISTRY_KEY),
+                                    FloatArgumentType.getFloat(context, "progression"),
+                                    IntegerArgumentType.getInteger(context, "stage")
+                                )
+                            ))
+                        )
                     )
                 )
             )
@@ -96,6 +108,18 @@ public abstract class AfflictionCommand {
                                 IntegerArgumentType.getInteger(context, "stage")
                             )
                         ))
+                        .then(CommandManager
+                            .argument("progression", FloatArgumentType.floatArg(0.0F, Affliction.MAX_PROGRESSION))
+                            .executes(context -> executeSet(
+                                context.getSource(),
+                                EntityArgumentType.getEntities(context, "targets"),
+                                new AfflictionInstance(
+                                    RegistryEntryReferenceArgumentType.getRegistryEntry(context, "affliction", RegistryKeys.AFFLICTION_REGISTRY_KEY),
+                                    FloatArgumentType.getFloat(context, "progression"),
+                                    IntegerArgumentType.getInteger(context, "stage")
+                                )
+                            ))
+                        )
                     )
                 )
             )

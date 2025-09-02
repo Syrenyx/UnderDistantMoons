@@ -4,6 +4,12 @@
   },
   "max_stage": 8,
   "persistent": false,
-  "tick_progression": {},
+  "tick_progression": {
+    "type": "minecraft:lookup",
+    "values": [
+      0.8, 0.6, 0.4, 0.2, -0.2, -0.4, -0.6, -0.8
+    ],
+    "fallback": 0.0
+  },
   "effects": {}
 }
