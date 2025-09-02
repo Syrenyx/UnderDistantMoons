@@ -1,0 +1,10 @@
+{
+  "display": {
+    "descriptions": {
+      "translate": "affliction.distant-moons.curse_of_the_night"
+    }
+  },
+  "persistent": true,
+  "tick_progression": {},
+  "effects": {}
+}

@@ -4,9 +4,11 @@ import net.fabricmc.fabric.api.event.registry.DynamicRegistries;
 import syrenyx.distantmoons.affliction.Affliction;
 import syrenyx.distantmoons.references.RegistryKeys;
 
-public class Registries {
+public abstract class Registries {
 
-  public static void initialize() {
-    DynamicRegistries.registerSynced(RegistryKeys.AFFLICTION, Affliction.CODEC);
+  static {
+    DynamicRegistries.registerSynced(RegistryKeys.AFFLICTION_REGISTRY_KEY, Affliction.CODEC);
   }
+
+  public static void initialize() {}
 }
