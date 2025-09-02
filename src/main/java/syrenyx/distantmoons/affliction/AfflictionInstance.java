@@ -30,8 +30,11 @@ public class AfflictionInstance {
     return this.stage;
   }
 
-  public int setStage(int stage) {
-    this.stage += stage;
-    return this.stage;
+  public void setStage(int stage) {
+    this.stage = stage;
+  }
+
+  public void limitToAllowedValues() {
+    this.stage = Math.min(this.stage, this.affliction.value().maxStage());
   }
 }

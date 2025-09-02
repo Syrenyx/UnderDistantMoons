@@ -2,6 +2,7 @@
   "description": {
     "translate": "affliction.distant-moons.illness"
   },
+  "max_stage": 8,
   "persistent": false,
   "tick_progression": {},
   "effects": {}

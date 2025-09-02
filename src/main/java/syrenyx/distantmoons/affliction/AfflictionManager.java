@@ -2,6 +2,7 @@ package syrenyx.distantmoons.affliction;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.registry.Registries;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.network.ServerPlayerEntity;
 import org.jetbrains.annotations.Nullable;
@@ -22,6 +23,7 @@ public abstract class AfflictionManager {
 
   public static boolean setAffliction(LivingEntity entity, AfflictionInstance afflictionInstance) {
     if (isImmune(entity, afflictionInstance.affliction())) return false;
+    afflictionInstance.limitToAllowedValues();
     Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
     activeAfflictions.put(afflictionInstance.affliction(), afflictionInstance);
     return true;
@@ -29,6 +31,7 @@ public abstract class AfflictionManager {
 
   public static boolean giveAffliction(LivingEntity entity, AfflictionInstance afflictionInstance) {
     if (isImmune(entity, afflictionInstance.affliction())) return false;
+    afflictionInstance.limitToAllowedValues();
     Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
     AfflictionInstance activeAffliction = activeAfflictions.putIfAbsent(afflictionInstance.affliction(), afflictionInstance);
     if (activeAffliction == null) return true;
@@ -55,6 +58,6 @@ public abstract class AfflictionManager {
 
   private static boolean isImmune(LivingEntity entity, RegistryEntry<Affliction> affliction) {
     if (affliction.value().immuneEntities().isEmpty()) return false;
-    return affliction.value().immuneEntities().get().contains(entity.getType().getRegistryEntry());
+    return affliction.value().immuneEntities().get().contains(Registries.ENTITY_TYPE.getEntry(entity.getType()));
   }
 }
