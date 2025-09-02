@@ -4,6 +4,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.network.ServerPlayerEntity;
+import org.jetbrains.annotations.Nullable;
 import syrenyx.distantmoons.data.attachment.LivingEntityAttachment;
 import syrenyx.distantmoons.data.persistent.PersistentStateManager;
 
@@ -11,10 +12,12 @@ import java.util.Map;
 
 public abstract class AfflictionManager {
 
-  public static void clearAffliction(LivingEntity entity, RegistryEntry<Affliction> affliction) {
+  public static boolean clearAffliction(LivingEntity entity, @Nullable RegistryEntry<Affliction> affliction) {
     Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
-    if (affliction == null) activeAfflictions.clear();
-    else activeAfflictions.remove(affliction);
+    if (activeAfflictions.isEmpty()) return false;
+    if (affliction != null) return activeAfflictions.remove(affliction) != null;
+    activeAfflictions.clear();
+    return true;
   }
 
   public static void setAffliction(LivingEntity entity, AfflictionInstance afflictionInstance) {
@@ -22,9 +25,16 @@ public abstract class AfflictionManager {
     activeAfflictions.put(afflictionInstance.affliction(), afflictionInstance);
   }
 
-  public static void giveAffliction(LivingEntity entity, AfflictionInstance afflictionInstance) {
+  public static boolean giveAffliction(LivingEntity entity, AfflictionInstance afflictionInstance) {
     Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
-    activeAfflictions.put(afflictionInstance.affliction(), afflictionInstance);
+    AfflictionInstance activeAffliction = activeAfflictions.putIfAbsent(afflictionInstance.affliction(), afflictionInstance);
+    if (activeAffliction == null) return true;
+    boolean result = false;
+    if (afflictionInstance.stage() > activeAffliction.stage()) {
+      activeAffliction.setStage(afflictionInstance.stage());
+      result = true;
+    }
+    return result;
   }
 
   public static void handlePlayerDeath(ServerPlayerEntity player) {
