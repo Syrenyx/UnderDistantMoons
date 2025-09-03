@@ -2,14 +2,21 @@ package syrenyx.distantmoons.affliction;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.network.RegistryByteBuf;
+import net.minecraft.network.codec.PacketCodec;
+import net.minecraft.network.codec.PacketCodecs;
 import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.dynamic.Codecs;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-public class AfflictionInstance {
+public class AfflictionInstance implements Comparable {
 
   public static final Codec<AfflictionInstance> CODEC = RecordCodecBuilder.create(instance -> instance
       .group(
           Affliction.FIXED_ENTRY_CODEC.fieldOf("id").forGetter(AfflictionInstance::affliction),
+          Codecs.rangedInclusiveFloat(0, Affliction.MAX_PROGRESSION).optionalFieldOf("progression", 0.0F).forGetter(AfflictionInstance::progression),
           Codecs.rangedInt(1, Affliction.MAX_STAGE).fieldOf("stage").forGetter(AfflictionInstance::stage)
       )
       .apply(instance, AfflictionInstance::new)
@@ -59,5 +66,16 @@ public class AfflictionInstance {
   public void limitToAllowedValues() {
     this.progression = Math.max(0.0F, Math.min(this.progression, Affliction.MAX_PROGRESSION));
     this.stage = Math.max(1, Math.min(this.stage, this.affliction.value().maxStage()));
+  }
+
+  @Nullable
+  public Identifier getSprite() {
+    if (this.affliction.value().display().isEmpty()) return null;
+    return this.affliction.value().display().get().icon();
+  }
+
+  @Override
+  public int compareTo(@NotNull Object o) {
+    return 0;
   }
 }

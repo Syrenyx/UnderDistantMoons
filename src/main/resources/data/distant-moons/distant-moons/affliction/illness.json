@@ -2,6 +2,10 @@
   "description": {
     "translate": "affliction.distant-moons.illness"
   },
+  "display": {
+    "icon": "distant-moons:illness",
+    "color": 0
+  },
   "max_stage": 8,
   "persistent": false,
   "tick_progression": {

@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import syrenyx.distantmoons.initializers.AttachedData;
 import syrenyx.distantmoons.initializers.Commands;
+import syrenyx.distantmoons.initializers.Networking;
 import syrenyx.distantmoons.initializers.Registries;
 
 public class UnderDistantMoons implements ModInitializer {
@@ -20,6 +21,7 @@ public class UnderDistantMoons implements ModInitializer {
     LOGGER.info("Initializing Modded Content");
     AttachedData.initialize();
     Commands.initialize();
+    Networking.initialize();
     Registries.initialize();
     LOGGER.info("Content Successfully Initialized");
 	}

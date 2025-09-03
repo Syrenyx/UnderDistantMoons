@@ -4,6 +4,8 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.enchantment.EnchantmentLevelBasedValue;
 import net.minecraft.entity.EntityType;
+import net.minecraft.network.RegistryByteBuf;
+import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.registry.RegistryCodecs;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.entry.RegistryEntryList;
@@ -17,6 +19,7 @@ import java.util.Optional;
 
 public record Affliction(
     Text description,
+    Optional<AfflictionDisplay> display,
     Optional<RegistryEntryList<EntityType<?>>> immuneEntities,
     int maxStage,
     boolean persistent,
@@ -26,6 +29,7 @@ public record Affliction(
   public static final Codec<Affliction> CODEC = RecordCodecBuilder.create(instance -> instance
       .group(
           TextCodecs.CODEC.fieldOf("description").forGetter(Affliction::description),
+          AfflictionDisplay.CODEC.optionalFieldOf("display").forGetter(Affliction::display),
           RegistryCodecs.entryList(net.minecraft.registry.RegistryKeys.ENTITY_TYPE).optionalFieldOf("immune_entities").forGetter(Affliction::immuneEntities),
           Codecs.rangedInt(1, Affliction.MAX_STAGE).fieldOf("max_stage").forGetter(Affliction::maxStage),
           Codec.BOOL.optionalFieldOf("persistent", false).forGetter(Affliction::persistent),

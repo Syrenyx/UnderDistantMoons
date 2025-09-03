@@ -2,6 +2,10 @@
   "description": {
     "translate": "affliction.distant-moons.curse"
   },
+  "display": {
+    "icon": "distant-moons:curse",
+    "color": 0
+  },
   "max_stage": 3,
   "persistent": true,
   "immune_entities": "#minecraft:undead",

@@ -1,5 +1,6 @@
 package syrenyx.distantmoons.affliction;
 
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.Registries;
@@ -8,7 +9,11 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import org.jetbrains.annotations.Nullable;
 import syrenyx.distantmoons.data.attachment.LivingEntityAttachment;
 import syrenyx.distantmoons.data.persistent.PersistentStateManager;
+import syrenyx.distantmoons.initializers.Networking;
+import syrenyx.distantmoons.payload.ActiveAfflictionsPayload;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 public abstract class AfflictionManager {
@@ -57,6 +62,7 @@ public abstract class AfflictionManager {
       afflictionInstance.addToProgression(afflictionInstance.affliction().value().tickProgression().get().getValue(afflictionInstance.stage()));
       afflictionInstance.limitToAllowedValues();
     }
+    if (entity instanceof ServerPlayerEntity player) ServerPlayNetworking.send(player, new ActiveAfflictionsPayload(activeAfflictions.values().stream().map(AfflictionPacket::fromInstance).toList()));
   }
 
   private static Map<RegistryEntry<Affliction>, AfflictionInstance> getActiveAfflictions(LivingEntity entity) {
