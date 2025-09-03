@@ -1,5 +1,6 @@
 package syrenyx.distantmoons.affliction;
 
+import com.google.common.collect.ComparisonChain;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.network.RegistryByteBuf;
@@ -11,7 +12,7 @@ import net.minecraft.util.dynamic.Codecs;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class AfflictionInstance implements Comparable {
+public class AfflictionInstance implements Comparable<AfflictionInstance> {
 
   public static final Codec<AfflictionInstance> CODEC = RecordCodecBuilder.create(instance -> instance
       .group(
@@ -75,7 +76,14 @@ public class AfflictionInstance implements Comparable {
   }
 
   @Override
-  public int compareTo(@NotNull Object o) {
-    return 0;
+  public int compareTo(@NotNull AfflictionInstance other) {
+    Affliction thisAffliction = this.affliction.value();
+    Affliction otherAffliction = other.affliction.value();
+    return ComparisonChain
+        .start()
+        .compareTrueFirst(thisAffliction.persistent(), otherAffliction.persistent())
+        .compare(this.stage, other.stage)
+        .compare(thisAffliction.maxStage(), otherAffliction.maxStage())
+        .result();
   }
 }

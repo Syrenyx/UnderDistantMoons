@@ -17,6 +17,8 @@ public class en_us extends FabricLanguageProvider {
     builder.add("affliction.distant-moons.curse", "Curse");
     builder.add("affliction.distant-moons.illness", "Illness");
 
+    builder.add("affliction.progression_tooltip", "%s / %s");
+
     builder.add("commands.affliction.clear.everything.failed", "Target has no afflictions to remove");
     builder.add("commands.affliction.clear.everything.success.multiple", "Removed every affliction from %s targets");
     builder.add("commands.affliction.clear.everything.success.single", "Removed every affliction from %s");

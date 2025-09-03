@@ -4,7 +4,7 @@
   },
   "display": {
     "icon": "distant-moons:illness",
-    "color": 0
+    "tooltip_style": "distant-moons:affliction"
   },
   "max_stage": 8,
   "persistent": false,

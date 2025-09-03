@@ -38,7 +38,7 @@ public record Affliction(
       .apply(instance, Affliction::new)
   );
   public static final Codec<RegistryEntry<Affliction>> FIXED_ENTRY_CODEC = RegistryFixedCodec.of(RegistryKeys.AFFLICTION_REGISTRY_KEY);
-  public static final int MAX_PROGRESSION = 255;
+  public static final int MAX_PROGRESSION = 100;
   public static final int MAX_STAGE = 255;
   public static final int DEFAULT_STAGE = 1;
 }

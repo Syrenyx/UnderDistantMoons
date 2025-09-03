@@ -4,7 +4,7 @@
   },
   "display": {
     "icon": "distant-moons:curse",
-    "color": 0
+    "tooltip_style": "distant-moons:curse"
   },
   "max_stage": 3,
   "persistent": true,
