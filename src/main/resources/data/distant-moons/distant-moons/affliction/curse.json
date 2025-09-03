@@ -4,7 +4,7 @@
   },
   "display": {
     "icon": "distant-moons:curse",
-    "tooltip_style": "distant-moons:curse"
+    "tooltip_style": "distant-moons:persistent_affliction"
   },
   "max_stage": 3,
   "persistent": true,

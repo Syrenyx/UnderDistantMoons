@@ -32,14 +32,13 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
-@Debug(export = true)
 @Mixin(StatusEffectsDisplay.class)
 public abstract class StatusEffectsDisplayMixin {
 
   @Unique private static final int MIN_SIZE = 32;
   @Unique private static final int FULL_SIZE = 120;
   @Unique private static final int PROGRESSION_BAR_HEIGHT = 5;
-  @Unique private static final int PROGRESSION_BAR_WIDTH = 80;
+  @Unique private static final int PROGRESSION_BAR_WIDTH = 84;
 
   @Unique private static final Identifier LARGE_AFFLICTION_BACKGROUND_TEXTURE = UnderDistantMoons.identifierOf("container/inventory/affliction_background_large");
   @Unique private static final Identifier SMALL_AFFLICTION_BACKGROUND_TEXTURE = UnderDistantMoons.identifierOf("container/inventory/affliction_background_small");
@@ -50,8 +49,10 @@ public abstract class StatusEffectsDisplayMixin {
 
   @Unique private static final Identifier AFFLICTION_PROGRESSION_BACKGROUND = UnderDistantMoons.identifierOf("container/inventory/affliction_progression_background");
   @Unique private static final Identifier AFFLICTION_PROGRESSION_BAR = UnderDistantMoons.identifierOf("container/inventory/affliction_progression_bar");
+  @Unique private static final Identifier AFFLICTION_PROGRESSION_INFINITE = UnderDistantMoons.identifierOf("container/inventory/affliction_progression_infinite");
   @Unique private static final Identifier PERSISTENT_AFFLICTION_PROGRESSION_BACKGROUND = UnderDistantMoons.identifierOf("container/inventory/persistent_affliction_progression_background");
   @Unique private static final Identifier PERSISTENT_AFFLICTION_PROGRESSION_BAR = UnderDistantMoons.identifierOf("container/inventory/persistent_affliction_progression_bar");
+  @Unique private static final Identifier PERSISTENT_AFFLICTION_PROGRESSION_INFINITE = UnderDistantMoons.identifierOf("container/inventory/persistent_affliction_progression_infinite");
 
   @Final @Shadow
   private HandledScreen<?> parent;
@@ -131,6 +132,14 @@ public abstract class StatusEffectsDisplayMixin {
     context.drawGuiTexture(RenderPipelines.GUI_TEXTURED, getIcon(affliction), x + (wide ? 6 : 7), y + 7, 18, 18);
     if (wide) {
       context.drawTextWithShadow(textRenderer, getDescription(affliction), x + 28, y + 6, Colors.WHITE);
+      if (affliction.affliction().value().tickProgression().isEmpty()) {
+        context.drawGuiTexture(
+            RenderPipelines.GUI_TEXTURED,
+            affliction.affliction().value().persistent() ? PERSISTENT_AFFLICTION_PROGRESSION_INFINITE : AFFLICTION_PROGRESSION_INFINITE,
+            x + 28, y + 17, PROGRESSION_BAR_WIDTH, PROGRESSION_BAR_HEIGHT + 4
+        );
+        return;
+      }
       context.drawGuiTexture(
           RenderPipelines.GUI_TEXTURED,
           affliction.affliction().value().persistent() ? PERSISTENT_AFFLICTION_PROGRESSION_BACKGROUND : AFFLICTION_PROGRESSION_BACKGROUND,
