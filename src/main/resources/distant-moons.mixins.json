@@ -2,7 +2,10 @@
   "required": true,
   "package": "syrenyx.distantmoons.mixin",
   "compatibilityLevel": "JAVA_21",
-  "mixins": [],
+  "mixins": [
+    "LivingEntityMixin",
+    "ServerPlayerEntityMixin"
+  ],
   "injectors": {
     "defaultRequire": 1
   },

@@ -1,0 +1,34 @@
+package syrenyx.distantmoons.initializers.client;
+
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.minecraft.registry.RegistryKey;
+import syrenyx.distantmoons.affliction.AfflictionInstance;
+import syrenyx.distantmoons.data.attachment.ClientPlayerAttachment;
+import syrenyx.distantmoons.payload.ActiveAfflictionsPayload;
+import syrenyx.distantmoons.references.RegistryKeys;
+
+import java.util.List;
+
+public abstract class Networking {
+
+  static {
+    ClientPlayNetworking.registerGlobalReceiver(
+        ActiveAfflictionsPayload.ID,
+        (payload, context) -> context.client().execute(
+            () -> {
+              List<AfflictionInstance> currentAfflictions = ClientPlayerAttachment.getOrCreate(context.player()).activeAfflictions();
+              currentAfflictions.clear();
+              currentAfflictions.addAll(payload.afflictions().stream().map(packet ->
+                  new AfflictionInstance(
+                      context.player().getRegistryManager().getEntryOrThrow(RegistryKey.of(RegistryKeys.AFFLICTION_REGISTRY_KEY, packet.id())),
+                      packet.progression(),
+                      packet.stage()
+                  )
+              ).toList());
+            }
+        )
+    );
+  }
+
+  public static void initialize() {}
+}

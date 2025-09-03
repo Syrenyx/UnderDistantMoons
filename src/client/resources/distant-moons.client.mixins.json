@@ -2,7 +2,10 @@
   "required": true,
   "package": "syrenyx.distantmoons.mixin.client",
   "compatibilityLevel": "JAVA_21",
-  "client": [],
+  "client": [
+    "HandledScreenAccessor",
+    "StatusEffectsDisplayMixin"
+  ],
   "injectors": {
     "defaultRequire": 1
   }
