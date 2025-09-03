@@ -85,6 +85,7 @@ public abstract class StatusEffectsDisplayMixin {
       y += widgetSpacing;
     }
     for (var statusEffect : iterableEffects) {
+      assert this.client.world != null;
       drawStatusEffectWidget(context, horizontalPosition, y, wide, statusEffect, this.parent.getTextRenderer(), this.client.world.getTickManager());
       y += widgetSpacing;
     }
@@ -112,6 +113,7 @@ public abstract class StatusEffectsDisplayMixin {
       if (tooltipStyle.isPresent()) context.drawTooltip(this.parent.getTextRenderer(), text, Optional.empty(), mouseX, mouseY, tooltipStyle.get());
       else context.drawTooltip(this.parent.getTextRenderer(), text, Optional.empty(), mouseX, mouseY);
     } else if (this.hoveredStatusEffect != null) {
+      assert this.client.world != null;
       List<Text> text = List.of(
           getDescription(this.hoveredStatusEffect),
           StatusEffectUtil.getDurationText(this.hoveredStatusEffect, 1.0F, this.client.world.getTickManager().getTickRate())

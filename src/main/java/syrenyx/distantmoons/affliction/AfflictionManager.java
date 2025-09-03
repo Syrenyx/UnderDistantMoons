@@ -8,12 +8,10 @@ import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.network.ServerPlayerEntity;
 import org.jetbrains.annotations.Nullable;
 import syrenyx.distantmoons.data.attachment.LivingEntityAttachment;
+import syrenyx.distantmoons.data.networking.AfflictionPacket;
 import syrenyx.distantmoons.data.persistent.PersistentStateManager;
-import syrenyx.distantmoons.initializers.Networking;
 import syrenyx.distantmoons.payload.ActiveAfflictionsPayload;
 
-import java.util.Collection;
-import java.util.List;
 import java.util.Map;
 
 public abstract class AfflictionManager {

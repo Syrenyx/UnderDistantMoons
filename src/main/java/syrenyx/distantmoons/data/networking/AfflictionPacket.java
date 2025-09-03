@@ -1,10 +1,10 @@
-package syrenyx.distantmoons.affliction;
-
+package syrenyx.distantmoons.data.networking;
 
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.codec.PacketCodecs;
 import net.minecraft.util.Identifier;
+import syrenyx.distantmoons.affliction.AfflictionInstance;
 
 public record AfflictionPacket(Identifier id, int stage, float progression) {
   public static final PacketCodec<RegistryByteBuf, AfflictionPacket> PACKET_CODEC = PacketCodec.tuple(

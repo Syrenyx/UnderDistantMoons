@@ -4,7 +4,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 
 import java.util.TreeMap;
 
-public abstract class Util {
+public abstract class EnchantmentLevelUtil {
 
   private final static TreeMap<Integer, String> map = new TreeMap<>();
 

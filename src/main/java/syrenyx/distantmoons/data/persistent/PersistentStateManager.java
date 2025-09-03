@@ -28,10 +28,12 @@ public class PersistentStateManager extends PersistentState {
       CODEC,
       null
   );
-  public HashMap<UUID, PlayerData> players = new HashMap<>();
+  public HashMap<UUID, PlayerData> players;
 
 
-  private PersistentStateManager() {}
+  private PersistentStateManager() {
+    this.players = new HashMap<>();
+  }
 
   private PersistentStateManager(Map<UUID, PlayerData> players) {
     this.players = new HashMap<>(players);

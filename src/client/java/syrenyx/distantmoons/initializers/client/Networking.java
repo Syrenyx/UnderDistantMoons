@@ -18,7 +18,13 @@ public abstract class Networking {
             () -> {
               List<AfflictionInstance> currentAfflictions = ClientPlayerAttachment.getOrCreate(context.player()).activeAfflictions();
               currentAfflictions.clear();
-              currentAfflictions.addAll(payload.afflictions().stream().map(packet -> new AfflictionInstance(context.player().getRegistryManager().getEntryOrThrow(RegistryKey.of(RegistryKeys.AFFLICTION_REGISTRY_KEY, packet.id())), packet.progression(), packet.stage())).toList());
+              currentAfflictions.addAll(payload.afflictions().stream().map(packet ->
+                  new AfflictionInstance(
+                      context.player().getRegistryManager().getEntryOrThrow(RegistryKey.of(RegistryKeys.AFFLICTION_REGISTRY_KEY, packet.id())),
+                      packet.progression(),
+                      packet.stage()
+                  )
+              ).toList());
             }
         )
     );

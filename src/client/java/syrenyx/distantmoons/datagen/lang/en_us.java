@@ -32,6 +32,6 @@ public class en_us extends FabricLanguageProvider {
     builder.add("commands.affliction.set.success.multiple", "Applied affliction %s to %s targets");
     builder.add("commands.affliction.set.success.single", "Applied affliction %s to %s");
 
-    Util.generateEnchantmentLevels(builder, 11, 255);
+    EnchantmentLevelUtil.generateEnchantmentLevels(builder, 11, 255);
   }
 }
