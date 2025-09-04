@@ -10,6 +10,7 @@ import org.jetbrains.annotations.Nullable;
 import syrenyx.distantmoons.data.attachment.LivingEntityAttachment;
 import syrenyx.distantmoons.data.networking.AfflictionPacket;
 import syrenyx.distantmoons.data.persistent.PersistentStateManager;
+import syrenyx.distantmoons.initializers.component.AfflictionEffectComponents;
 import syrenyx.distantmoons.payload.ActiveAfflictionsPayload;
 
 import java.util.Map;
@@ -56,8 +57,10 @@ public abstract class AfflictionManager {
   public static void handleTick(LivingEntity entity) {
     Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
     for (AfflictionInstance afflictionInstance : activeAfflictions.values()) {
-      if (afflictionInstance.affliction().value().tickProgression().isEmpty()) continue;
-      afflictionInstance.addToProgression(afflictionInstance.affliction().value().tickProgression().get().getValue(afflictionInstance.stage()));
+      Affliction affliction = afflictionInstance.affliction().value();
+      affliction.processEntityEffects(entity, afflictionInstance.stage(), AfflictionEffectComponents.TICK);
+      if (affliction.tickProgression().isEmpty()) continue;
+      afflictionInstance.addToProgression(affliction.tickProgression().get().getValue(afflictionInstance.stage()));
       afflictionInstance.limitToAllowedValues();
     }
     if (entity instanceof ServerPlayerEntity player) ServerPlayNetworking.send(player, new ActiveAfflictionsPayload(activeAfflictions.values().stream().map(AfflictionPacket::fromInstance).toList()));

@@ -54,14 +54,10 @@ public abstract class StatusEffectsDisplayMixin {
   @Unique private static final Identifier PERSISTENT_AFFLICTION_PROGRESSION_BAR = UnderDistantMoons.identifierOf("container/inventory/persistent_affliction_progression_bar");
   @Unique private static final Identifier PERSISTENT_AFFLICTION_PROGRESSION_INFINITE = UnderDistantMoons.identifierOf("container/inventory/persistent_affliction_progression_infinite");
 
-  @Final @Shadow
-  private HandledScreen<?> parent;
-  @Final @Shadow
-  private MinecraftClient client;
-  @Shadow
-  private StatusEffectInstance hoveredStatusEffect;
-  @Unique
-  private AfflictionInstance hoveredAffliction;
+  @Final @Shadow private HandledScreen<?> parent;
+  @Final @Shadow private MinecraftClient client;
+  @Shadow private StatusEffectInstance hoveredStatusEffect;
+  @Unique private AfflictionInstance hoveredAffliction;
 
   @Inject(at = @At("HEAD"), cancellable = true, method = "drawStatusEffects")
   public void drawStatusEffects(DrawContext context, int mouseX, int mouseY, CallbackInfo callbackInfo) {

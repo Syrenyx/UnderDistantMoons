@@ -12,7 +12,7 @@ import syrenyx.distantmoons.affliction.AfflictionManager;
 public class LivingEntityMixin {
 
   @Inject(at = @At("HEAD"), method = "baseTick")
-  public void tick(CallbackInfo callbackInfo) {
+  public void baseTick(CallbackInfo callbackInfo) {
     LivingEntity entity = (LivingEntity) (Object) this;
     if (entity.getWorld() instanceof ServerWorld) AfflictionManager.handleTick(entity);
   }

@@ -9,5 +9,44 @@
   "max_stage": 3,
   "persistent": true,
   "immune_entities": "#minecraft:undead",
-  "effects": {}
+  "effects": {
+    "distant-moons:tick": [
+      {
+        "effect": {
+          "type": "distant-moons:ignite",
+          "duration": 8.0
+        },
+        "requirements": {
+          "condition": "minecraft:all_of",
+          "terms": [
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "can_see_sky": true,
+                "light": {
+                  "light": 15
+                }
+              }
+            },
+            {
+              "condition": "minecraft:random_chance",
+              "chance": 0.05
+            },
+            {
+              "condition": "minecraft:time_check",
+              "value": {
+                "min": 0,
+                "max": 12000
+              },
+              "period": 24000
+            },
+            {
+              "condition": "minecraft:weather_check",
+              "raining": false
+            }
+          ]
+        }
+      }
+    ]
+  }
 }
