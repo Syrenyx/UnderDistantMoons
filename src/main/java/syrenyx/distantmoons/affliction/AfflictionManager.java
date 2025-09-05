@@ -7,6 +7,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -57,6 +58,13 @@ public abstract class AfflictionManager {
       result = true;
     }
     return result;
+  }
+
+  public static void handleUsedItem(LivingEntity entity, ItemStack item) {
+    Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
+    for (AfflictionInstance afflictionInstance : activeAfflictions.values()) {
+      Affliction.processUsedItemEffects(entity, item, afflictionInstance, AfflictionEffectComponents.USED_ITEM);
+    }
   }
 
   public static void handlePlayerDeath(ServerPlayerEntity player) {

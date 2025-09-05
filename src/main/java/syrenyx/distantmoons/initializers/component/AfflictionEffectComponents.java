@@ -3,10 +3,7 @@ package syrenyx.distantmoons.initializers.component;
 import net.minecraft.component.ComponentType;
 import net.minecraft.registry.Registry;
 import syrenyx.distantmoons.UnderDistantMoons;
-import syrenyx.distantmoons.affliction.effect.AfflictionEffectEntry;
-import syrenyx.distantmoons.affliction.effect.AfflictionEntityEffect;
-import syrenyx.distantmoons.affliction.effect.SpawnedEntityAfflictionEffectEntry;
-import syrenyx.distantmoons.affliction.effect.TargetedAfflictionEffectEntry;
+import syrenyx.distantmoons.affliction.effect.*;
 import syrenyx.distantmoons.initializers.LootContextTypes;
 import syrenyx.distantmoons.initializers.Registries;
 
@@ -16,6 +13,9 @@ import java.util.function.UnaryOperator;
 public abstract class AfflictionEffectComponents {
 
 
+  public static final ComponentType<List<AfflictionEffectEntry<AfflictionEntityEffect>>> USED_ITEM = register(
+      "used_item", builder -> builder.codec(AfflictionEffectEntry.createCodec(AfflictionEntityEffect.CODEC, LootContextTypes.AFFLICTED_ITEM).listOf())
+  );
   public static final ComponentType<List<TargetedAfflictionEffectEntry<AfflictionEntityEffect>>> POST_ATTACK = register(
       "post_attack", builder -> builder.codec(TargetedAfflictionEffectEntry.createCodec(AfflictionEntityEffect.CODEC, LootContextTypes.AFFLICTED_ATTACK).listOf())
   );

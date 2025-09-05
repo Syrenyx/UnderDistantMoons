@@ -10,99 +10,25 @@
   "persistent": true,
   "immune_entities": "#minecraft:undead",
   "effects": {
-    "distant-moons:post_attack": [
+    "distant-moons:used_item": [
       {
-        "afflicted": "attacker",
-        "affected": "victim",
         "effect": {
-          "type": "distant-moons:ignite",
-          "duration": 8.0
-        }
-      }
-    ],
-    "distant-moons:projectile_spawned": [
-      {
-        "target": "spawned_entity",
-        "effect": {
-          "type": "distant-moons:ignite",
-          "duration": 8.0
+          "type": "distant-moons:run_function",
+          "function": "distant-moons:test_function"
+        },
+        "requirements": {
+          "condition": "minecraft:match_tool",
+          "predicate": {
+            "items": [
+              "minecraft:mushroom_stew"
+            ]
+          }
         }
       },
       {
-        "target": "originator",
         "effect": {
           "type": "distant-moons:ignite",
-          "duration": 8.0
-        }
-      }
-    ],
-    "distant-moons:stage_changed": [
-      {
-        "effect": {
-          "type": "distant-moons:ignite",
-          "duration": 8.0
-        },
-        "requirements": {
-          "condition": "minecraft:value_check",
-          "value": {
-            "type": "distant-moons:affliction_stage",
-            "amount": {
-              "type": "minecraft:linear",
-              "base": 1,
-              "per_level_above_first": 1
-            }
-          },
-          "range": 0
-        }
-      }
-    ],
-    "distant-moons:tick": [
-      {
-        "effect": {
-          "type": "distant-moons:ignite",
-          "duration": 8.0
-        },
-        "requirements": {
-          "condition": "minecraft:all_of",
-          "terms": [
-            {
-              "condition": "minecraft:location_check",
-              "predicate": {
-                "can_see_sky": true,
-                "light": {
-                  "light": 15
-                }
-              }
-            },
-            {
-              "condition": "minecraft:random_chance",
-              "chance": 0.05
-            },
-            {
-              "condition": "minecraft:time_check",
-              "value": {
-                "min": 0,
-                "max": 12000
-              },
-              "period": 24000
-            },
-            {
-              "condition": "minecraft:value_check",
-              "value": {
-                "type": "distant-moons:affliction_stage",
-                "amount": {
-                  "type": "minecraft:linear",
-                  "base": 1,
-                  "per_level_above_first": 1
-                }
-              },
-              "range": 3
-            },
-            {
-              "condition": "minecraft:weather_check",
-              "raining": false
-            }
-          ]
+          "duration": 2.0
         }
       }
     ]

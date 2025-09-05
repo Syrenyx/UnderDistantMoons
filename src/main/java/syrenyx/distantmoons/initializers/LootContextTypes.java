@@ -25,6 +25,13 @@ public abstract class LootContextTypes {
       .require(net.minecraft.loot.context.LootContextParameters.ORIGIN)
       .require(net.minecraft.loot.context.LootContextParameters.THIS_ENTITY)
   );
+  public static final ContextType AFFLICTED_ITEM = register("afflicted_item", builder -> builder
+      .require(LootContextParameters.AFFLICTION_PROGRESSION)
+      .require(LootContextParameters.AFFLICTION_STAGE)
+      .require(net.minecraft.loot.context.LootContextParameters.ORIGIN)
+      .require(net.minecraft.loot.context.LootContextParameters.THIS_ENTITY)
+      .require(net.minecraft.loot.context.LootContextParameters.TOOL)
+  );
   public static final ContextType AFFLICTED_PROJECTILE = register("afflicted_projectile", builder -> builder
       .require(LootContextParameters.AFFLICTION_PROGRESSION)
       .require(LootContextParameters.AFFLICTION_STAGE)

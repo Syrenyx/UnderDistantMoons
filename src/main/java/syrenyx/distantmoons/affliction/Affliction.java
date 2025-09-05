@@ -9,6 +9,7 @@ import net.minecraft.enchantment.effect.EnchantmentEffectTarget;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.item.ItemStack;
 import net.minecraft.loot.context.LootContext;
 import net.minecraft.loot.context.LootContextParameters;
 import net.minecraft.loot.context.LootWorldContext;
@@ -56,7 +57,15 @@ public record Affliction(
   public static final int MAX_STAGE = 255;
   public static final int DEFAULT_STAGE = 1;
 
-  public static void processPostAttackEffects(Entity victim, DamageSource damageSource, EnchantmentEffectTarget afflicted , AfflictionInstance afflictionInstance, ComponentType<List<TargetedAfflictionEffectEntry<AfflictionEntityEffect>>> componentType) {
+  public static void processUsedItemEffects(Entity entity, ItemStack item, AfflictionInstance afflictionInstance, ComponentType<List<AfflictionEffectEntry<AfflictionEntityEffect>>> componentType) {
+    List<AfflictionEffectEntry<AfflictionEntityEffect>> effectEntries = afflictionInstance.affliction().value().effects.getOrDefault(componentType, List.of());
+    LootContext lootContext = getAfflictedItemLootContext(entity, item, afflictionInstance.stage(), afflictionInstance.progression());
+    for (AfflictionEffectEntry<AfflictionEntityEffect> effectEntry : effectEntries) {
+      if (effectEntry.test(lootContext)) effectEntry.effect().apply((ServerWorld) entity.getWorld(), afflictionInstance.stage(), entity, entity.getPos());
+    }
+  }
+
+  public static void processPostAttackEffects(Entity victim, DamageSource damageSource, EnchantmentEffectTarget afflicted, AfflictionInstance afflictionInstance, ComponentType<List<TargetedAfflictionEffectEntry<AfflictionEntityEffect>>> componentType) {
     List<TargetedAfflictionEffectEntry<AfflictionEntityEffect>> effectEntries = afflictionInstance.affliction().value().effects.getOrDefault(componentType, List.of());
     LootContext lootContext = getAfflictedAttackLootContext(victim, damageSource, afflictionInstance.stage(), afflictionInstance.progression());
     for (TargetedAfflictionEffectEntry<AfflictionEntityEffect> effectEntry : effectEntries) {
@@ -119,6 +128,19 @@ public record Affliction(
             .add(LootContextParameters.ORIGIN, entity.getPos())
             .add(LootContextParameters.THIS_ENTITY, entity)
             .build(LootContextTypes.AFFLICTED_ENTITY)
+    ).build(Optional.empty());
+  }
+
+  private static LootContext getAfflictedItemLootContext(Entity entity, ItemStack item, int stage, float progression) {
+    return new LootContext.Builder(
+        new LootWorldContext
+            .Builder((ServerWorld) entity.getWorld())
+            .add(syrenyx.distantmoons.references.LootContextParameters.AFFLICTION_PROGRESSION, progression)
+            .add(syrenyx.distantmoons.references.LootContextParameters.AFFLICTION_STAGE, stage)
+            .add(LootContextParameters.ORIGIN, entity.getPos())
+            .add(LootContextParameters.THIS_ENTITY, entity)
+            .add(LootContextParameters.TOOL, item)
+            .build(LootContextTypes.AFFLICTED_ITEM)
     ).build(Optional.empty());
   }
 
