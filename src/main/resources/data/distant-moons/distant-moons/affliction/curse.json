@@ -36,6 +36,26 @@
         }
       }
     ],
+    "distant-moons:stage_changed": [
+      {
+        "effect": {
+          "type": "distant-moons:ignite",
+          "duration": 8.0
+        },
+        "requirements": {
+          "condition": "minecraft:value_check",
+          "value": {
+            "type": "distant-moons:affliction_stage",
+            "amount": {
+              "type": "minecraft:linear",
+              "base": 1,
+              "per_level_above_first": 1
+            }
+          },
+          "range": 0
+        }
+      }
+    ],
     "distant-moons:tick": [
       {
         "effect": {

@@ -24,7 +24,13 @@ public abstract class AfflictionManager {
   public static boolean clearAffliction(LivingEntity entity, @Nullable RegistryEntry<Affliction> affliction) {
     Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
     if (activeAfflictions.isEmpty()) return false;
-    if (affliction != null) return activeAfflictions.remove(affliction) != null;
+    if (affliction != null) {
+      if (activeAfflictions.get(affliction) != null) Affliction.processStageChangedEffects(entity, activeAfflictions.get(affliction), true, AfflictionEffectComponents.STAGE_CHANGED);
+      return activeAfflictions.remove(affliction) != null;
+    }
+    for (AfflictionInstance afflictionInstance : activeAfflictions.values()) {
+      Affliction.processStageChangedEffects(entity, afflictionInstance, true, AfflictionEffectComponents.STAGE_CHANGED);
+    }
     activeAfflictions.clear();
     return true;
   }
@@ -34,6 +40,7 @@ public abstract class AfflictionManager {
     afflictionInstance.limitToAllowedValues();
     Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
     activeAfflictions.put(afflictionInstance.affliction(), afflictionInstance);
+    Affliction.processStageChangedEffects(entity, afflictionInstance, false, AfflictionEffectComponents.STAGE_CHANGED);
     return true;
   }
 
@@ -44,6 +51,7 @@ public abstract class AfflictionManager {
     AfflictionInstance activeAffliction = activeAfflictions.putIfAbsent(afflictionInstance.affliction(), afflictionInstance);
     if (activeAffliction == null) return true;
     boolean result = false;
+    if (afflictionInstance.stage() > activeAffliction.stage()) Affliction.processStageChangedEffects(entity, afflictionInstance, false, AfflictionEffectComponents.STAGE_CHANGED);
     if (afflictionInstance.stage() > activeAffliction.stage() || afflictionInstance.stage() == activeAffliction.stage() && afflictionInstance.progression() > activeAffliction.progression()) {
       activeAffliction.setStage(afflictionInstance.stage());
       result = true;

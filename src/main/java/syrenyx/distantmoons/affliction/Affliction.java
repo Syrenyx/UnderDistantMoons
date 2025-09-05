@@ -79,6 +79,14 @@ public record Affliction(
     }
   }
 
+  public static void processStageChangedEffects(Entity entity, AfflictionInstance afflictionInstance, boolean cleared, ComponentType<List<AfflictionEffectEntry<AfflictionEntityEffect>>> componentType) {
+    List<AfflictionEffectEntry<AfflictionEntityEffect>> effectEntries = afflictionInstance.affliction().value().effects.getOrDefault(componentType, List.of());
+    LootContext lootContext = getAfflictedEntityLootContext(entity, cleared ? 0 : afflictionInstance.stage(), afflictionInstance.progression());
+    for (AfflictionEffectEntry<AfflictionEntityEffect> effectEntry : effectEntries) {
+      if (effectEntry.test(lootContext)) effectEntry.effect().apply((ServerWorld) entity.getWorld(), afflictionInstance.stage(), entity, entity.getPos());
+    }
+  }
+
   public static void processTickEffects(Entity entity, AfflictionInstance afflictionInstance, ComponentType<List<AfflictionEffectEntry<AfflictionEntityEffect>>> componentType) {
     List<AfflictionEffectEntry<AfflictionEntityEffect>> effectEntries = afflictionInstance.affliction().value().effects.getOrDefault(componentType, List.of());
     LootContext lootContext = getAfflictedEntityLootContext(entity, afflictionInstance.stage(), afflictionInstance.progression());

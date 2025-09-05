@@ -22,6 +22,9 @@ public abstract class AfflictionEffectComponents {
   public static final ComponentType<List<SpawnedEntityAfflictionEffectEntry<AfflictionEntityEffect>>> PROJECTILE_SPAWNED = register(
       "projectile_spawned", builder -> builder.codec(SpawnedEntityAfflictionEffectEntry.createCodec(AfflictionEntityEffect.CODEC, LootContextTypes.AFFLICTED_PROJECTILE).listOf())
   );
+  public static final ComponentType<List<AfflictionEffectEntry<AfflictionEntityEffect>>> STAGE_CHANGED = register(
+      "stage_changed", builder -> builder.codec(AfflictionEffectEntry.createCodec(AfflictionEntityEffect.CODEC, LootContextTypes.AFFLICTED_ENTITY).listOf())
+  );
   public static final ComponentType<List<AfflictionEffectEntry<AfflictionEntityEffect>>> TICK = register(
       "tick", builder -> builder.codec(AfflictionEffectEntry.createCodec(AfflictionEntityEffect.CODEC, LootContextTypes.AFFLICTED_ENTITY).listOf())
   );
