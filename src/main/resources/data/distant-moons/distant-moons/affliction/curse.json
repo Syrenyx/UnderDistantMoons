@@ -10,6 +10,16 @@
   "persistent": true,
   "immune_entities": "#minecraft:undead",
   "effects": {
+    "distant-moons:post_attack": [
+      {
+        "afflicted": "attacker",
+        "affected": "victim",
+        "effect": {
+          "type": "distant-moons:ignite",
+          "duration": 8.0
+        }
+      }
+    ],
     "distant-moons:projectile_spawned": [
       {
         "target": "spawned_entity",

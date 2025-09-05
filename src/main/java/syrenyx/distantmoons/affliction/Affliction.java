@@ -5,8 +5,10 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.component.ComponentMap;
 import net.minecraft.component.ComponentType;
 import net.minecraft.enchantment.EnchantmentLevelBasedValue;
+import net.minecraft.enchantment.effect.EnchantmentEffectTarget;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.loot.context.LootContext;
 import net.minecraft.loot.context.LootContextParameters;
 import net.minecraft.loot.context.LootWorldContext;
@@ -18,10 +20,7 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.text.TextCodecs;
 import net.minecraft.util.dynamic.Codecs;
-import syrenyx.distantmoons.affliction.effect.AfflictionEffectEntry;
-import syrenyx.distantmoons.affliction.effect.AfflictionEntityEffect;
-import syrenyx.distantmoons.affliction.effect.SpawnedEntityAfflictionEffectEntry;
-import syrenyx.distantmoons.affliction.effect.SpawnedEntityEffectTarget;
+import syrenyx.distantmoons.affliction.effect.*;
 import syrenyx.distantmoons.initializers.LootContextTypes;
 import syrenyx.distantmoons.initializers.Registries;
 import syrenyx.distantmoons.references.RegistryKeys;
@@ -57,6 +56,20 @@ public record Affliction(
   public static final int MAX_STAGE = 255;
   public static final int DEFAULT_STAGE = 1;
 
+  public static void processPostAttackEffects(Entity victim, DamageSource damageSource, EnchantmentEffectTarget afflicted , AfflictionInstance afflictionInstance, ComponentType<List<TargetedAfflictionEffectEntry<AfflictionEntityEffect>>> componentType) {
+    List<TargetedAfflictionEffectEntry<AfflictionEntityEffect>> effectEntries = afflictionInstance.affliction().value().effects.getOrDefault(componentType, List.of());
+    LootContext lootContext = getAfflictedAttackLootContext(victim, damageSource, afflictionInstance.stage(), afflictionInstance.progression());
+    for (TargetedAfflictionEffectEntry<AfflictionEntityEffect> effectEntry : effectEntries) {
+      if (effectEntry.afflicted() != afflicted) continue;
+      Entity target = switch (effectEntry.affected()) {
+        case ATTACKER -> damageSource.getAttacker();
+        case DAMAGING_ENTITY -> damageSource.getSource();
+        case VICTIM -> victim;
+      };
+      if (effectEntry.test(lootContext)) effectEntry.effect().apply((ServerWorld) target.getWorld(), afflictionInstance.stage(), target, target.getPos());
+    }
+  }
+
   public static void processProjectileSpawnedEffects(Entity owner, Entity projectile, AfflictionInstance afflictionInstance, ComponentType<List<SpawnedEntityAfflictionEffectEntry<AfflictionEntityEffect>>> componentType) {
     List<SpawnedEntityAfflictionEffectEntry<AfflictionEntityEffect>> effectEntries = afflictionInstance.affliction().value().effects.getOrDefault(componentType, List.of());
     LootContext lootContext = getAfflictedProjectileLootContext(owner, projectile, afflictionInstance.stage(), afflictionInstance.progression());
@@ -72,6 +85,21 @@ public record Affliction(
     for (AfflictionEffectEntry<AfflictionEntityEffect> effectEntry : effectEntries) {
       if (effectEntry.test(lootContext)) effectEntry.effect().apply((ServerWorld) entity.getWorld(), afflictionInstance.stage(), entity, entity.getPos());
     }
+  }
+
+  private static LootContext getAfflictedAttackLootContext(Entity victim, DamageSource damageSource, int stage, float progression) {
+    return new LootContext.Builder(
+        new LootWorldContext
+            .Builder((ServerWorld) victim.getWorld())
+            .add(syrenyx.distantmoons.references.LootContextParameters.AFFLICTION_PROGRESSION, progression)
+            .add(syrenyx.distantmoons.references.LootContextParameters.AFFLICTION_STAGE, stage)
+            .add(LootContextParameters.ATTACKING_ENTITY, damageSource.getAttacker())
+            .add(LootContextParameters.DAMAGE_SOURCE, damageSource)
+            .add(LootContextParameters.DIRECT_ATTACKING_ENTITY, damageSource.getSource())
+            .add(LootContextParameters.ORIGIN, victim.getPos())
+            .add(LootContextParameters.THIS_ENTITY, victim)
+            .build(LootContextTypes.AFFLICTED_ATTACK)
+    ).build(Optional.empty());
   }
 
   private static LootContext getAfflictedEntityLootContext(Entity entity, int stage, float progression) {

@@ -3,6 +3,7 @@
   "package": "syrenyx.distantmoons.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "EnchantmentHelperMixin",
     "LivingEntityMixin",
     "LootContextTypesAccessor",
     "ProjectileEntityMixin",

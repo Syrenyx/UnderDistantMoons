@@ -10,6 +10,15 @@ import java.util.function.Consumer;
 
 public abstract class LootContextTypes {
 
+  public static final ContextType AFFLICTED_ATTACK = register("afflicted_attack", builder -> builder
+      .require(LootContextParameters.AFFLICTION_PROGRESSION)
+      .require(LootContextParameters.AFFLICTION_STAGE)
+      .require(net.minecraft.loot.context.LootContextParameters.DAMAGE_SOURCE)
+      .require(net.minecraft.loot.context.LootContextParameters.ORIGIN)
+      .require(net.minecraft.loot.context.LootContextParameters.THIS_ENTITY)
+      .allow(net.minecraft.loot.context.LootContextParameters.ATTACKING_ENTITY)
+      .allow(net.minecraft.loot.context.LootContextParameters.DIRECT_ATTACKING_ENTITY)
+  );
   public static final ContextType AFFLICTED_ENTITY = register("afflicted_entity", builder -> builder
       .require(LootContextParameters.AFFLICTION_PROGRESSION)
       .require(LootContextParameters.AFFLICTION_STAGE)

@@ -1,7 +1,10 @@
 package syrenyx.distantmoons.affliction;
 
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.enchantment.effect.EnchantmentEffectTarget;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.registry.Registries;
@@ -52,6 +55,21 @@ public abstract class AfflictionManager {
     Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(player);
     for (RegistryEntry<Affliction> affliction : activeAfflictions.keySet()) {
       if (!affliction.value().persistent()) activeAfflictions.remove(affliction);
+    }
+  }
+
+  public static void handlePostAttack(Entity victim, DamageSource damageSource) {
+    for (EnchantmentEffectTarget targetType : EnchantmentEffectTarget.values()) {
+      Entity entity = switch (targetType) {
+        case ATTACKER -> damageSource.getAttacker();
+        case DAMAGING_ENTITY -> damageSource.getSource();
+        case VICTIM -> victim;
+      };
+      if (!(entity instanceof LivingEntity afflicted)) return;
+      Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(afflicted);
+      for (AfflictionInstance afflictionInstance : activeAfflictions.values()) {
+        Affliction.processPostAttackEffects(victim, damageSource, targetType, afflictionInstance, AfflictionEffectComponents.POST_ATTACK);
+      }
     }
   }
 

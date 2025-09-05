@@ -6,6 +6,7 @@ import syrenyx.distantmoons.UnderDistantMoons;
 import syrenyx.distantmoons.affliction.effect.AfflictionEffectEntry;
 import syrenyx.distantmoons.affliction.effect.AfflictionEntityEffect;
 import syrenyx.distantmoons.affliction.effect.SpawnedEntityAfflictionEffectEntry;
+import syrenyx.distantmoons.affliction.effect.TargetedAfflictionEffectEntry;
 import syrenyx.distantmoons.initializers.LootContextTypes;
 import syrenyx.distantmoons.initializers.Registries;
 
@@ -15,8 +16,11 @@ import java.util.function.UnaryOperator;
 public abstract class AfflictionEffectComponents {
 
 
+  public static final ComponentType<List<TargetedAfflictionEffectEntry<AfflictionEntityEffect>>> POST_ATTACK = register(
+      "post_attack", builder -> builder.codec(TargetedAfflictionEffectEntry.createCodec(AfflictionEntityEffect.CODEC, LootContextTypes.AFFLICTED_ATTACK).listOf())
+  );
   public static final ComponentType<List<SpawnedEntityAfflictionEffectEntry<AfflictionEntityEffect>>> PROJECTILE_SPAWNED = register(
-      "projectile_spawned", builder -> builder.codec(SpawnedEntityAfflictionEffectEntry.createCodec(AfflictionEntityEffect.CODEC, LootContextTypes.AFFLICTED_ENTITY).listOf())
+      "projectile_spawned", builder -> builder.codec(SpawnedEntityAfflictionEffectEntry.createCodec(AfflictionEntityEffect.CODEC, LootContextTypes.AFFLICTED_PROJECTILE).listOf())
   );
   public static final ComponentType<List<AfflictionEffectEntry<AfflictionEntityEffect>>> TICK = register(
       "tick", builder -> builder.codec(AfflictionEffectEntry.createCodec(AfflictionEntityEffect.CODEC, LootContextTypes.AFFLICTED_ENTITY).listOf())
