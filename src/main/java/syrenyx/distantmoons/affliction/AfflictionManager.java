@@ -3,6 +3,7 @@ package syrenyx.distantmoons.affliction;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -54,11 +55,18 @@ public abstract class AfflictionManager {
     }
   }
 
+  public static void handleProjectileSpawned(LivingEntity entity, ProjectileEntity projectile) {
+    Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
+    for (AfflictionInstance afflictionInstance : activeAfflictions.values()) {
+      Affliction.processProjectileSpawnedEffects(entity, projectile, afflictionInstance, AfflictionEffectComponents.PROJECTILE_SPAWNED);
+    }
+  }
+
   public static void handleTick(LivingEntity entity) {
     Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
     for (AfflictionInstance afflictionInstance : activeAfflictions.values()) {
       Affliction affliction = afflictionInstance.affliction().value();
-      Affliction.processEntityEffects(entity, afflictionInstance, AfflictionEffectComponents.TICK);
+      Affliction.processTickEffects(entity, afflictionInstance, AfflictionEffectComponents.TICK);
       if (affliction.tickProgression().isEmpty()) continue;
       afflictionInstance.addToProgression(affliction.tickProgression().get().getValue(afflictionInstance.stage()));
       afflictionInstance.limitToAllowedValues();

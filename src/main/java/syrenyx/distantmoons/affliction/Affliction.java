@@ -20,6 +20,8 @@ import net.minecraft.text.TextCodecs;
 import net.minecraft.util.dynamic.Codecs;
 import syrenyx.distantmoons.affliction.effect.AfflictionEffectEntry;
 import syrenyx.distantmoons.affliction.effect.AfflictionEntityEffect;
+import syrenyx.distantmoons.affliction.effect.SpawnedEntityAfflictionEffectEntry;
+import syrenyx.distantmoons.affliction.effect.SpawnedEntityEffectTarget;
 import syrenyx.distantmoons.initializers.LootContextTypes;
 import syrenyx.distantmoons.initializers.Registries;
 import syrenyx.distantmoons.references.RegistryKeys;
@@ -55,15 +57,24 @@ public record Affliction(
   public static final int MAX_STAGE = 255;
   public static final int DEFAULT_STAGE = 1;
 
-  public static void processEntityEffects(Entity entity, AfflictionInstance afflictionInstance, ComponentType<List<AfflictionEffectEntry<AfflictionEntityEffect>>> componentType) {
+  public static void processProjectileSpawnedEffects(Entity owner, Entity projectile, AfflictionInstance afflictionInstance, ComponentType<List<SpawnedEntityAfflictionEffectEntry<AfflictionEntityEffect>>> componentType) {
+    List<SpawnedEntityAfflictionEffectEntry<AfflictionEntityEffect>> effectEntries = afflictionInstance.affliction().value().effects.getOrDefault(componentType, List.of());
+    LootContext lootContext = getAfflictedProjectileLootContext(owner, projectile, afflictionInstance.stage(), afflictionInstance.progression());
+    for (SpawnedEntityAfflictionEffectEntry<AfflictionEntityEffect> effectEntry : effectEntries) {
+      Entity target = effectEntry.target() == SpawnedEntityEffectTarget.ORIGINATOR ? owner : projectile;
+      if (effectEntry.test(lootContext)) effectEntry.effect().apply((ServerWorld) target.getWorld(), afflictionInstance.stage(), target, target.getPos());
+    }
+  }
+
+  public static void processTickEffects(Entity entity, AfflictionInstance afflictionInstance, ComponentType<List<AfflictionEffectEntry<AfflictionEntityEffect>>> componentType) {
     List<AfflictionEffectEntry<AfflictionEntityEffect>> effectEntries = afflictionInstance.affliction().value().effects.getOrDefault(componentType, List.of());
-    LootContext lootContext = getLootContext(entity, afflictionInstance.stage(), afflictionInstance.progression());
+    LootContext lootContext = getAfflictedEntityLootContext(entity, afflictionInstance.stage(), afflictionInstance.progression());
     for (AfflictionEffectEntry<AfflictionEntityEffect> effectEntry : effectEntries) {
       if (effectEntry.test(lootContext)) effectEntry.effect().apply((ServerWorld) entity.getWorld(), afflictionInstance.stage(), entity, entity.getPos());
     }
   }
 
-  private static LootContext getLootContext(Entity entity, int stage, float progression) {
+  private static LootContext getAfflictedEntityLootContext(Entity entity, int stage, float progression) {
     return new LootContext.Builder(
         new LootWorldContext
             .Builder((ServerWorld) entity.getWorld())
@@ -72,6 +83,19 @@ public record Affliction(
             .add(LootContextParameters.ORIGIN, entity.getPos())
             .add(LootContextParameters.THIS_ENTITY, entity)
             .build(LootContextTypes.AFFLICTED_ENTITY)
+    ).build(Optional.empty());
+  }
+
+  private static LootContext getAfflictedProjectileLootContext(Entity owner, Entity projectile, int stage, float progression) {
+    return new LootContext.Builder(
+        new LootWorldContext
+            .Builder((ServerWorld) owner.getWorld())
+            .add(syrenyx.distantmoons.references.LootContextParameters.AFFLICTION_PROGRESSION, progression)
+            .add(syrenyx.distantmoons.references.LootContextParameters.AFFLICTION_STAGE, stage)
+            .add(LootContextParameters.DIRECT_ATTACKING_ENTITY, projectile)
+            .add(LootContextParameters.ORIGIN, projectile.getPos())
+            .add(LootContextParameters.THIS_ENTITY, owner)
+            .build(LootContextTypes.AFFLICTED_PROJECTILE)
     ).build(Optional.empty());
   }
 }

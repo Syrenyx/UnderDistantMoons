@@ -1,11 +1,12 @@
 package syrenyx.distantmoons.initializers.component;
 
 import net.minecraft.component.ComponentType;
-import net.minecraft.loot.context.LootContextTypes;
 import net.minecraft.registry.Registry;
 import syrenyx.distantmoons.UnderDistantMoons;
 import syrenyx.distantmoons.affliction.effect.AfflictionEffectEntry;
 import syrenyx.distantmoons.affliction.effect.AfflictionEntityEffect;
+import syrenyx.distantmoons.affliction.effect.SpawnedEntityAfflictionEffectEntry;
+import syrenyx.distantmoons.initializers.LootContextTypes;
 import syrenyx.distantmoons.initializers.Registries;
 
 import java.util.List;
@@ -13,8 +14,12 @@ import java.util.function.UnaryOperator;
 
 public abstract class AfflictionEffectComponents {
 
+
+  public static final ComponentType<List<SpawnedEntityAfflictionEffectEntry<AfflictionEntityEffect>>> PROJECTILE_SPAWNED = register(
+      "projectile_spawned", builder -> builder.codec(SpawnedEntityAfflictionEffectEntry.createCodec(AfflictionEntityEffect.CODEC, LootContextTypes.AFFLICTED_ENTITY).listOf())
+  );
   public static final ComponentType<List<AfflictionEffectEntry<AfflictionEntityEffect>>> TICK = register(
-      "tick", builder -> builder.codec(AfflictionEffectEntry.createCodec(AfflictionEntityEffect.CODEC, LootContextTypes.SELECTOR).listOf())
+      "tick", builder -> builder.codec(AfflictionEffectEntry.createCodec(AfflictionEntityEffect.CODEC, LootContextTypes.AFFLICTED_ENTITY).listOf())
   );
 
   private static <T> ComponentType<T> register(String id, UnaryOperator<ComponentType.Builder<T>> builderOperator) {

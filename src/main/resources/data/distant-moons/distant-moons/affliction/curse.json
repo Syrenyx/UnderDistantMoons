@@ -10,6 +10,22 @@
   "persistent": true,
   "immune_entities": "#minecraft:undead",
   "effects": {
+    "distant-moons:projectile_spawned": [
+      {
+        "target": "spawned_entity",
+        "effect": {
+          "type": "distant-moons:ignite",
+          "duration": 8.0
+        }
+      },
+      {
+        "target": "originator",
+        "effect": {
+          "type": "distant-moons:ignite",
+          "duration": 8.0
+        }
+      }
+    ],
     "distant-moons:tick": [
       {
         "effect": {
@@ -43,7 +59,7 @@
             {
               "condition": "minecraft:value_check",
               "value": {
-                "type": "distant-moons:affliction_value",
+                "type": "distant-moons:affliction_stage",
                 "amount": {
                   "type": "minecraft:linear",
                   "base": 1,

@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import syrenyx.distantmoons.affliction.AfflictionManager;
 
 @Mixin(LivingEntity.class)
-public class LivingEntityMixin {
+public abstract class LivingEntityMixin {
 
   @Inject(at = @At("HEAD"), method = "baseTick")
   public void baseTick(CallbackInfo callbackInfo) {
