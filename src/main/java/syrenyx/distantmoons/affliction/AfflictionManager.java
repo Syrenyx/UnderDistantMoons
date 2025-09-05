@@ -58,7 +58,7 @@ public abstract class AfflictionManager {
     Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
     for (AfflictionInstance afflictionInstance : activeAfflictions.values()) {
       Affliction affliction = afflictionInstance.affliction().value();
-      affliction.processEntityEffects(entity, afflictionInstance.stage(), AfflictionEffectComponents.TICK);
+      Affliction.processEntityEffects(entity, afflictionInstance, AfflictionEffectComponents.TICK);
       if (affliction.tickProgression().isEmpty()) continue;
       afflictionInstance.addToProgression(affliction.tickProgression().get().getValue(afflictionInstance.stage()));
       afflictionInstance.limitToAllowedValues();

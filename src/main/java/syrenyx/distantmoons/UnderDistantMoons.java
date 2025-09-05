@@ -21,6 +21,8 @@ public class UnderDistantMoons implements ModInitializer {
     AfflictionEntityEffects.initialize();
     AttachedData.initialize();
     Commands.initialize();
+    LootContextTypes.initialize();
+    LootNumberProviders.initialize();
     Networking.initialize();
     Registries.initialize();
     LOGGER.info("Content Successfully Initialized");

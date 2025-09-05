@@ -41,6 +41,18 @@
               "period": 24000
             },
             {
+              "condition": "minecraft:value_check",
+              "value": {
+                "type": "distant-moons:affliction_value",
+                "amount": {
+                  "type": "minecraft:linear",
+                  "base": 1,
+                  "per_level_above_first": 1
+                }
+              },
+              "range": 3
+            },
+            {
               "condition": "minecraft:weather_check",
               "raining": false
             }
