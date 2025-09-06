@@ -15,24 +15,53 @@ import org.jetbrains.annotations.Nullable;
 import syrenyx.distantmoons.data.attachment.LivingEntityAttachment;
 import syrenyx.distantmoons.data.networking.AfflictionPacket;
 import syrenyx.distantmoons.data.persistent.PersistentStateManager;
-import syrenyx.distantmoons.initializers.component.AfflictionEffectComponents;
+import syrenyx.distantmoons.initializers.AfflictionEffectComponents;
 import syrenyx.distantmoons.payload.ActiveAfflictionsPayload;
 
+import java.util.Collection;
 import java.util.Map;
 
 public abstract class AfflictionManager {
+
+  public static boolean addToAffliction(LivingEntity entity, AfflictionInstance afflictionInstance) {
+    if (afflictionInstance.stage() == 0 && afflictionInstance.progression() == 0.0F) return false;
+    Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
+    AfflictionInstance activeAffliction = getActiveAfflictions(entity).get(afflictionInstance.affliction());
+    if (activeAffliction == null) {
+      if (afflictionInstance.stage() < 1 || afflictionInstance.progression() < 0.0F) return false;
+      afflictionInstance.limitToAllowedValues();
+      activeAfflictions.put(afflictionInstance.affliction(), afflictionInstance);
+      Affliction.processStageChangedEffects(entity, afflictionInstance, false, AfflictionEffectComponents.STAGE_CHANGED);
+      return true;
+    }
+    if (activeAffliction.stage() + afflictionInstance.stage() < 1) {
+      activeAfflictions.remove(afflictionInstance.affliction());
+      Affliction.processStageChangedEffects(entity, activeAffliction, true, AfflictionEffectComponents.STAGE_CHANGED);
+      return true;
+    }
+    int currentStage = activeAffliction.stage();
+    activeAffliction.addToStage(afflictionInstance.stage());
+    activeAffliction.addToProgression(afflictionInstance.progression());
+    activeAffliction.limitToAllowedValues();
+    if (currentStage != activeAffliction.stage()) Affliction.processStageChangedEffects(entity, activeAffliction, false, AfflictionEffectComponents.STAGE_CHANGED);
+    return true;
+  }
 
   public static boolean clearAffliction(LivingEntity entity, @Nullable RegistryEntry<Affliction> affliction) {
     Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
     if (activeAfflictions.isEmpty()) return false;
     if (affliction != null) {
-      if (activeAfflictions.get(affliction) != null) Affliction.processStageChangedEffects(entity, activeAfflictions.get(affliction), true, AfflictionEffectComponents.STAGE_CHANGED);
-      return activeAfflictions.remove(affliction) != null;
+      boolean present = false;
+      if (activeAfflictions.get(affliction) != null) present = true;
+      activeAfflictions.remove(affliction);
+      if (present) Affliction.processStageChangedEffects(entity, activeAfflictions.get(affliction), true, AfflictionEffectComponents.STAGE_CHANGED);
+      return present;
     }
-    for (AfflictionInstance afflictionInstance : activeAfflictions.values()) {
+    Collection<AfflictionInstance> values = activeAfflictions.values();
+    activeAfflictions.clear();
+    for (AfflictionInstance afflictionInstance : values) {
       Affliction.processStageChangedEffects(entity, afflictionInstance, true, AfflictionEffectComponents.STAGE_CHANGED);
     }
-    activeAfflictions.clear();
     return true;
   }
 

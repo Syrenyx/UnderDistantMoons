@@ -1,11 +1,9 @@
-package syrenyx.distantmoons.initializers.component;
+package syrenyx.distantmoons.initializers;
 
 import net.minecraft.component.ComponentType;
 import net.minecraft.registry.Registry;
 import syrenyx.distantmoons.UnderDistantMoons;
 import syrenyx.distantmoons.affliction.effect.*;
-import syrenyx.distantmoons.initializers.LootContextTypes;
-import syrenyx.distantmoons.initializers.Registries;
 
 import java.util.List;
 import java.util.function.UnaryOperator;

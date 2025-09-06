@@ -6,11 +6,12 @@ import syrenyx.distantmoons.UnderDistantMoons;
 import syrenyx.distantmoons.affliction.effect.AfflictionEntityEffect;
 import syrenyx.distantmoons.affliction.effect.entity.*;
 
-public class AfflictionEntityEffects {
+public abstract class AfflictionEntityEffects {
 
   static {
     register("all_of", AllOfEntityEffect.CODEC);
     register("apply_mob_effect", ApplyMobEffectEffect.CODEC);
+    register("change_affliction", ChangeAfflictionEffect.CODEC);
     register("damage_entity", DamageEntityEffect.CODEC);
     register("explode", ExplodeEffect.CODEC);
     register("ignite", IgniteEffect.CODEC);

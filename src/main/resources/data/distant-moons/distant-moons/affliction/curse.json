@@ -8,29 +8,5 @@
   },
   "max_stage": 3,
   "persistent": true,
-  "immune_entities": "#minecraft:undead",
-  "effects": {
-    "distant-moons:used_item": [
-      {
-        "effect": {
-          "type": "distant-moons:run_function",
-          "function": "distant-moons:test_function"
-        },
-        "requirements": {
-          "condition": "minecraft:match_tool",
-          "predicate": {
-            "items": [
-              "minecraft:mushroom_stew"
-            ]
-          }
-        }
-      },
-      {
-        "effect": {
-          "type": "distant-moons:ignite",
-          "duration": 2.0
-        }
-      }
-    ]
-  }
+  "immune_entities": "#minecraft:undead"
 }

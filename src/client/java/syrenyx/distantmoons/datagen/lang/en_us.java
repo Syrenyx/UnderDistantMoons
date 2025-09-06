@@ -19,6 +19,9 @@ public class en_us extends FabricLanguageProvider {
 
     builder.add("affliction.progression_tooltip", "%s / %s");
 
+    builder.add("commands.affliction.add.failed", "Unable to apply this affliction (target is either immune to afflictions, has something stronger, or the operation produced an invalid affliction)");
+    builder.add("commands.affliction.add.success.multiple", "Added affliction %s to %s targets");
+    builder.add("commands.affliction.add.success.single", "Applied affliction %s to %s");
     builder.add("commands.affliction.clear.everything.failed", "Target has no afflictions to remove");
     builder.add("commands.affliction.clear.everything.success.multiple", "Removed every affliction from %s targets");
     builder.add("commands.affliction.clear.everything.success.single", "Removed every affliction from %s");

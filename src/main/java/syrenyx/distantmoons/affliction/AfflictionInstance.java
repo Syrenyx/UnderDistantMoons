@@ -14,8 +14,8 @@ public class AfflictionInstance implements Comparable<AfflictionInstance> {
   public static final Codec<AfflictionInstance> CODEC = RecordCodecBuilder.create(instance -> instance
       .group(
           Affliction.FIXED_ENTRY_CODEC.fieldOf("id").forGetter(AfflictionInstance::affliction),
-          Codecs.rangedInclusiveFloat(0, Affliction.MAX_PROGRESSION).optionalFieldOf("progression", 0.0F).forGetter(AfflictionInstance::progression),
-          Codecs.rangedInt(1, Affliction.MAX_STAGE).fieldOf("stage").forGetter(AfflictionInstance::stage)
+          Codecs.rangedInt(1, Affliction.MAX_STAGE).fieldOf("stage").forGetter(AfflictionInstance::stage),
+          Codecs.rangedInclusiveFloat(0, Affliction.MAX_PROGRESSION).optionalFieldOf("progression", 0.0F).forGetter(AfflictionInstance::progression)
       )
       .apply(instance, AfflictionInstance::new)
   );
@@ -23,7 +23,7 @@ public class AfflictionInstance implements Comparable<AfflictionInstance> {
   private float progression;
   private int stage;
 
-  public AfflictionInstance(RegistryEntry<Affliction> affliction, float progression, int stage) {
+  public AfflictionInstance(RegistryEntry<Affliction> affliction, int stage, float progression) {
     this.affliction = affliction;
     this.progression = progression;
     this.stage = stage;
@@ -55,6 +55,10 @@ public class AfflictionInstance implements Comparable<AfflictionInstance> {
 
   public void setStage(int stage) {
     this.stage = stage;
+  }
+
+  public void addToStage(int value) {
+    this.stage += value;
   }
 
   public void addToProgression(float value) {

@@ -18,17 +18,16 @@ public abstract class PlayerEntityMixin {
 
   @Inject(at = @At("HEAD"), method = "tick")
   public void tick(CallbackInfo callbackInfo) {
-    PlayerEntity thisPlayerEntity = (PlayerEntity) (Object) this;
-    if (!thisPlayerEntity.getActiveItem().isEmpty()) this.savedItemStack = thisPlayerEntity.getActiveItem().copy();
+    ItemStack activeItem = ((PlayerEntity) (Object) this).getActiveItem();
+    if (!activeItem.isEmpty()) this.savedItemStack = activeItem.copy();
   }
 
   @Inject(at = @At("HEAD"), method = "incrementStat(Lnet/minecraft/stat/Stat;)V")
   public void incrementStat(Stat<?> stat, CallbackInfo callbackInfo) {
     PlayerEntity thisPlayerEntity = (PlayerEntity) (Object) this;
-    if (thisPlayerEntity.getWorld().isClient()) return;
-    if (stat.getType() == Stats.USED) {
-      ItemStack stack = thisPlayerEntity.getActiveItem().isEmpty() ? savedItemStack : thisPlayerEntity.getActiveItem();
-      AfflictionManager.handleUsedItem(thisPlayerEntity, stack);
-    }
+    if (thisPlayerEntity.getWorld().isClient() || stat.getType() != Stats.USED) return;
+    ItemStack activeItem = thisPlayerEntity.getActiveItem();
+    ItemStack stack = activeItem.isEmpty() ? savedItemStack : activeItem;
+    AfflictionManager.handleUsedItem(thisPlayerEntity, stack);
   }
 }
