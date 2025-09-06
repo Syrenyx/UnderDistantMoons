@@ -10,7 +10,7 @@ public enum SpawnedEntityEffectTarget implements StringIdentifiable {
   public static final Codec<SpawnedEntityEffectTarget> CODEC = StringIdentifiable.createCodec(SpawnedEntityEffectTarget::values);
   private final String id;
 
-  private SpawnedEntityEffectTarget(String id) {
+  SpawnedEntityEffectTarget(final String id) {
     this.id = id;
   }
 

@@ -150,7 +150,7 @@ public record Affliction(
             .Builder((ServerWorld) owner.getWorld())
             .add(syrenyx.distantmoons.references.LootContextParameters.AFFLICTION_PROGRESSION, progression)
             .add(syrenyx.distantmoons.references.LootContextParameters.AFFLICTION_STAGE, stage)
-            .add(LootContextParameters.DIRECT_ATTACKING_ENTITY, projectile)
+            .add(syrenyx.distantmoons.references.LootContextParameters.SPAWNED_ENTITY, projectile)
             .add(LootContextParameters.ORIGIN, projectile.getPos())
             .add(LootContextParameters.THIS_ENTITY, owner)
             .build(LootContextTypes.AFFLICTED_PROJECTILE)

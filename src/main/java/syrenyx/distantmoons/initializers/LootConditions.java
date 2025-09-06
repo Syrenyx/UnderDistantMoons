@@ -6,10 +6,12 @@ import net.minecraft.loot.condition.LootConditionType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import syrenyx.distantmoons.UnderDistantMoons;
+import syrenyx.distantmoons.predicate.condition.EntityPropertiesCondition;
 import syrenyx.distantmoons.predicate.condition.LocationCheck;
 
 public abstract class LootConditions {
 
+  public static final LootConditionType ENTITY_PROPERTIES = register("entity_properties", EntityPropertiesCondition.CODEC);
   public static final LootConditionType LOCATION_CHECK = register("location_check", LocationCheck.CODEC);
 
   private static LootConditionType register(String id, MapCodec<? extends LootCondition> codec) {

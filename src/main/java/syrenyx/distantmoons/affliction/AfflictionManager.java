@@ -141,7 +141,7 @@ public abstract class AfflictionManager {
     if (entity instanceof ServerPlayerEntity player) ServerPlayNetworking.send(player, new ActiveAfflictionsPayload(activeAfflictions.values().stream().map(AfflictionPacket::fromInstance).toList()));
   }
 
-  private static Map<RegistryEntry<Affliction>, AfflictionInstance> getActiveAfflictions(LivingEntity entity) {
+  public static Map<RegistryEntry<Affliction>, AfflictionInstance> getActiveAfflictions(LivingEntity entity) {
     return entity instanceof PlayerEntity player
         ? PersistentStateManager.getPlayerState(player).livingEntityAttachment().activeAfflictions()
         : LivingEntityAttachment.getOrCreate(entity).activeAfflictions();

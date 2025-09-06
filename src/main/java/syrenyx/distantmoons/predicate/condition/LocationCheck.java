@@ -12,7 +12,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3i;
 import syrenyx.distantmoons.initializers.LootConditions;
-import syrenyx.distantmoons.predicate.LocationPredicate;
+import syrenyx.distantmoons.predicate.location.LocationPredicate;
 
 import java.util.Optional;
 import java.util.Set;

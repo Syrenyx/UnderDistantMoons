@@ -1,4 +1,4 @@
-package syrenyx.distantmoons.predicate;
+package syrenyx.distantmoons.predicate.location;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

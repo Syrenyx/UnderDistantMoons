@@ -17,14 +17,10 @@
           "duration": 8.0
         },
         "requirements": {
-          "condition": "distant-moons:location_check",
-          "offset": {
-            "y": 1
-          },
+          "condition": "distant-moons:entity_properties",
+          "entity": "this",
           "predicate": {
-            "light": {
-              "time_adjusted_sky_light": 15
-            }
+            "affected_by_daylight": {}
           }
         }
       }
