@@ -1,0 +1,33 @@
+{
+  "description": {
+    "translate": "affliction.distant-moons.curse_of_the_night"
+  },
+  "display": {
+    "icon": "distant-moons:curse",
+    "tooltip_style": "distant-moons:persistent_affliction"
+  },
+  "max_stage": 1,
+  "persistent": true,
+  "immune_entities": "#minecraft:undead",
+  "effects": {
+    "distant-moons:tick": [
+      {
+        "effect": {
+          "type": "distant-moons:ignite",
+          "duration": 8.0
+        },
+        "requirements": {
+          "condition": "distant-moons:location_check",
+          "offset": {
+            "y": 1
+          },
+          "predicate": {
+            "light": {
+              "time_adjusted_sky_light": 15
+            }
+          }
+        }
+      }
+    ]
+  }
+}

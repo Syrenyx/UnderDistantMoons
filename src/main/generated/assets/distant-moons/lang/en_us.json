@@ -1,5 +1,5 @@
 {
-  "affliction.distant-moons.curse": "Curse",
+  "affliction.distant-moons.curse_of_the_night": "Curse of the Night",
   "affliction.distant-moons.illness": "Illness",
   "affliction.progression_tooltip": "%s / %s",
   "commands.affliction.add.failed": "Unable to apply this affliction (target is either immune to afflictions, has something stronger, or the operation produced an invalid affliction)",

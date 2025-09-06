@@ -14,7 +14,7 @@ public class en_us extends FabricLanguageProvider {
 
   @Override
   public void generateTranslations(RegistryWrapper.WrapperLookup wrapperLookup, TranslationBuilder builder) {
-    builder.add("affliction.distant-moons.curse", "Curse");
+    builder.add("affliction.distant-moons.curse_of_the_night", "Curse of the Night");
     builder.add("affliction.distant-moons.illness", "Illness");
 
     builder.add("affliction.progression_tooltip", "%s / %s");
