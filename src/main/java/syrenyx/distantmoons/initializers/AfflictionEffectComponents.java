@@ -10,7 +10,6 @@ import java.util.function.UnaryOperator;
 
 public abstract class AfflictionEffectComponents {
 
-
   public static final ComponentType<List<AfflictionEffectEntry<AfflictionEntityEffect>>> USED_ITEM = register(
       "used_item", builder -> builder.codec(AfflictionEffectEntry.createCodec(AfflictionEntityEffect.CODEC, LootContextTypes.AFFLICTED_ITEM).listOf())
   );

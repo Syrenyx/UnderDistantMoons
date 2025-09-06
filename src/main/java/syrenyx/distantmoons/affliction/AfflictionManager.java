@@ -65,13 +65,8 @@ public abstract class AfflictionManager {
     return true;
   }
 
-  public static boolean setAffliction(LivingEntity entity, AfflictionInstance afflictionInstance) {
-    if (isImmune(entity, afflictionInstance.affliction())) return false;
-    afflictionInstance.limitToAllowedValues();
-    Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
-    activeAfflictions.put(afflictionInstance.affliction(), afflictionInstance);
-    Affliction.processStageChangedEffects(entity, afflictionInstance, false, AfflictionEffectComponents.STAGE_CHANGED);
-    return true;
+  public static @Nullable AfflictionInstance getAffliction(LivingEntity entity, RegistryEntry<Affliction> affliction) {
+    return getActiveAfflictions(entity).get(affliction);
   }
 
   public static boolean giveAffliction(LivingEntity entity, AfflictionInstance afflictionInstance) {
@@ -87,6 +82,15 @@ public abstract class AfflictionManager {
       result = true;
     }
     return result;
+  }
+
+  public static boolean setAffliction(LivingEntity entity, AfflictionInstance afflictionInstance) {
+    if (isImmune(entity, afflictionInstance.affliction())) return false;
+    afflictionInstance.limitToAllowedValues();
+    Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
+    activeAfflictions.put(afflictionInstance.affliction(), afflictionInstance);
+    Affliction.processStageChangedEffects(entity, afflictionInstance, false, AfflictionEffectComponents.STAGE_CHANGED);
+    return true;
   }
 
   public static void handleUsedItem(LivingEntity entity, ItemStack item) {

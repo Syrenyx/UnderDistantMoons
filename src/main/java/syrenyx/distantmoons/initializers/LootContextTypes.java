@@ -39,6 +39,12 @@ public abstract class LootContextTypes {
       .require(net.minecraft.loot.context.LootContextParameters.ORIGIN)
       .require(net.minecraft.loot.context.LootContextParameters.THIS_ENTITY)
   );
+  public static final ContextType ENCHANTED_ITEM = register("enchanted_item", builder -> builder
+      .require(net.minecraft.loot.context.LootContextParameters.ENCHANTMENT_LEVEL)
+      .require(net.minecraft.loot.context.LootContextParameters.ORIGIN)
+      .require(net.minecraft.loot.context.LootContextParameters.THIS_ENTITY)
+      .require(net.minecraft.loot.context.LootContextParameters.TOOL)
+  );
 
   private static ContextType register(String id, Consumer<ContextType.Builder> type) {
     ContextType.Builder builder = new ContextType.Builder();

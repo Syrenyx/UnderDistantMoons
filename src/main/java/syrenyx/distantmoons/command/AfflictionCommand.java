@@ -1,7 +1,6 @@
 package syrenyx.distantmoons.command;
 
 import com.google.common.collect.ImmutableList;
-import com.ibm.icu.impl.Assert;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.FloatArgumentType;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
@@ -16,7 +15,6 @@ import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.Text;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import syrenyx.distantmoons.affliction.Affliction;
 import syrenyx.distantmoons.affliction.AfflictionInstance;
@@ -84,6 +82,33 @@ public abstract class AfflictionCommand {
                         EntityArgumentType.getEntities(context, "targets"),
                         RegistryEntryReferenceArgumentType.getRegistryEntry(context, "affliction", RegistryKeys.AFFLICTION_REGISTRY_KEY)
                     ))
+                )
+            )
+        )
+        .then(CommandManager
+            .literal("get")
+            .then(CommandManager
+                .argument("target", EntityArgumentType.entity())
+                .then(CommandManager
+                    .argument("affliction", RegistryEntryReferenceArgumentType.registryEntry(registryAccess, RegistryKeys.AFFLICTION_REGISTRY_KEY))
+                    .then(CommandManager
+                        .literal("stage")
+                        .executes(context -> executeGet(
+                            context.getSource(),
+                            EntityArgumentType.getEntity(context, "target"),
+                            RegistryEntryReferenceArgumentType.getRegistryEntry(context, "affliction", RegistryKeys.AFFLICTION_REGISTRY_KEY),
+                            true
+                        ))
+                    )
+                    .then(CommandManager
+                        .literal("progression")
+                        .executes(context -> executeGet(
+                            context.getSource(),
+                            EntityArgumentType.getEntity(context, "target"),
+                            RegistryEntryReferenceArgumentType.getRegistryEntry(context, "affliction", RegistryKeys.AFFLICTION_REGISTRY_KEY),
+                            false
+                        ))
+                    )
                 )
             )
         )
@@ -164,6 +189,8 @@ public abstract class AfflictionCommand {
   private static final SimpleCommandExceptionType ADD_FAILED_EXCEPTION = new SimpleCommandExceptionType(Text.translatable("commands.affliction.add.failed"));
   private static final SimpleCommandExceptionType CLEAR_EVERYTHING_FAILED_EXCEPTION = new SimpleCommandExceptionType(Text.translatable("commands.affliction.clear.everything.failed"));
   private static final SimpleCommandExceptionType CLEAR_SPECIFIC_FAILED_EXCEPTION = new SimpleCommandExceptionType(Text.translatable("commands.affliction.clear.specific.failed"));
+  private static final SimpleCommandExceptionType GET_FAILED_AFFLICTION_EXCEPTION = new SimpleCommandExceptionType(Text.translatable("commands.affliction.get.failed.affliction"));
+  private static final SimpleCommandExceptionType GET_FAILED_ENTITY_EXCEPTION = new SimpleCommandExceptionType(Text.translatable("commands.affliction.get.failed.entity"));
   private static final SimpleCommandExceptionType GIVE_FAILED_EXCEPTION = new SimpleCommandExceptionType(Text.translatable("commands.affliction.give.failed"));
   private static final SimpleCommandExceptionType SET_FAILED_EXCEPTION = new SimpleCommandExceptionType(Text.translatable("commands.affliction.set.failed"));
 
@@ -197,6 +224,20 @@ public abstract class AfflictionCommand {
     else if (affliction == null) source.sendFeedback(() -> Text.translatable("commands.affliction.clear.everything.success.multiple", targets.size()), true);
     else source.sendFeedback(() -> Text.translatable("commands.affliction.clear.specific.success.multiple", affliction.value().description(), targets.size()), true);
     return result;
+  }
+
+  private static int executeGet(
+      ServerCommandSource source,
+      Entity target,
+      RegistryEntry<Affliction> affliction,
+      boolean stage
+  ) throws CommandSyntaxException {
+    if (!(target instanceof LivingEntity livingEntity)) throw GET_FAILED_ENTITY_EXCEPTION.create();
+    AfflictionInstance afflictionInstance = AfflictionManager.getAffliction(livingEntity, affliction);
+    if (afflictionInstance == null) throw GET_FAILED_AFFLICTION_EXCEPTION.create();
+    if (stage) source.sendFeedback(() -> Text.translatable("commands.affliction.get.success.stage", affliction.value().description(), afflictionInstance.stage()), true);
+    else source.sendFeedback(() -> Text.translatable("commands.affliction.get.success.progression", affliction.value().description(), afflictionInstance.progression()), true);
+    return stage ? afflictionInstance.stage() : (int) afflictionInstance.progression();
   }
 
   private static int executeGive(

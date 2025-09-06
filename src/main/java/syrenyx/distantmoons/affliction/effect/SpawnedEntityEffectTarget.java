@@ -1,7 +1,6 @@
 package syrenyx.distantmoons.affliction.effect;
 
 import com.mojang.serialization.Codec;
-import net.minecraft.enchantment.effect.EnchantmentEffectTarget;
 import net.minecraft.util.StringIdentifiable;
 
 public enum SpawnedEntityEffectTarget implements StringIdentifiable {

@@ -10,6 +10,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import syrenyx.distantmoons.affliction.AfflictionManager;
+import syrenyx.distantmoons.enchantment.effect.entity.EnchantmentManager;
 
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin {
@@ -29,5 +30,6 @@ public abstract class PlayerEntityMixin {
     ItemStack activeItem = thisPlayerEntity.getActiveItem();
     ItemStack stack = activeItem.isEmpty() ? savedItemStack : activeItem;
     AfflictionManager.handleUsedItem(thisPlayerEntity, stack);
+    EnchantmentManager.handleUsedItem(thisPlayerEntity, stack);
   }
 }
