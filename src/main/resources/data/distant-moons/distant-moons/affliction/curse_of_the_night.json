@@ -4,11 +4,32 @@
   },
   "display": {
     "icon": "distant-moons:curse",
-    "tooltip_style": "distant-moons:persistent_affliction"
+    "tooltip_style": "distant-moons:persistent_affliction",
+    "stage_overrides": {
+      "1": {
+        "description": {
+          "translate": "affliction.distant-moons.curse_of_the_night"
+        },
+        "progression_bar": "infinite"
+      },
+      "2": {
+        "description": {
+          "translate": "affliction.distant-moons.curse_of_the_night_waning"
+        }
+      }
+    }
   },
-  "max_stage": 1,
+  "max_stage": 2,
   "persistent": true,
   "immune_entities": "#minecraft:undead",
+  "tick_progression": {
+    "type": "minecraft:lookup",
+    "values": [
+      0.0,
+      -0.03
+    ],
+    "fallback": 0.0
+  },
   "effects": {
     "distant-moons:tick": [
       {
@@ -24,6 +45,40 @@
               "undead_exposed_to_daylight_check": true
             }
           }
+        }
+      }
+    ],
+    "distant-moons:used_item": [
+      {
+        "effect": {
+          "type": "distant-moons:change_affliction",
+          "operation": "set",
+          "affliction": "distant-moons:curse_of_the_night",
+          "stage": 2,
+          "progression": 100.0
+        },
+        "requirements": {
+          "condition": "minecraft:all_of",
+          "terms": [
+            {
+              "condition": "distant-moons:entity_properties",
+              "entity": "this",
+              "predicate": {
+                "effects": {
+                  "minecraft:weakness": {}
+                }
+              }
+            },
+            {
+              "condition": "minecraft:match_tool",
+              "predicate": {
+                "items": [
+                  "minecraft:enchanted_golden_apple",
+                  "minecraft:golden_apple"
+                ]
+              }
+            }
+          ]
         }
       }
     ]

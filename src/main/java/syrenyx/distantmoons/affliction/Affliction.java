@@ -21,6 +21,8 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.text.TextCodecs;
 import net.minecraft.util.dynamic.Codecs;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import syrenyx.distantmoons.affliction.effect.*;
 import syrenyx.distantmoons.initializers.LootContextTypes;
 import syrenyx.distantmoons.initializers.Registries;
@@ -57,14 +59,6 @@ public record Affliction(
   public static final int MAX_STAGE = 255;
   public static final int DEFAULT_STAGE = 1;
 
-  public static void processUsedItemEffects(Entity entity, ItemStack item, AfflictionInstance afflictionInstance, ComponentType<List<AfflictionEffectEntry<AfflictionEntityEffect>>> componentType) {
-    List<AfflictionEffectEntry<AfflictionEntityEffect>> effectEntries = afflictionInstance.affliction().value().effects.getOrDefault(componentType, List.of());
-    LootContext lootContext = getAfflictedItemLootContext(entity, item, afflictionInstance.stage(), afflictionInstance.progression());
-    for (AfflictionEffectEntry<AfflictionEntityEffect> effectEntry : effectEntries) {
-      if (effectEntry.test(lootContext)) effectEntry.effect().apply((ServerWorld) entity.getWorld(), afflictionInstance.stage(), entity, entity.getPos());
-    }
-  }
-
   public static void processPostDamageEffects(Entity victim, DamageSource damageSource, EnchantmentEffectTarget afflicted, AfflictionInstance afflictionInstance, ComponentType<List<TargetedAfflictionEffectEntry<AfflictionEntityEffect>>> componentType) {
     List<TargetedAfflictionEffectEntry<AfflictionEntityEffect>> effectEntries = afflictionInstance.affliction().value().effects.getOrDefault(componentType, List.of());
     LootContext lootContext = getAfflictedAttackLootContext(victim, damageSource, afflictionInstance.stage(), afflictionInstance.progression());
@@ -76,6 +70,14 @@ public record Affliction(
         case VICTIM -> victim;
       };
       if (effectEntry.test(lootContext)) effectEntry.effect().apply((ServerWorld) target.getWorld(), afflictionInstance.stage(), target, target.getPos());
+    }
+  }
+
+  public static void processHitBlockEffects(Entity entity, Vec3d pos, AfflictionInstance afflictionInstance, ComponentType<List<AfflictionEffectEntry<AfflictionEntityEffect>>> componentType) {
+    List<AfflictionEffectEntry<AfflictionEntityEffect>> effectEntries = afflictionInstance.affliction().value().effects.getOrDefault(componentType, List.of());
+    LootContext lootContext = getAfflictedBlockLootContext(entity, pos, afflictionInstance.stage(), afflictionInstance.progression());
+    for (AfflictionEffectEntry<AfflictionEntityEffect> effectEntry : effectEntries) {
+      if (effectEntry.test(lootContext)) effectEntry.effect().apply((ServerWorld) entity.getWorld(), afflictionInstance.stage(), entity, pos);
     }
   }
 
@@ -104,6 +106,14 @@ public record Affliction(
     }
   }
 
+  public static void processUsedItemEffects(Entity entity, ItemStack item, AfflictionInstance afflictionInstance, ComponentType<List<AfflictionEffectEntry<AfflictionEntityEffect>>> componentType) {
+    List<AfflictionEffectEntry<AfflictionEntityEffect>> effectEntries = afflictionInstance.affliction().value().effects.getOrDefault(componentType, List.of());
+    LootContext lootContext = getAfflictedItemLootContext(entity, item, afflictionInstance.stage(), afflictionInstance.progression());
+    for (AfflictionEffectEntry<AfflictionEntityEffect> effectEntry : effectEntries) {
+      if (effectEntry.test(lootContext)) effectEntry.effect().apply((ServerWorld) entity.getWorld(), afflictionInstance.stage(), entity, entity.getPos());
+    }
+  }
+
   private static LootContext getAfflictedAttackLootContext(Entity victim, DamageSource damageSource, int stage, float progression) {
     return new LootContext.Builder(
         new LootWorldContext
@@ -116,6 +126,19 @@ public record Affliction(
             .add(LootContextParameters.ORIGIN, victim.getPos())
             .add(LootContextParameters.THIS_ENTITY, victim)
             .build(LootContextTypes.AFFLICTED_ATTACK)
+    ).build(Optional.empty());
+  }
+
+  private static LootContext getAfflictedBlockLootContext(Entity victim, Vec3d pos, int stage, float progression) {
+    return new LootContext.Builder(
+        new LootWorldContext
+            .Builder((ServerWorld) victim.getWorld())
+            .add(syrenyx.distantmoons.references.LootContextParameters.AFFLICTION_PROGRESSION, progression)
+            .add(syrenyx.distantmoons.references.LootContextParameters.AFFLICTION_STAGE, stage)
+            .add(LootContextParameters.BLOCK_STATE, victim.getWorld().getBlockState(BlockPos.ofFloored(pos)))
+            .add(LootContextParameters.ORIGIN, pos)
+            .add(LootContextParameters.THIS_ENTITY, victim)
+            .build(LootContextTypes.AFFLICTED_BLOCK)
     ).build(Optional.empty());
   }
 

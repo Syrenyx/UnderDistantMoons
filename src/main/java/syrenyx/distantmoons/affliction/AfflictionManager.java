@@ -12,6 +12,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import org.jetbrains.annotations.Nullable;
 import syrenyx.distantmoons.affliction.effect.AfflictionEntityEffect;
 import syrenyx.distantmoons.affliction.effect.TargetedAfflictionEffectEntry;
@@ -39,8 +41,8 @@ public abstract class AfflictionManager {
       return true;
     }
     if (activeAffliction.stage() + afflictionInstance.stage() < 1) {
-      activeAfflictions.remove(afflictionInstance.affliction());
       Affliction.processStageChangedEffects(entity, activeAffliction, true, AfflictionEffectComponents.STAGE_CHANGED);
+      activeAfflictions.remove(afflictionInstance.affliction());
       return true;
     }
     int currentStage = activeAffliction.stage();
@@ -55,17 +57,15 @@ public abstract class AfflictionManager {
     Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
     if (activeAfflictions.isEmpty()) return false;
     if (affliction != null) {
-      boolean present = false;
-      if (activeAfflictions.get(affliction) != null) present = true;
+      if (activeAfflictions.get(affliction) == null) return false;
+      Affliction.processStageChangedEffects(entity, activeAfflictions.get(affliction), true, AfflictionEffectComponents.STAGE_CHANGED);
       activeAfflictions.remove(affliction);
-      if (present) Affliction.processStageChangedEffects(entity, activeAfflictions.get(affliction), true, AfflictionEffectComponents.STAGE_CHANGED);
-      return present;
+      return true;
     }
-    Collection<AfflictionInstance> values = activeAfflictions.values();
-    activeAfflictions.clear();
-    for (AfflictionInstance afflictionInstance : values) {
+    for (AfflictionInstance afflictionInstance : activeAfflictions.values()) {
       Affliction.processStageChangedEffects(entity, afflictionInstance, true, AfflictionEffectComponents.STAGE_CHANGED);
     }
+    activeAfflictions.clear();
     return true;
   }
 
@@ -83,6 +83,7 @@ public abstract class AfflictionManager {
     if (afflictionInstance.stage() > activeAffliction.stage()) Affliction.processStageChangedEffects(entity, afflictionInstance, false, AfflictionEffectComponents.STAGE_CHANGED);
     if (afflictionInstance.stage() > activeAffliction.stage() || afflictionInstance.stage() == activeAffliction.stage() && afflictionInstance.progression() > activeAffliction.progression()) {
       activeAffliction.setStage(afflictionInstance.stage());
+      if (afflictionInstance.progression() > activeAffliction.progression()) activeAffliction.setProgression(afflictionInstance.progression());
       result = true;
     }
     return result;
@@ -97,17 +98,17 @@ public abstract class AfflictionManager {
     return true;
   }
 
-  public static void handleUsedItem(LivingEntity entity, ItemStack item) {
-    Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
-    for (AfflictionInstance afflictionInstance : activeAfflictions.values()) {
-      Affliction.processUsedItemEffects(entity, item, afflictionInstance, AfflictionEffectComponents.USED_ITEM);
-    }
-  }
-
   public static void handlePlayerDeath(ServerPlayerEntity player) {
     Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(player);
     for (RegistryEntry<Affliction> affliction : activeAfflictions.keySet()) {
       if (!affliction.value().persistent()) activeAfflictions.remove(affliction);
+    }
+  }
+
+  public static void handleHitBlock(LivingEntity entity, Vec3d pos) {
+    Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
+    for (AfflictionInstance afflictionInstance : activeAfflictions.values()) {
+      Affliction.processHitBlockEffects(entity, pos, afflictionInstance, AfflictionEffectComponents.HIT_BLOCK);
     }
   }
 
@@ -143,6 +144,13 @@ public abstract class AfflictionManager {
       afflictionInstance.limitToAllowedValues();
     }
     if (entity instanceof ServerPlayerEntity player) ServerPlayNetworking.send(player, new ActiveAfflictionsPayload(activeAfflictions.values().stream().map(AfflictionPacket::fromInstance).toList()));
+  }
+
+  public static void handleUsedItem(LivingEntity entity, ItemStack item) {
+    Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
+    for (AfflictionInstance afflictionInstance : activeAfflictions.values()) {
+      Affliction.processUsedItemEffects(entity, item, afflictionInstance, AfflictionEffectComponents.USED_ITEM);
+    }
   }
 
   public static Map<RegistryEntry<Affliction>, AfflictionInstance> getActiveAfflictions(LivingEntity entity) {

@@ -4,10 +4,14 @@ import com.google.common.collect.ComparisonChain;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.screen.ScreenTexts;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.dynamic.Codecs;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.NoSuchElementException;
 
 public class AfflictionInstance implements Comparable<AfflictionInstance> {
 
@@ -53,12 +57,16 @@ public class AfflictionInstance implements Comparable<AfflictionInstance> {
     return this.stage;
   }
 
-  public void setStage(int stage) {
-    this.stage = stage;
+  public void setStage(int value) {
+    this.stage = value;
   }
 
   public void addToStage(int value) {
     this.stage += value;
+  }
+
+  public void setProgression(float value) {
+    this.progression = value;
   }
 
   public void addToProgression(float value) {
@@ -70,10 +78,43 @@ public class AfflictionInstance implements Comparable<AfflictionInstance> {
     this.stage = Math.max(1, Math.min(this.stage, this.affliction.value().maxStage()));
   }
 
-  @Nullable
-  public Identifier getSprite() {
-    if (this.affliction.value().display().isEmpty()) return null;
-    return this.affliction.value().display().get().icon();
+  public Text getDescription() {
+    Affliction affliction = this.affliction().value();
+    try {
+      return affliction.display().orElseThrow().stageOverrides().orElseThrow().get(String.valueOf(this.stage())).description().orElseThrow();
+    } catch (NoSuchElementException e) {
+      return affliction.description().copy().append(ScreenTexts.SPACE).append(Text.translatable("enchantment.level." + (this.stage())));
+    }
+  }
+
+  public @Nullable Identifier getIcon() {
+    Affliction affliction = this.affliction().value();
+    try {
+      return affliction.display().orElseThrow().stageOverrides().orElseThrow().get(String.valueOf(this.stage())).icon().orElseThrow();
+    } catch (NoSuchElementException e) {
+      if (affliction.display().isPresent()) return affliction.display().get().icon();
+      return null;
+    }
+  }
+
+  public ProgressionBarStyle getProgressionBarStyle() {
+    Affliction affliction = this.affliction().value();
+    try {
+      return affliction.display().orElseThrow().stageOverrides().orElseThrow().get(String.valueOf(this.stage())).progressionBarStyle().orElseThrow();
+    } catch (NoSuchElementException e) {
+      if (affliction.display().isPresent()) return affliction.tickProgression().isPresent() ? ProgressionBarStyle.DEFAULT : ProgressionBarStyle.INFINITE;
+      return null;
+    }
+  }
+
+  public @Nullable Identifier getTooltipStyle() {
+    Affliction affliction = this.affliction().value();
+    try {
+      return affliction.display().orElseThrow().stageOverrides().orElseThrow().get(String.valueOf(this.stage())).tooltipStyle().orElseThrow();
+    } catch (NoSuchElementException e) {
+      if (affliction.display().isPresent()) return affliction.display().get().tooltipStyle().orElse(null);
+      return null;
+    }
   }
 
   @Override

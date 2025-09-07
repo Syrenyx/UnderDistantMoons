@@ -19,6 +19,13 @@ public abstract class LootContextTypes {
       .allow(net.minecraft.loot.context.LootContextParameters.ATTACKING_ENTITY)
       .allow(net.minecraft.loot.context.LootContextParameters.DIRECT_ATTACKING_ENTITY)
   );
+  public static final ContextType AFFLICTED_BLOCK = register("afflicted_block", builder -> builder
+      .require(LootContextParameters.AFFLICTION_PROGRESSION)
+      .require(LootContextParameters.AFFLICTION_STAGE)
+      .require(net.minecraft.loot.context.LootContextParameters.BLOCK_STATE)
+      .require(net.minecraft.loot.context.LootContextParameters.ORIGIN)
+      .require(net.minecraft.loot.context.LootContextParameters.THIS_ENTITY)
+  );
   public static final ContextType AFFLICTED_ENTITY = register("afflicted_entity", builder -> builder
       .require(LootContextParameters.AFFLICTION_PROGRESSION)
       .require(LootContextParameters.AFFLICTION_STAGE)
