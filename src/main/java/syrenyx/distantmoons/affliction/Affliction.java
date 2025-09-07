@@ -65,7 +65,7 @@ public record Affliction(
     }
   }
 
-  public static void processPostAttackEffects(Entity victim, DamageSource damageSource, EnchantmentEffectTarget afflicted, AfflictionInstance afflictionInstance, ComponentType<List<TargetedAfflictionEffectEntry<AfflictionEntityEffect>>> componentType) {
+  public static void processPostDamageEffects(Entity victim, DamageSource damageSource, EnchantmentEffectTarget afflicted, AfflictionInstance afflictionInstance, ComponentType<List<TargetedAfflictionEffectEntry<AfflictionEntityEffect>>> componentType) {
     List<TargetedAfflictionEffectEntry<AfflictionEntityEffect>> effectEntries = afflictionInstance.affliction().value().effects.getOrDefault(componentType, List.of());
     LootContext lootContext = getAfflictedAttackLootContext(victim, damageSource, afflictionInstance.stage(), afflictionInstance.progression());
     for (TargetedAfflictionEffectEntry<AfflictionEntityEffect> effectEntry : effectEntries) {

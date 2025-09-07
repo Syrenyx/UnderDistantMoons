@@ -1,6 +1,7 @@
 package syrenyx.distantmoons.affliction;
 
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.component.ComponentType;
 import net.minecraft.enchantment.effect.EnchantmentEffectTarget;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -12,6 +13,8 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.network.ServerPlayerEntity;
 import org.jetbrains.annotations.Nullable;
+import syrenyx.distantmoons.affliction.effect.AfflictionEntityEffect;
+import syrenyx.distantmoons.affliction.effect.TargetedAfflictionEffectEntry;
 import syrenyx.distantmoons.data.attachment.LivingEntityAttachment;
 import syrenyx.distantmoons.data.networking.AfflictionPacket;
 import syrenyx.distantmoons.data.persistent.PersistentStateManager;
@@ -19,6 +22,7 @@ import syrenyx.distantmoons.initializers.AfflictionEffectComponents;
 import syrenyx.distantmoons.payload.ActiveAfflictionsPayload;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 public abstract class AfflictionManager {
@@ -107,7 +111,7 @@ public abstract class AfflictionManager {
     }
   }
 
-  public static void handlePostAttack(Entity victim, DamageSource damageSource) {
+  public static void handlePostDamage(Entity victim, DamageSource damageSource, ComponentType<List<TargetedAfflictionEffectEntry<AfflictionEntityEffect>>> componentType) {
     for (EnchantmentEffectTarget targetType : EnchantmentEffectTarget.values()) {
       Entity entity = switch (targetType) {
         case ATTACKER -> damageSource.getAttacker();
@@ -117,7 +121,7 @@ public abstract class AfflictionManager {
       if (!(entity instanceof LivingEntity afflicted)) return;
       Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(afflicted);
       for (AfflictionInstance afflictionInstance : activeAfflictions.values()) {
-        Affliction.processPostAttackEffects(victim, damageSource, targetType, afflictionInstance, AfflictionEffectComponents.POST_ATTACK);
+        Affliction.processPostDamageEffects(victim, damageSource, targetType, afflictionInstance, componentType);
       }
     }
   }

@@ -13,6 +13,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import syrenyx.distantmoons.affliction.AfflictionManager;
+import syrenyx.distantmoons.initializers.AfflictionEffectComponents;
 
 import java.util.function.Consumer;
 
@@ -28,6 +29,6 @@ public abstract class EnchantmentHelperMixin {
       Consumer<Item> breakCallback,
       CallbackInfo callbackInfo
   ) {
-    if (target instanceof LivingEntity livingEntity) AfflictionManager.handlePostAttack(target, damageSource);
+    if (target instanceof LivingEntity livingEntity) AfflictionManager.handlePostDamage(livingEntity, damageSource, AfflictionEffectComponents.POST_ATTACK);
   }
 }

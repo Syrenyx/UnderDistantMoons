@@ -4,19 +4,17 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.predicate.NbtPredicate;
 import net.minecraft.predicate.component.ComponentsPredicate;
 import net.minecraft.predicate.entity.*;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.Unit;
 import net.minecraft.util.dynamic.Codecs;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.LightType;
 
+import java.util.List;
 import java.util.Optional;
 
 public record EntityPredicate(
@@ -96,25 +94,21 @@ public record EntityPredicate(
     if (this.team.isPresent() && (entity.getScoreboardTeam() == null || !this.team.get().equals(entity.getScoreboardTeam().getName()))) return false;
     if (this.slots.isPresent() && !this.slots.get().matches(entity)) return false;
     if (!this.extension.components.test(entity)) return false;
-    if (this.extension.affectedByDaylight.isPresent()) {
-      if (!world.isDay() || entity.isTouchingWaterOrRain() || entity.inPowderSnow || entity.wasInPowderSnow || !world.isSkyVisible(BlockPos.ofFloored(pos))) return false;
-      float brightness = world.getLightLevel(LightType.SKY, BlockPos.ofFloored(entity.getX(), entity.getEyeY(), entity.getZ())) / 15.0F;
-      if (!(brightness > 0.5F && entity.getRandom().nextFloat() * 30.0F < (brightness - 0.4F) * 2.0F)) return false;
-    }
+    if (this.extension.checks.isPresent() && !this.extension.checks.get().test(entity, world, pos)) return false;
     if (this.extension.afflictions.isPresent() && !this.extension.afflictions.get().test(entity)) return false;
     return true;
   }
 
   public record EntityPredicateExtension(
       ComponentsPredicate components,
-      Optional<Unit> affectedByDaylight,
+      Optional<EntityChecks> checks,
       Optional<AfflictionPredicate> afflictions
   ) {
 
     public static final MapCodec<EntityPredicateExtension> CODEC = RecordCodecBuilder.mapCodec(instance -> instance
         .group(
             ComponentsPredicate.CODEC.forGetter(EntityPredicateExtension::components),
-            Unit.CODEC.optionalFieldOf("affected_by_daylight").forGetter(EntityPredicateExtension::affectedByDaylight),
+            EntityChecks.CODEC.optionalFieldOf("checks").forGetter(EntityPredicateExtension::checks),
             AfflictionPredicate.CODEC.optionalFieldOf("afflictions").forGetter(EntityPredicateExtension::afflictions)
         )
         .apply(instance, EntityPredicateExtension::new)

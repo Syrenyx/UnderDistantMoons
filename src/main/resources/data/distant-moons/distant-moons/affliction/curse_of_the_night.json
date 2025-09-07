@@ -20,7 +20,9 @@
           "condition": "distant-moons:entity_properties",
           "entity": "this",
           "predicate": {
-            "affected_by_daylight": {}
+            "checks": {
+              "undead_exposed_to_daylight_check": true
+            }
           }
         }
       }
