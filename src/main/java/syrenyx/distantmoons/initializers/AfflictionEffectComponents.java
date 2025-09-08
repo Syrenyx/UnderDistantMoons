@@ -19,6 +19,9 @@ public abstract class AfflictionEffectComponents {
   public static final ComponentType<List<TargetedAfflictionEffectEntry<AfflictionEntityEffect>>> POST_DEATH = register(
       "post_death", builder -> builder.codec(TargetedAfflictionEffectEntry.createCodec(AfflictionEntityEffect.CODEC, LootContextTypes.AFFLICTED_ATTACK).listOf())
   );
+  public static final ComponentType<List<ProgressionThresholdAfflictionEffectEntry<AfflictionEntityEffect>>> PROGRESSION_THRESHOLD = register(
+      "progression_threshold", builder -> builder.codec(ProgressionThresholdAfflictionEffectEntry.createCodec(AfflictionEntityEffect.CODEC, LootContextTypes.AFFLICTED_ENTITY).listOf())
+  );
   public static final ComponentType<List<SpawnedEntityAfflictionEffectEntry<AfflictionEntityEffect>>> PROJECTILE_SPAWNED = register(
       "projectile_spawned", builder -> builder.codec(SpawnedEntityAfflictionEffectEntry.createCodec(AfflictionEntityEffect.CODEC, LootContextTypes.AFFLICTED_PROJECTILE).listOf())
   );

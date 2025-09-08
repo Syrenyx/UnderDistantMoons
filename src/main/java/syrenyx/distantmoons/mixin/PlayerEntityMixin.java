@@ -28,7 +28,7 @@ public abstract class PlayerEntityMixin {
     PlayerEntity thisPlayerEntity = (PlayerEntity) (Object) this;
     if (thisPlayerEntity.getWorld().isClient() || stat.getType() != Stats.USED) return;
     ItemStack activeItem = thisPlayerEntity.getActiveItem();
-    ItemStack stack = activeItem.isEmpty() ? savedItemStack : activeItem;
+    ItemStack stack = activeItem.isEmpty() ? this.savedItemStack : activeItem;
     AfflictionManager.handleUsedItem(thisPlayerEntity, stack);
     EnchantmentManager.handleUsedItem(thisPlayerEntity, stack);
   }

@@ -59,7 +59,26 @@ public record Affliction(
   public static final int MAX_STAGE = 255;
   public static final int DEFAULT_STAGE = 1;
 
-  public static void processPostDamageEffects(Entity victim, DamageSource damageSource, EnchantmentEffectTarget afflicted, AfflictionInstance afflictionInstance, ComponentType<List<TargetedAfflictionEffectEntry<AfflictionEntityEffect>>> componentType) {
+  public static void processHitBlockEffects(
+      Entity entity,
+      Vec3d pos,
+      AfflictionInstance afflictionInstance,
+      ComponentType<List<AfflictionEffectEntry<AfflictionEntityEffect>>> componentType
+  ) {
+    List<AfflictionEffectEntry<AfflictionEntityEffect>> effectEntries = afflictionInstance.affliction().value().effects.getOrDefault(componentType, List.of());
+    LootContext lootContext = getAfflictedBlockLootContext(entity, pos, afflictionInstance.stage(), afflictionInstance.progression());
+    for (AfflictionEffectEntry<AfflictionEntityEffect> effectEntry : effectEntries) {
+      if (effectEntry.test(lootContext)) effectEntry.effect().apply((ServerWorld) entity.getWorld(), afflictionInstance.stage(), entity, pos);
+    }
+  }
+
+  public static void processPostDamageEffects(
+      Entity victim,
+      DamageSource damageSource,
+      EnchantmentEffectTarget afflicted,
+      AfflictionInstance afflictionInstance,
+      ComponentType<List<TargetedAfflictionEffectEntry<AfflictionEntityEffect>>> componentType
+  ) {
     List<TargetedAfflictionEffectEntry<AfflictionEntityEffect>> effectEntries = afflictionInstance.affliction().value().effects.getOrDefault(componentType, List.of());
     LootContext lootContext = getAfflictedAttackLootContext(victim, damageSource, afflictionInstance.stage(), afflictionInstance.progression());
     for (TargetedAfflictionEffectEntry<AfflictionEntityEffect> effectEntry : effectEntries) {
@@ -69,19 +88,46 @@ public record Affliction(
         case DAMAGING_ENTITY -> damageSource.getSource();
         case VICTIM -> victim;
       };
+      if (target == null) continue;
       if (effectEntry.test(lootContext)) effectEntry.effect().apply((ServerWorld) target.getWorld(), afflictionInstance.stage(), target, target.getPos());
     }
   }
 
-  public static void processHitBlockEffects(Entity entity, Vec3d pos, AfflictionInstance afflictionInstance, ComponentType<List<AfflictionEffectEntry<AfflictionEntityEffect>>> componentType) {
-    List<AfflictionEffectEntry<AfflictionEntityEffect>> effectEntries = afflictionInstance.affliction().value().effects.getOrDefault(componentType, List.of());
-    LootContext lootContext = getAfflictedBlockLootContext(entity, pos, afflictionInstance.stage(), afflictionInstance.progression());
-    for (AfflictionEffectEntry<AfflictionEntityEffect> effectEntry : effectEntries) {
-      if (effectEntry.test(lootContext)) effectEntry.effect().apply((ServerWorld) entity.getWorld(), afflictionInstance.stage(), entity, pos);
+  public static void processProgressionThresholdEffects(
+      Entity entity,
+      float previousProgression,
+      AfflictionInstance afflictionInstance,
+      ComponentType<List<ProgressionThresholdAfflictionEffectEntry<AfflictionEntityEffect>>> componentType
+  ) {
+    List<ProgressionThresholdAfflictionEffectEntry<AfflictionEntityEffect>> effectEntries = afflictionInstance.affliction().value().effects.getOrDefault(componentType, List.of());
+    float currentProgression = afflictionInstance.progression();
+    LootContext lootContext = getAfflictedEntityLootContext(entity, afflictionInstance.stage(), currentProgression);
+    for (ProgressionThresholdAfflictionEffectEntry<AfflictionEntityEffect> effectEntry : effectEntries) {
+      switch (effectEntry.type()) {
+        case ANY -> {
+          if (
+              currentProgression == previousProgression
+                  || currentProgression < previousProgression && (effectEntry.threshold() < currentProgression || effectEntry.threshold() >= previousProgression)
+                  || currentProgression > previousProgression && (effectEntry.threshold() > currentProgression || effectEntry.threshold() <= previousProgression)
+          ) continue;
+        }
+        case DECREASING -> {
+          if (currentProgression >= previousProgression || effectEntry.threshold() < currentProgression || effectEntry.threshold() >= previousProgression) continue;
+        }
+        case INCREASING -> {
+          if (currentProgression <= previousProgression || effectEntry.threshold() > currentProgression || effectEntry.threshold() <= previousProgression) continue;
+        }
+      }
+      if (effectEntry.test(lootContext)) effectEntry.effect().apply((ServerWorld) entity.getWorld(), afflictionInstance.stage(), entity, entity.getPos());
     }
   }
 
-  public static void processProjectileSpawnedEffects(Entity owner, Entity projectile, AfflictionInstance afflictionInstance, ComponentType<List<SpawnedEntityAfflictionEffectEntry<AfflictionEntityEffect>>> componentType) {
+  public static void processProjectileSpawnedEffects(
+      Entity owner,
+      Entity projectile,
+      AfflictionInstance afflictionInstance,
+      ComponentType<List<SpawnedEntityAfflictionEffectEntry<AfflictionEntityEffect>>> componentType
+  ) {
     List<SpawnedEntityAfflictionEffectEntry<AfflictionEntityEffect>> effectEntries = afflictionInstance.affliction().value().effects.getOrDefault(componentType, List.of());
     LootContext lootContext = getAfflictedProjectileLootContext(owner, projectile, afflictionInstance.stage(), afflictionInstance.progression());
     for (SpawnedEntityAfflictionEffectEntry<AfflictionEntityEffect> effectEntry : effectEntries) {
@@ -90,7 +136,12 @@ public record Affliction(
     }
   }
 
-  public static void processStageChangedEffects(Entity entity, AfflictionInstance afflictionInstance, boolean cleared, ComponentType<List<AfflictionEffectEntry<AfflictionEntityEffect>>> componentType) {
+  public static void processStageChangedEffects(
+      Entity entity,
+      AfflictionInstance afflictionInstance,
+      boolean cleared,
+      ComponentType<List<AfflictionEffectEntry<AfflictionEntityEffect>>> componentType
+  ) {
     List<AfflictionEffectEntry<AfflictionEntityEffect>> effectEntries = afflictionInstance.affliction().value().effects.getOrDefault(componentType, List.of());
     LootContext lootContext = getAfflictedEntityLootContext(entity, cleared ? 0 : afflictionInstance.stage(), afflictionInstance.progression());
     for (AfflictionEffectEntry<AfflictionEntityEffect> effectEntry : effectEntries) {
@@ -98,7 +149,11 @@ public record Affliction(
     }
   }
 
-  public static void processTickEffects(Entity entity, AfflictionInstance afflictionInstance, ComponentType<List<AfflictionEffectEntry<AfflictionEntityEffect>>> componentType) {
+  public static void processTickEffects(
+      Entity entity,
+      AfflictionInstance afflictionInstance,
+      ComponentType<List<AfflictionEffectEntry<AfflictionEntityEffect>>> componentType
+  ) {
     List<AfflictionEffectEntry<AfflictionEntityEffect>> effectEntries = afflictionInstance.affliction().value().effects.getOrDefault(componentType, List.of());
     LootContext lootContext = getAfflictedEntityLootContext(entity, afflictionInstance.stage(), afflictionInstance.progression());
     for (AfflictionEffectEntry<AfflictionEntityEffect> effectEntry : effectEntries) {
@@ -106,7 +161,12 @@ public record Affliction(
     }
   }
 
-  public static void processUsedItemEffects(Entity entity, ItemStack item, AfflictionInstance afflictionInstance, ComponentType<List<AfflictionEffectEntry<AfflictionEntityEffect>>> componentType) {
+  public static void processUsedItemEffects(
+      Entity entity,
+      ItemStack item,
+      AfflictionInstance afflictionInstance,
+      ComponentType<List<AfflictionEffectEntry<AfflictionEntityEffect>>> componentType
+  ) {
     List<AfflictionEffectEntry<AfflictionEntityEffect>> effectEntries = afflictionInstance.affliction().value().effects.getOrDefault(componentType, List.of());
     LootContext lootContext = getAfflictedItemLootContext(entity, item, afflictionInstance.stage(), afflictionInstance.progression());
     for (AfflictionEffectEntry<AfflictionEntityEffect> effectEntry : effectEntries) {

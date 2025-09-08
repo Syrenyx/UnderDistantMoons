@@ -98,7 +98,8 @@ public abstract class AfflictionManager {
     return true;
   }
 
-  public static void handlePlayerDeath(ServerPlayerEntity player) {
+  public static void handlePlayerDeath(ServerPlayerEntity player, DamageSource damageSource) {
+    handlePostDamage(player, damageSource, AfflictionEffectComponents.POST_DEATH);
     Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(player);
     for (RegistryEntry<Affliction> affliction : activeAfflictions.keySet()) {
       if (!affliction.value().persistent()) activeAfflictions.remove(affliction);
@@ -119,7 +120,7 @@ public abstract class AfflictionManager {
         case DAMAGING_ENTITY -> damageSource.getSource();
         case VICTIM -> victim;
       };
-      if (!(entity instanceof LivingEntity afflicted)) return;
+      if (!(entity instanceof LivingEntity afflicted)) continue;
       Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(afflicted);
       for (AfflictionInstance afflictionInstance : activeAfflictions.values()) {
         Affliction.processPostDamageEffects(victim, damageSource, targetType, afflictionInstance, componentType);
@@ -140,8 +141,10 @@ public abstract class AfflictionManager {
       Affliction affliction = afflictionInstance.affliction().value();
       Affliction.processTickEffects(entity, afflictionInstance, AfflictionEffectComponents.TICK);
       if (affliction.tickProgression().isEmpty()) continue;
+      float previousProgression = afflictionInstance.progression();
       afflictionInstance.addToProgression(affliction.tickProgression().get().getValue(afflictionInstance.stage()));
       afflictionInstance.limitToAllowedValues();
+      Affliction.processProgressionThresholdEffects(entity, previousProgression, afflictionInstance, AfflictionEffectComponents.PROGRESSION_THRESHOLD);
     }
     if (entity instanceof ServerPlayerEntity player) ServerPlayNetworking.send(player, new ActiveAfflictionsPayload(activeAfflictions.values().stream().map(AfflictionPacket::fromInstance).toList()));
   }

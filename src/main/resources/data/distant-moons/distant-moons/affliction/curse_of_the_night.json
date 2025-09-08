@@ -31,6 +31,39 @@
     "fallback": 0.0
   },
   "effects": {
+    "distant-moons:post_death": [
+      {
+        "affected": "victim",
+        "afflicted": "victim",
+        "effect": {
+          "type": "distant-moons:change_affliction",
+          "operation": "clear",
+          "affliction": "distant-moons:curse_of_the_night"
+        },
+        "requirements": {
+          "condition": "minecraft:value_check",
+          "value": {
+            "type": "distant-moons:affliction_stage",
+            "amount": {
+              "type": "minecraft:linear",
+              "base": 1,
+              "per_level_above_first": 1
+            }
+          },
+          "range": 2
+        }
+      }
+    ],
+    "distant-moons:progression_threshold": [
+      {
+        "threshold": 0,
+        "effect": {
+          "type": "distant-moons:change_affliction",
+          "operation": "clear",
+          "affliction": "distant-moons:curse_of_the_night"
+        }
+      }
+    ],
     "distant-moons:tick": [
       {
         "effect": {
@@ -77,6 +110,16 @@
                   "minecraft:golden_apple"
                 ]
               }
+            },
+            {
+              "condition": "minecraft:value_check",
+              "value": {
+                "type": "distant-moons:affliction_stage",
+                "amount": {
+                  "type": "distant-moons:direct"
+                }
+              },
+              "range": 1
             }
           ]
         }
