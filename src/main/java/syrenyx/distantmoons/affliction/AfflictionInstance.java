@@ -10,8 +10,10 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.dynamic.Codecs;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import syrenyx.distantmoons.affliction.effect.location_based.AfflictionLocationBasedEffect;
 
 import java.util.NoSuchElementException;
+import java.util.Set;
 
 public class AfflictionInstance implements Comparable<AfflictionInstance> {
 
@@ -26,6 +28,7 @@ public class AfflictionInstance implements Comparable<AfflictionInstance> {
   private final RegistryEntry<Affliction> affliction;
   private float progression;
   private int stage;
+  public Set<AfflictionLocationBasedEffect> activeLocationBasedEffects;
 
   public AfflictionInstance(RegistryEntry<Affliction> affliction, int stage, float progression) {
     this.affliction = affliction;

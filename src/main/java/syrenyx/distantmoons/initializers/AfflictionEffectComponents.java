@@ -4,12 +4,15 @@ import net.minecraft.component.ComponentType;
 import net.minecraft.registry.Registry;
 import syrenyx.distantmoons.UnderDistantMoons;
 import syrenyx.distantmoons.affliction.effect.*;
+import syrenyx.distantmoons.affliction.effect.entity.AfflictionEntityEffect;
+import syrenyx.distantmoons.affliction.effect.location_based.AfflictionLocationBasedEffect;
 
 import java.util.List;
 import java.util.function.UnaryOperator;
 
 public abstract class AfflictionEffectComponents {
 
+  //ENTITY EFFECT ENTRIES
   public static final ComponentType<List<AfflictionEffectEntry<AfflictionEntityEffect>>> HIT_BLOCK = register(
       "hit_block", builder -> builder.codec(AfflictionEffectEntry.createCodec(AfflictionEntityEffect.CODEC, LootContextTypes.AFFLICTED_BLOCK).listOf())
   );
@@ -33,6 +36,11 @@ public abstract class AfflictionEffectComponents {
   );
   public static final ComponentType<List<AfflictionEffectEntry<AfflictionEntityEffect>>> USED_ITEM = register(
       "used_item", builder -> builder.codec(AfflictionEffectEntry.createCodec(AfflictionEntityEffect.CODEC, LootContextTypes.AFFLICTED_ITEM).listOf())
+  );
+
+  //LOCATION BASED EFFECT ENTRIES
+  public static final ComponentType<List<AfflictionEffectEntry<AfflictionLocationBasedEffect>>> LOCATION_CHANGED = register(
+      "location_changed", builder -> builder.codec(AfflictionEffectEntry.createCodec(AfflictionLocationBasedEffect.CODEC, LootContextTypes.AFFLICTED_ENTITY).listOf())
   );
 
   private static <T> ComponentType<T> register(String id, UnaryOperator<ComponentType.Builder<T>> builderOperator) {

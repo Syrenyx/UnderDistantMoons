@@ -13,7 +13,6 @@ import net.minecraft.util.math.Vec3d;
 import syrenyx.distantmoons.affliction.Affliction;
 import syrenyx.distantmoons.affliction.AfflictionInstance;
 import syrenyx.distantmoons.affliction.AfflictionManager;
-import syrenyx.distantmoons.affliction.effect.AfflictionEntityEffect;
 import syrenyx.distantmoons.references.RegistryKeys;
 
 import java.util.Optional;

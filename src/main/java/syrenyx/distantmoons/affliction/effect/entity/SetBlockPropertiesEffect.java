@@ -12,7 +12,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.event.GameEvent;
-import syrenyx.distantmoons.affliction.effect.AfflictionEntityEffect;
 
 import java.util.Optional;
 

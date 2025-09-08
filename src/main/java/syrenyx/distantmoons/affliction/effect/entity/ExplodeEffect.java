@@ -20,7 +20,6 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.explosion.AdvancedExplosionBehavior;
 import org.jetbrains.annotations.Nullable;
-import syrenyx.distantmoons.affliction.effect.AfflictionEntityEffect;
 
 import java.util.Optional;
 

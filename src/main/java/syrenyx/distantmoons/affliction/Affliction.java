@@ -24,6 +24,8 @@ import net.minecraft.util.dynamic.Codecs;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import syrenyx.distantmoons.affliction.effect.*;
+import syrenyx.distantmoons.affliction.effect.entity.AfflictionEntityEffect;
+import syrenyx.distantmoons.affliction.effect.location_based.AfflictionLocationBasedEffect;
 import syrenyx.distantmoons.initializers.LootContextTypes;
 import syrenyx.distantmoons.initializers.Registries;
 import syrenyx.distantmoons.references.RegistryKeys;
@@ -72,6 +74,20 @@ public record Affliction(
     }
   }
 
+  public static void processLocationChangedEffects(
+      Entity entity,
+      boolean remove,
+      AfflictionInstance afflictionInstance,
+      ComponentType<List<AfflictionEffectEntry<AfflictionLocationBasedEffect>>> componentType
+  ) {
+    List<AfflictionEffectEntry<AfflictionLocationBasedEffect>> effectEntries = afflictionInstance.affliction().value().effects.getOrDefault(componentType, List.of());
+    LootContext lootContext = getAfflictedEntityLootContext(entity, afflictionInstance.stage(), afflictionInstance.progression());
+    for (AfflictionEffectEntry<AfflictionLocationBasedEffect> effectEntry : effectEntries) {
+      if (remove) effectEntry.effect().remove((ServerWorld) entity.getWorld(), afflictionInstance.stage(), entity, entity.getPos(), afflictionInstance);
+      else if (effectEntry.test(lootContext)) effectEntry.effect().apply((ServerWorld) entity.getWorld(), afflictionInstance.stage(), entity, entity.getPos(), afflictionInstance);
+    }
+  }
+
   public static void processPostDamageEffects(
       Entity victim,
       DamageSource damageSource,
@@ -99,25 +115,16 @@ public record Affliction(
       AfflictionInstance afflictionInstance,
       ComponentType<List<ProgressionThresholdAfflictionEffectEntry<AfflictionEntityEffect>>> componentType
   ) {
+    if (afflictionInstance.affliction().value().tickProgression().isEmpty() || afflictionInstance.affliction().value().tickProgression().get().getValue(afflictionInstance.stage()) == 0.0) return;
     List<ProgressionThresholdAfflictionEffectEntry<AfflictionEntityEffect>> effectEntries = afflictionInstance.affliction().value().effects.getOrDefault(componentType, List.of());
     float currentProgression = afflictionInstance.progression();
     LootContext lootContext = getAfflictedEntityLootContext(entity, afflictionInstance.stage(), currentProgression);
     for (ProgressionThresholdAfflictionEffectEntry<AfflictionEntityEffect> effectEntry : effectEntries) {
-      switch (effectEntry.type()) {
-        case ANY -> {
-          if (
-              currentProgression == previousProgression
-                  || currentProgression < previousProgression && (effectEntry.threshold() < currentProgression || effectEntry.threshold() >= previousProgression)
-                  || currentProgression > previousProgression && (effectEntry.threshold() > currentProgression || effectEntry.threshold() <= previousProgression)
-          ) continue;
-        }
-        case DECREASING -> {
-          if (currentProgression >= previousProgression || effectEntry.threshold() < currentProgression || effectEntry.threshold() >= previousProgression) continue;
-        }
-        case INCREASING -> {
-          if (currentProgression <= previousProgression || effectEntry.threshold() > currentProgression || effectEntry.threshold() <= previousProgression) continue;
-        }
-      }
+      if (
+          currentProgression == previousProgression
+              || effectEntry.type() != ProgressionThresholdPassingType.INCREASING && currentProgression < previousProgression && (effectEntry.threshold() < currentProgression || effectEntry.threshold() >= previousProgression)
+              || effectEntry.type() != ProgressionThresholdPassingType.DECREASING && currentProgression > previousProgression && (effectEntry.threshold() > currentProgression || effectEntry.threshold() <= previousProgression)
+      ) continue;
       if (effectEntry.test(lootContext)) effectEntry.effect().apply((ServerWorld) entity.getWorld(), afflictionInstance.stage(), entity, entity.getPos());
     }
   }

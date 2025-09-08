@@ -11,7 +11,6 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
 import syrenyx.distantmoons.UnderDistantMoons;
-import syrenyx.distantmoons.affliction.effect.AfflictionEntityEffect;
 import syrenyx.distantmoons.command.PermissionLevel;
 
 import java.util.Optional;

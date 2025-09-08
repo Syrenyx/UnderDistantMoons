@@ -23,6 +23,16 @@ import java.util.function.Consumer;
 @Mixin(EnchantmentHelper.class)
 public abstract class EnchantmentHelperMixin {
 
+  @Inject(at = @At("HEAD"), method = "applyLocationBasedEffects(Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/entity/LivingEntity;)V")
+  private static void applyLocationBasedEffects(ServerWorld world, LivingEntity user, CallbackInfo callbackInfo) {
+    AfflictionManager.handleLocationChanged(user, false);
+  }
+
+  @Inject(at = @At("HEAD"), method = "applyLocationBasedEffects(Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/item/ItemStack;Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/entity/EquipmentSlot;)V")
+  private static void applyLocationBasedEffects(ServerWorld world, ItemStack stack, LivingEntity user, EquipmentSlot slot, CallbackInfo callbackInfo) {
+    AfflictionManager.handleLocationChanged(user, false);
+  }
+
   @Inject(at = @At("HEAD"), method = "onHitBlock")
   private static void onHitBlock(
       ServerWorld world,
@@ -36,6 +46,16 @@ public abstract class EnchantmentHelperMixin {
       CallbackInfo callbackInfo
   ) {
     AfflictionManager.handleHitBlock(user, pos);
+  }
+
+  @Inject(at = @At("HEAD"), method = "removeLocationBasedEffects(Lnet/minecraft/entity/LivingEntity;)V")
+  private static void removeLocationBasedEffects(LivingEntity user, CallbackInfo callbackInfo) {
+    AfflictionManager.handleLocationChanged(user, true);
+  }
+
+  @Inject(at = @At("HEAD"), method = "removeLocationBasedEffects(Lnet/minecraft/item/ItemStack;Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/entity/EquipmentSlot;)V")
+  private static void removeLocationBasedEffects(ItemStack stack, LivingEntity user, EquipmentSlot slot, CallbackInfo callbackInfo) {
+    AfflictionManager.handleLocationChanged(user, true);
   }
 
   @Inject(at = @At("HEAD"), method = "onTargetDamaged(Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/entity/Entity;Lnet/minecraft/entity/damage/DamageSource;Lnet/minecraft/item/ItemStack;Ljava/util/function/Consumer;)V")

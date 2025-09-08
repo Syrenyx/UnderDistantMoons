@@ -11,7 +11,6 @@ import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.event.GameEvent;
 import net.minecraft.world.gen.blockpredicate.BlockPredicate;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
-import syrenyx.distantmoons.affliction.effect.AfflictionEntityEffect;
 
 import java.util.Optional;
 

@@ -12,10 +12,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import org.jetbrains.annotations.Nullable;
-import syrenyx.distantmoons.affliction.effect.AfflictionEntityEffect;
+import syrenyx.distantmoons.affliction.effect.entity.AfflictionEntityEffect;
 import syrenyx.distantmoons.affliction.effect.TargetedAfflictionEffectEntry;
 import syrenyx.distantmoons.data.attachment.LivingEntityAttachment;
 import syrenyx.distantmoons.data.networking.AfflictionPacket;
@@ -23,7 +22,6 @@ import syrenyx.distantmoons.data.persistent.PersistentStateManager;
 import syrenyx.distantmoons.initializers.AfflictionEffectComponents;
 import syrenyx.distantmoons.payload.ActiveAfflictionsPayload;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -96,6 +94,13 @@ public abstract class AfflictionManager {
     activeAfflictions.put(afflictionInstance.affliction(), afflictionInstance);
     Affliction.processStageChangedEffects(entity, afflictionInstance, false, AfflictionEffectComponents.STAGE_CHANGED);
     return true;
+  }
+
+  public static void handleLocationChanged(LivingEntity entity, boolean remove) {
+    Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
+    for (AfflictionInstance afflictionInstance : activeAfflictions.values()) {
+      Affliction.processLocationChangedEffects(entity, remove, afflictionInstance, AfflictionEffectComponents.LOCATION_CHANGED);
+    }
   }
 
   public static void handlePlayerDeath(ServerPlayerEntity player, DamageSource damageSource) {

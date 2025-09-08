@@ -6,7 +6,6 @@ import net.minecraft.enchantment.EnchantmentLevelBasedValue;
 import net.minecraft.entity.Entity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.Vec3d;
-import syrenyx.distantmoons.affliction.effect.AfflictionEntityEffect;
 
 public record IgniteEffect(EnchantmentLevelBasedValue duration) implements AfflictionEntityEffect {
 

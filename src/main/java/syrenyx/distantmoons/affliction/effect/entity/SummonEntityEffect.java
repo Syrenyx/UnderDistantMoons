@@ -16,7 +16,6 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import syrenyx.distantmoons.affliction.effect.AfflictionEntityEffect;
 
 import java.util.Optional;
 

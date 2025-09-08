@@ -15,7 +15,6 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
-import syrenyx.distantmoons.affliction.effect.AfflictionEntityEffect;
 
 import java.util.Optional;
 

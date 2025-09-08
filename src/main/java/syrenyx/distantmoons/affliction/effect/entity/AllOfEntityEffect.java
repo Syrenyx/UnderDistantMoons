@@ -5,7 +5,6 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.entity.Entity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.Vec3d;
-import syrenyx.distantmoons.affliction.effect.AfflictionEntityEffect;
 
 import java.util.List;
 

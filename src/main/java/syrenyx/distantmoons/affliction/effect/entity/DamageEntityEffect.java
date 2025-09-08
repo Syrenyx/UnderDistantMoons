@@ -10,7 +10,6 @@ import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import syrenyx.distantmoons.affliction.effect.AfflictionEntityEffect;
 
 public record DamageEntityEffect(
     EnchantmentLevelBasedValue minDamage,
