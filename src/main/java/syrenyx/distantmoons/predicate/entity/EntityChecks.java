@@ -22,8 +22,8 @@ public record EntityChecks(
   public boolean test(Entity entity, ServerWorld world, Vec3d pos) {
     if (undeadExposedToDaylightCheck) {
       if (!world.isDay() || entity.isTouchingWaterOrRain() || entity.inPowderSnow || entity.wasInPowderSnow || !world.isSkyVisible(BlockPos.ofFloored(pos))) return false;
-      float brightness = world.getLightLevel(LightType.SKY, BlockPos.ofFloored(entity.getX(), entity.getEyeY(), entity.getZ())) / 15.0F;
-      if (!(brightness > 0.5F && entity.getRandom().nextFloat() * 30.0F < (brightness - 0.4F) * 2.0F)) return false;
+      int brightness = world.getLightLevel(LightType.SKY, BlockPos.ofFloored(entity.getEyePos()));
+      if (brightness < 8 || (brightness - 6) * 2 < entity.getRandom().nextFloat() * 450) return false;
     }
     return true;
   }

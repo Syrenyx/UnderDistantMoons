@@ -10,11 +10,8 @@ import net.minecraft.predicate.component.ComponentsPredicate;
 import net.minecraft.predicate.entity.*;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.dynamic.Codecs;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.LightType;
 
-import java.util.List;
 import java.util.Optional;
 
 public record EntityPredicate(

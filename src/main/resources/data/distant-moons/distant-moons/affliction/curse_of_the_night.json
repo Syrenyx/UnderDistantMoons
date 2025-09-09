@@ -58,9 +58,28 @@
       {
         "threshold": 0,
         "effect": {
-          "type": "distant-moons:change_affliction",
-          "operation": "clear",
-          "affliction": "distant-moons:curse_of_the_night"
+          "type": "distant-moons:all_of",
+          "effects": [
+            {
+              "type": "distant-moons:apply_mob_effect",
+              "to_apply": "minecraft:nausea",
+              "min_duration": 200,
+              "max_duration": 200,
+              "min_amplifier": 0,
+              "max_amplifier": 0
+            },
+            {
+              "type": "distant-moons:change_affliction",
+              "operation": "clear",
+              "affliction": "distant-moons:curse_of_the_night"
+            },
+            {
+              "type": "distant-moons:play_sound",
+              "sound": "minecraft:entity.zombie_villager.cure",
+              "pitch": 0.75,
+              "volume": 1.25
+            }
+          ]
         }
       }
     ],

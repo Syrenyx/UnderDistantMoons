@@ -4,7 +4,6 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.predicate.NumberRange;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.Unit;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.LightType;
 
@@ -14,8 +13,7 @@ public record LightPredicate(
     Optional<NumberRange.IntRange> blockLight,
     Optional<NumberRange.IntRange> skyLight,
     Optional<NumberRange.IntRange> timeAdjustedSkyLight,
-    Optional<NumberRange.IntRange> visibleLight,
-    Optional<Unit> affectedByDaylight
+    Optional<NumberRange.IntRange> visibleLight
 ) {
 
   public static final Codec<LightPredicate> CODEC = RecordCodecBuilder.create(instance -> instance
@@ -23,8 +21,7 @@ public record LightPredicate(
           NumberRange.IntRange.CODEC.optionalFieldOf("block_light").forGetter(LightPredicate::blockLight),
           NumberRange.IntRange.CODEC.optionalFieldOf("sky_light").forGetter(LightPredicate::skyLight),
           NumberRange.IntRange.CODEC.optionalFieldOf("time_adjusted_sky_light").forGetter(LightPredicate::timeAdjustedSkyLight),
-          NumberRange.IntRange.CODEC.optionalFieldOf("visible_light").forGetter(LightPredicate::visibleLight),
-          Unit.CODEC.optionalFieldOf("affected_by_daylight").forGetter(LightPredicate::affectedByDaylight)
+          NumberRange.IntRange.CODEC.optionalFieldOf("visible_light").forGetter(LightPredicate::visibleLight)
       )
       .apply(instance, LightPredicate::new)
   );
