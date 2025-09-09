@@ -6,6 +6,7 @@ import syrenyx.distantmoons.UnderDistantMoons;
 import syrenyx.distantmoons.affliction.effect.*;
 import syrenyx.distantmoons.affliction.effect.entity.AfflictionEntityEffect;
 import syrenyx.distantmoons.affliction.effect.location_based.AfflictionLocationBasedEffect;
+import syrenyx.distantmoons.affliction.effect.miscellaneous.DamageImmunityEffect;
 
 import java.util.List;
 import java.util.function.UnaryOperator;
@@ -41,6 +42,11 @@ public abstract class AfflictionEffectComponents {
   //LOCATION BASED EFFECT ENTRIES
   public static final ComponentType<List<AfflictionEffectEntry<AfflictionLocationBasedEffect>>> LOCATION_CHANGED = register(
       "location_changed", builder -> builder.codec(AfflictionEffectEntry.createCodec(AfflictionLocationBasedEffect.CODEC, LootContextTypes.AFFLICTED_ENTITY).listOf())
+  );
+
+  //MISCELLANEOUS EFFECT ENTRIES
+  public static final ComponentType<List<AfflictionEffectEntry<DamageImmunityEffect>>> DAMAGE_IMMUNITY = register(
+      "damage_immunity", builder -> builder.codec(AfflictionEffectEntry.createCodec(DamageImmunityEffect.CODEC, LootContextTypes.AFFLICTED_ATTACK).listOf())
   );
 
   private static <T> ComponentType<T> register(String id, UnaryOperator<ComponentType.Builder<T>> builderOperator) {

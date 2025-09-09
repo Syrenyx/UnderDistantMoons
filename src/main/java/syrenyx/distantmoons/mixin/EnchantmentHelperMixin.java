@@ -15,6 +15,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import syrenyx.distantmoons.affliction.AfflictionManager;
 import syrenyx.distantmoons.initializers.AfflictionEffectComponents;
 
@@ -24,13 +25,36 @@ import java.util.function.Consumer;
 public abstract class EnchantmentHelperMixin {
 
   @Inject(at = @At("HEAD"), method = "applyLocationBasedEffects(Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/entity/LivingEntity;)V")
-  private static void applyLocationBasedEffects(ServerWorld world, LivingEntity user, CallbackInfo callbackInfo) {
+  private static void applyLocationBasedEffects(
+      ServerWorld world,
+      LivingEntity user,
+      CallbackInfo callbackInfo
+  ) {
     AfflictionManager.handleLocationChanged(user, false);
   }
 
   @Inject(at = @At("HEAD"), method = "applyLocationBasedEffects(Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/item/ItemStack;Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/entity/EquipmentSlot;)V")
-  private static void applyLocationBasedEffects(ServerWorld world, ItemStack stack, LivingEntity user, EquipmentSlot slot, CallbackInfo callbackInfo) {
+  private static void applyLocationBasedEffects(
+      ServerWorld world,
+      ItemStack stack,
+      LivingEntity user,
+      EquipmentSlot slot,
+      CallbackInfo callbackInfo
+  ) {
     AfflictionManager.handleLocationChanged(user, false);
+  }
+
+  @Inject(at = @At("HEAD"), cancellable = true, method = "isInvulnerableTo")
+  private static void isInvulnerableTo(
+      ServerWorld world,
+      LivingEntity user,
+      DamageSource damageSource,
+      CallbackInfoReturnable<Boolean> callbackInfo
+  ) {
+    if (AfflictionManager.handleDamageImmunity(user, damageSource)) {
+      callbackInfo.setReturnValue(true);
+      callbackInfo.cancel();
+    }
   }
 
   @Inject(at = @At("HEAD"), method = "onHitBlock")
@@ -48,16 +72,6 @@ public abstract class EnchantmentHelperMixin {
     AfflictionManager.handleHitBlock(user, pos);
   }
 
-  @Inject(at = @At("HEAD"), method = "removeLocationBasedEffects(Lnet/minecraft/entity/LivingEntity;)V")
-  private static void removeLocationBasedEffects(LivingEntity user, CallbackInfo callbackInfo) {
-    AfflictionManager.handleLocationChanged(user, true);
-  }
-
-  @Inject(at = @At("HEAD"), method = "removeLocationBasedEffects(Lnet/minecraft/item/ItemStack;Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/entity/EquipmentSlot;)V")
-  private static void removeLocationBasedEffects(ItemStack stack, LivingEntity user, EquipmentSlot slot, CallbackInfo callbackInfo) {
-    AfflictionManager.handleLocationChanged(user, true);
-  }
-
   @Inject(at = @At("HEAD"), method = "onTargetDamaged(Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/entity/Entity;Lnet/minecraft/entity/damage/DamageSource;Lnet/minecraft/item/ItemStack;Ljava/util/function/Consumer;)V")
   private static void onTargetDamaged(
       ServerWorld world,
@@ -68,5 +82,15 @@ public abstract class EnchantmentHelperMixin {
       CallbackInfo callbackInfo
   ) {
     if (target instanceof LivingEntity livingEntity) AfflictionManager.handlePostDamage(livingEntity, damageSource, AfflictionEffectComponents.POST_ATTACK);
+  }
+
+  @Inject(at = @At("HEAD"), method = "removeLocationBasedEffects(Lnet/minecraft/entity/LivingEntity;)V")
+  private static void removeLocationBasedEffects(LivingEntity user, CallbackInfo callbackInfo) {
+    AfflictionManager.handleLocationChanged(user, true);
+  }
+
+  @Inject(at = @At("HEAD"), method = "removeLocationBasedEffects(Lnet/minecraft/item/ItemStack;Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/entity/EquipmentSlot;)V")
+  private static void removeLocationBasedEffects(ItemStack stack, LivingEntity user, EquipmentSlot slot, CallbackInfo callbackInfo) {
+    AfflictionManager.handleLocationChanged(user, true);
   }
 }

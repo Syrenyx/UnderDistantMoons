@@ -12,10 +12,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.Vec3d;
 import org.jetbrains.annotations.Nullable;
+import syrenyx.distantmoons.affliction.effect.AfflictionEffectEntry;
 import syrenyx.distantmoons.affliction.effect.entity.AfflictionEntityEffect;
 import syrenyx.distantmoons.affliction.effect.TargetedAfflictionEffectEntry;
+import syrenyx.distantmoons.affliction.effect.entity.DamageEntityEffect;
+import syrenyx.distantmoons.affliction.effect.location_based.AfflictionLocationBasedEffect;
 import syrenyx.distantmoons.data.attachment.LivingEntityAttachment;
 import syrenyx.distantmoons.data.networking.AfflictionPacket;
 import syrenyx.distantmoons.data.persistent.PersistentStateManager;
@@ -94,6 +98,14 @@ public abstract class AfflictionManager {
     activeAfflictions.put(afflictionInstance.affliction(), afflictionInstance);
     Affliction.processStageChangedEffects(entity, afflictionInstance, false, AfflictionEffectComponents.STAGE_CHANGED);
     return true;
+  }
+
+  public static boolean handleDamageImmunity(LivingEntity entity, DamageSource damageSource) {
+    Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
+    for (AfflictionInstance afflictionInstance : activeAfflictions.values()) {
+      if (Affliction.processDamageImmunityEffects(entity, damageSource, afflictionInstance)) return true;
+    }
+    return false;
   }
 
   public static void handleLocationChanged(LivingEntity entity, boolean remove) {

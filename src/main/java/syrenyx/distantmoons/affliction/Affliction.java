@@ -26,6 +26,8 @@ import net.minecraft.util.math.Vec3d;
 import syrenyx.distantmoons.affliction.effect.*;
 import syrenyx.distantmoons.affliction.effect.entity.AfflictionEntityEffect;
 import syrenyx.distantmoons.affliction.effect.location_based.AfflictionLocationBasedEffect;
+import syrenyx.distantmoons.affliction.effect.miscellaneous.DamageImmunityEffect;
+import syrenyx.distantmoons.initializers.AfflictionEffectComponents;
 import syrenyx.distantmoons.initializers.LootContextTypes;
 import syrenyx.distantmoons.initializers.Registries;
 import syrenyx.distantmoons.references.RegistryKeys;
@@ -60,6 +62,19 @@ public record Affliction(
   public static final int MAX_PROGRESSION = 100;
   public static final int MAX_STAGE = 255;
   public static final int DEFAULT_STAGE = 1;
+
+  public static boolean processDamageImmunityEffects(
+      Entity entity,
+      DamageSource damageSource,
+      AfflictionInstance afflictionInstance
+  ) {
+    List<AfflictionEffectEntry<DamageImmunityEffect>> effectEntries = afflictionInstance.affliction().value().effects.getOrDefault(AfflictionEffectComponents.DAMAGE_IMMUNITY, List.of());
+    LootContext lootContext = getAfflictedAttackLootContext(entity, damageSource, afflictionInstance.stage(), afflictionInstance.progression());
+    for (AfflictionEffectEntry<DamageImmunityEffect> effectEntry : effectEntries) {
+      if (effectEntry.test(lootContext)) return true;
+    }
+    return false;
+  }
 
   public static void processHitBlockEffects(
       Entity entity,
