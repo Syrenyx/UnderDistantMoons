@@ -38,23 +38,27 @@ public record AttributeEffect(
 
   @Override
   public void apply(ServerWorld world, int stage, Entity target, Vec3d pos, AfflictionInstance instance) {
-    if (!(target instanceof LivingEntity livingEntity)) return;
-    if (instance.activeLocationBasedEffects.contains(this)) return;
-    livingEntity.getAttributes().addTemporaryModifiers(this.getModifiers(stage));
-    instance.activeLocationBasedEffects.add(this);
+    if (!(target instanceof LivingEntity livingEntity) || instance.activeAttributeEffects.contains(this)) return;
+    livingEntity.getAttributes().addTemporaryModifiers(this.getModifiers(stage, instance.affliction().getIdAsString()));
+    instance.activeAttributeEffects.add(this);
   }
 
   @Override
   public void remove(ServerWorld world, int stage, Entity target, Vec3d pos, AfflictionInstance instance) {
     if (target instanceof LivingEntity livingEntity) {
-      livingEntity.getAttributes().removeModifiers(this.getModifiers(stage));
-      instance.activeLocationBasedEffects.remove(this);
+      livingEntity.getAttributes().removeModifiers(this.getModifiers(stage, instance.affliction().getIdAsString()));
+      instance.activeAttributeEffects.remove(this);
     }
   }
 
-  private HashMultimap<RegistryEntry<EntityAttribute>, EntityAttributeModifier> getModifiers(int level) {
+  private HashMultimap<RegistryEntry<EntityAttribute>, EntityAttributeModifier> getModifiers(int level, String afflictionId) {
     HashMultimap<RegistryEntry<EntityAttribute>, EntityAttributeModifier> hashMultimap = HashMultimap.create();
-    hashMultimap.put(this.attribute, new EntityAttributeModifier(this.id.withSuffixedPath("/affliction"), this.amount().getValue(level), this.operation()));
+    EntityAttributeModifier modifier = new EntityAttributeModifier(
+        this.id.withSuffixedPath("/affliction/" + afflictionId.replace(":", "/")),
+        this.amount().getValue(level),
+        this.operation()
+    );
+    hashMultimap.put(this.attribute, modifier);
     return hashMultimap;
   }
 }

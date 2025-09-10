@@ -12,14 +12,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.Vec3d;
 import org.jetbrains.annotations.Nullable;
-import syrenyx.distantmoons.affliction.effect.AfflictionEffectEntry;
 import syrenyx.distantmoons.affliction.effect.entity.AfflictionEntityEffect;
 import syrenyx.distantmoons.affliction.effect.TargetedAfflictionEffectEntry;
-import syrenyx.distantmoons.affliction.effect.entity.DamageEntityEffect;
-import syrenyx.distantmoons.affliction.effect.location_based.AfflictionLocationBasedEffect;
 import syrenyx.distantmoons.data.attachment.LivingEntityAttachment;
 import syrenyx.distantmoons.data.networking.AfflictionPacket;
 import syrenyx.distantmoons.data.persistent.PersistentStateManager;
@@ -32,6 +28,7 @@ import java.util.Map;
 public abstract class AfflictionManager {
 
   public static boolean addToAffliction(LivingEntity entity, AfflictionInstance afflictionInstance) {
+    if (isImmune(entity, afflictionInstance.affliction())) return false;
     if (afflictionInstance.stage() == 0 && afflictionInstance.progression() == 0.0F) return false;
     Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
     AfflictionInstance activeAffliction = getActiveAfflictions(entity).get(afflictionInstance.affliction());
@@ -39,11 +36,11 @@ public abstract class AfflictionManager {
       if (afflictionInstance.stage() < 1 || afflictionInstance.progression() < 0.0F) return false;
       afflictionInstance.limitToAllowedValues();
       activeAfflictions.put(afflictionInstance.affliction(), afflictionInstance);
-      Affliction.processStageChangedEffects(entity, afflictionInstance, false, AfflictionEffectComponents.STAGE_CHANGED);
+      onAfflictionAdded(entity, afflictionInstance);
       return true;
     }
     if (activeAffliction.stage() + afflictionInstance.stage() < 1) {
-      Affliction.processStageChangedEffects(entity, activeAffliction, true, AfflictionEffectComponents.STAGE_CHANGED);
+      onAfflictionRemoved(entity, activeAffliction);
       activeAfflictions.remove(afflictionInstance.affliction());
       return true;
     }
@@ -51,7 +48,7 @@ public abstract class AfflictionManager {
     activeAffliction.addToStage(afflictionInstance.stage());
     activeAffliction.addToProgression(afflictionInstance.progression());
     activeAffliction.limitToAllowedValues();
-    if (currentStage != activeAffliction.stage()) Affliction.processStageChangedEffects(entity, activeAffliction, false, AfflictionEffectComponents.STAGE_CHANGED);
+    if (currentStage != activeAffliction.stage()) onAfflictionStageChanged(entity, activeAffliction);
     return true;
   }
 
@@ -60,12 +57,12 @@ public abstract class AfflictionManager {
     if (activeAfflictions.isEmpty()) return false;
     if (affliction != null) {
       if (activeAfflictions.get(affliction) == null) return false;
-      Affliction.processStageChangedEffects(entity, activeAfflictions.get(affliction), true, AfflictionEffectComponents.STAGE_CHANGED);
+      onAfflictionRemoved(entity, activeAfflictions.get(affliction));
       activeAfflictions.remove(affliction);
       return true;
     }
     for (AfflictionInstance afflictionInstance : activeAfflictions.values()) {
-      Affliction.processStageChangedEffects(entity, afflictionInstance, true, AfflictionEffectComponents.STAGE_CHANGED);
+      onAfflictionRemoved(entity, afflictionInstance);
     }
     activeAfflictions.clear();
     return true;
@@ -82,7 +79,7 @@ public abstract class AfflictionManager {
     AfflictionInstance activeAffliction = activeAfflictions.putIfAbsent(afflictionInstance.affliction(), afflictionInstance);
     if (activeAffliction == null) return true;
     boolean result = false;
-    if (afflictionInstance.stage() > activeAffliction.stage()) Affliction.processStageChangedEffects(entity, afflictionInstance, false, AfflictionEffectComponents.STAGE_CHANGED);
+    if (afflictionInstance.stage() > activeAffliction.stage()) onAfflictionStageChanged(entity, afflictionInstance);
     if (afflictionInstance.stage() > activeAffliction.stage() || afflictionInstance.stage() == activeAffliction.stage() && afflictionInstance.progression() > activeAffliction.progression()) {
       activeAffliction.setStage(afflictionInstance.stage());
       if (afflictionInstance.progression() > activeAffliction.progression()) activeAffliction.setProgression(afflictionInstance.progression());
@@ -96,8 +93,23 @@ public abstract class AfflictionManager {
     afflictionInstance.limitToAllowedValues();
     Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
     activeAfflictions.put(afflictionInstance.affliction(), afflictionInstance);
-    Affliction.processStageChangedEffects(entity, afflictionInstance, false, AfflictionEffectComponents.STAGE_CHANGED);
+    onAfflictionAdded(entity, afflictionInstance);
     return true;
+  }
+
+  private static void onAfflictionAdded(LivingEntity entity, AfflictionInstance afflictionInstance) {
+    Affliction.processAttributeEffects(entity, false, afflictionInstance);
+    Affliction.processStageChangedEffects(entity, afflictionInstance, false, AfflictionEffectComponents.STAGE_CHANGED);
+  }
+
+  private static void onAfflictionRemoved(LivingEntity entity, AfflictionInstance afflictionInstance) {
+    Affliction.processAttributeEffects(entity, true, afflictionInstance);
+    Affliction.processStageChangedEffects(entity, afflictionInstance, true, AfflictionEffectComponents.STAGE_CHANGED);
+  }
+
+  private static void onAfflictionStageChanged(LivingEntity entity, AfflictionInstance afflictionInstance) {
+    Affliction.processAttributeEffects(entity, false, afflictionInstance);
+    Affliction.processStageChangedEffects(entity, afflictionInstance, false, AfflictionEffectComponents.STAGE_CHANGED);
   }
 
   public static boolean handleDamageImmunity(LivingEntity entity, DamageSource damageSource) {

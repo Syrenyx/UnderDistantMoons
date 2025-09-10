@@ -8,6 +8,7 @@ import net.minecraft.enchantment.EnchantmentLevelBasedValue;
 import net.minecraft.enchantment.effect.EnchantmentEffectTarget;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.context.LootContext;
@@ -26,6 +27,7 @@ import net.minecraft.util.math.Vec3d;
 import syrenyx.distantmoons.affliction.effect.*;
 import syrenyx.distantmoons.affliction.effect.entity.AfflictionEntityEffect;
 import syrenyx.distantmoons.affliction.effect.location_based.AfflictionLocationBasedEffect;
+import syrenyx.distantmoons.affliction.effect.location_based.AttributeEffect;
 import syrenyx.distantmoons.affliction.effect.miscellaneous.DamageImmunityEffect;
 import syrenyx.distantmoons.initializers.AfflictionEffectComponents;
 import syrenyx.distantmoons.initializers.LootContextTypes;
@@ -62,6 +64,18 @@ public record Affliction(
   public static final int MAX_PROGRESSION = 100;
   public static final int MAX_STAGE = 255;
   public static final int DEFAULT_STAGE = 1;
+
+  public static void processAttributeEffects(
+      LivingEntity entity,
+      boolean remove,
+      AfflictionInstance afflictionInstance
+  ) {
+    List<AttributeEffect> effects = afflictionInstance.affliction().value().effects.getOrDefault(AfflictionEffectComponents.ATTRIBUTES, List.of());
+    for (AttributeEffect effect : effects) {
+      effect.remove((ServerWorld) entity.getWorld(), afflictionInstance.stage(), entity, entity.getPos(), afflictionInstance);
+      if (!remove) effect.apply((ServerWorld) entity.getWorld(), afflictionInstance.stage(), entity, entity.getPos(), afflictionInstance);
+    }
+  }
 
   public static boolean processDamageImmunityEffects(
       Entity entity,

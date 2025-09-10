@@ -1,0 +1,24 @@
+{
+  "description": {
+    "translate": "affliction.distant-moons.curse_of_the_underworld"
+  },
+  "display": {
+    "icon": "distant-moons:curse",
+    "tooltip_style": "distant-moons:persistent_affliction"
+  },
+  "max_stage": 1,
+  "persistent": true,
+  "immune_entities": "#minecraft:undead",
+  "effects": {
+    "distant-moons:attributes": [
+      {
+        "id": "distant-moons:jump_strength",
+        "attribute": "minecraft:jump_strength",
+        "amount": {
+          "type": "distant-moons:direct"
+        },
+        "operation": "add_value"
+      }
+    ]
+  }
+}
