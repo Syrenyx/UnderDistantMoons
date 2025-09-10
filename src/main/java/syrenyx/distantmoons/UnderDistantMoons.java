@@ -20,6 +20,7 @@ public class UnderDistantMoons implements ModInitializer {
     AfflictionEffectComponents.initialize();
     AfflictionEntityEffects.initialize();
     AfflictionLocationBasedEffects.initialize();
+    AfflictionValueEffects.initialize();
     AttachedData.initialize();
     Commands.initialize();
     EnchantmentEffectComponents.initialize();

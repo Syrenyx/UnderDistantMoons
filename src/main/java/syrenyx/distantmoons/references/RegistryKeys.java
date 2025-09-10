@@ -8,6 +8,7 @@ import syrenyx.distantmoons.UnderDistantMoons;
 import syrenyx.distantmoons.affliction.Affliction;
 import syrenyx.distantmoons.affliction.effect.entity.AfflictionEntityEffect;
 import syrenyx.distantmoons.affliction.effect.location_based.AfflictionLocationBasedEffect;
+import syrenyx.distantmoons.affliction.effect.value.AfflictionValueEffect;
 
 public abstract class RegistryKeys {
 
@@ -15,6 +16,7 @@ public abstract class RegistryKeys {
   public static final RegistryKey<Registry<ComponentType<?>>> AFFLICTION_EFFECT_COMPONENT_REGISTRY_KEY = keyOf("affliction_effect_component");
   public static final RegistryKey<Registry<MapCodec<? extends AfflictionEntityEffect>>> AFFLICTION_ENTITY_EFFECT_REGISTRY_KEY = keyOf("affliction_entity_effect");
   public static final RegistryKey<Registry<MapCodec<? extends AfflictionLocationBasedEffect>>> AFFLICTION_LOCATION_BASED_EFFECT_REGISTRY_KEY = keyOf("affliction_location_based_effect");
+  public static final RegistryKey<Registry<MapCodec<? extends AfflictionValueEffect>>> AFFLICTION_VALUE_EFFECT_REGISTRY_KEY = keyOf("affliction_value_effect");
 
   private static <T> RegistryKey<Registry<T>> keyOf(String id) {
     return RegistryKey.ofRegistry(UnderDistantMoons.identifierOf(id));
