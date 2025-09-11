@@ -38,6 +38,7 @@ public abstract class StatusEffectsDisplayMixin {
   @Unique private static final int FULL_SIZE = 120;
   @Unique private static final int PROGRESSION_BAR_HEIGHT = 5;
   @Unique private static final int PROGRESSION_BAR_WIDTH = 84;
+  @Unique private static final int WIDGET_SPACING = 33;
 
   @Unique private static final Identifier LARGE_AFFLICTION_BACKGROUND_TEXTURE = UnderDistantMoons.identifierOf("container/inventory/affliction_background_large");
   @Unique private static final Identifier SMALL_AFFLICTION_BACKGROUND_TEXTURE = UnderDistantMoons.identifierOf("container/inventory/affliction_background_small");
@@ -70,30 +71,45 @@ public abstract class StatusEffectsDisplayMixin {
     Collection<AfflictionInstance> activeAfflictions = ClientPlayerAttachment.getOrCreate(this.client.player).activeAfflictions().stream().filter(affliction -> affliction.affliction().value().display().isPresent()).toList();
     Collection<StatusEffectInstance> statusEffects = this.client.player.getStatusEffects();
     if (height < MIN_SIZE || statusEffects.isEmpty() && activeAfflictions.isEmpty()) return;
-    boolean wide = height >= FULL_SIZE;
-    int amount = statusEffects.size() + activeAfflictions.size();
-    int widgetSpacing = amount > 5 ? 132 / (amount - 1) : 33;
+    boolean wide = height >= FULL_SIZE && activeAfflictions.size() + statusEffects.size() < 6;
     Iterable<AfflictionInstance> iterableAfflictions = Ordering.natural().sortedCopy(activeAfflictions);
     Iterable<StatusEffectInstance> iterableEffects = Ordering.natural().sortedCopy(statusEffects);
+    int x = horizontalPosition;
     int y = parentAccessor.y();
     for (AfflictionInstance affliction : iterableAfflictions) {
-      drawAfflictionWidget(context, horizontalPosition, y, wide, affliction, this.parent.getTextRenderer());
-      y += widgetSpacing;
+      drawAfflictionWidget(context, x, y, wide, affliction, this.parent.getTextRenderer());
+      y += WIDGET_SPACING;
+      if (y - parentAccessor.y() > WIDGET_SPACING * 4) {
+        y = parentAccessor.y();
+        x += WIDGET_SPACING;
+      }
     }
     for (var statusEffect : iterableEffects) {
       assert this.client.world != null;
-      drawStatusEffectWidget(context, horizontalPosition, y, wide, statusEffect, this.parent.getTextRenderer(), this.client.world.getTickManager());
-      y += widgetSpacing;
+      drawStatusEffectWidget(context, x, y, wide, statusEffect, this.parent.getTextRenderer(), this.client.world.getTickManager());
+      y += WIDGET_SPACING;
+      if (y - parentAccessor.y() > WIDGET_SPACING * 4) {
+        y = parentAccessor.y();
+        x += WIDGET_SPACING;
+      }
     }
-    if (wide || !(mouseX >= horizontalPosition && mouseX <= horizontalPosition + 33)) return;
+    x = horizontalPosition;
     y = parentAccessor.y();
     for (AfflictionInstance afflictionInstance : iterableAfflictions) {
-      if (mouseY >= y && mouseY <= y + widgetSpacing) this.hoveredAffliction = afflictionInstance;
-      y += widgetSpacing;
+      if (mouseY >= y && mouseY <= y + WIDGET_SPACING - 1 && mouseX >= x && mouseX <= x + WIDGET_SPACING - 1) this.hoveredAffliction = afflictionInstance;
+      y += WIDGET_SPACING;
+      if (y - parentAccessor.y() > WIDGET_SPACING * 4) {
+        y = parentAccessor.y();
+        x += WIDGET_SPACING;
+      }
     }
     for (StatusEffectInstance statusEffectInstance : iterableEffects) {
-      if (mouseY >= y && mouseY <= y + widgetSpacing) this.hoveredStatusEffect = statusEffectInstance;
-      y += widgetSpacing;
+      if (mouseY >= y && mouseY <= y + WIDGET_SPACING - 1 && mouseX >= x && mouseX <= x + WIDGET_SPACING - 1) this.hoveredStatusEffect = statusEffectInstance;
+      y += WIDGET_SPACING;
+      if (y - parentAccessor.y() > WIDGET_SPACING * 4) {
+        y = parentAccessor.y();
+        x += WIDGET_SPACING;
+      }
     }
   }
 
