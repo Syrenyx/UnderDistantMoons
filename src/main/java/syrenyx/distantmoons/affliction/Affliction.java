@@ -29,6 +29,7 @@ import syrenyx.distantmoons.affliction.effect.entity.AfflictionEntityEffect;
 import syrenyx.distantmoons.affliction.effect.location_based.AfflictionLocationBasedEffect;
 import syrenyx.distantmoons.affliction.effect.location_based.AttributeEffect;
 import syrenyx.distantmoons.affliction.effect.miscellaneous.DamageImmunityEffect;
+import syrenyx.distantmoons.affliction.effect.value.AfflictionValueEffect;
 import syrenyx.distantmoons.initializers.AfflictionEffectComponents;
 import syrenyx.distantmoons.initializers.LootContextTypes;
 import syrenyx.distantmoons.initializers.Registries;
@@ -75,6 +76,92 @@ public record Affliction(
       effect.remove((ServerWorld) entity.getWorld(), afflictionInstance.stage(), entity, entity.getPos(), afflictionInstance);
       if (!remove) effect.apply((ServerWorld) entity.getWorld(), afflictionInstance.stage(), entity, entity.getPos(), afflictionInstance);
     }
+  }
+
+  public static float processArmorEffectiveness(
+      LivingEntity entity,
+      DamageSource damageSource,
+      float armorEffectiveness,
+      AfflictionInstance afflictionInstance
+  ) {
+    List<AfflictionEffectEntry<AfflictionValueEffect>> effectEntries = afflictionInstance.affliction().value().effects.getOrDefault(AfflictionEffectComponents.ARMOR_EFFECTIVENESS, List.of());
+    LootContext lootContext = getAfflictedAttackLootContext(entity, damageSource, afflictionInstance.stage(), afflictionInstance.progression());
+    for (var effectEntry : effectEntries) {
+      if (effectEntry.test(lootContext)) armorEffectiveness = effectEntry.effect().apply(afflictionInstance.stage(), entity.getRandom(), armorEffectiveness);
+    }
+    return armorEffectiveness;
+  }
+
+  public static float processDamage(
+      LivingEntity entity,
+      Entity victim,
+      DamageSource damageSource,
+      float damage,
+      AfflictionInstance afflictionInstance
+  ) {
+    List<AfflictionEffectEntry<AfflictionValueEffect>> effectEntries = afflictionInstance.affliction().value().effects.getOrDefault(AfflictionEffectComponents.DAMAGE, List.of());
+    LootContext lootContext = getAfflictedAttackLootContext(victim, damageSource, afflictionInstance.stage(), afflictionInstance.progression());
+    for (var effectEntry : effectEntries) {
+      if (effectEntry.test(lootContext)) damage = effectEntry.effect().apply(afflictionInstance.stage(), entity.getRandom(), damage);
+    }
+    return damage;
+  }
+
+  public static float processDamageProtection(
+      LivingEntity entity,
+      DamageSource damageSource,
+      float damageProtection,
+      AfflictionInstance afflictionInstance
+  ) {
+    List<AfflictionEffectEntry<AfflictionValueEffect>> effectEntries = afflictionInstance.affliction().value().effects.getOrDefault(AfflictionEffectComponents.FISHING_LUCK_BONUS, List.of());
+    LootContext lootContext = getAfflictedAttackLootContext(entity, damageSource, afflictionInstance.stage(), afflictionInstance.progression());
+    for (var effectEntry : effectEntries) {
+      if (effectEntry.test(lootContext)) damageProtection = effectEntry.effect().apply(afflictionInstance.stage(), entity.getRandom(), damageProtection);
+    }
+    return damageProtection;
+  }
+
+  public static float processFishingLuckBonus(
+      LivingEntity entity,
+      ItemStack stack,
+      float fishingLuckBonus,
+      AfflictionInstance afflictionInstance
+  ) {
+    List<AfflictionEffectEntry<AfflictionValueEffect>> effectEntries = afflictionInstance.affliction().value().effects.getOrDefault(AfflictionEffectComponents.FISHING_TIME_REDUCTION, List.of());
+    LootContext lootContext = getAfflictedItemLootContext(entity, stack, afflictionInstance.stage(), afflictionInstance.progression());
+    for (var effectEntry : effectEntries) {
+      if (effectEntry.test(lootContext)) fishingLuckBonus = effectEntry.effect().apply(afflictionInstance.stage(), entity.getRandom(), fishingLuckBonus);
+    }
+    return fishingLuckBonus;
+  }
+
+  public static float processFishingTimeReduction(
+      LivingEntity entity,
+      ItemStack stack,
+      float fishingTimeReduction,
+      AfflictionInstance afflictionInstance
+  ) {
+    List<AfflictionEffectEntry<AfflictionValueEffect>> effectEntries = afflictionInstance.affliction().value().effects.getOrDefault(AfflictionEffectComponents.KNOCKBACK, List.of());
+    LootContext lootContext = getAfflictedItemLootContext(entity, stack, afflictionInstance.stage(), afflictionInstance.progression());
+    for (var effectEntry : effectEntries) {
+      if (effectEntry.test(lootContext)) fishingTimeReduction = effectEntry.effect().apply(afflictionInstance.stage(), entity.getRandom(), fishingTimeReduction);
+    }
+    return fishingTimeReduction;
+  }
+
+  public static float processKnockback(
+      LivingEntity entity,
+      Entity victim,
+      DamageSource damageSource,
+      float knockback,
+      AfflictionInstance afflictionInstance
+  ) {
+    List<AfflictionEffectEntry<AfflictionValueEffect>> effectEntries = afflictionInstance.affliction().value().effects.getOrDefault(AfflictionEffectComponents.KNOCKBACK, List.of());
+    LootContext lootContext = getAfflictedAttackLootContext(victim, damageSource, afflictionInstance.stage(), afflictionInstance.progression());
+    for (var effectEntry : effectEntries) {
+      if (effectEntry.test(lootContext)) knockback = effectEntry.effect().apply(afflictionInstance.stage(), entity.getRandom(), knockback);
+    }
+    return knockback;
   }
 
   public static boolean processDamageImmunityEffects(

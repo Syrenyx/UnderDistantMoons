@@ -12,6 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.Vec3d;
 import org.jetbrains.annotations.Nullable;
 import syrenyx.distantmoons.affliction.effect.entity.AfflictionEntityEffect;
@@ -110,6 +111,57 @@ public abstract class AfflictionManager {
   private static void onAfflictionStageChanged(LivingEntity entity, AfflictionInstance afflictionInstance) {
     Affliction.processAttributeEffects(entity, false, afflictionInstance);
     Affliction.processStageChangedEffects(entity, afflictionInstance, false, AfflictionEffectComponents.STAGE_CHANGED);
+  }
+
+  public static float getArmorEffectiveness(LivingEntity entity, DamageSource damageSource, float armorEffectiveness) {
+    Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
+    for (AfflictionInstance afflictionInstance : activeAfflictions.values()) {
+      armorEffectiveness = Affliction.processArmorEffectiveness(entity, damageSource, armorEffectiveness, afflictionInstance);
+    }
+    return armorEffectiveness;
+  }
+
+  public static float getDamage(LivingEntity entity, Entity target, DamageSource damageSource, float damage) {
+    Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
+    for (AfflictionInstance afflictionInstance : activeAfflictions.values()) {
+      damage = Affliction.processDamage(entity, target, damageSource, damage, afflictionInstance);
+    }
+    return damage;
+  }
+
+  public static float getDamageProtection(LivingEntity entity, DamageSource damageSource) {
+    float damageProtection = 0.0F;
+    Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
+    for (AfflictionInstance afflictionInstance : activeAfflictions.values()) {
+      damageProtection = Affliction.processDamageProtection(entity, damageSource, damageProtection, afflictionInstance);
+    }
+    return damageProtection;
+  }
+
+  public static float getFishingLuckBonus(LivingEntity entity, ItemStack stack) {
+    float fishingLuckBonus = 0.0F;
+    Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
+    for (AfflictionInstance afflictionInstance : activeAfflictions.values()) {
+      fishingLuckBonus = Affliction.processFishingLuckBonus(entity, stack, fishingLuckBonus, afflictionInstance);
+    }
+    return fishingLuckBonus;
+  }
+
+  public static float getFishingTimeReduction(LivingEntity entity, ItemStack stack) {
+    float fishingTimeReduction = 0.0F;
+    Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
+    for (AfflictionInstance afflictionInstance : activeAfflictions.values()) {
+      fishingTimeReduction = Affliction.processFishingTimeReduction(entity, stack, fishingTimeReduction, afflictionInstance);
+    }
+    return fishingTimeReduction;
+  }
+
+  public static float getKnockback(LivingEntity entity, Entity target, DamageSource damageSource, float knockback) {
+    Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
+    for (AfflictionInstance afflictionInstance : activeAfflictions.values()) {
+      knockback = Affliction.processKnockback(entity, target, damageSource, knockback, afflictionInstance);
+    }
+    return knockback;
   }
 
   public static boolean handleDamageImmunity(LivingEntity entity, DamageSource damageSource) {
