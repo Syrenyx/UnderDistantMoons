@@ -12,7 +12,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 @SuppressWarnings("UnstableApiUsage")
-public record LivingEntityAttachment(Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions) {
+public record LivingEntityAttachment(
+    Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions
+) {
 
   public static final Codec<LivingEntityAttachment> CODEC = RecordCodecBuilder.create(instance -> instance
       .group(
@@ -25,16 +27,12 @@ public record LivingEntityAttachment(Map<RegistryEntry<Affliction>, AfflictionIn
     this.activeAfflictions = new HashMap<>(activeAfflictions);
   }
 
-  public static LivingEntityAttachment newDefault() {
-    return new LivingEntityAttachment(new HashMap<>());
+  public LivingEntityAttachment() {
+    this(new HashMap<>());
   }
 
   public static LivingEntityAttachment getOrCreate(LivingEntity entity) {
-    if (!entity.hasAttached(AttachedData.LIVING_ENTITY_ATTACHMENT)) {
-      entity.setAttached(AttachedData.LIVING_ENTITY_ATTACHMENT, new LivingEntityAttachment(
-          new HashMap<>()
-      ));
-    }
+    if (!entity.hasAttached(AttachedData.LIVING_ENTITY_ATTACHMENT)) entity.setAttached(AttachedData.LIVING_ENTITY_ATTACHMENT, new LivingEntityAttachment());
     return entity.getAttached(AttachedData.LIVING_ENTITY_ATTACHMENT);
   }
 }

@@ -2,7 +2,10 @@ package syrenyx.distantmoons.datagen.lang;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
+import net.minecraft.item.Item;
 import net.minecraft.registry.RegistryWrapper;
+import syrenyx.distantmoons.UnderDistantMoons;
+import syrenyx.distantmoons.initializers.Items;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -43,5 +46,7 @@ public class en_us extends FabricLanguageProvider {
     builder.add("enchantment.distant-moons.curse", "Curse");
 
     EnchantmentLevelUtil.generateEnchantmentLevels(builder, 11, 255);
+
+    builder.add(Items.MORTAL_HEART, "Mortal Heart");
   }
 }

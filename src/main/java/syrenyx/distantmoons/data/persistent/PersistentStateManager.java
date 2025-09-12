@@ -55,6 +55,6 @@ public class PersistentStateManager extends PersistentState {
     MinecraftServer server = player.getServer();
     assert server != null;
     PersistentStateManager stateManager = getServerState(server);
-    return stateManager.players.computeIfAbsent(player.getUuid(), uuid -> PlayerData.newDefault());
+    return stateManager.players.computeIfAbsent(player.getUuid(), uuid -> new PlayerData());
   }
 }
