@@ -7,7 +7,9 @@
     "LivingEntityMixin",
     "LootContextTypesAccessor",
     "PlayerEntityMixin",
+    "PlayerScreenHandlerMixin",
     "ProjectileEntityMixin",
+    "ScreenHandlerInvoker",
     "ServerPlayerEntityMixin"
   ],
   "injectors": {

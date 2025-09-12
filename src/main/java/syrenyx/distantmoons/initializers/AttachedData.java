@@ -4,11 +4,13 @@ import com.mojang.serialization.Codec;
 import net.fabricmc.fabric.api.attachment.v1.AttachmentRegistry;
 import net.fabricmc.fabric.api.attachment.v1.AttachmentType;
 import syrenyx.distantmoons.UnderDistantMoons;
+import syrenyx.distantmoons.data.attachment.ClientPlayerAttachment;
 import syrenyx.distantmoons.data.attachment.LivingEntityAttachment;
 
 @SuppressWarnings("UnstableApiUsage")
 public abstract class AttachedData {
 
+  public static final AttachmentType<ClientPlayerAttachment> CLIENT_PLAYER_ATTACHMENT = register("client_player_attachment", ClientPlayerAttachment.CODEC);
   public static final AttachmentType<LivingEntityAttachment> LIVING_ENTITY_ATTACHMENT = register("living_entity_attachment", LivingEntityAttachment.CODEC);
 
   private static <T> AttachmentType<T> register(String id, Codec<T> codec) {

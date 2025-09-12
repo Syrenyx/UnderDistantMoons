@@ -14,6 +14,7 @@ import syrenyx.distantmoons.UnderDistantMoons;
 import syrenyx.distantmoons.data.attachment.ClientPlayerAttachment;
 
 @Mixin(InventoryScreen.class)
+@SuppressWarnings("resource")
 public abstract class InventoryScreenMixin {
 
   @Unique private static final Identifier SLOT_TEXTURE = UnderDistantMoons.identifierOf("textures/gui/container/slot.png");
