@@ -5,10 +5,8 @@ import net.fabricmc.api.ModInitializer;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import syrenyx.distantmoons.initializers.AttachedData;
-import syrenyx.distantmoons.initializers.Commands;
-import syrenyx.distantmoons.initializers.Networking;
-import syrenyx.distantmoons.initializers.Registries;
+import syrenyx.distantmoons.initializers.*;
+import syrenyx.distantmoons.initializers.AfflictionEffectComponents;
 
 public class UnderDistantMoons implements ModInitializer {
 
@@ -19,8 +17,18 @@ public class UnderDistantMoons implements ModInitializer {
 	@Override
 	public void onInitialize() {
     LOGGER.info("Initializing Modded Content");
+    AfflictionEffectComponents.initialize();
+    AfflictionEntityEffects.initialize();
+    AfflictionLocationBasedEffects.initialize();
+    AfflictionValueEffects.initialize();
     AttachedData.initialize();
     Commands.initialize();
+    EnchantmentEffectComponents.initialize();
+    EnchantmentEntityEffects.initialize();
+    EnchantmentLevelBasedValueTypes.initialize();
+    LootConditions.initialize();
+    LootContextTypes.initialize();
+    LootNumberProviders.initialize();
     Networking.initialize();
     Registries.initialize();
     LOGGER.info("Content Successfully Initialized");

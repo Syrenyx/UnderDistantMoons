@@ -24,7 +24,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import syrenyx.distantmoons.UnderDistantMoons;
 import syrenyx.distantmoons.affliction.Affliction;
-import syrenyx.distantmoons.affliction.AfflictionDisplay;
 import syrenyx.distantmoons.affliction.AfflictionInstance;
 import syrenyx.distantmoons.data.attachment.ClientPlayerAttachment;
 
@@ -39,6 +38,7 @@ public abstract class StatusEffectsDisplayMixin {
   @Unique private static final int FULL_SIZE = 120;
   @Unique private static final int PROGRESSION_BAR_HEIGHT = 5;
   @Unique private static final int PROGRESSION_BAR_WIDTH = 84;
+  @Unique private static final int WIDGET_SPACING = 33;
 
   @Unique private static final Identifier LARGE_AFFLICTION_BACKGROUND_TEXTURE = UnderDistantMoons.identifierOf("container/inventory/affliction_background_large");
   @Unique private static final Identifier SMALL_AFFLICTION_BACKGROUND_TEXTURE = UnderDistantMoons.identifierOf("container/inventory/affliction_background_small");
@@ -54,14 +54,10 @@ public abstract class StatusEffectsDisplayMixin {
   @Unique private static final Identifier PERSISTENT_AFFLICTION_PROGRESSION_BAR = UnderDistantMoons.identifierOf("container/inventory/persistent_affliction_progression_bar");
   @Unique private static final Identifier PERSISTENT_AFFLICTION_PROGRESSION_INFINITE = UnderDistantMoons.identifierOf("container/inventory/persistent_affliction_progression_infinite");
 
-  @Final @Shadow
-  private HandledScreen<?> parent;
-  @Final @Shadow
-  private MinecraftClient client;
-  @Shadow
-  private StatusEffectInstance hoveredStatusEffect;
-  @Unique
-  private AfflictionInstance hoveredAffliction;
+  @Final @Shadow private HandledScreen<?> parent;
+  @Final @Shadow private MinecraftClient client;
+  @Shadow private StatusEffectInstance hoveredStatusEffect;
+  @Unique private AfflictionInstance hoveredAffliction;
 
   @Inject(at = @At("HEAD"), cancellable = true, method = "drawStatusEffects")
   public void drawStatusEffects(DrawContext context, int mouseX, int mouseY, CallbackInfo callbackInfo) {
@@ -75,30 +71,45 @@ public abstract class StatusEffectsDisplayMixin {
     Collection<AfflictionInstance> activeAfflictions = ClientPlayerAttachment.getOrCreate(this.client.player).activeAfflictions().stream().filter(affliction -> affliction.affliction().value().display().isPresent()).toList();
     Collection<StatusEffectInstance> statusEffects = this.client.player.getStatusEffects();
     if (height < MIN_SIZE || statusEffects.isEmpty() && activeAfflictions.isEmpty()) return;
-    boolean wide = height >= FULL_SIZE;
-    int amount = statusEffects.size() + activeAfflictions.size();
-    int widgetSpacing = amount > 5 ? 132 / (amount - 1) : 33;
+    boolean wide = height >= FULL_SIZE && activeAfflictions.size() + statusEffects.size() < 6;
     Iterable<AfflictionInstance> iterableAfflictions = Ordering.natural().sortedCopy(activeAfflictions);
     Iterable<StatusEffectInstance> iterableEffects = Ordering.natural().sortedCopy(statusEffects);
+    int x = horizontalPosition;
     int y = parentAccessor.y();
     for (AfflictionInstance affliction : iterableAfflictions) {
-      drawAfflictionWidget(context, horizontalPosition, y, wide, affliction, this.parent.getTextRenderer());
-      y += widgetSpacing;
+      drawAfflictionWidget(context, x, y, wide, affliction, this.parent.getTextRenderer());
+      y += WIDGET_SPACING;
+      if (y - parentAccessor.y() > WIDGET_SPACING * 4) {
+        y = parentAccessor.y();
+        x += WIDGET_SPACING;
+      }
     }
     for (var statusEffect : iterableEffects) {
       assert this.client.world != null;
-      drawStatusEffectWidget(context, horizontalPosition, y, wide, statusEffect, this.parent.getTextRenderer(), this.client.world.getTickManager());
-      y += widgetSpacing;
+      drawStatusEffectWidget(context, x, y, wide, statusEffect, this.parent.getTextRenderer(), this.client.world.getTickManager());
+      y += WIDGET_SPACING;
+      if (y - parentAccessor.y() > WIDGET_SPACING * 4) {
+        y = parentAccessor.y();
+        x += WIDGET_SPACING;
+      }
     }
-    if (wide || !(mouseX >= horizontalPosition && mouseX <= horizontalPosition + 33)) return;
+    x = horizontalPosition;
     y = parentAccessor.y();
     for (AfflictionInstance afflictionInstance : iterableAfflictions) {
-      if (mouseY >= y && mouseY <= y + widgetSpacing) this.hoveredAffliction = afflictionInstance;
-      y += widgetSpacing;
+      if (mouseY >= y && mouseY <= y + MIN_SIZE - 1 && mouseX >= x && mouseX <= x + (wide ? FULL_SIZE : MIN_SIZE) - 1) this.hoveredAffliction = afflictionInstance;
+      y += WIDGET_SPACING;
+      if (y - parentAccessor.y() > WIDGET_SPACING * 4) {
+        y = parentAccessor.y();
+        x += WIDGET_SPACING;
+      }
     }
     for (StatusEffectInstance statusEffectInstance : iterableEffects) {
-      if (mouseY >= y && mouseY <= y + widgetSpacing) this.hoveredStatusEffect = statusEffectInstance;
-      y += widgetSpacing;
+      if (mouseY >= y && mouseY <= y + MIN_SIZE - 1 && mouseX >= x && mouseX <= x + (wide ? FULL_SIZE : MIN_SIZE) - 1) this.hoveredStatusEffect = statusEffectInstance;
+      y += WIDGET_SPACING;
+      if (y - parentAccessor.y() > WIDGET_SPACING * 4) {
+        y = parentAccessor.y();
+        x += WIDGET_SPACING;
+      }
     }
   }
 
@@ -107,11 +118,11 @@ public abstract class StatusEffectsDisplayMixin {
     callbackInfo.cancel();
     if (this.hoveredAffliction != null) {
       List<Text> text = List.of(
-          getDescription(this.hoveredAffliction),
+          this.hoveredAffliction.getDescription(),
           getProgressionText(this.hoveredAffliction)
       );
-      Optional<Identifier> tooltipStyle = this.hoveredAffliction.affliction().value().display().flatMap(AfflictionDisplay::tooltipStyle);
-      if (tooltipStyle.isPresent()) context.drawTooltip(this.parent.getTextRenderer(), text, Optional.empty(), mouseX, mouseY, tooltipStyle.get());
+      Identifier tooltipStyle = this.hoveredAffliction.getTooltipStyle();
+      if (tooltipStyle != null) context.drawTooltip(this.parent.getTextRenderer(), text, Optional.empty(), mouseX, mouseY, tooltipStyle);
       else context.drawTooltip(this.parent.getTextRenderer(), text, Optional.empty(), mouseX, mouseY);
     } else if (this.hoveredStatusEffect != null) {
       assert this.client.world != null;
@@ -124,35 +135,46 @@ public abstract class StatusEffectsDisplayMixin {
   }
 
   @Unique
-  private static void drawAfflictionWidget(DrawContext context, int x, int y, boolean wide, AfflictionInstance affliction, TextRenderer textRenderer) {
-    Identifier texture = affliction.affliction().value().persistent()
+  private static void drawAfflictionWidget(DrawContext context, int x, int y, boolean wide, AfflictionInstance afflictionInstance, TextRenderer textRenderer) {
+    Affliction affliction = afflictionInstance.affliction().value();
+    Identifier texture = affliction.persistent()
         ? (wide ? LARGE_PERSISTENT_AFFLICTION_BACKGROUND_TEXTURE : SMALL_PERSISTENT_AFFLICTION_BACKGROUND_TEXTURE)
         : (wide ? LARGE_AFFLICTION_BACKGROUND_TEXTURE : SMALL_AFFLICTION_BACKGROUND_TEXTURE);
     context.drawGuiTexture(RenderPipelines.GUI_TEXTURED, texture, x, y, wide ? FULL_SIZE : MIN_SIZE, MIN_SIZE);
-    context.drawGuiTexture(RenderPipelines.GUI_TEXTURED, getIcon(affliction), x + (wide ? 6 : 7), y + 7, 18, 18);
-    if (wide) {
-      context.drawTextWithShadow(textRenderer, getDescription(affliction), x + 28, y + 6, Colors.WHITE);
-      if (affliction.affliction().value().tickProgression().isEmpty()) {
+    context.drawGuiTexture(RenderPipelines.GUI_TEXTURED, getIcon(afflictionInstance), x + (wide ? 6 : 7), y + 7, 18, 18);
+    if (!wide) return;
+    context.drawTextWithShadow(textRenderer, afflictionInstance.getDescription(), x + 28, y + 6, Colors.WHITE);
+    switch (afflictionInstance.getProgressionBarStyle()) {
+      case DEFAULT -> {
         context.drawGuiTexture(
             RenderPipelines.GUI_TEXTURED,
-            affliction.affliction().value().persistent() ? PERSISTENT_AFFLICTION_PROGRESSION_INFINITE : AFFLICTION_PROGRESSION_INFINITE,
-            x + 28, y + 17, PROGRESSION_BAR_WIDTH, PROGRESSION_BAR_HEIGHT + 4
+            affliction.persistent() ? PERSISTENT_AFFLICTION_PROGRESSION_BACKGROUND : AFFLICTION_PROGRESSION_BACKGROUND,
+            x + 28, y + 19, PROGRESSION_BAR_WIDTH, PROGRESSION_BAR_HEIGHT
         );
-        return;
+        int progression = MathHelper.ceil((afflictionInstance.progression() / 100) * PROGRESSION_BAR_WIDTH);
+        context.drawGuiTexture(
+            RenderPipelines.GUI_TEXTURED,
+            affliction.persistent() ? PERSISTENT_AFFLICTION_PROGRESSION_BAR : AFFLICTION_PROGRESSION_BAR,
+            PROGRESSION_BAR_WIDTH, PROGRESSION_BAR_HEIGHT,
+            0, 0,
+            x + 28, y + 19,
+            progression, PROGRESSION_BAR_HEIGHT
+        );
       }
-      context.drawGuiTexture(
+      case EMPTY -> context.drawGuiTexture(
           RenderPipelines.GUI_TEXTURED,
-          affliction.affliction().value().persistent() ? PERSISTENT_AFFLICTION_PROGRESSION_BACKGROUND : AFFLICTION_PROGRESSION_BACKGROUND,
+          affliction.persistent() ? PERSISTENT_AFFLICTION_PROGRESSION_BACKGROUND : AFFLICTION_PROGRESSION_BACKGROUND,
           x + 28, y + 19, PROGRESSION_BAR_WIDTH, PROGRESSION_BAR_HEIGHT
       );
-      int progression = MathHelper.ceil((affliction.progression() / 100) * PROGRESSION_BAR_WIDTH);
-      context.drawGuiTexture(
+      case FULL -> context.drawGuiTexture(
           RenderPipelines.GUI_TEXTURED,
-          affliction.affliction().value().persistent() ? PERSISTENT_AFFLICTION_PROGRESSION_BAR : AFFLICTION_PROGRESSION_BAR,
-          PROGRESSION_BAR_WIDTH, PROGRESSION_BAR_HEIGHT,
-          0, 0,
-          x + 28, y + 19,
-          progression, PROGRESSION_BAR_HEIGHT
+          affliction.persistent() ? PERSISTENT_AFFLICTION_PROGRESSION_BAR : AFFLICTION_PROGRESSION_BAR,
+          x + 28, y + 19, PROGRESSION_BAR_WIDTH, PROGRESSION_BAR_HEIGHT
+      );
+      case INFINITE -> context.drawGuiTexture(
+          RenderPipelines.GUI_TEXTURED,
+          affliction.persistent() ? PERSISTENT_AFFLICTION_PROGRESSION_INFINITE : AFFLICTION_PROGRESSION_INFINITE,
+          x + 28, y + 17, PROGRESSION_BAR_WIDTH, PROGRESSION_BAR_HEIGHT + 4
       );
     }
   }
@@ -168,13 +190,6 @@ public abstract class StatusEffectsDisplayMixin {
   }
 
   @Unique
-  private static Text getDescription(AfflictionInstance affliction) {
-    MutableText text = affliction.affliction().value().description().copy();
-    if (affliction.affliction().value().maxStage() > 1) text.append(ScreenTexts.SPACE).append(Text.translatable("enchantment.level." + affliction.stage()));
-    return text;
-  }
-
-  @Unique
   private static Text getDescription(StatusEffectInstance statusEffect) {
     MutableText text = statusEffect.getEffectType().value().getName().copy();
     if (statusEffect.getAmplifier() >= 1) text.append(ScreenTexts.SPACE).append(Text.translatable("enchantment.level." + (statusEffect.getAmplifier() + 1)));
@@ -182,10 +197,10 @@ public abstract class StatusEffectsDisplayMixin {
   }
 
   @Unique
-  private static Identifier getIcon(AfflictionInstance affliction) {
-    Identifier identifier = affliction.getSprite();
-    if (identifier == null) return MissingSprite.getMissingSpriteId();
-    else return identifier.withPrefixedPath("mob_effect/");
+  private static Identifier getIcon(AfflictionInstance afflictionInstance) {
+    Identifier icon = afflictionInstance.getIcon();
+    if (icon == null) return MissingSprite.getMissingSpriteId();
+    return icon.withPrefixedPath("mob_effect/");
   }
 
   @Unique

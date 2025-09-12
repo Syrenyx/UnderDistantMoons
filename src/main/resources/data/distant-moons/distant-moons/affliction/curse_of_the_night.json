@@ -1,0 +1,148 @@
+{
+  "description": {
+    "translate": "affliction.distant-moons.curse_of_the_night"
+  },
+  "display": {
+    "icon": "distant-moons:curse_of_the_night",
+    "tooltip_style": "distant-moons:persistent_affliction",
+    "stage_overrides": {
+      "1": {
+        "description": {
+          "translate": "affliction.distant-moons.curse_of_the_night"
+        },
+        "progression_bar": "infinite"
+      },
+      "2": {
+        "description": {
+          "translate": "affliction.distant-moons.curse_of_the_night_waning"
+        }
+      }
+    }
+  },
+  "max_stage": 2,
+  "persistent": true,
+  "immune_entities": "#minecraft:undead",
+  "tick_progression": {
+    "type": "minecraft:lookup",
+    "values": [
+      0.0,
+      -0.03
+    ],
+    "fallback": 0.0
+  },
+  "effects": {
+    "distant-moons:post_death": [
+      {
+        "affected": "victim",
+        "afflicted": "victim",
+        "effect": {
+          "type": "distant-moons:change_affliction",
+          "operation": "clear",
+          "affliction": "distant-moons:curse_of_the_night"
+        },
+        "requirements": {
+          "condition": "minecraft:value_check",
+          "value": {
+            "type": "distant-moons:affliction_stage",
+            "amount": {
+              "type": "minecraft:linear",
+              "base": 1,
+              "per_level_above_first": 1
+            }
+          },
+          "range": 2
+        }
+      }
+    ],
+    "distant-moons:progression_threshold": [
+      {
+        "threshold": 0,
+        "effect": {
+          "type": "distant-moons:all_of",
+          "effects": [
+            {
+              "type": "distant-moons:apply_mob_effect",
+              "to_apply": "minecraft:nausea",
+              "min_duration": 200,
+              "max_duration": 200,
+              "min_amplifier": 0,
+              "max_amplifier": 0
+            },
+            {
+              "type": "distant-moons:change_affliction",
+              "operation": "clear",
+              "affliction": "distant-moons:curse_of_the_night"
+            },
+            {
+              "type": "distant-moons:play_sound",
+              "sound": "minecraft:entity.zombie_villager.cure",
+              "pitch": 0.75,
+              "volume": 1.25
+            }
+          ]
+        }
+      }
+    ],
+    "distant-moons:tick": [
+      {
+        "effect": {
+          "type": "distant-moons:ignite",
+          "duration": 8.0
+        },
+        "requirements": {
+          "condition": "distant-moons:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "checks": {
+              "undead_exposed_to_daylight_check": true
+            }
+          }
+        }
+      }
+    ],
+    "distant-moons:used_item": [
+      {
+        "effect": {
+          "type": "distant-moons:change_affliction",
+          "operation": "set",
+          "affliction": "distant-moons:curse_of_the_night",
+          "stage": 2,
+          "progression": 100.0
+        },
+        "requirements": {
+          "condition": "minecraft:all_of",
+          "terms": [
+            {
+              "condition": "distant-moons:entity_properties",
+              "entity": "this",
+              "predicate": {
+                "effects": {
+                  "minecraft:weakness": {}
+                }
+              }
+            },
+            {
+              "condition": "minecraft:match_tool",
+              "predicate": {
+                "items": [
+                  "minecraft:enchanted_golden_apple",
+                  "minecraft:golden_apple"
+                ]
+              }
+            },
+            {
+              "condition": "minecraft:value_check",
+              "value": {
+                "type": "distant-moons:affliction_stage",
+                "amount": {
+                  "type": "distant-moons:direct"
+                }
+              },
+              "range": 1
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
