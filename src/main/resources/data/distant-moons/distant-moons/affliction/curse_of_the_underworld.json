@@ -3,7 +3,7 @@
     "translate": "affliction.distant-moons.curse_of_the_underworld"
   },
   "display": {
-    "icon": "distant-moons:curse",
+    "icon": "distant-moons:curse_of_the_underworld",
     "tooltip_style": "distant-moons:persistent_affliction"
   },
   "max_stage": 1,

@@ -3,7 +3,7 @@
     "translate": "affliction.distant-moons.curse_of_the_night"
   },
   "display": {
-    "icon": "distant-moons:curse",
+    "icon": "distant-moons:curse_of_the_night",
     "tooltip_style": "distant-moons:persistent_affliction",
     "stage_overrides": {
       "1": {

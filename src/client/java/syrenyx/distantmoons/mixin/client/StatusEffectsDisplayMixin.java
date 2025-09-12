@@ -96,7 +96,7 @@ public abstract class StatusEffectsDisplayMixin {
     x = horizontalPosition;
     y = parentAccessor.y();
     for (AfflictionInstance afflictionInstance : iterableAfflictions) {
-      if (mouseY >= y && mouseY <= y + WIDGET_SPACING - 1 && mouseX >= x && mouseX <= x + WIDGET_SPACING - 1) this.hoveredAffliction = afflictionInstance;
+      if (mouseY >= y && mouseY <= y + MIN_SIZE - 1 && mouseX >= x && mouseX <= x + (wide ? FULL_SIZE : MIN_SIZE) - 1) this.hoveredAffliction = afflictionInstance;
       y += WIDGET_SPACING;
       if (y - parentAccessor.y() > WIDGET_SPACING * 4) {
         y = parentAccessor.y();
@@ -104,7 +104,7 @@ public abstract class StatusEffectsDisplayMixin {
       }
     }
     for (StatusEffectInstance statusEffectInstance : iterableEffects) {
-      if (mouseY >= y && mouseY <= y + WIDGET_SPACING - 1 && mouseX >= x && mouseX <= x + WIDGET_SPACING - 1) this.hoveredStatusEffect = statusEffectInstance;
+      if (mouseY >= y && mouseY <= y + MIN_SIZE - 1 && mouseX >= x && mouseX <= x + (wide ? FULL_SIZE : MIN_SIZE) - 1) this.hoveredStatusEffect = statusEffectInstance;
       y += WIDGET_SPACING;
       if (y - parentAccessor.y() > WIDGET_SPACING * 4) {
         y = parentAccessor.y();
