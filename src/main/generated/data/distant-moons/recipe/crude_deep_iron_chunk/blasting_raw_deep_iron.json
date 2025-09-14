@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 1.0,
+  "group": "crude_deep_iron_chunk_from_ore",
+  "ingredient": "distant-moons:raw_deep_iron",
+  "result": {
+    "id": "distant-moons:crude_deep_iron_chunk"
+  }
+}

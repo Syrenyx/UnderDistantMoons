@@ -39,4 +39,8 @@ public class UnderDistantMoons implements ModInitializer {
   public static Identifier identifierOf(String string) {
     return Identifier.of(MOD_ID, string);
   }
+
+  public static String withPrefixedNamespace(String string) {
+    return MOD_ID + ":" + string;
+  }
 }

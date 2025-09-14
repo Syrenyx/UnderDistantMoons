@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "distant-moons:crude_deep_iron_block"
+  ],
+  "result": {
+    "count": 9,
+    "id": "distant-moons:crude_deep_iron_chunk"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 400,
+  "experience": 1.0,
+  "group": "crude_deep_iron_chunk_from_ore",
+  "ingredient": "distant-moons:blackstone_deep_iron_ore",
+  "result": {
+    "id": "distant-moons:crude_deep_iron_chunk"
+  }
+}
