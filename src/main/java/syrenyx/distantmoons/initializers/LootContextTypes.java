@@ -1,6 +1,5 @@
 package syrenyx.distantmoons.initializers;
 
-import net.minecraft.util.Identifier;
 import net.minecraft.util.context.ContextType;
 import syrenyx.distantmoons.UnderDistantMoons;
 import syrenyx.distantmoons.mixin.LootContextTypesAccessor;
@@ -57,8 +56,7 @@ public abstract class LootContextTypes {
     ContextType.Builder builder = new ContextType.Builder();
     type.accept(builder);
     ContextType contextType = builder.build();
-    Identifier identifier = UnderDistantMoons.identifierOf(id);
-    LootContextTypesAccessor.MAP().forcePut(identifier, contextType);
+    LootContextTypesAccessor.MAP().forcePut(UnderDistantMoons.identifierOf(id), contextType);
     return contextType;
   }
 

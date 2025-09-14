@@ -3,7 +3,6 @@ package syrenyx.distantmoons.initializers;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.registry.Registry;
 import syrenyx.distantmoons.UnderDistantMoons;
-import syrenyx.distantmoons.affliction.effect.entity.AfflictionEntityEffect;
 import syrenyx.distantmoons.affliction.effect.entity.*;
 
 public abstract class AfflictionEntityEffects {

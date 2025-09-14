@@ -6,7 +6,6 @@ import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import syrenyx.distantmoons.initializers.*;
-import syrenyx.distantmoons.initializers.AfflictionEffectComponents;
 
 public class UnderDistantMoons implements ModInitializer {
 
