@@ -8,7 +8,7 @@ import syrenyx.distantmoons.affliction.effect.entity.*;
 import syrenyx.distantmoons.affliction.effect.location_based.AllOfLocationBasedEffect;
 import syrenyx.distantmoons.affliction.effect.location_based.AttributeEffect;
 
-public abstract class AfflictionLocationBasedEffects {
+public abstract class DistantMoonsAfflictionLocationBasedEffects {
 
   static {
     register("all_of", AllOfLocationBasedEffect.CODEC);

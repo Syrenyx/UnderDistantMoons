@@ -9,7 +9,7 @@ import syrenyx.distantmoons.UnderDistantMoons;
 import syrenyx.distantmoons.predicate.number_provider.AfflictionProgression;
 import syrenyx.distantmoons.predicate.number_provider.AfflictionStage;
 
-public abstract class LootNumberProviders {
+public abstract class DistantMoonsLootNumberProviders {
 
   public static final LootNumberProviderType AFFLICTION_PROGRESSION = register("affliction_progression", AfflictionProgression.CODEC);
   public static final LootNumberProviderType AFFLICTION_STAGE = register("affliction_stage", AfflictionStage.CODEC);

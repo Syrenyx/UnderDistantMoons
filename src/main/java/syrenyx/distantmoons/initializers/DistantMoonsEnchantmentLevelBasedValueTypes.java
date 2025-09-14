@@ -7,7 +7,7 @@ import net.minecraft.registry.Registry;
 import syrenyx.distantmoons.UnderDistantMoons;
 import syrenyx.distantmoons.enchantment.level_based_value.Direct;
 
-public abstract class EnchantmentLevelBasedValueTypes {
+public abstract class DistantMoonsEnchantmentLevelBasedValueTypes {
 
   static {
     register("direct", Direct.CODEC);

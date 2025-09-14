@@ -16,19 +16,22 @@ public class UnderDistantMoons implements ModInitializer {
 	@Override
 	public void onInitialize() {
     LOGGER.info("Initializing Modded Content");
-    AfflictionEffectComponents.initialize();
-    AfflictionEntityEffects.initialize();
-    AfflictionLocationBasedEffects.initialize();
-    AfflictionValueEffects.initialize();
-    AttachedData.initialize();
-    Commands.initialize();
-    EnchantmentEffectComponents.initialize();
-    EnchantmentEntityEffects.initialize();
-    EnchantmentLevelBasedValueTypes.initialize();
-    LootConditions.initialize();
-    LootContextTypes.initialize();
-    LootNumberProviders.initialize();
-    Networking.initialize();
+    DistantMoonsAfflictionEffectComponents.initialize();
+    DistantMoonsAfflictionEntityEffects.initialize();
+    DistantMoonsAfflictionLocationBasedEffects.initialize();
+    DistantMoonsAfflictionValueEffects.initialize();
+    DistantMoonsAttachedData.initialize();
+    DistantMoonsBlocks.initialize();
+    DistantMoonsCommands.initialize();
+    DistantMoonsEnchantmentEffectComponents.initialize();
+    DistantMoonsEnchantmentEntityEffects.initialize();
+    DistantMoonsEnchantmentLevelBasedValueTypes.initialize();
+    DistantMoonsItemGroups.initialize();
+    DistantMoonsItems.initialize();
+    DistantMoonsLootConditions.initialize();
+    DistantMoonsLootContextTypes.initialize();
+    DistantMoonsLootNumberProviders.initialize();
+    DistantMoonsNetworking.initialize();
     Registries.initialize();
     LOGGER.info("Content Successfully Initialized");
 	}

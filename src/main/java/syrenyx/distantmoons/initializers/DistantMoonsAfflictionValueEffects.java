@@ -5,7 +5,7 @@ import net.minecraft.registry.Registry;
 import syrenyx.distantmoons.UnderDistantMoons;
 import syrenyx.distantmoons.affliction.effect.value.*;
 
-public abstract class AfflictionValueEffects {
+public abstract class DistantMoonsAfflictionValueEffects {
 
   static {
     register("add", AddEffect.CODEC);

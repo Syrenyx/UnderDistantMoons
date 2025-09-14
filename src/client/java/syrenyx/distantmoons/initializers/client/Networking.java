@@ -5,7 +5,7 @@ import net.minecraft.registry.RegistryKey;
 import syrenyx.distantmoons.affliction.AfflictionInstance;
 import syrenyx.distantmoons.data.attachment.ClientPlayerAttachment;
 import syrenyx.distantmoons.payload.ActiveAfflictionsPayload;
-import syrenyx.distantmoons.references.RegistryKeys;
+import syrenyx.distantmoons.references.DistantMoonsRegistryKeys;
 
 import java.util.List;
 
@@ -20,7 +20,7 @@ public abstract class Networking {
               currentAfflictions.clear();
               currentAfflictions.addAll(payload.afflictions().stream().map(packet ->
                   new AfflictionInstance(
-                      context.player().getRegistryManager().getEntryOrThrow(RegistryKey.of(RegistryKeys.AFFLICTION_REGISTRY_KEY, packet.id())),
+                      context.player().getRegistryManager().getEntryOrThrow(RegistryKey.of(DistantMoonsRegistryKeys.AFFLICTION_REGISTRY_KEY, packet.id())),
                       packet.stage(),
                       packet.progression()
                   )

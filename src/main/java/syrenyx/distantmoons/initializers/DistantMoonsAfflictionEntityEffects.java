@@ -5,7 +5,7 @@ import net.minecraft.registry.Registry;
 import syrenyx.distantmoons.UnderDistantMoons;
 import syrenyx.distantmoons.affliction.effect.entity.*;
 
-public abstract class AfflictionEntityEffects {
+public abstract class DistantMoonsAfflictionEntityEffects {
 
   static {
     register("all_of", AllOfEntityEffect.CODEC);

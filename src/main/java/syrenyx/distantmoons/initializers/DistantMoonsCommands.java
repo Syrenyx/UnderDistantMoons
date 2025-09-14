@@ -3,7 +3,7 @@ package syrenyx.distantmoons.initializers;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import syrenyx.distantmoons.command.AfflictionCommand;
 
-public abstract class Commands {
+public abstract class DistantMoonsCommands {
 
   static {
     CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {

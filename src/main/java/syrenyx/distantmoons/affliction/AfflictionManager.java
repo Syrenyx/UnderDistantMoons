@@ -12,7 +12,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.Vec3d;
 import org.jetbrains.annotations.Nullable;
 import syrenyx.distantmoons.affliction.effect.entity.AfflictionEntityEffect;
@@ -20,7 +19,7 @@ import syrenyx.distantmoons.affliction.effect.TargetedAfflictionEffectEntry;
 import syrenyx.distantmoons.data.attachment.LivingEntityAttachment;
 import syrenyx.distantmoons.data.networking.AfflictionPacket;
 import syrenyx.distantmoons.data.persistent.PersistentStateManager;
-import syrenyx.distantmoons.initializers.AfflictionEffectComponents;
+import syrenyx.distantmoons.initializers.DistantMoonsAfflictionEffectComponents;
 import syrenyx.distantmoons.payload.ActiveAfflictionsPayload;
 
 import java.util.List;
@@ -100,17 +99,17 @@ public abstract class AfflictionManager {
 
   private static void onAfflictionAdded(LivingEntity entity, AfflictionInstance afflictionInstance) {
     Affliction.processAttributeEffects(entity, false, afflictionInstance);
-    Affliction.processStageChangedEffects(entity, afflictionInstance, false, AfflictionEffectComponents.STAGE_CHANGED);
+    Affliction.processStageChangedEffects(entity, afflictionInstance, false, DistantMoonsAfflictionEffectComponents.STAGE_CHANGED);
   }
 
   private static void onAfflictionRemoved(LivingEntity entity, AfflictionInstance afflictionInstance) {
     Affliction.processAttributeEffects(entity, true, afflictionInstance);
-    Affliction.processStageChangedEffects(entity, afflictionInstance, true, AfflictionEffectComponents.STAGE_CHANGED);
+    Affliction.processStageChangedEffects(entity, afflictionInstance, true, DistantMoonsAfflictionEffectComponents.STAGE_CHANGED);
   }
 
   private static void onAfflictionStageChanged(LivingEntity entity, AfflictionInstance afflictionInstance) {
     Affliction.processAttributeEffects(entity, false, afflictionInstance);
-    Affliction.processStageChangedEffects(entity, afflictionInstance, false, AfflictionEffectComponents.STAGE_CHANGED);
+    Affliction.processStageChangedEffects(entity, afflictionInstance, false, DistantMoonsAfflictionEffectComponents.STAGE_CHANGED);
   }
 
   public static float getArmorEffectiveness(LivingEntity entity, DamageSource damageSource, float armorEffectiveness) {
@@ -175,12 +174,12 @@ public abstract class AfflictionManager {
   public static void handleLocationChanged(LivingEntity entity, boolean remove) {
     Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
     for (AfflictionInstance afflictionInstance : activeAfflictions.values()) {
-      Affliction.processLocationChangedEffects(entity, remove, afflictionInstance, AfflictionEffectComponents.LOCATION_CHANGED);
+      Affliction.processLocationChangedEffects(entity, remove, afflictionInstance, DistantMoonsAfflictionEffectComponents.LOCATION_CHANGED);
     }
   }
 
   public static void handlePlayerDeath(ServerPlayerEntity player, DamageSource damageSource) {
-    handlePostDamage(player, damageSource, AfflictionEffectComponents.POST_DEATH);
+    handlePostDamage(player, damageSource, DistantMoonsAfflictionEffectComponents.POST_DEATH);
     Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(player);
     for (RegistryEntry<Affliction> affliction : activeAfflictions.keySet()) {
       if (!affliction.value().persistent()) activeAfflictions.remove(affliction);
@@ -190,7 +189,7 @@ public abstract class AfflictionManager {
   public static void handleHitBlock(LivingEntity entity, Vec3d pos) {
     Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
     for (AfflictionInstance afflictionInstance : activeAfflictions.values()) {
-      Affliction.processHitBlockEffects(entity, pos, afflictionInstance, AfflictionEffectComponents.HIT_BLOCK);
+      Affliction.processHitBlockEffects(entity, pos, afflictionInstance, DistantMoonsAfflictionEffectComponents.HIT_BLOCK);
     }
   }
 
@@ -212,7 +211,7 @@ public abstract class AfflictionManager {
   public static void handleProjectileSpawned(LivingEntity entity, ProjectileEntity projectile) {
     Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
     for (AfflictionInstance afflictionInstance : activeAfflictions.values()) {
-      Affliction.processProjectileSpawnedEffects(entity, projectile, afflictionInstance, AfflictionEffectComponents.PROJECTILE_SPAWNED);
+      Affliction.processProjectileSpawnedEffects(entity, projectile, afflictionInstance, DistantMoonsAfflictionEffectComponents.PROJECTILE_SPAWNED);
     }
   }
 
@@ -220,12 +219,12 @@ public abstract class AfflictionManager {
     Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
     for (AfflictionInstance afflictionInstance : activeAfflictions.values()) {
       Affliction affliction = afflictionInstance.affliction().value();
-      Affliction.processTickEffects(entity, afflictionInstance, AfflictionEffectComponents.TICK);
+      Affliction.processTickEffects(entity, afflictionInstance, DistantMoonsAfflictionEffectComponents.TICK);
       if (affliction.tickProgression().isEmpty()) continue;
       float previousProgression = afflictionInstance.progression();
       afflictionInstance.addToProgression(affliction.tickProgression().get().getValue(afflictionInstance.stage()));
       afflictionInstance.limitToAllowedValues();
-      Affliction.processProgressionThresholdEffects(entity, previousProgression, afflictionInstance, AfflictionEffectComponents.PROGRESSION_THRESHOLD);
+      Affliction.processProgressionThresholdEffects(entity, previousProgression, afflictionInstance, DistantMoonsAfflictionEffectComponents.PROGRESSION_THRESHOLD);
     }
     if (entity instanceof ServerPlayerEntity player) ServerPlayNetworking.send(player, new ActiveAfflictionsPayload(activeAfflictions.values().stream().map(AfflictionPacket::fromInstance).toList()));
   }
@@ -233,7 +232,7 @@ public abstract class AfflictionManager {
   public static void handleUsedItem(LivingEntity entity, ItemStack item) {
     Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
     for (AfflictionInstance afflictionInstance : activeAfflictions.values()) {
-      Affliction.processUsedItemEffects(entity, item, afflictionInstance, AfflictionEffectComponents.USED_ITEM);
+      Affliction.processUsedItemEffects(entity, item, afflictionInstance, DistantMoonsAfflictionEffectComponents.USED_ITEM);
     }
   }
 

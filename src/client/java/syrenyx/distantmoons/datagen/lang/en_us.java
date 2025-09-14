@@ -3,6 +3,8 @@ package syrenyx.distantmoons.datagen.lang;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.minecraft.registry.RegistryWrapper;
+import syrenyx.distantmoons.initializers.DistantMoonsBlocks;
+import syrenyx.distantmoons.initializers.DistantMoonsItems;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -19,6 +21,13 @@ public class en_us extends FabricLanguageProvider {
     builder.add("affliction.distant-moons.curse_of_the_underworld", "Curse of the Underworld");
 
     builder.add("affliction.progression_tooltip", "%s / %s");
+
+    builder.add(DistantMoonsBlocks.BLACKSTONE_DEEP_IRON_ORE, "Blackstone Deep Iron Ore");
+    builder.add(DistantMoonsBlocks.CRUDE_DEEP_IRON_BLOCK, "Block of Crude Deep Iron");
+    builder.add(DistantMoonsBlocks.DEEPSLATE_DEEP_IRON_ORE, "Deepslate Deep Iron Ore");
+    builder.add(DistantMoonsBlocks.NETHERRACK_DEEP_IRON_ORE, "Netherrack Deep Iron Ore");
+    builder.add(DistantMoonsBlocks.RAW_DEEP_IRON_BLOCK, "Block of Raw Deep Iron");
+    builder.add(DistantMoonsBlocks.REFINED_DEEP_IRON_BLOCK, "Block of Refined Deep Iron");
 
     builder.add("commands.affliction.add.failed", "Unable to apply this affliction (target is either immune to afflictions, has something stronger, or the operation produced an invalid affliction)");
     builder.add("commands.affliction.add.success.multiple", "Added affliction %s to %s targets");
@@ -41,6 +50,11 @@ public class en_us extends FabricLanguageProvider {
     builder.add("commands.affliction.set.success.single", "Applied affliction %s to %s");
 
     builder.add("enchantment.distant-moons.curse", "Curse");
+
+    builder.add(DistantMoonsItems.CRUDE_DEEP_IRON_CHUNK, "Crude Deep Iron Chunk");
+    builder.add(DistantMoonsItems.RAW_DEEP_IRON, "Raw Deep Iron");
+    builder.add(DistantMoonsItems.REFINED_DEEP_IRON_INGOT, "Refined Deep Iron Ingot");
+    builder.add(DistantMoonsItems.REFINED_DEEP_IRON_NUGGET, "Refined Deep Iron Nugget");
 
     EnchantmentLevelUtil.generateEnchantmentLevels(builder, 11, 255);
   }

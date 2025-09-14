@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import syrenyx.distantmoons.affliction.AfflictionManager;
 import syrenyx.distantmoons.enchantment.effect.entity.EnchantmentManager;
-import syrenyx.distantmoons.initializers.AfflictionEffectComponents;
+import syrenyx.distantmoons.initializers.DistantMoonsAfflictionEffectComponents;
 
 import java.util.function.Consumer;
 
@@ -173,7 +173,7 @@ public abstract class EnchantmentHelperMixin {
       Consumer<Item> breakCallback,
       CallbackInfo callbackInfo
   ) {
-    if (target instanceof LivingEntity livingEntity) AfflictionManager.handlePostDamage(livingEntity, damageSource, AfflictionEffectComponents.POST_ATTACK);
+    if (target instanceof LivingEntity livingEntity) AfflictionManager.handlePostDamage(livingEntity, damageSource, DistantMoonsAfflictionEffectComponents.POST_ATTACK);
   }
 
   @Inject(at = @At("HEAD"), method = "removeLocationBasedEffects(Lnet/minecraft/entity/LivingEntity;)V")

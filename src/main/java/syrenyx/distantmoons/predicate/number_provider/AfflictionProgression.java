@@ -4,8 +4,8 @@ import com.mojang.serialization.MapCodec;
 import net.minecraft.loot.context.LootContext;
 import net.minecraft.loot.provider.number.LootNumberProvider;
 import net.minecraft.loot.provider.number.LootNumberProviderType;
-import syrenyx.distantmoons.initializers.LootNumberProviders;
-import syrenyx.distantmoons.references.LootContextParameters;
+import syrenyx.distantmoons.initializers.DistantMoonsLootNumberProviders;
+import syrenyx.distantmoons.references.DistantMoonsLootContextParameters;
 
 public record AfflictionProgression() implements LootNumberProvider {
 
@@ -13,11 +13,11 @@ public record AfflictionProgression() implements LootNumberProvider {
 
   @Override
   public LootNumberProviderType getType() {
-    return LootNumberProviders.AFFLICTION_PROGRESSION;
+    return DistantMoonsLootNumberProviders.AFFLICTION_PROGRESSION;
   }
 
   @Override
   public float nextFloat(LootContext context) {
-    return context.getOrThrow(LootContextParameters.AFFLICTION_PROGRESSION);
+    return context.getOrThrow(DistantMoonsLootContextParameters.AFFLICTION_PROGRESSION);
   }
 }

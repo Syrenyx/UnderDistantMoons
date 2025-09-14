@@ -4,7 +4,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.context.ContextParameter;
 import syrenyx.distantmoons.UnderDistantMoons;
 
-public abstract class LootContextParameters {
+public abstract class DistantMoonsLootContextParameters {
 
   public static final ContextParameter<Float> AFFLICTION_PROGRESSION = contextParameterOf("affliction_progression");
   public static final ContextParameter<Integer> AFFLICTION_STAGE = contextParameterOf("affliction_stage");

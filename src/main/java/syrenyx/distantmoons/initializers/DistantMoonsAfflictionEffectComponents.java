@@ -1,7 +1,6 @@
 package syrenyx.distantmoons.initializers;
 
 import net.minecraft.component.ComponentType;
-import net.minecraft.enchantment.effect.EnchantmentEffectEntry;
 import net.minecraft.registry.Registry;
 import syrenyx.distantmoons.UnderDistantMoons;
 import syrenyx.distantmoons.affliction.effect.*;
@@ -14,57 +13,57 @@ import syrenyx.distantmoons.affliction.effect.value.AfflictionValueEffect;
 import java.util.List;
 import java.util.function.UnaryOperator;
 
-public abstract class AfflictionEffectComponents {
+public abstract class DistantMoonsAfflictionEffectComponents {
 
   //ENTITY EFFECT ENTRIES
   public static final ComponentType<List<AfflictionEffectEntry<AfflictionEntityEffect>>> HIT_BLOCK = register(
-      "hit_block", builder -> builder.codec(AfflictionEffectEntry.createCodec(AfflictionEntityEffect.CODEC, LootContextTypes.AFFLICTED_BLOCK).listOf())
+      "hit_block", builder -> builder.codec(AfflictionEffectEntry.createCodec(AfflictionEntityEffect.CODEC, DistantMoonsLootContextTypes.AFFLICTED_BLOCK).listOf())
   );
   public static final ComponentType<List<TargetedAfflictionEffectEntry<AfflictionEntityEffect>>> POST_ATTACK = register(
-      "post_attack", builder -> builder.codec(TargetedAfflictionEffectEntry.createCodec(AfflictionEntityEffect.CODEC, LootContextTypes.AFFLICTED_ATTACK).listOf())
+      "post_attack", builder -> builder.codec(TargetedAfflictionEffectEntry.createCodec(AfflictionEntityEffect.CODEC, DistantMoonsLootContextTypes.AFFLICTED_ATTACK).listOf())
   );
   public static final ComponentType<List<TargetedAfflictionEffectEntry<AfflictionEntityEffect>>> POST_DEATH = register(
-      "post_death", builder -> builder.codec(TargetedAfflictionEffectEntry.createCodec(AfflictionEntityEffect.CODEC, LootContextTypes.AFFLICTED_ATTACK).listOf())
+      "post_death", builder -> builder.codec(TargetedAfflictionEffectEntry.createCodec(AfflictionEntityEffect.CODEC, DistantMoonsLootContextTypes.AFFLICTED_ATTACK).listOf())
   );
   public static final ComponentType<List<ProgressionThresholdAfflictionEffectEntry<AfflictionEntityEffect>>> PROGRESSION_THRESHOLD = register(
-      "progression_threshold", builder -> builder.codec(ProgressionThresholdAfflictionEffectEntry.createCodec(AfflictionEntityEffect.CODEC, LootContextTypes.AFFLICTED_ENTITY).listOf())
+      "progression_threshold", builder -> builder.codec(ProgressionThresholdAfflictionEffectEntry.createCodec(AfflictionEntityEffect.CODEC, DistantMoonsLootContextTypes.AFFLICTED_ENTITY).listOf())
   );
   public static final ComponentType<List<SpawnedEntityAfflictionEffectEntry<AfflictionEntityEffect>>> PROJECTILE_SPAWNED = register(
-      "projectile_spawned", builder -> builder.codec(SpawnedEntityAfflictionEffectEntry.createCodec(AfflictionEntityEffect.CODEC, LootContextTypes.AFFLICTED_PROJECTILE).listOf())
+      "projectile_spawned", builder -> builder.codec(SpawnedEntityAfflictionEffectEntry.createCodec(AfflictionEntityEffect.CODEC, DistantMoonsLootContextTypes.AFFLICTED_PROJECTILE).listOf())
   );
   public static final ComponentType<List<AfflictionEffectEntry<AfflictionEntityEffect>>> STAGE_CHANGED = register(
-      "stage_changed", builder -> builder.codec(AfflictionEffectEntry.createCodec(AfflictionEntityEffect.CODEC, LootContextTypes.AFFLICTED_ENTITY).listOf())
+      "stage_changed", builder -> builder.codec(AfflictionEffectEntry.createCodec(AfflictionEntityEffect.CODEC, DistantMoonsLootContextTypes.AFFLICTED_ENTITY).listOf())
   );
   public static final ComponentType<List<AfflictionEffectEntry<AfflictionEntityEffect>>> TICK = register(
-      "tick", builder -> builder.codec(AfflictionEffectEntry.createCodec(AfflictionEntityEffect.CODEC, LootContextTypes.AFFLICTED_ENTITY).listOf())
+      "tick", builder -> builder.codec(AfflictionEffectEntry.createCodec(AfflictionEntityEffect.CODEC, DistantMoonsLootContextTypes.AFFLICTED_ENTITY).listOf())
   );
   public static final ComponentType<List<AfflictionEffectEntry<AfflictionEntityEffect>>> USED_ITEM = register(
-      "used_item", builder -> builder.codec(AfflictionEffectEntry.createCodec(AfflictionEntityEffect.CODEC, LootContextTypes.AFFLICTED_ITEM).listOf())
+      "used_item", builder -> builder.codec(AfflictionEffectEntry.createCodec(AfflictionEntityEffect.CODEC, DistantMoonsLootContextTypes.AFFLICTED_ITEM).listOf())
   );
 
   //LOCATION BASED EFFECT ENTRIES
   public static final ComponentType<List<AfflictionEffectEntry<AfflictionLocationBasedEffect>>> LOCATION_CHANGED = register(
-      "location_changed", builder -> builder.codec(AfflictionEffectEntry.createCodec(AfflictionLocationBasedEffect.CODEC, LootContextTypes.AFFLICTED_ENTITY).listOf())
+      "location_changed", builder -> builder.codec(AfflictionEffectEntry.createCodec(AfflictionLocationBasedEffect.CODEC, DistantMoonsLootContextTypes.AFFLICTED_ENTITY).listOf())
   );
 
   //VALUE EFFECT ENTRIES
   public static final ComponentType<List<AfflictionEffectEntry<AfflictionValueEffect>>> ARMOR_EFFECTIVENESS = register(
-      "armor_effectiveness", builder -> builder.codec(AfflictionEffectEntry.createCodec(AfflictionValueEffect.CODEC, LootContextTypes.AFFLICTED_ATTACK).listOf())
+      "armor_effectiveness", builder -> builder.codec(AfflictionEffectEntry.createCodec(AfflictionValueEffect.CODEC, DistantMoonsLootContextTypes.AFFLICTED_ATTACK).listOf())
   );
   public static final ComponentType<List<AfflictionEffectEntry<AfflictionValueEffect>>> DAMAGE = register(
-      "damage", builder -> builder.codec(AfflictionEffectEntry.createCodec(AfflictionValueEffect.CODEC, LootContextTypes.AFFLICTED_ATTACK).listOf())
+      "damage", builder -> builder.codec(AfflictionEffectEntry.createCodec(AfflictionValueEffect.CODEC, DistantMoonsLootContextTypes.AFFLICTED_ATTACK).listOf())
   );
   public static final ComponentType<List<AfflictionEffectEntry<AfflictionValueEffect>>> DAMAGE_PROTECTION = register(
-      "damage_protection", builder -> builder.codec(AfflictionEffectEntry.createCodec(AfflictionValueEffect.CODEC, LootContextTypes.AFFLICTED_ATTACK).listOf())
+      "damage_protection", builder -> builder.codec(AfflictionEffectEntry.createCodec(AfflictionValueEffect.CODEC, DistantMoonsLootContextTypes.AFFLICTED_ATTACK).listOf())
   );
   public static final ComponentType<List<AfflictionEffectEntry<AfflictionValueEffect>>> FISHING_LUCK_BONUS = register(
-      "fishing_luck_bonus", builder -> builder.codec(AfflictionEffectEntry.createCodec(AfflictionValueEffect.CODEC, LootContextTypes.AFFLICTED_ITEM).listOf())
+      "fishing_luck_bonus", builder -> builder.codec(AfflictionEffectEntry.createCodec(AfflictionValueEffect.CODEC, DistantMoonsLootContextTypes.AFFLICTED_ITEM).listOf())
   );
   public static final ComponentType<List<AfflictionEffectEntry<AfflictionValueEffect>>> FISHING_TIME_REDUCTION = register(
-      "fishing_time_reduction", builder -> builder.codec(AfflictionEffectEntry.createCodec(AfflictionValueEffect.CODEC, LootContextTypes.AFFLICTED_ITEM).listOf())
+      "fishing_time_reduction", builder -> builder.codec(AfflictionEffectEntry.createCodec(AfflictionValueEffect.CODEC, DistantMoonsLootContextTypes.AFFLICTED_ITEM).listOf())
   );
   public static final ComponentType<List<AfflictionEffectEntry<AfflictionValueEffect>>> KNOCKBACK = register(
-      "knockback", builder -> builder.codec(AfflictionEffectEntry.createCodec(AfflictionValueEffect.CODEC, LootContextTypes.AFFLICTED_ATTACK).listOf())
+      "knockback", builder -> builder.codec(AfflictionEffectEntry.createCodec(AfflictionValueEffect.CODEC, DistantMoonsLootContextTypes.AFFLICTED_ATTACK).listOf())
   );
 
   //MISCELLANEOUS EFFECT ENTRIES
@@ -72,7 +71,7 @@ public abstract class AfflictionEffectComponents {
       "attributes", builder -> builder.codec(AttributeEffect.CODEC.codec().listOf())
   );
   public static final ComponentType<List<AfflictionEffectEntry<DamageImmunityEffect>>> DAMAGE_IMMUNITY = register(
-      "damage_immunity", builder -> builder.codec(AfflictionEffectEntry.createCodec(DamageImmunityEffect.CODEC, LootContextTypes.AFFLICTED_ATTACK).listOf())
+      "damage_immunity", builder -> builder.codec(AfflictionEffectEntry.createCodec(DamageImmunityEffect.CODEC, DistantMoonsLootContextTypes.AFFLICTED_ATTACK).listOf())
   );
 
   private static <T> ComponentType<T> register(String id, UnaryOperator<ComponentType.Builder<T>> builderOperator) {

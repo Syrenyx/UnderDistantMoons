@@ -16,8 +16,8 @@ import net.minecraft.loot.context.LootWorldContext;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.world.ServerWorld;
 import org.apache.commons.lang3.mutable.MutableFloat;
-import syrenyx.distantmoons.initializers.EnchantmentEffectComponents;
-import syrenyx.distantmoons.initializers.LootContextTypes;
+import syrenyx.distantmoons.initializers.DistantMoonsEnchantmentEffectComponents;
+import syrenyx.distantmoons.initializers.DistantMoonsLootContextTypes;
 
 import java.util.Optional;
 
@@ -97,7 +97,7 @@ public abstract class EnchantmentManager {
     ItemEnchantmentsComponent activeEnchantments = item.get(DataComponentTypes.ENCHANTMENTS);
     if (activeEnchantments == null || activeEnchantments.isEmpty()) return;
     for (Object2IntMap.Entry<RegistryEntry<Enchantment>> enchantment : activeEnchantments.getEnchantmentEntries()) {
-      enchantment.getKey().value().getEffect(EnchantmentEffectComponents.USED_ITEM).forEach(effect -> {
+      enchantment.getKey().value().getEffect(DistantMoonsEnchantmentEffectComponents.USED_ITEM).forEach(effect -> {
         LootContext lootContext = getEnchantedItemLootContext(entity, item, enchantment.getIntValue());
         EnchantmentEffectContext context = new EnchantmentEffectContext(item, EquipmentSlot.MAINHAND, entity);
         if (effect.test(lootContext)) effect.effect().apply((ServerWorld) entity.getWorld(), enchantment.getIntValue(), context, entity, entity.getPos());
@@ -113,7 +113,7 @@ public abstract class EnchantmentManager {
             .add(LootContextParameters.ORIGIN, entity.getPos())
             .add(LootContextParameters.THIS_ENTITY, entity)
             .add(LootContextParameters.TOOL, item)
-            .build(LootContextTypes.ENCHANTED_ITEM)
+            .build(DistantMoonsLootContextTypes.ENCHANTED_ITEM)
     ).build(Optional.empty());
   }
 }

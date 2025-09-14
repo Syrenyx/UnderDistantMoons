@@ -7,7 +7,7 @@ import syrenyx.distantmoons.UnderDistantMoons;
 import syrenyx.distantmoons.data.attachment.LivingEntityAttachment;
 
 @SuppressWarnings("UnstableApiUsage")
-public abstract class AttachedData {
+public abstract class DistantMoonsAttachedData {
 
   public static final AttachmentType<LivingEntityAttachment> LIVING_ENTITY_ATTACHMENT = register("living_entity_attachment", LivingEntityAttachment.CODEC);
 

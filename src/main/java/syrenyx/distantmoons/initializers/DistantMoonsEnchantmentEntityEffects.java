@@ -7,7 +7,7 @@ import net.minecraft.registry.Registry;
 import syrenyx.distantmoons.UnderDistantMoons;
 import syrenyx.distantmoons.enchantment.effect.entity.ChangeAfflictionEffect;
 
-public abstract class EnchantmentEntityEffects {
+public abstract class DistantMoonsEnchantmentEntityEffects {
 
   static {
     register("change_affliction", ChangeAfflictionEffect.CODEC);

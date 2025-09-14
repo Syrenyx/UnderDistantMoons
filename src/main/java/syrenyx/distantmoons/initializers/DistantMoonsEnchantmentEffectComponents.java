@@ -10,10 +10,10 @@ import syrenyx.distantmoons.UnderDistantMoons;
 import java.util.List;
 import java.util.function.UnaryOperator;
 
-public abstract class EnchantmentEffectComponents {
+public abstract class DistantMoonsEnchantmentEffectComponents {
 
   public static final ComponentType<List<EnchantmentEffectEntry<EnchantmentEntityEffect>>> USED_ITEM = register(
-      "used_item", builder -> builder.codec(EnchantmentEffectEntry.createCodec(EnchantmentEntityEffect.CODEC, LootContextTypes.ENCHANTED_ITEM).listOf())
+      "used_item", builder -> builder.codec(EnchantmentEffectEntry.createCodec(EnchantmentEntityEffect.CODEC, DistantMoonsLootContextTypes.ENCHANTED_ITEM).listOf())
   );
 
   private static <T> ComponentType<T> register(String id, UnaryOperator<ComponentType.Builder<T>> builderOperator) {

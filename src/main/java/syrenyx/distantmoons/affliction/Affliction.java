@@ -30,10 +30,11 @@ import syrenyx.distantmoons.affliction.effect.location_based.AfflictionLocationB
 import syrenyx.distantmoons.affliction.effect.location_based.AttributeEffect;
 import syrenyx.distantmoons.affliction.effect.miscellaneous.DamageImmunityEffect;
 import syrenyx.distantmoons.affliction.effect.value.AfflictionValueEffect;
-import syrenyx.distantmoons.initializers.AfflictionEffectComponents;
-import syrenyx.distantmoons.initializers.LootContextTypes;
+import syrenyx.distantmoons.initializers.DistantMoonsAfflictionEffectComponents;
+import syrenyx.distantmoons.initializers.DistantMoonsLootContextTypes;
 import syrenyx.distantmoons.initializers.Registries;
-import syrenyx.distantmoons.references.RegistryKeys;
+import syrenyx.distantmoons.references.DistantMoonsLootContextParameters;
+import syrenyx.distantmoons.references.DistantMoonsRegistryKeys;
 
 import java.util.List;
 import java.util.Optional;
@@ -61,7 +62,7 @@ public record Affliction(
       )
       .apply(instance, Affliction::new)
   );
-  public static final Codec<RegistryEntry<Affliction>> FIXED_ENTRY_CODEC = RegistryFixedCodec.of(RegistryKeys.AFFLICTION_REGISTRY_KEY);
+  public static final Codec<RegistryEntry<Affliction>> FIXED_ENTRY_CODEC = RegistryFixedCodec.of(DistantMoonsRegistryKeys.AFFLICTION_REGISTRY_KEY);
   public static final int MAX_PROGRESSION = 100;
   public static final int MAX_STAGE = 255;
   public static final int DEFAULT_STAGE = 1;
@@ -71,7 +72,7 @@ public record Affliction(
       boolean remove,
       AfflictionInstance afflictionInstance
   ) {
-    List<AttributeEffect> effects = afflictionInstance.affliction().value().effects.getOrDefault(AfflictionEffectComponents.ATTRIBUTES, List.of());
+    List<AttributeEffect> effects = afflictionInstance.affliction().value().effects.getOrDefault(DistantMoonsAfflictionEffectComponents.ATTRIBUTES, List.of());
     for (AttributeEffect effect : effects) {
       effect.remove((ServerWorld) entity.getWorld(), afflictionInstance.stage(), entity, entity.getPos(), afflictionInstance);
       if (!remove) effect.apply((ServerWorld) entity.getWorld(), afflictionInstance.stage(), entity, entity.getPos(), afflictionInstance);
@@ -84,7 +85,7 @@ public record Affliction(
       float armorEffectiveness,
       AfflictionInstance afflictionInstance
   ) {
-    List<AfflictionEffectEntry<AfflictionValueEffect>> effectEntries = afflictionInstance.affliction().value().effects.getOrDefault(AfflictionEffectComponents.ARMOR_EFFECTIVENESS, List.of());
+    List<AfflictionEffectEntry<AfflictionValueEffect>> effectEntries = afflictionInstance.affliction().value().effects.getOrDefault(DistantMoonsAfflictionEffectComponents.ARMOR_EFFECTIVENESS, List.of());
     LootContext lootContext = getAfflictedAttackLootContext(entity, damageSource, afflictionInstance.stage(), afflictionInstance.progression());
     for (var effectEntry : effectEntries) {
       if (effectEntry.test(lootContext)) armorEffectiveness = effectEntry.effect().apply(afflictionInstance.stage(), entity.getRandom(), armorEffectiveness);
@@ -99,7 +100,7 @@ public record Affliction(
       float damage,
       AfflictionInstance afflictionInstance
   ) {
-    List<AfflictionEffectEntry<AfflictionValueEffect>> effectEntries = afflictionInstance.affliction().value().effects.getOrDefault(AfflictionEffectComponents.DAMAGE, List.of());
+    List<AfflictionEffectEntry<AfflictionValueEffect>> effectEntries = afflictionInstance.affliction().value().effects.getOrDefault(DistantMoonsAfflictionEffectComponents.DAMAGE, List.of());
     LootContext lootContext = getAfflictedAttackLootContext(victim, damageSource, afflictionInstance.stage(), afflictionInstance.progression());
     for (var effectEntry : effectEntries) {
       if (effectEntry.test(lootContext)) damage = effectEntry.effect().apply(afflictionInstance.stage(), entity.getRandom(), damage);
@@ -113,7 +114,7 @@ public record Affliction(
       float damageProtection,
       AfflictionInstance afflictionInstance
   ) {
-    List<AfflictionEffectEntry<AfflictionValueEffect>> effectEntries = afflictionInstance.affliction().value().effects.getOrDefault(AfflictionEffectComponents.FISHING_LUCK_BONUS, List.of());
+    List<AfflictionEffectEntry<AfflictionValueEffect>> effectEntries = afflictionInstance.affliction().value().effects.getOrDefault(DistantMoonsAfflictionEffectComponents.FISHING_LUCK_BONUS, List.of());
     LootContext lootContext = getAfflictedAttackLootContext(entity, damageSource, afflictionInstance.stage(), afflictionInstance.progression());
     for (var effectEntry : effectEntries) {
       if (effectEntry.test(lootContext)) damageProtection = effectEntry.effect().apply(afflictionInstance.stage(), entity.getRandom(), damageProtection);
@@ -127,7 +128,7 @@ public record Affliction(
       float fishingLuckBonus,
       AfflictionInstance afflictionInstance
   ) {
-    List<AfflictionEffectEntry<AfflictionValueEffect>> effectEntries = afflictionInstance.affliction().value().effects.getOrDefault(AfflictionEffectComponents.FISHING_TIME_REDUCTION, List.of());
+    List<AfflictionEffectEntry<AfflictionValueEffect>> effectEntries = afflictionInstance.affliction().value().effects.getOrDefault(DistantMoonsAfflictionEffectComponents.FISHING_TIME_REDUCTION, List.of());
     LootContext lootContext = getAfflictedItemLootContext(entity, stack, afflictionInstance.stage(), afflictionInstance.progression());
     for (var effectEntry : effectEntries) {
       if (effectEntry.test(lootContext)) fishingLuckBonus = effectEntry.effect().apply(afflictionInstance.stage(), entity.getRandom(), fishingLuckBonus);
@@ -141,7 +142,7 @@ public record Affliction(
       float fishingTimeReduction,
       AfflictionInstance afflictionInstance
   ) {
-    List<AfflictionEffectEntry<AfflictionValueEffect>> effectEntries = afflictionInstance.affliction().value().effects.getOrDefault(AfflictionEffectComponents.KNOCKBACK, List.of());
+    List<AfflictionEffectEntry<AfflictionValueEffect>> effectEntries = afflictionInstance.affliction().value().effects.getOrDefault(DistantMoonsAfflictionEffectComponents.KNOCKBACK, List.of());
     LootContext lootContext = getAfflictedItemLootContext(entity, stack, afflictionInstance.stage(), afflictionInstance.progression());
     for (var effectEntry : effectEntries) {
       if (effectEntry.test(lootContext)) fishingTimeReduction = effectEntry.effect().apply(afflictionInstance.stage(), entity.getRandom(), fishingTimeReduction);
@@ -156,7 +157,7 @@ public record Affliction(
       float knockback,
       AfflictionInstance afflictionInstance
   ) {
-    List<AfflictionEffectEntry<AfflictionValueEffect>> effectEntries = afflictionInstance.affliction().value().effects.getOrDefault(AfflictionEffectComponents.KNOCKBACK, List.of());
+    List<AfflictionEffectEntry<AfflictionValueEffect>> effectEntries = afflictionInstance.affliction().value().effects.getOrDefault(DistantMoonsAfflictionEffectComponents.KNOCKBACK, List.of());
     LootContext lootContext = getAfflictedAttackLootContext(victim, damageSource, afflictionInstance.stage(), afflictionInstance.progression());
     for (var effectEntry : effectEntries) {
       if (effectEntry.test(lootContext)) knockback = effectEntry.effect().apply(afflictionInstance.stage(), entity.getRandom(), knockback);
@@ -169,7 +170,7 @@ public record Affliction(
       DamageSource damageSource,
       AfflictionInstance afflictionInstance
   ) {
-    List<AfflictionEffectEntry<DamageImmunityEffect>> effectEntries = afflictionInstance.affliction().value().effects.getOrDefault(AfflictionEffectComponents.DAMAGE_IMMUNITY, List.of());
+    List<AfflictionEffectEntry<DamageImmunityEffect>> effectEntries = afflictionInstance.affliction().value().effects.getOrDefault(DistantMoonsAfflictionEffectComponents.DAMAGE_IMMUNITY, List.of());
     LootContext lootContext = getAfflictedAttackLootContext(entity, damageSource, afflictionInstance.stage(), afflictionInstance.progression());
     for (AfflictionEffectEntry<DamageImmunityEffect> effectEntry : effectEntries) {
       if (effectEntry.test(lootContext)) return true;
@@ -301,14 +302,14 @@ public record Affliction(
     return new LootContext.Builder(
         new LootWorldContext
             .Builder((ServerWorld) victim.getWorld())
-            .add(syrenyx.distantmoons.references.LootContextParameters.AFFLICTION_PROGRESSION, progression)
-            .add(syrenyx.distantmoons.references.LootContextParameters.AFFLICTION_STAGE, stage)
+            .add(DistantMoonsLootContextParameters.AFFLICTION_PROGRESSION, progression)
+            .add(DistantMoonsLootContextParameters.AFFLICTION_STAGE, stage)
             .add(LootContextParameters.ATTACKING_ENTITY, damageSource.getAttacker())
             .add(LootContextParameters.DAMAGE_SOURCE, damageSource)
             .add(LootContextParameters.DIRECT_ATTACKING_ENTITY, damageSource.getSource())
             .add(LootContextParameters.ORIGIN, victim.getPos())
             .add(LootContextParameters.THIS_ENTITY, victim)
-            .build(LootContextTypes.AFFLICTED_ATTACK)
+            .build(DistantMoonsLootContextTypes.AFFLICTED_ATTACK)
     ).build(Optional.empty());
   }
 
@@ -316,12 +317,12 @@ public record Affliction(
     return new LootContext.Builder(
         new LootWorldContext
             .Builder((ServerWorld) victim.getWorld())
-            .add(syrenyx.distantmoons.references.LootContextParameters.AFFLICTION_PROGRESSION, progression)
-            .add(syrenyx.distantmoons.references.LootContextParameters.AFFLICTION_STAGE, stage)
+            .add(DistantMoonsLootContextParameters.AFFLICTION_PROGRESSION, progression)
+            .add(DistantMoonsLootContextParameters.AFFLICTION_STAGE, stage)
             .add(LootContextParameters.BLOCK_STATE, victim.getWorld().getBlockState(BlockPos.ofFloored(pos)))
             .add(LootContextParameters.ORIGIN, pos)
             .add(LootContextParameters.THIS_ENTITY, victim)
-            .build(LootContextTypes.AFFLICTED_BLOCK)
+            .build(DistantMoonsLootContextTypes.AFFLICTED_BLOCK)
     ).build(Optional.empty());
   }
 
@@ -329,11 +330,11 @@ public record Affliction(
     return new LootContext.Builder(
         new LootWorldContext
             .Builder((ServerWorld) entity.getWorld())
-            .add(syrenyx.distantmoons.references.LootContextParameters.AFFLICTION_PROGRESSION, progression)
-            .add(syrenyx.distantmoons.references.LootContextParameters.AFFLICTION_STAGE, stage)
+            .add(DistantMoonsLootContextParameters.AFFLICTION_PROGRESSION, progression)
+            .add(DistantMoonsLootContextParameters.AFFLICTION_STAGE, stage)
             .add(LootContextParameters.ORIGIN, entity.getPos())
             .add(LootContextParameters.THIS_ENTITY, entity)
-            .build(LootContextTypes.AFFLICTED_ENTITY)
+            .build(DistantMoonsLootContextTypes.AFFLICTED_ENTITY)
     ).build(Optional.empty());
   }
 
@@ -341,12 +342,12 @@ public record Affliction(
     return new LootContext.Builder(
         new LootWorldContext
             .Builder((ServerWorld) entity.getWorld())
-            .add(syrenyx.distantmoons.references.LootContextParameters.AFFLICTION_PROGRESSION, progression)
-            .add(syrenyx.distantmoons.references.LootContextParameters.AFFLICTION_STAGE, stage)
+            .add(DistantMoonsLootContextParameters.AFFLICTION_PROGRESSION, progression)
+            .add(DistantMoonsLootContextParameters.AFFLICTION_STAGE, stage)
             .add(LootContextParameters.ORIGIN, entity.getPos())
             .add(LootContextParameters.THIS_ENTITY, entity)
             .add(LootContextParameters.TOOL, item)
-            .build(LootContextTypes.AFFLICTED_ITEM)
+            .build(DistantMoonsLootContextTypes.AFFLICTED_ITEM)
     ).build(Optional.empty());
   }
 
@@ -354,12 +355,12 @@ public record Affliction(
     return new LootContext.Builder(
         new LootWorldContext
             .Builder((ServerWorld) owner.getWorld())
-            .add(syrenyx.distantmoons.references.LootContextParameters.AFFLICTION_PROGRESSION, progression)
-            .add(syrenyx.distantmoons.references.LootContextParameters.AFFLICTION_STAGE, stage)
-            .add(syrenyx.distantmoons.references.LootContextParameters.SPAWNED_ENTITY, projectile)
+            .add(DistantMoonsLootContextParameters.AFFLICTION_PROGRESSION, progression)
+            .add(DistantMoonsLootContextParameters.AFFLICTION_STAGE, stage)
+            .add(DistantMoonsLootContextParameters.SPAWNED_ENTITY, projectile)
             .add(LootContextParameters.ORIGIN, projectile.getPos())
             .add(LootContextParameters.THIS_ENTITY, owner)
-            .build(LootContextTypes.AFFLICTED_PROJECTILE)
+            .build(DistantMoonsLootContextTypes.AFFLICTED_PROJECTILE)
     ).build(Optional.empty());
   }
 }

@@ -10,7 +10,7 @@ import syrenyx.distantmoons.affliction.effect.entity.AfflictionEntityEffect;
 import syrenyx.distantmoons.affliction.effect.location_based.AfflictionLocationBasedEffect;
 import syrenyx.distantmoons.affliction.effect.value.AfflictionValueEffect;
 
-public abstract class RegistryKeys {
+public abstract class DistantMoonsRegistryKeys {
 
   public static final RegistryKey<Registry<Affliction>> AFFLICTION_REGISTRY_KEY = keyOf("affliction");
   public static final RegistryKey<Registry<ComponentType<?>>> AFFLICTION_EFFECT_COMPONENT_REGISTRY_KEY = keyOf("affliction_effect_component");

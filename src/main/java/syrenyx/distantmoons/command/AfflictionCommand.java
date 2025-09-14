@@ -19,7 +19,7 @@ import org.jetbrains.annotations.Nullable;
 import syrenyx.distantmoons.affliction.Affliction;
 import syrenyx.distantmoons.affliction.AfflictionInstance;
 import syrenyx.distantmoons.affliction.AfflictionManager;
-import syrenyx.distantmoons.references.RegistryKeys;
+import syrenyx.distantmoons.references.DistantMoonsRegistryKeys;
 
 import java.util.Collection;
 
@@ -34,14 +34,14 @@ public abstract class AfflictionCommand {
             .then(CommandManager
                 .argument("targets", EntityArgumentType.entities())
                 .then(CommandManager
-                    .argument("affliction", RegistryEntryReferenceArgumentType.registryEntry(registryAccess, RegistryKeys.AFFLICTION_REGISTRY_KEY))
+                    .argument("affliction", RegistryEntryReferenceArgumentType.registryEntry(registryAccess, DistantMoonsRegistryKeys.AFFLICTION_REGISTRY_KEY))
                     .then(CommandManager
                         .argument("stage", IntegerArgumentType.integer(1, Affliction.MAX_STAGE))
                         .executes(context -> executeAdd(
                             context.getSource(),
                             EntityArgumentType.getEntities(context, "targets"),
                             new AfflictionInstance(
-                                RegistryEntryReferenceArgumentType.getRegistryEntry(context, "affliction", RegistryKeys.AFFLICTION_REGISTRY_KEY),
+                                RegistryEntryReferenceArgumentType.getRegistryEntry(context, "affliction", DistantMoonsRegistryKeys.AFFLICTION_REGISTRY_KEY),
                                 IntegerArgumentType.getInteger(context, "stage")
                             )
                         ))
@@ -51,7 +51,7 @@ public abstract class AfflictionCommand {
                                 context.getSource(),
                                 EntityArgumentType.getEntities(context, "targets"),
                                 new AfflictionInstance(
-                                    RegistryEntryReferenceArgumentType.getRegistryEntry(context, "affliction", RegistryKeys.AFFLICTION_REGISTRY_KEY),
+                                    RegistryEntryReferenceArgumentType.getRegistryEntry(context, "affliction", DistantMoonsRegistryKeys.AFFLICTION_REGISTRY_KEY),
                                     IntegerArgumentType.getInteger(context, "stage"),
                                     FloatArgumentType.getFloat(context, "progression")
                                 )
@@ -76,11 +76,11 @@ public abstract class AfflictionCommand {
                     null
                 ))
                 .then(CommandManager
-                    .argument("affliction", RegistryEntryReferenceArgumentType.registryEntry(registryAccess, RegistryKeys.AFFLICTION_REGISTRY_KEY))
+                    .argument("affliction", RegistryEntryReferenceArgumentType.registryEntry(registryAccess, DistantMoonsRegistryKeys.AFFLICTION_REGISTRY_KEY))
                     .executes(context -> executeClear(
                         context.getSource(),
                         EntityArgumentType.getEntities(context, "targets"),
-                        RegistryEntryReferenceArgumentType.getRegistryEntry(context, "affliction", RegistryKeys.AFFLICTION_REGISTRY_KEY)
+                        RegistryEntryReferenceArgumentType.getRegistryEntry(context, "affliction", DistantMoonsRegistryKeys.AFFLICTION_REGISTRY_KEY)
                     ))
                 )
             )
@@ -90,13 +90,13 @@ public abstract class AfflictionCommand {
             .then(CommandManager
                 .argument("target", EntityArgumentType.entity())
                 .then(CommandManager
-                    .argument("affliction", RegistryEntryReferenceArgumentType.registryEntry(registryAccess, RegistryKeys.AFFLICTION_REGISTRY_KEY))
+                    .argument("affliction", RegistryEntryReferenceArgumentType.registryEntry(registryAccess, DistantMoonsRegistryKeys.AFFLICTION_REGISTRY_KEY))
                     .then(CommandManager
                         .literal("stage")
                         .executes(context -> executeGet(
                             context.getSource(),
                             EntityArgumentType.getEntity(context, "target"),
-                            RegistryEntryReferenceArgumentType.getRegistryEntry(context, "affliction", RegistryKeys.AFFLICTION_REGISTRY_KEY),
+                            RegistryEntryReferenceArgumentType.getRegistryEntry(context, "affliction", DistantMoonsRegistryKeys.AFFLICTION_REGISTRY_KEY),
                             true
                         ))
                     )
@@ -105,7 +105,7 @@ public abstract class AfflictionCommand {
                         .executes(context -> executeGet(
                             context.getSource(),
                             EntityArgumentType.getEntity(context, "target"),
-                            RegistryEntryReferenceArgumentType.getRegistryEntry(context, "affliction", RegistryKeys.AFFLICTION_REGISTRY_KEY),
+                            RegistryEntryReferenceArgumentType.getRegistryEntry(context, "affliction", DistantMoonsRegistryKeys.AFFLICTION_REGISTRY_KEY),
                             false
                         ))
                     )
@@ -117,12 +117,12 @@ public abstract class AfflictionCommand {
             .then(CommandManager
                 .argument("targets", EntityArgumentType.entities())
                 .then(CommandManager
-                    .argument("affliction", RegistryEntryReferenceArgumentType.registryEntry(registryAccess, RegistryKeys.AFFLICTION_REGISTRY_KEY))
+                    .argument("affliction", RegistryEntryReferenceArgumentType.registryEntry(registryAccess, DistantMoonsRegistryKeys.AFFLICTION_REGISTRY_KEY))
                     .executes(context -> executeGive(
                         context.getSource(),
                         EntityArgumentType.getEntities(context, "targets"),
                         new AfflictionInstance(
-                            RegistryEntryReferenceArgumentType.getRegistryEntry(context, "affliction", RegistryKeys.AFFLICTION_REGISTRY_KEY)
+                            RegistryEntryReferenceArgumentType.getRegistryEntry(context, "affliction", DistantMoonsRegistryKeys.AFFLICTION_REGISTRY_KEY)
                         )
                     ))
                     .then(CommandManager
@@ -131,7 +131,7 @@ public abstract class AfflictionCommand {
                             context.getSource(),
                             EntityArgumentType.getEntities(context, "targets"),
                             new AfflictionInstance(
-                                RegistryEntryReferenceArgumentType.getRegistryEntry(context, "affliction", RegistryKeys.AFFLICTION_REGISTRY_KEY),
+                                RegistryEntryReferenceArgumentType.getRegistryEntry(context, "affliction", DistantMoonsRegistryKeys.AFFLICTION_REGISTRY_KEY),
                                 IntegerArgumentType.getInteger(context, "stage")
                             )
                         ))
@@ -141,7 +141,7 @@ public abstract class AfflictionCommand {
                                 context.getSource(),
                                 EntityArgumentType.getEntities(context, "targets"),
                                 new AfflictionInstance(
-                                    RegistryEntryReferenceArgumentType.getRegistryEntry(context, "affliction", RegistryKeys.AFFLICTION_REGISTRY_KEY),
+                                    RegistryEntryReferenceArgumentType.getRegistryEntry(context, "affliction", DistantMoonsRegistryKeys.AFFLICTION_REGISTRY_KEY),
                                     IntegerArgumentType.getInteger(context, "stage"),
                                     FloatArgumentType.getFloat(context, "progression")
                                 )
@@ -156,14 +156,14 @@ public abstract class AfflictionCommand {
             .then(CommandManager
                 .argument("targets", EntityArgumentType.entities())
                 .then(CommandManager
-                    .argument("affliction", RegistryEntryReferenceArgumentType.registryEntry(registryAccess, RegistryKeys.AFFLICTION_REGISTRY_KEY))
+                    .argument("affliction", RegistryEntryReferenceArgumentType.registryEntry(registryAccess, DistantMoonsRegistryKeys.AFFLICTION_REGISTRY_KEY))
                     .then(CommandManager
                         .argument("stage", IntegerArgumentType.integer(1, Affliction.MAX_STAGE))
                         .executes(context -> executeSet(
                             context.getSource(),
                             EntityArgumentType.getEntities(context, "targets"),
                             new AfflictionInstance(
-                                RegistryEntryReferenceArgumentType.getRegistryEntry(context, "affliction", RegistryKeys.AFFLICTION_REGISTRY_KEY),
+                                RegistryEntryReferenceArgumentType.getRegistryEntry(context, "affliction", DistantMoonsRegistryKeys.AFFLICTION_REGISTRY_KEY),
                                 IntegerArgumentType.getInteger(context, "stage")
                             )
                         ))
@@ -173,7 +173,7 @@ public abstract class AfflictionCommand {
                                 context.getSource(),
                                 EntityArgumentType.getEntities(context, "targets"),
                                 new AfflictionInstance(
-                                    RegistryEntryReferenceArgumentType.getRegistryEntry(context, "affliction", RegistryKeys.AFFLICTION_REGISTRY_KEY),
+                                    RegistryEntryReferenceArgumentType.getRegistryEntry(context, "affliction", DistantMoonsRegistryKeys.AFFLICTION_REGISTRY_KEY),
                                     IntegerArgumentType.getInteger(context, "stage"),
                                     FloatArgumentType.getFloat(context, "progression")
                                 )
