@@ -1,0 +1,41 @@
+{
+  "type": "minecraft:block",
+  "random_sequence": "distant-moons:blocks/deepslate_deep_iron_ore",
+  "pools": [
+    {
+      "rolls": 1.0,
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:alternatives",
+          "children": [
+            {
+              "type": "minecraft:item",
+              "name": "distant-moons:deepslate_deep_iron_ore",
+              "conditions": [
+                {
+                  "condition": "minecraft:reference",
+                  "name": "distant-moons:silk_touch_tool"
+                }
+              ]
+            },
+            {
+              "type": "minecraft:item",
+              "name": "distant-moons:raw_deep_iron",
+              "functions": [
+                {
+                  "enchantment": "minecraft:fortune",
+                  "formula": "minecraft:ore_drops",
+                  "function": "minecraft:apply_bonus"
+                },
+                {
+                  "function": "minecraft:explosion_decay"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
