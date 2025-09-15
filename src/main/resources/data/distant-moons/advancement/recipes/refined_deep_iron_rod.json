@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "trigger": "minecraft:inventory_changed",
+    "has_refined_deep_iron_ingot": {
+      "conditions": {
+        "items": [
+          {
+            "items": "distant-moons:refined_deep_iron_ingot"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "distant-moons:refined_deep_iron_rod"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_refined_deep_iron_ingot"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "distant-moons:refined_deep_iron_rod"
+    ]
+  }
+}
