@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:ore",
+  "config": {
+    "discard_chance_on_air_exposure": 0.5,
+    "size": 9,
+    "targets": [
+      {
+        "state": {
+          "Name": "distant-moons:blackstone_deep_iron_ore"
+        },
+        "target": {
+          "predicate_type": "minecraft:block_match",
+          "block": "minecraft:blackstone"
+        }
+      },
+      {
+        "state": {
+          "Name": "distant-moons:deepslate_deep_iron_ore"
+        },
+        "target": {
+          "predicate_type": "minecraft:tag_match",
+          "tag": "minecraft:deepslate_ore_replaceables"
+        }
+      },
+      {
+        "state": {
+          "Name": "distant-moons:netherrack_deep_iron_ore"
+        },
+        "target": {
+          "predicate_type": "minecraft:block_match",
+          "block": "minecraft:netherrack"
+        }
+      }
+    ]
+  }
+}
