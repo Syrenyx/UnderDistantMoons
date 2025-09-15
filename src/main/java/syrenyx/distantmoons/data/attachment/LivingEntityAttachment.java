@@ -6,7 +6,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.registry.entry.RegistryEntry;
 import syrenyx.distantmoons.affliction.Affliction;
 import syrenyx.distantmoons.affliction.AfflictionInstance;
-import syrenyx.distantmoons.initializers.AttachedData;
+import syrenyx.distantmoons.initializers.DistantMoonsAttachedData;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,11 +30,11 @@ public record LivingEntityAttachment(Map<RegistryEntry<Affliction>, AfflictionIn
   }
 
   public static LivingEntityAttachment getOrCreate(LivingEntity entity) {
-    if (!entity.hasAttached(AttachedData.LIVING_ENTITY_ATTACHMENT)) {
-      entity.setAttached(AttachedData.LIVING_ENTITY_ATTACHMENT, new LivingEntityAttachment(
+    if (!entity.hasAttached(DistantMoonsAttachedData.LIVING_ENTITY_ATTACHMENT)) {
+      entity.setAttached(DistantMoonsAttachedData.LIVING_ENTITY_ATTACHMENT, new LivingEntityAttachment(
           new HashMap<>()
       ));
     }
-    return entity.getAttached(AttachedData.LIVING_ENTITY_ATTACHMENT);
+    return entity.getAttached(DistantMoonsAttachedData.LIVING_ENTITY_ATTACHMENT);
   }
 }

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "refined_deep_iron_ingot_from_resource_compression",
+  "key": {
+    "0": "distant-moons:refined_deep_iron_nugget"
+  },
+  "pattern": [
+    "000",
+    "000",
+    "000"
+  ],
+  "result": {
+    "count": 1,
+    "id": "distant-moons:refined_deep_iron_ingot"
+  }
+}

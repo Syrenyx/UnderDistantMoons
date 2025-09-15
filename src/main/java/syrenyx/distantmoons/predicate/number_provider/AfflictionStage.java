@@ -6,8 +6,8 @@ import net.minecraft.enchantment.EnchantmentLevelBasedValue;
 import net.minecraft.loot.context.LootContext;
 import net.minecraft.loot.provider.number.LootNumberProvider;
 import net.minecraft.loot.provider.number.LootNumberProviderType;
-import syrenyx.distantmoons.initializers.LootNumberProviders;
-import syrenyx.distantmoons.references.LootContextParameters;
+import syrenyx.distantmoons.initializers.DistantMoonsLootNumberProviders;
+import syrenyx.distantmoons.references.DistantMoonsLootContextParameters;
 
 public record AfflictionStage(
     EnchantmentLevelBasedValue stageValue
@@ -22,11 +22,11 @@ public record AfflictionStage(
 
   @Override
   public LootNumberProviderType getType() {
-    return LootNumberProviders.AFFLICTION_STAGE;
+    return DistantMoonsLootNumberProviders.AFFLICTION_STAGE;
   }
 
   @Override
   public float nextFloat(LootContext context) {
-    return stageValue.getValue(context.getOrThrow(LootContextParameters.AFFLICTION_STAGE));
+    return stageValue.getValue(context.getOrThrow(DistantMoonsLootContextParameters.AFFLICTION_STAGE));
   }
 }

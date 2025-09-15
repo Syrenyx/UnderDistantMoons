@@ -3,6 +3,12 @@
   "affliction.distant-moons.curse_of_the_night_waning": "Waning Curse of the Night",
   "affliction.distant-moons.curse_of_the_underworld": "Curse of the Underworld",
   "affliction.progression_tooltip": "%s / %s",
+  "block.distant-moons.blackstone_deep_iron_ore": "Blackstone Deep Iron Ore",
+  "block.distant-moons.crude_deep_iron_block": "Block of Crude Deep Iron",
+  "block.distant-moons.deepslate_deep_iron_ore": "Deepslate Deep Iron Ore",
+  "block.distant-moons.netherrack_deep_iron_ore": "Netherrack Deep Iron Ore",
+  "block.distant-moons.raw_deep_iron_block": "Block of Raw Deep Iron",
+  "block.distant-moons.refined_deep_iron_block": "Block of Refined Deep Iron",
   "commands.affliction.add.failed": "Unable to apply this affliction (target is either immune to afflictions, has something stronger, or the operation produced an invalid affliction)",
   "commands.affliction.add.success.multiple": "Added affliction %s to %s targets",
   "commands.affliction.add.success.single": "Applied affliction %s to %s",
@@ -267,5 +273,9 @@
   "enchantment.level.96": "XCVI",
   "enchantment.level.97": "XCVII",
   "enchantment.level.98": "XCVIII",
-  "enchantment.level.99": "XCIX"
+  "enchantment.level.99": "XCIX",
+  "item.distant-moons.crude_deep_iron_chunk": "Crude Deep Iron Chunk",
+  "item.distant-moons.raw_deep_iron": "Raw Deep Iron",
+  "item.distant-moons.refined_deep_iron_ingot": "Refined Deep Iron Ingot",
+  "item.distant-moons.refined_deep_iron_nugget": "Refined Deep Iron Nugget"
 }

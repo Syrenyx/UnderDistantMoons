@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "distant-moons:item/crude_deep_iron_chunk"
+  }
+}

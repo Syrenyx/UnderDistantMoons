@@ -7,7 +7,7 @@ import net.minecraft.loot.condition.LootConditionType;
 import net.minecraft.loot.context.LootContext;
 import net.minecraft.loot.context.LootContextParameters;
 import net.minecraft.util.context.ContextParameter;
-import syrenyx.distantmoons.initializers.LootConditions;
+import syrenyx.distantmoons.initializers.DistantMoonsLootConditions;
 import syrenyx.distantmoons.predicate.entity.EntityPredicate;
 
 import java.util.Optional;
@@ -28,7 +28,7 @@ public record EntityPropertiesCondition(
 
   @Override
   public LootConditionType getType() {
-    return LootConditions.ENTITY_PROPERTIES;
+    return DistantMoonsLootConditions.ENTITY_PROPERTIES;
   }
 
   @Override

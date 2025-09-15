@@ -7,13 +7,13 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.Vec3d;
 import syrenyx.distantmoons.affliction.AfflictionInstance;
 import syrenyx.distantmoons.affliction.effect.location_based.AfflictionLocationBasedEffect;
-import syrenyx.distantmoons.initializers.Registries;
+import syrenyx.distantmoons.initializers.DistantMoonsRegistries;
 
 import java.util.function.Function;
 
 public interface AfflictionEntityEffect extends AfflictionLocationBasedEffect {
 
-  Codec<AfflictionEntityEffect> CODEC = Registries.AFFLICTION_ENTITY_EFFECT_REGISTRY.getCodec().dispatch(AfflictionEntityEffect::getCodec, Function.identity());
+  Codec<AfflictionEntityEffect> CODEC = DistantMoonsRegistries.AFFLICTION_ENTITY_EFFECT_REGISTRY.getCodec().dispatch(AfflictionEntityEffect::getCodec, Function.identity());
 
   MapCodec<? extends AfflictionEntityEffect> getCodec();
 

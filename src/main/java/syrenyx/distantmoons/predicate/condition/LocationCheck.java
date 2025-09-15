@@ -11,7 +11,7 @@ import net.minecraft.util.context.ContextParameter;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3i;
-import syrenyx.distantmoons.initializers.LootConditions;
+import syrenyx.distantmoons.initializers.DistantMoonsLootConditions;
 import syrenyx.distantmoons.predicate.location.LocationPredicate;
 
 import java.util.Optional;
@@ -40,7 +40,7 @@ public record LocationCheck(
 
   @Override
   public LootConditionType getType() {
-    return LootConditions.LOCATION_CHECK;
+    return DistantMoonsLootConditions.LOCATION_CHECK;
   }
 
   @Override

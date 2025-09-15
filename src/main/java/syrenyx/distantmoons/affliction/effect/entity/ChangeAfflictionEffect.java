@@ -13,7 +13,7 @@ import net.minecraft.util.math.Vec3d;
 import syrenyx.distantmoons.affliction.Affliction;
 import syrenyx.distantmoons.affliction.AfflictionInstance;
 import syrenyx.distantmoons.affliction.AfflictionManager;
-import syrenyx.distantmoons.references.RegistryKeys;
+import syrenyx.distantmoons.references.DistantMoonsRegistryKeys;
 
 import java.util.Optional;
 
@@ -42,7 +42,7 @@ public record ChangeAfflictionEffect(
   @Override
   public void apply(ServerWorld world, int afflictionStage, Entity target, Vec3d pos) {
     if (!(target instanceof LivingEntity livingEntity)) return;
-    Optional<RegistryEntry.Reference<Affliction>> afflictionEntry = target.getRegistryManager().getOptionalEntry(RegistryKey.of(RegistryKeys.AFFLICTION_REGISTRY_KEY, this.affliction));
+    Optional<RegistryEntry.Reference<Affliction>> afflictionEntry = target.getRegistryManager().getOptionalEntry(RegistryKey.of(DistantMoonsRegistryKeys.AFFLICTION_REGISTRY_KEY, this.affliction));
     if (afflictionEntry.isEmpty()) return;
     switch (this.operation) {
       case ADD -> AfflictionManager.addToAffliction(livingEntity, new AfflictionInstance(

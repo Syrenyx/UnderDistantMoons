@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "raw_deep_iron_from_resource_compression",
+  "ingredients": [
+    "distant-moons:raw_deep_iron_block"
+  ],
+  "result": {
+    "count": 9,
+    "id": "distant-moons:raw_deep_iron"
+  }
+}
