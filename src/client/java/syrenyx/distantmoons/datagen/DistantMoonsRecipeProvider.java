@@ -7,10 +7,8 @@ import net.minecraft.data.recipe.CookingRecipeJsonBuilder;
 import net.minecraft.data.recipe.RecipeExporter;
 import net.minecraft.data.recipe.RecipeGenerator;
 import net.minecraft.item.ItemConvertible;
-import net.minecraft.recipe.BlastingRecipe;
-import net.minecraft.recipe.Ingredient;
-import net.minecraft.recipe.RecipeSerializer;
-import net.minecraft.recipe.SmeltingRecipe;
+import net.minecraft.item.Items;
+import net.minecraft.recipe.*;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryWrapper;
@@ -41,18 +39,36 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
       @Override
       public void generate() {
 
-        //CRAFTING
+        //COOKING
+        this.createCookingRecipes(Items.BROWN_MUSHROOM, DistantMoonsItems.ROASTED_BROWN_MUSHROOM, 0.35F, 200);
+
+        //RESOURCE COMPRESSION
         this.createResourceCompressionRecipes(DistantMoonsItems.CRUDE_DEEP_IRON_CHUNK, DistantMoonsBlocks.CRUDE_DEEP_IRON_BLOCK);
         this.createResourceCompressionRecipes(DistantMoonsItems.RAW_DEEP_IRON, DistantMoonsBlocks.RAW_DEEP_IRON_BLOCK);
         this.createResourceCompressionRecipes(DistantMoonsItems.REFINED_DEEP_IRON_NUGGET, DistantMoonsItems.REFINED_DEEP_IRON_INGOT, DistantMoonsBlocks.REFINED_DEEP_IRON_BLOCK);
 
-        //SMELTING
+        //ORE SMELTING
         this.createOreSmeltingRecipes(
             List.of(DistantMoonsItems.RAW_DEEP_IRON, DistantMoonsBlocks.DEEPSLATE_DEEP_IRON_ORE, DistantMoonsBlocks.NETHERRACK_DEEP_IRON_ORE, DistantMoonsBlocks.BLACKSTONE_DEEP_IRON_ORE),
             DistantMoonsItems.CRUDE_DEEP_IRON_CHUNK,
             1.0F,
             400
         );
+      }
+
+      private void createCookingRecipes(ItemConvertible ingredient, ItemConvertible result, float experience, int cookingTime) {
+        CookingRecipeJsonBuilder
+            .create(Ingredient.ofItem(ingredient), RecipeCategory.FOOD, result, experience, cookingTime, RecipeSerializer.SMELTING, SmeltingRecipe::new)
+            .criterion(hasItem(ingredient), this.conditionsFromItem(ingredient))
+            .offerTo(this.exporter, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/smelting" + getItemId(ingredient)));
+        CookingRecipeJsonBuilder
+            .create(Ingredient.ofItem(ingredient), RecipeCategory.FOOD, result, experience, cookingTime / 2, RecipeSerializer.SMOKING, SmokingRecipe::new)
+            .criterion(hasItem(ingredient), this.conditionsFromItem(ingredient))
+            .offerTo(this.exporter, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/smoking" + getItemId(ingredient)));
+        CookingRecipeJsonBuilder
+            .create(Ingredient.ofItem(ingredient), RecipeCategory.FOOD, result, experience, cookingTime * 3, RecipeSerializer.CAMPFIRE_COOKING, CampfireCookingRecipe::new)
+            .criterion(hasItem(ingredient), this.conditionsFromItem(ingredient))
+            .offerTo(this.exporter, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/campfire_cooking" + getItemId(ingredient)));
       }
 
       private void createOreSmeltingRecipes(List<ItemConvertible> ingredients, ItemConvertible result, float experience, int cookingTime) {

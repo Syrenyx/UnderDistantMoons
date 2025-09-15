@@ -23,6 +23,18 @@ public abstract class DistantMoonsBlocks {
       new Item.Settings()
           .fireproof()
   );
+  public static final Block CHARCOAL_BLOCK = register(
+      "charcoal_block",
+      Block::new,
+      AbstractBlock.Settings.copy(Blocks.COAL_BLOCK),
+      new Item.Settings()
+  );
+  public static final Block COKE_BLOCK = register(
+      "coke_block",
+      Block::new,
+      AbstractBlock.Settings.copy(Blocks.COAL_BLOCK),
+      new Item.Settings()
+  );
   public static final Block CRUDE_DEEP_IRON_BLOCK = register(
       "crude_deep_iron_block",
       Block::new,

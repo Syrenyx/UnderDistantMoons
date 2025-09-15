@@ -17,6 +17,8 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
   @Override
   public void generateBlockStateModels(BlockStateModelGenerator generator) {
     generator.registerSimpleCubeAll(DistantMoonsBlocks.BLACKSTONE_DEEP_IRON_ORE);
+    generator.registerSimpleCubeAll(DistantMoonsBlocks.CHARCOAL_BLOCK);
+    generator.registerSimpleCubeAll(DistantMoonsBlocks.COKE_BLOCK);
     generator.registerSimpleCubeAll(DistantMoonsBlocks.CRUDE_DEEP_IRON_BLOCK);
     generator.registerSimpleCubeAll(DistantMoonsBlocks.DEEPSLATE_DEEP_IRON_ORE);
     generator.registerSimpleCubeAll(DistantMoonsBlocks.NETHERRACK_DEEP_IRON_ORE);
@@ -26,9 +28,14 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
 
   @Override
   public void generateItemModels(ItemModelGenerator generator) {
+    generator.register(DistantMoonsItems.COKE, Models.GENERATED);
     generator.register(DistantMoonsItems.CRUDE_DEEP_IRON_CHUNK, Models.GENERATED);
+    generator.register(DistantMoonsItems.IRON_ROD, Models.HANDHELD);
     generator.register(DistantMoonsItems.RAW_DEEP_IRON, Models.GENERATED);
     generator.register(DistantMoonsItems.REFINED_DEEP_IRON_INGOT, Models.GENERATED);
     generator.register(DistantMoonsItems.REFINED_DEEP_IRON_NUGGET, Models.GENERATED);
+    generator.register(DistantMoonsItems.REFINED_DEEP_IRON_ROD, Models.HANDHELD);
+    generator.register(DistantMoonsItems.ROASTED_BROWN_MUSHROOM, Models.HANDHELD);
+    generator.register(DistantMoonsItems.UNDERWORLD_DUST, Models.GENERATED);
   }
 }

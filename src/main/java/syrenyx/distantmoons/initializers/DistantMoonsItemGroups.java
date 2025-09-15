@@ -22,6 +22,14 @@ public abstract class DistantMoonsItemGroups {
     );
     addToGroup(
         ItemGroups.BUILDING_BLOCKS,
+        Items.COAL_BLOCK,
+        List.of(
+            DistantMoonsBlocks.CHARCOAL_BLOCK.asItem().getDefaultStack(),
+            DistantMoonsBlocks.COKE_BLOCK.asItem().getDefaultStack()
+        )
+    );
+    addToGroup(
+        ItemGroups.BUILDING_BLOCKS,
         Items.DIAMOND_BLOCK,
         List.of(
             DistantMoonsBlocks.CRUDE_DEEP_IRON_BLOCK.asItem().getDefaultStack(),
@@ -67,8 +75,33 @@ public abstract class DistantMoonsItemGroups {
     //COMBAT
 
     //FOOD AND DRINK
+    addToGroup(
+        ItemGroups.FOOD_AND_DRINK,
+        Items.MELON_SLICE,
+        List.of(
+            Items.GLISTERING_MELON_SLICE.getDefaultStack()
+        )
+    );
+    addToGroup(
+        ItemGroups.FOOD_AND_DRINK,
+        Items.DRIED_KELP,
+        List.of(
+            Items.BROWN_MUSHROOM.getDefaultStack(),
+            DistantMoonsItems.ROASTED_BROWN_MUSHROOM.getDefaultStack(),
+            Items.RED_MUSHROOM.getDefaultStack(),
+            Items.CRIMSON_FUNGUS.getDefaultStack(),
+            Items.WARPED_FUNGUS.getDefaultStack()
+        )
+    );
 
     //INGREDIENTS
+    addToGroup(
+        ItemGroups.INGREDIENTS,
+        Items.CHARCOAL,
+        List.of(
+            DistantMoonsItems.COKE.getDefaultStack()
+        )
+    );
     addToGroup(
         ItemGroups.INGREDIENTS,
         Items.DIAMOND,
@@ -89,6 +122,21 @@ public abstract class DistantMoonsItemGroups {
         List.of(
             DistantMoonsItems.CRUDE_DEEP_IRON_CHUNK.getDefaultStack(),
             DistantMoonsItems.REFINED_DEEP_IRON_INGOT.getDefaultStack()
+        )
+    );
+    addToGroup(
+        ItemGroups.INGREDIENTS,
+        Items.NETHERITE_INGOT,
+        List.of(
+            DistantMoonsItems.IRON_ROD.getDefaultStack(),
+            DistantMoonsItems.REFINED_DEEP_IRON_ROD.getDefaultStack()
+        )
+    );
+    addToGroup(
+        ItemGroups.INGREDIENTS,
+        Items.BOOK,
+        List.of(
+            DistantMoonsItems.UNDERWORLD_DUST.getDefaultStack()
         )
     );
 
