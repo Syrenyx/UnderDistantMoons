@@ -24,7 +24,7 @@ public abstract class DistantMoonsAfflictionEntityEffects {
   }
 
   private static <T extends AfflictionEntityEffect> void register(String id, MapCodec<T> codec) {
-    Registry.register(Registries.AFFLICTION_ENTITY_EFFECT_REGISTRY, UnderDistantMoons.identifierOf(id), codec);
+    Registry.register(DistantMoonsRegistries.AFFLICTION_ENTITY_EFFECT_REGISTRY, UnderDistantMoons.identifierOf(id), codec);
   }
 
   public static void initialize() {}

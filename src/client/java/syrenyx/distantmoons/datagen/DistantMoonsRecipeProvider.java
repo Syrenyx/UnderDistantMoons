@@ -13,8 +13,6 @@ import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.SmeltingRecipe;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.Registries;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.RegistryWrapper;
 import syrenyx.distantmoons.UnderDistantMoons;
 import syrenyx.distantmoons.initializers.DistantMoonsBlocks;
@@ -73,18 +71,19 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
       }
 
       private void createResourceCompressionRecipes(ItemConvertible... items) {
-        ItemConvertible item = null;
+        ItemConvertible current = null;
         for (ItemConvertible next : items) {
-          if (item != null) {
-            this.createResourceCompressionRecipe(item, next);
-            this.createResourceDecompressionRecipe(next, item);
+          if (current != null) {
+            this.createResourceCompressionRecipe(current, next);
+            this.createResourceDecompressionRecipe(next, current);
           }
-          item = next;
+          current = next;
         }
       }
 
       private void createResourceCompressionRecipe(ItemConvertible ingredient, ItemConvertible result) {
         this.createShaped(result instanceof Block ? RecipeCategory.BUILDING_BLOCKS : RecipeCategory.MISC, result)
+            .group(getItemId(result) + "_from_resource_compression")
             .pattern("000").pattern("000").pattern("000")
             .input('0', ingredient)
             .criterion(hasItem(ingredient), conditionsFromItem(ingredient))
@@ -92,14 +91,15 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
       }
 
       private void createResourceDecompressionRecipe(ItemConvertible ingredient, ItemConvertible result) {
-        this.createShapeless(RecipeCategory.MISC, result, 9)
+        this.createShapeless(result instanceof Block ? RecipeCategory.BUILDING_BLOCKS : RecipeCategory.MISC, result, 9)
+            .group(getItemId(result) + "_from_resource_compression")
             .input(ingredient)
             .criterion(hasItem(ingredient), conditionsFromItem(ingredient))
             .offerTo(this.exporter, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/decompressing_" + getItemId(ingredient)));
       }
 
       private static String getItemId(ItemConvertible item) {
-        return RegistryKey.of(RegistryKeys.RECIPE, Registries.ITEM.getId(item.asItem())).getValue().toString().split(":")[1];
+        return Registries.ITEM.getId(item.asItem()).toString().split(":")[1];
       }
     };
   }

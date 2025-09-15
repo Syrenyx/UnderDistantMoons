@@ -75,7 +75,7 @@ public abstract class DistantMoonsAfflictionEffectComponents {
   );
 
   private static <T> ComponentType<T> register(String id, UnaryOperator<ComponentType.Builder<T>> builderOperator) {
-    return Registry.register(Registries.AFFLICTION_EFFECT_COMPONENT_REGISTRY, UnderDistantMoons.identifierOf(id), builderOperator.apply(ComponentType.builder()).build());
+    return Registry.register(DistantMoonsRegistries.AFFLICTION_EFFECT_COMPONENT_REGISTRY, UnderDistantMoons.identifierOf(id), builderOperator.apply(ComponentType.builder()).build());
   }
 
   public static void initialize() {}

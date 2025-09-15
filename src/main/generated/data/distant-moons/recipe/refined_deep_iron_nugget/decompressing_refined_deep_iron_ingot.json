@@ -1,6 +1,7 @@
 {
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
+  "group": "refined_deep_iron_nugget_from_resource_compression",
   "ingredients": [
     "distant-moons:refined_deep_iron_ingot"
   ],

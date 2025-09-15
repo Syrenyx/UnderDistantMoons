@@ -32,7 +32,7 @@ public class UnderDistantMoons implements ModInitializer {
     DistantMoonsLootContextTypes.initialize();
     DistantMoonsLootNumberProviders.initialize();
     DistantMoonsNetworking.initialize();
-    Registries.initialize();
+    DistantMoonsRegistries.initialize();
     LOGGER.info("Content Successfully Initialized");
 	}
 

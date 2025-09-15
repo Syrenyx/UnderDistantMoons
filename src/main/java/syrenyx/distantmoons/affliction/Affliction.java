@@ -32,7 +32,7 @@ import syrenyx.distantmoons.affliction.effect.miscellaneous.DamageImmunityEffect
 import syrenyx.distantmoons.affliction.effect.value.AfflictionValueEffect;
 import syrenyx.distantmoons.initializers.DistantMoonsAfflictionEffectComponents;
 import syrenyx.distantmoons.initializers.DistantMoonsLootContextTypes;
-import syrenyx.distantmoons.initializers.Registries;
+import syrenyx.distantmoons.initializers.DistantMoonsRegistries;
 import syrenyx.distantmoons.references.DistantMoonsLootContextParameters;
 import syrenyx.distantmoons.references.DistantMoonsRegistryKeys;
 
@@ -49,7 +49,7 @@ public record Affliction(
     ComponentMap effects
 ) {
 
-  public static final Codec<ComponentMap> COMPONENT_MAP_CODEC = ComponentMap.createCodec(Codec.lazyInitialized(Registries.AFFLICTION_EFFECT_COMPONENT_REGISTRY::getCodec));
+  public static final Codec<ComponentMap> COMPONENT_MAP_CODEC = ComponentMap.createCodec(Codec.lazyInitialized(DistantMoonsRegistries.AFFLICTION_EFFECT_COMPONENT_REGISTRY::getCodec));
   public static final Codec<Affliction> CODEC = RecordCodecBuilder.create(instance -> instance
       .group(
           TextCodecs.CODEC.fieldOf("description").forGetter(Affliction::description),

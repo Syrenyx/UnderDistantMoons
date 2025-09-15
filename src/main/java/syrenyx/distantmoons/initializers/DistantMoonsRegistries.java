@@ -11,7 +11,7 @@ import syrenyx.distantmoons.affliction.effect.location_based.AfflictionLocationB
 import syrenyx.distantmoons.affliction.effect.value.AfflictionValueEffect;
 import syrenyx.distantmoons.references.DistantMoonsRegistryKeys;
 
-public abstract class Registries {
+public abstract class DistantMoonsRegistries {
 
   public static final SimpleRegistry<ComponentType<?>> AFFLICTION_EFFECT_COMPONENT_REGISTRY = FabricRegistryBuilder.createSimple(DistantMoonsRegistryKeys.AFFLICTION_EFFECT_COMPONENT_REGISTRY_KEY).buildAndRegister();
   public static final SimpleRegistry<MapCodec<? extends AfflictionEntityEffect>> AFFLICTION_ENTITY_EFFECT_REGISTRY = FabricRegistryBuilder.createSimple(DistantMoonsRegistryKeys.AFFLICTION_ENTITY_EFFECT_REGISTRY_KEY).buildAndRegister();

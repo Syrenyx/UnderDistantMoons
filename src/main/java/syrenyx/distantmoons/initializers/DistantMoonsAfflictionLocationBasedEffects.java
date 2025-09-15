@@ -28,7 +28,7 @@ public abstract class DistantMoonsAfflictionLocationBasedEffects {
   }
 
   private static <T extends AfflictionLocationBasedEffect> void register(String id, MapCodec<T> codec) {
-    Registry.register(Registries.AFFLICTION_LOCATION_BASED_EFFECT_REGISTRY, UnderDistantMoons.identifierOf(id), codec);
+    Registry.register(DistantMoonsRegistries.AFFLICTION_LOCATION_BASED_EFFECT_REGISTRY, UnderDistantMoons.identifierOf(id), codec);
   }
 
   public static void initialize() {}

@@ -1,6 +1,7 @@
 {
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
+  "group": "crude_deep_iron_chunk_from_resource_compression",
   "ingredients": [
     "distant-moons:crude_deep_iron_block"
   ],

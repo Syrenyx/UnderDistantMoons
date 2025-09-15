@@ -1,6 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "building",
+  "group": "refined_deep_iron_block_from_resource_compression",
   "key": {
     "0": "distant-moons:refined_deep_iron_ingot"
   },
