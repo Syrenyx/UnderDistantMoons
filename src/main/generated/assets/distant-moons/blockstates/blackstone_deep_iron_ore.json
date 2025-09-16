@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "distant-moons:block/blackstone_deep_iron_ore"
+      "model": "distant-moons:object/blackstone_deep_iron_ore"
     }
   }
 }

@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "distant-moons:block/charcoal_block"
+      "model": "distant-moons:object/charcoal_block"
     }
   }
 }

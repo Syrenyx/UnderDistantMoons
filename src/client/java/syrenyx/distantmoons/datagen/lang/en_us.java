@@ -28,9 +28,17 @@ public class en_us extends FabricLanguageProvider {
     builder.add(DistantMoonsBlocks.COKE_BLOCK, "Block of Coke");
     builder.add(DistantMoonsBlocks.CRUDE_DEEP_IRON_BLOCK, "Block of Crude Deep Iron");
     builder.add(DistantMoonsBlocks.DEEPSLATE_DEEP_IRON_ORE, "Deepslate Deep Iron Ore");
+    builder.add(DistantMoonsBlocks.IRON_FENCE, "Iron Fence");
+    builder.add(DistantMoonsBlocks.IRON_LADDER, "Iron Ladder");
     builder.add(DistantMoonsBlocks.NETHERRACK_DEEP_IRON_ORE, "Netherrack Deep Iron Ore");
     builder.add(DistantMoonsBlocks.RAW_DEEP_IRON_BLOCK, "Block of Raw Deep Iron");
+    builder.add(DistantMoonsBlocks.REFINED_DEEP_IRON_BARS, "Refined Deep Iron Bars");
     builder.add(DistantMoonsBlocks.REFINED_DEEP_IRON_BLOCK, "Block of Refined Deep Iron");
+    builder.add(DistantMoonsBlocks.REFINED_DEEP_IRON_FENCE, "Refined Deep Iron Fence");
+    builder.add(DistantMoonsBlocks.REFINED_DEEP_IRON_LADDER, "Refined Deep Iron Ladder");
+    builder.add(DistantMoonsBlocks.WROUGHT_IRON_BARS, "Wrought Iron Bars");
+    builder.add(DistantMoonsBlocks.WROUGHT_IRON_FENCE, "Wrought Iron Fence");
+    builder.add(DistantMoonsBlocks.WROUGHT_IRON_LADDER, "Wrought Iron Ladder");
 
     builder.add("commands.affliction.add.failed", "Unable to apply this affliction (target is either immune to afflictions, has something stronger, or the operation produced an invalid affliction instance)");
     builder.add("commands.affliction.add.success.multiple", "Added affliction %s to %s targets");

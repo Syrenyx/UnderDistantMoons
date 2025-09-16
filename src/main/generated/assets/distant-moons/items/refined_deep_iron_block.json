@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "distant-moons:block/refined_deep_iron_block"
+    "model": "distant-moons:object/refined_deep_iron_block"
   }
 }

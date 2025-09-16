@@ -48,6 +48,8 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
         this.createMetalSmeltingRecipes(DistantMoonsItems.IRON_ROD, DistantMoonsItems.WROUGHT_IRON_ROD, 0.0F, DEFAULT_SMELTING_TIME);
 
         //RESOURCE COMPRESSION
+        this.createResourceCompressionRecipes(Items.CHARCOAL, DistantMoonsBlocks.CHARCOAL_BLOCK);
+        this.createResourceCompressionRecipes(DistantMoonsItems.COKE, DistantMoonsBlocks.COKE_BLOCK);
         this.createResourceCompressionRecipes(DistantMoonsItems.CRUDE_DEEP_IRON_CHUNK, DistantMoonsBlocks.CRUDE_DEEP_IRON_BLOCK);
         this.createResourceCompressionRecipes(DistantMoonsItems.RAW_DEEP_IRON, DistantMoonsBlocks.RAW_DEEP_IRON_BLOCK);
         this.createResourceCompressionRecipes(DistantMoonsItems.REFINED_DEEP_IRON_NUGGET, DistantMoonsItems.REFINED_DEEP_IRON_INGOT, DistantMoonsBlocks.REFINED_DEEP_IRON_BLOCK);
@@ -65,15 +67,15 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
         CookingRecipeJsonBuilder
             .create(Ingredient.ofItem(ingredient), RecipeCategory.FOOD, result, experience, cookingTime, RecipeSerializer.SMELTING, SmeltingRecipe::new)
             .criterion(hasItem(ingredient), this.conditionsFromItem(ingredient))
-            .offerTo(this.exporter, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/smelting" + getItemId(ingredient)));
+            .offerTo(this.exporter, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/smelting_" + getItemId(ingredient)));
         CookingRecipeJsonBuilder
             .create(Ingredient.ofItem(ingredient), RecipeCategory.FOOD, result, experience, cookingTime / 2, RecipeSerializer.SMOKING, SmokingRecipe::new)
             .criterion(hasItem(ingredient), this.conditionsFromItem(ingredient))
-            .offerTo(this.exporter, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/smoking" + getItemId(ingredient)));
+            .offerTo(this.exporter, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/smoking_" + getItemId(ingredient)));
         CookingRecipeJsonBuilder
             .create(Ingredient.ofItem(ingredient), RecipeCategory.FOOD, result, experience, cookingTime * 3, RecipeSerializer.CAMPFIRE_COOKING, CampfireCookingRecipe::new)
             .criterion(hasItem(ingredient), this.conditionsFromItem(ingredient))
-            .offerTo(this.exporter, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/campfire_cooking" + getItemId(ingredient)));
+            .offerTo(this.exporter, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/campfire_cooking_" + getItemId(ingredient)));
       }
 
       private void createMetalSmeltingRecipes(ItemConvertible ingredient, ItemConvertible result, float experience, int cookingTime) {

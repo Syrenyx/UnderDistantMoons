@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "distant-moons:block/deepslate_deep_iron_ore"
+    "model": "distant-moons:object/deepslate_deep_iron_ore"
   }
 }

@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "distant-moons:block/raw_deep_iron_block"
+      "model": "distant-moons:object/raw_deep_iron_block"
     }
   }
 }

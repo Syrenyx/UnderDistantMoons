@@ -1,0 +1,6 @@
+{
+  "parent": "distant-moons:template/simple_item",
+  "textures": {
+    "layer0": "distant-moons:block/underworld_dust"
+  }
+}

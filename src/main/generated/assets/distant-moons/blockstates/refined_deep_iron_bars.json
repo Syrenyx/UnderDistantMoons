@@ -1,0 +1,102 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "distant-moons:object/refined_deep_iron_bars/center_caps"
+      }
+    },
+    {
+      "apply": {
+        "model": "distant-moons:object/refined_deep_iron_bars/center_post"
+      },
+      "when": {
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "west": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "distant-moons:object/refined_deep_iron_bars/cap"
+      },
+      "when": {
+        "east": "false",
+        "north": "true",
+        "south": "false",
+        "west": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "distant-moons:object/refined_deep_iron_bars/cap",
+        "y": 90
+      },
+      "when": {
+        "east": "true",
+        "north": "false",
+        "south": "false",
+        "west": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "distant-moons:object/refined_deep_iron_bars/cap",
+        "y": 180
+      },
+      "when": {
+        "east": "false",
+        "north": "false",
+        "south": "true",
+        "west": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "distant-moons:object/refined_deep_iron_bars/cap",
+        "y": 270
+      },
+      "when": {
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "west": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "distant-moons:object/refined_deep_iron_bars/side"
+      },
+      "when": {
+        "north": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "distant-moons:object/refined_deep_iron_bars/side",
+        "y": 90
+      },
+      "when": {
+        "east": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "distant-moons:object/refined_deep_iron_bars/side",
+        "y": 180
+      },
+      "when": {
+        "south": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "distant-moons:object/refined_deep_iron_bars/side",
+        "y": 270
+      },
+      "when": {
+        "west": "true"
+      }
+    }
+  ]
+}

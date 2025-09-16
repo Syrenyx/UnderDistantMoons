@@ -1,0 +1,7 @@
+{
+  "parent": "distant-moons:template/simple_item",
+  "textures": {
+    "end": "distant-moons:block/wrought_iron_ladder",
+    "side": "distant-moons:block/wrought_iron_ladder"
+  }
+}

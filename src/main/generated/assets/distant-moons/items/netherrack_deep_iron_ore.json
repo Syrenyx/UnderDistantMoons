@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "distant-moons:block/netherrack_deep_iron_ore"
+    "model": "distant-moons:object/netherrack_deep_iron_ore"
   }
 }

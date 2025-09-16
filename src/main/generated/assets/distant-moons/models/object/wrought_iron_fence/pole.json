@@ -1,0 +1,6 @@
+{
+  "parent": "distant-moons:template/spiked_fence/pole",
+  "textures": {
+    "end": "distant-moons:block/wrought_iron_fence/end"
+  }
+}

@@ -9,6 +9,7 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import syrenyx.distantmoons.UnderDistantMoons;
+import syrenyx.distantmoons.block.SpikedFenceBlock;
 
 import java.util.function.Function;
 
@@ -51,6 +52,18 @@ public abstract class DistantMoonsBlocks {
       new Item.Settings()
           .fireproof()
   );
+  public static final Block IRON_FENCE = register(
+      "iron_fence",
+      SpikedFenceBlock::new,
+      AbstractBlock.Settings.copy(Blocks.IRON_BARS),
+      new Item.Settings()
+  );
+  public static final Block IRON_LADDER = register(
+      "iron_ladder",
+      LadderBlock::new,
+      AbstractBlock.Settings.copy(Blocks.IRON_BARS),
+      new Item.Settings()
+  );
   public static final Block NETHERRACK_DEEP_IRON_ORE = register(
       "netherrack_deep_iron_ore",
       settings -> new ExperienceDroppingBlock(ConstantIntProvider.create(0), settings),
@@ -67,6 +80,13 @@ public abstract class DistantMoonsBlocks {
       new Item.Settings()
           .fireproof()
   );
+  public static final Block REFINED_DEEP_IRON_BARS = register(
+      "refined_deep_iron_bars",
+      PaneBlock::new,
+      AbstractBlock.Settings.copy(Blocks.IRON_BARS),
+      new Item.Settings()
+          .fireproof()
+  );
   public static final Block REFINED_DEEP_IRON_BLOCK = register(
       "refined_deep_iron_block",
       Block::new,
@@ -74,6 +94,38 @@ public abstract class DistantMoonsBlocks {
           .mapColor(MapColor.LIGHT_BLUE_GRAY),
       new Item.Settings()
           .fireproof()
+  );
+  public static final Block REFINED_DEEP_IRON_FENCE = register(
+      "refined_deep_iron_fence",
+      SpikedFenceBlock::new,
+      AbstractBlock.Settings.copy(Blocks.IRON_BARS),
+      new Item.Settings()
+          .fireproof()
+  );
+  public static final Block REFINED_DEEP_IRON_LADDER = register(
+      "refined_deep_iron_ladder",
+      LadderBlock::new,
+      AbstractBlock.Settings.copy(Blocks.IRON_BARS),
+      new Item.Settings()
+          .fireproof()
+  );
+  public static final Block WROUGHT_IRON_BARS = register(
+      "wrought_iron_bars",
+      PaneBlock::new,
+      AbstractBlock.Settings.copy(Blocks.IRON_BARS),
+      new Item.Settings()
+  );
+  public static final Block WROUGHT_IRON_FENCE = register(
+      "wrought_iron_fence",
+      SpikedFenceBlock::new,
+      AbstractBlock.Settings.copy(Blocks.IRON_BARS),
+      new Item.Settings()
+  );
+  public static final Block WROUGHT_IRON_LADDER = register(
+      "wrought_iron_ladder",
+      LadderBlock::new,
+      AbstractBlock.Settings.copy(Blocks.IRON_BARS),
+      new Item.Settings()
   );
 
   private static Block register(String id, Function<AbstractBlock.Settings, Block> blockFactory, AbstractBlock.Settings settings) {

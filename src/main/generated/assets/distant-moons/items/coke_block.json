@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "distant-moons:block/coke_block"
+    "model": "distant-moons:object/coke_block"
   }
 }

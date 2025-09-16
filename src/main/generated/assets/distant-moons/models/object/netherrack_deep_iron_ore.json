@@ -1,0 +1,6 @@
+{
+  "parent": "distant-moons:template/simple_block",
+  "textures": {
+    "side": "distant-moons:block/netherrack_deep_iron_ore"
+  }
+}

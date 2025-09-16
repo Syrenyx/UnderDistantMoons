@@ -1,0 +1,6 @@
+{
+  "parent": "distant-moons:template/metal_bars/cap",
+  "textures": {
+    "end": "distant-moons:block/refined_deep_iron_bars/end"
+  }
+}

@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "distant-moons:item/roasted_brown_mushroom"
+    "model": "distant-moons:object/roasted_brown_mushroom"
   }
 }

@@ -1,0 +1,6 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "distant-moons:object/iron_fence/item"
+  }
+}

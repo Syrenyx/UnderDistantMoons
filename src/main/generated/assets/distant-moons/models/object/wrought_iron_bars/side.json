@@ -1,0 +1,7 @@
+{
+  "parent": "distant-moons:template/metal_bars/side",
+  "textures": {
+    "end": "distant-moons:block/wrought_iron_bars/end",
+    "side": "distant-moons:block/wrought_iron_bars/side"
+  }
+}

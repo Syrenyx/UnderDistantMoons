@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "distant-moons:item/underworld_dust"
+    "model": "distant-moons:object/underworld_dust"
   }
 }
