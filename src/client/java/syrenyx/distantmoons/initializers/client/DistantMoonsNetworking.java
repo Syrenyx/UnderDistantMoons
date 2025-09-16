@@ -9,7 +9,7 @@ import syrenyx.distantmoons.references.DistantMoonsRegistryKeys;
 
 import java.util.List;
 
-public abstract class Networking {
+public abstract class DistantMoonsNetworking {
 
   static {
     ClientPlayNetworking.registerGlobalReceiver(

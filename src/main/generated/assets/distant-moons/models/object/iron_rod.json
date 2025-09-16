@@ -1,6 +1,6 @@
 {
   "parent": "distant-moons:template/stick",
   "textures": {
-    "layer0": "distant-moons:block/iron_rod"
+    "texture": "distant-moons:item/iron_rod"
   }
 }

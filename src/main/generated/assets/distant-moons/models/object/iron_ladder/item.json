@@ -1,7 +1,7 @@
 {
   "parent": "distant-moons:template/simple_item",
   "textures": {
-    "end": "distant-moons:block/iron_ladder",
-    "side": "distant-moons:block/iron_ladder"
+    "particle": "distant-moons:block/iron_ladder",
+    "texture": "distant-moons:block/iron_ladder"
   }
 }

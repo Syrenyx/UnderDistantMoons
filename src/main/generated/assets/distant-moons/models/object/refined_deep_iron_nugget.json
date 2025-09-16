@@ -1,6 +1,6 @@
 {
   "parent": "distant-moons:template/simple_item",
   "textures": {
-    "layer0": "distant-moons:block/refined_deep_iron_nugget"
+    "texture": "distant-moons:item/refined_deep_iron_nugget"
   }
 }

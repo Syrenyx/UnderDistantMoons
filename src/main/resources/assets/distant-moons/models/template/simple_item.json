@@ -1,0 +1,6 @@
+{
+  "parent": "distant-moons:display/simple_item",
+  "textures": {
+    "layer0": "#texture"
+  }
+}
