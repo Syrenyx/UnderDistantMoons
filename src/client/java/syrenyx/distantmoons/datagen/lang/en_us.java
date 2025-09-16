@@ -61,6 +61,7 @@ public class en_us extends FabricLanguageProvider {
     builder.add(DistantMoonsItems.REFINED_DEEP_IRON_ROD, "Refined Deep Iron Rod");
     builder.add(DistantMoonsItems.ROASTED_BROWN_MUSHROOM, "Roasted Brown Mushroom");
     builder.add(DistantMoonsItems.UNDERWORLD_DUST, "Underworld Dust");
+    builder.add(DistantMoonsItems.WROUGHT_IRON_ROD, "Wrought Iron Rod");
 
     EnchantmentLevelUtil.generateEnchantmentLevels(builder, 11, 255);
   }

@@ -37,5 +37,6 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     generator.register(DistantMoonsItems.REFINED_DEEP_IRON_ROD, Models.HANDHELD);
     generator.register(DistantMoonsItems.ROASTED_BROWN_MUSHROOM, Models.HANDHELD);
     generator.register(DistantMoonsItems.UNDERWORLD_DUST, Models.GENERATED);
+    generator.register(DistantMoonsItems.WROUGHT_IRON_ROD, Models.HANDHELD);
   }
 }
