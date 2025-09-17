@@ -82,7 +82,7 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
 
   private static void registerMetalLadderBlock(Block block, BlockStateModelGenerator generator) {
     WeightedVariant variant = createWeightedVariant(createObjectModel(block, "metal_ladder", "/block", generator, Map.of(
-        TextureKey.BACK, "/back", TextureKey.BOTTOM, "/bottom", TextureKey.of("detail"), "/detail", TextureKey.FRONT, "/front", TextureKey.TOP, "/top", TextureKey.PARTICLE, "/front")
+        TextureKey.BOTTOM, "/bottom", TextureKey.of("detail"), "/detail", TextureKey.SIDE, "/side", TextureKey.of("support"), "/support", TextureKey.TOP, "/top", TextureKey.PARTICLE, "/side")
     ));
     generator.blockStateCollector.accept(VariantsBlockModelDefinitionCreator.of(block).with(BlockStateVariantMap
         .models(LadderBlock.FACING)

@@ -9,6 +9,7 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import syrenyx.distantmoons.UnderDistantMoons;
+import syrenyx.distantmoons.block.MetalLadderBlock;
 import syrenyx.distantmoons.block.SpikedFenceBlock;
 
 import java.util.function.Function;
@@ -60,7 +61,7 @@ public abstract class DistantMoonsBlocks {
   );
   public static final Block IRON_LADDER = register(
       "iron_ladder",
-      LadderBlock::new,
+      MetalLadderBlock::new,
       AbstractBlock.Settings.copy(Blocks.IRON_BARS),
       new Item.Settings()
   );
@@ -104,7 +105,7 @@ public abstract class DistantMoonsBlocks {
   );
   public static final Block REFINED_DEEP_IRON_LADDER = register(
       "refined_deep_iron_ladder",
-      LadderBlock::new,
+      MetalLadderBlock::new,
       AbstractBlock.Settings.copy(Blocks.IRON_BARS),
       new Item.Settings()
           .fireproof()
@@ -123,7 +124,7 @@ public abstract class DistantMoonsBlocks {
   );
   public static final Block WROUGHT_IRON_LADDER = register(
       "wrought_iron_ladder",
-      LadderBlock::new,
+      MetalLadderBlock::new,
       AbstractBlock.Settings.copy(Blocks.IRON_BARS),
       new Item.Settings()
   );
