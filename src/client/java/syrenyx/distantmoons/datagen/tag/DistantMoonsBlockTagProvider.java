@@ -2,6 +2,7 @@ package syrenyx.distantmoons.datagen.tag;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.minecraft.block.Blocks;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.BlockTags;
 import syrenyx.distantmoons.initializers.DistantMoonsBlocks;
@@ -19,13 +20,71 @@ public class DistantMoonsBlockTagProvider extends FabricTagProvider.BlockTagProv
   protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
 
     //BLOCK GROUPS
-    this.valueLookupBuilder(DistantMoonsTags.SPIKED_FENCE)
-        .add(DistantMoonsBlocks.IRON_FENCE, DistantMoonsBlocks.REFINED_DEEP_IRON_FENCE, DistantMoonsBlocks.WROUGHT_IRON_FENCE);
+    this.valueLookupBuilder(DistantMoonsTags.GLASS)
+        .addTag(DistantMoonsTags.COLORED_STAINED_GLASS)
+        .add(
+            Blocks.GLASS, Blocks.TINTED_GLASS
+        );
+    this.valueLookupBuilder(DistantMoonsTags.GLASS_PANE)
+        .addTag(DistantMoonsTags.COLORED_STAINED_GLASS_PANE)
+        .add(
+            Blocks.GLASS_PANE
+        );
+    this.valueLookupBuilder(DistantMoonsTags.METAL_BARS).add(
+        Blocks.IRON_BARS, DistantMoonsBlocks.REFINED_DEEP_IRON_BARS, DistantMoonsBlocks.WROUGHT_IRON_BARS
+    );
+    this.valueLookupBuilder(DistantMoonsTags.SPIKED_FENCE).add(
+        DistantMoonsBlocks.IRON_FENCE, DistantMoonsBlocks.REFINED_DEEP_IRON_FENCE, DistantMoonsBlocks.WROUGHT_IRON_FENCE
+    );
+
+    //COLORED BLOCK GROUPS
+    this.valueLookupBuilder(DistantMoonsTags.COLORED_STAINED_GLASS).add(
+        Blocks.BLACK_STAINED_GLASS, Blocks.BLUE_STAINED_GLASS, Blocks.BROWN_STAINED_GLASS, Blocks.CYAN_STAINED_GLASS, Blocks.GRAY_STAINED_GLASS,
+        Blocks.GREEN_STAINED_GLASS, Blocks.LIGHT_BLUE_STAINED_GLASS, Blocks.LIGHT_GRAY_STAINED_GLASS, Blocks.LIME_STAINED_GLASS, Blocks.MAGENTA_STAINED_GLASS,
+        Blocks.ORANGE_STAINED_GLASS, Blocks.PINK_STAINED_GLASS, Blocks.PURPLE_STAINED_GLASS, Blocks.RED_STAINED_GLASS, Blocks.WHITE_STAINED_GLASS,
+        Blocks.YELLOW_STAINED_GLASS
+    );
+    this.valueLookupBuilder(DistantMoonsTags.COLORED_STAINED_GLASS_PANE).add(
+        Blocks.BLACK_STAINED_GLASS_PANE, Blocks.BLUE_STAINED_GLASS_PANE, Blocks.BROWN_STAINED_GLASS_PANE, Blocks.CYAN_STAINED_GLASS_PANE, Blocks.GRAY_STAINED_GLASS_PANE,
+        Blocks.GREEN_STAINED_GLASS_PANE, Blocks.LIGHT_BLUE_STAINED_GLASS_PANE, Blocks.LIGHT_GRAY_STAINED_GLASS_PANE, Blocks.LIME_STAINED_GLASS_PANE, Blocks.MAGENTA_STAINED_GLASS_PANE,
+        Blocks.ORANGE_STAINED_GLASS_PANE, Blocks.PINK_STAINED_GLASS_PANE, Blocks.PURPLE_STAINED_GLASS_PANE, Blocks.RED_STAINED_GLASS_PANE, Blocks.WHITE_STAINED_GLASS_PANE,
+        Blocks.YELLOW_STAINED_GLASS_PANE
+    );
 
     //CONNECTION TARGETS
+    this.valueLookupBuilder(DistantMoonsTags.FENCE_ALWAYS_CONNECTS_TO)
+        .addTag(DistantMoonsTags.SPIKED_FENCE)
+        .forceAddTag(BlockTags.FENCES)
+        .forceAddTag(BlockTags.WALLS);
+    this.valueLookupBuilder(DistantMoonsTags.FENCE_NEVER_CONNECTS_TO)
+        .addTag(DistantMoonsTags.COLORED_STAINED_GLASS);
+    this.valueLookupBuilder(DistantMoonsTags.GLASS_PANE_ALWAYS_CONNECTS_TO)
+        .addTag(DistantMoonsTags.GLASS_PANE)
+        .addTag(DistantMoonsTags.METAL_BARS)
+        .forceAddTag(BlockTags.WALLS);
+    this.valueLookupBuilder(DistantMoonsTags.GLASS_PANE_NEVER_CONNECTS_TO);
+    this.valueLookupBuilder(DistantMoonsTags.METAL_BARS_ALWAYS_CONNECTS_TO)
+        .addTag(DistantMoonsTags.GLASS_PANE)
+        .addTag(DistantMoonsTags.METAL_BARS)
+        .addTag(DistantMoonsTags.SPIKED_FENCE)
+        .forceAddTag(BlockTags.WALLS);
+    this.valueLookupBuilder(DistantMoonsTags.METAL_BARS_NEVER_CONNECTS_TO)
+        .addTag(DistantMoonsTags.COLORED_STAINED_GLASS);
     this.valueLookupBuilder(DistantMoonsTags.SPIKED_FENCE_ALWAYS_CONNECTS_TO)
-        .addTag(DistantMoonsTags.SPIKED_FENCE);
-    this.valueLookupBuilder(DistantMoonsTags.SPIKED_FENCE_NEVER_CONNECTS_TO);
+        .addTag(DistantMoonsTags.METAL_BARS)
+        .addTag(DistantMoonsTags.SPIKED_FENCE)
+        .forceAddTag(BlockTags.FENCES)
+        .forceAddTag(BlockTags.WALLS);
+    this.valueLookupBuilder(DistantMoonsTags.SPIKED_FENCE_NEVER_CONNECTS_TO)
+        .addTag(DistantMoonsTags.COLORED_STAINED_GLASS);
+    this.valueLookupBuilder(DistantMoonsTags.WALL_ALWAYS_CONNECTS_TO)
+        .addTag(DistantMoonsTags.GLASS_PANE)
+        .addTag(DistantMoonsTags.METAL_BARS)
+        .addTag(DistantMoonsTags.SPIKED_FENCE)
+        .forceAddTag(BlockTags.FENCES)
+        .forceAddTag(BlockTags.WALLS);
+    this.valueLookupBuilder(DistantMoonsTags.WALL_NEVER_CONNECTS_TO)
+        .addTag(DistantMoonsTags.COLORED_STAINED_GLASS);
 
     //IMMUNITIES
     this.valueLookupBuilder(DistantMoonsTags.IMMUNE_TO_DRAGON);
@@ -41,8 +100,9 @@ public class DistantMoonsBlockTagProvider extends FabricTagProvider.BlockTagProv
     this.valueLookupBuilder(DistantMoonsTags.MINING_TYPE_SHOVEL);
 
     //MISCELLANEOUS
-    this.valueLookupBuilder(DistantMoonsTags.CLIMBABLE)
-        .add(DistantMoonsBlocks.IRON_LADDER, DistantMoonsBlocks.REFINED_DEEP_IRON_LADDER, DistantMoonsBlocks.WROUGHT_IRON_LADDER);
+    this.valueLookupBuilder(DistantMoonsTags.CLIMBABLE).add(
+        DistantMoonsBlocks.IRON_LADDER, DistantMoonsBlocks.REFINED_DEEP_IRON_LADDER, DistantMoonsBlocks.WROUGHT_IRON_LADDER
+    );
 
     //VANILLA TAG REDIRECTS
     this.valueLookupBuilder(BlockTags.AXE_MINEABLE).addTag(DistantMoonsTags.MINING_TYPE_AXE);

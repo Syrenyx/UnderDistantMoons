@@ -1,9 +1,6 @@
 package syrenyx.distantmoons.block;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.ShapeContext;
-import net.minecraft.block.Waterloggable;
+import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.fluid.FluidState;
@@ -124,6 +121,7 @@ public class SpikedFenceBlock extends Block implements Waterloggable {
 
   private boolean canConnectTo(BlockView world, BlockPos pos, Direction direction) {
     BlockState state = world.getBlockState(pos.offset(direction));
+    if (state.getBlock() instanceof FenceGateBlock && FenceGateBlock.canWallConnect(state, direction)) return true;
     if (state.isIn(DistantMoonsTags.SPIKED_FENCE_NEVER_CONNECTS_TO)) return false;
     if (state.isSideSolidFullSquare(world, pos.offset(direction), direction.getOpposite())) return true;
     return state.isIn(DistantMoonsTags.SPIKED_FENCE_ALWAYS_CONNECTS_TO);

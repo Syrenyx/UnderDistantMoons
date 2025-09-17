@@ -1,8 +1,8 @@
 {
   "values": [
+    "#distant-moons:glass_pane",
     "#distant-moons:metal_bars",
     "#distant-moons:spiked_fence",
-    "#minecraft:fences",
     "#minecraft:walls"
   ]
 }

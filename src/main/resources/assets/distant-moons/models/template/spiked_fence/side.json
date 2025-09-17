@@ -1,5 +1,4 @@
 {
-  "parent": "minecraft:block",
   "elements": [
     {
       "from": [8, 0, 0],
