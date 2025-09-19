@@ -2,6 +2,7 @@ package syrenyx.distantmoons.datagen.tag;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.BlockTags;
@@ -75,6 +76,13 @@ public class DistantMoonsBlockTagProvider extends FabricTagProvider.BlockTagProv
         .forceAddTag(BlockTags.WALLS);
     this.valueLookupBuilder(DistantMoonsTags.SPIKED_FENCE_NEVER_CONNECTS_TO)
         .addTag(DistantMoonsTags.COLORED_STAINED_GLASS);
+    this.valueLookupBuilder(DistantMoonsTags.SPIKED_FENCE_NOT_BLOCKED_BY)
+        .forceAddTag(BlockTags.LEAVES)
+        .forceAddTag(BlockTags.ICE)
+        .forceAddTag(BlockTags.WART_BLOCKS)
+        .add(
+            Blocks.SLIME_BLOCK, Blocks.SNOW_BLOCK
+        );
     this.valueLookupBuilder(DistantMoonsTags.WALL_ALWAYS_CONNECTS_TO)
         .addTag(DistantMoonsTags.GLASS_PANE)
         .addTag(DistantMoonsTags.METAL_BARS)
