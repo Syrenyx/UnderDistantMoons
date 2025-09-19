@@ -31,10 +31,10 @@ public class DistantMoonsBlockTagProvider extends FabricTagProvider.BlockTagProv
             Blocks.GLASS_PANE
         );
     this.valueLookupBuilder(DistantMoonsTags.METAL_BARS).add(
-        Blocks.IRON_BARS, DistantMoonsBlocks.REFINED_DEEP_IRON_BARS, DistantMoonsBlocks.WROUGHT_IRON_BARS
-    );
+        DistantMoonsBlocks.DEEP_IRON_BARS, DistantMoonsBlocks.WROUGHT_IRON_BARS, Blocks.IRON_BARS
+        );
     this.valueLookupBuilder(DistantMoonsTags.SPIKED_FENCE).add(
-        DistantMoonsBlocks.IRON_FENCE, DistantMoonsBlocks.REFINED_DEEP_IRON_FENCE, DistantMoonsBlocks.WROUGHT_IRON_FENCE
+        DistantMoonsBlocks.DEEP_IRON_FENCE, DistantMoonsBlocks.IRON_FENCE, DistantMoonsBlocks.WROUGHT_IRON_FENCE
     );
 
     //COLORED BLOCK GROUPS
@@ -53,7 +53,6 @@ public class DistantMoonsBlockTagProvider extends FabricTagProvider.BlockTagProv
 
     //CONNECTION TARGETS
     this.valueLookupBuilder(DistantMoonsTags.FENCE_ALWAYS_CONNECTS_TO)
-        .addTag(DistantMoonsTags.SPIKED_FENCE)
         .forceAddTag(BlockTags.FENCES)
         .forceAddTag(BlockTags.WALLS);
     this.valueLookupBuilder(DistantMoonsTags.FENCE_NEVER_CONNECTS_TO)
@@ -73,7 +72,6 @@ public class DistantMoonsBlockTagProvider extends FabricTagProvider.BlockTagProv
     this.valueLookupBuilder(DistantMoonsTags.SPIKED_FENCE_ALWAYS_CONNECTS_TO)
         .addTag(DistantMoonsTags.METAL_BARS)
         .addTag(DistantMoonsTags.SPIKED_FENCE)
-        .forceAddTag(BlockTags.FENCES)
         .forceAddTag(BlockTags.WALLS);
     this.valueLookupBuilder(DistantMoonsTags.SPIKED_FENCE_NEVER_CONNECTS_TO)
         .addTag(DistantMoonsTags.COLORED_STAINED_GLASS);
@@ -101,7 +99,7 @@ public class DistantMoonsBlockTagProvider extends FabricTagProvider.BlockTagProv
 
     //MISCELLANEOUS
     this.valueLookupBuilder(DistantMoonsTags.CLIMBABLE).add(
-        DistantMoonsBlocks.IRON_LADDER, DistantMoonsBlocks.REFINED_DEEP_IRON_LADDER, DistantMoonsBlocks.WROUGHT_IRON_LADDER
+        DistantMoonsBlocks.IRON_LADDER, DistantMoonsBlocks.DEEP_IRON_LADDER, DistantMoonsBlocks.WROUGHT_IRON_LADDER
     );
 
     //VANILLA TAG REDIRECTS

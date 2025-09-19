@@ -1,7 +1,0 @@
-{
-  "parent": "distant-moons:template/simple_block",
-  "textures": {
-    "particle": "distant-moons:block/deepslate_deep_iron_ore",
-    "side": "distant-moons:block/deepslate_deep_iron_ore"
-  }
-}

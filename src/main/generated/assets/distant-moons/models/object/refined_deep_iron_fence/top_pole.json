@@ -1,9 +1,0 @@
-{
-  "parent": "distant-moons:template/spiked_fence/pole",
-  "textures": {
-    "bottom": "distant-moons:block/refined_deep_iron_fence/bottom",
-    "particle": "distant-moons:block/refined_deep_iron_fence/side_top",
-    "side": "distant-moons:block/refined_deep_iron_fence/side_top",
-    "top": "distant-moons:block/refined_deep_iron_fence/top"
-  }
-}

@@ -45,16 +45,16 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
 
     //SIMPLE DIRECTIONAL BLOCKS
     registerMetalLadderBlock(DistantMoonsBlocks.IRON_LADDER, generator);
-    registerMetalLadderBlock(DistantMoonsBlocks.REFINED_DEEP_IRON_LADDER, generator);
+    registerMetalLadderBlock(DistantMoonsBlocks.DEEP_IRON_LADDER, generator);
     registerMetalLadderBlock(DistantMoonsBlocks.WROUGHT_IRON_LADDER, generator);
 
     //METAL BARS
-    registerMetalBars(DistantMoonsBlocks.REFINED_DEEP_IRON_BARS, generator);
+    registerMetalBars(DistantMoonsBlocks.DEEP_IRON_BARS, generator);
     registerMetalBars(DistantMoonsBlocks.WROUGHT_IRON_BARS, generator);
 
     //SPIKED FENCES
     registerSpikedFence(DistantMoonsBlocks.IRON_FENCE, generator);
-    registerSpikedFence(DistantMoonsBlocks.REFINED_DEEP_IRON_FENCE, generator);
+    registerSpikedFence(DistantMoonsBlocks.DEEP_IRON_FENCE, generator);
     registerSpikedFence(DistantMoonsBlocks.WROUGHT_IRON_FENCE, generator);
   }
 

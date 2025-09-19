@@ -2,7 +2,6 @@ package syrenyx.distantmoons.datagen.lang;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
-import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryWrapper;
 import syrenyx.distantmoons.initializers.DistantMoonsBlocks;
 import syrenyx.distantmoons.initializers.DistantMoonsItems;
@@ -27,15 +26,15 @@ public class en_us extends FabricLanguageProvider {
     builder.add(DistantMoonsBlocks.CHARCOAL_BLOCK, "Block of Charcoal");
     builder.add(DistantMoonsBlocks.COKE_BLOCK, "Block of Coke");
     builder.add(DistantMoonsBlocks.CRUDE_DEEP_IRON_BLOCK, "Block of Crude Deep Iron");
+    builder.add(DistantMoonsBlocks.DEEP_IRON_BARS, "Deep Iron Bars");
+    builder.add(DistantMoonsBlocks.DEEP_IRON_FENCE, "Deep Iron Fence");
+    builder.add(DistantMoonsBlocks.DEEP_IRON_LADDER, "Deep Iron Ladder");
     builder.add(DistantMoonsBlocks.DEEPSLATE_DEEP_IRON_ORE, "Deepslate Deep Iron Ore");
     builder.add(DistantMoonsBlocks.IRON_FENCE, "Iron Fence");
     builder.add(DistantMoonsBlocks.IRON_LADDER, "Iron Ladder");
     builder.add(DistantMoonsBlocks.NETHERRACK_DEEP_IRON_ORE, "Netherrack Deep Iron Ore");
     builder.add(DistantMoonsBlocks.RAW_DEEP_IRON_BLOCK, "Block of Raw Deep Iron");
-    builder.add(DistantMoonsBlocks.REFINED_DEEP_IRON_BARS, "Refined Deep Iron Bars");
     builder.add(DistantMoonsBlocks.REFINED_DEEP_IRON_BLOCK, "Block of Refined Deep Iron");
-    builder.add(DistantMoonsBlocks.REFINED_DEEP_IRON_FENCE, "Refined Deep Iron Fence");
-    builder.add(DistantMoonsBlocks.REFINED_DEEP_IRON_LADDER, "Refined Deep Iron Ladder");
     builder.add(DistantMoonsBlocks.WROUGHT_IRON_BARS, "Wrought Iron Bars");
     builder.add(DistantMoonsBlocks.WROUGHT_IRON_FENCE, "Wrought Iron Fence");
     builder.add(DistantMoonsBlocks.WROUGHT_IRON_LADDER, "Wrought Iron Ladder");

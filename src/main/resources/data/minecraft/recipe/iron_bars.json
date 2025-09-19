@@ -5,12 +5,11 @@
     "0": "distant-moons:iron_rod"
   },
   "pattern": [
-    "0 0",
-    "000",
-    "0 0"
+    "00",
+    "00"
   ],
   "result": {
-    "id": "distant-moons:iron_ladder",
-    "count": 6
+    "id": "minecraft:iron_bars",
+    "count": 8
   }
 }

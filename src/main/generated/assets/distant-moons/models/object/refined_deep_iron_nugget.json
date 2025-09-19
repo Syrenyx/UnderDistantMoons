@@ -1,6 +1,0 @@
-{
-  "parent": "distant-moons:template/simple_item",
-  "textures": {
-    "texture": "distant-moons:item/refined_deep_iron_nugget"
-  }
-}

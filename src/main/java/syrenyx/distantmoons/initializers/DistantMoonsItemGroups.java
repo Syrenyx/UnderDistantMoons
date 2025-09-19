@@ -34,9 +34,9 @@ public abstract class DistantMoonsItemGroups {
     addToGroup(ItemGroups.BUILDING_BLOCKS, Items.DIAMOND_BLOCK, List.of(
         DistantMoonsBlocks.CRUDE_DEEP_IRON_BLOCK.asItem().getDefaultStack(),
         DistantMoonsBlocks.REFINED_DEEP_IRON_BLOCK.asItem().getDefaultStack(),
-        DistantMoonsBlocks.REFINED_DEEP_IRON_BARS.asItem().getDefaultStack(),
-        DistantMoonsBlocks.REFINED_DEEP_IRON_FENCE.asItem().getDefaultStack(),
-        DistantMoonsBlocks.REFINED_DEEP_IRON_LADDER.asItem().getDefaultStack()
+        DistantMoonsBlocks.DEEP_IRON_BARS.asItem().getDefaultStack(),
+        DistantMoonsBlocks.DEEP_IRON_FENCE.asItem().getDefaultStack(),
+        DistantMoonsBlocks.DEEP_IRON_LADDER.asItem().getDefaultStack()
     ));
 
     //COLORED BLOCKS
@@ -55,7 +55,7 @@ public abstract class DistantMoonsItemGroups {
     addToGroup(ItemGroups.FUNCTIONAL, Items.LADDER, List.of(
         DistantMoonsBlocks.IRON_LADDER.asItem().getDefaultStack(),
         DistantMoonsBlocks.WROUGHT_IRON_LADDER.asItem().getDefaultStack(),
-        DistantMoonsBlocks.REFINED_DEEP_IRON_LADDER.asItem().getDefaultStack()
+        DistantMoonsBlocks.DEEP_IRON_LADDER.asItem().getDefaultStack()
     ));
     addToGroup(ItemGroups.FUNCTIONAL, Items.DRAGON_EGG, List.of(
         Items.SPAWNER.getDefaultStack(),

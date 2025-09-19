@@ -45,6 +45,27 @@ public abstract class DistantMoonsBlocks {
       new Item.Settings()
           .fireproof()
   );
+  public static final Block DEEP_IRON_BARS = register(
+      "iron_bars",
+      PaneBlock::new,
+      AbstractBlock.Settings.copy(Blocks.IRON_BARS),
+      new Item.Settings()
+          .fireproof()
+  );
+  public static final Block DEEP_IRON_FENCE = register(
+      "deep_iron_fence",
+      SpikedFenceBlock::new,
+      AbstractBlock.Settings.copy(Blocks.IRON_BARS),
+      new Item.Settings()
+          .fireproof()
+  );
+  public static final Block DEEP_IRON_LADDER = register(
+      "deep_iron_ladder",
+      MetalLadderBlock::new,
+      AbstractBlock.Settings.copy(Blocks.IRON_BARS),
+      new Item.Settings()
+          .fireproof()
+  );
   public static final Block DEEPSLATE_DEEP_IRON_ORE = register(
       "deepslate_deep_iron_ore",
       settings -> new ExperienceDroppingBlock(ConstantIntProvider.create(0), settings),
@@ -81,32 +102,11 @@ public abstract class DistantMoonsBlocks {
       new Item.Settings()
           .fireproof()
   );
-  public static final Block REFINED_DEEP_IRON_BARS = register(
-      "refined_deep_iron_bars",
-      PaneBlock::new,
-      AbstractBlock.Settings.copy(Blocks.IRON_BARS),
-      new Item.Settings()
-          .fireproof()
-  );
   public static final Block REFINED_DEEP_IRON_BLOCK = register(
       "refined_deep_iron_block",
       Block::new,
       AbstractBlock.Settings.copy(Blocks.IRON_BLOCK)
           .mapColor(MapColor.LIGHT_BLUE_GRAY),
-      new Item.Settings()
-          .fireproof()
-  );
-  public static final Block REFINED_DEEP_IRON_FENCE = register(
-      "refined_deep_iron_fence",
-      SpikedFenceBlock::new,
-      AbstractBlock.Settings.copy(Blocks.IRON_BARS),
-      new Item.Settings()
-          .fireproof()
-  );
-  public static final Block REFINED_DEEP_IRON_LADDER = register(
-      "refined_deep_iron_ladder",
-      MetalLadderBlock::new,
-      AbstractBlock.Settings.copy(Blocks.IRON_BARS),
       new Item.Settings()
           .fireproof()
   );
