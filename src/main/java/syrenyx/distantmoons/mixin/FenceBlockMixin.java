@@ -8,6 +8,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import syrenyx.distantmoons.block.FixedLadderBlock;
 import syrenyx.distantmoons.references.DistantMoonsTags;
 
 @Mixin(FenceBlock.class)
@@ -27,6 +28,10 @@ public class FenceBlockMixin {
     if (state.isIn(DistantMoonsTags.FENCE_ALWAYS_CONNECTS_TO)) {
       callbackInfo.cancel();
       callbackInfo.setReturnValue(true);
+    }
+    if (state.getBlock() instanceof FixedLadderBlock) {
+      callbackInfo.cancel();
+      callbackInfo.setReturnValue(FixedLadderBlock.canWallConnect(state, dir));
     }
   }
 }

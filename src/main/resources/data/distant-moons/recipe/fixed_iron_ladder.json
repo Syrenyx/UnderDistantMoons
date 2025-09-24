@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "0": "distant-moons:iron_rod"
+  },
+  "pattern": [
+    " 0 ",
+    "000",
+    " 0 "
+  ],
+  "result": {
+    "id": "distant-moons:fixed_iron_ladder",
+    "count": 6
+  }
+}

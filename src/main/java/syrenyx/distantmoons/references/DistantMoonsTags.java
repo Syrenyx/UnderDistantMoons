@@ -15,6 +15,10 @@ public abstract class DistantMoonsTags {
   public static final TagKey<Block> COLORED_STAINED_GLASS_PANE = generateKey(RegistryKeys.BLOCK, "colored/stained_glass_pane");
   public static final TagKey<Block> FENCE_ALWAYS_CONNECTS_TO = generateKey(RegistryKeys.BLOCK, "connection_target/fence/always");
   public static final TagKey<Block> FENCE_NEVER_CONNECTS_TO = generateKey(RegistryKeys.BLOCK, "connection_target/fence/never");
+  public static final TagKey<Block> FIXED_LADDER = generateKey(RegistryKeys.BLOCK, "fixed_ladder");
+  public static final TagKey<Block> FIXED_LADDER_ALWAYS_CONNECTS_TO = generateKey(RegistryKeys.BLOCK, "connection_target/fixed_ladder/always");
+  public static final TagKey<Block> FIXED_LADDER_ATTACHES_TO = generateKey(RegistryKeys.BLOCK, "connection_target/fixed_ladder/attached");
+  public static final TagKey<Block> FIXED_LADDER_NEVER_CONNECTS_TO = generateKey(RegistryKeys.BLOCK, "connection_target/fixed_ladder/never");
   public static final TagKey<Block> GLASS = generateKey(RegistryKeys.BLOCK, "glass");
   public static final TagKey<Block> GLASS_PANE = generateKey(RegistryKeys.BLOCK, "glass_pane");
   public static final TagKey<Block> GLASS_PANE_ALWAYS_CONNECTS_TO = generateKey(RegistryKeys.BLOCK, "connection_target/glass_pane/always");
@@ -31,6 +35,7 @@ public abstract class DistantMoonsTags {
   public static final TagKey<Block> MINING_TYPE_HOE = generateKey(RegistryKeys.BLOCK, "mining_tool_group/type/hoe");
   public static final TagKey<Block> MINING_TYPE_PICKAXE = generateKey(RegistryKeys.BLOCK, "mining_tool_group/type/pickaxe");
   public static final TagKey<Block> MINING_TYPE_SHOVEL = generateKey(RegistryKeys.BLOCK, "mining_tool_group/type/shovel");
+  public static final TagKey<Block> NEVER_CONNECT_TO = generateKey(RegistryKeys.BLOCK, "connection_target/never");
   public static final TagKey<Block> SPIKED_FENCE = generateKey(RegistryKeys.BLOCK, "spiked_fence");
   public static final TagKey<Block> SPIKED_FENCE_ALWAYS_CONNECTS_TO = generateKey(RegistryKeys.BLOCK, "connection_target/spiked_fence/always");
   public static final TagKey<Block> SPIKED_FENCE_NEVER_CONNECTS_TO = generateKey(RegistryKeys.BLOCK, "connection_target/spiked_fence/never");

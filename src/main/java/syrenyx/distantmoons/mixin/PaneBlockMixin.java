@@ -8,6 +8,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import syrenyx.distantmoons.block.FixedLadderBlock;
 import syrenyx.distantmoons.references.DistantMoonsTags;
 
 @Mixin(PaneBlock.class)
@@ -20,7 +21,8 @@ public class PaneBlockMixin {
       CallbackInfoReturnable<Boolean> callbackInfo
   ) {
     PaneBlock thisPaneBlock = (PaneBlock) (Object) this;
-    if (thisPaneBlock.getDefaultState().isIn(DistantMoonsTags.METAL_BARS)) {
+    BlockState defaultState = thisPaneBlock.getDefaultState();
+    if (defaultState.isIn(DistantMoonsTags.METAL_BARS)) {
       if (state.isIn(DistantMoonsTags.METAL_BARS_NEVER_CONNECTS_TO)) {
         callbackInfo.cancel();
         callbackInfo.setReturnValue(false);
@@ -30,7 +32,7 @@ public class PaneBlockMixin {
         callbackInfo.setReturnValue(true);
       }
     }
-    if (thisPaneBlock.getDefaultState().isIn(DistantMoonsTags.GLASS_PANE)) {
+    if (defaultState.isIn(DistantMoonsTags.GLASS_PANE)) {
       if (state.isIn(DistantMoonsTags.GLASS_PANE_NEVER_CONNECTS_TO)) {
         callbackInfo.cancel();
         callbackInfo.setReturnValue(false);

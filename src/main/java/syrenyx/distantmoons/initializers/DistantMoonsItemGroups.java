@@ -24,19 +24,22 @@ public abstract class DistantMoonsItemGroups {
         DistantMoonsBlocks.IRON_FENCE.asItem().getDefaultStack()
     ));
     addToGroup(ItemGroups.BUILDING_BLOCKS, Items.HEAVY_WEIGHTED_PRESSURE_PLATE, List.of(
-        DistantMoonsBlocks.IRON_LADDER.asItem().getDefaultStack()
+        DistantMoonsBlocks.IRON_LADDER.asItem().getDefaultStack(),
+        DistantMoonsBlocks.FIXED_IRON_LADDER.asItem().getDefaultStack()
     ));
     addToGroup(ItemGroups.BUILDING_BLOCKS, Items.CHAIN, List.of(
         DistantMoonsBlocks.WROUGHT_IRON_BARS.asItem().getDefaultStack(),
         DistantMoonsBlocks.WROUGHT_IRON_FENCE.asItem().getDefaultStack(),
-        DistantMoonsBlocks.WROUGHT_IRON_LADDER.asItem().getDefaultStack()
+        DistantMoonsBlocks.WROUGHT_IRON_LADDER.asItem().getDefaultStack(),
+        DistantMoonsBlocks.FIXED_WROUGHT_IRON_LADDER.asItem().getDefaultStack()
     ));
     addToGroup(ItemGroups.BUILDING_BLOCKS, Items.DIAMOND_BLOCK, List.of(
         DistantMoonsBlocks.CRUDE_DEEP_IRON_BLOCK.asItem().getDefaultStack(),
         DistantMoonsBlocks.REFINED_DEEP_IRON_BLOCK.asItem().getDefaultStack(),
         DistantMoonsBlocks.DEEP_IRON_BARS.asItem().getDefaultStack(),
         DistantMoonsBlocks.DEEP_IRON_FENCE.asItem().getDefaultStack(),
-        DistantMoonsBlocks.DEEP_IRON_LADDER.asItem().getDefaultStack()
+        DistantMoonsBlocks.DEEP_IRON_LADDER.asItem().getDefaultStack(),
+        DistantMoonsBlocks.FIXED_DEEP_IRON_LADDER.asItem().getDefaultStack()
     ));
 
     //COLORED BLOCKS
@@ -55,7 +58,10 @@ public abstract class DistantMoonsItemGroups {
     addToGroup(ItemGroups.FUNCTIONAL, Items.LADDER, List.of(
         DistantMoonsBlocks.IRON_LADDER.asItem().getDefaultStack(),
         DistantMoonsBlocks.WROUGHT_IRON_LADDER.asItem().getDefaultStack(),
-        DistantMoonsBlocks.DEEP_IRON_LADDER.asItem().getDefaultStack()
+        DistantMoonsBlocks.DEEP_IRON_LADDER.asItem().getDefaultStack(),
+        DistantMoonsBlocks.FIXED_IRON_LADDER.asItem().getDefaultStack(),
+        DistantMoonsBlocks.FIXED_WROUGHT_IRON_LADDER.asItem().getDefaultStack(),
+        DistantMoonsBlocks.FIXED_DEEP_IRON_LADDER.asItem().getDefaultStack()
     ));
     addToGroup(ItemGroups.FUNCTIONAL, Items.DRAGON_EGG, List.of(
         Items.SPAWNER.getDefaultStack(),

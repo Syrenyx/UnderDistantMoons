@@ -16,7 +16,9 @@ import net.minecraft.util.collection.Pool;
 import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.Nullable;
 import syrenyx.distantmoons.UnderDistantMoons;
+import syrenyx.distantmoons.block.FixedLadderBlock;
 import syrenyx.distantmoons.block.SpikedFenceBlock;
+import syrenyx.distantmoons.block.block_state_enums.FixedLadderSideShape;
 import syrenyx.distantmoons.block.block_state_enums.SpikedFenceShape;
 import syrenyx.distantmoons.initializers.DistantMoonsBlocks;
 import syrenyx.distantmoons.initializers.DistantMoonsItems;
@@ -44,18 +46,23 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     registerSimpleBlock(DistantMoonsBlocks.REFINED_DEEP_IRON_BLOCK, generator);
 
     //SIMPLE DIRECTIONAL BLOCKS
-    registerMetalLadderBlock(DistantMoonsBlocks.IRON_LADDER, generator);
     registerMetalLadderBlock(DistantMoonsBlocks.DEEP_IRON_LADDER, generator);
+    registerMetalLadderBlock(DistantMoonsBlocks.IRON_LADDER, generator);
     registerMetalLadderBlock(DistantMoonsBlocks.WROUGHT_IRON_LADDER, generator);
 
+    //FIXED LADDERS
+    registerFixedLadderBlock(DistantMoonsBlocks.FIXED_DEEP_IRON_LADDER, generator);
+    registerFixedLadderBlock(DistantMoonsBlocks.FIXED_IRON_LADDER, generator);
+    registerFixedLadderBlock(DistantMoonsBlocks.FIXED_WROUGHT_IRON_LADDER, generator);
+
     //METAL BARS
-    registerMetalBars(DistantMoonsBlocks.DEEP_IRON_BARS, generator);
-    registerMetalBars(DistantMoonsBlocks.WROUGHT_IRON_BARS, generator);
+    registerMetalBarsBlock(DistantMoonsBlocks.DEEP_IRON_BARS, generator);
+    registerMetalBarsBlock(DistantMoonsBlocks.WROUGHT_IRON_BARS, generator);
 
     //SPIKED FENCES
-    registerSpikedFence(DistantMoonsBlocks.IRON_FENCE, generator);
-    registerSpikedFence(DistantMoonsBlocks.DEEP_IRON_FENCE, generator);
-    registerSpikedFence(DistantMoonsBlocks.WROUGHT_IRON_FENCE, generator);
+    registerSpikedFenceBlock(DistantMoonsBlocks.DEEP_IRON_FENCE, generator);
+    registerSpikedFenceBlock(DistantMoonsBlocks.IRON_FENCE, generator);
+    registerSpikedFenceBlock(DistantMoonsBlocks.WROUGHT_IRON_FENCE, generator);
   }
 
   @Override
@@ -80,6 +87,31 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     generator.itemModelOutput.accept(block.asItem(), ItemModels.basic(getFirstEntryOf(variant)));
   }
 
+  private static void registerFixedLadderBlock(Block block, BlockStateModelGenerator generator) {
+    WeightedVariant center = createWeightedVariant(createObjectModel(block, "fixed_ladder/center", "/center", generator, Map.of(
+        TextureKey.BOTTOM, "/bottom", TextureKey.FRONT, "/front", TextureKey.SIDE, "/center", TextureKey.TOP, "/top", TextureKey.PARTICLE, "/particle")
+    ));
+    WeightedVariant extension = createWeightedVariant(createObjectModel(block, "fixed_ladder/extension", "/extension", generator, Map.of(
+        TextureKey.BOTTOM, "/bottom", TextureKey.FRONT, "/front", TextureKey.TOP, "/top", TextureKey.PARTICLE, "/particle")
+    ));
+    WeightedVariant side = createWeightedVariant(createObjectModel(block, "fixed_ladder/side", "/side", generator, Map.of(
+        TextureKey.SIDE, "/side", TextureKey.PARTICLE, "/particle")
+    ));
+    generator.blockStateCollector.accept(MultipartBlockModelDefinitionCreator.create(block)
+        .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.ROTATED, true), center.apply(BlockStateModelGenerator.ROTATE_Y_90))
+        .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.ROTATED, false), center)
+        .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.ROTATED, true).put(FixedLadderBlock.LEFT, FixedLadderSideShape.ATTACHED, FixedLadderSideShape.CONNECTED), side)
+        .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.ROTATED, true).put(FixedLadderBlock.RIGHT, FixedLadderSideShape.ATTACHED, FixedLadderSideShape.CONNECTED), side.apply(BlockStateModelGenerator.ROTATE_Y_180))
+        .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.ROTATED, false).put(FixedLadderBlock.LEFT, FixedLadderSideShape.ATTACHED, FixedLadderSideShape.CONNECTED), side.apply(BlockStateModelGenerator.ROTATE_Y_270))
+        .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.ROTATED, false).put(FixedLadderBlock.RIGHT, FixedLadderSideShape.ATTACHED, FixedLadderSideShape.CONNECTED), side.apply(BlockStateModelGenerator.ROTATE_Y_90))
+        .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.ROTATED, true).put(FixedLadderBlock.LEFT, FixedLadderSideShape.ATTACHED), extension)
+        .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.ROTATED, true).put(FixedLadderBlock.RIGHT, FixedLadderSideShape.ATTACHED), extension.apply(BlockStateModelGenerator.ROTATE_Y_180))
+        .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.ROTATED, false).put(FixedLadderBlock.LEFT, FixedLadderSideShape.ATTACHED), extension.apply(BlockStateModelGenerator.ROTATE_Y_270))
+        .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.ROTATED, false).put(FixedLadderBlock.RIGHT, FixedLadderSideShape.ATTACHED), extension.apply(BlockStateModelGenerator.ROTATE_Y_90))
+    );
+    generator.itemModelOutput.accept(block.asItem(), ItemModels.basic(center.variants().getEntries().getFirst().value().modelId()));
+  }
+
   private static void registerMetalLadderBlock(Block block, BlockStateModelGenerator generator) {
     WeightedVariant variant = createWeightedVariant(createObjectModel(block, "metal_ladder", "/block", generator, Map.of(
         TextureKey.BOTTOM, "/bottom", TextureKey.of("detail"), "/detail", TextureKey.SIDE, "/side", TextureKey.of("support"), "/support", TextureKey.TOP, "/top", TextureKey.PARTICLE, "/side")
@@ -97,7 +129,7 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     generator.itemModelOutput.accept(block.asItem(), ItemModels.basic(inventoryModel));
   }
 
-  private static void registerMetalBars(Block block, BlockStateModelGenerator generator) {
+  private static void registerMetalBarsBlock(Block block, BlockStateModelGenerator generator) {
     WeightedVariant centerCaps = createWeightedVariant(createObjectModel(block, "metal_bars/center_caps", "/center_caps", generator, Map.of(
         TextureKey.END, "/end", TextureKey.PARTICLE, "/side")
     ));
@@ -134,7 +166,7 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     generator.itemModelOutput.accept(block.asItem(), ItemModels.basic(inventoryModel));
   }
 
-  private static void registerSpikedFence(Block block, BlockStateModelGenerator generator) {
+  private static void registerSpikedFenceBlock(Block block, BlockStateModelGenerator generator) {
     WeightedVariant pole = createWeightedVariant(createObjectModel(block, "spiked_fence/pole", "/pole", generator, Map.of(
         TextureKey.BOTTOM, "/bottom", TextureKey.SIDE, "/side", TextureKey.TOP, "/bottom", TextureKey.PARTICLE, "/side")
     ));

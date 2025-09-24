@@ -13,8 +13,8 @@
       "from": [7, 15.999, 7],
       "to": [9, 15.999, 9],
       "faces": {
-        "down": { "uv": [7, 7, 9, 9], "texture": "#end"},
-        "up": { "uv": [7, 7, 9, 9], "texture": "#end", "cullface": "up"}
+        "up": { "uv": [7, 7, 9, 9], "texture": "#end", "cullface": "up"},
+        "down": { "uv": [7, 7, 9, 9], "texture": "#end"}
       }
     }
   ]

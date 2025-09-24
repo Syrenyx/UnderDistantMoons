@@ -10,6 +10,8 @@ import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.Properties;
+import net.minecraft.util.BlockMirror;
+import net.minecraft.util.BlockRotation;
 import net.minecraft.util.function.BooleanBiFunction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -80,13 +82,23 @@ public class SpikedFenceBlock extends Block implements Waterloggable {
 
   @Override
   protected boolean isTransparent(BlockState state) {
-    return !(Boolean)state.get(WATERLOGGED);
+    return !state.get(WATERLOGGED);
+  }
+
+  @Override
+  protected VoxelShape getCameraCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+    return VoxelShapes.empty();
   }
 
   @Nullable
   @Override
   public BlockState getPlacementState(ItemPlacementContext context) {
-    return this.calculateState(context.getWorld(), context.getBlockPos());
+    World world = context.getWorld();
+    BlockPos pos = context.getBlockPos();
+    return this.updateState(
+        world, pos,
+        this.getDefaultState().with(WATERLOGGED, world.getFluidState(pos).getFluid() == Fluids.WATER)
+    );
   }
 
   @Override
@@ -101,18 +113,17 @@ public class SpikedFenceBlock extends Block implements Waterloggable {
       Random random
   ) {
     tickView.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
-    return this.calculateState(world, pos);
+    return this.updateState(world, pos, state);
   }
 
-  private BlockState calculateState(BlockView world, BlockPos pos) {
-    BlockState state = this.getDefaultState();
+  private BlockState updateState(BlockView world, BlockPos pos, BlockState state) {
     BlockState topState = world.getBlockState(pos.up());
     VoxelShape topFace = topState.getCollisionShape(world, pos.up()).getFace(Direction.DOWN);
     if (blockedTop(CENTER_SHAPE, topFace, topState)) state = state.with(TOP, false);
-    if (canConnectTo(world, pos, Direction.NORTH)) state = state.with(NORTH, blockedTop(SIDE_SHAPES_BY_DIRECTION.get(Direction.NORTH), topFace, topState) ? SpikedFenceShape.SIDE : SpikedFenceShape.TOP);
-    if (canConnectTo(world, pos, Direction.EAST)) state = state.with(EAST, blockedTop(SIDE_SHAPES_BY_DIRECTION.get(Direction.EAST), topFace, topState) ? SpikedFenceShape.SIDE : SpikedFenceShape.TOP);
-    if (canConnectTo(world, pos, Direction.SOUTH)) state = state.with(SOUTH, blockedTop(SIDE_SHAPES_BY_DIRECTION.get(Direction.SOUTH), topFace, topState) ? SpikedFenceShape.SIDE : SpikedFenceShape.TOP);
-    if (canConnectTo(world, pos, Direction.WEST)) state = state.with(WEST, blockedTop(SIDE_SHAPES_BY_DIRECTION.get(Direction.WEST), topFace, topState) ? SpikedFenceShape.SIDE : SpikedFenceShape.TOP);
+    if (this.canConnectTo(world, pos, Direction.NORTH)) state = state.with(NORTH, blockedTop(SIDE_SHAPES_BY_DIRECTION.get(Direction.NORTH), topFace, topState) ? SpikedFenceShape.SIDE : SpikedFenceShape.TOP);
+    if (this.canConnectTo(world, pos, Direction.EAST)) state = state.with(EAST, blockedTop(SIDE_SHAPES_BY_DIRECTION.get(Direction.EAST), topFace, topState) ? SpikedFenceShape.SIDE : SpikedFenceShape.TOP);
+    if (this.canConnectTo(world, pos, Direction.SOUTH)) state = state.with(SOUTH, blockedTop(SIDE_SHAPES_BY_DIRECTION.get(Direction.SOUTH), topFace, topState) ? SpikedFenceShape.SIDE : SpikedFenceShape.TOP);
+    if (this.canConnectTo(world, pos, Direction.WEST)) state = state.with(WEST, blockedTop(SIDE_SHAPES_BY_DIRECTION.get(Direction.WEST), topFace, topState) ? SpikedFenceShape.SIDE : SpikedFenceShape.TOP);
     return state;
   }
 
@@ -123,10 +134,12 @@ public class SpikedFenceBlock extends Block implements Waterloggable {
 
   private boolean canConnectTo(BlockView world, BlockPos pos, Direction direction) {
     BlockState state = world.getBlockState(pos.offset(direction));
-    if (state.getBlock() instanceof FenceGateBlock && FenceGateBlock.canWallConnect(state, direction)) return true;
     if (state.isIn(DistantMoonsTags.SPIKED_FENCE_NEVER_CONNECTS_TO)) return false;
+    if (state.isIn(DistantMoonsTags.SPIKED_FENCE_ALWAYS_CONNECTS_TO)) return true;
+    if (state.getBlock() instanceof FenceGateBlock) return FenceGateBlock.canWallConnect(state, direction);
+    if (state.getBlock() instanceof FixedLadderBlock) return FixedLadderBlock.canWallConnect(state, direction);
     if (state.isSideSolidFullSquare(world, pos.offset(direction), direction.getOpposite())) return true;
-    return state.isIn(DistantMoonsTags.SPIKED_FENCE_ALWAYS_CONNECTS_TO);
+    return false;
   }
 
   @Override
@@ -137,5 +150,40 @@ public class SpikedFenceBlock extends Block implements Waterloggable {
     if (state.get(SOUTH) != SpikedFenceShape.NONE) shape = VoxelShapes.union(shape, SIDE_SHAPES_BY_DIRECTION.get(Direction.SOUTH));
     if (state.get(WEST) != SpikedFenceShape.NONE) shape = VoxelShapes.union(shape, SIDE_SHAPES_BY_DIRECTION.get(Direction.WEST));
     return shape;
+  }
+
+  @Override
+  protected BlockState rotate(BlockState state, BlockRotation rotation) {
+    return switch (rotation) {
+      case NONE -> state;
+      case CLOCKWISE_90 -> state
+          .with(NORTH, state.get(WEST))
+          .with(EAST, state.get(NORTH))
+          .with(SOUTH, state.get(EAST))
+          .with(WEST, state.get(SOUTH));
+      case CLOCKWISE_180 -> state
+          .with(NORTH, state.get(SOUTH))
+          .with(EAST, state.get(WEST))
+          .with(SOUTH, state.get(NORTH))
+          .with(WEST, state.get(EAST));
+      case COUNTERCLOCKWISE_90 -> state
+          .with(NORTH, state.get(EAST))
+          .with(EAST, state.get(SOUTH))
+          .with(SOUTH, state.get(WEST))
+          .with(WEST, state.get(NORTH));
+    };
+  }
+
+  @Override
+  protected BlockState mirror(BlockState state, BlockMirror mirror) {
+    return switch (mirror) {
+      case NONE -> state;
+      case LEFT_RIGHT -> state
+          .with(NORTH, state.get(SOUTH))
+          .with(SOUTH, state.get(NORTH));
+      case FRONT_BACK -> state
+          .with(EAST, state.get(WEST))
+          .with(WEST, state.get(EAST));
+    };
   }
 }

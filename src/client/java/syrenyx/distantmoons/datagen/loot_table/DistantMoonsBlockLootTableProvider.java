@@ -21,6 +21,9 @@ public class DistantMoonsBlockLootTableProvider extends FabricBlockLootTableProv
     this.addDrop(DistantMoonsBlocks.DEEP_IRON_BARS);
     this.addDrop(DistantMoonsBlocks.DEEP_IRON_FENCE);
     this.addDrop(DistantMoonsBlocks.DEEP_IRON_LADDER);
+    this.addDrop(DistantMoonsBlocks.FIXED_DEEP_IRON_LADDER);
+    this.addDrop(DistantMoonsBlocks.FIXED_IRON_LADDER);
+    this.addDrop(DistantMoonsBlocks.FIXED_WROUGHT_IRON_LADDER);
     this.addDrop(DistantMoonsBlocks.IRON_FENCE);
     this.addDrop(DistantMoonsBlocks.IRON_LADDER);
     this.addDrop(DistantMoonsBlocks.RAW_DEEP_IRON_BLOCK);
