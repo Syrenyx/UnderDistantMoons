@@ -69,6 +69,16 @@ public class en_us extends FabricLanguageProvider {
 
     builder.add(DistantMoonsItems.CRUDE_DEEP_IRON_CHUNK, "Crude Deep Iron Chunk");
     builder.add(DistantMoonsItems.COKE, "Coke");
+    builder.add(DistantMoonsItems.DEEP_IRON_AXE, "Deep Iron Axe");
+    builder.add(DistantMoonsItems.DEEP_IRON_BOOTS, "Deep Iron Boots");
+    builder.add(DistantMoonsItems.DEEP_IRON_CHESTPLATE, "Deep Iron Chestplate");
+    builder.add(DistantMoonsItems.DEEP_IRON_HELMET, "Deep Iron Helmet");
+    builder.add(DistantMoonsItems.DEEP_IRON_HOE, "Deep Iron Hoe");
+    builder.add(DistantMoonsItems.DEEP_IRON_HORSE_ARMOR, "Deep Iron Horse Armor");
+    builder.add(DistantMoonsItems.DEEP_IRON_LEGGINGS, "Deep Iron Leggings");
+    builder.add(DistantMoonsItems.DEEP_IRON_PICKAXE, "Deep Iron Pickaxe");
+    builder.add(DistantMoonsItems.DEEP_IRON_SHOVEL, "Deep Iron Shovel");
+    builder.add(DistantMoonsItems.DEEP_IRON_SWORD, "Deep Iron Sword");
     builder.add(DistantMoonsItems.IRON_ROD, "Iron Rod");
     builder.add(DistantMoonsItems.RAW_DEEP_IRON, "Raw Deep Iron");
     builder.add(DistantMoonsItems.REFINED_DEEP_IRON_INGOT, "Refined Deep Iron Ingot");

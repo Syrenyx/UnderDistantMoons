@@ -1,6 +1,7 @@
 package syrenyx.distantmoons.references;
 
 import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
@@ -42,6 +43,10 @@ public abstract class DistantMoonsTags {
   public static final TagKey<Block> SPIKED_FENCE_NOT_BLOCKED_BY = generateKey(RegistryKeys.BLOCK, "connection_target/spiked_fence/not_blocked_by");
   public static final TagKey<Block> WALL_ALWAYS_CONNECTS_TO = generateKey(RegistryKeys.BLOCK, "connection_target/wall/always");
   public static final TagKey<Block> WALL_NEVER_CONNECTS_TO = generateKey(RegistryKeys.BLOCK, "connection_target/wall/never");
+
+  //ITEM TAGS
+  public static final TagKey<Item> REPAIRS_DEEP_IRON_EQUIPMENT = generateKey(RegistryKeys.ITEM, "repair_material/deep_iron");
+  public static final TagKey<Item> SWORD = generateKey(RegistryKeys.ITEM, "sword");
 
   private static <T> TagKey<T> generateKey(RegistryKey<Registry<T>> registryKey, String id) {
     return TagKey.of(registryKey, UnderDistantMoons.identifierOf(id));

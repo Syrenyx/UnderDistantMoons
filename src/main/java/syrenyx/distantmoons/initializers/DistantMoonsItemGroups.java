@@ -77,8 +77,29 @@ public abstract class DistantMoonsItemGroups {
     //REDSTONE
 
     //TOOLS
+    addToGroup(ItemGroups.TOOLS, Items.IRON_HOE, List.of(
+        DistantMoonsItems.DEEP_IRON_SHOVEL.getDefaultStack(),
+        DistantMoonsItems.DEEP_IRON_PICKAXE.getDefaultStack(),
+        DistantMoonsItems.DEEP_IRON_AXE.getDefaultStack(),
+        DistantMoonsItems.DEEP_IRON_HOE.getDefaultStack()
+    ));
 
     //COMBAT
+    addToGroup(ItemGroups.COMBAT, Items.IRON_SWORD, List.of(
+        DistantMoonsItems.DEEP_IRON_SWORD.getDefaultStack()
+    ));
+    addToGroup(ItemGroups.COMBAT, Items.IRON_AXE, List.of(
+        DistantMoonsItems.DEEP_IRON_AXE.getDefaultStack()
+    ));
+    addToGroup(ItemGroups.COMBAT, Items.IRON_BOOTS, List.of(
+        DistantMoonsItems.DEEP_IRON_HELMET.getDefaultStack(),
+        DistantMoonsItems.DEEP_IRON_CHESTPLATE.getDefaultStack(),
+        DistantMoonsItems.DEEP_IRON_LEGGINGS.getDefaultStack(),
+        DistantMoonsItems.DEEP_IRON_BOOTS.getDefaultStack()
+    ));
+    addToGroup(ItemGroups.COMBAT, Items.IRON_HORSE_ARMOR, List.of(
+        DistantMoonsItems.DEEP_IRON_HORSE_ARMOR.getDefaultStack()
+    ));
 
     //FOOD AND DRINK
     addToGroup(ItemGroups.FOOD_AND_DRINK, Items.MELON_SLICE, List.of(
