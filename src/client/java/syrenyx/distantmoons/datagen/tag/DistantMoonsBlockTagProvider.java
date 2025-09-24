@@ -114,10 +114,20 @@ public class DistantMoonsBlockTagProvider extends FabricTagProvider.BlockTagProv
     //MINING TOOL GROUPS
     this.valueLookupBuilder(DistantMoonsTags.MINING_TIER_DIAMOND);
     this.valueLookupBuilder(DistantMoonsTags.MINING_TIER_IRON);
-    this.valueLookupBuilder(DistantMoonsTags.MINING_TIER_STONE);
+    this.valueLookupBuilder(DistantMoonsTags.MINING_TIER_STONE).add(
+        DistantMoonsBlocks.BLACKSTONE_DEEP_IRON_ORE, DistantMoonsBlocks.CRUDE_DEEP_IRON_BLOCK, DistantMoonsBlocks.DEEPSLATE_DEEP_IRON_ORE, DistantMoonsBlocks.NETHERRACK_DEEP_IRON_ORE,
+        DistantMoonsBlocks.RAW_DEEP_IRON_BLOCK, DistantMoonsBlocks.REFINED_DEEP_IRON_BLOCK
+    );
     this.valueLookupBuilder(DistantMoonsTags.MINING_TYPE_AXE);
     this.valueLookupBuilder(DistantMoonsTags.MINING_TYPE_HOE);
-    this.valueLookupBuilder(DistantMoonsTags.MINING_TYPE_PICKAXE);
+    this.valueLookupBuilder(DistantMoonsTags.MINING_TYPE_PICKAXE).add(
+        DistantMoonsBlocks.BLACKSTONE_DEEP_IRON_ORE, DistantMoonsBlocks.CHARCOAL_BLOCK, DistantMoonsBlocks.COKE_BLOCK, DistantMoonsBlocks.CRUDE_DEEP_IRON_BLOCK,
+        DistantMoonsBlocks.DEEP_IRON_BAR_DOOR, DistantMoonsBlocks.DEEP_IRON_BARS, DistantMoonsBlocks.DEEP_IRON_DOOR, DistantMoonsBlocks.DEEP_IRON_FENCE,
+        DistantMoonsBlocks.DEEP_IRON_LADDER, DistantMoonsBlocks.DEEP_IRON_TRAPDOOR, DistantMoonsBlocks.DEEPSLATE_DEEP_IRON_ORE, DistantMoonsBlocks.FIXED_DEEP_IRON_LADDER,
+        DistantMoonsBlocks.FIXED_IRON_LADDER, DistantMoonsBlocks.FIXED_WROUGHT_IRON_LADDER, DistantMoonsBlocks.IRON_BAR_DOOR, DistantMoonsBlocks.IRON_FENCE,
+        DistantMoonsBlocks.IRON_LADDER, DistantMoonsBlocks.NETHERRACK_DEEP_IRON_ORE, DistantMoonsBlocks.RAW_DEEP_IRON_BLOCK, DistantMoonsBlocks.REFINED_DEEP_IRON_BLOCK,
+        DistantMoonsBlocks.WROUGHT_IRON_BAR_DOOR, DistantMoonsBlocks.WROUGHT_IRON_BARS, DistantMoonsBlocks.WROUGHT_IRON_FENCE, DistantMoonsBlocks.WROUGHT_IRON_LADDER
+    );
     this.valueLookupBuilder(DistantMoonsTags.MINING_TYPE_SHOVEL);
 
     //MISCELLANEOUS

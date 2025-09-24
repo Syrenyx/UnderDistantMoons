@@ -23,6 +23,9 @@ public abstract class DistantMoonsItemGroups {
     addToGroup(ItemGroups.BUILDING_BLOCKS, Items.IRON_BARS, List.of(
         DistantMoonsBlocks.IRON_FENCE.asItem().getDefaultStack()
     ));
+    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.IRON_DOOR, List.of(
+        DistantMoonsBlocks.IRON_BAR_DOOR.asItem().getDefaultStack()
+    ));
     addToGroup(ItemGroups.BUILDING_BLOCKS, Items.HEAVY_WEIGHTED_PRESSURE_PLATE, List.of(
         DistantMoonsBlocks.IRON_LADDER.asItem().getDefaultStack(),
         DistantMoonsBlocks.FIXED_IRON_LADDER.asItem().getDefaultStack()
@@ -30,14 +33,16 @@ public abstract class DistantMoonsItemGroups {
     addToGroup(ItemGroups.BUILDING_BLOCKS, Items.CHAIN, List.of(
         DistantMoonsBlocks.WROUGHT_IRON_BARS.asItem().getDefaultStack(),
         DistantMoonsBlocks.WROUGHT_IRON_FENCE.asItem().getDefaultStack(),
+        DistantMoonsBlocks.WROUGHT_IRON_BAR_DOOR.asItem().getDefaultStack(),
         DistantMoonsBlocks.WROUGHT_IRON_LADDER.asItem().getDefaultStack(),
-        DistantMoonsBlocks.FIXED_WROUGHT_IRON_LADDER.asItem().getDefaultStack()
-    ));
-    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.DIAMOND_BLOCK, List.of(
+        DistantMoonsBlocks.FIXED_WROUGHT_IRON_LADDER.asItem().getDefaultStack(),
         DistantMoonsBlocks.CRUDE_DEEP_IRON_BLOCK.asItem().getDefaultStack(),
         DistantMoonsBlocks.REFINED_DEEP_IRON_BLOCK.asItem().getDefaultStack(),
         DistantMoonsBlocks.DEEP_IRON_BARS.asItem().getDefaultStack(),
         DistantMoonsBlocks.DEEP_IRON_FENCE.asItem().getDefaultStack(),
+        DistantMoonsBlocks.DEEP_IRON_DOOR.asItem().getDefaultStack(),
+        DistantMoonsBlocks.DEEP_IRON_BAR_DOOR.asItem().getDefaultStack(),
+        DistantMoonsBlocks.DEEP_IRON_TRAPDOOR.asItem().getDefaultStack(),
         DistantMoonsBlocks.DEEP_IRON_LADDER.asItem().getDefaultStack(),
         DistantMoonsBlocks.FIXED_DEEP_IRON_LADDER.asItem().getDefaultStack()
     ));

@@ -119,12 +119,12 @@ public class SpikedFenceBlock extends Block implements Waterloggable {
   private BlockState updateState(BlockView world, BlockPos pos, BlockState state) {
     BlockState topState = world.getBlockState(pos.up());
     VoxelShape topFace = topState.getCollisionShape(world, pos.up()).getFace(Direction.DOWN);
-    if (blockedTop(CENTER_SHAPE, topFace, topState)) state = state.with(TOP, false);
-    if (this.canConnectTo(world, pos, Direction.NORTH)) state = state.with(NORTH, blockedTop(SIDE_SHAPES_BY_DIRECTION.get(Direction.NORTH), topFace, topState) ? SpikedFenceShape.SIDE : SpikedFenceShape.TOP);
-    if (this.canConnectTo(world, pos, Direction.EAST)) state = state.with(EAST, blockedTop(SIDE_SHAPES_BY_DIRECTION.get(Direction.EAST), topFace, topState) ? SpikedFenceShape.SIDE : SpikedFenceShape.TOP);
-    if (this.canConnectTo(world, pos, Direction.SOUTH)) state = state.with(SOUTH, blockedTop(SIDE_SHAPES_BY_DIRECTION.get(Direction.SOUTH), topFace, topState) ? SpikedFenceShape.SIDE : SpikedFenceShape.TOP);
-    if (this.canConnectTo(world, pos, Direction.WEST)) state = state.with(WEST, blockedTop(SIDE_SHAPES_BY_DIRECTION.get(Direction.WEST), topFace, topState) ? SpikedFenceShape.SIDE : SpikedFenceShape.TOP);
-    return state;
+    return state
+        .with(TOP, !blockedTop(CENTER_SHAPE, topFace, topState))
+        .with(NORTH, this.canConnectTo(world, pos, Direction.NORTH) ? (blockedTop(SIDE_SHAPES_BY_DIRECTION.get(Direction.NORTH), topFace, topState) ? SpikedFenceShape.SIDE : SpikedFenceShape.TOP) : SpikedFenceShape.NONE)
+        .with(EAST, this.canConnectTo(world, pos, Direction.EAST) ? (blockedTop(SIDE_SHAPES_BY_DIRECTION.get(Direction.EAST), topFace, topState) ? SpikedFenceShape.SIDE : SpikedFenceShape.TOP) : SpikedFenceShape.NONE)
+        .with(SOUTH, this.canConnectTo(world, pos, Direction.SOUTH) ? (blockedTop(SIDE_SHAPES_BY_DIRECTION.get(Direction.SOUTH), topFace, topState) ? SpikedFenceShape.SIDE : SpikedFenceShape.TOP) : SpikedFenceShape.NONE)
+        .with(WEST, this.canConnectTo(world, pos, Direction.WEST) ? (blockedTop(SIDE_SHAPES_BY_DIRECTION.get(Direction.WEST), topFace, topState) ? SpikedFenceShape.SIDE : SpikedFenceShape.TOP) : SpikedFenceShape.NONE);
   }
 
   private static boolean blockedTop(VoxelShape shape, VoxelShape topFace, BlockState topState) {

@@ -46,10 +46,24 @@ public abstract class DistantMoonsBlocks {
       new Item.Settings()
           .fireproof()
   );
+  public static final Block DEEP_IRON_BAR_DOOR = register(
+      "deep_iron_bar_door",
+      settings -> new DoorBlock(BlockSetType.IRON, settings),
+      AbstractBlock.Settings.copy(Blocks.IRON_DOOR),
+      new Item.Settings()
+          .fireproof()
+  );
   public static final Block DEEP_IRON_BARS = register(
       "deep_iron_bars",
       PaneBlock::new,
       AbstractBlock.Settings.copy(Blocks.IRON_BARS),
+      new Item.Settings()
+          .fireproof()
+  );
+  public static final Block DEEP_IRON_DOOR = register(
+      "deep_iron_door",
+      settings -> new DoorBlock(BlockSetType.IRON, settings),
+      AbstractBlock.Settings.copy(Blocks.IRON_DOOR),
       new Item.Settings()
           .fireproof()
   );
@@ -67,6 +81,13 @@ public abstract class DistantMoonsBlocks {
       new Item.Settings()
           .fireproof()
   );
+  public static final Block DEEP_IRON_TRAPDOOR = register(
+      "deep_iron_trapdoor",
+      settings -> new TrapdoorBlock(BlockSetType.IRON, settings),
+      AbstractBlock.Settings.copy(Blocks.IRON_DOOR),
+      new Item.Settings()
+          .fireproof()
+  );
   public static final Block DEEPSLATE_DEEP_IRON_ORE = register(
       "deepslate_deep_iron_ore",
       settings -> new ExperienceDroppingBlock(ConstantIntProvider.create(0), settings),
@@ -80,6 +101,7 @@ public abstract class DistantMoonsBlocks {
       FixedLadderBlock::new,
       AbstractBlock.Settings.copy(Blocks.IRON_BARS),
       new Item.Settings()
+          .fireproof()
   );
   public static final Block FIXED_IRON_LADDER = register(
       "fixed_iron_ladder",
@@ -91,6 +113,12 @@ public abstract class DistantMoonsBlocks {
       "fixed_wrought_iron_ladder",
       FixedLadderBlock::new,
       AbstractBlock.Settings.copy(Blocks.IRON_BARS),
+      new Item.Settings()
+  );
+  public static final Block IRON_BAR_DOOR = register(
+      "iron_bar_door",
+      settings -> new DoorBlock(BlockSetType.IRON, settings),
+      AbstractBlock.Settings.copy(Blocks.IRON_DOOR),
       new Item.Settings()
   );
   public static final Block IRON_FENCE = register(
@@ -128,6 +156,12 @@ public abstract class DistantMoonsBlocks {
           .mapColor(MapColor.LIGHT_BLUE_GRAY),
       new Item.Settings()
           .fireproof()
+  );
+  public static final Block WROUGHT_IRON_BAR_DOOR = register(
+      "wrought_iron_bar_door",
+      settings -> new DoorBlock(BlockSetType.IRON, settings),
+      AbstractBlock.Settings.copy(Blocks.IRON_DOOR),
+      new Item.Settings()
   );
   public static final Block WROUGHT_IRON_BARS = register(
       "wrought_iron_bars",
