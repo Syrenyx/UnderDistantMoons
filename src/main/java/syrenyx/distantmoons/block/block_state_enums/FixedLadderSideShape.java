@@ -9,7 +9,7 @@ public enum FixedLadderSideShape implements StringIdentifiable {
 
   private final String id;
 
-  FixedLadderSideShape(String id) {
+  FixedLadderSideShape(final String id) {
     this.id = id;
   }
 

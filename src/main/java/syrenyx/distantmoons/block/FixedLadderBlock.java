@@ -23,21 +23,24 @@ import net.minecraft.world.WorldView;
 import net.minecraft.world.tick.ScheduledTickView;
 import org.jetbrains.annotations.Nullable;
 import syrenyx.distantmoons.block.block_state_enums.FixedLadderSideShape;
+import syrenyx.distantmoons.block.block_state_enums.HorizontalAxis;
 import syrenyx.distantmoons.references.DistantMoonsTags;
+
+import java.util.Objects;
 
 public class FixedLadderBlock extends Block {
 
-  public static final BooleanProperty ROTATED = BooleanProperty.of("rotated");
+  public static final EnumProperty<HorizontalAxis> AXIS = EnumProperty.of("axis", HorizontalAxis.class);
   public static final EnumProperty<FixedLadderSideShape> LEFT = EnumProperty.of("left", FixedLadderSideShape.class);
   public static final EnumProperty<FixedLadderSideShape> RIGHT = EnumProperty.of("right", FixedLadderSideShape.class);
   public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
-  private static final VoxelShape SHAPE = Block.createCuboidShape(0.0, 0.0, 7.0, 16.0, 16.0, 9.0);
-  private static final VoxelShape ROTATED_SHAPE = VoxelShapes.transform(SHAPE, DirectionTransformation.fromRotations(AxisRotation.R0, AxisRotation.R90), new Vec3d(0.5, 0.5, 0.5));
+  private static final VoxelShape X_SHAPE = Block.createCuboidShape(7.0, 0.0, 0.0, 9.0, 16.0, 16.0);
+  private static final VoxelShape Z_SHAPE = VoxelShapes.transform(X_SHAPE, DirectionTransformation.fromRotations(AxisRotation.R0, AxisRotation.R90), new Vec3d(0.5, 0.5, 0.5));
 
   public FixedLadderBlock(Settings settings) {
     super(settings);
     this.setDefaultState(this.getDefaultState()
-        .with(ROTATED, false)
+        .with(AXIS, HorizontalAxis.X)
         .with(LEFT, FixedLadderSideShape.NONE)
         .with(RIGHT, FixedLadderSideShape.NONE)
         .with(WATERLOGGED, false)
@@ -46,7 +49,7 @@ public class FixedLadderBlock extends Block {
 
   @Override
   protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-    builder.add(ROTATED, LEFT, RIGHT, WATERLOGGED);
+    builder.add(AXIS, LEFT, RIGHT, WATERLOGGED);
   }
 
   @Override
@@ -66,6 +69,7 @@ public class FixedLadderBlock extends Block {
 
   @Nullable
   @Override
+  @SuppressWarnings("DataFlowIssue")
   public BlockState getPlacementState(ItemPlacementContext context) {
     World world = context.getWorld();
     BlockPos pos = context.getBlockPos();
@@ -73,9 +77,9 @@ public class FixedLadderBlock extends Block {
     return this.updateState(
         world, pos,
         this.getDefaultState()
-            .with(ROTATED, sideAxis == Direction.Axis.Y
-                ? context.getHorizontalPlayerFacing().getAxis() == Direction.Axis.X
-                : sideAxis == Direction.Axis.Z
+            .with(AXIS, sideAxis == Direction.Axis.Y
+                ? HorizontalAxis.fromDirectionAxis(context.getHorizontalPlayerFacing().getAxis())
+                : HorizontalAxis.fromDirectionAxis(sideAxis).opposite()
             )
             .with(WATERLOGGED, world.getFluidState(pos).getFluid() == Fluids.WATER)
     );
@@ -97,10 +101,10 @@ public class FixedLadderBlock extends Block {
   }
 
   private BlockState updateState(BlockView world, BlockPos pos, BlockState state) {
-    boolean rotated = state.get(ROTATED);
+    boolean x = state.get(AXIS) == HorizontalAxis.X;
     return state
-        .with(LEFT, this.getConnectionType(world, pos, rotated ? Direction.NORTH : Direction.WEST))
-        .with(RIGHT, this.getConnectionType(world, pos, rotated ? Direction.SOUTH : Direction.EAST));
+        .with(LEFT, this.getConnectionType(world, pos, x ? Direction.SOUTH : Direction.EAST))
+        .with(RIGHT, this.getConnectionType(world, pos, x ? Direction.NORTH : Direction.WEST));
   }
 
   private FixedLadderSideShape getConnectionType(BlockView world, BlockPos pos, Direction direction) {
@@ -109,7 +113,7 @@ public class FixedLadderBlock extends Block {
     if (state.isIn(DistantMoonsTags.FIXED_LADDER_ALWAYS_CONNECTS_TO)) return state.isIn(DistantMoonsTags.FIXED_LADDER_ATTACHES_TO)
         ? FixedLadderSideShape.ATTACHED : FixedLadderSideShape.CONNECTED;
     if (state.getBlock() instanceof FixedLadderBlock) {
-      return (state.get(ROTATED) && direction.getAxis() == Direction.Axis.Z || !state.get(ROTATED) && direction.getAxis() == Direction.Axis.X)
+      return (state.get(AXIS) != HorizontalAxis.fromDirectionAxis(direction.getAxis()))
           ? FixedLadderSideShape.ATTACHED : FixedLadderSideShape.NONE;
     }
     return FixedLadderSideShape.NONE;
@@ -117,40 +121,36 @@ public class FixedLadderBlock extends Block {
 
   @Override
   protected VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-    return state.get(ROTATED) ? ROTATED_SHAPE : SHAPE;
+    return state.get(AXIS) == HorizontalAxis.X ? X_SHAPE : Z_SHAPE;
   }
 
   public static boolean canWallConnect(BlockState state, Direction direction) {
-    return switch (direction.getAxis()) {
-      case X -> !state.get(ROTATED);
-      case Y -> false;
-      case Z -> state.get(ROTATED);
-    };
+    return state.get(AXIS) != HorizontalAxis.fromDirectionAxis(direction.getAxis());
   }
 
   @Override
   protected BlockState rotate(BlockState state, BlockRotation rotation) {
-    boolean rotated = state.get(ROTATED);
+    boolean x = state.get(AXIS) == HorizontalAxis.X;
     return switch (rotation) {
       case NONE -> state;
       case CLOCKWISE_90 -> state
-          .with(ROTATED, !rotated)
-          .with(LEFT, state.get(rotated ? RIGHT : LEFT))
-          .with(RIGHT, state.get(rotated ? LEFT : RIGHT));
+          .with(AXIS, state.get(AXIS).opposite())
+          .with(LEFT, state.get(x ? LEFT : RIGHT))
+          .with(RIGHT, state.get(x ? RIGHT : LEFT));
       case CLOCKWISE_180 -> state
           .with(LEFT, state.get(RIGHT))
           .with(RIGHT, state.get(LEFT));
       case COUNTERCLOCKWISE_90 -> state
-          .with(ROTATED, !state.get(ROTATED))
-          .with(LEFT, state.get(rotated ? LEFT : RIGHT))
-          .with(RIGHT, state.get(rotated ? RIGHT : LEFT));
+          .with(AXIS, state.get(AXIS).opposite())
+          .with(LEFT, state.get(x ? RIGHT : LEFT))
+          .with(RIGHT, state.get(x ? LEFT : RIGHT));
     };
   }
 
   @Override
   protected BlockState mirror(BlockState state, BlockMirror mirror) {
-    boolean rotated = state.get(ROTATED);
-    if (!rotated && mirror == BlockMirror.LEFT_RIGHT || rotated && mirror == BlockMirror.FRONT_BACK) {
+    boolean x = state.get(AXIS) == HorizontalAxis.X;
+    if (x && mirror == BlockMirror.LEFT_RIGHT || !x && mirror == BlockMirror.FRONT_BACK) {
       return state.with(LEFT, state.get(RIGHT)).with(RIGHT, state.get(LEFT));
     }
     return state;

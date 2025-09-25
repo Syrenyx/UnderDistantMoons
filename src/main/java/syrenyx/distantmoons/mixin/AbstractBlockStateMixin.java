@@ -9,6 +9,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import syrenyx.distantmoons.block.FixedLadderBlock;
+import syrenyx.distantmoons.block.block_state_enums.HorizontalAxis;
 
 @Mixin(AbstractBlock.AbstractBlockState.class)
 public class AbstractBlockStateMixin {
@@ -23,8 +24,7 @@ public class AbstractBlockStateMixin {
     AbstractBlock.AbstractBlockState thisState = (AbstractBlock.AbstractBlockState) (Object) this;
     if (
         thisState.getBlock() instanceof FixedLadderBlock
-            && (thisState.get(FixedLadderBlock.ROTATED) && direction.getAxis() == Direction.Axis.Z
-            || !thisState.get(FixedLadderBlock.ROTATED) && direction.getAxis() == Direction.Axis.X)
+            && thisState.get(FixedLadderBlock.AXIS) != HorizontalAxis.fromDirectionAxis(direction.getAxis())
     ) {
       callbackInfo.cancel();
       callbackInfo.setReturnValue(true);
