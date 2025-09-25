@@ -33,7 +33,7 @@ public abstract class DistantMoonsItems {
   );
   public static final Item DEEP_IRON_AXE = register(
       "deep_iron_axe",
-      settings -> new AxeItem(ToolMaterial.IRON, 9F, 0.9F, settings),
+      settings -> new AxeItem(ToolMaterial.IRON, 9.0F, 0.9F, settings),
       new Item.Settings().fireproof()
   );
   public static final Item DEEP_IRON_BOOTS = register(
@@ -53,7 +53,7 @@ public abstract class DistantMoonsItems {
   );
   public static final Item DEEP_IRON_HOE = register(
       "deep_iron_hoe",
-      settings -> new HoeItem(ToolMaterial.IRON, 1F, 3F, settings),
+      settings -> new HoeItem(ToolMaterial.IRON, 1.0F, 3.0F, settings),
       new Item.Settings().fireproof()
   );
   public static final Item DEEP_IRON_HORSE_ARMOR = register(
@@ -69,11 +69,11 @@ public abstract class DistantMoonsItems {
   public static final Item DEEP_IRON_PICKAXE = register(
       "deep_iron_pickaxe",
       Item::new,
-      new Item.Settings().fireproof().pickaxe(DistantMoonsItemMaterials.DEEP_IRON_TOOL, 1F, -2.8F)
+      new Item.Settings().fireproof().pickaxe(DistantMoonsItemMaterials.DEEP_IRON_TOOL, 1.0F, -2.8F)
   );
   public static final Item DEEP_IRON_SHOVEL = register(
       "deep_iron_shovel",
-      settings -> new ShovelItem(ToolMaterial.IRON, 4.5F, 1F, settings),
+      settings -> new ShovelItem(ToolMaterial.IRON, 4.5F, 1.0F, settings),
       new Item.Settings().fireproof()
   );
   public static final Item DEEP_IRON_SWORD = register(

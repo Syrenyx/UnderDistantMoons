@@ -11,8 +11,10 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.Items;
 import net.minecraft.item.consume.ApplyEffectsConsumeEffect;
 
-public class DistantMoonsItemModifications {
+public abstract class DistantMoonsItemModifications {
 
+  private static final int COAL_SMELT_TIME_FACTOR = 8;
+  private static final int COKE_SMELT_TIME_FACTOR = 12;
   private static final ConsumableComponent NETHER_FUNGUS_CONSUMABLE = ConsumableComponent.builder()
       .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 600, 0), 0.45F))
       .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(StatusEffects.POISON, 300, 0), 0.35F))
@@ -52,9 +54,9 @@ public class DistantMoonsItemModifications {
 
     //FUEL
     FuelRegistryEvents.BUILD.register((builder, context) -> {
-      builder.add(DistantMoonsBlocks.CHARCOAL_BLOCK.asItem(), context.baseSmeltTime() * 72);
-      builder.add(DistantMoonsItems.COKE, context.baseSmeltTime() * 12);
-      builder.add(DistantMoonsBlocks.COKE_BLOCK.asItem(), context.baseSmeltTime() * 96);
+      builder.add(DistantMoonsBlocks.CHARCOAL_BLOCK.asItem(), context.baseSmeltTime() * COAL_SMELT_TIME_FACTOR * 9);
+      builder.add(DistantMoonsItems.COKE, context.baseSmeltTime() * COKE_SMELT_TIME_FACTOR);
+      builder.add(DistantMoonsBlocks.COKE_BLOCK.asItem(), context.baseSmeltTime() * COKE_SMELT_TIME_FACTOR * 9);
     });
   }
 

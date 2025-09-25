@@ -40,6 +40,9 @@ public class SpikedFenceBlock extends Block implements Waterloggable {
   private static final VoxelShape CENTER_SHAPE = Block.createCuboidShape(7.0, 0.0, 7.0, 9.0, 16.0, 9.0);
   private static final VoxelShape SIDE_SHAPE = Block.createCuboidShape(7.0, 0.0, 0.0, 9.0, 16.0, 7.0);
   private static final Map<Direction, VoxelShape> SIDE_SHAPES_BY_DIRECTION = VoxelShapeUtil.createHorizontalDirectionShapeMap(SIDE_SHAPE);
+  private static final VoxelShape TALL_CENTER_SHAPE = Block.createCuboidShape(7.0, 0.0, 7.0, 9.0, 24.0, 9.0);
+  private static final VoxelShape TALL_SIDE_SHAPE = Block.createCuboidShape(7.0, 0.0, 0.0, 9.0, 24.0, 7.0);
+  private static final Map<Direction, VoxelShape> TALL_SIDE_SHAPES_BY_DIRECTION = VoxelShapeUtil.createHorizontalDirectionShapeMap(TALL_SIDE_SHAPE);
 
   public SpikedFenceBlock(Settings settings) {
     super(settings);
@@ -83,11 +86,6 @@ public class SpikedFenceBlock extends Block implements Waterloggable {
   @Override
   protected boolean isTransparent(BlockState state) {
     return !state.get(WATERLOGGED);
-  }
-
-  @Override
-  protected VoxelShape getCameraCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-    return VoxelShapes.empty();
   }
 
   @Nullable
@@ -140,6 +138,21 @@ public class SpikedFenceBlock extends Block implements Waterloggable {
     if (state.getBlock() instanceof FixedLadderBlock) return FixedLadderBlock.canWallConnect(state, direction);
     if (state.isSideSolidFullSquare(world, pos.offset(direction), direction.getOpposite())) return true;
     return false;
+  }
+
+  @Override
+  protected VoxelShape getCameraCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+    return VoxelShapes.empty();
+  }
+
+  @Override
+  protected VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+    VoxelShape shape = TALL_CENTER_SHAPE;
+    if (state.get(NORTH) != SpikedFenceShape.NONE) shape = VoxelShapes.union(shape, TALL_SIDE_SHAPES_BY_DIRECTION.get(Direction.NORTH));
+    if (state.get(EAST) != SpikedFenceShape.NONE) shape = VoxelShapes.union(shape, TALL_SIDE_SHAPES_BY_DIRECTION.get(Direction.EAST));
+    if (state.get(SOUTH) != SpikedFenceShape.NONE) shape = VoxelShapes.union(shape, TALL_SIDE_SHAPES_BY_DIRECTION.get(Direction.SOUTH));
+    if (state.get(WEST) != SpikedFenceShape.NONE) shape = VoxelShapes.union(shape, TALL_SIDE_SHAPES_BY_DIRECTION.get(Direction.WEST));
+    return shape;
   }
 
   @Override
