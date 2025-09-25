@@ -92,6 +92,8 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
 
   @Override
   public void generateItemModels(ItemModelGenerator generator) {
+
+    //SIMPLE ITEMS
     registerSimpleItem(DistantMoonsItems.COKE, "simple_item", generator);
     registerSimpleItem(DistantMoonsItems.CRUDE_DEEP_IRON_CHUNK, "simple_item", generator);
     registerSimpleItem(DistantMoonsItems.DEEP_IRON_AXE, "axe", generator);
@@ -124,16 +126,16 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
 
   private static void registerDoorBlock(Block block, String parent, BlockStateModelGenerator generator) {
     WeightedVariant bottomLeft = createWeightedVariant(createObjectModel(block, parent + "/bottom", "/bottom_left", generator, Map.of(
-        TextureKey.BOTTOM, "/bottom", TextureKey.FRONT, "/front/bottom", TextureKey.SIDE, "/side", TextureKey.PARTICLE, "/front/bottom")
+        TextureKey.BOTTOM, "/bottom", TextureKey.INSIDE, "/front/bottom_right", TextureKey.of("outside"), "/front/bottom_left", TextureKey.SIDE, "/side", TextureKey.PARTICLE, "/front/bottom_right")
     ));
     WeightedVariant bottomRight = createWeightedVariant(createObjectModel(block, parent + "/bottom", "/bottom_right", generator, Map.of(
-        TextureKey.BOTTOM, "/bottom", TextureKey.FRONT, "/front/bottom", TextureKey.SIDE, "/side", TextureKey.PARTICLE, "/front/bottom")
+        TextureKey.BOTTOM, "/bottom", TextureKey.INSIDE, "/front/bottom_left", TextureKey.of("outside"), "/front/bottom_right", TextureKey.SIDE, "/side", TextureKey.PARTICLE, "/front/bottom_right")
     ));
     WeightedVariant topLeft = createWeightedVariant(createObjectModel(block, parent + "/top", "/top_left", generator, Map.of(
-        TextureKey.FRONT, "/front/top", TextureKey.SIDE, "/side", TextureKey.TOP, "/top", TextureKey.PARTICLE, "/front/top")
+        TextureKey.INSIDE, "/front/top_right", TextureKey.of("outside"), "/front/top_left", TextureKey.SIDE, "/side", TextureKey.TOP, "/tep", TextureKey.PARTICLE, "/front/bottom_right")
     ));
     WeightedVariant topRight = createWeightedVariant(createObjectModel(block, parent + "/top", "/top_right", generator, Map.of(
-        TextureKey.FRONT, "/front/top", TextureKey.SIDE, "/side", TextureKey.TOP, "/top", TextureKey.PARTICLE, "/front/top")
+        TextureKey.INSIDE, "/front/top_left", TextureKey.of("outside"), "/front/top_right", TextureKey.SIDE, "/side", TextureKey.TOP, "/tep", TextureKey.PARTICLE, "/front/bottom_right")
     ));
     generator.blockStateCollector.accept(VariantsBlockModelDefinitionCreator.of(block).with(BlockStateVariantMap
         .models(DoorBlock.HALF, DoorBlock.FACING, DoorBlock.HINGE, DoorBlock.OPEN)
@@ -189,14 +191,14 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     generator.blockStateCollector.accept(MultipartBlockModelDefinitionCreator.create(block)
         .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.AXIS, HorizontalAxis.X), center)
         .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.AXIS, HorizontalAxis.Z), center.apply(ROTATE_Y_90))
-        .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.AXIS, HorizontalAxis.X).put(FixedLadderBlock.LEFT, FixedLadderSideShape.ATTACHED, FixedLadderSideShape.CONNECTED), side)
-        .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.AXIS, HorizontalAxis.X).put(FixedLadderBlock.RIGHT, FixedLadderSideShape.ATTACHED, FixedLadderSideShape.CONNECTED), side.apply(ROTATE_Y_180))
-        .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.AXIS, HorizontalAxis.Z).put(FixedLadderBlock.LEFT, FixedLadderSideShape.ATTACHED, FixedLadderSideShape.CONNECTED), side.apply(ROTATE_Y_270))
-        .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.AXIS, HorizontalAxis.Z).put(FixedLadderBlock.RIGHT, FixedLadderSideShape.ATTACHED, FixedLadderSideShape.CONNECTED), side.apply(ROTATE_Y_90))
-        .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.AXIS, HorizontalAxis.X).put(FixedLadderBlock.LEFT, FixedLadderSideShape.ATTACHED), extension)
-        .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.AXIS, HorizontalAxis.X).put(FixedLadderBlock.RIGHT, FixedLadderSideShape.ATTACHED), extension.apply(ROTATE_Y_180))
-        .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.AXIS, HorizontalAxis.Z).put(FixedLadderBlock.LEFT, FixedLadderSideShape.ATTACHED), extension.apply(ROTATE_Y_270))
-        .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.AXIS, HorizontalAxis.Z).put(FixedLadderBlock.RIGHT, FixedLadderSideShape.ATTACHED), extension.apply(ROTATE_Y_90))
+        .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.AXIS, HorizontalAxis.X).put(FixedLadderBlock.LEFT, FixedLadderSideShape.ATTACHED, FixedLadderSideShape.CONNECTED), side.apply(ROTATE_Y_180))
+        .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.AXIS, HorizontalAxis.X).put(FixedLadderBlock.RIGHT, FixedLadderSideShape.ATTACHED, FixedLadderSideShape.CONNECTED), side)
+        .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.AXIS, HorizontalAxis.Z).put(FixedLadderBlock.LEFT, FixedLadderSideShape.ATTACHED, FixedLadderSideShape.CONNECTED), side.apply(ROTATE_Y_90))
+        .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.AXIS, HorizontalAxis.Z).put(FixedLadderBlock.RIGHT, FixedLadderSideShape.ATTACHED, FixedLadderSideShape.CONNECTED), side.apply(ROTATE_Y_270))
+        .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.AXIS, HorizontalAxis.X).put(FixedLadderBlock.LEFT, FixedLadderSideShape.ATTACHED), extension.apply(ROTATE_Y_180))
+        .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.AXIS, HorizontalAxis.X).put(FixedLadderBlock.RIGHT, FixedLadderSideShape.ATTACHED), extension)
+        .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.AXIS, HorizontalAxis.Z).put(FixedLadderBlock.LEFT, FixedLadderSideShape.ATTACHED), extension.apply(ROTATE_Y_90))
+        .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.AXIS, HorizontalAxis.Z).put(FixedLadderBlock.RIGHT, FixedLadderSideShape.ATTACHED), extension.apply(ROTATE_Y_270))
     );
     generator.itemModelOutput.accept(block.asItem(), ItemModels.basic(center.variants().getEntries().getFirst().value().modelId()));
   }
