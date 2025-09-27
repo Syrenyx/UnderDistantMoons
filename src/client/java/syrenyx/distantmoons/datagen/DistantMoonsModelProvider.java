@@ -23,6 +23,7 @@ import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.Nullable;
 import syrenyx.distantmoons.UnderDistantMoons;
 import syrenyx.distantmoons.block.FixedLadderBlock;
+import syrenyx.distantmoons.block.MetalBarDoorBlock;
 import syrenyx.distantmoons.block.SpikedFenceBlock;
 import syrenyx.distantmoons.block.block_state_enums.FixedLadderSideShape;
 import syrenyx.distantmoons.block.block_state_enums.HorizontalAxis;
@@ -67,19 +68,21 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     registerMetalLadderBlock(DistantMoonsBlocks.WROUGHT_IRON_LADDER, generator);
 
     //DOORS
-    registerDoorBlock(DistantMoonsBlocks.DEEP_IRON_BAR_DOOR, "metal_bar_door", generator);
-    registerDoorBlock(DistantMoonsBlocks.DEEP_IRON_DOOR, "door", generator);
-    registerDoorBlock(DistantMoonsBlocks.IRON_BAR_DOOR, "metal_bar_door", generator);
-    registerDoorBlock(DistantMoonsBlocks.WROUGHT_IRON_BAR_DOOR, "metal_bar_door", generator);
+    registerDoorBlock(DistantMoonsBlocks.DEEP_IRON_DOOR, generator);
 
     //FIXED LADDERS
     registerFixedLadderBlock(DistantMoonsBlocks.FIXED_DEEP_IRON_LADDER, generator);
     registerFixedLadderBlock(DistantMoonsBlocks.FIXED_IRON_LADDER, generator);
     registerFixedLadderBlock(DistantMoonsBlocks.FIXED_WROUGHT_IRON_LADDER, generator);
 
+    //METAL BAR DOORS
+    registerMetalBarDoorBlock(DistantMoonsBlocks.DEEP_IRON_BAR_DOOR, generator);
+    registerMetalBarDoorBlock(DistantMoonsBlocks.IRON_BAR_DOOR, generator);
+    registerMetalBarDoorBlock(DistantMoonsBlocks.WROUGHT_IRON_BAR_DOOR, generator);
+
     //METAL BARS
-    registerMetalBarsBlock(DistantMoonsBlocks.DEEP_IRON_BARS, generator);
-    registerMetalBarsBlock(DistantMoonsBlocks.WROUGHT_IRON_BARS, generator);
+    registerMetalBarsBlock(DistantMoonsBlocks.DEEP_IRON_BARS, false, generator);
+    registerMetalBarsBlock(DistantMoonsBlocks.WROUGHT_IRON_BARS, false, generator);
 
     //SPIKED FENCES
     registerSpikedFenceBlock(DistantMoonsBlocks.DEEP_IRON_FENCE, generator);
@@ -124,18 +127,18 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     generator.itemModelOutput.accept(block.asItem(), ItemModels.basic(getFirstEntryOf(variant)));
   }
 
-  private static void registerDoorBlock(Block block, String parent, BlockStateModelGenerator generator) {
-    WeightedVariant bottomLeft = createWeightedVariant(createObjectModel(block, parent + "/bottom", "/bottom_left", generator, Map.of(
-        TextureKey.BOTTOM, "/bottom", TextureKey.INSIDE, "/front/bottom_right", TextureKey.of("outside"), "/front/bottom_left", TextureKey.SIDE, "/side", TextureKey.PARTICLE, "/front/bottom_right")
+  private static void registerDoorBlock(Block block, BlockStateModelGenerator generator) {
+    WeightedVariant bottomLeft = createWeightedVariant(createObjectModel(block, "door/bottom", "/bottom_left", generator, Map.of(
+        TextureKey.END, "/end", TextureKey.INSIDE, "/front/bottom_right", TextureKey.of("outside"), "/front/bottom_left", TextureKey.SIDE, "/side", TextureKey.PARTICLE, "/front/bottom_left")
     ));
-    WeightedVariant bottomRight = createWeightedVariant(createObjectModel(block, parent + "/bottom", "/bottom_right", generator, Map.of(
-        TextureKey.BOTTOM, "/bottom", TextureKey.INSIDE, "/front/bottom_left", TextureKey.of("outside"), "/front/bottom_right", TextureKey.SIDE, "/side", TextureKey.PARTICLE, "/front/bottom_right")
+    WeightedVariant bottomRight = createWeightedVariant(createObjectModel(block, "door/bottom", "/bottom_right", generator, Map.of(
+        TextureKey.END, "/end", TextureKey.INSIDE, "/front/bottom_left", TextureKey.of("outside"), "/front/bottom_right", TextureKey.SIDE, "/side", TextureKey.PARTICLE, "/front/bottom_right")
     ));
-    WeightedVariant topLeft = createWeightedVariant(createObjectModel(block, parent + "/top", "/top_left", generator, Map.of(
-        TextureKey.INSIDE, "/front/top_right", TextureKey.of("outside"), "/front/top_left", TextureKey.SIDE, "/side", TextureKey.TOP, "/tep", TextureKey.PARTICLE, "/front/bottom_right")
+    WeightedVariant topLeft = createWeightedVariant(createObjectModel(block, "door/top", "/top_left", generator, Map.of(
+        TextureKey.END, "/end", TextureKey.INSIDE, "/front/top_right", TextureKey.of("outside"), "/front/top_left", TextureKey.SIDE, "/side", TextureKey.PARTICLE, "/front/top_left")
     ));
-    WeightedVariant topRight = createWeightedVariant(createObjectModel(block, parent + "/top", "/top_right", generator, Map.of(
-        TextureKey.INSIDE, "/front/top_left", TextureKey.of("outside"), "/front/top_right", TextureKey.SIDE, "/side", TextureKey.TOP, "/tep", TextureKey.PARTICLE, "/front/bottom_right")
+    WeightedVariant topRight = createWeightedVariant(createObjectModel(block, "door/top", "/top_right", generator, Map.of(
+        TextureKey.END, "/end", TextureKey.INSIDE, "/front/top_left", TextureKey.of("outside"), "/front/top_right", TextureKey.SIDE, "/side", TextureKey.PARTICLE, "/front/top_right")
     ));
     generator.blockStateCollector.accept(VariantsBlockModelDefinitionCreator.of(block).with(BlockStateVariantMap
         .models(DoorBlock.HALF, DoorBlock.FACING, DoorBlock.HINGE, DoorBlock.OPEN)
@@ -203,6 +206,104 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     generator.itemModelOutput.accept(block.asItem(), ItemModels.basic(center.variants().getEntries().getFirst().value().modelId()));
   }
 
+  private static void registerMetalBarDoorBlock(Block block, BlockStateModelGenerator generator) {
+    WeightedVariant doubleBottomLeft = createWeightedVariant(createObjectModel(block, "metal_bar_door/double/bottom", "/double/bottom_left", generator, Map.of(
+        TextureKey.END, "/end", TextureKey.INSIDE, "/front/double/bottom_right", TextureKey.of("outside"), "/front/double/bottom_left", TextureKey.SIDE, "/side", TextureKey.PARTICLE, "/front/double/bottom_left")
+    ));
+    WeightedVariant doubleBottomRight = createWeightedVariant(createObjectModel(block, "metal_bar_door/double/bottom", "/double/bottom_right", generator, Map.of(
+        TextureKey.END, "/end", TextureKey.INSIDE, "/front/double/bottom_left", TextureKey.of("outside"), "/front/double/bottom_right", TextureKey.SIDE, "/side", TextureKey.PARTICLE, "/front/double/bottom_right")
+    ));
+    WeightedVariant doubleTopLeft = createWeightedVariant(createObjectModel(block, "metal_bar_door/double/top", "/double/top_left", generator, Map.of(
+        TextureKey.END, "/end", TextureKey.INSIDE, "/front/double/top_right", TextureKey.of("outside"), "/front/double/top_left", TextureKey.SIDE, "/side", TextureKey.PARTICLE, "/front/double/top_left")
+    ));
+    WeightedVariant doubleTopRight = createWeightedVariant(createObjectModel(block, "metal_bar_door/double/top", "/double/top_right", generator, Map.of(
+        TextureKey.END, "/end", TextureKey.INSIDE, "/front/double/top_left", TextureKey.of("outside"), "/front/double/top_right", TextureKey.SIDE, "/side", TextureKey.PARTICLE, "/front/double/top_right")
+    ));
+    WeightedVariant singleBottomLeft = createWeightedVariant(createObjectModel(block, "metal_bar_door/single/bottom", "/single/bottom_left", generator, Map.of(
+        TextureKey.END, "/end", TextureKey.INSIDE, "/front/single/bottom_right", TextureKey.of("outside"), "/front/single/bottom_left", TextureKey.SIDE, "/side", TextureKey.PARTICLE, "/front/single/bottom_left")
+    ));
+    WeightedVariant singleBottomRight = createWeightedVariant(createObjectModel(block, "metal_bar_door/single/bottom", "/single/bottom_right", generator, Map.of(
+        TextureKey.END, "/end", TextureKey.INSIDE, "/front/single/bottom_left", TextureKey.of("outside"), "/front/single/bottom_right", TextureKey.SIDE, "/side", TextureKey.PARTICLE, "/front/single/bottom_right")
+    ));
+    WeightedVariant singleTopLeft = createWeightedVariant(createObjectModel(block, "metal_bar_door/single/top", "/single/top_left", generator, Map.of(
+        TextureKey.END, "/end", TextureKey.INSIDE, "/front/single/top_right", TextureKey.of("outside"), "/front/single/top_left", TextureKey.SIDE, "/side", TextureKey.PARTICLE, "/front/single/top_left")
+    ));
+    WeightedVariant singleTopRight = createWeightedVariant(createObjectModel(block, "metal_bar_door/single/top", "/single/top_right", generator, Map.of(
+        TextureKey.END, "/end", TextureKey.INSIDE, "/front/single/top_left", TextureKey.of("outside"), "/front/single/top_right", TextureKey.SIDE, "/side", TextureKey.PARTICLE, "/front/single/top_right")
+    ));
+    generator.blockStateCollector.accept(VariantsBlockModelDefinitionCreator.of(block).with(BlockStateVariantMap
+        .models(MetalBarDoorBlock.DOUBLE, DoorBlock.HALF, DoorBlock.FACING, DoorBlock.HINGE, DoorBlock.OPEN)
+        .register(false, DoubleBlockHalf.LOWER, Direction.NORTH, DoorHinge.LEFT, false, singleBottomLeft)
+        .register(false, DoubleBlockHalf.LOWER, Direction.EAST, DoorHinge.LEFT, false, singleBottomLeft.apply(ROTATE_Y_90))
+        .register(false, DoubleBlockHalf.LOWER, Direction.SOUTH, DoorHinge.LEFT, false, singleBottomLeft.apply(ROTATE_Y_180))
+        .register(false, DoubleBlockHalf.LOWER, Direction.WEST, DoorHinge.LEFT, false, singleBottomLeft.apply(ROTATE_Y_270))
+        .register(false, DoubleBlockHalf.LOWER, Direction.NORTH, DoorHinge.LEFT, true, singleBottomRight.apply(ROTATE_Y_90))
+        .register(false, DoubleBlockHalf.LOWER, Direction.EAST, DoorHinge.LEFT, true, singleBottomRight.apply(ROTATE_Y_180))
+        .register(false, DoubleBlockHalf.LOWER, Direction.SOUTH, DoorHinge.LEFT, true, singleBottomRight.apply(ROTATE_Y_270))
+        .register(false, DoubleBlockHalf.LOWER, Direction.WEST, DoorHinge.LEFT, true, singleBottomRight)
+        .register(false, DoubleBlockHalf.LOWER, Direction.NORTH, DoorHinge.RIGHT, false, singleBottomRight)
+        .register(false, DoubleBlockHalf.LOWER, Direction.EAST, DoorHinge.RIGHT, false, singleBottomRight.apply(ROTATE_Y_90))
+        .register(false, DoubleBlockHalf.LOWER, Direction.SOUTH, DoorHinge.RIGHT, false, singleBottomRight.apply(ROTATE_Y_180))
+        .register(false, DoubleBlockHalf.LOWER, Direction.WEST, DoorHinge.RIGHT, false, singleBottomRight.apply(ROTATE_Y_270))
+        .register(false, DoubleBlockHalf.LOWER, Direction.NORTH, DoorHinge.RIGHT, true, singleBottomLeft.apply(ROTATE_Y_270))
+        .register(false, DoubleBlockHalf.LOWER, Direction.EAST, DoorHinge.RIGHT, true, singleBottomLeft)
+        .register(false, DoubleBlockHalf.LOWER, Direction.SOUTH, DoorHinge.RIGHT, true, singleBottomLeft.apply(ROTATE_Y_90))
+        .register(false, DoubleBlockHalf.LOWER, Direction.WEST, DoorHinge.RIGHT, true, singleBottomLeft.apply(ROTATE_Y_180))
+        .register(false, DoubleBlockHalf.UPPER, Direction.NORTH, DoorHinge.LEFT, false, singleTopLeft)
+        .register(false, DoubleBlockHalf.UPPER, Direction.EAST, DoorHinge.LEFT, false, singleTopLeft.apply(ROTATE_Y_90))
+        .register(false, DoubleBlockHalf.UPPER, Direction.SOUTH, DoorHinge.LEFT, false, singleTopLeft.apply(ROTATE_Y_180))
+        .register(false, DoubleBlockHalf.UPPER, Direction.WEST, DoorHinge.LEFT, false, singleTopLeft.apply(ROTATE_Y_270))
+        .register(false, DoubleBlockHalf.UPPER, Direction.NORTH, DoorHinge.LEFT, true, singleTopRight.apply(ROTATE_Y_90))
+        .register(false, DoubleBlockHalf.UPPER, Direction.EAST, DoorHinge.LEFT, true, singleTopRight.apply(ROTATE_Y_180))
+        .register(false, DoubleBlockHalf.UPPER, Direction.SOUTH, DoorHinge.LEFT, true, singleTopRight.apply(ROTATE_Y_270))
+        .register(false, DoubleBlockHalf.UPPER, Direction.WEST, DoorHinge.LEFT, true, singleTopRight)
+        .register(false, DoubleBlockHalf.UPPER, Direction.NORTH, DoorHinge.RIGHT, false, singleTopRight)
+        .register(false, DoubleBlockHalf.UPPER, Direction.EAST, DoorHinge.RIGHT, false, singleTopRight.apply(ROTATE_Y_90))
+        .register(false, DoubleBlockHalf.UPPER, Direction.SOUTH, DoorHinge.RIGHT, false, singleTopRight.apply(ROTATE_Y_180))
+        .register(false, DoubleBlockHalf.UPPER, Direction.WEST, DoorHinge.RIGHT, false, singleTopRight.apply(ROTATE_Y_270))
+        .register(false, DoubleBlockHalf.UPPER, Direction.NORTH, DoorHinge.RIGHT, true, singleTopLeft.apply(ROTATE_Y_270))
+        .register(false, DoubleBlockHalf.UPPER, Direction.EAST, DoorHinge.RIGHT, true, singleTopLeft)
+        .register(false, DoubleBlockHalf.UPPER, Direction.SOUTH, DoorHinge.RIGHT, true, singleTopLeft.apply(ROTATE_Y_90))
+        .register(false, DoubleBlockHalf.UPPER, Direction.WEST, DoorHinge.RIGHT, true, singleTopLeft.apply(ROTATE_Y_180))
+        .register(true, DoubleBlockHalf.LOWER, Direction.NORTH, DoorHinge.LEFT, false, doubleBottomLeft)
+        .register(true, DoubleBlockHalf.LOWER, Direction.EAST, DoorHinge.LEFT, false, doubleBottomLeft.apply(ROTATE_Y_90))
+        .register(true, DoubleBlockHalf.LOWER, Direction.SOUTH, DoorHinge.LEFT, false, doubleBottomLeft.apply(ROTATE_Y_180))
+        .register(true, DoubleBlockHalf.LOWER, Direction.WEST, DoorHinge.LEFT, false, doubleBottomLeft.apply(ROTATE_Y_270))
+        .register(true, DoubleBlockHalf.LOWER, Direction.NORTH, DoorHinge.LEFT, true, doubleBottomRight.apply(ROTATE_Y_90))
+        .register(true, DoubleBlockHalf.LOWER, Direction.EAST, DoorHinge.LEFT, true, doubleBottomRight.apply(ROTATE_Y_180))
+        .register(true, DoubleBlockHalf.LOWER, Direction.SOUTH, DoorHinge.LEFT, true, doubleBottomRight.apply(ROTATE_Y_270))
+        .register(true, DoubleBlockHalf.LOWER, Direction.WEST, DoorHinge.LEFT, true, doubleBottomRight)
+        .register(true, DoubleBlockHalf.LOWER, Direction.NORTH, DoorHinge.RIGHT, false, doubleBottomRight)
+        .register(true, DoubleBlockHalf.LOWER, Direction.EAST, DoorHinge.RIGHT, false, doubleBottomRight.apply(ROTATE_Y_90))
+        .register(true, DoubleBlockHalf.LOWER, Direction.SOUTH, DoorHinge.RIGHT, false, doubleBottomRight.apply(ROTATE_Y_180))
+        .register(true, DoubleBlockHalf.LOWER, Direction.WEST, DoorHinge.RIGHT, false, doubleBottomRight.apply(ROTATE_Y_270))
+        .register(true, DoubleBlockHalf.LOWER, Direction.NORTH, DoorHinge.RIGHT, true, doubleBottomLeft.apply(ROTATE_Y_270))
+        .register(true, DoubleBlockHalf.LOWER, Direction.EAST, DoorHinge.RIGHT, true, doubleBottomLeft)
+        .register(true, DoubleBlockHalf.LOWER, Direction.SOUTH, DoorHinge.RIGHT, true, doubleBottomLeft.apply(ROTATE_Y_90))
+        .register(true, DoubleBlockHalf.LOWER, Direction.WEST, DoorHinge.RIGHT, true, doubleBottomLeft.apply(ROTATE_Y_180))
+        .register(true, DoubleBlockHalf.UPPER, Direction.NORTH, DoorHinge.LEFT, false, doubleTopLeft)
+        .register(true, DoubleBlockHalf.UPPER, Direction.EAST, DoorHinge.LEFT, false, doubleTopLeft.apply(ROTATE_Y_90))
+        .register(true, DoubleBlockHalf.UPPER, Direction.SOUTH, DoorHinge.LEFT, false, doubleTopLeft.apply(ROTATE_Y_180))
+        .register(true, DoubleBlockHalf.UPPER, Direction.WEST, DoorHinge.LEFT, false, doubleTopLeft.apply(ROTATE_Y_270))
+        .register(true, DoubleBlockHalf.UPPER, Direction.NORTH, DoorHinge.LEFT, true, doubleTopRight.apply(ROTATE_Y_90))
+        .register(true, DoubleBlockHalf.UPPER, Direction.EAST, DoorHinge.LEFT, true, doubleTopRight.apply(ROTATE_Y_180))
+        .register(true, DoubleBlockHalf.UPPER, Direction.SOUTH, DoorHinge.LEFT, true, doubleTopRight.apply(ROTATE_Y_270))
+        .register(true, DoubleBlockHalf.UPPER, Direction.WEST, DoorHinge.LEFT, true, doubleTopRight)
+        .register(true, DoubleBlockHalf.UPPER, Direction.NORTH, DoorHinge.RIGHT, false, doubleTopRight)
+        .register(true, DoubleBlockHalf.UPPER, Direction.EAST, DoorHinge.RIGHT, false, doubleTopRight.apply(ROTATE_Y_90))
+        .register(true, DoubleBlockHalf.UPPER, Direction.SOUTH, DoorHinge.RIGHT, false, doubleTopRight.apply(ROTATE_Y_180))
+        .register(true, DoubleBlockHalf.UPPER, Direction.WEST, DoorHinge.RIGHT, false, doubleTopRight.apply(ROTATE_Y_270))
+        .register(true, DoubleBlockHalf.UPPER, Direction.NORTH, DoorHinge.RIGHT, true, doubleTopLeft.apply(ROTATE_Y_270))
+        .register(true, DoubleBlockHalf.UPPER, Direction.EAST, DoorHinge.RIGHT, true, doubleTopLeft)
+        .register(true, DoubleBlockHalf.UPPER, Direction.SOUTH, DoorHinge.RIGHT, true, doubleTopLeft.apply(ROTATE_Y_90))
+        .register(true, DoubleBlockHalf.UPPER, Direction.WEST, DoorHinge.RIGHT, true, doubleTopLeft.apply(ROTATE_Y_180))
+    ));
+    Identifier inventoryModel = createObjectModel(block, "simple_item", "/item", generator, Map.of(
+        TextureKey.TEXTURE, "/item", TextureKey.PARTICLE, "/item")
+    );
+    generator.itemModelOutput.accept(block.asItem(), ItemModels.basic(inventoryModel));
+  }
+
   private static void registerMetalLadderBlock(Block block, BlockStateModelGenerator generator) {
     WeightedVariant variant = createWeightedVariant(createObjectModel(block, "metal_ladder", "/block", generator, Map.of(
         TextureKey.BOTTOM, "/bottom", TextureKey.of("detail"), "/detail", TextureKey.SIDE, "/side", TextureKey.of("support"), "/support", TextureKey.TOP, "/top", TextureKey.PARTICLE, "/side")
@@ -220,7 +321,7 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     generator.itemModelOutput.accept(block.asItem(), ItemModels.basic(inventoryModel));
   }
 
-  private static void registerMetalBarsBlock(Block block, BlockStateModelGenerator generator) {
+  private static void registerMetalBarsBlock(Block block, boolean mirrored, BlockStateModelGenerator generator) {
     WeightedVariant centerCaps = createWeightedVariant(createObjectModel(block, "metal_bars/center_caps", "/center_caps", generator, Map.of(
         TextureKey.END, "/end", TextureKey.PARTICLE, "/side")
     ));
@@ -236,20 +337,23 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     WeightedVariant side = createWeightedVariant(createObjectModel(block, "metal_bars/side/default", "/side/default", generator, Map.of(
         TextureKey.END, "/end", TextureKey.SIDE, "/side", TextureKey.PARTICLE, "/side")
     ));
-    WeightedVariant side_mirrored = createWeightedVariant(createObjectModel(block, "metal_bars/side/mirrored", "/side/mirrored", generator, Map.of(
+    WeightedVariant side_left = createWeightedVariant(createObjectModel(block, "metal_bars/side/mirrored_left", "/side/mirrored_left", generator, Map.of(
+        TextureKey.END, "/end", TextureKey.SIDE, "/side", TextureKey.PARTICLE, "/side")
+    ));
+    WeightedVariant side_right = createWeightedVariant(createObjectModel(block, "metal_bars/side/mirrored_right", "/side/mirrored_right", generator, Map.of(
         TextureKey.END, "/end", TextureKey.SIDE, "/side", TextureKey.PARTICLE, "/side")
     ));
     generator.blockStateCollector.accept(MultipartBlockModelDefinitionCreator.create(block)
         .with(centerCaps)
         .with(directionalMultipartCondition(false, false, false, false), centerPost)
         .with(directionalMultipartCondition(true, false, false, false), cap)
-        .with(directionalMultipartCondition(false, true, false, false), cap.apply(ROTATE_Y_90))
-        .with(directionalMultipartCondition(false, false, true, false), cap_mirrored.apply(ROTATE_Y_180))
-        .with(directionalMultipartCondition(false, false, false, true), cap_mirrored.apply(ROTATE_Y_270))
-        .with(directionalMultipartCondition(true, null, null, null), side)
-        .with(directionalMultipartCondition(null, true, null, null), side.apply(ROTATE_Y_90))
-        .with(directionalMultipartCondition(null, null, true, null), side_mirrored.apply(ROTATE_Y_180))
-        .with(directionalMultipartCondition(null, null, null, true), side_mirrored.apply(ROTATE_Y_270))
+        .with(directionalMultipartCondition(false, true, false, false), cap.apply(ROTATE_Y_90).apply(UV_LOCK))
+        .with(directionalMultipartCondition(false, false, true, false), cap_mirrored.apply(ROTATE_Y_180).apply(UV_LOCK))
+        .with(directionalMultipartCondition(false, false, false, true), cap_mirrored.apply(ROTATE_Y_270).apply(UV_LOCK))
+        .with(directionalMultipartCondition(true, null, null, null), mirrored ? side_left : side)
+        .with(directionalMultipartCondition(null, true, null, null), (mirrored ? side_left : side).apply(ROTATE_Y_90).apply(UV_LOCK))
+        .with(directionalMultipartCondition(null, null, true, null), (mirrored ? side_right : side).apply(ROTATE_Y_180).apply(UV_LOCK))
+        .with(directionalMultipartCondition(null, null, null, true), (mirrored ? side_right : side).apply(ROTATE_Y_270).apply(UV_LOCK))
     );
     Identifier inventoryModel = createObjectModel(block, "simple_item", "/item", generator, Map.of(
         TextureKey.TEXTURE, "/side", TextureKey.PARTICLE, "/side")

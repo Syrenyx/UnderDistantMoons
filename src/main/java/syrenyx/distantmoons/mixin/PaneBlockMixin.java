@@ -7,6 +7,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import syrenyx.distantmoons.references.DistantMoonsTags;
+import syrenyx.distantmoons.utility.MixinUtil;
 
 @Mixin(PaneBlock.class)
 public class PaneBlockMixin {
@@ -17,27 +18,14 @@ public class PaneBlockMixin {
       boolean sideSolidFullSquare,
       CallbackInfoReturnable<Boolean> callbackInfo
   ) {
-    PaneBlock thisPaneBlock = (PaneBlock) (Object) this;
-    BlockState defaultState = thisPaneBlock.getDefaultState();
+    BlockState defaultState = ((PaneBlock) (Object) this).getDefaultState();
     if (defaultState.isIn(DistantMoonsTags.METAL_BARS)) {
-      if (state.isIn(DistantMoonsTags.METAL_BARS_NEVER_CONNECTS_TO)) {
-        callbackInfo.cancel();
-        callbackInfo.setReturnValue(false);
-      }
-      if (state.isIn(DistantMoonsTags.METAL_BARS_ALWAYS_CONNECTS_TO)) {
-        callbackInfo.cancel();
-        callbackInfo.setReturnValue(true);
-      }
+      if (state.isIn(DistantMoonsTags.METAL_BARS_NEVER_CONNECTS_TO)) MixinUtil.returnBoolean(false, callbackInfo);
+      if (state.isIn(DistantMoonsTags.METAL_BARS_ALWAYS_CONNECTS_TO)) MixinUtil.returnBoolean(true, callbackInfo);
     }
     if (defaultState.isIn(DistantMoonsTags.GLASS_PANE)) {
-      if (state.isIn(DistantMoonsTags.GLASS_PANE_NEVER_CONNECTS_TO)) {
-        callbackInfo.cancel();
-        callbackInfo.setReturnValue(false);
-      }
-      if (state.isIn(DistantMoonsTags.GLASS_PANE_ALWAYS_CONNECTS_TO)) {
-        callbackInfo.cancel();
-        callbackInfo.setReturnValue(true);
-      }
+      if (state.isIn(DistantMoonsTags.GLASS_PANE_NEVER_CONNECTS_TO)) MixinUtil.returnBoolean(false, callbackInfo);
+      if (state.isIn(DistantMoonsTags.GLASS_PANE_ALWAYS_CONNECTS_TO)) MixinUtil.returnBoolean(true, callbackInfo);
     }
   }
 }

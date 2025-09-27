@@ -10,6 +10,7 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import syrenyx.distantmoons.UnderDistantMoons;
 import syrenyx.distantmoons.block.FixedLadderBlock;
+import syrenyx.distantmoons.block.MetalBarDoorBlock;
 import syrenyx.distantmoons.block.MetalLadderBlock;
 import syrenyx.distantmoons.block.SpikedFenceBlock;
 
@@ -46,7 +47,7 @@ public abstract class DistantMoonsBlocks {
   );
   public static final Block DEEP_IRON_BAR_DOOR = register(
       "deep_iron_bar_door",
-      settings -> new DoorBlock(BlockSetType.IRON, settings),
+      settings -> new MetalBarDoorBlock(BlockSetType.IRON, settings),
       AbstractBlock.Settings.copy(Blocks.IRON_DOOR),
       new Item.Settings().fireproof()
   );
@@ -107,7 +108,7 @@ public abstract class DistantMoonsBlocks {
   );
   public static final Block IRON_BAR_DOOR = register(
       "iron_bar_door",
-      settings -> new DoorBlock(BlockSetType.IRON, settings),
+      settings -> new MetalBarDoorBlock(BlockSetType.IRON, settings),
       AbstractBlock.Settings.copy(Blocks.IRON_DOOR),
       new Item.Settings()
   );
@@ -146,7 +147,7 @@ public abstract class DistantMoonsBlocks {
   );
   public static final Block WROUGHT_IRON_BAR_DOOR = register(
       "wrought_iron_bar_door",
-      settings -> new DoorBlock(BlockSetType.IRON, settings),
+      settings -> new MetalBarDoorBlock(BlockSetType.IRON, settings),
       AbstractBlock.Settings.copy(Blocks.IRON_DOOR),
       new Item.Settings()
   );

@@ -26,8 +26,6 @@ import syrenyx.distantmoons.block.block_state_enums.FixedLadderSideShape;
 import syrenyx.distantmoons.block.block_state_enums.HorizontalAxis;
 import syrenyx.distantmoons.references.DistantMoonsTags;
 
-import java.util.Objects;
-
 public class FixedLadderBlock extends Block {
 
   public static final EnumProperty<HorizontalAxis> AXIS = EnumProperty.of("axis", HorizontalAxis.class);
