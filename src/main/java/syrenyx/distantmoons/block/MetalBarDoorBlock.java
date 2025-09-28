@@ -57,7 +57,7 @@ public class MetalBarDoorBlock extends DoorBlock {
   }
 
   private BlockState updateState(BlockView world, BlockPos pos, BlockState state) {
-    return state.with(DOUBLE, canConnectTo(world, pos, state));
+    return state.getBlock() instanceof MetalBarDoorBlock ? state.with(DOUBLE, canConnectTo(world, pos, state)) : state;
   }
 
   private boolean canConnectTo(BlockView world, BlockPos pos, BlockState state) {
