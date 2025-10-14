@@ -26,6 +26,11 @@ public abstract class DistantMoonsItems {
       Item::new,
       new Item.Settings()
   );
+  public static final Item COPPER_ROD = register(
+      "copper_rod",
+      Item::new,
+      new Item.Settings()
+  );
   public static final Item CRUDE_DEEP_IRON_CHUNK = register(
       "crude_deep_iron_chunk",
       Item::new,

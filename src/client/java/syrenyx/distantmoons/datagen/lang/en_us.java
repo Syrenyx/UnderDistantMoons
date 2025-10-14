@@ -67,8 +67,9 @@ public class en_us extends FabricLanguageProvider {
     builder.add("commands.affliction.set.success.multiple", "Applied affliction %s to %s targets");
     builder.add("commands.affliction.set.success.single", "Applied affliction %s to %s");
 
-    builder.add(DistantMoonsItems.CRUDE_DEEP_IRON_CHUNK, "Crude Deep Iron Chunk");
     builder.add(DistantMoonsItems.COKE, "Coke");
+    builder.add(DistantMoonsItems.COPPER_ROD, "Copper Rod");
+    builder.add(DistantMoonsItems.CRUDE_DEEP_IRON_CHUNK, "Crude Deep Iron Chunk");
     builder.add(DistantMoonsItems.DEEP_IRON_AXE, "Deep Iron Axe");
     builder.add(DistantMoonsItems.DEEP_IRON_BOOTS, "Deep Iron Boots");
     builder.add(DistantMoonsItems.DEEP_IRON_CHESTPLATE, "Deep Iron Chestplate");

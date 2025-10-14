@@ -128,6 +128,7 @@ public abstract class DistantMoonsItemGroups {
         DistantMoonsItems.REFINED_DEEP_IRON_INGOT.getDefaultStack()
     ));
     addToGroup(ItemGroups.INGREDIENTS, Items.NETHERITE_INGOT, List.of(
+        DistantMoonsItems.COPPER_ROD.getDefaultStack(),
         DistantMoonsItems.IRON_ROD.getDefaultStack(),
         DistantMoonsItems.WROUGHT_IRON_ROD.getDefaultStack(),
         DistantMoonsItems.REFINED_DEEP_IRON_ROD.getDefaultStack()

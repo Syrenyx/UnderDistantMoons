@@ -98,6 +98,7 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
 
     //SIMPLE ITEMS
     registerSimpleItem(DistantMoonsItems.COKE, "simple_item", generator);
+    registerSimpleItem(DistantMoonsItems.COPPER_ROD, "stick", generator);
     registerSimpleItem(DistantMoonsItems.CRUDE_DEEP_IRON_CHUNK, "simple_item", generator);
     registerSimpleItem(DistantMoonsItems.DEEP_IRON_AXE, "axe", generator);
     registerSimpleItem(DistantMoonsItems.DEEP_IRON_BOOTS, "simple_item", generator);

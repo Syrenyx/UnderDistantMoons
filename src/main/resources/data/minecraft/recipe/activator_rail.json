@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "0": "distant-moons:iron_rod",
+    "1": "minecraft:stick",
+    "2": "minecraft:redstone_torch"
+  },
+  "pattern": [
+    "010",
+    "020",
+    "010"
+  ],
+  "result": {
+    "count": 6,
+    "id": "minecraft:activator_rail"
+  }
+}

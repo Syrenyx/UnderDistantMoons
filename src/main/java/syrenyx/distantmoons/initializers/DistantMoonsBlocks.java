@@ -13,6 +13,7 @@ import syrenyx.distantmoons.block.FixedLadderBlock;
 import syrenyx.distantmoons.block.MetalBarDoorBlock;
 import syrenyx.distantmoons.block.MetalLadderBlock;
 import syrenyx.distantmoons.block.SpikedFenceBlock;
+import syrenyx.distantmoons.references.DistantMoonsBlockSetTypes;
 
 import java.util.function.Function;
 
@@ -47,7 +48,7 @@ public abstract class DistantMoonsBlocks {
   );
   public static final Block DEEP_IRON_BAR_DOOR = register(
       "deep_iron_bar_door",
-      settings -> new MetalBarDoorBlock(BlockSetType.IRON, settings),
+      settings -> new MetalBarDoorBlock(DistantMoonsBlockSetTypes.IRON_BARS, settings),
       AbstractBlock.Settings.copy(Blocks.IRON_DOOR),
       new Item.Settings().fireproof()
   );
@@ -108,7 +109,7 @@ public abstract class DistantMoonsBlocks {
   );
   public static final Block IRON_BAR_DOOR = register(
       "iron_bar_door",
-      settings -> new MetalBarDoorBlock(BlockSetType.IRON, settings),
+      settings -> new MetalBarDoorBlock(DistantMoonsBlockSetTypes.IRON_BARS, settings),
       AbstractBlock.Settings.copy(Blocks.IRON_DOOR),
       new Item.Settings()
   );
@@ -147,7 +148,7 @@ public abstract class DistantMoonsBlocks {
   );
   public static final Block WROUGHT_IRON_BAR_DOOR = register(
       "wrought_iron_bar_door",
-      settings -> new MetalBarDoorBlock(BlockSetType.IRON, settings),
+      settings -> new MetalBarDoorBlock(DistantMoonsBlockSetTypes.IRON_BARS, settings),
       AbstractBlock.Settings.copy(Blocks.IRON_DOOR),
       new Item.Settings()
   );

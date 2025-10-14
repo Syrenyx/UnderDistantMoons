@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "0": "distant-moons:iron_rod",
+    "1": "minecraft:stone_pressure_plate",
+    "2": "minecraft:redstone"
+  },
+  "pattern": [
+    "0 0",
+    "010",
+    "020"
+  ],
+  "result": {
+    "count": 6,
+    "id": "minecraft:detector_rail"
+  }
+}

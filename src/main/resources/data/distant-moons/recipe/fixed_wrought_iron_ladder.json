@@ -5,9 +5,9 @@
     "0": "distant-moons:wrought_iron_rod"
   },
   "pattern": [
-    " 0 ",
     "000",
-    " 0 "
+    " 0 ",
+    "000"
   ],
   "result": {
     "id": "distant-moons:fixed_wrought_iron_ladder",
