@@ -30,7 +30,7 @@ public abstract class DistantMoonsItemGroups {
         DistantMoonsBlocks.IRON_LADDER.asItem().getDefaultStack(),
         DistantMoonsBlocks.FIXED_IRON_LADDER.asItem().getDefaultStack()
     ));
-    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.CHAIN, List.of(
+    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.IRON_CHAIN, List.of(
         DistantMoonsBlocks.WROUGHT_IRON_BARS.asItem().getDefaultStack(),
         DistantMoonsBlocks.WROUGHT_IRON_FENCE.asItem().getDefaultStack(),
         DistantMoonsBlocks.WROUGHT_IRON_BAR_DOOR.asItem().getDefaultStack(),

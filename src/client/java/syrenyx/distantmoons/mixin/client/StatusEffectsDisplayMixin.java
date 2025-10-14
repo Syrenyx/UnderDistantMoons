@@ -25,6 +25,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import syrenyx.distantmoons.UnderDistantMoons;
 import syrenyx.distantmoons.affliction.Affliction;
 import syrenyx.distantmoons.affliction.AfflictionInstance;
+import syrenyx.distantmoons.affliction.ProgressionBarStyle;
 import syrenyx.distantmoons.data.attachment.ClientPlayerAttachment;
 
 import java.util.Collection;
@@ -117,10 +118,9 @@ public abstract class StatusEffectsDisplayMixin {
   public void drawStatusEffectTooltip(DrawContext context, int mouseX, int mouseY, CallbackInfo callbackInfo) {
     callbackInfo.cancel();
     if (this.hoveredAffliction != null) {
-      List<Text> text = List.of(
-          this.hoveredAffliction.getDescription(),
-          getProgressionText(this.hoveredAffliction)
-      );
+      List<Text> text = this.hoveredAffliction.getProgressionBarStyle() == ProgressionBarStyle.INFINITE
+          ? List.of(this.hoveredAffliction.getDescription())
+          : List.of(this.hoveredAffliction.getDescription(), getProgressionText(this.hoveredAffliction));
       Identifier tooltipStyle = this.hoveredAffliction.getTooltipStyle();
       if (tooltipStyle != null) context.drawTooltip(this.parent.getTextRenderer(), text, Optional.empty(), mouseX, mouseY, tooltipStyle);
       else context.drawTooltip(this.parent.getTextRenderer(), text, Optional.empty(), mouseX, mouseY);
@@ -205,7 +205,12 @@ public abstract class StatusEffectsDisplayMixin {
 
   @Unique
   private static Text getProgressionText(AfflictionInstance affliction) {
-    if (affliction.affliction().value().tickProgression().isEmpty()) return Text.translatable("effect.duration.infinite");
-    return Text.translatable("affliction.progression_tooltip", String.format("%.1f", affliction.progression()), Affliction.MAX_PROGRESSION);
+    if (affliction.getProgressionBarStyle() == ProgressionBarStyle.INFINITE) return Text.translatable("effect.duration.infinite");
+    float progression = switch (affliction.getProgressionBarStyle()) {
+      case EMPTY -> 0.0F;
+      case FULL -> 100.0F;
+      default -> affliction.progression();
+    };
+    return Text.translatable("affliction.progression_tooltip", String.format(progression == 0.0F || progression == 100.0F ? "%f" : "%.1f", affliction.progression()), Affliction.MAX_PROGRESSION);
   }
 }

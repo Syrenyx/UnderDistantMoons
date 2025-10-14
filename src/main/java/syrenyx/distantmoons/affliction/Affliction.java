@@ -74,8 +74,8 @@ public record Affliction(
   ) {
     List<AttributeEffect> effects = afflictionInstance.affliction().value().effects.getOrDefault(DistantMoonsAfflictionEffectComponents.ATTRIBUTES, List.of());
     for (AttributeEffect effect : effects) {
-      effect.remove((ServerWorld) entity.getWorld(), afflictionInstance.stage(), entity, entity.getPos(), afflictionInstance);
-      if (!remove) effect.apply((ServerWorld) entity.getWorld(), afflictionInstance.stage(), entity, entity.getPos(), afflictionInstance);
+      effect.remove((ServerWorld) entity.getEntityWorld(), afflictionInstance.stage(), entity, entity.getEntityPos(), afflictionInstance);
+      if (!remove) effect.apply((ServerWorld) entity.getEntityWorld(), afflictionInstance.stage(), entity, entity.getEntityPos(), afflictionInstance);
     }
   }
 
@@ -187,7 +187,7 @@ public record Affliction(
     List<AfflictionEffectEntry<AfflictionEntityEffect>> effectEntries = afflictionInstance.affliction().value().effects.getOrDefault(componentType, List.of());
     LootContext lootContext = getAfflictedBlockLootContext(entity, pos, afflictionInstance.stage(), afflictionInstance.progression());
     for (AfflictionEffectEntry<AfflictionEntityEffect> effectEntry : effectEntries) {
-      if (effectEntry.test(lootContext)) effectEntry.effect().apply((ServerWorld) entity.getWorld(), afflictionInstance.stage(), entity, pos);
+      if (effectEntry.test(lootContext)) effectEntry.effect().apply((ServerWorld) entity.getEntityWorld(), afflictionInstance.stage(), entity, pos);
     }
   }
 
@@ -200,8 +200,8 @@ public record Affliction(
     List<AfflictionEffectEntry<AfflictionLocationBasedEffect>> effectEntries = afflictionInstance.affliction().value().effects.getOrDefault(componentType, List.of());
     LootContext lootContext = getAfflictedEntityLootContext(entity, afflictionInstance.stage(), afflictionInstance.progression());
     for (AfflictionEffectEntry<AfflictionLocationBasedEffect> effectEntry : effectEntries) {
-      if (remove) effectEntry.effect().remove((ServerWorld) entity.getWorld(), afflictionInstance.stage(), entity, entity.getPos(), afflictionInstance);
-      else if (effectEntry.test(lootContext)) effectEntry.effect().apply((ServerWorld) entity.getWorld(), afflictionInstance.stage(), entity, entity.getPos(), afflictionInstance);
+      if (remove) effectEntry.effect().remove((ServerWorld) entity.getEntityWorld(), afflictionInstance.stage(), entity, entity.getEntityPos(), afflictionInstance);
+      else if (effectEntry.test(lootContext)) effectEntry.effect().apply((ServerWorld) entity.getEntityWorld(), afflictionInstance.stage(), entity, entity.getEntityPos(), afflictionInstance);
     }
   }
 
@@ -222,7 +222,7 @@ public record Affliction(
         case VICTIM -> victim;
       };
       if (target == null) continue;
-      if (effectEntry.test(lootContext)) effectEntry.effect().apply((ServerWorld) target.getWorld(), afflictionInstance.stage(), target, target.getPos());
+      if (effectEntry.test(lootContext)) effectEntry.effect().apply((ServerWorld) target.getEntityWorld(), afflictionInstance.stage(), target, target.getEntityPos());
     }
   }
 
@@ -242,7 +242,7 @@ public record Affliction(
               || effectEntry.type() != ProgressionThresholdPassingType.INCREASING && currentProgression < previousProgression && (effectEntry.threshold() < currentProgression || effectEntry.threshold() >= previousProgression)
               || effectEntry.type() != ProgressionThresholdPassingType.DECREASING && currentProgression > previousProgression && (effectEntry.threshold() > currentProgression || effectEntry.threshold() <= previousProgression)
       ) continue;
-      if (effectEntry.test(lootContext)) effectEntry.effect().apply((ServerWorld) entity.getWorld(), afflictionInstance.stage(), entity, entity.getPos());
+      if (effectEntry.test(lootContext)) effectEntry.effect().apply((ServerWorld) entity.getEntityWorld(), afflictionInstance.stage(), entity, entity.getEntityPos());
     }
   }
 
@@ -256,7 +256,7 @@ public record Affliction(
     LootContext lootContext = getAfflictedProjectileLootContext(owner, projectile, afflictionInstance.stage(), afflictionInstance.progression());
     for (SpawnedEntityAfflictionEffectEntry<AfflictionEntityEffect> effectEntry : effectEntries) {
       Entity target = effectEntry.target() == SpawnedEntityEffectTarget.ORIGINATOR ? owner : projectile;
-      if (effectEntry.test(lootContext)) effectEntry.effect().apply((ServerWorld) target.getWorld(), afflictionInstance.stage(), target, target.getPos());
+      if (effectEntry.test(lootContext)) effectEntry.effect().apply((ServerWorld) target.getEntityWorld(), afflictionInstance.stage(), target, target.getEntityPos());
     }
   }
 
@@ -269,7 +269,7 @@ public record Affliction(
     List<AfflictionEffectEntry<AfflictionEntityEffect>> effectEntries = afflictionInstance.affliction().value().effects.getOrDefault(componentType, List.of());
     LootContext lootContext = getAfflictedEntityLootContext(entity, cleared ? 0 : afflictionInstance.stage(), afflictionInstance.progression());
     for (AfflictionEffectEntry<AfflictionEntityEffect> effectEntry : effectEntries) {
-      if (effectEntry.test(lootContext)) effectEntry.effect().apply((ServerWorld) entity.getWorld(), afflictionInstance.stage(), entity, entity.getPos());
+      if (effectEntry.test(lootContext)) effectEntry.effect().apply((ServerWorld) entity.getEntityWorld(), afflictionInstance.stage(), entity, entity.getEntityPos());
     }
   }
 
@@ -281,7 +281,7 @@ public record Affliction(
     List<AfflictionEffectEntry<AfflictionEntityEffect>> effectEntries = afflictionInstance.affliction().value().effects.getOrDefault(componentType, List.of());
     LootContext lootContext = getAfflictedEntityLootContext(entity, afflictionInstance.stage(), afflictionInstance.progression());
     for (AfflictionEffectEntry<AfflictionEntityEffect> effectEntry : effectEntries) {
-      if (effectEntry.test(lootContext)) effectEntry.effect().apply((ServerWorld) entity.getWorld(), afflictionInstance.stage(), entity, entity.getPos());
+      if (effectEntry.test(lootContext)) effectEntry.effect().apply((ServerWorld) entity.getEntityWorld(), afflictionInstance.stage(), entity, entity.getEntityPos());
     }
   }
 
@@ -294,20 +294,20 @@ public record Affliction(
     List<AfflictionEffectEntry<AfflictionEntityEffect>> effectEntries = afflictionInstance.affliction().value().effects.getOrDefault(componentType, List.of());
     LootContext lootContext = getAfflictedItemLootContext(entity, item, afflictionInstance.stage(), afflictionInstance.progression());
     for (AfflictionEffectEntry<AfflictionEntityEffect> effectEntry : effectEntries) {
-      if (effectEntry.test(lootContext)) effectEntry.effect().apply((ServerWorld) entity.getWorld(), afflictionInstance.stage(), entity, entity.getPos());
+      if (effectEntry.test(lootContext)) effectEntry.effect().apply((ServerWorld) entity.getEntityWorld(), afflictionInstance.stage(), entity, entity.getEntityPos());
     }
   }
 
   private static LootContext getAfflictedAttackLootContext(Entity victim, DamageSource damageSource, int stage, float progression) {
     return new LootContext.Builder(
         new LootWorldContext
-            .Builder((ServerWorld) victim.getWorld())
+            .Builder((ServerWorld) victim.getEntityWorld())
             .add(DistantMoonsLootContextParameters.AFFLICTION_PROGRESSION, progression)
             .add(DistantMoonsLootContextParameters.AFFLICTION_STAGE, stage)
             .add(LootContextParameters.ATTACKING_ENTITY, damageSource.getAttacker())
             .add(LootContextParameters.DAMAGE_SOURCE, damageSource)
             .add(LootContextParameters.DIRECT_ATTACKING_ENTITY, damageSource.getSource())
-            .add(LootContextParameters.ORIGIN, victim.getPos())
+            .add(LootContextParameters.ORIGIN, victim.getEntityPos())
             .add(LootContextParameters.THIS_ENTITY, victim)
             .build(DistantMoonsLootContextTypes.AFFLICTED_ATTACK)
     ).build(Optional.empty());
@@ -316,10 +316,10 @@ public record Affliction(
   private static LootContext getAfflictedBlockLootContext(Entity victim, Vec3d pos, int stage, float progression) {
     return new LootContext.Builder(
         new LootWorldContext
-            .Builder((ServerWorld) victim.getWorld())
+            .Builder((ServerWorld) victim.getEntityWorld())
             .add(DistantMoonsLootContextParameters.AFFLICTION_PROGRESSION, progression)
             .add(DistantMoonsLootContextParameters.AFFLICTION_STAGE, stage)
-            .add(LootContextParameters.BLOCK_STATE, victim.getWorld().getBlockState(BlockPos.ofFloored(pos)))
+            .add(LootContextParameters.BLOCK_STATE, victim.getEntityWorld().getBlockState(BlockPos.ofFloored(pos)))
             .add(LootContextParameters.ORIGIN, pos)
             .add(LootContextParameters.THIS_ENTITY, victim)
             .build(DistantMoonsLootContextTypes.AFFLICTED_BLOCK)
@@ -329,10 +329,10 @@ public record Affliction(
   private static LootContext getAfflictedEntityLootContext(Entity entity, int stage, float progression) {
     return new LootContext.Builder(
         new LootWorldContext
-            .Builder((ServerWorld) entity.getWorld())
+            .Builder((ServerWorld) entity.getEntityWorld())
             .add(DistantMoonsLootContextParameters.AFFLICTION_PROGRESSION, progression)
             .add(DistantMoonsLootContextParameters.AFFLICTION_STAGE, stage)
-            .add(LootContextParameters.ORIGIN, entity.getPos())
+            .add(LootContextParameters.ORIGIN, entity.getEntityPos())
             .add(LootContextParameters.THIS_ENTITY, entity)
             .build(DistantMoonsLootContextTypes.AFFLICTED_ENTITY)
     ).build(Optional.empty());
@@ -341,10 +341,10 @@ public record Affliction(
   private static LootContext getAfflictedItemLootContext(Entity entity, ItemStack item, int stage, float progression) {
     return new LootContext.Builder(
         new LootWorldContext
-            .Builder((ServerWorld) entity.getWorld())
+            .Builder((ServerWorld) entity.getEntityWorld())
             .add(DistantMoonsLootContextParameters.AFFLICTION_PROGRESSION, progression)
             .add(DistantMoonsLootContextParameters.AFFLICTION_STAGE, stage)
-            .add(LootContextParameters.ORIGIN, entity.getPos())
+            .add(LootContextParameters.ORIGIN, entity.getEntityPos())
             .add(LootContextParameters.THIS_ENTITY, entity)
             .add(LootContextParameters.TOOL, item)
             .build(DistantMoonsLootContextTypes.AFFLICTED_ITEM)
@@ -354,11 +354,11 @@ public record Affliction(
   private static LootContext getAfflictedProjectileLootContext(Entity owner, Entity projectile, int stage, float progression) {
     return new LootContext.Builder(
         new LootWorldContext
-            .Builder((ServerWorld) owner.getWorld())
+            .Builder((ServerWorld) owner.getEntityWorld())
             .add(DistantMoonsLootContextParameters.AFFLICTION_PROGRESSION, progression)
             .add(DistantMoonsLootContextParameters.AFFLICTION_STAGE, stage)
             .add(DistantMoonsLootContextParameters.SPAWNED_ENTITY, projectile)
-            .add(LootContextParameters.ORIGIN, projectile.getPos())
+            .add(LootContextParameters.ORIGIN, projectile.getEntityPos())
             .add(LootContextParameters.THIS_ENTITY, owner)
             .build(DistantMoonsLootContextTypes.AFFLICTED_PROJECTILE)
     ).build(Optional.empty());

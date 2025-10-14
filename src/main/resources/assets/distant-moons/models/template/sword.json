@@ -1,0 +1,6 @@
+{
+  "parent": "distant-moons:display/sword",
+  "textures": {
+    "layer0": "#texture"
+  }
+}

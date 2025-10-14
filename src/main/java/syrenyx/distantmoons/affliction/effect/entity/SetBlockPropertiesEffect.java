@@ -38,9 +38,9 @@ public record SetBlockPropertiesEffect(
   @Override
   public void apply(ServerWorld world, int stage, Entity target, Vec3d pos) {
     BlockPos blockPos = BlockPos.ofFloored(pos).add(this.offset);
-    BlockState originalBlockState = target.getWorld().getBlockState(blockPos);
+    BlockState originalBlockState = target.getEntityWorld().getBlockState(blockPos);
     BlockState newBlockState = this.properties.applyToState(originalBlockState);
-    if (originalBlockState != newBlockState && target.getWorld().setBlockState(blockPos, newBlockState, Block.NOTIFY_ALL)) {
+    if (originalBlockState != newBlockState && target.getEntityWorld().setBlockState(blockPos, newBlockState, Block.NOTIFY_ALL)) {
       this.triggerGameEvent.ifPresent(gameEvent -> world.emitGameEvent(target, gameEvent, blockPos));
     }
   }

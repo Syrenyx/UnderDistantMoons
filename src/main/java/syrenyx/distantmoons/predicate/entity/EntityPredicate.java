@@ -1,5 +1,6 @@
 package syrenyx.distantmoons.predicate.entity;
 
+import com.google.common.collect.Sets;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -12,7 +13,10 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.dynamic.Codecs;
 import net.minecraft.util.math.Vec3d;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 public record EntityPredicate(
     Optional<EntityTypePredicate> type,
@@ -93,20 +97,28 @@ public record EntityPredicate(
     if (!this.extension.components.test(entity)) return false;
     if (this.extension.checks.isPresent() && !this.extension.checks.get().test(entity, world, pos)) return false;
     if (this.extension.afflictions.isPresent() && !this.extension.afflictions.get().test(entity)) return false;
+    if (this.extension.tags.isPresent()) {
+      Set<String> entityTags = entity.getCommandTags();
+      for (List<String> tagList : this.extension.tags.get()) {
+        if (Sets.intersection(entityTags, new HashSet<>(tagList)).isEmpty()) return false;
+      }
+    }
     return true;
   }
 
   public record EntityPredicateExtension(
       ComponentsPredicate components,
       Optional<EntityChecks> checks,
-      Optional<AfflictionPredicate> afflictions
+      Optional<AfflictionPredicate> afflictions,
+      Optional<List<List<String>>> tags
   ) {
 
     public static final MapCodec<EntityPredicateExtension> CODEC = RecordCodecBuilder.mapCodec(instance -> instance
         .group(
             ComponentsPredicate.CODEC.forGetter(EntityPredicateExtension::components),
             EntityChecks.CODEC.optionalFieldOf("checks").forGetter(EntityPredicateExtension::checks),
-            AfflictionPredicate.CODEC.optionalFieldOf("afflictions").forGetter(EntityPredicateExtension::afflictions)
+            AfflictionPredicate.CODEC.optionalFieldOf("afflictions").forGetter(EntityPredicateExtension::afflictions),
+            Codec.STRING.listOf().listOf().optionalFieldOf("tags").forGetter(EntityPredicateExtension::tags)
         )
         .apply(instance, EntityPredicateExtension::new)
     );

@@ -24,7 +24,7 @@ import java.util.Optional;
 public abstract class EnchantmentManager {
 
   public static float getArmorEffectiveness(Entity entity, ItemStack item, DamageSource damageSource, float armorEffectiveness) {
-    if (!(entity.getWorld() instanceof ServerWorld serverWorld)) return armorEffectiveness;
+    if (!(entity.getEntityWorld() instanceof ServerWorld serverWorld)) return armorEffectiveness;
     ItemEnchantmentsComponent activeEnchantments = item.get(DataComponentTypes.ENCHANTMENTS);
     if (activeEnchantments == null || activeEnchantments.isEmpty()) return armorEffectiveness;
     MutableFloat mutableArmorEffectiveness = new MutableFloat(armorEffectiveness);
@@ -35,7 +35,7 @@ public abstract class EnchantmentManager {
   }
 
   public static float getDamage(Entity entity, ItemStack item, DamageSource damageSource, float damage) {
-    if (!(entity.getWorld() instanceof ServerWorld serverWorld)) return damage;
+    if (!(entity.getEntityWorld() instanceof ServerWorld serverWorld)) return damage;
     ItemEnchantmentsComponent activeEnchantments = item.get(DataComponentTypes.ENCHANTMENTS);
     if (activeEnchantments == null || activeEnchantments.isEmpty()) return damage;
     MutableFloat mutableDamage = new MutableFloat(damage);
@@ -46,7 +46,7 @@ public abstract class EnchantmentManager {
   }
 
   public static float getDamageProtection(LivingEntity entity, DamageSource damageSource, float damageProtection) {
-    if (!(entity.getWorld() instanceof ServerWorld serverWorld)) return damageProtection;
+    if (!(entity.getEntityWorld() instanceof ServerWorld serverWorld)) return damageProtection;
     MutableFloat mutableDamageProtection = new MutableFloat(damageProtection);
     for (EquipmentSlot equipmentSlot : EquipmentSlot.VALUES) {
       ItemStack item = entity.getEquippedStack(equipmentSlot);
@@ -60,7 +60,7 @@ public abstract class EnchantmentManager {
   }
 
   public static float getFishingLuckBonus(Entity entity, ItemStack item, float fishingLuckBonus) {
-    if (!(entity.getWorld() instanceof ServerWorld serverWorld)) return fishingLuckBonus;
+    if (!(entity.getEntityWorld() instanceof ServerWorld serverWorld)) return fishingLuckBonus;
     ItemEnchantmentsComponent activeEnchantments = item.get(DataComponentTypes.ENCHANTMENTS);
     if (activeEnchantments == null || activeEnchantments.isEmpty()) return fishingLuckBonus;
     MutableFloat mutableFishingLuckBonus = new MutableFloat(fishingLuckBonus);
@@ -71,7 +71,7 @@ public abstract class EnchantmentManager {
   }
 
   public static float getFishingTimeReduction(Entity entity, ItemStack item, float fishingTimeReduction) {
-    if (!(entity.getWorld() instanceof ServerWorld serverWorld)) return fishingTimeReduction;
+    if (!(entity.getEntityWorld() instanceof ServerWorld serverWorld)) return fishingTimeReduction;
     ItemEnchantmentsComponent activeEnchantments = item.get(DataComponentTypes.ENCHANTMENTS);
     if (activeEnchantments == null || activeEnchantments.isEmpty()) return fishingTimeReduction;
     MutableFloat mutableFishingTimeReduction = new MutableFloat(fishingTimeReduction);
@@ -82,7 +82,7 @@ public abstract class EnchantmentManager {
   }
 
   public static float getKnockback(Entity entity, ItemStack item, DamageSource damageSource, float knockback) {
-    if (!(entity.getWorld() instanceof ServerWorld serverWorld)) return knockback;
+    if (!(entity.getEntityWorld() instanceof ServerWorld serverWorld)) return knockback;
     ItemEnchantmentsComponent activeEnchantments = item.get(DataComponentTypes.ENCHANTMENTS);
     if (activeEnchantments == null || activeEnchantments.isEmpty()) return knockback;
     MutableFloat mutableKnockback = new MutableFloat(knockback);
@@ -93,14 +93,14 @@ public abstract class EnchantmentManager {
   }
 
   public static void handleUsedItem(LivingEntity entity, ItemStack item) {
-    if (item.isEmpty() || entity.getWorld().isClient()) return;
+    if (item.isEmpty() || entity.getEntityWorld().isClient()) return;
     ItemEnchantmentsComponent activeEnchantments = item.get(DataComponentTypes.ENCHANTMENTS);
     if (activeEnchantments == null || activeEnchantments.isEmpty()) return;
     for (Object2IntMap.Entry<RegistryEntry<Enchantment>> enchantment : activeEnchantments.getEnchantmentEntries()) {
       enchantment.getKey().value().getEffect(DistantMoonsEnchantmentEffectComponents.USED_ITEM).forEach(effect -> {
         LootContext lootContext = getEnchantedItemLootContext(entity, item, enchantment.getIntValue());
         EnchantmentEffectContext context = new EnchantmentEffectContext(item, EquipmentSlot.MAINHAND, entity);
-        if (effect.test(lootContext)) effect.effect().apply((ServerWorld) entity.getWorld(), enchantment.getIntValue(), context, entity, entity.getPos());
+        if (effect.test(lootContext)) effect.effect().apply((ServerWorld) entity.getEntityWorld(), enchantment.getIntValue(), context, entity, entity.getEntityPos());
       });
     }
   }
@@ -108,9 +108,9 @@ public abstract class EnchantmentManager {
   private static LootContext getEnchantedItemLootContext(Entity entity, ItemStack item, int level) {
     return new LootContext.Builder(
         new LootWorldContext
-            .Builder((ServerWorld) entity.getWorld())
+            .Builder((ServerWorld) entity.getEntityWorld())
             .add(LootContextParameters.ENCHANTMENT_LEVEL, level)
-            .add(LootContextParameters.ORIGIN, entity.getPos())
+            .add(LootContextParameters.ORIGIN, entity.getEntityPos())
             .add(LootContextParameters.THIS_ENTITY, entity)
             .add(LootContextParameters.TOOL, item)
             .build(DistantMoonsLootContextTypes.ENCHANTED_ITEM)

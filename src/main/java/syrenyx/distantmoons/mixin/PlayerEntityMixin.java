@@ -26,7 +26,7 @@ public abstract class PlayerEntityMixin {
   @Inject(at = @At("HEAD"), method = "incrementStat(Lnet/minecraft/stat/Stat;)V")
   public void incrementStat(Stat<?> stat, CallbackInfo callbackInfo) {
     PlayerEntity thisPlayerEntity = (PlayerEntity) (Object) this;
-    if (thisPlayerEntity.getWorld().isClient() || stat.getType() != Stats.USED) return;
+    if (thisPlayerEntity.getEntityWorld().isClient() || stat.getType() != Stats.USED) return;
     ItemStack activeItem = thisPlayerEntity.getActiveItem();
     ItemStack stack = activeItem.isEmpty() ? this.savedItemStack : activeItem;
     if (stack == null) return;

@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Uuids;
 import net.minecraft.world.PersistentState;
@@ -52,9 +53,8 @@ public class PersistentStateManager extends PersistentState {
   }
 
   public static PlayerData getPlayerState(LivingEntity player) {
-    MinecraftServer server = player.getServer();
-    assert server != null;
-    PersistentStateManager stateManager = getServerState(server);
+    if (!(player instanceof ServerPlayerEntity serverPlayer)) throw new IllegalArgumentException();
+    PersistentStateManager stateManager = getServerState(serverPlayer.getEntityWorld().getServer());
     return stateManager.players.computeIfAbsent(player.getUuid(), uuid -> PlayerData.newDefault());
   }
 }

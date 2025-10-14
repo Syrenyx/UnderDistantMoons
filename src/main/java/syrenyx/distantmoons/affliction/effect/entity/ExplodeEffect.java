@@ -8,6 +8,7 @@ import net.minecraft.enchantment.EnchantmentLevelBasedValue;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.damage.DamageType;
+import net.minecraft.particle.BlockParticleEffect;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.RegistryCodecs;
@@ -16,6 +17,7 @@ import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.entry.RegistryEntryList;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.util.collection.Pool;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.explosion.AdvancedExplosionBehavior;
@@ -34,6 +36,7 @@ public record ExplodeEffect(
     World.ExplosionSourceType blockInteraction,
     ParticleEffect smallParticle,
     ParticleEffect largeParticle,
+    Pool<BlockParticleEffect> blockParticles,
     RegistryEntry<SoundEvent> sound
 ) implements AfflictionEntityEffect {
 
@@ -49,6 +52,7 @@ public record ExplodeEffect(
           World.ExplosionSourceType.CODEC.fieldOf("block_interaction").forGetter(ExplodeEffect::blockInteraction),
           ParticleTypes.TYPE_CODEC.fieldOf("small_particle").forGetter(ExplodeEffect::smallParticle),
           ParticleTypes.TYPE_CODEC.fieldOf("large_particle").forGetter(ExplodeEffect::largeParticle),
+          Pool.createCodec(BlockParticleEffect.CODEC).optionalFieldOf("block_particles", Pool.empty()).forGetter(ExplodeEffect::blockParticles),
           SoundEvent.ENTRY_CODEC.fieldOf("sound").forGetter(ExplodeEffect::sound)
       )
       .apply(instance, ExplodeEffect::new)
@@ -64,9 +68,7 @@ public record ExplodeEffect(
     Vec3d offsetPosition = pos.add(this.offset);
     world.createExplosion(
         this.attributeToUser ? target : null,
-        this.damageType.map(damageTypeRegistryEntry -> this.attributeToUser
-            ? new DamageSource(damageTypeRegistryEntry, target)
-            : new DamageSource(damageTypeRegistryEntry, offsetPosition)).orElse(null),
+        this.getDamageSource(target, offsetPosition),
         new AdvancedExplosionBehavior(
             this.blockInteraction != World.ExplosionSourceType.NONE,
             this.damageType.isPresent(),
@@ -79,6 +81,7 @@ public record ExplodeEffect(
         this.blockInteraction,
         this.smallParticle,
         this.largeParticle,
+        this.blockParticles,
         this.sound
     );
   }
@@ -87,6 +90,7 @@ public record ExplodeEffect(
   private DamageSource getDamageSource(Entity user, Vec3d pos) {
     return this.damageType.map(damageTypeRegistryEntry -> this.attributeToUser
         ? new DamageSource(damageTypeRegistryEntry, user)
-        : new DamageSource(damageTypeRegistryEntry, pos)).orElse(null);
+        : new DamageSource(damageTypeRegistryEntry, pos)
+    ).orElse(null);
   }
 }
