@@ -209,28 +209,28 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
 
   private static void registerMetalBarDoorBlock(Block block, BlockStateModelGenerator generator) {
     WeightedVariant doubleBottomLeft = createWeightedVariant(createObjectModel(block, "metal_bar_door/double/bottom_left", "/double/bottom_left", generator, Map.of(
-        TextureKey.END, "/end", TextureKey.INSIDE, "/double/bottom_right", TextureKey.of("outside"), "/double/bottom_left", TextureKey.SIDE, "/side", TextureKey.PARTICLE, "/double/bottom_left")
+        TextureKey.END, "/end", TextureKey.BACK, "/double/bottom_right", TextureKey.FRONT, "/double/bottom_left", TextureKey.INSIDE, "/inside", TextureKey.SIDE, "/side", TextureKey.PARTICLE, "/double/bottom_left")
     ));
     WeightedVariant doubleBottomRight = createWeightedVariant(createObjectModel(block, "metal_bar_door/double/bottom_right", "/double/bottom_right", generator, Map.of(
-        TextureKey.END, "/end", TextureKey.INSIDE, "/double/bottom_left", TextureKey.of("outside"), "/double/bottom_right", TextureKey.SIDE, "/side", TextureKey.PARTICLE, "/double/bottom_right")
+        TextureKey.END, "/end", TextureKey.BACK, "/double/bottom_left", TextureKey.FRONT, "/double/bottom_right", TextureKey.INSIDE, "/inside", TextureKey.SIDE, "/side", TextureKey.PARTICLE, "/double/bottom_right")
     ));
     WeightedVariant doubleTopLeft = createWeightedVariant(createObjectModel(block, "metal_bar_door/double/top_left", "/double/top_left", generator, Map.of(
-        TextureKey.END, "/end", TextureKey.INSIDE, "/double/top_right", TextureKey.of("outside"), "/double/top_left", TextureKey.SIDE, "/side", TextureKey.PARTICLE, "/double/top_left")
+        TextureKey.END, "/end", TextureKey.BACK, "/double/top_right", TextureKey.FRONT, "/double/top_left", TextureKey.INSIDE, "/inside", TextureKey.SIDE, "/side", TextureKey.PARTICLE, "/double/top_left")
     ));
     WeightedVariant doubleTopRight = createWeightedVariant(createObjectModel(block, "metal_bar_door/double/top_right", "/double/top_right", generator, Map.of(
-        TextureKey.END, "/end", TextureKey.INSIDE, "/double/top_left", TextureKey.of("outside"), "/double/top_right", TextureKey.SIDE, "/side", TextureKey.PARTICLE, "/double/top_right")
+        TextureKey.END, "/end", TextureKey.BACK, "/double/top_left", TextureKey.FRONT, "/double/top_right", TextureKey.INSIDE, "/inside", TextureKey.SIDE, "/side", TextureKey.PARTICLE, "/double/top_right")
     ));
     WeightedVariant singleBottomLeft = createWeightedVariant(createObjectModel(block, "metal_bar_door/single/bottom", "/single/bottom_left", generator, Map.of(
-        TextureKey.END, "/end", TextureKey.INSIDE, "/single/bottom_right", TextureKey.of("outside"), "/single/bottom_left", TextureKey.SIDE, "/side", TextureKey.PARTICLE, "/single/bottom_left")
+        TextureKey.END, "/end", TextureKey.BACK, "/single/bottom_right", TextureKey.FRONT, "/single/bottom_left", TextureKey.INSIDE, "/inside", TextureKey.SIDE, "/side", TextureKey.PARTICLE, "/single/bottom_left")
     ));
     WeightedVariant singleBottomRight = createWeightedVariant(createObjectModel(block, "metal_bar_door/single/bottom", "/single/bottom_right", generator, Map.of(
-        TextureKey.END, "/end", TextureKey.INSIDE, "/single/bottom_left", TextureKey.of("outside"), "/single/bottom_right", TextureKey.SIDE, "/side", TextureKey.PARTICLE, "/single/bottom_right")
+        TextureKey.END, "/end", TextureKey.BACK, "/single/bottom_left", TextureKey.FRONT, "/single/bottom_right", TextureKey.INSIDE, "/inside", TextureKey.SIDE, "/side", TextureKey.PARTICLE, "/single/bottom_right")
     ));
     WeightedVariant singleTopLeft = createWeightedVariant(createObjectModel(block, "metal_bar_door/single/top", "/single/top_left", generator, Map.of(
-        TextureKey.END, "/end", TextureKey.INSIDE, "/single/top_right", TextureKey.of("outside"), "/single/top_left", TextureKey.SIDE, "/side", TextureKey.PARTICLE, "/single/top_left")
+        TextureKey.END, "/end", TextureKey.BACK, "/single/top_right", TextureKey.FRONT, "/single/top_left", TextureKey.INSIDE, "/inside", TextureKey.SIDE, "/side", TextureKey.PARTICLE, "/single/top_left")
     ));
     WeightedVariant singleTopRight = createWeightedVariant(createObjectModel(block, "metal_bar_door/single/top", "/single/top_right", generator, Map.of(
-        TextureKey.END, "/end", TextureKey.INSIDE, "/single/top_left", TextureKey.of("outside"), "/single/top_right", TextureKey.SIDE, "/side", TextureKey.PARTICLE, "/single/top_right")
+        TextureKey.END, "/end", TextureKey.BACK, "/single/top_left", TextureKey.FRONT, "/single/top_right", TextureKey.INSIDE, "/inside", TextureKey.SIDE, "/side", TextureKey.PARTICLE, "/single/top_right")
     ));
     generator.blockStateCollector.accept(VariantsBlockModelDefinitionCreator.of(block).with(BlockStateVariantMap
         .models(MetalBarDoorBlock.DOUBLE, DoorBlock.HALF, DoorBlock.FACING, DoorBlock.HINGE, DoorBlock.OPEN)

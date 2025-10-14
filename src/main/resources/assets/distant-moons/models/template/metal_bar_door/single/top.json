@@ -4,21 +4,21 @@
       "from": [0, 14, 13],
       "to": [16, 16, 16],
       "faces": {
-        "north": {"uv": [0, 0, 16, 2], "texture": "#inside"},
+        "north": {"uv": [0, 0, 16, 2], "texture": "#back"},
         "east": {"uv": [0, 0, 3, 2], "texture": "#side", "cullface": "east"},
-        "south": {"uv": [0, 0, 16, 2], "texture": "#outside", "cullface": "south"},
+        "south": {"uv": [0, 0, 16, 2], "texture": "#front", "cullface": "south"},
         "west": {"uv": [13, 0, 16, 2], "texture": "#side", "cullface": "west"},
-        "up": {"uv": [0, 13, 16, 16], "texture": "#end"},
-        "down": {"uv": [0, 0, 16, 3], "texture": "#end", "cullface": "down"}
+        "up": {"uv": [0, 13, 16, 16], "texture": "#end", "cullface": "up"},
+        "down": {"uv": [0, 0, 16, 3], "texture": "#inside"}
       }
     },
     {
       "from": [0, 0, 13],
       "to": [2, 14, 16],
       "faces": {
-        "north": {"uv": [14, 2, 16, 16], "texture": "#inside"},
-        "east": {"uv": [0, 2, 3, 16], "texture": "#side"},
-        "south": {"uv": [0, 2, 2, 16], "texture": "#outside", "cullface": "south"},
+        "north": {"uv": [14, 2, 16, 16], "texture": "#back"},
+        "east": {"uv": [0, 2, 3, 16], "texture": "#inside"},
+        "south": {"uv": [0, 2, 2, 16], "texture": "#front", "cullface": "south"},
         "west": {"uv": [13, 2, 16, 16], "texture": "#side", "cullface": "west"}
       }
     },
@@ -26,18 +26,18 @@
       "from": [14, 0, 13],
       "to": [16, 14, 16],
       "faces": {
-        "north": {"uv": [0, 2, 2, 16], "texture": "#inside"},
+        "north": {"uv": [0, 2, 2, 16], "texture": "#back"},
         "east": {"uv": [0, 2, 3, 16], "texture": "#side", "cullface": "east"},
-        "south": {"uv": [14, 2, 16, 16], "texture": "#outside", "cullface": "south"},
-        "west": {"uv": [13, 2, 16, 16], "texture": "#side"}
+        "south": {"uv": [14, 2, 16, 16], "texture": "#front", "cullface": "south"},
+        "west": {"uv": [13, 2, 16, 16], "texture": "#inside"}
       }
     },
     {
       "from": [2, 0, 14],
       "to": [14, 14, 15],
       "faces": {
-        "north": {"uv": [2, 2, 14, 16], "texture": "#inside"},
-        "south": {"uv": [2, 2, 14, 16], "texture": "#outside"}
+        "north": {"uv": [2, 2, 14, 16], "texture": "#back"},
+        "south": {"uv": [2, 2, 14, 16], "texture": "#front"}
       }
     }
   ]
