@@ -2,13 +2,11 @@ package syrenyx.distantmoons.mixin;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FenceBlock;
-import net.minecraft.block.PaneBlock;
 import net.minecraft.util.math.Direction;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import syrenyx.distantmoons.block.FixedLadderBlock;
 import syrenyx.distantmoons.references.DistantMoonsTags;
 import syrenyx.distantmoons.utility.MixinUtil;
 

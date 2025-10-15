@@ -3,10 +3,10 @@ package syrenyx.distantmoons.initializers;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.registry.Registry;
 import syrenyx.distantmoons.UnderDistantMoons;
-import syrenyx.distantmoons.affliction.effect.location_based.AfflictionLocationBasedEffect;
-import syrenyx.distantmoons.affliction.effect.entity.*;
-import syrenyx.distantmoons.affliction.effect.location_based.AllOfLocationBasedEffect;
-import syrenyx.distantmoons.affliction.effect.location_based.AttributeEffect;
+import syrenyx.distantmoons.content.affliction.effect.entity.*;
+import syrenyx.distantmoons.content.affliction.effect.location_based.AfflictionLocationBasedEffect;
+import syrenyx.distantmoons.content.affliction.effect.location_based.AllOfLocationBasedEffect;
+import syrenyx.distantmoons.content.affliction.effect.location_based.AttributeEffect;
 
 public abstract class DistantMoonsAfflictionLocationBasedEffects {
 

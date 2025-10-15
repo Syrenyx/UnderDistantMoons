@@ -5,10 +5,10 @@ import net.fabricmc.fabric.api.event.registry.DynamicRegistries;
 import net.fabricmc.fabric.api.event.registry.FabricRegistryBuilder;
 import net.minecraft.component.ComponentType;
 import net.minecraft.registry.SimpleRegistry;
-import syrenyx.distantmoons.affliction.Affliction;
-import syrenyx.distantmoons.affliction.effect.entity.AfflictionEntityEffect;
-import syrenyx.distantmoons.affliction.effect.location_based.AfflictionLocationBasedEffect;
-import syrenyx.distantmoons.affliction.effect.value.AfflictionValueEffect;
+import syrenyx.distantmoons.content.affliction.Affliction;
+import syrenyx.distantmoons.content.affliction.effect.entity.AfflictionEntityEffect;
+import syrenyx.distantmoons.content.affliction.effect.location_based.AfflictionLocationBasedEffect;
+import syrenyx.distantmoons.content.affliction.effect.value.AfflictionValueEffect;
 import syrenyx.distantmoons.references.DistantMoonsRegistryKeys;
 
 public abstract class DistantMoonsRegistries {

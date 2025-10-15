@@ -5,7 +5,7 @@ import net.minecraft.enchantment.EnchantmentLevelBasedValue;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import syrenyx.distantmoons.UnderDistantMoons;
-import syrenyx.distantmoons.enchantment.level_based_value.Direct;
+import syrenyx.distantmoons.content.enchantment.level_based_value.Direct;
 
 public abstract class DistantMoonsEnchantmentLevelBasedValueTypes {
 

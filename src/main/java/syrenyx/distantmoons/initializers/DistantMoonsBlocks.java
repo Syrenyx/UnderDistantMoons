@@ -9,10 +9,10 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import syrenyx.distantmoons.UnderDistantMoons;
-import syrenyx.distantmoons.block.FixedLadderBlock;
-import syrenyx.distantmoons.block.MetalBarDoorBlock;
-import syrenyx.distantmoons.block.MetalLadderBlock;
-import syrenyx.distantmoons.block.SpikedFenceBlock;
+import syrenyx.distantmoons.content.block.FixedLadderBlock;
+import syrenyx.distantmoons.content.block.MetalBarDoorBlock;
+import syrenyx.distantmoons.content.block.MetalLadderBlock;
+import syrenyx.distantmoons.content.block.SpikedFenceBlock;
 import syrenyx.distantmoons.references.DistantMoonsBlockSetTypes;
 
 import java.util.function.Function;

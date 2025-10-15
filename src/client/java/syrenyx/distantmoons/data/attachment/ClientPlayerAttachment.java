@@ -3,7 +3,7 @@ package syrenyx.distantmoons.data.attachment;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.client.network.ClientPlayerEntity;
-import syrenyx.distantmoons.affliction.AfflictionInstance;
+import syrenyx.distantmoons.content.affliction.AfflictionInstance;
 import syrenyx.distantmoons.initializers.client.DistantMoonsAttachedData;
 
 import java.util.ArrayList;

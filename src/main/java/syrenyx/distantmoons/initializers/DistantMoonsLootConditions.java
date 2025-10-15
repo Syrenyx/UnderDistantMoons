@@ -6,8 +6,8 @@ import net.minecraft.loot.condition.LootConditionType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import syrenyx.distantmoons.UnderDistantMoons;
-import syrenyx.distantmoons.predicate.condition.EntityPropertiesCondition;
-import syrenyx.distantmoons.predicate.condition.LocationCheck;
+import syrenyx.distantmoons.content.predicate.condition.EntityPropertiesCondition;
+import syrenyx.distantmoons.content.predicate.condition.LocationCheck;
 
 public abstract class DistantMoonsLootConditions {
 

@@ -23,9 +23,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import syrenyx.distantmoons.UnderDistantMoons;
-import syrenyx.distantmoons.affliction.Affliction;
-import syrenyx.distantmoons.affliction.AfflictionInstance;
-import syrenyx.distantmoons.affliction.ProgressionBarStyle;
+import syrenyx.distantmoons.content.affliction.Affliction;
+import syrenyx.distantmoons.content.affliction.AfflictionInstance;
+import syrenyx.distantmoons.content.affliction.ProgressionBarStyle;
 import syrenyx.distantmoons.data.attachment.ClientPlayerAttachment;
 
 import java.util.Collection;

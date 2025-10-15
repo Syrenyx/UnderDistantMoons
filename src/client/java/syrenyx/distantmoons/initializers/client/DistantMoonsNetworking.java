@@ -2,9 +2,9 @@ package syrenyx.distantmoons.initializers.client;
 
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.registry.RegistryKey;
-import syrenyx.distantmoons.affliction.AfflictionInstance;
+import syrenyx.distantmoons.content.affliction.AfflictionInstance;
 import syrenyx.distantmoons.data.attachment.ClientPlayerAttachment;
-import syrenyx.distantmoons.payload.ActiveAfflictionsPayload;
+import syrenyx.distantmoons.data.networking.ActiveAfflictionsPayload;
 import syrenyx.distantmoons.references.DistantMoonsRegistryKeys;
 
 import java.util.List;

@@ -5,7 +5,7 @@ import net.minecraft.enchantment.effect.EnchantmentEntityEffect;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import syrenyx.distantmoons.UnderDistantMoons;
-import syrenyx.distantmoons.enchantment.effect.entity.ChangeAfflictionEffect;
+import syrenyx.distantmoons.content.enchantment.effect.entity.ChangeAfflictionEffect;
 
 public abstract class DistantMoonsEnchantmentEntityEffects {
 

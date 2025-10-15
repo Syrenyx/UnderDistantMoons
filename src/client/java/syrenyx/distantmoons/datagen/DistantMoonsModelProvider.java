@@ -22,12 +22,12 @@ import net.minecraft.util.collection.Pool;
 import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.Nullable;
 import syrenyx.distantmoons.UnderDistantMoons;
-import syrenyx.distantmoons.block.FixedLadderBlock;
-import syrenyx.distantmoons.block.MetalBarDoorBlock;
-import syrenyx.distantmoons.block.SpikedFenceBlock;
-import syrenyx.distantmoons.block.block_state_enums.FixedLadderSideShape;
-import syrenyx.distantmoons.block.block_state_enums.HorizontalAxis;
-import syrenyx.distantmoons.block.block_state_enums.SpikedFenceShape;
+import syrenyx.distantmoons.content.block.FixedLadderBlock;
+import syrenyx.distantmoons.content.block.MetalBarDoorBlock;
+import syrenyx.distantmoons.content.block.SpikedFenceBlock;
+import syrenyx.distantmoons.content.block.block_state_enums.FixedLadderSideShape;
+import syrenyx.distantmoons.content.block.block_state_enums.HorizontalAxis;
+import syrenyx.distantmoons.content.block.block_state_enums.SpikedFenceShape;
 import syrenyx.distantmoons.initializers.DistantMoonsBlocks;
 import syrenyx.distantmoons.initializers.DistantMoonsItems;
 

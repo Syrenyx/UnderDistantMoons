@@ -1,7 +1,7 @@
 package syrenyx.distantmoons.initializers;
 
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
-import syrenyx.distantmoons.command.AfflictionCommand;
+import syrenyx.distantmoons.content.command.AfflictionCommand;
 
 public abstract class DistantMoonsCommands {
 

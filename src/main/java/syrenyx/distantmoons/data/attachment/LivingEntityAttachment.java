@@ -4,8 +4,8 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.registry.entry.RegistryEntry;
-import syrenyx.distantmoons.affliction.Affliction;
-import syrenyx.distantmoons.affliction.AfflictionInstance;
+import syrenyx.distantmoons.content.affliction.Affliction;
+import syrenyx.distantmoons.content.affliction.AfflictionInstance;
 import syrenyx.distantmoons.initializers.DistantMoonsAttachedData;
 
 import java.util.HashMap;

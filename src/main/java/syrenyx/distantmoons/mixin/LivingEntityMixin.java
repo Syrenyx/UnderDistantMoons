@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import syrenyx.distantmoons.affliction.AfflictionManager;
+import syrenyx.distantmoons.content.affliction.AfflictionManager;
 import syrenyx.distantmoons.initializers.DistantMoonsAfflictionEffectComponents;
 
 @Mixin(LivingEntity.class)
