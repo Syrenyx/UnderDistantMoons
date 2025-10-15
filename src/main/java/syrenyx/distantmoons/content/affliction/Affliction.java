@@ -24,7 +24,6 @@ import net.minecraft.text.TextCodecs;
 import net.minecraft.util.dynamic.Codecs;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
-import syrenyx.distantmoons.affliction.effect.*;
 import syrenyx.distantmoons.content.affliction.effect.*;
 import syrenyx.distantmoons.content.affliction.effect.entity.AfflictionEntityEffect;
 import syrenyx.distantmoons.content.affliction.effect.location_based.AfflictionLocationBasedEffect;

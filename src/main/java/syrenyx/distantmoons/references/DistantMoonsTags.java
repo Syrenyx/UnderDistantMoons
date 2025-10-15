@@ -27,6 +27,7 @@ public abstract class DistantMoonsTags {
   public static final TagKey<Block> GLASS_PANE_NEVER_CONNECTS_TO = generateKey(RegistryKeys.BLOCK, "connection_target/glass_pane/never");
   public static final TagKey<Block> IMMUNE_TO_DRAGON = generateKey(RegistryKeys.BLOCK, "immunity/ender_dragon");
   public static final TagKey<Block> IMMUNE_TO_WITHER = generateKey(RegistryKeys.BLOCK, "immunity/wither");
+  public static final TagKey<Block> METAL_BAR_DOOR = generateKey(RegistryKeys.BLOCK, "metal_bar_door");
   public static final TagKey<Block> METAL_BAR_DOOR_NEVER_CONNECTS_TO = generateKey(RegistryKeys.BLOCK, "connection_target/metal_bar_door/never");
   public static final TagKey<Block> METAL_BARS = generateKey(RegistryKeys.BLOCK, "metal_bars");
   public static final TagKey<Block> METAL_BARS_ALWAYS_CONNECTS_TO = generateKey(RegistryKeys.BLOCK, "connection_target/metal_bars/always");

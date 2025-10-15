@@ -32,6 +32,9 @@ public class DistantMoonsBlockTagProvider extends FabricTagProvider.BlockTagProv
     this.valueLookupBuilder(DistantMoonsTags.GLASS_PANE)
         .addTag(DistantMoonsTags.COLORED_STAINED_GLASS_PANE)
         .add(Blocks.GLASS_PANE);
+    this.valueLookupBuilder(DistantMoonsTags.METAL_BAR_DOOR).add(
+        DistantMoonsBlocks.DEEP_IRON_BAR_DOOR, DistantMoonsBlocks.IRON_BAR_DOOR, DistantMoonsBlocks.WROUGHT_IRON_BAR_DOOR
+    );
     this.valueLookupBuilder(DistantMoonsTags.METAL_BARS).add(
         DistantMoonsBlocks.DEEP_IRON_BARS, DistantMoonsBlocks.WROUGHT_IRON_BARS, Blocks.IRON_BARS
     );
@@ -64,6 +67,7 @@ public class DistantMoonsBlockTagProvider extends FabricTagProvider.BlockTagProv
     this.valueLookupBuilder(DistantMoonsTags.BRICK_FENCE_NEVER_CONNECTS_TO)
         .addTag(DistantMoonsTags.COLORED_STAINED_GLASS)
         .addTag(DistantMoonsTags.FIXED_LADDER)
+        .addTag(DistantMoonsTags.METAL_BAR_DOOR)
         .addTag(DistantMoonsTags.NEVER_CONNECT_TO);
     this.valueLookupBuilder(DistantMoonsTags.FIXED_LADDER_ALWAYS_CONNECTS_TO)
         .addTag(DistantMoonsTags.GLASS_PANE)
@@ -80,15 +84,18 @@ public class DistantMoonsBlockTagProvider extends FabricTagProvider.BlockTagProv
         .addTag(DistantMoonsTags.METAL_BARS)
         .forceAddTag(BlockTags.WALLS);
     this.valueLookupBuilder(DistantMoonsTags.GLASS_PANE_NEVER_CONNECTS_TO)
+        .addTag(DistantMoonsTags.METAL_BAR_DOOR)
         .addTag(DistantMoonsTags.NEVER_CONNECT_TO);
     this.valueLookupBuilder(DistantMoonsTags.METAL_BARS_ALWAYS_CONNECTS_TO)
         .addTag(DistantMoonsTags.GLASS_PANE)
         .addTag(DistantMoonsTags.METAL_BARS)
         .addTag(DistantMoonsTags.SPIKED_FENCE)
         .forceAddTag(BlockTags.WALLS);
-    this.valueLookupBuilder(DistantMoonsTags.METAL_BAR_DOOR_NEVER_CONNECTS_TO);
+    this.valueLookupBuilder(DistantMoonsTags.METAL_BAR_DOOR_NEVER_CONNECTS_TO)
+        .addTag(DistantMoonsTags.NEVER_CONNECT_TO);
     this.valueLookupBuilder(DistantMoonsTags.METAL_BARS_NEVER_CONNECTS_TO)
         .addTag(DistantMoonsTags.COLORED_STAINED_GLASS)
+        .addTag(DistantMoonsTags.METAL_BAR_DOOR)
         .addTag(DistantMoonsTags.NEVER_CONNECT_TO);
     this.valueLookupBuilder(DistantMoonsTags.NEVER_CONNECT_TO)
         .forceAddTag(BlockTags.SHULKER_BOXES)
@@ -99,6 +106,7 @@ public class DistantMoonsBlockTagProvider extends FabricTagProvider.BlockTagProv
         .forceAddTag(BlockTags.WALLS);
     this.valueLookupBuilder(DistantMoonsTags.SPIKED_FENCE_NEVER_CONNECTS_TO)
         .addTag(DistantMoonsTags.COLORED_STAINED_GLASS)
+        .addTag(DistantMoonsTags.METAL_BAR_DOOR)
         .addTag(DistantMoonsTags.NEVER_CONNECT_TO);
     this.valueLookupBuilder(DistantMoonsTags.SPIKED_FENCE_NOT_BLOCKED_BY)
         .addTag(DistantMoonsTags.NEVER_CONNECT_TO)
@@ -112,12 +120,14 @@ public class DistantMoonsBlockTagProvider extends FabricTagProvider.BlockTagProv
         .forceAddTag(BlockTags.WALLS);
     this.valueLookupBuilder(DistantMoonsTags.WALL_NEVER_CONNECTS_TO)
         .addTag(DistantMoonsTags.COLORED_STAINED_GLASS)
+        .addTag(DistantMoonsTags.METAL_BAR_DOOR)
         .addTag(DistantMoonsTags.NEVER_CONNECT_TO);
     this.valueLookupBuilder(DistantMoonsTags.WOODEN_FENCE_ALWAYS_CONNECTS_TO)
         .addTag(DistantMoonsTags.WOODEN_FENCE);
     this.valueLookupBuilder(DistantMoonsTags.WOODEN_FENCE_NEVER_CONNECTS_TO)
         .addTag(DistantMoonsTags.COLORED_STAINED_GLASS)
         .addTag(DistantMoonsTags.FIXED_LADDER)
+        .addTag(DistantMoonsTags.METAL_BAR_DOOR)
         .addTag(DistantMoonsTags.NEVER_CONNECT_TO);
 
     //IMMUNITIES
@@ -144,10 +154,12 @@ public class DistantMoonsBlockTagProvider extends FabricTagProvider.BlockTagProv
     this.valueLookupBuilder(DistantMoonsTags.MINING_TYPE_SHOVEL);
 
     //MISCELLANEOUS
-    this.valueLookupBuilder(DistantMoonsTags.CLIMBABLE).add(
-        DistantMoonsBlocks.IRON_LADDER, DistantMoonsBlocks.DEEP_IRON_LADDER, DistantMoonsBlocks.FIXED_DEEP_IRON_LADDER, DistantMoonsBlocks.FIXED_IRON_LADDER,
-        DistantMoonsBlocks.FIXED_WROUGHT_IRON_LADDER, DistantMoonsBlocks.WROUGHT_IRON_LADDER
-    );
+    this.valueLookupBuilder(DistantMoonsTags.CLIMBABLE)
+        .forceAddTag(BlockTags.CHAINS)
+        .add(
+            DistantMoonsBlocks.IRON_LADDER, DistantMoonsBlocks.DEEP_IRON_LADDER, DistantMoonsBlocks.FIXED_DEEP_IRON_LADDER, DistantMoonsBlocks.FIXED_IRON_LADDER,
+            DistantMoonsBlocks.FIXED_WROUGHT_IRON_LADDER, DistantMoonsBlocks.WROUGHT_IRON_LADDER
+        );
 
     //VANILLA TAG REDIRECTS
     this.valueLookupBuilder(BlockTags.AXE_MINEABLE).addTag(DistantMoonsTags.MINING_TYPE_AXE);
