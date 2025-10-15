@@ -45,9 +45,7 @@
           "value": {
             "type": "distant-moons:affliction_stage",
             "amount": {
-              "type": "minecraft:linear",
-              "base": 1,
-              "per_level_above_first": 1
+              "type": "distant-moons:direct"
             }
           },
           "range": 2

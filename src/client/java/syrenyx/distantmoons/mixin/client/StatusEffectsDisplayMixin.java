@@ -118,9 +118,7 @@ public abstract class StatusEffectsDisplayMixin {
   public void drawStatusEffectTooltip(DrawContext context, int mouseX, int mouseY, CallbackInfo callbackInfo) {
     callbackInfo.cancel();
     if (this.hoveredAffliction != null) {
-      List<Text> text = this.hoveredAffliction.getProgressionBarStyle() == ProgressionBarStyle.INFINITE
-          ? List.of(this.hoveredAffliction.getDescription())
-          : List.of(this.hoveredAffliction.getDescription(), getProgressionText(this.hoveredAffliction));
+      List<Text> text = List.of(this.hoveredAffliction.getDescription(), getProgressionText(this.hoveredAffliction));
       Identifier tooltipStyle = this.hoveredAffliction.getTooltipStyle();
       if (tooltipStyle != null) context.drawTooltip(this.parent.getTextRenderer(), text, Optional.empty(), mouseX, mouseY, tooltipStyle);
       else context.drawTooltip(this.parent.getTextRenderer(), text, Optional.empty(), mouseX, mouseY);
