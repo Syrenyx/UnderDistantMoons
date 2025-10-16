@@ -22,12 +22,12 @@ public class FenceBlockMixin {
   ) {
     BlockState defaultState = ((FenceBlock) (Object) this).getDefaultState();
     if (defaultState.isIn(DistantMoonsTags.BRICK_FENCE)) {
-      if (state.isIn(DistantMoonsTags.BRICK_FENCE_NEVER_CONNECTS_TO)) MixinUtil.returnBoolean(false, callbackInfo);
-      if (state.isIn(DistantMoonsTags.BRICK_FENCE_ALWAYS_CONNECTS_TO)) MixinUtil.returnBoolean(true, callbackInfo);
+      if (state.isIn(DistantMoonsTags.BRICK_FENCE_NEVER_CONNECTS_TO)) MixinUtil.cancelAndReturnValue(false, callbackInfo);
+      if (state.isIn(DistantMoonsTags.BRICK_FENCE_ALWAYS_CONNECTS_TO)) MixinUtil.cancelAndReturnValue(true, callbackInfo);
     }
     if (defaultState.isIn(DistantMoonsTags.WOODEN_FENCE)) {
-      if (state.isIn(DistantMoonsTags.WOODEN_FENCE_NEVER_CONNECTS_TO)) MixinUtil.returnBoolean(false, callbackInfo);
-      if (state.isIn(DistantMoonsTags.WOODEN_FENCE_ALWAYS_CONNECTS_TO)) MixinUtil.returnBoolean(true, callbackInfo);
+      if (state.isIn(DistantMoonsTags.WOODEN_FENCE_NEVER_CONNECTS_TO)) MixinUtil.cancelAndReturnValue(false, callbackInfo);
+      if (state.isIn(DistantMoonsTags.WOODEN_FENCE_ALWAYS_CONNECTS_TO)) MixinUtil.cancelAndReturnValue(true, callbackInfo);
     }
   }
 }

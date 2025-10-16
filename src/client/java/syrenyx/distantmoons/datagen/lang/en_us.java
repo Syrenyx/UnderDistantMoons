@@ -28,6 +28,7 @@ public class en_us extends FabricLanguageProvider {
     builder.add(DistantMoonsBlocks.CRUDE_DEEP_IRON_BLOCK, "Block of Crude Deep Iron");
     builder.add(DistantMoonsBlocks.DEEP_IRON_BAR_DOOR, "Deep Iron Bar Door");
     builder.add(DistantMoonsBlocks.DEEP_IRON_BARS, "Deep Iron Bars");
+    builder.add(DistantMoonsBlocks.DEEP_IRON_CHAIN, "Deep Iron Chain");
     builder.add(DistantMoonsBlocks.DEEP_IRON_DOOR, "Deep Iron Door");
     builder.add(DistantMoonsBlocks.DEEP_IRON_FENCE, "Deep Iron Fence");
     builder.add(DistantMoonsBlocks.DEEP_IRON_LADDER, "Deep Iron Ladder");

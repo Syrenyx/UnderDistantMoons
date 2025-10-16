@@ -58,6 +58,12 @@ public abstract class DistantMoonsBlocks {
       AbstractBlock.Settings.copy(Blocks.IRON_BARS),
       new Item.Settings().fireproof()
   );
+  public static final Block DEEP_IRON_CHAIN = register(
+      "deep_iron_chain",
+      ChainBlock::new,
+      AbstractBlock.Settings.copy(Blocks.IRON_CHAIN),
+      new Item.Settings().fireproof()
+  );
   public static final Block DEEP_IRON_DOOR = register(
       "deep_iron_door",
       settings -> new DoorBlock(BlockSetType.IRON, settings),

@@ -23,6 +23,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
 import net.minecraft.world.tick.ScheduledTickView;
 import org.jetbrains.annotations.Nullable;
+import syrenyx.distantmoons.content.block.block_state_enums.FixedLadderSideShape;
+import syrenyx.distantmoons.content.block.block_state_enums.HorizontalAxis;
 import syrenyx.distantmoons.content.block.block_state_enums.SpikedFenceShape;
 import syrenyx.distantmoons.references.DistantMoonsTags;
 import syrenyx.distantmoons.utility.VoxelShapeUtil;
@@ -118,16 +120,17 @@ public class SpikedFenceBlock extends Block implements Waterloggable {
     BlockState topState = world.getBlockState(pos.up());
     VoxelShape topFace = topState.getCollisionShape(world, pos.up()).getFace(Direction.DOWN);
     return state
-        .with(TOP, !blockedTop(CENTER_SHAPE, topFace, topState))
-        .with(NORTH, this.canConnectTo(world, pos, Direction.NORTH) ? (blockedTop(SIDE_SHAPES_BY_DIRECTION.get(Direction.NORTH), topFace, topState) ? SpikedFenceShape.SIDE : SpikedFenceShape.TOP) : SpikedFenceShape.NONE)
-        .with(EAST, this.canConnectTo(world, pos, Direction.EAST) ? (blockedTop(SIDE_SHAPES_BY_DIRECTION.get(Direction.EAST), topFace, topState) ? SpikedFenceShape.SIDE : SpikedFenceShape.TOP) : SpikedFenceShape.NONE)
-        .with(SOUTH, this.canConnectTo(world, pos, Direction.SOUTH) ? (blockedTop(SIDE_SHAPES_BY_DIRECTION.get(Direction.SOUTH), topFace, topState) ? SpikedFenceShape.SIDE : SpikedFenceShape.TOP) : SpikedFenceShape.NONE)
-        .with(WEST, this.canConnectTo(world, pos, Direction.WEST) ? (blockedTop(SIDE_SHAPES_BY_DIRECTION.get(Direction.WEST), topFace, topState) ? SpikedFenceShape.SIDE : SpikedFenceShape.TOP) : SpikedFenceShape.NONE);
+        .with(TOP, !blockedTop(Direction.UP, topFace, topState))
+        .with(NORTH, this.canConnectTo(world, pos, Direction.NORTH) ? (blockedTop(Direction.NORTH, topFace, topState) ? SpikedFenceShape.SIDE : SpikedFenceShape.TOP) : SpikedFenceShape.NONE)
+        .with(EAST, this.canConnectTo(world, pos, Direction.EAST) ? (blockedTop(Direction.EAST, topFace, topState) ? SpikedFenceShape.SIDE : SpikedFenceShape.TOP) : SpikedFenceShape.NONE)
+        .with(SOUTH, this.canConnectTo(world, pos, Direction.SOUTH) ? (blockedTop(Direction.SOUTH, topFace, topState) ? SpikedFenceShape.SIDE : SpikedFenceShape.TOP) : SpikedFenceShape.NONE)
+        .with(WEST, this.canConnectTo(world, pos, Direction.WEST) ? (blockedTop(Direction.WEST, topFace, topState) ? SpikedFenceShape.SIDE : SpikedFenceShape.TOP) : SpikedFenceShape.NONE);
   }
 
-  private static boolean blockedTop(VoxelShape shape, VoxelShape topFace, BlockState topState) {
-    return !topState.isIn(DistantMoonsTags.SPIKED_FENCE_NOT_BLOCKED_BY)
-        && !VoxelShapes.matchesAnywhere(shape, topFace, BooleanBiFunction.ONLY_FIRST);
+  private static boolean blockedTop(Direction direction, VoxelShape topFace, BlockState topState) {
+    if (topState.isIn(DistantMoonsTags.SPIKED_FENCE_NOT_BLOCKED_BY)) return false;
+    if (topState.getBlock() instanceof FixedLadderBlock) return FixedLadderBlock.blocksTop(topState, direction);
+    return !VoxelShapes.matchesAnywhere(SIDE_SHAPES_BY_DIRECTION.getOrDefault(direction, CENTER_SHAPE), topFace, BooleanBiFunction.ONLY_FIRST);
   }
 
   private boolean canConnectTo(BlockView world, BlockPos pos, Direction direction) {

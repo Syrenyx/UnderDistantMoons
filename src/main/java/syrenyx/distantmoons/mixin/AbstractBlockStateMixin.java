@@ -26,6 +26,6 @@ public class AbstractBlockStateMixin {
     if (
         thisState.getBlock() instanceof FixedLadderBlock
             && thisState.get(FixedLadderBlock.AXIS) != HorizontalAxis.fromDirectionAxis(direction.getAxis())
-    ) MixinUtil.returnBoolean(true, callbackInfo);
+    ) MixinUtil.cancelAndReturnValue(true, callbackInfo);
   }
 }

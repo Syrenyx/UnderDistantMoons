@@ -11,9 +11,13 @@ import syrenyx.distantmoons.UnderDistantMoons;
 public abstract class DistantMoonsTags {
 
   //BLOCK TAGS
+  public static final TagKey<Block> BARS = generateKey(RegistryKeys.BLOCK, "bars");
+  public static final TagKey<Block> BARS_ALWAYS_CONNECTS_TO = generateKey(RegistryKeys.BLOCK, "connection_target/bars/always");
+  public static final TagKey<Block> BARS_NEVER_CONNECTS_TO = generateKey(RegistryKeys.BLOCK, "connection_target/bars/never");
   public static final TagKey<Block> BRICK_FENCE = generateKey(RegistryKeys.BLOCK, "brick_fence");
   public static final TagKey<Block> BRICK_FENCE_ALWAYS_CONNECTS_TO = generateKey(RegistryKeys.BLOCK, "connection_target/brick_fence/always");
   public static final TagKey<Block> BRICK_FENCE_NEVER_CONNECTS_TO = generateKey(RegistryKeys.BLOCK, "connection_target/brick_fence/never");
+  public static final TagKey<Block> CHAIN = generateKey(RegistryKeys.BLOCK, "chain");
   public static final TagKey<Block> CLIMBABLE = generateKey(RegistryKeys.BLOCK, "climbable");
   public static final TagKey<Block> COLORED_STAINED_GLASS = generateKey(RegistryKeys.BLOCK, "colored/stained_glass");
   public static final TagKey<Block> COLORED_STAINED_GLASS_PANE = generateKey(RegistryKeys.BLOCK, "colored/stained_glass_pane");
@@ -29,9 +33,6 @@ public abstract class DistantMoonsTags {
   public static final TagKey<Block> IMMUNE_TO_WITHER = generateKey(RegistryKeys.BLOCK, "immunity/wither");
   public static final TagKey<Block> METAL_BAR_DOOR = generateKey(RegistryKeys.BLOCK, "metal_bar_door");
   public static final TagKey<Block> METAL_BAR_DOOR_NEVER_CONNECTS_TO = generateKey(RegistryKeys.BLOCK, "connection_target/metal_bar_door/never");
-  public static final TagKey<Block> METAL_BARS = generateKey(RegistryKeys.BLOCK, "metal_bars");
-  public static final TagKey<Block> METAL_BARS_ALWAYS_CONNECTS_TO = generateKey(RegistryKeys.BLOCK, "connection_target/metal_bars/always");
-  public static final TagKey<Block> METAL_BARS_NEVER_CONNECTS_TO = generateKey(RegistryKeys.BLOCK, "connection_target/metal_bars/never");
   public static final TagKey<Block> MINING_TIER_DIAMOND = generateKey(RegistryKeys.BLOCK, "mining_tool_group/tier/diamond");
   public static final TagKey<Block> MINING_TIER_IRON = generateKey(RegistryKeys.BLOCK, "mining_tool_group/tier/iron");
   public static final TagKey<Block> MINING_TIER_STONE = generateKey(RegistryKeys.BLOCK, "mining_tool_group/tier/stone");

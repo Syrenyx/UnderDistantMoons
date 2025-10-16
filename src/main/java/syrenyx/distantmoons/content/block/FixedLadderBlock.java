@@ -126,6 +126,16 @@ public class FixedLadderBlock extends Block {
     return state.get(AXIS) != HorizontalAxis.fromDirectionAxis(direction.getAxis());
   }
 
+  public static boolean blocksTop(BlockState state, Direction direction) {
+    return switch (direction) {
+      case NORTH -> state.get(FixedLadderBlock.AXIS) == HorizontalAxis.X && state.get(FixedLadderBlock.RIGHT) != FixedLadderSideShape.NONE;
+      case EAST -> state.get(FixedLadderBlock.AXIS) == HorizontalAxis.Z && state.get(FixedLadderBlock.LEFT) != FixedLadderSideShape.NONE;
+      case SOUTH -> state.get(FixedLadderBlock.AXIS) == HorizontalAxis.X && state.get(FixedLadderBlock.LEFT) != FixedLadderSideShape.NONE;
+      case WEST -> state.get(FixedLadderBlock.AXIS) == HorizontalAxis.Z && state.get(FixedLadderBlock.RIGHT) != FixedLadderSideShape.NONE;
+      default -> true;
+    };
+  }
+
   @Override
   protected BlockState rotate(BlockState state, BlockRotation rotation) {
     boolean x = state.get(AXIS) == HorizontalAxis.X;
