@@ -83,7 +83,7 @@ public class AfflictionInstance implements Comparable<AfflictionInstance> {
   }
 
   public Text getDescription() {
-    Affliction affliction = this.affliction().value();
+    Affliction affliction = this.affliction.value();
     try {
       return affliction.display().orElseThrow().stageOverrides().orElseThrow().get(String.valueOf(this.stage())).description().orElseThrow();
     } catch (NoSuchElementException e) {
@@ -92,7 +92,7 @@ public class AfflictionInstance implements Comparable<AfflictionInstance> {
   }
 
   public @Nullable Identifier getIcon() {
-    Affliction affliction = this.affliction().value();
+    Affliction affliction = this.affliction.value();
     try {
       return affliction.display().orElseThrow().stageOverrides().orElseThrow().get(String.valueOf(this.stage())).icon().orElseThrow();
     } catch (NoSuchElementException e) {
@@ -102,7 +102,7 @@ public class AfflictionInstance implements Comparable<AfflictionInstance> {
   }
 
   public ProgressionBarStyle getProgressionBarStyle() {
-    Affliction affliction = this.affliction().value();
+    Affliction affliction = this.affliction.value();
     try {
       return affliction.display().orElseThrow().stageOverrides().orElseThrow().get(String.valueOf(this.stage())).progressionBarStyle().orElseThrow();
     } catch (NoSuchElementException e) {
@@ -112,7 +112,7 @@ public class AfflictionInstance implements Comparable<AfflictionInstance> {
   }
 
   public @Nullable Identifier getTooltipStyle() {
-    Affliction affliction = this.affliction().value();
+    Affliction affliction = this.affliction.value();
     try {
       return affliction.display().orElseThrow().stageOverrides().orElseThrow().get(String.valueOf(this.stage())).tooltipStyle().orElseThrow();
     } catch (NoSuchElementException e) {
@@ -131,5 +131,14 @@ public class AfflictionInstance implements Comparable<AfflictionInstance> {
         .compare(this.stage, other.stage)
         .compare(thisAffliction.maxStage(), otherAffliction.maxStage())
         .result();
+  }
+
+  public boolean isVisible() {
+    Affliction affliction = this.affliction.value();
+    try {
+      return !affliction.display().orElseThrow().stageOverrides().orElseThrow().get(String.valueOf(this.stage)).hidden().orElseThrow();
+    } catch (NoSuchElementException e) {
+      return affliction.display().isPresent();
+    }
   }
 }

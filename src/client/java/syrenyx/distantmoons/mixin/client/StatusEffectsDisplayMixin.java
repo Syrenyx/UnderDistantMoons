@@ -69,7 +69,7 @@ public abstract class StatusEffectsDisplayMixin {
     this.hoveredStatusEffect = null;
     int horizontalPosition = parentAccessor.x() + parentAccessor.backgroundWidth() + 2;
     int height = parent.width - horizontalPosition;
-    Collection<AfflictionInstance> activeAfflictions = ClientPlayerAttachment.getOrCreate(this.client.player).activeAfflictions().stream().filter(affliction -> affliction.affliction().value().display().isPresent()).toList();
+    Collection<AfflictionInstance> activeAfflictions = ClientPlayerAttachment.getOrCreate(this.client.player).activeAfflictions().stream().filter(AfflictionInstance::isVisible).toList();
     Collection<StatusEffectInstance> statusEffects = this.client.player.getStatusEffects();
     if (height < MIN_SIZE || statusEffects.isEmpty() && activeAfflictions.isEmpty()) return;
     boolean wide = height >= FULL_SIZE && activeAfflictions.size() + statusEffects.size() < 6;
