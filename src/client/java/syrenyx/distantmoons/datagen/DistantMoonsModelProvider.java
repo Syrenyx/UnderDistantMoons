@@ -10,10 +10,7 @@ import net.minecraft.block.enums.BlockHalf;
 import net.minecraft.block.enums.DoorHinge;
 import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.client.data.*;
-import net.minecraft.client.render.model.json.ModelVariant;
-import net.minecraft.client.render.model.json.ModelVariantOperator;
-import net.minecraft.client.render.model.json.MultipartModelConditionBuilder;
-import net.minecraft.client.render.model.json.WeightedVariant;
+import net.minecraft.client.render.model.json.*;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.state.property.Properties;
@@ -31,6 +28,7 @@ import syrenyx.distantmoons.content.block.block_state_enums.SpikedFenceShape;
 import syrenyx.distantmoons.initializers.DistantMoonsBlocks;
 import syrenyx.distantmoons.initializers.DistantMoonsItems;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -183,17 +181,20 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
   }
 
   private static void registerFixedLadderBlock(Block block, BlockStateModelGenerator generator) {
-    WeightedVariant caps = createWeightedVariant(createObjectModel(block, "fixed_ladder/caps", "/caps", generator, Map.of(
-        TextureKey.END, "/end", TextureKey.PARTICLE, "/particle")
-    ));
     WeightedVariant center = createWeightedVariant(createObjectModel(block, "fixed_ladder/center", "/center", generator, Map.of(
         TextureKey.BOTTOM, "/bottom", TextureKey.FRONT, "/front", TextureKey.SIDE, "/center", TextureKey.TOP, "/top", TextureKey.PARTICLE, "/particle")
+    ));
+    WeightedVariant center_caps = createWeightedVariant(createObjectModel(block, "fixed_ladder/caps/center", "/caps/center", generator, Map.of(
+        TextureKey.END, "/end", TextureKey.PARTICLE, "/particle")
     ));
     WeightedVariant extension = createWeightedVariant(createObjectModel(block, "fixed_ladder/extension", "/extension", generator, Map.of(
         TextureKey.BOTTOM, "/bottom", TextureKey.FRONT, "/front", TextureKey.TOP, "/top", TextureKey.PARTICLE, "/particle")
     ));
     WeightedVariant side = createWeightedVariant(createObjectModel(block, "fixed_ladder/side", "/side", generator, Map.of(
         TextureKey.SIDE, "/side", TextureKey.PARTICLE, "/particle")
+    ));
+    WeightedVariant side_caps = createWeightedVariant(createObjectModel(block, "fixed_ladder/caps/side", "/caps/side", generator, Map.of(
+        TextureKey.END, "/end", TextureKey.PARTICLE, "/particle")
     ));
     generator.blockStateCollector.accept(MultipartBlockModelDefinitionCreator.create(block)
         .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.AXIS, HorizontalAxis.X), center.apply(ROTATE_Y_90))
@@ -206,10 +207,14 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
         .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.AXIS, HorizontalAxis.X).put(FixedLadderBlock.RIGHT_SHAPE, FixedLadderSideShape.ATTACHED), extension)
         .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.AXIS, HorizontalAxis.Z).put(FixedLadderBlock.LEFT_SHAPE, FixedLadderSideShape.ATTACHED), extension.apply(ROTATE_Y_90))
         .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.AXIS, HorizontalAxis.Z).put(FixedLadderBlock.RIGHT_SHAPE, FixedLadderSideShape.ATTACHED), extension.apply(ROTATE_Y_270))
-        .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.AXIS, HorizontalAxis.X).put(FixedLadderBlock.LEFT_CAPPED, true), caps.apply(ROTATE_Y_180).apply(UV_LOCK))
-        .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.AXIS, HorizontalAxis.X).put(FixedLadderBlock.RIGHT_CAPPED, true), caps.apply(UV_LOCK))
-        .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.AXIS, HorizontalAxis.Z).put(FixedLadderBlock.LEFT_CAPPED, true), caps.apply(ROTATE_Y_90).apply(UV_LOCK))
-        .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.AXIS, HorizontalAxis.Z).put(FixedLadderBlock.RIGHT_CAPPED, true), caps.apply(ROTATE_Y_270).apply(UV_LOCK))
+        .with(new MultipartModelCombinedCondition(MultipartModelCombinedCondition.LogicalOperator.OR, List.of(
+            new MultipartModelConditionBuilder().put(FixedLadderBlock.LEFT_CAPPED, true).build(),
+            new MultipartModelConditionBuilder().put(FixedLadderBlock.RIGHT_CAPPED, true).build())
+        ), center_caps)
+        .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.AXIS, HorizontalAxis.X).put(FixedLadderBlock.LEFT_CAPPED, true), side_caps.apply(ROTATE_Y_180).apply(UV_LOCK))
+        .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.AXIS, HorizontalAxis.X).put(FixedLadderBlock.RIGHT_CAPPED, true), side_caps.apply(UV_LOCK))
+        .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.AXIS, HorizontalAxis.Z).put(FixedLadderBlock.LEFT_CAPPED, true), side_caps.apply(ROTATE_Y_90).apply(UV_LOCK))
+        .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.AXIS, HorizontalAxis.Z).put(FixedLadderBlock.RIGHT_CAPPED, true), side_caps.apply(ROTATE_Y_270).apply(UV_LOCK))
     );
     generator.itemModelOutput.accept(block.asItem(), ItemModels.basic(center.variants().getEntries().getFirst().value().modelId()));
   }
