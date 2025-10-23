@@ -16,6 +16,7 @@ import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.Text;
 import org.jetbrains.annotations.Nullable;
+import syrenyx.distantmoons.UnderDistantMoons;
 import syrenyx.distantmoons.content.affliction.Affliction;
 import syrenyx.distantmoons.content.affliction.AfflictionInstance;
 import syrenyx.distantmoons.content.affliction.AfflictionManager;
@@ -27,7 +28,7 @@ public abstract class AfflictionCommand {
 
   public static void register(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess registryAccess) {
     dispatcher.register(CommandManager
-        .literal("affliction")
+        .literal(UnderDistantMoons.withPrefixedNamespace("affliction"))
         .requires(source -> source.hasPermissionLevel(PermissionLevel.GAMEMASTER.get()))
         .then(CommandManager
             .literal("add")

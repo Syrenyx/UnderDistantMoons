@@ -24,6 +24,7 @@ public abstract class DistantMoonsTags {
   public static final TagKey<Block> FIXED_LADDER = generateKey(RegistryKeys.BLOCK, "fixed_ladder");
   public static final TagKey<Block> FIXED_LADDER_ALWAYS_CONNECTS_TO = generateKey(RegistryKeys.BLOCK, "connection_target/fixed_ladder/always");
   public static final TagKey<Block> FIXED_LADDER_ATTACHES_TO = generateKey(RegistryKeys.BLOCK, "connection_target/fixed_ladder/attached");
+  public static final TagKey<Block> FIXED_LADDER_CAPPED_TO = generateKey(RegistryKeys.BLOCK, "connection_target/fixed_ladder/capped");
   public static final TagKey<Block> FIXED_LADDER_NEVER_CONNECTS_TO = generateKey(RegistryKeys.BLOCK, "connection_target/fixed_ladder/never");
   public static final TagKey<Block> GLASS = generateKey(RegistryKeys.BLOCK, "glass");
   public static final TagKey<Block> GLASS_PANE = generateKey(RegistryKeys.BLOCK, "glass_pane");

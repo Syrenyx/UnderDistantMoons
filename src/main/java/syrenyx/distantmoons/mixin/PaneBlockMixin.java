@@ -9,6 +9,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import syrenyx.distantmoons.content.block.FixedLadderBlock;
+import syrenyx.distantmoons.content.block.SpikedFenceBlock;
 import syrenyx.distantmoons.references.DistantMoonsTags;
 import syrenyx.distantmoons.utility.MixinUtil;
 
@@ -39,6 +40,10 @@ public class PaneBlockMixin {
       Direction direction,
       CallbackInfoReturnable<Boolean> callbackInfo
   ) {
-    if (state.isIn(BlockTags.BARS) && stateFrom.getBlock() instanceof FixedLadderBlock) MixinUtil.cancelAndReturnValue(true, callbackInfo);
+    if (
+        state.isIn(BlockTags.BARS)
+            && (stateFrom.getBlock() instanceof FixedLadderBlock
+            || stateFrom.getBlock() instanceof SpikedFenceBlock)
+    ) MixinUtil.cancelAndReturnValue(true, callbackInfo);
   }
 }

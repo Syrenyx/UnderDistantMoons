@@ -53,7 +53,7 @@ public abstract class WallBlockMixin {
     callbackInfo.setReturnValue(currentState
         .with(UP,
             shouldHavePost(currentState, Blocks.AIR.getDefaultState(), VoxelShapes.empty())
-                || ((aboveState.get(FixedLadderBlock.LEFT) == FixedLadderSideShape.NONE) != (aboveState.get(FixedLadderBlock.RIGHT) == FixedLadderSideShape.NONE))
+                || ((aboveState.get(FixedLadderBlock.LEFT_SHAPE) == FixedLadderSideShape.NONE) != (aboveState.get(FixedLadderBlock.RIGHT_SHAPE) == FixedLadderSideShape.NONE))
                 || currentState.get(NORTH_WALL_SHAPE) != WallShape.TALL
                 && currentState.get(EAST_WALL_SHAPE) != WallShape.TALL
                 && currentState.get(SOUTH_WALL_SHAPE) != WallShape.TALL
