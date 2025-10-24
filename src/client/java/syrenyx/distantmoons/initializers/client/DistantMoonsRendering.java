@@ -11,6 +11,7 @@ public abstract class DistantMoonsRendering {
         BlockRenderLayer.CUTOUT,
         DistantMoonsBlocks.DEEP_IRON_BAR_DOOR,
         DistantMoonsBlocks.DEEP_IRON_BARS,
+        DistantMoonsBlocks.DEEP_IRON_CHAIN,
         DistantMoonsBlocks.DEEP_IRON_DOOR,
         DistantMoonsBlocks.DEEP_IRON_FENCE,
         DistantMoonsBlocks.DEEP_IRON_TRAPDOOR,

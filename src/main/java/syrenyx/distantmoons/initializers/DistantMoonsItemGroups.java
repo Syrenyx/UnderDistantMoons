@@ -44,7 +44,8 @@ public abstract class DistantMoonsItemGroups {
         DistantMoonsBlocks.DEEP_IRON_BAR_DOOR.asItem().getDefaultStack(),
         DistantMoonsBlocks.DEEP_IRON_TRAPDOOR.asItem().getDefaultStack(),
         DistantMoonsBlocks.DEEP_IRON_LADDER.asItem().getDefaultStack(),
-        DistantMoonsBlocks.FIXED_DEEP_IRON_LADDER.asItem().getDefaultStack()
+        DistantMoonsBlocks.FIXED_DEEP_IRON_LADDER.asItem().getDefaultStack(),
+        DistantMoonsBlocks.DEEP_IRON_CHAIN.asItem().getDefaultStack()
     ));
 
     //COLORED BLOCKS

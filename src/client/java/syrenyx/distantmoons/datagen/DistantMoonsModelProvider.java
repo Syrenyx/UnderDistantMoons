@@ -2,10 +2,7 @@ package syrenyx.distantmoons.datagen;
 
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.minecraft.block.Block;
-import net.minecraft.block.DoorBlock;
-import net.minecraft.block.LadderBlock;
-import net.minecraft.block.TrapdoorBlock;
+import net.minecraft.block.*;
 import net.minecraft.block.enums.BlockHalf;
 import net.minecraft.block.enums.DoorHinge;
 import net.minecraft.block.enums.DoubleBlockHalf;
@@ -65,6 +62,9 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     registerMetalLadderBlock(DistantMoonsBlocks.IRON_LADDER, generator);
     registerMetalLadderBlock(DistantMoonsBlocks.WROUGHT_IRON_LADDER, generator);
 
+    //CHAINS
+    registerChainBlock(DistantMoonsBlocks.DEEP_IRON_CHAIN, generator);
+
     //DOORS
     registerDoorBlock(DistantMoonsBlocks.DEEP_IRON_DOOR, generator);
 
@@ -78,7 +78,7 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     registerMetalBarDoorBlock(DistantMoonsBlocks.IRON_BAR_DOOR, generator);
     registerMetalBarDoorBlock(DistantMoonsBlocks.WROUGHT_IRON_BAR_DOOR, generator);
 
-    //METAL BARS
+    //BARS
     registerMetalBarsBlock(DistantMoonsBlocks.DEEP_IRON_BARS, false, generator);
     registerMetalBarsBlock(DistantMoonsBlocks.WROUGHT_IRON_BARS, false, generator);
 
@@ -124,6 +124,22 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     ));
     generator.blockStateCollector.accept(VariantsBlockModelDefinitionCreator.of(block, variant));
     generator.itemModelOutput.accept(block.asItem(), ItemModels.basic(getFirstEntryOf(variant)));
+  }
+
+  private static void registerChainBlock(Block block, BlockStateModelGenerator generator) {
+    WeightedVariant variant = createWeightedVariant(createObjectModel(block, "chain", null, generator, Map.of(
+        TextureKey.SIDE, "/block", TextureKey.PARTICLE, "/block")
+    ));
+    generator.blockStateCollector.accept(VariantsBlockModelDefinitionCreator.of(block).with(BlockStateVariantMap
+        .models(ChainBlock.AXIS)
+        .register(Direction.Axis.X, variant.apply(ROTATE_X_90).apply(ROTATE_Y_90))
+        .register(Direction.Axis.Y, variant)
+        .register(Direction.Axis.Z, variant.apply(ROTATE_X_90))
+    ));
+    Identifier inventoryModel = createObjectModel(block, "simple_item", "/item", generator, Map.of(
+        TextureKey.TEXTURE, "/item", TextureKey.PARTICLE, "/item")
+    );
+    generator.itemModelOutput.accept(block.asItem(), ItemModels.basic(inventoryModel));
   }
 
   private static void registerDoorBlock(Block block, BlockStateModelGenerator generator) {
