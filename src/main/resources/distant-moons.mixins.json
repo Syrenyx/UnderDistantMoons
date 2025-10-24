@@ -3,7 +3,6 @@
   "package": "syrenyx.distantmoons.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "AbstractBlockStateMixin",
     "EnchantmentHelperMixin",
     "FenceBlockMixin",
     "LivingEntityMixin",

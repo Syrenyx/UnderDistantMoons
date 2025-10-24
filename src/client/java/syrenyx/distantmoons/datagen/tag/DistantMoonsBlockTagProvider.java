@@ -105,8 +105,8 @@ public class DistantMoonsBlockTagProvider extends FabricTagProvider.BlockTagProv
         .forceAddTag(BlockTags.WALLS);
     this.valueLookupBuilder(DistantMoonsTags.BARS_NEVER_CONNECTS_TO)
         .addTag(DistantMoonsTags.COLORED_STAINED_GLASS)
-        .addTag(DistantMoonsTags.NEVER_CONNECT_TO)
-        .forceAddTag(BlockTags.BARS);
+        .addTag(DistantMoonsTags.METAL_BAR_DOOR)
+        .addTag(DistantMoonsTags.NEVER_CONNECT_TO);
 
     this.valueLookupBuilder(DistantMoonsTags.METAL_BAR_DOOR_NEVER_CONNECTS_TO)
         .addTag(DistantMoonsTags.NEVER_CONNECT_TO);
