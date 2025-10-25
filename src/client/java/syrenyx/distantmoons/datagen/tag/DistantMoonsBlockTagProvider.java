@@ -121,6 +121,7 @@ public class DistantMoonsBlockTagProvider extends FabricTagProvider.BlockTagProv
         .addTag(DistantMoonsBlockTags.NEVER_CONNECT_TO);
     this.valueLookupBuilder(DistantMoonsBlockTags.SPIKED_FENCE_NOT_BLOCKED_BY)
         .addTag(DistantMoonsBlockTags.NEVER_CONNECT_TO)
+        .forceAddTag(BlockTags.CHAINS)
         .forceAddTag(BlockTags.LEAVES)
         .forceAddTag(BlockTags.ICE)
         .add(Blocks.SLIME_BLOCK, Blocks.SNOW_BLOCK);
