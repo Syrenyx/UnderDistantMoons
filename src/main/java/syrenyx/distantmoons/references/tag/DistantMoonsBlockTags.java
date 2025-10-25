@@ -7,7 +7,6 @@ import syrenyx.distantmoons.utility.TagUtil;
 
 public abstract class DistantMoonsBlockTags {
 
-  //BLOCK TAGS
   public static final TagKey<Block> BARS = TagUtil.generateKey(RegistryKeys.BLOCK, "bars");
   public static final TagKey<Block> BARS_ALWAYS_CONNECTS_TO = TagUtil.generateKey(RegistryKeys.BLOCK, "connection_target/bars/always");
   public static final TagKey<Block> BARS_NEVER_CONNECTS_TO = TagUtil.generateKey(RegistryKeys.BLOCK, "connection_target/bars/never");
