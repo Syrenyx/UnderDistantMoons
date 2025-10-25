@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import syrenyx.distantmoons.content.block.FixedLadderBlock;
 import syrenyx.distantmoons.content.block.SpikedFenceBlock;
-import syrenyx.distantmoons.references.DistantMoonsTags;
+import syrenyx.distantmoons.references.tag.DistantMoonsBlockTags;
 import syrenyx.distantmoons.utility.MixinUtil;
 
 @Mixin(PaneBlock.class)
@@ -29,12 +29,12 @@ public class PaneBlockMixin {
     BlockState defaultState = ((PaneBlock) (Object) this).getDefaultState();
     BlockState connectedState = blockView.getBlockState(blockPos);
     if (defaultState.isIn(BlockTags.BARS)) {
-      if (connectedState.isIn(DistantMoonsTags.BARS_NEVER_CONNECTS_TO)) return false;
-      if (connectedState.isIn(DistantMoonsTags.BARS_ALWAYS_CONNECTS_TO)) return true;
+      if (connectedState.isIn(DistantMoonsBlockTags.BARS_NEVER_CONNECTS_TO)) return false;
+      if (connectedState.isIn(DistantMoonsBlockTags.BARS_ALWAYS_CONNECTS_TO)) return true;
     }
-    if (defaultState.isIn(DistantMoonsTags.GLASS_PANE)) {
-      if (connectedState.isIn(DistantMoonsTags.GLASS_PANE_NEVER_CONNECTS_TO)) return false;
-      if (connectedState.isIn(DistantMoonsTags.GLASS_PANE_ALWAYS_CONNECTS_TO)) return true;
+    if (defaultState.isIn(DistantMoonsBlockTags.GLASS_PANE)) {
+      if (connectedState.isIn(DistantMoonsBlockTags.GLASS_PANE_NEVER_CONNECTS_TO)) return false;
+      if (connectedState.isIn(DistantMoonsBlockTags.GLASS_PANE_ALWAYS_CONNECTS_TO)) return true;
     }
     return wrappedCall.call(instance, blockView, blockPos, direction.getOpposite())
         || connectedState.getBlock() instanceof FixedLadderBlock && FixedLadderBlock.canWallConnect(connectedState, direction.getOpposite());

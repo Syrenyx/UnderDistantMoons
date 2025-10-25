@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import syrenyx.distantmoons.references.DistantMoonsTags;
+import syrenyx.distantmoons.references.tag.DistantMoonsBlockTags;
 import syrenyx.distantmoons.utility.MixinUtil;
 
 @Mixin(FenceBlock.class)
@@ -21,13 +21,13 @@ public class FenceBlockMixin {
       CallbackInfoReturnable<Boolean> callbackInfo
   ) {
     BlockState defaultState = ((FenceBlock) (Object) this).getDefaultState();
-    if (defaultState.isIn(DistantMoonsTags.BRICK_FENCE)) {
-      if (state.isIn(DistantMoonsTags.BRICK_FENCE_NEVER_CONNECTS_TO)) MixinUtil.cancelAndReturnValue(false, callbackInfo);
-      if (state.isIn(DistantMoonsTags.BRICK_FENCE_ALWAYS_CONNECTS_TO)) MixinUtil.cancelAndReturnValue(true, callbackInfo);
+    if (defaultState.isIn(DistantMoonsBlockTags.BRICK_FENCE)) {
+      if (state.isIn(DistantMoonsBlockTags.BRICK_FENCE_NEVER_CONNECTS_TO)) MixinUtil.cancelAndReturnValue(false, callbackInfo);
+      if (state.isIn(DistantMoonsBlockTags.BRICK_FENCE_ALWAYS_CONNECTS_TO)) MixinUtil.cancelAndReturnValue(true, callbackInfo);
     }
-    if (defaultState.isIn(DistantMoonsTags.WOODEN_FENCE)) {
-      if (state.isIn(DistantMoonsTags.WOODEN_FENCE_NEVER_CONNECTS_TO)) MixinUtil.cancelAndReturnValue(false, callbackInfo);
-      if (state.isIn(DistantMoonsTags.WOODEN_FENCE_ALWAYS_CONNECTS_TO)) MixinUtil.cancelAndReturnValue(true, callbackInfo);
+    if (defaultState.isIn(DistantMoonsBlockTags.WOODEN_FENCE)) {
+      if (state.isIn(DistantMoonsBlockTags.WOODEN_FENCE_NEVER_CONNECTS_TO)) MixinUtil.cancelAndReturnValue(false, callbackInfo);
+      if (state.isIn(DistantMoonsBlockTags.WOODEN_FENCE_ALWAYS_CONNECTS_TO)) MixinUtil.cancelAndReturnValue(true, callbackInfo);
     }
   }
 }

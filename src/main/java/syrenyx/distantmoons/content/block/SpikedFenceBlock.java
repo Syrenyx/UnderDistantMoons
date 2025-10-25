@@ -23,10 +23,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
 import net.minecraft.world.tick.ScheduledTickView;
 import org.jetbrains.annotations.Nullable;
-import syrenyx.distantmoons.content.block.block_state_enums.FixedLadderSideShape;
-import syrenyx.distantmoons.content.block.block_state_enums.HorizontalAxis;
 import syrenyx.distantmoons.content.block.block_state_enums.SpikedFenceShape;
-import syrenyx.distantmoons.references.DistantMoonsTags;
+import syrenyx.distantmoons.references.tag.DistantMoonsBlockTags;
 import syrenyx.distantmoons.utility.VoxelShapeUtil;
 
 import java.util.Map;
@@ -128,15 +126,15 @@ public class SpikedFenceBlock extends Block implements Waterloggable {
   }
 
   private static boolean blockedTop(Direction direction, VoxelShape topFace, BlockState topState) {
-    if (topState.isIn(DistantMoonsTags.SPIKED_FENCE_NOT_BLOCKED_BY)) return false;
+    if (topState.isIn(DistantMoonsBlockTags.SPIKED_FENCE_NOT_BLOCKED_BY)) return false;
     if (topState.getBlock() instanceof FixedLadderBlock) return FixedLadderBlock.blocksTop(topState, direction);
     return !VoxelShapes.matchesAnywhere(SIDE_SHAPES_BY_DIRECTION.getOrDefault(direction, CENTER_SHAPE), topFace, BooleanBiFunction.ONLY_FIRST);
   }
 
   private boolean canConnectTo(BlockView world, BlockPos pos, Direction direction) {
     BlockState state = world.getBlockState(pos.offset(direction));
-    if (state.isIn(DistantMoonsTags.SPIKED_FENCE_NEVER_CONNECTS_TO)) return false;
-    if (state.isIn(DistantMoonsTags.SPIKED_FENCE_ALWAYS_CONNECTS_TO)) return true;
+    if (state.isIn(DistantMoonsBlockTags.SPIKED_FENCE_NEVER_CONNECTS_TO)) return false;
+    if (state.isIn(DistantMoonsBlockTags.SPIKED_FENCE_ALWAYS_CONNECTS_TO)) return true;
     if (state.getBlock() instanceof FenceGateBlock) return FenceGateBlock.canWallConnect(state, direction);
     if (state.getBlock() instanceof FixedLadderBlock) return FixedLadderBlock.canWallConnect(state, direction);
     if (state.isSideSolidFullSquare(world, pos.offset(direction), direction.getOpposite())) return true;

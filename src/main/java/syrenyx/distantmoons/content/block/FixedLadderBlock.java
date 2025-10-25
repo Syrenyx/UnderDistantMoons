@@ -24,7 +24,7 @@ import net.minecraft.world.tick.ScheduledTickView;
 import org.jetbrains.annotations.Nullable;
 import syrenyx.distantmoons.content.block.block_state_enums.FixedLadderSideShape;
 import syrenyx.distantmoons.content.block.block_state_enums.HorizontalAxis;
-import syrenyx.distantmoons.references.DistantMoonsTags;
+import syrenyx.distantmoons.references.tag.DistantMoonsBlockTags;
 
 public class FixedLadderBlock extends Block {
 
@@ -110,14 +110,14 @@ public class FixedLadderBlock extends Block {
     FixedLadderSideShape rightShape = this.getConnectionType(world, pos, rightDirection);
     return state
         .with(LEFT_SHAPE, leftShape).with(RIGHT_SHAPE, rightShape)
-        .with(LEFT_CAPPED, leftShape != FixedLadderSideShape.NONE && world.getBlockState(pos.offset(leftDirection)).isIn(DistantMoonsTags.FIXED_LADDER_CAPPED_TO))
-        .with(RIGHT_CAPPED, rightShape != FixedLadderSideShape.NONE && world.getBlockState(pos.offset(rightDirection)).isIn(DistantMoonsTags.FIXED_LADDER_CAPPED_TO));
+        .with(LEFT_CAPPED, leftShape != FixedLadderSideShape.NONE && world.getBlockState(pos.offset(leftDirection)).isIn(DistantMoonsBlockTags.FIXED_LADDER_CAPPED_TO))
+        .with(RIGHT_CAPPED, rightShape != FixedLadderSideShape.NONE && world.getBlockState(pos.offset(rightDirection)).isIn(DistantMoonsBlockTags.FIXED_LADDER_CAPPED_TO));
   }
 
   private FixedLadderSideShape getConnectionType(BlockView world, BlockPos pos, Direction direction) {
     BlockState state = world.getBlockState(pos.offset(direction));
-    if (state.isIn(DistantMoonsTags.FIXED_LADDER_NEVER_CONNECTS_TO)) return FixedLadderSideShape.NONE;
-    if (state.isIn(DistantMoonsTags.FIXED_LADDER_ALWAYS_CONNECTS_TO)) return state.isIn(DistantMoonsTags.FIXED_LADDER_ATTACHES_TO)
+    if (state.isIn(DistantMoonsBlockTags.FIXED_LADDER_NEVER_CONNECTS_TO)) return FixedLadderSideShape.NONE;
+    if (state.isIn(DistantMoonsBlockTags.FIXED_LADDER_ALWAYS_CONNECTS_TO)) return state.isIn(DistantMoonsBlockTags.FIXED_LADDER_ATTACHES_TO)
         ? FixedLadderSideShape.ATTACHED : FixedLadderSideShape.CONNECTED;
     if (state.getBlock() instanceof FixedLadderBlock) {
       return (state.get(AXIS) != HorizontalAxis.fromDirectionAxis(direction.getAxis()))

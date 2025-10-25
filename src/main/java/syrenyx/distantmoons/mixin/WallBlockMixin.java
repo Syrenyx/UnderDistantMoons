@@ -19,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import syrenyx.distantmoons.content.block.FixedLadderBlock;
 import syrenyx.distantmoons.content.block.block_state_enums.FixedLadderSideShape;
-import syrenyx.distantmoons.references.DistantMoonsTags;
+import syrenyx.distantmoons.references.tag.DistantMoonsBlockTags;
 import syrenyx.distantmoons.utility.MixinUtil;
 
 @Mixin(WallBlock.class)
@@ -69,8 +69,8 @@ public abstract class WallBlockMixin {
       Direction side,
       CallbackInfoReturnable<Boolean> callbackInfo
   ) {
-    if (state.isIn(DistantMoonsTags.WALL_NEVER_CONNECTS_TO)) MixinUtil.cancelAndReturnValue(false, callbackInfo);
-    if (state.isIn(DistantMoonsTags.WALL_ALWAYS_CONNECTS_TO)) MixinUtil.cancelAndReturnValue(true, callbackInfo);
+    if (state.isIn(DistantMoonsBlockTags.WALL_NEVER_CONNECTS_TO)) MixinUtil.cancelAndReturnValue(false, callbackInfo);
+    if (state.isIn(DistantMoonsBlockTags.WALL_ALWAYS_CONNECTS_TO)) MixinUtil.cancelAndReturnValue(true, callbackInfo);
     if (state.getBlock() instanceof FixedLadderBlock) MixinUtil.cancelAndReturnValue(FixedLadderBlock.canWallConnect(state, side), callbackInfo);
   }
 }

@@ -15,7 +15,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldView;
 import net.minecraft.world.tick.ScheduledTickView;
 import org.jetbrains.annotations.Nullable;
-import syrenyx.distantmoons.references.DistantMoonsTags;
+import syrenyx.distantmoons.references.tag.DistantMoonsBlockTags;
 
 public class MetalBarDoorBlock extends DoorBlock {
 
@@ -63,7 +63,7 @@ public class MetalBarDoorBlock extends DoorBlock {
   private boolean canConnectTo(BlockView world, BlockPos pos, BlockState state) {
     Direction offset = state.get(DoorBlock.FACING).rotateClockwise(Direction.Axis.Y);
     BlockState neighborState = world.getBlockState(pos.offset(state.get(DoorBlock.HINGE) == DoorHinge.RIGHT ? offset.getOpposite() : offset));
-    if (!(neighborState.getBlock() instanceof DoorBlock) || state.isIn(DistantMoonsTags.METAL_BAR_DOOR_NEVER_CONNECTS_TO)) return false;
+    if (!(neighborState.getBlock() instanceof DoorBlock) || state.isIn(DistantMoonsBlockTags.METAL_BAR_DOOR_NEVER_CONNECTS_TO)) return false;
     return state.get(DoorBlock.FACING) == neighborState.get(DoorBlock.FACING)
         && state.get(DoorBlock.HALF) == neighborState.get(DoorBlock.HALF)
         && state.get(DoorBlock.HINGE) != neighborState.get(DoorBlock.HINGE);
