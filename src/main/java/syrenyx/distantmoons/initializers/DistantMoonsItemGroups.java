@@ -118,7 +118,7 @@ public abstract class DistantMoonsItemGroups {
     addToGroup(ItemGroups.INGREDIENTS, Items.CHARCOAL, List.of(
             DistantMoonsItems.COKE.getDefaultStack()
     ));
-    addToGroup(ItemGroups.INGREDIENTS, Items.DIAMOND, List.of(
+    addToGroup(ItemGroups.INGREDIENTS, Items.RAW_GOLD, List.of(
         DistantMoonsItems.RAW_DEEP_IRON.getDefaultStack()
     ));
     addToGroup(ItemGroups.INGREDIENTS, Items.GOLD_NUGGET, List.of(

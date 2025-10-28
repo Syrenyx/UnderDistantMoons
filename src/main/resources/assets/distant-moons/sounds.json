@@ -1,0 +1,8 @@
+{
+  "entity.player.cure_curse_of_the_night": {
+    "subtitle": "subtitles.distant-moons.entity.player.cure_curse_of_the_night",
+    "sounds": [
+      "minecraft:mob/zombie/remedy"
+    ]
+  }
+}

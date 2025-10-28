@@ -48,25 +48,25 @@ public class en_us extends FabricLanguageProvider {
     builder.add(DistantMoonsBlocks.WROUGHT_IRON_FENCE, "Wrought Iron Fence");
     builder.add(DistantMoonsBlocks.WROUGHT_IRON_LADDER, "Wrought Iron Ladder");
 
-    builder.add("commands.affliction.add.failed", "Unable to apply this affliction (target is either immune to afflictions, has something stronger, or the operation produced an invalid affliction instance)");
-    builder.add("commands.affliction.add.success.multiple", "Added affliction %s to %s targets");
-    builder.add("commands.affliction.add.success.single", "Applied affliction %s to %s");
-    builder.add("commands.affliction.clear.everything.failed", "Target has no afflictions to remove");
-    builder.add("commands.affliction.clear.everything.success.multiple", "Removed every affliction from %s targets");
-    builder.add("commands.affliction.clear.everything.success.single", "Removed every affliction from %s");
-    builder.add("commands.affliction.clear.specific.failed", "Target doesn't have the requested afflictions");
-    builder.add("commands.affliction.clear.specific.success.multiple", "Removed affliction %s from %s targets");
-    builder.add("commands.affliction.clear.specific.success.single", "Removed affliction %s from %s");
-    builder.add("commands.affliction.get.failed.affliction", "Unable to get this affliction (target does not have this affliction)");
-    builder.add("commands.affliction.get.failed.entity", "Unable to get this affliction (target is immune to afflictions)");
-    builder.add("commands.affliction.get.success.progression", "Affliction %s has progressed to %s on target");
-    builder.add("commands.affliction.get.success.stage", "Affliction %s has progressed to stage %s on target");
-    builder.add("commands.affliction.give.failed", "Unable to apply this affliction (target is either immune to afflictions, or has something stronger)");
-    builder.add("commands.affliction.give.success.multiple", "Applied affliction %s to %s targets");
-    builder.add("commands.affliction.give.success.single", "Applied affliction %s to %s");
-    builder.add("commands.affliction.set.failed", "Target is immune to afflictions");
-    builder.add("commands.affliction.set.success.multiple", "Applied affliction %s to %s targets");
-    builder.add("commands.affliction.set.success.single", "Applied affliction %s to %s");
+    builder.add("commands.distant-moons.affliction.add.failed", "Unable to apply this affliction (target is either immune to afflictions, has something stronger, or the operation produced an invalid affliction instance)");
+    builder.add("commands.distant-moons.affliction.add.success.multiple", "Added affliction %s to %s targets");
+    builder.add("commands.distant-moons.affliction.add.success.single", "Applied affliction %s to %s");
+    builder.add("commands.distant-moons.affliction.clear.everything.failed", "Target has no afflictions to remove");
+    builder.add("commands.distant-moons.affliction.clear.everything.success.multiple", "Removed every affliction from %s targets");
+    builder.add("commands.distant-moons.affliction.clear.everything.success.single", "Removed every affliction from %s");
+    builder.add("commands.distant-moons.affliction.clear.specific.failed", "Target doesn't have the requested afflictions");
+    builder.add("commands.distant-moons.affliction.clear.specific.success.multiple", "Removed affliction %s from %s targets");
+    builder.add("commands.distant-moons.affliction.clear.specific.success.single", "Removed affliction %s from %s");
+    builder.add("commands.distant-moons.affliction.get.failed.affliction", "Unable to get this affliction (target does not have this affliction)");
+    builder.add("commands.distant-moons.affliction.get.failed.entity", "Unable to get this affliction (target is immune to afflictions)");
+    builder.add("commands.distant-moons.affliction.get.success.progression", "Affliction %s has progressed to %s on target");
+    builder.add("commands.distant-moons.affliction.get.success.stage", "Affliction %s has progressed to stage %s on target");
+    builder.add("commands.distant-moons.affliction.give.failed", "Unable to apply this affliction (target is either immune to afflictions, or has something stronger)");
+    builder.add("commands.distant-moons.affliction.give.success.multiple", "Applied affliction %s to %s targets");
+    builder.add("commands.distant-moons.affliction.give.success.single", "Applied affliction %s to %s");
+    builder.add("commands.distant-moons.affliction.set.failed", "Target is immune to afflictions");
+    builder.add("commands.distant-moons.affliction.set.success.multiple", "Applied affliction %s to %s targets");
+    builder.add("commands.distant-moons.affliction.set.success.single", "Applied affliction %s to %s");
 
     builder.add(DistantMoonsItems.COKE, "Coke");
     builder.add(DistantMoonsItems.COPPER_ROD, "Copper Rod");
@@ -89,6 +89,8 @@ public class en_us extends FabricLanguageProvider {
     builder.add(DistantMoonsItems.ROASTED_BROWN_MUSHROOM, "Roasted Brown Mushroom");
     builder.add(DistantMoonsItems.UNDERWORLD_DUST, "Underworld Dust");
     builder.add(DistantMoonsItems.WROUGHT_IRON_ROD, "Wrought Iron Rod");
+
+    builder.add("subtitles.distant-moons.entity.player.cure_curse_of_the_night", "Player snuffles");
 
     EnchantmentLevelUtil.generateEnchantmentLevels(builder, 11, 255);
   }

@@ -73,7 +73,7 @@
             },
             {
               "type": "distant-moons:play_sound",
-              "sound": "minecraft:entity.zombie_villager.cure",
+              "sound": "distant-moons:entity.player.cure_curse_of_the_night",
               "pitch": 0.75,
               "volume": 1.25
             }

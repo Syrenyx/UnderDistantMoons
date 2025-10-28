@@ -187,13 +187,13 @@ public abstract class AfflictionCommand {
     );
   }
 
-  private static final SimpleCommandExceptionType ADD_FAILED_EXCEPTION = new SimpleCommandExceptionType(Text.translatable("commands.affliction.add.failed"));
-  private static final SimpleCommandExceptionType CLEAR_EVERYTHING_FAILED_EXCEPTION = new SimpleCommandExceptionType(Text.translatable("commands.affliction.clear.everything.failed"));
-  private static final SimpleCommandExceptionType CLEAR_SPECIFIC_FAILED_EXCEPTION = new SimpleCommandExceptionType(Text.translatable("commands.affliction.clear.specific.failed"));
-  private static final SimpleCommandExceptionType GET_FAILED_AFFLICTION_EXCEPTION = new SimpleCommandExceptionType(Text.translatable("commands.affliction.get.failed.affliction"));
-  private static final SimpleCommandExceptionType GET_FAILED_ENTITY_EXCEPTION = new SimpleCommandExceptionType(Text.translatable("commands.affliction.get.failed.entity"));
-  private static final SimpleCommandExceptionType GIVE_FAILED_EXCEPTION = new SimpleCommandExceptionType(Text.translatable("commands.affliction.give.failed"));
-  private static final SimpleCommandExceptionType SET_FAILED_EXCEPTION = new SimpleCommandExceptionType(Text.translatable("commands.affliction.set.failed"));
+  private static final SimpleCommandExceptionType ADD_FAILED_EXCEPTION = new SimpleCommandExceptionType(Text.translatable("commands.distant-moons.affliction.add.failed"));
+  private static final SimpleCommandExceptionType CLEAR_EVERYTHING_FAILED_EXCEPTION = new SimpleCommandExceptionType(Text.translatable("commands.distant-moons.affliction.clear.everything.failed"));
+  private static final SimpleCommandExceptionType CLEAR_SPECIFIC_FAILED_EXCEPTION = new SimpleCommandExceptionType(Text.translatable("commands.distant-moons.affliction.clear.specific.failed"));
+  private static final SimpleCommandExceptionType GET_FAILED_AFFLICTION_EXCEPTION = new SimpleCommandExceptionType(Text.translatable("commands.distant-moons.affliction.get.failed.affliction"));
+  private static final SimpleCommandExceptionType GET_FAILED_ENTITY_EXCEPTION = new SimpleCommandExceptionType(Text.translatable("commands.distant-moons.affliction.get.failed.entity"));
+  private static final SimpleCommandExceptionType GIVE_FAILED_EXCEPTION = new SimpleCommandExceptionType(Text.translatable("commands.distant-moons.affliction.give.failed"));
+  private static final SimpleCommandExceptionType SET_FAILED_EXCEPTION = new SimpleCommandExceptionType(Text.translatable("commands.distant-moons.affliction.set.failed"));
 
   private static int executeAdd(
       ServerCommandSource source,
@@ -205,8 +205,8 @@ public abstract class AfflictionCommand {
       if (target instanceof LivingEntity livingEntity && AfflictionManager.addToAffliction(livingEntity, affliction)) result++;
     }
     if (result == 0) throw ADD_FAILED_EXCEPTION.create();
-    if (targets.size() == 1) source.sendFeedback(() -> Text.translatable("commands.affliction.add.success.single", affliction.affliction().value().description(), targets.iterator().next().getDisplayName()), true);
-    else source.sendFeedback(() -> Text.translatable("commands.affliction.add.success.multiple", affliction.affliction().value().description(), targets.size()), true);
+    if (targets.size() == 1) source.sendFeedback(() -> Text.translatable("commands.distant-moons.affliction.add.success.single", affliction.affliction().value().description(), targets.iterator().next().getDisplayName()), true);
+    else source.sendFeedback(() -> Text.translatable("commands.distant-moons.affliction.add.success.multiple", affliction.affliction().value().description(), targets.size()), true);
     return result;
   }
 
@@ -220,10 +220,10 @@ public abstract class AfflictionCommand {
       if (target instanceof LivingEntity livingEntity && AfflictionManager.clearAffliction(livingEntity, affliction)) result++;
     }
     if (result == 0) throw affliction == null ? CLEAR_EVERYTHING_FAILED_EXCEPTION.create() : CLEAR_SPECIFIC_FAILED_EXCEPTION.create();
-    if (targets.size() == 1 && affliction == null) source.sendFeedback(() -> Text.translatable("commands.affliction.clear.everything.success.single", targets.iterator().next().getDisplayName()), true);
-    else if (targets.size() == 1) source.sendFeedback(() -> Text.translatable("commands.affliction.clear.specific.success.single", affliction.value().description(), targets.iterator().next().getDisplayName()), true);
-    else if (affliction == null) source.sendFeedback(() -> Text.translatable("commands.affliction.clear.everything.success.multiple", targets.size()), true);
-    else source.sendFeedback(() -> Text.translatable("commands.affliction.clear.specific.success.multiple", affliction.value().description(), targets.size()), true);
+    if (targets.size() == 1 && affliction == null) source.sendFeedback(() -> Text.translatable("commands.distant-moons.affliction.clear.everything.success.single", targets.iterator().next().getDisplayName()), true);
+    else if (targets.size() == 1) source.sendFeedback(() -> Text.translatable("commands.distant-moons.affliction.clear.specific.success.single", affliction.value().description(), targets.iterator().next().getDisplayName()), true);
+    else if (affliction == null) source.sendFeedback(() -> Text.translatable("commands.distant-moons.affliction.clear.everything.success.multiple", targets.size()), true);
+    else source.sendFeedback(() -> Text.translatable("commands.distant-moons.affliction.clear.specific.success.multiple", affliction.value().description(), targets.size()), true);
     return result;
   }
 
@@ -236,8 +236,8 @@ public abstract class AfflictionCommand {
     if (!(target instanceof LivingEntity livingEntity)) throw GET_FAILED_ENTITY_EXCEPTION.create();
     AfflictionInstance afflictionInstance = AfflictionManager.getAffliction(livingEntity, affliction);
     if (afflictionInstance == null) throw GET_FAILED_AFFLICTION_EXCEPTION.create();
-    if (stage) source.sendFeedback(() -> Text.translatable("commands.affliction.get.success.stage", affliction.value().description(), afflictionInstance.stage()), true);
-    else source.sendFeedback(() -> Text.translatable("commands.affliction.get.success.progression", affliction.value().description(), afflictionInstance.progression()), true);
+    if (stage) source.sendFeedback(() -> Text.translatable("commands.distant-moons.affliction.get.success.stage", affliction.value().description(), afflictionInstance.stage()), true);
+    else source.sendFeedback(() -> Text.translatable("commands.distant-moons.affliction.get.success.progression", affliction.value().description(), afflictionInstance.progression()), true);
     return stage ? afflictionInstance.stage() : (int) afflictionInstance.progression();
   }
 
@@ -251,8 +251,8 @@ public abstract class AfflictionCommand {
       if (target instanceof LivingEntity livingEntity && AfflictionManager.giveAffliction(livingEntity, affliction)) result++;
     }
     if (result == 0) throw GIVE_FAILED_EXCEPTION.create();
-    if (targets.size() == 1) source.sendFeedback(() -> Text.translatable("commands.affliction.give.success.single", affliction.affliction().value().description(), targets.iterator().next().getDisplayName()), true);
-    else source.sendFeedback(() -> Text.translatable("commands.affliction.give.success.multiple", affliction.affliction().value().description(), targets.size()), true);
+    if (targets.size() == 1) source.sendFeedback(() -> Text.translatable("commands.distant-moons.affliction.give.success.single", affliction.affliction().value().description(), targets.iterator().next().getDisplayName()), true);
+    else source.sendFeedback(() -> Text.translatable("commands.distant-moons.affliction.give.success.multiple", affliction.affliction().value().description(), targets.size()), true);
     return result;
   }
 
@@ -266,8 +266,8 @@ public abstract class AfflictionCommand {
       if (target instanceof LivingEntity livingEntity && AfflictionManager.setAffliction(livingEntity, affliction)) result++;
     }
     if (result == 0) throw SET_FAILED_EXCEPTION.create();
-    if (targets.size() == 1) source.sendFeedback(() -> Text.translatable("commands.affliction.set.success.single", affliction.affliction().value().description(), targets.iterator().next().getDisplayName()), true);
-    else source.sendFeedback(() -> Text.translatable("commands.affliction.set.success.multiple", affliction.affliction().value().description(), targets.size()), true);
+    if (targets.size() == 1) source.sendFeedback(() -> Text.translatable("commands.distant-moons.affliction.set.success.single", affliction.affliction().value().description(), targets.iterator().next().getDisplayName()), true);
+    else source.sendFeedback(() -> Text.translatable("commands.distant-moons.affliction.set.success.multiple", affliction.affliction().value().description(), targets.size()), true);
     return result;
   }
 }
