@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:block",
+  "random_sequence": "distant-moons:blocks/iron_bar_door",
+  "pools": [
+    {
+      "rolls": 1.0,
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "distant-moons:iron_bar_door",
+          "conditions": [
+            {
+              "condition": "minecraft:block_state_property",
+              "block": "distant-moons:iron_bar_door",
+              "properties": {
+                "half": "lower"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

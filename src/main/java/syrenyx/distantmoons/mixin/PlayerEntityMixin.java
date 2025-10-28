@@ -9,8 +9,8 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import syrenyx.distantmoons.affliction.AfflictionManager;
-import syrenyx.distantmoons.enchantment.effect.entity.EnchantmentManager;
+import syrenyx.distantmoons.content.affliction.AfflictionManager;
+import syrenyx.distantmoons.content.enchantment.EnchantmentManager;
 
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin {
@@ -26,9 +26,10 @@ public abstract class PlayerEntityMixin {
   @Inject(at = @At("HEAD"), method = "incrementStat(Lnet/minecraft/stat/Stat;)V")
   public void incrementStat(Stat<?> stat, CallbackInfo callbackInfo) {
     PlayerEntity thisPlayerEntity = (PlayerEntity) (Object) this;
-    if (thisPlayerEntity.getWorld().isClient() || stat.getType() != Stats.USED) return;
+    if (thisPlayerEntity.getEntityWorld().isClient() || stat.getType() != Stats.USED) return;
     ItemStack activeItem = thisPlayerEntity.getActiveItem();
     ItemStack stack = activeItem.isEmpty() ? this.savedItemStack : activeItem;
+    if (stack == null) return;
     AfflictionManager.handleUsedItem(thisPlayerEntity, stack);
     EnchantmentManager.handleUsedItem(thisPlayerEntity, stack);
   }

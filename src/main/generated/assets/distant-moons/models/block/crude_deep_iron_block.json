@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cube_all",
-  "textures": {
-    "all": "distant-moons:block/crude_deep_iron_block"
-  }
-}

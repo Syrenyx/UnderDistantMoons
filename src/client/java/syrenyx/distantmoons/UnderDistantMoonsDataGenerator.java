@@ -5,13 +5,25 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import syrenyx.distantmoons.datagen.DistantMoonsModelProvider;
 import syrenyx.distantmoons.datagen.DistantMoonsRecipeProvider;
 import syrenyx.distantmoons.datagen.lang.en_us;
+import syrenyx.distantmoons.datagen.loot_table.DistantMoonsBlockLootTableProvider;
+import syrenyx.distantmoons.datagen.tag.DistantMoonsBlockTagProvider;
+import syrenyx.distantmoons.datagen.tag.DistantMoonsItemTagProvider;
 
 public class UnderDistantMoonsDataGenerator implements DataGeneratorEntrypoint {
 	@Override
 	public void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator) {
     FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
+
+    //MISCELLANEOUS
     pack.addProvider(DistantMoonsModelProvider::new);
     pack.addProvider(DistantMoonsRecipeProvider::new);
+    pack.addProvider(DistantMoonsBlockLootTableProvider::new);
+
+    //TAGS
+    pack.addProvider(DistantMoonsBlockTagProvider::new);
+    pack.addProvider((output, registriesFuture) -> new DistantMoonsItemTagProvider(output, registriesFuture, null));
+
+    //LANGUAGES
     pack.addProvider(en_us::new);
 	}
 }

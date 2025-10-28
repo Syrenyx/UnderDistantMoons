@@ -3,7 +3,7 @@ package syrenyx.distantmoons.initializers;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.registry.Registry;
 import syrenyx.distantmoons.UnderDistantMoons;
-import syrenyx.distantmoons.affliction.effect.value.*;
+import syrenyx.distantmoons.content.affliction.effect.value.*;
 
 public abstract class DistantMoonsAfflictionValueEffects {
 

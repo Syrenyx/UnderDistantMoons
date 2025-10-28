@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "0": "distant-moons:iron_rod"
+  },
+  "pattern": [
+    "000",
+    "000"
+  ],
+  "result": {
+    "id": "distant-moons:iron_fence",
+    "count": 8
+  }
+}

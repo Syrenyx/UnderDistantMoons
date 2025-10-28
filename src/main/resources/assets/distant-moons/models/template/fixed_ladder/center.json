@@ -1,0 +1,37 @@
+{
+  "parent": "distant-moons:display/fixed_ladder",
+  "elements": [
+    {
+      "from": [2, 11, 7],
+      "to": [14, 13, 9],
+      "faces": {
+        "north": {"uv": [2, 3, 14, 5], "texture": "#front"},
+        "east": {"uv": [14, 3, 16, 5], "texture": "#front"},
+        "south": {"uv": [2, 3, 14, 5], "texture": "#front"},
+        "west": {"uv": [0, 3, 2, 5], "texture": "#front"},
+        "up": {"uv": [2, 3, 14, 5], "texture": "#top"},
+        "down": {"uv": [2, 3, 14, 5], "texture": "#bottom"}
+      }
+    },
+    {
+      "from": [2, 3, 7],
+      "to": [14, 5, 9],
+      "faces": {
+        "north": {"uv": [2, 11, 14, 13], "texture": "#front"},
+        "east": {"uv": [14, 11, 16, 13], "texture": "#front"},
+        "south": {"uv": [2, 11, 14, 13], "texture": "#front"},
+        "west": {"uv": [0, 11, 2, 13], "texture": "#front"},
+        "up": {"uv": [2, 11, 14, 13], "texture": "#top"},
+        "down": {"uv": [2, 11, 14, 13], "texture": "#bottom"}
+      }
+    },
+    {
+      "from": [0, 0, 8],
+      "to": [16, 16, 8],
+      "faces": {
+        "north": {"uv": [0, 0, 16, 16], "texture": "#side"},
+        "south": {"uv": [0, 0, 16, 16], "texture": "#side"}
+      }
+    }
+  ]
+}

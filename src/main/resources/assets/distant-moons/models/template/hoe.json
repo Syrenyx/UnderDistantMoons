@@ -1,0 +1,6 @@
+{
+  "parent": "distant-moons:display/hoe",
+  "textures": {
+    "layer0": "#texture"
+  }
+}

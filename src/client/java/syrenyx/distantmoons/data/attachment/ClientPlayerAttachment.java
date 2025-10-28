@@ -3,8 +3,8 @@ package syrenyx.distantmoons.data.attachment;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.client.network.ClientPlayerEntity;
-import syrenyx.distantmoons.affliction.AfflictionInstance;
-import syrenyx.distantmoons.initializers.client.AttachedData;
+import syrenyx.distantmoons.content.affliction.AfflictionInstance;
+import syrenyx.distantmoons.initializers.client.DistantMoonsAttachedData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,11 +20,11 @@ public record ClientPlayerAttachment(List<AfflictionInstance> activeAfflictions)
   );
 
   public static ClientPlayerAttachment getOrCreate(ClientPlayerEntity player) {
-    if (!player.hasAttached(AttachedData.CLIENT_PLAYER_ATTACHMENT)) {
-      player.setAttached(AttachedData.CLIENT_PLAYER_ATTACHMENT, new ClientPlayerAttachment(
+    if (!player.hasAttached(DistantMoonsAttachedData.CLIENT_PLAYER_ATTACHMENT)) {
+      player.setAttached(DistantMoonsAttachedData.CLIENT_PLAYER_ATTACHMENT, new ClientPlayerAttachment(
           new ArrayList<>()
       ));
     }
-    return player.getAttached(AttachedData.CLIENT_PLAYER_ATTACHMENT);
+    return player.getAttached(DistantMoonsAttachedData.CLIENT_PLAYER_ATTACHMENT);
   }
 }

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "0": "distant-moons:iron_rod",
+    "1": "minecraft:stick"
+  },
+  "pattern": [
+    "0 0",
+    "010",
+    "0 0"
+  ],
+  "result": {
+    "count": 16,
+    "id": "minecraft:rail"
+  }
+}

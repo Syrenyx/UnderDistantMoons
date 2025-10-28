@@ -23,8 +23,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import syrenyx.distantmoons.UnderDistantMoons;
-import syrenyx.distantmoons.affliction.Affliction;
-import syrenyx.distantmoons.affliction.AfflictionInstance;
+import syrenyx.distantmoons.content.affliction.Affliction;
+import syrenyx.distantmoons.content.affliction.AfflictionInstance;
+import syrenyx.distantmoons.content.affliction.ProgressionBarStyle;
 import syrenyx.distantmoons.data.attachment.ClientPlayerAttachment;
 
 import java.util.Collection;
@@ -68,7 +69,7 @@ public abstract class StatusEffectsDisplayMixin {
     this.hoveredStatusEffect = null;
     int horizontalPosition = parentAccessor.x() + parentAccessor.backgroundWidth() + 2;
     int height = parent.width - horizontalPosition;
-    Collection<AfflictionInstance> activeAfflictions = ClientPlayerAttachment.getOrCreate(this.client.player).activeAfflictions().stream().filter(affliction -> affliction.affliction().value().display().isPresent()).toList();
+    Collection<AfflictionInstance> activeAfflictions = ClientPlayerAttachment.getOrCreate(this.client.player).activeAfflictions().stream().filter(AfflictionInstance::isVisible).toList();
     Collection<StatusEffectInstance> statusEffects = this.client.player.getStatusEffects();
     if (height < MIN_SIZE || statusEffects.isEmpty() && activeAfflictions.isEmpty()) return;
     boolean wide = height >= FULL_SIZE && activeAfflictions.size() + statusEffects.size() < 6;
@@ -117,10 +118,7 @@ public abstract class StatusEffectsDisplayMixin {
   public void drawStatusEffectTooltip(DrawContext context, int mouseX, int mouseY, CallbackInfo callbackInfo) {
     callbackInfo.cancel();
     if (this.hoveredAffliction != null) {
-      List<Text> text = List.of(
-          this.hoveredAffliction.getDescription(),
-          getProgressionText(this.hoveredAffliction)
-      );
+      List<Text> text = List.of(this.hoveredAffliction.getDescription(), getProgressionText(this.hoveredAffliction));
       Identifier tooltipStyle = this.hoveredAffliction.getTooltipStyle();
       if (tooltipStyle != null) context.drawTooltip(this.parent.getTextRenderer(), text, Optional.empty(), mouseX, mouseY, tooltipStyle);
       else context.drawTooltip(this.parent.getTextRenderer(), text, Optional.empty(), mouseX, mouseY);
@@ -205,7 +203,12 @@ public abstract class StatusEffectsDisplayMixin {
 
   @Unique
   private static Text getProgressionText(AfflictionInstance affliction) {
-    if (affliction.affliction().value().tickProgression().isEmpty()) return Text.translatable("effect.duration.infinite");
-    return Text.translatable("affliction.progression_tooltip", String.format("%.1f", affliction.progression()), Affliction.MAX_PROGRESSION);
+    if (affliction.getProgressionBarStyle() == ProgressionBarStyle.INFINITE) return Text.translatable("effect.duration.infinite");
+    float progression = switch (affliction.getProgressionBarStyle()) {
+      case EMPTY -> 0.0F;
+      case FULL -> 100.0F;
+      default -> affliction.progression();
+    };
+    return Text.translatable("affliction.progression_tooltip", String.format(progression == 0.0F || progression == 100.0F ? "%f" : "%.1f", affliction.progression()), Affliction.MAX_PROGRESSION);
   }
 }

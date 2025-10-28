@@ -1,7 +1,7 @@
 package syrenyx.distantmoons.initializers;
 
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
-import syrenyx.distantmoons.payload.ActiveAfflictionsPayload;
+import syrenyx.distantmoons.data.networking.ActiveAfflictionsPayload;
 
 public abstract class DistantMoonsNetworking {
 

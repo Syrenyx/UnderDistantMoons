@@ -1,0 +1,14 @@
+{
+  "entity.begin_curing_curse_of_the_night": {
+    "subtitle": "subtitles.distant-moons.entity.begin_curing_curse",
+    "sounds": [
+      "minecraft:mob/zombie/remedy"
+    ]
+  },
+  "entity.finish_curing_curse_of_the_night": {
+    "subtitle": "subtitles.distant-moons.entity.finish_curing_curse",
+    "sounds": [
+      "minecraft:mob/zombie/unfect"
+    ]
+  }
+}

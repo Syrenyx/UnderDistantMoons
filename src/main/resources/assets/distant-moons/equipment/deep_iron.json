@@ -1,0 +1,19 @@
+{
+  "layers": {
+    "horse_body": [
+      {
+        "texture": "distant-moons:deep_iron"
+      }
+    ],
+    "humanoid": [
+      {
+        "texture": "distant-moons:deep_iron"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "distant-moons:deep_iron"
+      }
+    ]
+  }
+}

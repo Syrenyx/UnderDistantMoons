@@ -4,11 +4,14 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "EnchantmentHelperMixin",
+    "FenceBlockMixin",
     "LivingEntityMixin",
     "LootContextTypesAccessor",
+    "PaneBlockMixin",
     "PlayerEntityMixin",
     "ProjectileEntityMixin",
-    "ServerPlayerEntityMixin"
+    "ServerPlayerEntityMixin",
+    "WallBlockMixin"
   ],
   "injectors": {
     "defaultRequire": 1

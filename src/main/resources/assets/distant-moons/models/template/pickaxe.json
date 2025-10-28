@@ -1,0 +1,6 @@
+{
+  "parent": "distant-moons:display/pickaxe",
+  "textures": {
+    "layer0": "#texture"
+  }
+}

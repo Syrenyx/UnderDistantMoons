@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "0": "distant-moons:refined_deep_iron_rod"
+  },
+  "pattern": [
+    "0 0",
+    "000",
+    "0 0"
+  ],
+  "result": {
+    "id": "distant-moons:deep_iron_ladder",
+    "count": 6
+  }
+}

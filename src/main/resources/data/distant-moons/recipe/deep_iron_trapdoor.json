@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "0": "distant-moons:refined_deep_iron_ingot"
+  },
+  "pattern": [
+    "00",
+    "00"
+  ],
+  "result": {
+    "id": "distant-moons:deep_iron_trapdoor"
+  }
+}
