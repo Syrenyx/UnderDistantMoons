@@ -43,13 +43,14 @@ public abstract class DistantMoonsBlocks {
       "crude_deep_iron_block",
       Block::new,
       AbstractBlock.Settings.copy(Blocks.IRON_BLOCK)
-          .mapColor(MapColor.LIGHT_BLUE_GRAY),
+          .mapColor(MapColor.TERRACOTTA_WHITE),
       new Item.Settings().fireproof()
   );
   public static final Block DEEP_IRON_BAR_DOOR = register(
       "deep_iron_bar_door",
-      settings -> new MetalBarDoorBlock(DistantMoonsBlockSetTypes.IRON_BARS, settings),
-      AbstractBlock.Settings.copy(Blocks.IRON_DOOR),
+      settings -> new MetalBarDoorBlock(BlockSetType.IRON, settings),
+      AbstractBlock.Settings.copy(Blocks.IRON_DOOR)
+          .mapColor(MapColor.TERRACOTTA_WHITE),
       new Item.Settings().fireproof()
   );
   public static final Block DEEP_IRON_BARS = register(
@@ -67,7 +68,8 @@ public abstract class DistantMoonsBlocks {
   public static final Block DEEP_IRON_DOOR = register(
       "deep_iron_door",
       settings -> new DoorBlock(BlockSetType.IRON, settings),
-      AbstractBlock.Settings.copy(Blocks.IRON_DOOR),
+      AbstractBlock.Settings.copy(Blocks.IRON_DOOR)
+          .mapColor(MapColor.TERRACOTTA_WHITE),
       new Item.Settings().fireproof()
   );
   public static final Block DEEP_IRON_FENCE = register(
@@ -85,7 +87,8 @@ public abstract class DistantMoonsBlocks {
   public static final Block DEEP_IRON_TRAPDOOR = register(
       "deep_iron_trapdoor",
       settings -> new TrapdoorBlock(BlockSetType.IRON, settings),
-      AbstractBlock.Settings.copy(Blocks.IRON_DOOR),
+      AbstractBlock.Settings.copy(Blocks.IRON_TRAPDOOR)
+          .mapColor(MapColor.TERRACOTTA_WHITE),
       new Item.Settings().fireproof()
   );
   public static final Block DEEPSLATE_DEEP_IRON_ORE = register(
@@ -115,7 +118,7 @@ public abstract class DistantMoonsBlocks {
   );
   public static final Block IRON_BAR_DOOR = register(
       "iron_bar_door",
-      settings -> new MetalBarDoorBlock(DistantMoonsBlockSetTypes.IRON_BARS, settings),
+      settings -> new MetalBarDoorBlock(BlockSetType.IRON, settings),
       AbstractBlock.Settings.copy(Blocks.IRON_DOOR),
       new Item.Settings()
   );
@@ -142,20 +145,21 @@ public abstract class DistantMoonsBlocks {
       "raw_deep_iron_block",
       Block::new,
       AbstractBlock.Settings.copy(Blocks.RAW_IRON_BLOCK)
-          .mapColor(MapColor.TERRACOTTA_WHITE),
+          .mapColor(MapColor.TERRACOTTA_MAGENTA),
       new Item.Settings().fireproof()
   );
   public static final Block REFINED_DEEP_IRON_BLOCK = register(
       "refined_deep_iron_block",
       Block::new,
       AbstractBlock.Settings.copy(Blocks.IRON_BLOCK)
-          .mapColor(MapColor.LIGHT_BLUE_GRAY),
+          .mapColor(MapColor.TERRACOTTA_WHITE),
       new Item.Settings().fireproof()
   );
   public static final Block WROUGHT_IRON_BAR_DOOR = register(
       "wrought_iron_bar_door",
-      settings -> new MetalBarDoorBlock(DistantMoonsBlockSetTypes.IRON_BARS, settings),
-      AbstractBlock.Settings.copy(Blocks.IRON_DOOR),
+      settings -> new MetalBarDoorBlock(DistantMoonsBlockSetTypes.WROUGHT_IRON, settings),
+      AbstractBlock.Settings.copy(Blocks.IRON_DOOR)
+          .mapColor(MapColor.TERRACOTTA_CYAN),
       new Item.Settings()
   );
   public static final Block WROUGHT_IRON_BARS = register(

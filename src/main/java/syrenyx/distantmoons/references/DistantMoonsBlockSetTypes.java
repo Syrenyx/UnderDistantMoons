@@ -6,8 +6,8 @@ import net.minecraft.sound.SoundEvents;
 
 public abstract class DistantMoonsBlockSetTypes {
 
-  public static final BlockSetType IRON_BARS = new BlockSetType(
-      "iron_bars",
+  public static final BlockSetType WROUGHT_IRON = new BlockSetType(
+      "wrought_iron",
       true,
       false,
       false,
