@@ -1,4 +1,4 @@
-package syrenyx.distantmoons.content.enchantment.effect.entity;
+package syrenyx.distantmoons.content.enchantment;
 
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import net.minecraft.component.DataComponentTypes;

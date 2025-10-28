@@ -73,9 +73,9 @@
             },
             {
               "type": "distant-moons:play_sound",
-              "sound": "distant-moons:entity.player.cure_curse_of_the_night",
-              "pitch": 0.75,
-              "volume": 1.25
+              "sound": "distant-moons:entity.finish_curing_curse_of_the_night",
+              "pitch": 1.0,
+              "volume": 1.0
             }
           ]
         }
@@ -101,11 +101,30 @@
     "distant-moons:used_item": [
       {
         "effect": {
-          "type": "distant-moons:change_affliction",
-          "operation": "set",
-          "affliction": "distant-moons:curse_of_the_night",
-          "stage": 2,
-          "progression": 100.0
+          "type": "distant-moons:all_of",
+          "effects": [
+            {
+              "type": "distant-moons:change_affliction",
+              "operation": "set",
+              "affliction": "distant-moons:curse_of_the_night",
+              "stage": 2,
+              "progression": 100.0
+            },
+            {
+              "type": "distant-moons:play_sound",
+              "sound": "distant-moons:entity.begin_curing_curse_of_the_night",
+              "pitch": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 0.3,
+                "max_exclusive": 1.0
+              },
+              "volume": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1.0,
+                "max_exclusive": 1.5
+              }
+            }
+          ]
         },
         "requirements": {
           "condition": "minecraft:all_of",

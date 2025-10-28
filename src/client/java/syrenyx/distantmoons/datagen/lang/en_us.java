@@ -90,7 +90,8 @@ public class en_us extends FabricLanguageProvider {
     builder.add(DistantMoonsItems.UNDERWORLD_DUST, "Underworld Dust");
     builder.add(DistantMoonsItems.WROUGHT_IRON_ROD, "Wrought Iron Rod");
 
-    builder.add("subtitles.distant-moons.entity.player.cure_curse_of_the_night", "Player snuffles");
+    builder.add("subtitles.distant-moons.entity.begin_curing_curse", "Curse wanes");
+    builder.add("subtitles.distant-moons.entity.finish_curing_curse", "Curse lifts");
 
     EnchantmentLevelUtil.generateEnchantmentLevels(builder, 11, 255);
   }
