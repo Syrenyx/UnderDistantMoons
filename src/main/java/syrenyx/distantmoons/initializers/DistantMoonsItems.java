@@ -2,10 +2,12 @@ package syrenyx.distantmoons.initializers;
 
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.ConsumableComponent;
+import net.minecraft.component.type.ConsumableComponents;
 import net.minecraft.component.type.EquippableComponent;
 import net.minecraft.component.type.FoodComponent;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.*;
+import net.minecraft.item.consume.ApplyEffectsConsumeEffect;
 import net.minecraft.item.equipment.ArmorMaterial;
 import net.minecraft.item.equipment.ArmorMaterials;
 import net.minecraft.item.equipment.EquipmentType;
@@ -117,6 +119,13 @@ public abstract class DistantMoonsItems {
       new Item.Settings()
           .component(DataComponentTypes.CONSUMABLE, ConsumableComponent.builder().build())
           .component(DataComponentTypes.FOOD, new FoodComponent(5, 6F, false))
+  );
+  public static final Item ROTTEN_FISH = register(
+      "rotten_fish",
+      Item::new,
+      new Item.Settings()
+          .component(DataComponentTypes.CONSUMABLE, ConsumableComponents.ROTTEN_FLESH)
+          .component(DataComponentTypes.FOOD, new FoodComponent(4, 0.1F, false))
   );
   public static final Item UNDERWORLD_DUST = register(
       "underworld_dust",
