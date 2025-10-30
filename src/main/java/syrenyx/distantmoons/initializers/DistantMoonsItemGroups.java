@@ -113,6 +113,9 @@ public abstract class DistantMoonsItemGroups {
         Items.CRIMSON_FUNGUS.getDefaultStack(),
         Items.WARPED_FUNGUS.getDefaultStack()
     ));
+    addToGroup(ItemGroups.FOOD_AND_DRINK, Items.ROTTEN_FLESH, List.of(
+        DistantMoonsItems.ROTTEN_FISH.getDefaultStack()
+    ));
 
     //INGREDIENTS
     addToGroup(ItemGroups.INGREDIENTS, Items.CHARCOAL, List.of(

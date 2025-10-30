@@ -1,6 +1,6 @@
 {
   "type": "minecraft:entity",
-  "random_sequence": "minecraft:entities/hoglin",
+  "random_sequence": "minecraft:entities/polar_bear",
   "pools": [
     {
       "rolls": 1.0,
@@ -8,17 +8,9 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:porkchop",
+          "name": "minecraft:cod",
+          "weight": 3,
           "functions": [
-            {
-              "function": "minecraft:set_count",
-              "add": false,
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 4.0,
-                "min": 2.0
-              }
-            },
             {
               "function": "minecraft:furnace_smelt",
               "conditions": [
@@ -57,7 +49,7 @@
             },
             {
               "function": "minecraft:set_item",
-              "item": "minecraft:rotten_flesh",
+              "item": "distant-moons:rotten_fish",
               "conditions": [
                 {
                   "condition": "minecraft:any_of",
@@ -85,6 +77,15 @@
               ]
             },
             {
+              "function": "minecraft:set_count",
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 2.0,
+                "min": 0.0
+              }
+            },
+            {
               "function": "minecraft:enchanted_count_increase",
               "enchantment": "minecraft:looting",
               "count": {
@@ -94,23 +95,82 @@
               }
             }
           ]
-        }
-      ]
-    },
-    {
-      "rolls": 1.0,
-      "bonus_rolls": 0.0,
-      "entries": [
+        },
         {
           "type": "minecraft:item",
-          "name": "minecraft:leather",
+          "name": "minecraft:salmon",
           "functions": [
+            {
+              "function": "minecraft:furnace_smelt",
+              "conditions": [
+                {
+                  "condition": "minecraft:any_of",
+                  "terms": [
+                    {
+                      "condition": "minecraft:entity_properties",
+                      "entity": "this",
+                      "predicate": {
+                        "flags": {
+                          "is_on_fire": true
+                        }
+                      }
+                    },
+                    {
+                      "condition": "minecraft:entity_properties",
+                      "entity": "direct_attacker",
+                      "predicate": {
+                        "equipment": {
+                          "mainhand": {
+                            "predicates": {
+                              "minecraft:enchantments": [
+                                {
+                                  "enchantments": "#minecraft:smelts_loot"
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "function": "minecraft:set_item",
+              "item": "distant-moons:rotten_fish",
+              "conditions": [
+                {
+                  "condition": "minecraft:any_of",
+                  "terms": [
+                    {
+                      "condition": "distant-moons:entity_properties",
+                      "entity": "this",
+                      "predicate": {
+                        "afflictions": {
+                          "distant-moons:curse_of_the_night": {}
+                        }
+                      }
+                    },
+                    {
+                      "condition": "distant-moons:entity_properties",
+                      "entity": "direct_attacker",
+                      "predicate": {
+                        "afflictions": {
+                          "distant-moons:curse_of_the_night": {}
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
             {
               "function": "minecraft:set_count",
               "add": false,
               "count": {
                 "type": "minecraft:uniform",
-                "max": 1.0,
+                "max": 2.0,
                 "min": 0.0
               }
             },
