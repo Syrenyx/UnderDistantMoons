@@ -12,6 +12,17 @@ import java.util.Map;
 
 public abstract class VoxelShapeUtil {
 
+  public static Map<Direction.Axis, VoxelShape> createAxisShapeMap(VoxelShape shape) {
+    Vec3d anchor = new Vec3d(0.5, 0.5, 0.5);
+    return Maps.newEnumMap(
+        Map.of(
+            Direction.Axis.X, VoxelShapes.transform(shape, DirectionTransformation.fromRotations(AxisRotation.R90, AxisRotation.R270), anchor),
+            Direction.Axis.Y, shape,
+            Direction.Axis.Z, VoxelShapes.transform(shape, DirectionTransformation.fromRotations(AxisRotation.R90, AxisRotation.R0), anchor)
+        )
+    );
+  }
+
   public static Map<Direction, VoxelShape> createHorizontalDirectionShapeMap(VoxelShape shape) {
     Vec3d anchor = new Vec3d(0.5, 0.5, 0.5);
     return Maps.newEnumMap(

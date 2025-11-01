@@ -6,6 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.data.recipe.CookingRecipeJsonBuilder;
 import net.minecraft.data.recipe.RecipeExporter;
 import net.minecraft.data.recipe.RecipeGenerator;
+import net.minecraft.data.recipe.StonecuttingRecipeJsonBuilder;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.*;
@@ -43,6 +44,54 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
 
         //COOKING
         this.createCookingRecipes(Items.BROWN_MUSHROOM, DistantMoonsItems.ROASTED_BROWN_MUSHROOM, 0.35F, DEFAULT_SMELTING_TIME);
+
+        //SLAB CRAFTING
+        this.createSlabRecipes(Items.ACACIA_LOG, DistantMoonsBlocks.CUT_ACACIA_LOG);
+        this.createSlabRecipes(Items.ACACIA_WOOD, DistantMoonsBlocks.CUT_ACACIA_WOOD);
+        this.createSlabRecipes(Items.BAMBOO_BLOCK, DistantMoonsBlocks.CUT_BAMBOO_BLOCK);
+        this.createSlabRecipes(Items.BIRCH_LOG, DistantMoonsBlocks.CUT_BIRCH_LOG);
+        this.createSlabRecipes(Items.BIRCH_WOOD, DistantMoonsBlocks.CUT_BIRCH_WOOD);
+        this.createSlabRecipes(Items.CHERRY_LOG, DistantMoonsBlocks.CUT_CHERRY_LOG);
+        this.createSlabRecipes(Items.CHERRY_WOOD, DistantMoonsBlocks.CUT_CHERRY_WOOD);
+        this.createSlabRecipes(Items.CRIMSON_HYPHAE, DistantMoonsBlocks.CUT_CRIMSON_HYPHAE);
+        this.createSlabRecipes(Items.CRIMSON_STEM, DistantMoonsBlocks.CUT_CRIMSON_STEM);
+        this.createSlabRecipes(Items.DARK_OAK_LOG, DistantMoonsBlocks.CUT_DARK_OAK_LOG);
+        this.createSlabRecipes(Items.DARK_OAK_WOOD, DistantMoonsBlocks.CUT_DARK_OAK_WOOD);
+        this.createSlabRecipes(Items.JUNGLE_LOG, DistantMoonsBlocks.CUT_JUNGLE_LOG);
+        this.createSlabRecipes(Items.JUNGLE_WOOD, DistantMoonsBlocks.CUT_JUNGLE_WOOD);
+        this.createSlabRecipes(Items.MANGROVE_LOG, DistantMoonsBlocks.CUT_MANGROVE_LOG);
+        this.createSlabRecipes(Items.MANGROVE_WOOD, DistantMoonsBlocks.CUT_MANGROVE_WOOD);
+        this.createSlabRecipes(Items.OAK_LOG, DistantMoonsBlocks.CUT_OAK_LOG);
+        this.createSlabRecipes(Items.OAK_WOOD, DistantMoonsBlocks.CUT_OAK_WOOD);
+        this.createSlabRecipes(Items.PALE_OAK_LOG, DistantMoonsBlocks.CUT_PALE_OAK_LOG);
+        this.createSlabRecipes(Items.PALE_OAK_WOOD, DistantMoonsBlocks.CUT_PALE_OAK_WOOD);
+        this.createSlabRecipes(Items.SPRUCE_LOG, DistantMoonsBlocks.CUT_SPRUCE_LOG);
+        this.createSlabRecipes(Items.SPRUCE_WOOD, DistantMoonsBlocks.CUT_SPRUCE_WOOD);
+        this.createSlabRecipes(Items.WARPED_HYPHAE, DistantMoonsBlocks.CUT_WARPED_HYPHAE);
+        this.createSlabRecipes(Items.WARPED_STEM, DistantMoonsBlocks.CUT_WARPED_STEM);
+        this.createSlabRecipes(Items.STRIPPED_ACACIA_LOG, DistantMoonsBlocks.STRIPPED_CUT_ACACIA_LOG);
+        this.createSlabRecipes(Items.STRIPPED_ACACIA_WOOD, DistantMoonsBlocks.STRIPPED_CUT_ACACIA_WOOD);
+        this.createSlabRecipes(Items.STRIPPED_BAMBOO_BLOCK, DistantMoonsBlocks.STRIPPED_CUT_BAMBOO_BLOCK);
+        this.createSlabRecipes(Items.STRIPPED_BIRCH_LOG, DistantMoonsBlocks.STRIPPED_CUT_BIRCH_LOG);
+        this.createSlabRecipes(Items.STRIPPED_BIRCH_WOOD, DistantMoonsBlocks.STRIPPED_CUT_BIRCH_WOOD);
+        this.createSlabRecipes(Items.STRIPPED_CHERRY_LOG, DistantMoonsBlocks.STRIPPED_CUT_CHERRY_LOG);
+        this.createSlabRecipes(Items.STRIPPED_CHERRY_WOOD, DistantMoonsBlocks.STRIPPED_CUT_CHERRY_WOOD);
+        this.createSlabRecipes(Items.STRIPPED_CRIMSON_HYPHAE, DistantMoonsBlocks.STRIPPED_CUT_CRIMSON_HYPHAE);
+        this.createSlabRecipes(Items.STRIPPED_CRIMSON_STEM, DistantMoonsBlocks.STRIPPED_CUT_CRIMSON_STEM);
+        this.createSlabRecipes(Items.STRIPPED_DARK_OAK_LOG, DistantMoonsBlocks.STRIPPED_CUT_DARK_OAK_LOG);
+        this.createSlabRecipes(Items.STRIPPED_DARK_OAK_WOOD, DistantMoonsBlocks.STRIPPED_CUT_DARK_OAK_WOOD);
+        this.createSlabRecipes(Items.STRIPPED_JUNGLE_LOG, DistantMoonsBlocks.STRIPPED_CUT_JUNGLE_LOG);
+        this.createSlabRecipes(Items.STRIPPED_JUNGLE_WOOD, DistantMoonsBlocks.STRIPPED_CUT_JUNGLE_WOOD);
+        this.createSlabRecipes(Items.STRIPPED_MANGROVE_LOG, DistantMoonsBlocks.STRIPPED_CUT_MANGROVE_LOG);
+        this.createSlabRecipes(Items.STRIPPED_MANGROVE_WOOD, DistantMoonsBlocks.STRIPPED_CUT_MANGROVE_WOOD);
+        this.createSlabRecipes(Items.STRIPPED_OAK_LOG, DistantMoonsBlocks.STRIPPED_CUT_OAK_LOG);
+        this.createSlabRecipes(Items.STRIPPED_OAK_WOOD, DistantMoonsBlocks.STRIPPED_CUT_OAK_WOOD);
+        this.createSlabRecipes(Items.STRIPPED_PALE_OAK_LOG, DistantMoonsBlocks.STRIPPED_CUT_PALE_OAK_LOG);
+        this.createSlabRecipes(Items.STRIPPED_PALE_OAK_WOOD, DistantMoonsBlocks.STRIPPED_CUT_PALE_OAK_WOOD);
+        this.createSlabRecipes(Items.STRIPPED_SPRUCE_LOG, DistantMoonsBlocks.STRIPPED_CUT_SPRUCE_LOG);
+        this.createSlabRecipes(Items.STRIPPED_SPRUCE_WOOD, DistantMoonsBlocks.STRIPPED_CUT_SPRUCE_WOOD);
+        this.createSlabRecipes(Items.STRIPPED_WARPED_HYPHAE, DistantMoonsBlocks.STRIPPED_CUT_WARPED_HYPHAE);
+        this.createSlabRecipes(Items.STRIPPED_WARPED_STEM, DistantMoonsBlocks.STRIPPED_CUT_WARPED_STEM);
 
         //MISCELLANEOUS SMELTING
         this.createMetalSmeltingRecipes(DistantMoonsItems.IRON_ROD, DistantMoonsItems.WROUGHT_IRON_ROD, 0.0F, DEFAULT_SMELTING_TIME);
@@ -130,6 +179,25 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
             .input(ingredient)
             .criterion(hasItem(ingredient), conditionsFromItem(ingredient))
             .offerTo(this.exporter, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/decompressing_" + getItemId(ingredient)));
+      }
+
+      private void createSlabCraftingRecipe(ItemConvertible ingredient, ItemConvertible result) {
+        this.createShaped(RecipeCategory.BUILDING_BLOCKS, result, 6)
+            .pattern("000")
+            .input('0', ingredient)
+            .criterion(hasItem(ingredient), conditionsFromItem(ingredient))
+            .offerTo(this.exporter, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/crafting"));
+      }
+
+      private void createSlabCuttingRecipe(ItemConvertible ingredient, ItemConvertible result) {
+        StonecuttingRecipeJsonBuilder.createStonecutting(Ingredient.ofItem(ingredient), RecipeCategory.MISC, result, 2)
+            .criterion(hasItem(ingredient), conditionsFromItem(ingredient))
+            .offerTo(this.exporter, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/stonecutting"));
+      }
+
+      private void createSlabRecipes(ItemConvertible ingredient, ItemConvertible result) {
+        this.createSlabCraftingRecipe(ingredient, result);
+        this.createSlabCuttingRecipe(ingredient, result);
       }
 
       private static String getItemId(ItemConvertible item) {
