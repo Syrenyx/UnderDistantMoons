@@ -61,7 +61,7 @@ public abstract class StatusEffectsDisplayMixin {
   @Unique private AfflictionInstance hoveredAffliction;
 
   @Inject(at = @At("HEAD"), cancellable = true, method = "drawStatusEffects")
-  public void drawStatusEffects(DrawContext context, int mouseX, int mouseY, CallbackInfo callbackInfo) {
+  public void drawStatusEffects(DrawContext context, Collection<StatusEffectInstance> collection, int i, int j, int k, int l, int m, CallbackInfo callbackInfo) {
     callbackInfo.cancel();
     if (this.client.player == null) return;
     HandledScreenAccessor parentAccessor = (HandledScreenAccessor) this.parent;
@@ -114,7 +114,7 @@ public abstract class StatusEffectsDisplayMixin {
     }
   }
 
-  @Inject(at = @At("HEAD"), cancellable = true, method = "drawStatusEffectTooltip")
+  @Inject(at = @At("HEAD"), cancellable = true, method = "method_75369")
   public void drawStatusEffectTooltip(DrawContext context, int mouseX, int mouseY, CallbackInfo callbackInfo) {
     callbackInfo.cancel();
     if (this.hoveredAffliction != null) {
