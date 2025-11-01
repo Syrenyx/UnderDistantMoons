@@ -29,14 +29,17 @@ public class en_us extends FabricLanguageProvider {
     builder.add(DistantMoonsBlocks.CUT_ACACIA_LOG, "Cut Acacia Log");
     builder.add(DistantMoonsBlocks.CUT_ACACIA_WOOD, "Cut Acacia Wood");
     builder.add(DistantMoonsBlocks.CUT_BAMBOO_BLOCK, "Cut Bamboo Block");
+    builder.add(DistantMoonsBlocks.CUT_BASALT, "Cut Basalt");
     builder.add(DistantMoonsBlocks.CUT_BIRCH_LOG, "Cut Birch Log");
     builder.add(DistantMoonsBlocks.CUT_BIRCH_WOOD, "Cut Birch Wood");
+    builder.add(DistantMoonsBlocks.CUT_BONE_BLOCK, "Cut Bone Block");
     builder.add(DistantMoonsBlocks.CUT_CHERRY_LOG, "Cut Cherry Log");
     builder.add(DistantMoonsBlocks.CUT_CHERRY_WOOD, "Cut Cherry Wood");
     builder.add(DistantMoonsBlocks.CUT_CRIMSON_HYPHAE, "Cut Crimson Hyphae");
     builder.add(DistantMoonsBlocks.CUT_CRIMSON_STEM, "Cut Crimson Stem");
     builder.add(DistantMoonsBlocks.CUT_DARK_OAK_LOG, "Cut Dark Oak Log");
     builder.add(DistantMoonsBlocks.CUT_DARK_OAK_WOOD, "Cut Dark Oak Wood");
+    builder.add(DistantMoonsBlocks.CUT_DEEPSLATE, "Cut Deepslate");
     builder.add(DistantMoonsBlocks.CUT_JUNGLE_LOG, "Cut Jungle Log");
     builder.add(DistantMoonsBlocks.CUT_JUNGLE_WOOD, "Cut Jungle Wood");
     builder.add(DistantMoonsBlocks.CUT_MANGROVE_LOG, "Cut Mangrove Log");
@@ -45,6 +48,8 @@ public class en_us extends FabricLanguageProvider {
     builder.add(DistantMoonsBlocks.CUT_OAK_WOOD, "Cut Oak Wood");
     builder.add(DistantMoonsBlocks.CUT_PALE_OAK_LOG, "Cut Pale Oak Log");
     builder.add(DistantMoonsBlocks.CUT_PALE_OAK_WOOD, "Cut Pale Oak Wood");
+    builder.add(DistantMoonsBlocks.CUT_PURPUR_PILLAR, "Cut Purpur Pillar");
+    builder.add(DistantMoonsBlocks.CUT_QUARTZ_PILLAR, "Cut Quartz Pillar");
     builder.add(DistantMoonsBlocks.CUT_SPRUCE_LOG, "Cut Spruce Log");
     builder.add(DistantMoonsBlocks.CUT_SPRUCE_WOOD, "Cut Spruce Wood");
     builder.add(DistantMoonsBlocks.CUT_WARPED_HYPHAE, "Cut Warped Hyphae");
@@ -64,6 +69,7 @@ public class en_us extends FabricLanguageProvider {
     builder.add(DistantMoonsBlocks.IRON_FENCE, "Iron Fence");
     builder.add(DistantMoonsBlocks.IRON_LADDER, "Iron Ladder");
     builder.add(DistantMoonsBlocks.NETHERRACK_DEEP_IRON_ORE, "Netherrack Deep Iron Ore");
+    builder.add(DistantMoonsBlocks.POLISHED_CUT_BASALT, "Polished Cut Basalt");
     builder.add(DistantMoonsBlocks.RAW_DEEP_IRON_BLOCK, "Block of Raw Deep Iron");
     builder.add(DistantMoonsBlocks.REFINED_DEEP_IRON_BLOCK, "Block of Refined Deep Iron");
     builder.add(DistantMoonsBlocks.STRIPPED_CUT_ACACIA_LOG, "Stripped Cut Acacia Log");

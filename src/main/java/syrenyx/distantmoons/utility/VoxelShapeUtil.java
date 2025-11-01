@@ -16,7 +16,7 @@ public abstract class VoxelShapeUtil {
     Vec3d anchor = new Vec3d(0.5, 0.5, 0.5);
     return Maps.newEnumMap(
         Map.of(
-            Direction.Axis.X, VoxelShapes.transform(shape, DirectionTransformation.fromRotations(AxisRotation.R90, AxisRotation.R270), anchor),
+            Direction.Axis.X, VoxelShapes.transform(shape, DirectionTransformation.fromRotations(AxisRotation.R90, AxisRotation.R90), anchor),
             Direction.Axis.Y, shape,
             Direction.Axis.Z, VoxelShapes.transform(shape, DirectionTransformation.fromRotations(AxisRotation.R90, AxisRotation.R0), anchor)
         )

@@ -57,10 +57,15 @@ public abstract class DistantMoonsItemGroups {
     addToGroup(ItemGroups.BUILDING_BLOCKS, Items.WARPED_HYPHAE, List.of(DistantMoonsBlocks.CUT_WARPED_HYPHAE.asItem().getDefaultStack()));
     addToGroup(ItemGroups.BUILDING_BLOCKS, Items.STRIPPED_WARPED_STEM, List.of(DistantMoonsBlocks.STRIPPED_CUT_WARPED_STEM.asItem().getDefaultStack()));
     addToGroup(ItemGroups.BUILDING_BLOCKS, Items.STRIPPED_WARPED_HYPHAE, List.of(DistantMoonsBlocks.STRIPPED_CUT_WARPED_HYPHAE.asItem().getDefaultStack()));
+    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.DEEPSLATE, List.of(DistantMoonsBlocks.CUT_DEEPSLATE.asItem().getDefaultStack()));
+    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.BASALT, List.of(DistantMoonsBlocks.CUT_BASALT.asItem().getDefaultStack()));
+    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.POLISHED_BASALT, List.of(DistantMoonsBlocks.POLISHED_CUT_BASALT.asItem().getDefaultStack()));
+    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.PURPUR_PILLAR, List.of(DistantMoonsBlocks.CUT_PURPUR_PILLAR.asItem().getDefaultStack()));
     addToGroup(ItemGroups.BUILDING_BLOCKS, Items.PURPUR_SLAB, List.of(
         Items.GLASS.getDefaultStack(),
         Items.TINTED_GLASS.getDefaultStack(),
-        Items.BONE_BLOCK.getDefaultStack()
+        Items.BONE_BLOCK.getDefaultStack(),
+        DistantMoonsBlocks.CUT_BONE_BLOCK.asItem().getDefaultStack()
     ));
     addToGroup(ItemGroups.BUILDING_BLOCKS, Items.COAL_BLOCK, List.of(
         DistantMoonsBlocks.CHARCOAL_BLOCK.asItem().getDefaultStack(),
@@ -89,6 +94,7 @@ public abstract class DistantMoonsItemGroups {
         DistantMoonsBlocks.FIXED_DEEP_IRON_LADDER.asItem().getDefaultStack(),
         DistantMoonsBlocks.DEEP_IRON_CHAIN.asItem().getDefaultStack()
     ));
+    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.QUARTZ_PILLAR, List.of(DistantMoonsBlocks.CUT_QUARTZ_PILLAR.asItem().getDefaultStack()));
 
     //COLORED BLOCKS
 

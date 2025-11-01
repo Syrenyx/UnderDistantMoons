@@ -31,7 +31,7 @@ import syrenyx.distantmoons.utility.VoxelShapeUtil;
 
 import java.util.Map;
 
-public class CutPillarBlock extends Block implements Waterloggable {
+public class PillarSlabBlock extends Block implements Waterloggable {
 
   public static final EnumProperty<Direction.Axis> AXIS = Properties.AXIS;
   public static final EnumProperty<SlabType> TYPE = Properties.SLAB_TYPE;
@@ -39,7 +39,7 @@ public class CutPillarBlock extends Block implements Waterloggable {
   private static final Map<Direction.Axis, VoxelShape> BOTTOM_SHAPES_BY_AXIS = VoxelShapeUtil.createAxisShapeMap(Block.createColumnShape(16.0, 0.0, 8.0));
   private static final Map<Direction.Axis, VoxelShape> TOP_SHAPES_BY_AXIS = VoxelShapeUtil.createAxisShapeMap(Block.createColumnShape(16.0, 8.0, 16.0));
 
-  public CutPillarBlock(Settings settings) {
+  public PillarSlabBlock(Settings settings) {
     super(settings);
     this.setDefaultState(this.getDefaultState().
         with(AXIS, Direction.Axis.Y).
@@ -82,7 +82,7 @@ public class CutPillarBlock extends Block implements Waterloggable {
     if (context.canReplaceExisting()) {
       Direction placementDirection = context.getSide();
       return switch (state.get(AXIS)) {
-        case X -> slabType == SlabType.BOTTOM ? placementDirection == Direction.WEST : placementDirection == Direction.EAST;
+        case X -> slabType == SlabType.BOTTOM ? placementDirection == Direction.EAST : placementDirection == Direction.WEST;
         case Y -> slabType == SlabType.BOTTOM ? placementDirection == Direction.UP : placementDirection == Direction.DOWN;
         case Z -> slabType == SlabType.BOTTOM ? placementDirection == Direction.NORTH : placementDirection == Direction.SOUTH;
       };
@@ -107,12 +107,12 @@ public class CutPillarBlock extends Block implements Waterloggable {
     BlockState state = this.getDefaultState().with(WATERLOGGED, context.getWorld().getFluidState(pos).getFluid() == Fluids.WATER);
     Direction placementDirection = context.getSide();
     return switch (placementDirection) {
+      case NORTH -> state.with(AXIS, Direction.Axis.Z).with(TYPE, SlabType.BOTTOM);
+      case EAST -> state.with(AXIS, Direction.Axis.X).with(TYPE, SlabType.BOTTOM);
+      case SOUTH -> state.with(AXIS, Direction.Axis.Z).with(TYPE, SlabType.TOP);
+      case WEST -> state.with(AXIS, Direction.Axis.X).with(TYPE, SlabType.TOP);
       case DOWN -> state.with(TYPE, SlabType.TOP);
       case UP -> state;
-      case NORTH -> state.with(AXIS, Direction.Axis.Z).with(TYPE, SlabType.BOTTOM);
-      case SOUTH -> state.with(AXIS, Direction.Axis.Z).with(TYPE, SlabType.TOP);
-      case WEST -> state.with(AXIS, Direction.Axis.X).with(TYPE, SlabType.BOTTOM);
-      case EAST -> state.with(AXIS, Direction.Axis.X).with(TYPE, SlabType.TOP);
     };
   }
 
