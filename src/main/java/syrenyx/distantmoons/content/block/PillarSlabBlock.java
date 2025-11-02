@@ -17,6 +17,8 @@ import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.Properties;
+import net.minecraft.util.BlockMirror;
+import net.minecraft.util.BlockRotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
@@ -129,5 +131,39 @@ public class PillarSlabBlock extends Block implements Waterloggable {
   ) {
     if (state.get(WATERLOGGED)) tickView.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
     return super.getStateForNeighborUpdate(state, world, tickView, pos, direction, neighborPos, neighborState, random);
+  }
+
+  @Override
+  protected BlockState rotate(BlockState state, BlockRotation rotation) {
+    Direction.Axis originalAxis = state.get(AXIS);
+    if (originalAxis == Direction.Axis.Y) return state;
+    BlockState rotatedAxisState = state.with(AXIS, getRotated(state.get(AXIS)));
+    return switch (rotation) {
+      case NONE -> state;
+      case CLOCKWISE_90 -> originalAxis == Direction.Axis.X ? rotatedAxisState.with(TYPE, getOpposite(state.get(TYPE))) : rotatedAxisState;
+      case CLOCKWISE_180 -> state.with(TYPE, getOpposite(state.get(TYPE)));
+      case COUNTERCLOCKWISE_90 -> originalAxis == Direction.Axis.Z ? rotatedAxisState.with(TYPE, getOpposite(state.get(TYPE))) : rotatedAxisState;
+    };
+  }
+
+  @Override
+  protected BlockState mirror(BlockState state, BlockMirror mirror) {
+    Direction.Axis axis = state.get(AXIS);
+    if (
+        mirror == BlockMirror.FRONT_BACK && axis == Direction.Axis.X || mirror == BlockMirror.LEFT_RIGHT && axis == Direction.Axis.Z
+    ) return state.with(TYPE, getOpposite(state.get(TYPE)));
+    return state;
+  }
+
+  private static SlabType getOpposite(SlabType type) {
+    if (type == SlabType.BOTTOM) return SlabType.TOP;
+    if (type == SlabType.TOP) return SlabType.BOTTOM;
+    return type;
+  }
+
+  private static Direction.Axis getRotated(Direction.Axis axis) {
+    if (axis == Direction.Axis.X) return Direction.Axis.Z;
+    if (axis == Direction.Axis.Z) return Direction.Axis.X;
+    return axis;
   }
 }
