@@ -172,59 +172,63 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     registerMetalLadderBlock(DistantMoonsBlocks.IRON_LADDER, METAL_LADDER_TEXTURE_MAP);
     registerMetalLadderBlock(DistantMoonsBlocks.WROUGHT_IRON_LADDER, METAL_LADDER_TEXTURE_MAP);
 
-    //PILLAR SLABS
-    registerPillarSlabBlock(DistantMoonsBlocks.CUT_ACACIA_LOG, Map.of(TextureKey.END, "minecraft:block/acacia_log_top", TextureKey.SIDE, "minecraft:block/acacia_log"));
-    registerPillarSlabBlock(DistantMoonsBlocks.CUT_ACACIA_WOOD, Map.of(TextureKey.END, "minecraft:block/acacia_log", TextureKey.SIDE, "minecraft:block/acacia_log"));
-    registerPillarSlabBlock(DistantMoonsBlocks.CUT_BAMBOO_BLOCK, Map.of(TextureKey.END, "minecraft:block/bamboo_block_top", TextureKey.SIDE, "minecraft:block/bamboo_block"));
-    registerPillarSlabBlock(DistantMoonsBlocks.CUT_BASALT, Map.of(TextureKey.END, "minecraft:block/basalt_top", TextureKey.SIDE, "minecraft:block/basalt_side"));
-    registerPillarSlabBlock(DistantMoonsBlocks.CUT_BIRCH_LOG, Map.of(TextureKey.END, "minecraft:block/birch_log_top", TextureKey.SIDE, "minecraft:block/birch_log"));
-    registerPillarSlabBlock(DistantMoonsBlocks.CUT_BIRCH_WOOD, Map.of(TextureKey.END, "minecraft:block/birch_log", TextureKey.SIDE, "minecraft:block/birch_log"));
-    registerPillarSlabBlock(DistantMoonsBlocks.CUT_BONE_BLOCK, Map.of(TextureKey.END, "minecraft:block/bone_block_top", TextureKey.SIDE, "minecraft:block/bone_block_side"));
-    registerPillarSlabBlock(DistantMoonsBlocks.CUT_CHERRY_LOG, Map.of(TextureKey.END, "minecraft:block/cherry_log_top", TextureKey.SIDE, "minecraft:block/cherry_log"));
-    registerPillarSlabBlock(DistantMoonsBlocks.CUT_CHERRY_WOOD, Map.of(TextureKey.END, "minecraft:block/cherry_log", TextureKey.SIDE, "minecraft:block/cherry_log"));
-    registerPillarSlabBlock(DistantMoonsBlocks.CUT_CRIMSON_HYPHAE, Map.of(TextureKey.END, "minecraft:block/crimson_stem", TextureKey.SIDE, "minecraft:block/crimson_stem"));
-    registerPillarSlabBlock(DistantMoonsBlocks.CUT_CRIMSON_STEM, Map.of(TextureKey.END, "minecraft:block/crimson_stem_top", TextureKey.SIDE, "minecraft:block/crimson_stem"));
-    registerPillarSlabBlock(DistantMoonsBlocks.CUT_DARK_OAK_LOG, Map.of(TextureKey.END, "minecraft:block/dark_oak_log_top", TextureKey.SIDE, "minecraft:block/dark_oak_log"));
-    registerPillarSlabBlock(DistantMoonsBlocks.CUT_DARK_OAK_WOOD, Map.of(TextureKey.END, "minecraft:block/dark_oak_log", TextureKey.SIDE, "minecraft:block/dark_oak_log"));
-    registerPillarSlabBlock(DistantMoonsBlocks.CUT_DEEPSLATE, Map.of(TextureKey.END, "minecraft:block/deepslate_top", TextureKey.SIDE, "minecraft:block/deepslate"));
-    registerPillarSlabBlock(DistantMoonsBlocks.CUT_JUNGLE_LOG, Map.of(TextureKey.END, "minecraft:block/jungle_log_top", TextureKey.SIDE, "minecraft:block/jungle_log"));
-    registerPillarSlabBlock(DistantMoonsBlocks.CUT_JUNGLE_WOOD, Map.of(TextureKey.END, "minecraft:block/jungle_log", TextureKey.SIDE, "minecraft:block/jungle_log"));
-    registerPillarSlabBlock(DistantMoonsBlocks.CUT_MANGROVE_LOG, Map.of(TextureKey.END, "minecraft:block/mangrove_log_top", TextureKey.SIDE, "minecraft:block/mangrove_log"));
-    registerPillarSlabBlock(DistantMoonsBlocks.CUT_MANGROVE_WOOD, Map.of(TextureKey.END, "minecraft:block/mangrove_log", TextureKey.SIDE, "minecraft:block/mangrove_log"));
-    registerPillarSlabBlock(DistantMoonsBlocks.CUT_OAK_LOG, Map.of(TextureKey.END, "minecraft:block/oak_log_top", TextureKey.SIDE, "minecraft:block/oak_log"));
-    registerPillarSlabBlock(DistantMoonsBlocks.CUT_OAK_WOOD, Map.of(TextureKey.END, "minecraft:block/oak_log", TextureKey.SIDE, "minecraft:block/oak_log"));
-    registerPillarSlabBlock(DistantMoonsBlocks.CUT_PALE_OAK_LOG, Map.of(TextureKey.END, "minecraft:block/pale_oak_log_top", TextureKey.SIDE, "minecraft:block/pale_oak_log"));
-    registerPillarSlabBlock(DistantMoonsBlocks.CUT_PALE_OAK_WOOD, Map.of(TextureKey.END, "minecraft:block/pale_oak_log", TextureKey.SIDE, "minecraft:block/pale_oak_log"));
-    registerPillarSlabBlock(DistantMoonsBlocks.CUT_PURPUR_PILLAR, Map.of(TextureKey.END, "minecraft:block/purpur_pillar_top", TextureKey.SIDE, "minecraft:block/purpur_pillar"));
-    registerPillarSlabBlock(DistantMoonsBlocks.CUT_QUARTZ_PILLAR, Map.of(TextureKey.END, "minecraft:block/quartz_pillar_top", TextureKey.SIDE, "minecraft:block/quartz_pillar"));
-    registerPillarSlabBlock(DistantMoonsBlocks.CUT_SPRUCE_LOG, Map.of(TextureKey.END, "minecraft:block/spruce_log_top", TextureKey.SIDE, "minecraft:block/spruce_log"));
-    registerPillarSlabBlock(DistantMoonsBlocks.CUT_SPRUCE_WOOD, Map.of(TextureKey.END, "minecraft:block/spruce_log", TextureKey.SIDE, "minecraft:block/spruce_log"));
-    registerPillarSlabBlock(DistantMoonsBlocks.CUT_WARPED_HYPHAE, Map.of(TextureKey.END, "minecraft:block/warped_stem", TextureKey.SIDE, "minecraft:block/warped_stem"));
-    registerPillarSlabBlock(DistantMoonsBlocks.CUT_WARPED_STEM, Map.of(TextureKey.END, "minecraft:block/warped_stem_top", TextureKey.SIDE, "minecraft:block/warped_stem"));
-    registerPillarSlabBlock(DistantMoonsBlocks.POLISHED_CUT_BASALT, Map.of(TextureKey.END, "minecraft:block/polished_basalt_top", TextureKey.SIDE, "minecraft:block/polished_basalt_side"));
-    registerPillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_ACACIA_LOG, Map.of(TextureKey.END, "minecraft:block/stripped_acacia_log_top", TextureKey.SIDE, "minecraft:block/stripped_acacia_log"));
-    registerPillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_ACACIA_WOOD, Map.of(TextureKey.END, "minecraft:block/stripped_acacia_log", TextureKey.SIDE, "minecraft:block/stripped_acacia_log"));
-    registerPillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_BAMBOO_BLOCK, Map.of(TextureKey.END, "minecraft:block/stripped_bamboo_block_top", TextureKey.SIDE, "minecraft:block/stripped_bamboo_block"));
-    registerPillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_BIRCH_LOG, Map.of(TextureKey.END, "minecraft:block/stripped_birch_log_top", TextureKey.SIDE, "minecraft:block/stripped_birch_log"));
-    registerPillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_BIRCH_WOOD, Map.of(TextureKey.END, "minecraft:block/stripped_birch_log", TextureKey.SIDE, "minecraft:block/stripped_birch_log"));
-    registerPillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_CHERRY_LOG, Map.of(TextureKey.END, "minecraft:block/stripped_cherry_log_top", TextureKey.SIDE, "minecraft:block/stripped_cherry_log"));
-    registerPillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_CHERRY_WOOD, Map.of(TextureKey.END, "minecraft:block/stripped_cherry_log", TextureKey.SIDE, "minecraft:block/stripped_cherry_log"));
-    registerPillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_CRIMSON_HYPHAE, Map.of(TextureKey.END, "minecraft:block/stripped_crimson_stem", TextureKey.SIDE, "minecraft:block/stripped_crimson_stem"));
-    registerPillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_CRIMSON_STEM, Map.of(TextureKey.END, "minecraft:block/stripped_crimson_stem_top", TextureKey.SIDE, "minecraft:block/stripped_crimson_stem"));
-    registerPillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_DARK_OAK_LOG, Map.of(TextureKey.END, "minecraft:block/stripped_dark_oak_log_top", TextureKey.SIDE, "minecraft:block/stripped_dark_oak_log"));
-    registerPillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_DARK_OAK_WOOD, Map.of(TextureKey.END, "minecraft:block/stripped_dark_oak_log", TextureKey.SIDE, "minecraft:block/stripped_dark_oak_log"));
-    registerPillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_JUNGLE_LOG, Map.of(TextureKey.END, "minecraft:block/stripped_jungle_log_top", TextureKey.SIDE, "minecraft:block/stripped_jungle_log"));
-    registerPillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_JUNGLE_WOOD, Map.of(TextureKey.END, "minecraft:block/stripped_jungle_log", TextureKey.SIDE, "minecraft:block/stripped_jungle_log"));
-    registerPillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_MANGROVE_LOG, Map.of(TextureKey.END, "minecraft:block/stripped_mangrove_log_top", TextureKey.SIDE, "minecraft:block/stripped_mangrove_log"));
-    registerPillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_MANGROVE_WOOD, Map.of(TextureKey.END, "minecraft:block/stripped_mangrove_log", TextureKey.SIDE, "minecraft:block/stripped_mangrove_log"));
-    registerPillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_OAK_LOG, Map.of(TextureKey.END, "minecraft:block/stripped_oak_log_top", TextureKey.SIDE, "minecraft:block/stripped_oak_log"));
-    registerPillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_OAK_WOOD, Map.of(TextureKey.END, "minecraft:block/stripped_oak_log", TextureKey.SIDE, "minecraft:block/stripped_oak_log"));
-    registerPillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_PALE_OAK_LOG, Map.of(TextureKey.END, "minecraft:block/stripped_pale_oak_log_top", TextureKey.SIDE, "minecraft:block/stripped_pale_oak_log"));
-    registerPillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_PALE_OAK_WOOD, Map.of(TextureKey.END, "minecraft:block/stripped_pale_oak_log", TextureKey.SIDE, "minecraft:block/stripped_pale_oak_log"));
-    registerPillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_SPRUCE_LOG, Map.of(TextureKey.END, "minecraft:block/stripped_spruce_log_top", TextureKey.SIDE, "minecraft:block/stripped_spruce_log"));
-    registerPillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_SPRUCE_WOOD, Map.of(TextureKey.END, "minecraft:block/stripped_spruce_log", TextureKey.SIDE, "minecraft:block/stripped_spruce_log"));
-    registerPillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_WARPED_HYPHAE, Map.of(TextureKey.END, "minecraft:block/stripped_warped_stem", TextureKey.SIDE, "minecraft:block/stripped_warped_stem"));
-    registerPillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_WARPED_STEM, Map.of(TextureKey.END, "minecraft:block/stripped_warped_stem_top", TextureKey.SIDE, "minecraft:block/stripped_warped_stem"));
+    //PILLAR SLABS - SIMPLE
+    registerSimplePillarSlabBlock(DistantMoonsBlocks.CUT_ACACIA_WOOD, Map.of(TextureKey.END, "minecraft:block/acacia_log", TextureKey.SIDE, "minecraft:block/acacia_log"));
+    registerSimplePillarSlabBlock(DistantMoonsBlocks.CUT_BASALT, Map.of(TextureKey.END, "minecraft:block/basalt_top", TextureKey.SIDE, "minecraft:block/basalt_side"));
+    registerSimplePillarSlabBlock(DistantMoonsBlocks.CUT_BIRCH_WOOD, Map.of(TextureKey.END, "minecraft:block/birch_log", TextureKey.SIDE, "minecraft:block/birch_log"));
+    registerSimplePillarSlabBlock(DistantMoonsBlocks.CUT_BONE_BLOCK, Map.of(TextureKey.END, "minecraft:block/bone_block_top", TextureKey.SIDE, "minecraft:block/bone_block_side"));
+    registerSimplePillarSlabBlock(DistantMoonsBlocks.CUT_CHERRY_WOOD, Map.of(TextureKey.END, "minecraft:block/cherry_log", TextureKey.SIDE, "minecraft:block/cherry_log"));
+    registerSimplePillarSlabBlock(DistantMoonsBlocks.CUT_CRIMSON_HYPHAE, Map.of(TextureKey.END, "minecraft:block/crimson_stem", TextureKey.SIDE, "minecraft:block/crimson_stem"));
+    registerSimplePillarSlabBlock(DistantMoonsBlocks.CUT_CRIMSON_STEM, Map.of(TextureKey.END, "minecraft:block/crimson_stem_top", TextureKey.SIDE, "minecraft:block/crimson_stem"));
+    registerSimplePillarSlabBlock(DistantMoonsBlocks.CUT_DARK_OAK_WOOD, Map.of(TextureKey.END, "minecraft:block/dark_oak_log", TextureKey.SIDE, "minecraft:block/dark_oak_log"));
+    registerSimplePillarSlabBlock(DistantMoonsBlocks.CUT_JUNGLE_WOOD, Map.of(TextureKey.END, "minecraft:block/jungle_log", TextureKey.SIDE, "minecraft:block/jungle_log"));
+    registerSimplePillarSlabBlock(DistantMoonsBlocks.CUT_MANGROVE_WOOD, Map.of(TextureKey.END, "minecraft:block/mangrove_log", TextureKey.SIDE, "minecraft:block/mangrove_log"));
+    registerSimplePillarSlabBlock(DistantMoonsBlocks.CUT_OAK_WOOD, Map.of(TextureKey.END, "minecraft:block/oak_log", TextureKey.SIDE, "minecraft:block/oak_log"));
+    registerSimplePillarSlabBlock(DistantMoonsBlocks.CUT_PALE_OAK_WOOD, Map.of(TextureKey.END, "minecraft:block/pale_oak_log", TextureKey.SIDE, "minecraft:block/pale_oak_log"));
+    registerSimplePillarSlabBlock(DistantMoonsBlocks.CUT_SPRUCE_WOOD, Map.of(TextureKey.END, "minecraft:block/spruce_log", TextureKey.SIDE, "minecraft:block/spruce_log"));
+    registerSimplePillarSlabBlock(DistantMoonsBlocks.CUT_WARPED_HYPHAE, Map.of(TextureKey.END, "minecraft:block/warped_stem", TextureKey.SIDE, "minecraft:block/warped_stem"));
+    registerSimplePillarSlabBlock(DistantMoonsBlocks.POLISHED_CUT_BASALT, Map.of(TextureKey.END, "minecraft:block/polished_basalt_top", TextureKey.SIDE, "minecraft:block/polished_basalt_side"));
+    registerSimplePillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_ACACIA_WOOD, Map.of(TextureKey.END, "minecraft:block/stripped_acacia_log", TextureKey.SIDE, "minecraft:block/stripped_acacia_log"));
+    registerSimplePillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_BIRCH_WOOD, Map.of(TextureKey.END, "minecraft:block/stripped_birch_log", TextureKey.SIDE, "minecraft:block/stripped_birch_log"));
+    registerSimplePillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_CHERRY_WOOD, Map.of(TextureKey.END, "minecraft:block/stripped_cherry_log", TextureKey.SIDE, "minecraft:block/stripped_cherry_log"));
+    registerSimplePillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_CRIMSON_HYPHAE, Map.of(TextureKey.END, "minecraft:block/stripped_crimson_stem", TextureKey.SIDE, "minecraft:block/stripped_crimson_stem"));
+    registerSimplePillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_DARK_OAK_WOOD, Map.of(TextureKey.END, "minecraft:block/stripped_dark_oak_log", TextureKey.SIDE, "minecraft:block/stripped_dark_oak_log"));
+    registerSimplePillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_JUNGLE_WOOD, Map.of(TextureKey.END, "minecraft:block/stripped_jungle_log", TextureKey.SIDE, "minecraft:block/stripped_jungle_log"));
+    registerSimplePillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_MANGROVE_WOOD, Map.of(TextureKey.END, "minecraft:block/stripped_mangrove_log", TextureKey.SIDE, "minecraft:block/stripped_mangrove_log"));
+    registerSimplePillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_OAK_WOOD, Map.of(TextureKey.END, "minecraft:block/stripped_oak_log", TextureKey.SIDE, "minecraft:block/stripped_oak_log"));
+    registerSimplePillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_PALE_OAK_WOOD, Map.of(TextureKey.END, "minecraft:block/stripped_pale_oak_log", TextureKey.SIDE, "minecraft:block/stripped_pale_oak_log"));
+    registerSimplePillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_SPRUCE_WOOD, Map.of(TextureKey.END, "minecraft:block/stripped_spruce_log", TextureKey.SIDE, "minecraft:block/stripped_spruce_log"));
+    registerSimplePillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_WARPED_HYPHAE, Map.of(TextureKey.END, "minecraft:block/stripped_warped_stem", TextureKey.SIDE, "minecraft:block/stripped_warped_stem"));
+    registerSimplePillarSlabBlock(DistantMoonsBlocks.CUT_WARPED_STEM, Map.of(TextureKey.END, "minecraft:block/warped_stem_top", TextureKey.SIDE, "minecraft:block/warped_stem"));
+
+    //PILLAR SLAB - HORIZONTAL
+    registerHorizontalPillarSlabBlock(DistantMoonsBlocks.CUT_ACACIA_LOG, Map.of(TextureKey.END, "minecraft:block/acacia_log_top", TextureKey.SIDE, "minecraft:block/acacia_log"));
+    registerHorizontalPillarSlabBlock(DistantMoonsBlocks.CUT_BIRCH_LOG, Map.of(TextureKey.END, "minecraft:block/birch_log_top", TextureKey.SIDE, "minecraft:block/birch_log"));
+    registerHorizontalPillarSlabBlock(DistantMoonsBlocks.CUT_DARK_OAK_LOG, Map.of(TextureKey.END, "minecraft:block/dark_oak_log_top", TextureKey.SIDE, "minecraft:block/dark_oak_log"));
+    registerHorizontalPillarSlabBlock(DistantMoonsBlocks.CUT_DEEPSLATE, Map.of(TextureKey.END, "minecraft:block/deepslate_top", TextureKey.SIDE, "minecraft:block/deepslate"));
+    registerHorizontalPillarSlabBlock(DistantMoonsBlocks.CUT_JUNGLE_LOG, Map.of(TextureKey.END, "minecraft:block/jungle_log_top", TextureKey.SIDE, "minecraft:block/jungle_log"));
+    registerHorizontalPillarSlabBlock(DistantMoonsBlocks.CUT_MANGROVE_LOG, Map.of(TextureKey.END, "minecraft:block/mangrove_log_top", TextureKey.SIDE, "minecraft:block/mangrove_log"));
+    registerHorizontalPillarSlabBlock(DistantMoonsBlocks.CUT_OAK_LOG, Map.of(TextureKey.END, "minecraft:block/oak_log_top", TextureKey.SIDE, "minecraft:block/oak_log"));
+    registerHorizontalPillarSlabBlock(DistantMoonsBlocks.CUT_PALE_OAK_LOG, Map.of(TextureKey.END, "minecraft:block/pale_oak_log_top", TextureKey.SIDE, "minecraft:block/pale_oak_log"));
+    registerHorizontalPillarSlabBlock(DistantMoonsBlocks.CUT_PURPUR_PILLAR, Map.of(TextureKey.END, "minecraft:block/purpur_pillar_top", TextureKey.SIDE, "minecraft:block/purpur_pillar"));
+    registerHorizontalPillarSlabBlock(DistantMoonsBlocks.CUT_QUARTZ_PILLAR, Map.of(TextureKey.END, "minecraft:block/quartz_pillar_top", TextureKey.SIDE, "minecraft:block/quartz_pillar"));
+    registerHorizontalPillarSlabBlock(DistantMoonsBlocks.CUT_SPRUCE_LOG, Map.of(TextureKey.END, "minecraft:block/spruce_log_top", TextureKey.SIDE, "minecraft:block/spruce_log"));
+    registerHorizontalPillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_ACACIA_LOG, Map.of(TextureKey.END, "minecraft:block/stripped_acacia_log_top", TextureKey.SIDE, "minecraft:block/stripped_acacia_log"));
+    registerHorizontalPillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_BIRCH_LOG, Map.of(TextureKey.END, "minecraft:block/stripped_birch_log_top", TextureKey.SIDE, "minecraft:block/stripped_birch_log"));
+    registerHorizontalPillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_CRIMSON_STEM, Map.of(TextureKey.END, "minecraft:block/stripped_crimson_stem_top", TextureKey.SIDE, "minecraft:block/stripped_crimson_stem"));
+    registerHorizontalPillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_DARK_OAK_LOG, Map.of(TextureKey.END, "minecraft:block/stripped_dark_oak_log_top", TextureKey.SIDE, "minecraft:block/stripped_dark_oak_log"));
+    registerHorizontalPillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_JUNGLE_LOG, Map.of(TextureKey.END, "minecraft:block/stripped_jungle_log_top", TextureKey.SIDE, "minecraft:block/stripped_jungle_log"));
+    registerHorizontalPillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_MANGROVE_LOG, Map.of(TextureKey.END, "minecraft:block/stripped_mangrove_log_top", TextureKey.SIDE, "minecraft:block/stripped_mangrove_log"));
+    registerHorizontalPillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_OAK_LOG, Map.of(TextureKey.END, "minecraft:block/stripped_oak_log_top", TextureKey.SIDE, "minecraft:block/stripped_oak_log"));
+    registerHorizontalPillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_PALE_OAK_LOG, Map.of(TextureKey.END, "minecraft:block/stripped_pale_oak_log_top", TextureKey.SIDE, "minecraft:block/stripped_pale_oak_log"));
+    registerHorizontalPillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_SPRUCE_LOG, Map.of(TextureKey.END, "minecraft:block/stripped_spruce_log_top", TextureKey.SIDE, "minecraft:block/stripped_spruce_log"));
+    registerHorizontalPillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_WARPED_STEM, Map.of(TextureKey.END, "minecraft:block/stripped_warped_stem_top", TextureKey.SIDE, "minecraft:block/stripped_warped_stem"));
+
+    //PILLAR SLAB - UVLOCKED
+    registerUVLockedPillarSlabBlock(DistantMoonsBlocks.CUT_BAMBOO_BLOCK, Map.of(TextureKey.END, "minecraft:block/bamboo_block_top", TextureKey.SIDE, "minecraft:block/bamboo_block"));
+    registerUVLockedPillarSlabBlock(DistantMoonsBlocks.CUT_CHERRY_LOG, Map.of(TextureKey.END, "minecraft:block/cherry_log_top", TextureKey.SIDE, "minecraft:block/cherry_log"));
+    registerUVLockedPillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_BAMBOO_BLOCK, Map.of(TextureKey.END, "minecraft:block/stripped_bamboo_block_top", TextureKey.SIDE, "minecraft:block/stripped_bamboo_block"));
+    registerUVLockedPillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_CHERRY_LOG, Map.of(TextureKey.END, "minecraft:block/stripped_cherry_log_top", TextureKey.SIDE, "minecraft:block/stripped_cherry_log"));
 
     //SPIKED FENCES
     registerSpikedFenceBlock(DistantMoonsBlocks.DEEP_IRON_FENCE, SPIKED_FENCE_TEXTURE_MAP);
@@ -330,31 +334,6 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
         TextureKey.TEXTURE, textureMap.get(TextureKey.TEXTURE), TextureKey.PARTICLE, textureMap.get(TextureKey.TEXTURE)
     ));
     this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModels.basic(inventoryModel));
-  }
-
-  private void registerPillarSlabBlock(Block block, Map<TextureKey, String> textureMap) {
-    WeightedVariant bottom = createWeightedVariant(createObjectModel(block, "slab/pillar/bottom", "/bottom", Map.of(
-        TextureKey.END, textureMap.get(TextureKey.END), TextureKey.SIDE, textureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, textureMap.get(TextureKey.SIDE)
-    )));
-    WeightedVariant doubleSlab = createWeightedVariant(createObjectModel(block, "pillar", null, Map.of(
-        TextureKey.END, textureMap.get(TextureKey.END), TextureKey.SIDE, textureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, textureMap.get(TextureKey.SIDE)
-    )));
-    WeightedVariant top = createWeightedVariant(createObjectModel(block, "slab/pillar/top", "/top", Map.of(
-        TextureKey.END, textureMap.get(TextureKey.END), TextureKey.SIDE, textureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, textureMap.get(TextureKey.SIDE)
-    )));
-    this.blockGenerator.blockStateCollector.accept(VariantsBlockModelDefinitionCreator.of(block).with(BlockStateVariantMap
-        .models(PillarSlabBlock.AXIS, PillarSlabBlock.TYPE)
-        .register(Direction.Axis.X, SlabType.BOTTOM, bottom.apply(ROTATE_X_90).apply(ROTATE_Y_90))
-        .register(Direction.Axis.X, SlabType.DOUBLE, doubleSlab.apply(ROTATE_X_90).apply(ROTATE_Y_90))
-        .register(Direction.Axis.X, SlabType.TOP, top.apply(ROTATE_X_90).apply(ROTATE_Y_90))
-        .register(Direction.Axis.Y, SlabType.BOTTOM, bottom)
-        .register(Direction.Axis.Y, SlabType.DOUBLE, doubleSlab)
-        .register(Direction.Axis.Y, SlabType.TOP, top)
-        .register(Direction.Axis.Z, SlabType.BOTTOM, bottom.apply(ROTATE_X_90))
-        .register(Direction.Axis.Z, SlabType.DOUBLE, doubleSlab.apply(ROTATE_X_90))
-        .register(Direction.Axis.Z, SlabType.TOP, top.apply(ROTATE_X_90))
-    ));
-    this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModels.basic(bottom.variants().getEntries().getFirst().value().modelId()));
   }
 
   private void registerDoorBlock(Block block, Map<TextureKey, String> textureMap) {
@@ -563,6 +542,81 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
         TextureKey.TEXTURE, textureMap.get(TextureKey.TEXTURE), TextureKey.PARTICLE, textureMap.get(TextureKey.TEXTURE)
     ));
     this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModels.basic(inventoryModel));
+  }
+
+  private void registerSimplePillarSlabBlock(Block block, Map<TextureKey, String> textureMap) {
+    Map<TextureKey, String> assembledTextureMap = Map.of(
+        TextureKey.END, textureMap.get(TextureKey.END), TextureKey.SIDE, textureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, textureMap.get(TextureKey.SIDE)
+    );
+    WeightedVariant bottom = createWeightedVariant(createObjectModel(block, "slab/pillar/vertical/bottom", "/bottom_vertical", assembledTextureMap));
+    WeightedVariant doubleBlock = createWeightedVariant(createObjectModel(block, "pillar/vertical", "/double_vertical", assembledTextureMap));
+    WeightedVariant top = createWeightedVariant(createObjectModel(block, "slab/pillar/vertical/top", "/top_vertical", assembledTextureMap));
+    this.blockGenerator.blockStateCollector.accept(VariantsBlockModelDefinitionCreator.of(block).with(BlockStateVariantMap
+        .models(PillarSlabBlock.AXIS, PillarSlabBlock.TYPE)
+        .register(Direction.Axis.X, SlabType.BOTTOM, bottom.apply(ROTATE_X_90).apply(ROTATE_Y_90))
+        .register(Direction.Axis.X, SlabType.DOUBLE, doubleBlock.apply(ROTATE_X_90).apply(ROTATE_Y_90))
+        .register(Direction.Axis.X, SlabType.TOP, top.apply(ROTATE_X_90).apply(ROTATE_Y_90))
+        .register(Direction.Axis.Y, SlabType.BOTTOM, bottom)
+        .register(Direction.Axis.Y, SlabType.DOUBLE, doubleBlock)
+        .register(Direction.Axis.Y, SlabType.TOP, top)
+        .register(Direction.Axis.Z, SlabType.BOTTOM, bottom.apply(ROTATE_X_90))
+        .register(Direction.Axis.Z, SlabType.DOUBLE, doubleBlock.apply(ROTATE_X_90))
+        .register(Direction.Axis.Z, SlabType.TOP, top.apply(ROTATE_X_90))
+    ));
+    this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModels.basic(bottom.variants().getEntries().getFirst().value().modelId()));
+  }
+
+  private void registerHorizontalPillarSlabBlock(Block block, Map<TextureKey, String> textureMap) {
+    Map<TextureKey, String> assembledTextureMap = Map.of(
+        TextureKey.END, textureMap.get(TextureKey.END), TextureKey.SIDE, textureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, textureMap.get(TextureKey.SIDE)
+    );
+    WeightedVariant bottomHorizontal = createWeightedVariant(createObjectModel(block, "slab/pillar/horizontal/bottom", "/bottom_horizontal", assembledTextureMap));
+    WeightedVariant bottomVertical = createWeightedVariant(createObjectModel(block, "slab/pillar/vertical/bottom", "/bottom_vertical", assembledTextureMap));
+    WeightedVariant doubleHorizontal = createWeightedVariant(createObjectModel(block, "pillar/horizontal", "/double_horizontal", assembledTextureMap));
+    WeightedVariant doubleVertical = createWeightedVariant(createObjectModel(block, "pillar/vertical", "/double_vertical", assembledTextureMap));
+    WeightedVariant topHorizontal = createWeightedVariant(createObjectModel(block, "slab/pillar/horizontal/top", "/top_horizontal", assembledTextureMap));
+    WeightedVariant topVertical = createWeightedVariant(createObjectModel(block, "slab/pillar/vertical/top", "/top_vertical", assembledTextureMap));
+    this.blockGenerator.blockStateCollector.accept(VariantsBlockModelDefinitionCreator.of(block).with(BlockStateVariantMap
+        .models(PillarSlabBlock.AXIS, PillarSlabBlock.TYPE)
+        .register(Direction.Axis.X, SlabType.BOTTOM, bottomHorizontal.apply(ROTATE_X_90).apply(ROTATE_Y_90))
+        .register(Direction.Axis.X, SlabType.DOUBLE, doubleHorizontal.apply(ROTATE_X_90).apply(ROTATE_Y_90))
+        .register(Direction.Axis.X, SlabType.TOP, topHorizontal.apply(ROTATE_X_90).apply(ROTATE_Y_90))
+        .register(Direction.Axis.Y, SlabType.BOTTOM, bottomVertical)
+        .register(Direction.Axis.Y, SlabType.DOUBLE, doubleVertical)
+        .register(Direction.Axis.Y, SlabType.TOP, topVertical)
+        .register(Direction.Axis.Z, SlabType.BOTTOM, bottomHorizontal.apply(ROTATE_X_90))
+        .register(Direction.Axis.Z, SlabType.DOUBLE, doubleHorizontal.apply(ROTATE_X_90))
+        .register(Direction.Axis.Z, SlabType.TOP, topHorizontal.apply(ROTATE_X_90))
+    ));
+    this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModels.basic(bottomHorizontal.variants().getEntries().getFirst().value().modelId()));
+  }
+
+  private void registerUVLockedPillarSlabBlock(Block block, Map<TextureKey, String> textureMap) {
+    Map<TextureKey, String> assembledTextureMap = Map.of(
+        TextureKey.END, textureMap.get(TextureKey.END), TextureKey.SIDE, textureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, textureMap.get(TextureKey.SIDE)
+    );
+    WeightedVariant bottomX = createWeightedVariant(createObjectModel(block, "slab/pillar/axis_x/bottom", "/bottom_x", assembledTextureMap));
+    WeightedVariant bottomY = createWeightedVariant(createObjectModel(block, "slab/pillar/vertical/bottom", "/bottom_y", assembledTextureMap));
+    WeightedVariant bottomZ = createWeightedVariant(createObjectModel(block, "slab/pillar/axis_z/bottom", "/bottom_z", assembledTextureMap));
+    WeightedVariant doubleX = createWeightedVariant(createObjectModel(block, "pillar/axis_x", "/double_x", assembledTextureMap));
+    WeightedVariant doubleY = createWeightedVariant(createObjectModel(block, "pillar/vertical", "/double_y", assembledTextureMap));
+    WeightedVariant doubleZ = createWeightedVariant(createObjectModel(block, "pillar/axis_z", "/double_z", assembledTextureMap));
+    WeightedVariant topX = createWeightedVariant(createObjectModel(block, "slab/pillar/axis_x/top", "/top_x", assembledTextureMap));
+    WeightedVariant topY = createWeightedVariant(createObjectModel(block, "slab/pillar/vertical/top", "/top_y", assembledTextureMap));
+    WeightedVariant topZ = createWeightedVariant(createObjectModel(block, "slab/pillar/axis_z/top", "/top_z", assembledTextureMap));
+    this.blockGenerator.blockStateCollector.accept(VariantsBlockModelDefinitionCreator.of(block).with(BlockStateVariantMap
+        .models(PillarSlabBlock.AXIS, PillarSlabBlock.TYPE)
+        .register(Direction.Axis.X, SlabType.BOTTOM, bottomX.apply(ROTATE_X_90).apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(Direction.Axis.X, SlabType.DOUBLE, doubleX.apply(ROTATE_X_90).apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(Direction.Axis.X, SlabType.TOP, topX.apply(ROTATE_X_90).apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(Direction.Axis.Y, SlabType.BOTTOM, bottomY)
+        .register(Direction.Axis.Y, SlabType.DOUBLE, doubleY)
+        .register(Direction.Axis.Y, SlabType.TOP, topY)
+        .register(Direction.Axis.Z, SlabType.BOTTOM, bottomZ.apply(ROTATE_X_90).apply(UV_LOCK))
+        .register(Direction.Axis.Z, SlabType.DOUBLE, doubleZ.apply(ROTATE_X_90).apply(UV_LOCK))
+        .register(Direction.Axis.Z, SlabType.TOP, topZ.apply(ROTATE_X_90).apply(UV_LOCK))
+    ));
+    this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModels.basic(bottomY.variants().getEntries().getFirst().value().modelId()));
   }
 
   private void registerSpikedFenceBlock(Block block, Map<TextureKey, String> textureMap) {
