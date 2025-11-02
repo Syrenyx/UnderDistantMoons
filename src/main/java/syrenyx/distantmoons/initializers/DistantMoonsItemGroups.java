@@ -11,52 +11,96 @@ public abstract class DistantMoonsItemGroups {
   static {
 
     //BUILDING BLOCKS
-    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.OAK_LOG, List.of(DistantMoonsBlocks.CUT_OAK_LOG.asItem().getDefaultStack()));
-    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.OAK_WOOD, List.of(DistantMoonsBlocks.CUT_OAK_WOOD.asItem().getDefaultStack()));
-    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.STRIPPED_OAK_LOG, List.of(DistantMoonsBlocks.STRIPPED_CUT_OAK_LOG.asItem().getDefaultStack()));
-    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.STRIPPED_OAK_WOOD, List.of(DistantMoonsBlocks.STRIPPED_CUT_OAK_WOOD.asItem().getDefaultStack()));
-    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.SPRUCE_LOG, List.of(DistantMoonsBlocks.CUT_SPRUCE_LOG.asItem().getDefaultStack()));
-    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.SPRUCE_WOOD, List.of(DistantMoonsBlocks.CUT_SPRUCE_WOOD.asItem().getDefaultStack()));
-    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.STRIPPED_SPRUCE_LOG, List.of(DistantMoonsBlocks.STRIPPED_CUT_SPRUCE_LOG.asItem().getDefaultStack()));
-    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.STRIPPED_SPRUCE_WOOD, List.of(DistantMoonsBlocks.STRIPPED_CUT_SPRUCE_WOOD.asItem().getDefaultStack()));
-    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.BIRCH_LOG, List.of(DistantMoonsBlocks.CUT_BIRCH_LOG.asItem().getDefaultStack()));
-    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.BIRCH_WOOD, List.of(DistantMoonsBlocks.CUT_BIRCH_WOOD.asItem().getDefaultStack()));
-    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.STRIPPED_BIRCH_LOG, List.of(DistantMoonsBlocks.STRIPPED_CUT_BIRCH_LOG.asItem().getDefaultStack()));
-    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.STRIPPED_BIRCH_WOOD, List.of(DistantMoonsBlocks.STRIPPED_CUT_BIRCH_WOOD.asItem().getDefaultStack()));
-    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.JUNGLE_LOG, List.of(DistantMoonsBlocks.CUT_JUNGLE_LOG.asItem().getDefaultStack()));
-    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.JUNGLE_WOOD, List.of(DistantMoonsBlocks.CUT_JUNGLE_WOOD.asItem().getDefaultStack()));
-    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.STRIPPED_JUNGLE_LOG, List.of(DistantMoonsBlocks.STRIPPED_CUT_JUNGLE_LOG.asItem().getDefaultStack()));
-    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.STRIPPED_JUNGLE_WOOD, List.of(DistantMoonsBlocks.STRIPPED_CUT_JUNGLE_WOOD.asItem().getDefaultStack()));
-    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.ACACIA_LOG, List.of(DistantMoonsBlocks.CUT_ACACIA_LOG.asItem().getDefaultStack()));
-    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.ACACIA_WOOD, List.of(DistantMoonsBlocks.CUT_ACACIA_WOOD.asItem().getDefaultStack()));
-    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.STRIPPED_ACACIA_LOG, List.of(DistantMoonsBlocks.STRIPPED_CUT_ACACIA_LOG.asItem().getDefaultStack()));
-    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.STRIPPED_ACACIA_WOOD, List.of(DistantMoonsBlocks.STRIPPED_CUT_ACACIA_WOOD.asItem().getDefaultStack()));
-    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.DARK_OAK_LOG, List.of(DistantMoonsBlocks.CUT_DARK_OAK_LOG.asItem().getDefaultStack()));
-    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.DARK_OAK_WOOD, List.of(DistantMoonsBlocks.CUT_DARK_OAK_WOOD.asItem().getDefaultStack()));
-    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.STRIPPED_DARK_OAK_LOG, List.of(DistantMoonsBlocks.STRIPPED_CUT_DARK_OAK_LOG.asItem().getDefaultStack()));
-    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.STRIPPED_DARK_OAK_WOOD, List.of(DistantMoonsBlocks.STRIPPED_CUT_DARK_OAK_WOOD.asItem().getDefaultStack()));
-    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.MANGROVE_LOG, List.of(DistantMoonsBlocks.CUT_MANGROVE_LOG.asItem().getDefaultStack()));
-    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.MANGROVE_WOOD, List.of(DistantMoonsBlocks.CUT_MANGROVE_WOOD.asItem().getDefaultStack()));
-    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.STRIPPED_MANGROVE_LOG, List.of(DistantMoonsBlocks.STRIPPED_CUT_MANGROVE_LOG.asItem().getDefaultStack()));
-    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.STRIPPED_MANGROVE_WOOD, List.of(DistantMoonsBlocks.STRIPPED_CUT_MANGROVE_WOOD.asItem().getDefaultStack()));
-    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.CHERRY_LOG, List.of(DistantMoonsBlocks.CUT_CHERRY_LOG.asItem().getDefaultStack()));
-    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.CHERRY_WOOD, List.of(DistantMoonsBlocks.CUT_CHERRY_WOOD.asItem().getDefaultStack()));
-    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.STRIPPED_CHERRY_LOG, List.of(DistantMoonsBlocks.STRIPPED_CUT_CHERRY_LOG.asItem().getDefaultStack()));
-    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.STRIPPED_CHERRY_WOOD, List.of(DistantMoonsBlocks.STRIPPED_CUT_CHERRY_WOOD.asItem().getDefaultStack()));
-    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.PALE_OAK_LOG, List.of(DistantMoonsBlocks.CUT_PALE_OAK_LOG.asItem().getDefaultStack()));
-    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.PALE_OAK_WOOD, List.of(DistantMoonsBlocks.CUT_PALE_OAK_WOOD.asItem().getDefaultStack()));
-    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.STRIPPED_PALE_OAK_LOG, List.of(DistantMoonsBlocks.STRIPPED_CUT_PALE_OAK_LOG.asItem().getDefaultStack()));
-    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.STRIPPED_PALE_OAK_WOOD, List.of(DistantMoonsBlocks.STRIPPED_CUT_PALE_OAK_WOOD.asItem().getDefaultStack()));
+    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.OAK_WOOD, List.of(
+        DistantMoonsBlocks.CUT_OAK_LOG.asItem().getDefaultStack(),
+        DistantMoonsBlocks.CUT_OAK_WOOD.asItem().getDefaultStack()
+    ));
+    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.STRIPPED_OAK_WOOD, List.of(
+        DistantMoonsBlocks.STRIPPED_CUT_OAK_LOG.asItem().getDefaultStack(),
+        DistantMoonsBlocks.STRIPPED_CUT_OAK_WOOD.asItem().getDefaultStack()
+    ));
+    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.SPRUCE_WOOD, List.of(
+        DistantMoonsBlocks.CUT_SPRUCE_LOG.asItem().getDefaultStack(),
+        DistantMoonsBlocks.CUT_SPRUCE_WOOD.asItem().getDefaultStack()
+    ));
+    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.STRIPPED_SPRUCE_WOOD, List.of(
+        DistantMoonsBlocks.STRIPPED_CUT_SPRUCE_LOG.asItem().getDefaultStack(),
+        DistantMoonsBlocks.STRIPPED_CUT_SPRUCE_WOOD.asItem().getDefaultStack()
+    ));
+    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.BIRCH_WOOD, List.of(
+        DistantMoonsBlocks.CUT_BIRCH_LOG.asItem().getDefaultStack(),
+        DistantMoonsBlocks.CUT_BIRCH_WOOD.asItem().getDefaultStack()
+    ));
+    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.STRIPPED_BIRCH_WOOD, List.of(
+        DistantMoonsBlocks.STRIPPED_CUT_BIRCH_LOG.asItem().getDefaultStack(),
+        DistantMoonsBlocks.STRIPPED_CUT_BIRCH_WOOD.asItem().getDefaultStack()
+    ));
+    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.JUNGLE_WOOD, List.of(
+        DistantMoonsBlocks.CUT_JUNGLE_LOG.asItem().getDefaultStack(),
+        DistantMoonsBlocks.CUT_JUNGLE_WOOD.asItem().getDefaultStack()
+    ));
+    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.STRIPPED_JUNGLE_WOOD, List.of(
+        DistantMoonsBlocks.STRIPPED_CUT_JUNGLE_LOG.asItem().getDefaultStack(),
+        DistantMoonsBlocks.STRIPPED_CUT_JUNGLE_WOOD.asItem().getDefaultStack()
+    ));
+    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.ACACIA_WOOD, List.of(
+        DistantMoonsBlocks.CUT_ACACIA_LOG.asItem().getDefaultStack(),
+        DistantMoonsBlocks.CUT_ACACIA_WOOD.asItem().getDefaultStack()
+    ));
+    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.STRIPPED_ACACIA_WOOD, List.of(
+        DistantMoonsBlocks.STRIPPED_CUT_ACACIA_LOG.asItem().getDefaultStack(),
+        DistantMoonsBlocks.STRIPPED_CUT_ACACIA_WOOD.asItem().getDefaultStack()
+    ));
+    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.DARK_OAK_WOOD, List.of(
+        DistantMoonsBlocks.CUT_DARK_OAK_LOG.asItem().getDefaultStack(),
+        DistantMoonsBlocks.CUT_DARK_OAK_WOOD.asItem().getDefaultStack()
+    ));
+    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.STRIPPED_DARK_OAK_WOOD, List.of(
+        DistantMoonsBlocks.STRIPPED_CUT_DARK_OAK_LOG.asItem().getDefaultStack(),
+        DistantMoonsBlocks.STRIPPED_CUT_DARK_OAK_WOOD.asItem().getDefaultStack()
+    ));
+    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.MANGROVE_WOOD, List.of(
+        DistantMoonsBlocks.CUT_MANGROVE_LOG.asItem().getDefaultStack(),
+        DistantMoonsBlocks.CUT_MANGROVE_WOOD.asItem().getDefaultStack()
+    ));
+    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.STRIPPED_MANGROVE_WOOD, List.of(
+        DistantMoonsBlocks.STRIPPED_CUT_MANGROVE_LOG.asItem().getDefaultStack(),
+        DistantMoonsBlocks.STRIPPED_CUT_MANGROVE_WOOD.asItem().getDefaultStack()
+    ));
+    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.CHERRY_WOOD, List.of(
+        DistantMoonsBlocks.CUT_CHERRY_LOG.asItem().getDefaultStack(),
+        DistantMoonsBlocks.CUT_CHERRY_WOOD.asItem().getDefaultStack()
+    ));
+    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.STRIPPED_CHERRY_WOOD, List.of(
+        DistantMoonsBlocks.STRIPPED_CUT_CHERRY_LOG.asItem().getDefaultStack(),
+        DistantMoonsBlocks.STRIPPED_CUT_CHERRY_WOOD.asItem().getDefaultStack()
+    ));
+    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.PALE_OAK_WOOD, List.of(
+        DistantMoonsBlocks.CUT_PALE_OAK_LOG.asItem().getDefaultStack(),
+        DistantMoonsBlocks.CUT_PALE_OAK_WOOD.asItem().getDefaultStack()
+    ));
+    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.STRIPPED_PALE_OAK_WOOD, List.of(
+        DistantMoonsBlocks.STRIPPED_CUT_PALE_OAK_LOG.asItem().getDefaultStack(),
+        DistantMoonsBlocks.STRIPPED_CUT_PALE_OAK_WOOD.asItem().getDefaultStack()
+    ));
     addToGroup(ItemGroups.BUILDING_BLOCKS, Items.BAMBOO_BLOCK, List.of(DistantMoonsBlocks.CUT_BAMBOO_BLOCK.asItem().getDefaultStack()));
     addToGroup(ItemGroups.BUILDING_BLOCKS, Items.STRIPPED_BAMBOO_BLOCK, List.of(DistantMoonsBlocks.STRIPPED_CUT_BAMBOO_BLOCK.asItem().getDefaultStack()));
-    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.CRIMSON_STEM, List.of(DistantMoonsBlocks.CUT_CRIMSON_STEM.asItem().getDefaultStack()));
-    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.CRIMSON_HYPHAE, List.of(DistantMoonsBlocks.CUT_CRIMSON_HYPHAE.asItem().getDefaultStack()));
-    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.STRIPPED_CRIMSON_STEM, List.of(DistantMoonsBlocks.STRIPPED_CUT_CRIMSON_STEM.asItem().getDefaultStack()));
-    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.STRIPPED_CRIMSON_HYPHAE, List.of(DistantMoonsBlocks.STRIPPED_CUT_CRIMSON_HYPHAE.asItem().getDefaultStack()));
-    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.WARPED_STEM, List.of(DistantMoonsBlocks.CUT_WARPED_STEM.asItem().getDefaultStack()));
-    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.WARPED_HYPHAE, List.of(DistantMoonsBlocks.CUT_WARPED_HYPHAE.asItem().getDefaultStack()));
-    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.STRIPPED_WARPED_STEM, List.of(DistantMoonsBlocks.STRIPPED_CUT_WARPED_STEM.asItem().getDefaultStack()));
-    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.STRIPPED_WARPED_HYPHAE, List.of(DistantMoonsBlocks.STRIPPED_CUT_WARPED_HYPHAE.asItem().getDefaultStack()));
+    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.CRIMSON_HYPHAE, List.of(
+        DistantMoonsBlocks.CUT_CRIMSON_STEM.asItem().getDefaultStack(),
+        DistantMoonsBlocks.CUT_CRIMSON_HYPHAE.asItem().getDefaultStack()
+    ));
+    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.STRIPPED_CRIMSON_HYPHAE, List.of(
+        DistantMoonsBlocks.STRIPPED_CUT_CRIMSON_STEM.asItem().getDefaultStack(),
+        DistantMoonsBlocks.STRIPPED_CUT_CRIMSON_HYPHAE.asItem().getDefaultStack()
+    ));
+    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.WARPED_HYPHAE, List.of(
+        DistantMoonsBlocks.CUT_WARPED_STEM.asItem().getDefaultStack(),
+        DistantMoonsBlocks.CUT_WARPED_HYPHAE.asItem().getDefaultStack()
+    ));
+    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.STRIPPED_WARPED_HYPHAE, List.of(
+        DistantMoonsBlocks.STRIPPED_CUT_WARPED_STEM.asItem().getDefaultStack(),
+        DistantMoonsBlocks.STRIPPED_CUT_WARPED_HYPHAE.asItem().getDefaultStack()
+    ));
     addToGroup(ItemGroups.BUILDING_BLOCKS, Items.DEEPSLATE, List.of(DistantMoonsBlocks.CUT_DEEPSLATE.asItem().getDefaultStack()));
     addToGroup(ItemGroups.BUILDING_BLOCKS, Items.BASALT, List.of(DistantMoonsBlocks.CUT_BASALT.asItem().getDefaultStack()));
     addToGroup(ItemGroups.BUILDING_BLOCKS, Items.POLISHED_BASALT, List.of(DistantMoonsBlocks.POLISHED_CUT_BASALT.asItem().getDefaultStack()));
