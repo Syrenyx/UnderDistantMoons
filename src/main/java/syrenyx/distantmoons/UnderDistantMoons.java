@@ -21,6 +21,7 @@ public class UnderDistantMoons implements ModInitializer {
     DistantMoonsAfflictionLocationBasedEffects.initialize();
     DistantMoonsAfflictionValueEffects.initialize();
     DistantMoonsAttachedData.initialize();
+    DistantMoonsBlockModifications.initialize();
     DistantMoonsBlocks.initialize();
     DistantMoonsCommands.initialize();
     DistantMoonsEnchantmentEffectComponents.initialize();
