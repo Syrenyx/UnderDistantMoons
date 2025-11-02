@@ -9,10 +9,7 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import syrenyx.distantmoons.UnderDistantMoons;
-import syrenyx.distantmoons.content.block.FixedLadderBlock;
-import syrenyx.distantmoons.content.block.MetalBarDoorBlock;
-import syrenyx.distantmoons.content.block.MetalLadderBlock;
-import syrenyx.distantmoons.content.block.SpikedFenceBlock;
+import syrenyx.distantmoons.content.block.*;
 import syrenyx.distantmoons.references.DistantMoonsBlockSetTypes;
 
 import java.util.function.Function;
@@ -45,6 +42,174 @@ public abstract class DistantMoonsBlocks {
       AbstractBlock.Settings.copy(Blocks.IRON_BLOCK)
           .mapColor(MapColor.TERRACOTTA_WHITE),
       new Item.Settings().fireproof()
+  );
+  public static final Block CUT_ACACIA_LOG = register(
+      "cut_acacia_log",
+      PillarSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.ACACIA_LOG),
+      new Item.Settings()
+  );
+  public static final Block CUT_ACACIA_WOOD = register(
+      "cut_acacia_wood",
+      PillarSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.ACACIA_WOOD),
+      new Item.Settings()
+  );
+  public static final Block CUT_BAMBOO_BLOCK = register(
+      "cut_bamboo_block",
+      PillarSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.BAMBOO_BLOCK),
+      new Item.Settings()
+  );
+  public static final Block CUT_BASALT = register(
+      "cut_basalt",
+      PillarSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.BASALT),
+      new Item.Settings()
+  );
+  public static final Block CUT_BIRCH_LOG = register(
+      "cut_birch_log",
+      PillarSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.BIRCH_LOG),
+      new Item.Settings()
+  );
+  public static final Block CUT_BIRCH_WOOD = register(
+      "cut_birch_wood",
+      PillarSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.BIRCH_WOOD),
+      new Item.Settings()
+  );
+  public static final Block CUT_BONE_BLOCK = register(
+      "cut_bone_block",
+      PillarSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.BONE_BLOCK),
+      new Item.Settings()
+  );
+  public static final Block CUT_CHERRY_LOG = register(
+      "cut_cherry_log",
+      PillarSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.CHERRY_LOG),
+      new Item.Settings()
+  );
+  public static final Block CUT_CHERRY_WOOD = register(
+      "cut_cherry_wood",
+      PillarSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.CHERRY_WOOD),
+      new Item.Settings()
+  );
+  public static final Block CUT_CRIMSON_HYPHAE = register(
+      "cut_crimson_hyphae",
+      PillarSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.CRIMSON_HYPHAE),
+      new Item.Settings()
+  );
+  public static final Block CUT_CRIMSON_STEM = register(
+      "cut_crimson_stem",
+      PillarSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.CRIMSON_STEM),
+      new Item.Settings()
+  );
+  public static final Block CUT_DARK_OAK_LOG = register(
+      "cut_dark_oak_log",
+      PillarSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.DARK_OAK_LOG),
+      new Item.Settings()
+  );
+  public static final Block CUT_DARK_OAK_WOOD = register(
+      "cut_dark_oak_wood",
+      PillarSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.DARK_OAK_WOOD),
+      new Item.Settings()
+  );
+  public static final Block CUT_DEEPSLATE = register(
+      "cut_deepslate",
+      PillarSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.DEEPSLATE),
+      new Item.Settings()
+  );
+  public static final Block CUT_JUNGLE_LOG = register(
+      "cut_jungle_log",
+      PillarSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.JUNGLE_LOG),
+      new Item.Settings()
+  );
+  public static final Block CUT_JUNGLE_WOOD = register(
+      "cut_jungle_wood",
+      PillarSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.JUNGLE_WOOD),
+      new Item.Settings()
+  );
+  public static final Block CUT_MANGROVE_LOG = register(
+      "cut_mangrove_log",
+      PillarSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.MANGROVE_LOG),
+      new Item.Settings()
+  );
+  public static final Block CUT_MANGROVE_WOOD = register(
+      "cut_mangrove_wood",
+      PillarSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.MANGROVE_WOOD),
+      new Item.Settings()
+  );
+  public static final Block CUT_OAK_LOG = register(
+      "cut_oak_log",
+      PillarSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.OAK_LOG),
+      new Item.Settings()
+  );
+  public static final Block CUT_OAK_WOOD = register(
+      "cut_oak_wood",
+      PillarSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.OAK_WOOD),
+      new Item.Settings()
+  );
+  public static final Block CUT_PALE_OAK_LOG = register(
+      "cut_pale_oak_log",
+      PillarSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.PALE_OAK_LOG),
+      new Item.Settings()
+  );
+  public static final Block CUT_PALE_OAK_WOOD = register(
+      "cut_pale_oak_wood",
+      PillarSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.PALE_OAK_WOOD),
+      new Item.Settings()
+  );
+  public static final Block CUT_PURPUR_PILLAR = register(
+      "cut_purpur_pillar",
+      PillarSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.PURPUR_PILLAR),
+      new Item.Settings()
+  );
+  public static final Block CUT_QUARTZ_PILLAR = register(
+      "cut_quartz_pillar",
+      PillarSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.QUARTZ_PILLAR),
+      new Item.Settings()
+  );
+  public static final Block CUT_SPRUCE_LOG = register(
+      "cut_spruce_log",
+      PillarSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.SPRUCE_LOG),
+      new Item.Settings()
+  );
+  public static final Block CUT_SPRUCE_WOOD = register(
+      "cut_spruce_wood",
+      PillarSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.SPRUCE_WOOD),
+      new Item.Settings()
+  );
+  public static final Block CUT_WARPED_HYPHAE = register(
+      "cut_warped_hyphae",
+      PillarSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.WARPED_HYPHAE),
+      new Item.Settings()
+  );
+  public static final Block CUT_WARPED_STEM = register(
+      "cut_warped_stem",
+      PillarSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.WARPED_STEM),
+      new Item.Settings()
   );
   public static final Block DEEP_IRON_BAR_DOOR = register(
       "deep_iron_bar_door",
@@ -141,6 +306,12 @@ public abstract class DistantMoonsBlocks {
           .strength(3.0F, 3.0F),
       new Item.Settings().fireproof()
   );
+  public static final Block POLISHED_CUT_BASALT = register(
+      "polished_cut_basalt",
+      PillarSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.POLISHED_BASALT),
+      new Item.Settings()
+  );
   public static final Block RAW_DEEP_IRON_BLOCK = register(
       "raw_deep_iron_block",
       Block::new,
@@ -154,6 +325,144 @@ public abstract class DistantMoonsBlocks {
       AbstractBlock.Settings.copy(Blocks.IRON_BLOCK)
           .mapColor(MapColor.TERRACOTTA_WHITE),
       new Item.Settings().fireproof()
+  );
+  public static final Block STRIPPED_CUT_ACACIA_LOG = register(
+      "stripped_cut_acacia_log",
+      PillarSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.STRIPPED_ACACIA_LOG),
+      new Item.Settings()
+  );
+  public static final Block STRIPPED_CUT_ACACIA_WOOD = register(
+      "stripped_cut_acacia_wood",
+      PillarSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.STRIPPED_ACACIA_WOOD),
+      new Item.Settings()
+  );
+  public static final Block STRIPPED_CUT_BAMBOO_BLOCK = register(
+      "stripped_cut_bamboo_block",
+      PillarSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.STRIPPED_BAMBOO_BLOCK),
+      new Item.Settings()
+  );
+  public static final Block STRIPPED_CUT_BIRCH_LOG = register(
+      "stripped_cut_birch_log",
+      PillarSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.STRIPPED_BIRCH_LOG),
+      new Item.Settings()
+  );
+  public static final Block STRIPPED_CUT_BIRCH_WOOD = register(
+      "stripped_cut_birch_wood",
+      PillarSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.STRIPPED_BIRCH_WOOD),
+      new Item.Settings()
+  );
+  public static final Block STRIPPED_CUT_CHERRY_LOG = register(
+      "stripped_cut_cherry_log",
+      PillarSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.STRIPPED_CHERRY_LOG),
+      new Item.Settings()
+  );
+  public static final Block STRIPPED_CUT_CHERRY_WOOD = register(
+      "stripped_cut_cherry_wood",
+      PillarSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.STRIPPED_CHERRY_WOOD),
+      new Item.Settings()
+  );
+  public static final Block STRIPPED_CUT_CRIMSON_HYPHAE = register(
+      "stripped_cut_crimson_hyphae",
+      PillarSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.STRIPPED_CRIMSON_HYPHAE),
+      new Item.Settings()
+  );
+  public static final Block STRIPPED_CUT_CRIMSON_STEM = register(
+      "stripped_cut_crimson_stem",
+      PillarSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.STRIPPED_CRIMSON_STEM),
+      new Item.Settings()
+  );
+  public static final Block STRIPPED_CUT_DARK_OAK_LOG = register(
+      "stripped_cut_dark_oak_log",
+      PillarSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.STRIPPED_DARK_OAK_LOG),
+      new Item.Settings()
+  );
+  public static final Block STRIPPED_CUT_DARK_OAK_WOOD = register(
+      "stripped_cut_dark_oak_wood",
+      PillarSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.STRIPPED_DARK_OAK_WOOD),
+      new Item.Settings()
+  );
+  public static final Block STRIPPED_CUT_JUNGLE_LOG = register(
+      "stripped_cut_jungle_log",
+      PillarSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.STRIPPED_JUNGLE_LOG),
+      new Item.Settings()
+  );
+  public static final Block STRIPPED_CUT_JUNGLE_WOOD = register(
+      "stripped_cut_jungle_wood",
+      PillarSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.STRIPPED_JUNGLE_WOOD),
+      new Item.Settings()
+  );
+  public static final Block STRIPPED_CUT_MANGROVE_LOG = register(
+      "stripped_cut_mangrove_log",
+      PillarSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.STRIPPED_MANGROVE_LOG),
+      new Item.Settings()
+  );
+  public static final Block STRIPPED_CUT_MANGROVE_WOOD = register(
+      "stripped_cut_mangrove_wood",
+      PillarSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.STRIPPED_MANGROVE_WOOD),
+      new Item.Settings()
+  );
+  public static final Block STRIPPED_CUT_OAK_LOG = register(
+      "stripped_cut_oak_log",
+      PillarSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.STRIPPED_OAK_LOG),
+      new Item.Settings()
+  );
+  public static final Block STRIPPED_CUT_OAK_WOOD = register(
+      "stripped_cut_oak_wood",
+      PillarSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.STRIPPED_OAK_WOOD),
+      new Item.Settings()
+  );
+  public static final Block STRIPPED_CUT_PALE_OAK_LOG = register(
+      "stripped_cut_pale_oak_log",
+      PillarSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.STRIPPED_PALE_OAK_LOG),
+      new Item.Settings()
+  );
+  public static final Block STRIPPED_CUT_PALE_OAK_WOOD = register(
+      "stripped_cut_pale_oak_wood",
+      PillarSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.STRIPPED_PALE_OAK_WOOD),
+      new Item.Settings()
+  );
+  public static final Block STRIPPED_CUT_SPRUCE_LOG = register(
+      "stripped_cut_spruce_log",
+      PillarSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.STRIPPED_SPRUCE_LOG),
+      new Item.Settings()
+  );
+  public static final Block STRIPPED_CUT_SPRUCE_WOOD = register(
+      "stripped_cut_spruce_wood",
+      PillarSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.STRIPPED_SPRUCE_WOOD),
+      new Item.Settings()
+  );
+  public static final Block STRIPPED_CUT_WARPED_HYPHAE = register(
+      "stripped_cut_warped_hyphae",
+      PillarSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.STRIPPED_WARPED_HYPHAE),
+      new Item.Settings()
+  );
+  public static final Block STRIPPED_CUT_WARPED_STEM = register(
+      "stripped_cut_warped_stem",
+      PillarSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.WARPED_STEM),
+      new Item.Settings()
   );
   public static final Block WROUGHT_IRON_BAR_DOOR = register(
       "wrought_iron_bar_door",

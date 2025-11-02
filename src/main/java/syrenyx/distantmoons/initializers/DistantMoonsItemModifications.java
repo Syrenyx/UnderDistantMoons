@@ -10,11 +10,13 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.Items;
 import net.minecraft.item.consume.ApplyEffectsConsumeEffect;
+import syrenyx.distantmoons.references.tag.DistantMoonsItemTags;
 
 public abstract class DistantMoonsItemModifications {
 
   private static final int COAL_SMELT_TIME_FACTOR = 8;
   private static final int COKE_SMELT_TIME_FACTOR = 12;
+  private static final float WOOD_SMELT_TIME_FACTOR = 0.75F;
   private static final ConsumableComponent NETHER_FUNGUS_CONSUMABLE = ConsumableComponent.builder()
       .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 600, 0), 0.45F))
       .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(StatusEffects.POISON, 300, 0), 0.35F))
@@ -54,9 +56,15 @@ public abstract class DistantMoonsItemModifications {
 
     //FUEL
     FuelRegistryEvents.BUILD.register((builder, context) -> {
+
+      //ITEMS
       builder.add(DistantMoonsBlocks.CHARCOAL_BLOCK.asItem(), context.baseSmeltTime() * COAL_SMELT_TIME_FACTOR * 9);
       builder.add(DistantMoonsItems.COKE, context.baseSmeltTime() * COKE_SMELT_TIME_FACTOR);
       builder.add(DistantMoonsBlocks.COKE_BLOCK.asItem(), context.baseSmeltTime() * COKE_SMELT_TIME_FACTOR * 9);
+
+      //TAGS
+      builder.add(DistantMoonsItemTags.SMELTING_FUEL_WOOD, (int) (context.baseSmeltTime() * WOOD_SMELT_TIME_FACTOR));
+      builder.add(DistantMoonsItemTags.SMELTING_FUEL_WOOD_SLAB, (int) (context.baseSmeltTime() * WOOD_SMELT_TIME_FACTOR * 0.5F));
     });
   }
 
