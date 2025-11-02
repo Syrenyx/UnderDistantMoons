@@ -201,6 +201,12 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     registerSimplePillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_WARPED_HYPHAE, Map.of(TextureKey.END, "minecraft:block/stripped_warped_stem", TextureKey.SIDE, "minecraft:block/stripped_warped_stem"));
     registerSimplePillarSlabBlock(DistantMoonsBlocks.CUT_WARPED_STEM, Map.of(TextureKey.END, "minecraft:block/warped_stem_top", TextureKey.SIDE, "minecraft:block/warped_stem"));
 
+    //PILLAR SLAB - AXIS
+    registerAxisPillarSlabBlock(DistantMoonsBlocks.CUT_BAMBOO_BLOCK, Map.of(TextureKey.END, "minecraft:block/bamboo_block_top", TextureKey.SIDE, "minecraft:block/bamboo_block"));
+    registerAxisPillarSlabBlock(DistantMoonsBlocks.CUT_CHERRY_LOG, Map.of(TextureKey.END, "minecraft:block/cherry_log_top", TextureKey.SIDE, "minecraft:block/cherry_log"));
+    registerAxisPillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_BAMBOO_BLOCK, Map.of(TextureKey.END, "minecraft:block/stripped_bamboo_block_top", TextureKey.SIDE, "minecraft:block/stripped_bamboo_block"));
+    registerAxisPillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_CHERRY_LOG, Map.of(TextureKey.END, "minecraft:block/stripped_cherry_log_top", TextureKey.SIDE, "minecraft:block/stripped_cherry_log"));
+
     //PILLAR SLAB - HORIZONTAL
     registerHorizontalPillarSlabBlock(DistantMoonsBlocks.CUT_ACACIA_LOG, Map.of(TextureKey.END, "minecraft:block/acacia_log_top", TextureKey.SIDE, "minecraft:block/acacia_log"));
     registerHorizontalPillarSlabBlock(DistantMoonsBlocks.CUT_BIRCH_LOG, Map.of(TextureKey.END, "minecraft:block/birch_log_top", TextureKey.SIDE, "minecraft:block/birch_log"));
@@ -223,12 +229,6 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     registerHorizontalPillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_PALE_OAK_LOG, Map.of(TextureKey.END, "minecraft:block/stripped_pale_oak_log_top", TextureKey.SIDE, "minecraft:block/stripped_pale_oak_log"));
     registerHorizontalPillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_SPRUCE_LOG, Map.of(TextureKey.END, "minecraft:block/stripped_spruce_log_top", TextureKey.SIDE, "minecraft:block/stripped_spruce_log"));
     registerHorizontalPillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_WARPED_STEM, Map.of(TextureKey.END, "minecraft:block/stripped_warped_stem_top", TextureKey.SIDE, "minecraft:block/stripped_warped_stem"));
-
-    //PILLAR SLAB - UVLOCKED
-    registerUVLockedPillarSlabBlock(DistantMoonsBlocks.CUT_BAMBOO_BLOCK, Map.of(TextureKey.END, "minecraft:block/bamboo_block_top", TextureKey.SIDE, "minecraft:block/bamboo_block"));
-    registerUVLockedPillarSlabBlock(DistantMoonsBlocks.CUT_CHERRY_LOG, Map.of(TextureKey.END, "minecraft:block/cherry_log_top", TextureKey.SIDE, "minecraft:block/cherry_log"));
-    registerUVLockedPillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_BAMBOO_BLOCK, Map.of(TextureKey.END, "minecraft:block/stripped_bamboo_block_top", TextureKey.SIDE, "minecraft:block/stripped_bamboo_block"));
-    registerUVLockedPillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_CHERRY_LOG, Map.of(TextureKey.END, "minecraft:block/stripped_cherry_log_top", TextureKey.SIDE, "minecraft:block/stripped_cherry_log"));
 
     //SPIKED FENCES
     registerSpikedFenceBlock(DistantMoonsBlocks.DEEP_IRON_FENCE, SPIKED_FENCE_TEXTURE_MAP);
@@ -566,6 +566,34 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModels.basic(bottom.variants().getEntries().getFirst().value().modelId()));
   }
 
+  private void registerAxisPillarSlabBlock(Block block, Map<TextureKey, String> textureMap) {
+    Map<TextureKey, String> assembledTextureMap = Map.of(
+        TextureKey.END, textureMap.get(TextureKey.END), TextureKey.SIDE, textureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, textureMap.get(TextureKey.SIDE)
+    );
+    WeightedVariant bottomX = createWeightedVariant(createObjectModel(block, "slab/pillar/west", "/bottom_x", assembledTextureMap));
+    WeightedVariant bottomY = createWeightedVariant(createObjectModel(block, "slab/pillar/vertical/bottom", "/bottom_y", assembledTextureMap));
+    WeightedVariant bottomZ = createWeightedVariant(createObjectModel(block, "slab/pillar/south", "/bottom_z", assembledTextureMap));
+    WeightedVariant doubleX = createWeightedVariant(createObjectModel(block, "pillar/axis_x", "/double_x", assembledTextureMap));
+    WeightedVariant doubleY = createWeightedVariant(createObjectModel(block, "pillar/vertical", "/double_y", assembledTextureMap));
+    WeightedVariant doubleZ = createWeightedVariant(createObjectModel(block, "pillar/axis_z", "/double_z", assembledTextureMap));
+    WeightedVariant topX = createWeightedVariant(createObjectModel(block, "slab/pillar/east", "/top_x", assembledTextureMap));
+    WeightedVariant topY = createWeightedVariant(createObjectModel(block, "slab/pillar/vertical/top", "/top_y", assembledTextureMap));
+    WeightedVariant topZ = createWeightedVariant(createObjectModel(block, "slab/pillar/north", "/top_z", assembledTextureMap));
+    this.blockGenerator.blockStateCollector.accept(VariantsBlockModelDefinitionCreator.of(block).with(BlockStateVariantMap
+        .models(PillarSlabBlock.AXIS, PillarSlabBlock.TYPE)
+        .register(Direction.Axis.X, SlabType.BOTTOM, bottomX)
+        .register(Direction.Axis.X, SlabType.DOUBLE, doubleX)
+        .register(Direction.Axis.X, SlabType.TOP, topX)
+        .register(Direction.Axis.Y, SlabType.BOTTOM, bottomY)
+        .register(Direction.Axis.Y, SlabType.DOUBLE, doubleY)
+        .register(Direction.Axis.Y, SlabType.TOP, topY)
+        .register(Direction.Axis.Z, SlabType.BOTTOM, bottomZ)
+        .register(Direction.Axis.Z, SlabType.DOUBLE, doubleZ)
+        .register(Direction.Axis.Z, SlabType.TOP, topZ)
+    ));
+    this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModels.basic(bottomY.variants().getEntries().getFirst().value().modelId()));
+  }
+
   private void registerHorizontalPillarSlabBlock(Block block, Map<TextureKey, String> textureMap) {
     Map<TextureKey, String> assembledTextureMap = Map.of(
         TextureKey.END, textureMap.get(TextureKey.END), TextureKey.SIDE, textureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, textureMap.get(TextureKey.SIDE)
@@ -589,34 +617,6 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
         .register(Direction.Axis.Z, SlabType.TOP, topHorizontal.apply(ROTATE_X_90))
     ));
     this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModels.basic(bottomHorizontal.variants().getEntries().getFirst().value().modelId()));
-  }
-
-  private void registerUVLockedPillarSlabBlock(Block block, Map<TextureKey, String> textureMap) {
-    Map<TextureKey, String> assembledTextureMap = Map.of(
-        TextureKey.END, textureMap.get(TextureKey.END), TextureKey.SIDE, textureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, textureMap.get(TextureKey.SIDE)
-    );
-    WeightedVariant bottomX = createWeightedVariant(createObjectModel(block, "slab/pillar/axis_x/bottom", "/bottom_x", assembledTextureMap));
-    WeightedVariant bottomY = createWeightedVariant(createObjectModel(block, "slab/pillar/vertical/bottom", "/bottom_y", assembledTextureMap));
-    WeightedVariant bottomZ = createWeightedVariant(createObjectModel(block, "slab/pillar/axis_z/bottom", "/bottom_z", assembledTextureMap));
-    WeightedVariant doubleX = createWeightedVariant(createObjectModel(block, "pillar/axis_x", "/double_x", assembledTextureMap));
-    WeightedVariant doubleY = createWeightedVariant(createObjectModel(block, "pillar/vertical", "/double_y", assembledTextureMap));
-    WeightedVariant doubleZ = createWeightedVariant(createObjectModel(block, "pillar/axis_z", "/double_z", assembledTextureMap));
-    WeightedVariant topX = createWeightedVariant(createObjectModel(block, "slab/pillar/axis_x/top", "/top_x", assembledTextureMap));
-    WeightedVariant topY = createWeightedVariant(createObjectModel(block, "slab/pillar/vertical/top", "/top_y", assembledTextureMap));
-    WeightedVariant topZ = createWeightedVariant(createObjectModel(block, "slab/pillar/axis_z/top", "/top_z", assembledTextureMap));
-    this.blockGenerator.blockStateCollector.accept(VariantsBlockModelDefinitionCreator.of(block).with(BlockStateVariantMap
-        .models(PillarSlabBlock.AXIS, PillarSlabBlock.TYPE)
-        .register(Direction.Axis.X, SlabType.BOTTOM, bottomX.apply(ROTATE_X_90).apply(ROTATE_Y_90).apply(UV_LOCK))
-        .register(Direction.Axis.X, SlabType.DOUBLE, doubleX.apply(ROTATE_X_90).apply(ROTATE_Y_90).apply(UV_LOCK))
-        .register(Direction.Axis.X, SlabType.TOP, topX.apply(ROTATE_X_90).apply(ROTATE_Y_90).apply(UV_LOCK))
-        .register(Direction.Axis.Y, SlabType.BOTTOM, bottomY)
-        .register(Direction.Axis.Y, SlabType.DOUBLE, doubleY)
-        .register(Direction.Axis.Y, SlabType.TOP, topY)
-        .register(Direction.Axis.Z, SlabType.BOTTOM, bottomZ.apply(ROTATE_X_90).apply(UV_LOCK))
-        .register(Direction.Axis.Z, SlabType.DOUBLE, doubleZ.apply(ROTATE_X_90).apply(UV_LOCK))
-        .register(Direction.Axis.Z, SlabType.TOP, topZ.apply(ROTATE_X_90).apply(UV_LOCK))
-    ));
-    this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModels.basic(bottomY.variants().getEntries().getFirst().value().modelId()));
   }
 
   private void registerSpikedFenceBlock(Block block, Map<TextureKey, String> textureMap) {
