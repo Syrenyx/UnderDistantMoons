@@ -81,6 +81,10 @@ public class DistantMoonsBlockTagProvider extends FabricTagProvider.BlockTagProv
         .forceAddTag(BlockTags.SHULKER_BOXES)
         .add(Blocks.BARRIER, Blocks.CARVED_PUMPKIN, Blocks.JACK_O_LANTERN, Blocks.MELON, Blocks.PUMPKIN);
 
+    this.valueLookupBuilder(DistantMoonsBlockTags.BEAM_ALWAYS_CONNECTS_TO);
+    this.valueLookupBuilder(DistantMoonsBlockTags.BEAM_NEVER_CONNECTS_TO)
+        .addTag(DistantMoonsBlockTags.NEVER_CONNECT_TO);
+
     this.valueLookupBuilder(DistantMoonsBlockTags.BRICK_FENCE_ALWAYS_CONNECTS_TO)
         .addTag(DistantMoonsBlockTags.BRICK_FENCE);
     this.valueLookupBuilder(DistantMoonsBlockTags.BRICK_FENCE_NEVER_CONNECTS_TO)
@@ -121,6 +125,10 @@ public class DistantMoonsBlockTagProvider extends FabricTagProvider.BlockTagProv
         .addTag(DistantMoonsBlockTags.NEVER_CONNECT_TO);
 
     this.valueLookupBuilder(DistantMoonsBlockTags.METAL_BAR_DOOR_NEVER_CONNECTS_TO)
+        .addTag(DistantMoonsBlockTags.NEVER_CONNECT_TO);
+
+    this.valueLookupBuilder(DistantMoonsBlockTags.POLE_ALWAYS_CONNECTS_TO);
+    this.valueLookupBuilder(DistantMoonsBlockTags.POLE_NEVER_CONNECTS_TO)
         .addTag(DistantMoonsBlockTags.NEVER_CONNECT_TO);
 
     this.valueLookupBuilder(DistantMoonsBlockTags.SPIKED_FENCE_ALWAYS_CONNECTS_TO)
