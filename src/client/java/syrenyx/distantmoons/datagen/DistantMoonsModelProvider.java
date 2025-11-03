@@ -240,7 +240,19 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     ));
 
     //WALL SLABS - SIMPLE
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.ACACIA_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/acacia_planks"));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.BAMBOO_MOSAIC_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/bamboo_mosaic"));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.BAMBOO_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/bamboo_planks"));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.BIRCH_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/birch_planks"));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.CHERRY_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/cherry_planks"));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.CRIMSON_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/crimson_planks"));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.DARK_OAK_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/dark_oak_planks"));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.JUNGLE_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/jungle_planks"));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.MANGROVE_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/mangrove_planks"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.OAK_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/oak_planks"));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.PALE_OAK_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/pale_oak_planks"));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.SPRUCE_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/spruce_planks"));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.WARPED_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/warped_planks"));
   }
 
   @Override

@@ -172,6 +172,12 @@ public class DistantMoonsBlockTagProvider extends FabricTagProvider.BlockTagProv
         DistantMoonsBlocks.REFINED_DEEP_IRON_BLOCK
     );
     this.valueLookupBuilder(DistantMoonsBlockTags.MINING_TYPE_AXE).add(
+        DistantMoonsBlocks.ACACIA_WALL_SLAB,
+        DistantMoonsBlocks.BAMBOO_MOSAIC_WALL_SLAB,
+        DistantMoonsBlocks.BAMBOO_WALL_SLAB,
+        DistantMoonsBlocks.BIRCH_WALL_SLAB,
+        DistantMoonsBlocks.CHERRY_WALL_SLAB,
+        DistantMoonsBlocks.CRIMSON_WALL_SLAB,
         DistantMoonsBlocks.CUT_ACACIA_LOG,
         DistantMoonsBlocks.CUT_ACACIA_WOOD,
         DistantMoonsBlocks.CUT_BAMBOO_BLOCK,
@@ -195,7 +201,12 @@ public class DistantMoonsBlockTagProvider extends FabricTagProvider.BlockTagProv
         DistantMoonsBlocks.CUT_SPRUCE_WOOD,
         DistantMoonsBlocks.CUT_WARPED_HYPHAE,
         DistantMoonsBlocks.CUT_WARPED_STEM,
+        DistantMoonsBlocks.DARK_OAK_WALL_SLAB,
+        DistantMoonsBlocks.JUNGLE_WALL_SLAB,
+        DistantMoonsBlocks.MANGROVE_WALL_SLAB,
         DistantMoonsBlocks.OAK_WALL_SLAB,
+        DistantMoonsBlocks.PALE_OAK_WALL_SLAB,
+        DistantMoonsBlocks.SPRUCE_WALL_SLAB,
         DistantMoonsBlocks.STRIPPED_CUT_ACACIA_LOG,
         DistantMoonsBlocks.STRIPPED_CUT_ACACIA_WOOD,
         DistantMoonsBlocks.STRIPPED_CUT_BAMBOO_BLOCK,
@@ -218,7 +229,8 @@ public class DistantMoonsBlockTagProvider extends FabricTagProvider.BlockTagProv
         DistantMoonsBlocks.STRIPPED_CUT_SPRUCE_LOG,
         DistantMoonsBlocks.STRIPPED_CUT_SPRUCE_WOOD,
         DistantMoonsBlocks.STRIPPED_CUT_WARPED_HYPHAE,
-        DistantMoonsBlocks.STRIPPED_CUT_WARPED_STEM
+        DistantMoonsBlocks.STRIPPED_CUT_WARPED_STEM,
+        DistantMoonsBlocks.WARPED_WALL_SLAB
     );
     this.valueLookupBuilder(DistantMoonsBlockTags.MINING_TYPE_HOE);
     this.valueLookupBuilder(DistantMoonsBlockTags.MINING_TYPE_PICKAXE).add(

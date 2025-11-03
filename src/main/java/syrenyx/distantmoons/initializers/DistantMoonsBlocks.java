@@ -17,6 +17,30 @@ import java.util.function.Function;
 public abstract class DistantMoonsBlocks {
 
   //SIMPLE BLOCKS
+  public static final Block ACACIA_WALL_SLAB = register(
+      "acacia_wall_slab",
+      WallSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.ACACIA_PLANKS),
+      new Item.Settings()
+  );
+  public static final Block BAMBOO_MOSAIC_WALL_SLAB = register(
+      "bamboo_mosaic_wall_slab",
+      WallSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.BAMBOO_MOSAIC),
+      new Item.Settings()
+  );
+  public static final Block BAMBOO_WALL_SLAB = register(
+      "bamboo_wall_slab",
+      WallSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.BAMBOO_PLANKS),
+      new Item.Settings()
+  );
+  public static final Block BIRCH_WALL_SLAB = register(
+      "birch_wall_slab",
+      WallSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.BIRCH_PLANKS),
+      new Item.Settings()
+  );
   public static final Block BLACKSTONE_DEEP_IRON_ORE = register(
       "blackstone_deep_iron_ore",
       settings -> new ExperienceDroppingBlock(ConstantIntProvider.create(0), settings),
@@ -30,10 +54,22 @@ public abstract class DistantMoonsBlocks {
       AbstractBlock.Settings.copy(Blocks.COAL_BLOCK),
       new Item.Settings()
   );
+  public static final Block CHERRY_WALL_SLAB = register(
+      "cherry_wall_slab",
+      WallSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.CHERRY_PLANKS),
+      new Item.Settings()
+  );
   public static final Block COKE_BLOCK = register(
       "coke_block",
       Block::new,
       AbstractBlock.Settings.copy(Blocks.COAL_BLOCK),
+      new Item.Settings()
+  );
+  public static final Block CRIMSON_WALL_SLAB = register(
+      "crimson_wall_slab",
+      WallSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.CRIMSON_PLANKS),
       new Item.Settings()
   );
   public static final Block CRUDE_DEEP_IRON_BLOCK = register(
@@ -211,6 +247,12 @@ public abstract class DistantMoonsBlocks {
       AbstractBlock.Settings.copy(Blocks.WARPED_STEM),
       new Item.Settings()
   );
+  public static final Block DARK_OAK_WALL_SLAB = register(
+      "dark_oak_wall_slab",
+      WallSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.DARK_OAK_PLANKS),
+      new Item.Settings()
+  );
   public static final Block DEEP_IRON_BAR_DOOR = register(
       "deep_iron_bar_door",
       settings -> new MetalBarDoorBlock(BlockSetType.IRON, settings),
@@ -299,6 +341,18 @@ public abstract class DistantMoonsBlocks {
       AbstractBlock.Settings.copy(Blocks.IRON_BARS),
       new Item.Settings()
   );
+  public static final Block JUNGLE_WALL_SLAB = register(
+      "jungle_wall_slab",
+      WallSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.JUNGLE_PLANKS),
+      new Item.Settings()
+  );
+  public static final Block MANGROVE_WALL_SLAB = register(
+      "mangrove_wall_slab",
+      WallSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.MANGROVE_PLANKS),
+      new Item.Settings()
+  );
   public static final Block NETHERRACK_DEEP_IRON_ORE = register(
       "netherrack_deep_iron_ore",
       settings -> new ExperienceDroppingBlock(ConstantIntProvider.create(0), settings),
@@ -310,6 +364,12 @@ public abstract class DistantMoonsBlocks {
       "oak_wall_slab",
       WallSlabBlock::new,
       AbstractBlock.Settings.copy(Blocks.OAK_PLANKS),
+      new Item.Settings()
+  );
+  public static final Block PALE_OAK_WALL_SLAB = register(
+      "pale_oak_wall_slab",
+      WallSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.PALE_OAK_PLANKS),
       new Item.Settings()
   );
   public static final Block POLISHED_CUT_BASALT = register(
@@ -331,6 +391,12 @@ public abstract class DistantMoonsBlocks {
       AbstractBlock.Settings.copy(Blocks.IRON_BLOCK)
           .mapColor(MapColor.TERRACOTTA_WHITE),
       new Item.Settings().fireproof()
+  );
+  public static final Block SPRUCE_WALL_SLAB = register(
+      "spruce_wall_slab",
+      WallSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.SPRUCE_PLANKS),
+      new Item.Settings()
   );
   public static final Block STRIPPED_CUT_ACACIA_LOG = register(
       "stripped_cut_acacia_log",
@@ -468,6 +534,12 @@ public abstract class DistantMoonsBlocks {
       "stripped_cut_warped_stem",
       PillarSlabBlock::new,
       AbstractBlock.Settings.copy(Blocks.WARPED_STEM),
+      new Item.Settings()
+  );
+  public static final Block WARPED_WALL_SLAB = register(
+      "warped_wall_slab",
+      WallSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.WARPED_PLANKS),
       new Item.Settings()
   );
   public static final Block WROUGHT_IRON_BAR_DOOR = register(

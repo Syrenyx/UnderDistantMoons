@@ -104,7 +104,19 @@ public class DistantMoonsBlockLootTableProvider extends FabricBlockLootTableProv
     this.addSlabDrop(DistantMoonsBlocks.STRIPPED_CUT_WARPED_STEM);
 
     //WALL SLAB LOOT TABLES
+    this.addWallSlabDrop(DistantMoonsBlocks.ACACIA_WALL_SLAB);
+    this.addWallSlabDrop(DistantMoonsBlocks.BAMBOO_MOSAIC_WALL_SLAB);
+    this.addWallSlabDrop(DistantMoonsBlocks.BAMBOO_WALL_SLAB);
+    this.addWallSlabDrop(DistantMoonsBlocks.BIRCH_WALL_SLAB);
+    this.addWallSlabDrop(DistantMoonsBlocks.CHERRY_WALL_SLAB);
+    this.addWallSlabDrop(DistantMoonsBlocks.CRIMSON_WALL_SLAB);
+    this.addWallSlabDrop(DistantMoonsBlocks.DARK_OAK_WALL_SLAB);
+    this.addWallSlabDrop(DistantMoonsBlocks.JUNGLE_WALL_SLAB);
+    this.addWallSlabDrop(DistantMoonsBlocks.MANGROVE_WALL_SLAB);
     this.addWallSlabDrop(DistantMoonsBlocks.OAK_WALL_SLAB);
+    this.addWallSlabDrop(DistantMoonsBlocks.PALE_OAK_WALL_SLAB);
+    this.addWallSlabDrop(DistantMoonsBlocks.SPRUCE_WALL_SLAB);
+    this.addWallSlabDrop(DistantMoonsBlocks.WARPED_WALL_SLAB);
   }
 
   private void addSlabDrop(Block block) {

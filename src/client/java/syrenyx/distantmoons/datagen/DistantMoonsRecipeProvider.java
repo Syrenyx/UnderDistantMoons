@@ -118,7 +118,19 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
         );
 
         //WALL SLAB CRAFTING
+        this.createWallSlabRecipes(Items.ACACIA_PLANKS, DistantMoonsBlocks.ACACIA_WALL_SLAB);
+        this.createWallSlabRecipes(Items.BAMBOO_MOSAIC, DistantMoonsBlocks.BAMBOO_MOSAIC_WALL_SLAB);
+        this.createWallSlabRecipes(Items.BAMBOO_PLANKS, DistantMoonsBlocks.BAMBOO_WALL_SLAB);
+        this.createWallSlabRecipes(Items.BIRCH_PLANKS, DistantMoonsBlocks.BIRCH_WALL_SLAB);
+        this.createWallSlabRecipes(Items.CHERRY_PLANKS, DistantMoonsBlocks.CHERRY_WALL_SLAB);
+        this.createWallSlabRecipes(Items.CRIMSON_PLANKS, DistantMoonsBlocks.CRIMSON_WALL_SLAB);
+        this.createWallSlabRecipes(Items.DARK_OAK_PLANKS, DistantMoonsBlocks.DARK_OAK_WALL_SLAB);
+        this.createWallSlabRecipes(Items.JUNGLE_PLANKS, DistantMoonsBlocks.JUNGLE_WALL_SLAB);
+        this.createWallSlabRecipes(Items.MANGROVE_PLANKS, DistantMoonsBlocks.MANGROVE_WALL_SLAB);
         this.createWallSlabRecipes(Items.OAK_PLANKS, DistantMoonsBlocks.OAK_WALL_SLAB);
+        this.createWallSlabRecipes(Items.PALE_OAK_PLANKS, DistantMoonsBlocks.PALE_OAK_WALL_SLAB);
+        this.createWallSlabRecipes(Items.SPRUCE_PLANKS, DistantMoonsBlocks.SPRUCE_WALL_SLAB);
+        this.createWallSlabRecipes(Items.WARPED_PLANKS, DistantMoonsBlocks.WARPED_WALL_SLAB);
       }
 
       private void createCookingRecipes(ItemConvertible ingredient, ItemConvertible result, float experience, int cookingTime) {

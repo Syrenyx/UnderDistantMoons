@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.minecraft.registry.RegistryWrapper;
 import syrenyx.distantmoons.initializers.DistantMoonsBlocks;
 import syrenyx.distantmoons.initializers.DistantMoonsItems;
+import syrenyx.distantmoons.references.tag.DistantMoonsItemTags;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -22,9 +23,15 @@ public class en_us extends FabricLanguageProvider {
 
     builder.add("affliction.progression_tooltip", "%s / %s");
 
+    builder.add(DistantMoonsBlocks.ACACIA_WALL_SLAB, "Acacia Wall Slab");
+    builder.add(DistantMoonsBlocks.BAMBOO_MOSAIC_WALL_SLAB, "Bamboo Mosaic Wall Slab");
+    builder.add(DistantMoonsBlocks.BAMBOO_WALL_SLAB, "Bamboo Wall Slab");
+    builder.add(DistantMoonsBlocks.BIRCH_WALL_SLAB, "Birch Wall Slab");
     builder.add(DistantMoonsBlocks.BLACKSTONE_DEEP_IRON_ORE, "Blackstone Deep Iron Ore");
     builder.add(DistantMoonsBlocks.CHARCOAL_BLOCK, "Block of Charcoal");
+    builder.add(DistantMoonsBlocks.CHERRY_WALL_SLAB, "Cherry Wall Slab");
     builder.add(DistantMoonsBlocks.COKE_BLOCK, "Block of Coke");
+    builder.add(DistantMoonsBlocks.CRIMSON_WALL_SLAB, "Crimson Wall Slab");
     builder.add(DistantMoonsBlocks.CRUDE_DEEP_IRON_BLOCK, "Block of Crude Deep Iron");
     builder.add(DistantMoonsBlocks.CUT_ACACIA_LOG, "Cut Acacia Log");
     builder.add(DistantMoonsBlocks.CUT_ACACIA_WOOD, "Cut Acacia Wood");
@@ -54,6 +61,7 @@ public class en_us extends FabricLanguageProvider {
     builder.add(DistantMoonsBlocks.CUT_SPRUCE_WOOD, "Cut Spruce Wood");
     builder.add(DistantMoonsBlocks.CUT_WARPED_HYPHAE, "Cut Warped Hyphae");
     builder.add(DistantMoonsBlocks.CUT_WARPED_STEM, "Cut Warped Stem");
+    builder.add(DistantMoonsBlocks.DARK_OAK_WALL_SLAB, "Dark Oak Wall Slab");
     builder.add(DistantMoonsBlocks.DEEP_IRON_BAR_DOOR, "Deep Iron Bar Door");
     builder.add(DistantMoonsBlocks.DEEP_IRON_BARS, "Deep Iron Bars");
     builder.add(DistantMoonsBlocks.DEEP_IRON_CHAIN, "Deep Iron Chain");
@@ -68,11 +76,15 @@ public class en_us extends FabricLanguageProvider {
     builder.add(DistantMoonsBlocks.IRON_BAR_DOOR, "Iron Bar Door");
     builder.add(DistantMoonsBlocks.IRON_FENCE, "Iron Fence");
     builder.add(DistantMoonsBlocks.IRON_LADDER, "Iron Ladder");
+    builder.add(DistantMoonsBlocks.JUNGLE_WALL_SLAB, "Jungle Wall Slab");
+    builder.add(DistantMoonsBlocks.MANGROVE_WALL_SLAB, "Mangrove Wall Slab");
     builder.add(DistantMoonsBlocks.NETHERRACK_DEEP_IRON_ORE, "Netherrack Deep Iron Ore");
     builder.add(DistantMoonsBlocks.OAK_WALL_SLAB, "Oak Wall Slab");
+    builder.add(DistantMoonsBlocks.PALE_OAK_WALL_SLAB, "Pale Oak Wall Slab");
     builder.add(DistantMoonsBlocks.POLISHED_CUT_BASALT, "Polished Cut Basalt");
     builder.add(DistantMoonsBlocks.RAW_DEEP_IRON_BLOCK, "Block of Raw Deep Iron");
     builder.add(DistantMoonsBlocks.REFINED_DEEP_IRON_BLOCK, "Block of Refined Deep Iron");
+    builder.add(DistantMoonsBlocks.SPRUCE_WALL_SLAB, "Spruce Wall Slab");
     builder.add(DistantMoonsBlocks.STRIPPED_CUT_ACACIA_LOG, "Stripped Cut Acacia Log");
     builder.add(DistantMoonsBlocks.STRIPPED_CUT_ACACIA_WOOD, "Stripped Cut Acacia Wood");
     builder.add(DistantMoonsBlocks.STRIPPED_CUT_BAMBOO_BLOCK, "Stripped Cut Bamboo Block");
@@ -96,6 +108,7 @@ public class en_us extends FabricLanguageProvider {
     builder.add(DistantMoonsBlocks.STRIPPED_CUT_SPRUCE_WOOD, "Stripped Cut Spruce Wood");
     builder.add(DistantMoonsBlocks.STRIPPED_CUT_WARPED_HYPHAE, "Stripped Cut Warped Hyphae");
     builder.add(DistantMoonsBlocks.STRIPPED_CUT_WARPED_STEM, "Stripped Cut Warped Stem");
+    builder.add(DistantMoonsBlocks.WARPED_WALL_SLAB, "Warped Wall Slab");
     builder.add(DistantMoonsBlocks.WROUGHT_IRON_BAR_DOOR, "Wrought Iron Bar Door");
     builder.add(DistantMoonsBlocks.WROUGHT_IRON_BARS, "Wrought Iron Bars");
     builder.add(DistantMoonsBlocks.WROUGHT_IRON_FENCE, "Wrought Iron Fence");
@@ -146,6 +159,11 @@ public class en_us extends FabricLanguageProvider {
 
     builder.add("subtitles.distant-moons.entity.begin_curing_curse", "Curse wanes");
     builder.add("subtitles.distant-moons.entity.finish_curing_curse", "Curse lifts");
+
+    builder.add(DistantMoonsItemTags.REPAIRS_DEEP_IRON_EQUIPMENT, "Repairs Deep Iron Equipment");
+    builder.add(DistantMoonsItemTags.SMELTING_FUEL_WOOD_BLOCK, "Wooden Block Fuel");
+    builder.add(DistantMoonsItemTags.SMELTING_FUEL_WOOD_SLAB, "Wooden Slab Fuel");
+    builder.add(DistantMoonsItemTags.SWORD, "Sword");
 
     EnchantmentLevelUtil.generateEnchantmentLevels(builder, 11, 255);
   }
