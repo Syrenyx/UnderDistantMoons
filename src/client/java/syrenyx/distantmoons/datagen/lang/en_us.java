@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.minecraft.registry.RegistryWrapper;
 import syrenyx.distantmoons.initializers.DistantMoonsBlocks;
 import syrenyx.distantmoons.initializers.DistantMoonsItems;
+import syrenyx.distantmoons.references.tag.DistantMoonsItemTags;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -22,9 +23,20 @@ public class en_us extends FabricLanguageProvider {
 
     builder.add("affliction.progression_tooltip", "%s / %s");
 
+    builder.add(DistantMoonsBlocks.ACACIA_WALL_SLAB, "Acacia Wall Slab");
+    builder.add(DistantMoonsBlocks.ANDESITE_WALL_SLAB, "Andesite Wall Slab");
+    builder.add(DistantMoonsBlocks.BAMBOO_MOSAIC_WALL_SLAB, "Bamboo Mosaic Wall Slab");
+    builder.add(DistantMoonsBlocks.BAMBOO_WALL_SLAB, "Bamboo Wall Slab");
+    builder.add(DistantMoonsBlocks.BIRCH_WALL_SLAB, "Birch Wall Slab");
     builder.add(DistantMoonsBlocks.BLACKSTONE_DEEP_IRON_ORE, "Blackstone Deep Iron Ore");
+    builder.add(DistantMoonsBlocks.BLACKSTONE_WALL_SLAB, "Blackstone Wall Slab");
+    builder.add(DistantMoonsBlocks.BRICK_WALL_SLAB, "Brick Wall Slab");
     builder.add(DistantMoonsBlocks.CHARCOAL_BLOCK, "Block of Charcoal");
+    builder.add(DistantMoonsBlocks.CHERRY_WALL_SLAB, "Cherry Wall Slab");
+    builder.add(DistantMoonsBlocks.COBBLED_DEEPSLATE_WALL_SLAB, "Cobbled Deepslate Wall Slab");
+    builder.add(DistantMoonsBlocks.COBBLESTONE_WALL_SLAB, "Cobblestone Wall Slab");
     builder.add(DistantMoonsBlocks.COKE_BLOCK, "Block of Coke");
+    builder.add(DistantMoonsBlocks.CRIMSON_WALL_SLAB, "Crimson Wall Slab");
     builder.add(DistantMoonsBlocks.CRUDE_DEEP_IRON_BLOCK, "Block of Crude Deep Iron");
     builder.add(DistantMoonsBlocks.CUT_ACACIA_LOG, "Cut Acacia Log");
     builder.add(DistantMoonsBlocks.CUT_ACACIA_WOOD, "Cut Acacia Wood");
@@ -50,10 +62,14 @@ public class en_us extends FabricLanguageProvider {
     builder.add(DistantMoonsBlocks.CUT_PALE_OAK_WOOD, "Cut Pale Oak Wood");
     builder.add(DistantMoonsBlocks.CUT_PURPUR_PILLAR, "Cut Purpur Pillar");
     builder.add(DistantMoonsBlocks.CUT_QUARTZ_PILLAR, "Cut Quartz Pillar");
+    builder.add(DistantMoonsBlocks.CUT_RED_SANDSTONE_WALL_SLAB, "Cut Red Sandstone Wall Slab");
+    builder.add(DistantMoonsBlocks.CUT_SANDSTONE_WALL_SLAB, "Cut Sandstone Wall Slab");
     builder.add(DistantMoonsBlocks.CUT_SPRUCE_LOG, "Cut Spruce Log");
     builder.add(DistantMoonsBlocks.CUT_SPRUCE_WOOD, "Cut Spruce Wood");
     builder.add(DistantMoonsBlocks.CUT_WARPED_HYPHAE, "Cut Warped Hyphae");
     builder.add(DistantMoonsBlocks.CUT_WARPED_STEM, "Cut Warped Stem");
+    builder.add(DistantMoonsBlocks.DARK_OAK_WALL_SLAB, "Dark Oak Wall Slab");
+    builder.add(DistantMoonsBlocks.DARK_PRISMARINE_WALL_SLAB, "Dark Prismarine Wall Slab");
     builder.add(DistantMoonsBlocks.DEEP_IRON_BAR_DOOR, "Deep Iron Bar Door");
     builder.add(DistantMoonsBlocks.DEEP_IRON_BARS, "Deep Iron Bars");
     builder.add(DistantMoonsBlocks.DEEP_IRON_CHAIN, "Deep Iron Chain");
@@ -61,17 +77,52 @@ public class en_us extends FabricLanguageProvider {
     builder.add(DistantMoonsBlocks.DEEP_IRON_FENCE, "Deep Iron Fence");
     builder.add(DistantMoonsBlocks.DEEP_IRON_LADDER, "Deep Iron Ladder");
     builder.add(DistantMoonsBlocks.DEEP_IRON_TRAPDOOR, "Deep Iron Trapdoor");
+    builder.add(DistantMoonsBlocks.DEEPSLATE_BRICK_WALL_SLAB, "Deepslate Brick Wall Slab");
     builder.add(DistantMoonsBlocks.DEEPSLATE_DEEP_IRON_ORE, "Deepslate Deep Iron Ore");
+    builder.add(DistantMoonsBlocks.DEEPSLATE_TILE_WALL_SLAB, "Deepslate Tile Wall Slab");
+    builder.add(DistantMoonsBlocks.DIORITE_WALL_SLAB, "Diorite Wall Slab");
+    builder.add(DistantMoonsBlocks.END_STONE_BRICK_WALL_SLAB, "End Stone Brick Wall Slab");
     builder.add(DistantMoonsBlocks.FIXED_DEEP_IRON_LADDER, "Fixed Deep Iron Ladder");
     builder.add(DistantMoonsBlocks.FIXED_IRON_LADDER, "Fixed Iron Ladder");
     builder.add(DistantMoonsBlocks.FIXED_WROUGHT_IRON_LADDER, "Fixed Wrought Iron Ladder");
+    builder.add(DistantMoonsBlocks.GRANITE_WALL_SLAB, "Granite Wall Slab");
     builder.add(DistantMoonsBlocks.IRON_BAR_DOOR, "Iron Bar Door");
     builder.add(DistantMoonsBlocks.IRON_FENCE, "Iron Fence");
     builder.add(DistantMoonsBlocks.IRON_LADDER, "Iron Ladder");
+    builder.add(DistantMoonsBlocks.JUNGLE_WALL_SLAB, "Jungle Wall Slab");
+    builder.add(DistantMoonsBlocks.MANGROVE_WALL_SLAB, "Mangrove Wall Slab");
+    builder.add(DistantMoonsBlocks.MOSSY_COBBLESTONE_WALL_SLAB, "Mossy Cobblestone Wall Slab");
+    builder.add(DistantMoonsBlocks.MOSSY_STONE_BRICK_WALL_SLAB, "Mossy Stone Brick Wall Slab");
+    builder.add(DistantMoonsBlocks.MUD_BRICK_WALL_SLAB, "Mud Brick Wall Slab");
+    builder.add(DistantMoonsBlocks.NETHER_BRICK_WALL_SLAB, "Nether Brick Wall Slab");
     builder.add(DistantMoonsBlocks.NETHERRACK_DEEP_IRON_ORE, "Netherrack Deep Iron Ore");
+    builder.add(DistantMoonsBlocks.OAK_WALL_SLAB, "Oak Wall Slab");
+    builder.add(DistantMoonsBlocks.PALE_OAK_WALL_SLAB, "Pale Oak Wall Slab");
+    builder.add(DistantMoonsBlocks.POLISHED_ANDESITE_WALL_SLAB, "Polished Andesite Wall Slab");
+    builder.add(DistantMoonsBlocks.POLISHED_BLACKSTONE_BRICK_WALL_SLAB, "Polished Blackstone Brick Wall Slab");
+    builder.add(DistantMoonsBlocks.POLISHED_BLACKSTONE_WALL_SLAB, "Polished Blackstone Wall Slab");
     builder.add(DistantMoonsBlocks.POLISHED_CUT_BASALT, "Polished Cut Basalt");
+    builder.add(DistantMoonsBlocks.POLISHED_DEEPSLATE_WALL_SLAB, "Polished Deepslate Wall Slab");
+    builder.add(DistantMoonsBlocks.POLISHED_DIORITE_WALL_SLAB, "Polished Diorite Wall Slab");
+    builder.add(DistantMoonsBlocks.POLISHED_GRANITE_WALL_SLAB, "Polished Granite Wall Slab");
+    builder.add(DistantMoonsBlocks.POLISHED_TUFF_WALL_SLAB, "Polished Tuff Wall Slab");
+    builder.add(DistantMoonsBlocks.PRISMARINE_BRICK_WALL_SLAB, "Prismarine Brick Wall Slab");
+    builder.add(DistantMoonsBlocks.PRISMARINE_WALL_SLAB, "Prismarine Wall Slab");
+    builder.add(DistantMoonsBlocks.PURPUR_WALL_SLAB, "Purpur Wall Slab");
+    builder.add(DistantMoonsBlocks.QUARTZ_WALL_SLAB, "Quartz Wall Slab");
     builder.add(DistantMoonsBlocks.RAW_DEEP_IRON_BLOCK, "Block of Raw Deep Iron");
+    builder.add(DistantMoonsBlocks.RED_NETHER_BRICK_WALL_SLAB, "Red Nether Brick Wall Slab");
+    builder.add(DistantMoonsBlocks.RED_SANDSTONE_WALL_SLAB, "Red Sandstone Wall Slab");
     builder.add(DistantMoonsBlocks.REFINED_DEEP_IRON_BLOCK, "Block of Refined Deep Iron");
+    builder.add(DistantMoonsBlocks.RESIN_BRICK_WALL_SLAB, "Resin Brick Wall Slab");
+    builder.add(DistantMoonsBlocks.SANDSTONE_WALL_SLAB, "Sandstone Wall Slab");
+    builder.add(DistantMoonsBlocks.SMOOTH_QUARTZ_WALL_SLAB, "Smooth Quartz Wall Slab");
+    builder.add(DistantMoonsBlocks.SMOOTH_RED_SANDSTONE_WALL_SLAB, "Smooth Red Sandstone Wall Slab");
+    builder.add(DistantMoonsBlocks.SMOOTH_SANDSTONE_WALL_SLAB, "Smooth Sandstone Wall Slab");
+    builder.add(DistantMoonsBlocks.SMOOTH_STONE_WALL_SLAB, "Smooth Stone Wall Slab");
+    builder.add(DistantMoonsBlocks.SPRUCE_WALL_SLAB, "Spruce Wall Slab");
+    builder.add(DistantMoonsBlocks.STONE_BRICK_WALL_SLAB, "Stone Brick Wall Slab");
+    builder.add(DistantMoonsBlocks.STONE_WALL_SLAB, "Stone Wall Slab");
     builder.add(DistantMoonsBlocks.STRIPPED_CUT_ACACIA_LOG, "Stripped Cut Acacia Log");
     builder.add(DistantMoonsBlocks.STRIPPED_CUT_ACACIA_WOOD, "Stripped Cut Acacia Wood");
     builder.add(DistantMoonsBlocks.STRIPPED_CUT_BAMBOO_BLOCK, "Stripped Cut Bamboo Block");
@@ -95,6 +146,9 @@ public class en_us extends FabricLanguageProvider {
     builder.add(DistantMoonsBlocks.STRIPPED_CUT_SPRUCE_WOOD, "Stripped Cut Spruce Wood");
     builder.add(DistantMoonsBlocks.STRIPPED_CUT_WARPED_HYPHAE, "Stripped Cut Warped Hyphae");
     builder.add(DistantMoonsBlocks.STRIPPED_CUT_WARPED_STEM, "Stripped Cut Warped Stem");
+    builder.add(DistantMoonsBlocks.TUFF_BRICK_WALL_SLAB, "Tuff Brick Wall Slab");
+    builder.add(DistantMoonsBlocks.TUFF_WALL_SLAB, "Tuff Wall Slab");
+    builder.add(DistantMoonsBlocks.WARPED_WALL_SLAB, "Warped Wall Slab");
     builder.add(DistantMoonsBlocks.WROUGHT_IRON_BAR_DOOR, "Wrought Iron Bar Door");
     builder.add(DistantMoonsBlocks.WROUGHT_IRON_BARS, "Wrought Iron Bars");
     builder.add(DistantMoonsBlocks.WROUGHT_IRON_FENCE, "Wrought Iron Fence");
@@ -145,6 +199,11 @@ public class en_us extends FabricLanguageProvider {
 
     builder.add("subtitles.distant-moons.entity.begin_curing_curse", "Curse wanes");
     builder.add("subtitles.distant-moons.entity.finish_curing_curse", "Curse lifts");
+
+    builder.add(DistantMoonsItemTags.REPAIRS_DEEP_IRON_EQUIPMENT, "Repairs Deep Iron Equipment");
+    builder.add(DistantMoonsItemTags.SMELTING_FUEL_WOOD_BLOCK, "Wooden Block Fuel");
+    builder.add(DistantMoonsItemTags.SMELTING_FUEL_WOOD_SLAB, "Wooden Slab Fuel");
+    builder.add(DistantMoonsItemTags.SWORD, "Sword");
 
     EnchantmentLevelUtil.generateEnchantmentLevels(builder, 11, 255);
   }

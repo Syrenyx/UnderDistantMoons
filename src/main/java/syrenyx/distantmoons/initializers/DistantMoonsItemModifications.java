@@ -63,7 +63,7 @@ public abstract class DistantMoonsItemModifications {
       builder.add(DistantMoonsBlocks.COKE_BLOCK.asItem(), context.baseSmeltTime() * COKE_SMELT_TIME_FACTOR * 9);
 
       //TAGS
-      builder.add(DistantMoonsItemTags.SMELTING_FUEL_WOOD, (int) (context.baseSmeltTime() * WOOD_SMELT_TIME_FACTOR));
+      builder.add(DistantMoonsItemTags.SMELTING_FUEL_WOOD_BLOCK, (int) (context.baseSmeltTime() * WOOD_SMELT_TIME_FACTOR));
       builder.add(DistantMoonsItemTags.SMELTING_FUEL_WOOD_SLAB, (int) (context.baseSmeltTime() * WOOD_SMELT_TIME_FACTOR * 0.5F));
     });
   }
