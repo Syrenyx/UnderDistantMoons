@@ -116,6 +116,9 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
             1.0F,
             DEFAULT_SMELTING_TIME * 2
         );
+
+        //WALL SLAB CRAFTING
+        this.createWallSlabRecipes(Items.OAK_PLANKS, DistantMoonsBlocks.OAK_WALL_SLAB);
       }
 
       private void createCookingRecipes(ItemConvertible ingredient, ItemConvertible result, float experience, int cookingTime) {
@@ -187,6 +190,11 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
             .offerTo(this.exporter, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/decompressing_" + getItemId(ingredient)));
       }
 
+      private void createSlabRecipes(ItemConvertible ingredient, ItemConvertible result) {
+        this.createSlabCraftingRecipe(ingredient, result);
+        this.createSlabCuttingRecipe(ingredient, result);
+      }
+
       private void createSlabCraftingRecipe(ItemConvertible ingredient, ItemConvertible result) {
         this.createShaped(RecipeCategory.BUILDING_BLOCKS, result, 6)
             .pattern("000")
@@ -201,9 +209,17 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
             .offerTo(this.exporter, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/stonecutting"));
       }
 
-      private void createSlabRecipes(ItemConvertible ingredient, ItemConvertible result) {
-        this.createSlabCraftingRecipe(ingredient, result);
+      private void createWallSlabRecipes(ItemConvertible ingredient, ItemConvertible result) {
+        this.createWallSlabCraftingRecipe(ingredient, result);
         this.createSlabCuttingRecipe(ingredient, result);
+      }
+
+      private void createWallSlabCraftingRecipe(ItemConvertible ingredient, ItemConvertible result) {
+        this.createShaped(RecipeCategory.BUILDING_BLOCKS, result, 6)
+            .pattern("0").pattern("0").pattern("0")
+            .input('0', ingredient)
+            .criterion(hasItem(ingredient), conditionsFromItem(ingredient))
+            .offerTo(this.exporter, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/crafting"));
       }
 
       private static String getItemId(ItemConvertible item) {

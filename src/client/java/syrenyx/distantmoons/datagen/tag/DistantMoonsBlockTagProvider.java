@@ -195,6 +195,7 @@ public class DistantMoonsBlockTagProvider extends FabricTagProvider.BlockTagProv
         DistantMoonsBlocks.CUT_SPRUCE_WOOD,
         DistantMoonsBlocks.CUT_WARPED_HYPHAE,
         DistantMoonsBlocks.CUT_WARPED_STEM,
+        DistantMoonsBlocks.OAK_WALL_SLAB,
         DistantMoonsBlocks.STRIPPED_CUT_ACACIA_LOG,
         DistantMoonsBlocks.STRIPPED_CUT_ACACIA_WOOD,
         DistantMoonsBlocks.STRIPPED_CUT_BAMBOO_BLOCK,

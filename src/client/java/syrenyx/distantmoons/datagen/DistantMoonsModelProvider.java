@@ -17,13 +17,11 @@ import net.minecraft.util.collection.Pool;
 import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.Nullable;
 import syrenyx.distantmoons.UnderDistantMoons;
-import syrenyx.distantmoons.content.block.PillarSlabBlock;
-import syrenyx.distantmoons.content.block.FixedLadderBlock;
-import syrenyx.distantmoons.content.block.MetalBarDoorBlock;
-import syrenyx.distantmoons.content.block.SpikedFenceBlock;
+import syrenyx.distantmoons.content.block.*;
 import syrenyx.distantmoons.content.block.block_state_enums.FixedLadderSideShape;
 import syrenyx.distantmoons.content.block.block_state_enums.HorizontalAxis;
 import syrenyx.distantmoons.content.block.block_state_enums.SpikedFenceShape;
+import syrenyx.distantmoons.content.block.block_state_enums.WallSlabShape;
 import syrenyx.distantmoons.initializers.DistantMoonsBlocks;
 import syrenyx.distantmoons.initializers.DistantMoonsItems;
 import syrenyx.distantmoons.references.DistantMoonsTextureKeys;
@@ -201,13 +199,13 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     registerSimplePillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_WARPED_HYPHAE, Map.of(TextureKey.END, "minecraft:block/stripped_warped_stem", TextureKey.SIDE, "minecraft:block/stripped_warped_stem"));
     registerSimplePillarSlabBlock(DistantMoonsBlocks.CUT_WARPED_STEM, Map.of(TextureKey.END, "minecraft:block/warped_stem_top", TextureKey.SIDE, "minecraft:block/warped_stem"));
 
-    //PILLAR SLAB - AXIS
+    //PILLAR SLABS - AXIS
     registerAxisPillarSlabBlock(DistantMoonsBlocks.CUT_BAMBOO_BLOCK, Map.of(TextureKey.END, "minecraft:block/bamboo_block_top", TextureKey.SIDE, "minecraft:block/bamboo_block"));
     registerAxisPillarSlabBlock(DistantMoonsBlocks.CUT_CHERRY_LOG, Map.of(TextureKey.END, "minecraft:block/cherry_log_top", TextureKey.SIDE, "minecraft:block/cherry_log"));
     registerAxisPillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_BAMBOO_BLOCK, Map.of(TextureKey.END, "minecraft:block/stripped_bamboo_block_top", TextureKey.SIDE, "minecraft:block/stripped_bamboo_block"));
     registerAxisPillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_CHERRY_LOG, Map.of(TextureKey.END, "minecraft:block/stripped_cherry_log_top", TextureKey.SIDE, "minecraft:block/stripped_cherry_log"));
 
-    //PILLAR SLAB - HORIZONTAL
+    //PILLAR SLABS - HORIZONTAL
     registerHorizontalPillarSlabBlock(DistantMoonsBlocks.CUT_ACACIA_LOG, Map.of(TextureKey.END, "minecraft:block/acacia_log_top", TextureKey.SIDE, "minecraft:block/acacia_log"));
     registerHorizontalPillarSlabBlock(DistantMoonsBlocks.CUT_BIRCH_LOG, Map.of(TextureKey.END, "minecraft:block/birch_log_top", TextureKey.SIDE, "minecraft:block/birch_log"));
     registerHorizontalPillarSlabBlock(DistantMoonsBlocks.CUT_DARK_OAK_LOG, Map.of(TextureKey.END, "minecraft:block/dark_oak_log_top", TextureKey.SIDE, "minecraft:block/dark_oak_log"));
@@ -240,6 +238,9 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
         TextureKey.END, UnderDistantMoons.withPrefixedNamespace("block/deep_iron_door/trapdoor"),
         TextureKey.SIDE, UnderDistantMoons.withPrefixedNamespace("block/deep_iron_door/end")
     ));
+
+    //WALL SLABS - SIMPLE
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.OAK_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/oak_planks"));
   }
 
   @Override
@@ -549,18 +550,18 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
         TextureKey.END, textureMap.get(TextureKey.END), TextureKey.SIDE, textureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, textureMap.get(TextureKey.SIDE)
     );
     WeightedVariant bottom = createWeightedVariant(createObjectModel(block, "slab/pillar/vertical/bottom", "/bottom_vertical", assembledTextureMap));
-    WeightedVariant doubleBlock = createWeightedVariant(createObjectModel(block, "pillar/vertical", "/double_vertical", assembledTextureMap));
+    WeightedVariant doubleSlab = createWeightedVariant(createObjectModel(block, "pillar/vertical", "/double_vertical", assembledTextureMap));
     WeightedVariant top = createWeightedVariant(createObjectModel(block, "slab/pillar/vertical/top", "/top_vertical", assembledTextureMap));
     this.blockGenerator.blockStateCollector.accept(VariantsBlockModelDefinitionCreator.of(block).with(BlockStateVariantMap
         .models(PillarSlabBlock.AXIS, PillarSlabBlock.TYPE)
         .register(Direction.Axis.X, SlabType.BOTTOM, bottom.apply(ROTATE_X_90).apply(ROTATE_Y_90))
-        .register(Direction.Axis.X, SlabType.DOUBLE, doubleBlock.apply(ROTATE_X_90).apply(ROTATE_Y_90))
+        .register(Direction.Axis.X, SlabType.DOUBLE, doubleSlab.apply(ROTATE_X_90).apply(ROTATE_Y_90))
         .register(Direction.Axis.X, SlabType.TOP, top.apply(ROTATE_X_90).apply(ROTATE_Y_90))
         .register(Direction.Axis.Y, SlabType.BOTTOM, bottom)
-        .register(Direction.Axis.Y, SlabType.DOUBLE, doubleBlock)
+        .register(Direction.Axis.Y, SlabType.DOUBLE, doubleSlab)
         .register(Direction.Axis.Y, SlabType.TOP, top)
         .register(Direction.Axis.Z, SlabType.BOTTOM, bottom.apply(ROTATE_X_90))
-        .register(Direction.Axis.Z, SlabType.DOUBLE, doubleBlock.apply(ROTATE_X_90))
+        .register(Direction.Axis.Z, SlabType.DOUBLE, doubleSlab.apply(ROTATE_X_90))
         .register(Direction.Axis.Z, SlabType.TOP, top.apply(ROTATE_X_90))
     ));
     this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModels.basic(bottom.variants().getEntries().getFirst().value().modelId()));
@@ -651,15 +652,12 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
   }
 
   private void registerTrapdoorBlock(Block block, boolean orientable, Map<TextureKey, String> textureMap) {
-    WeightedVariant bottom = createWeightedVariant(createObjectModel(block, "trapdoor/bottom", "/bottom", Map.of(
+    Map<TextureKey, String> assembledTextureMap = Map.of(
         TextureKey.END, textureMap.get(TextureKey.END), TextureKey.SIDE, textureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, textureMap.get(TextureKey.END)
-    )));
-    WeightedVariant open = createWeightedVariant(createObjectModel(block, "trapdoor/open", "/open", Map.of(
-        TextureKey.END, textureMap.get(TextureKey.END), TextureKey.SIDE, textureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, textureMap.get(TextureKey.END)
-    )));
-    WeightedVariant top = createWeightedVariant(createObjectModel(block, "trapdoor/top", "/top", Map.of(
-        TextureKey.END, textureMap.get(TextureKey.END), TextureKey.SIDE, textureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, textureMap.get(TextureKey.END)
-    )));
+    );
+    WeightedVariant bottom = createWeightedVariant(createObjectModel(block, "trapdoor/bottom", "/bottom", assembledTextureMap));
+    WeightedVariant open = createWeightedVariant(createObjectModel(block, "trapdoor/open", "/open", assembledTextureMap));
+    WeightedVariant top = createWeightedVariant(createObjectModel(block, "trapdoor/top", "/top", assembledTextureMap));
     this.blockGenerator.blockStateCollector.accept(VariantsBlockModelDefinitionCreator.of(block).with(BlockStateVariantMap
         .models(TrapdoorBlock.HALF, TrapdoorBlock.FACING, TrapdoorBlock.OPEN)
         .register(BlockHalf.BOTTOM, Direction.NORTH, false, bottom)
@@ -680,6 +678,45 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
         .register(BlockHalf.TOP, Direction.WEST, true, open.apply(orientable ? ROTATE_X_180 : NO_OP).apply(orientable ? ROTATE_Y_90 : ROTATE_Y_270).apply(orientable ? UV_LOCK : NO_OP))
     ));
     this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModels.basic(bottom.variants().getEntries().getFirst().value().modelId()));
+  }
+
+  private void registerSimpleWallSlabBlock(Block block, Map<TextureKey, String> textureMap) {
+    Map<TextureKey, String> assembledTextureMap = Map.of(
+        TextureKey.SIDE, textureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, textureMap.get(TextureKey.SIDE)
+    );
+    WeightedVariant doubleSlab = createWeightedVariant(createObjectModel(block, "simple_block", "/double", assembledTextureMap));
+    WeightedVariant flat = createWeightedVariant(createObjectModel(block, "wall_slab/simple/flat", "/flat", assembledTextureMap));
+    WeightedVariant inner = createWeightedVariant(createObjectModel(block, "wall_slab/simple/inner", "/inner", assembledTextureMap));
+    WeightedVariant outer = createWeightedVariant(createObjectModel(block, "wall_slab/simple/outer", "/outer", assembledTextureMap));
+    this.blockGenerator.blockStateCollector.accept(VariantsBlockModelDefinitionCreator.of(block).with(BlockStateVariantMap
+        .models(WallSlabBlock.SHAPE, WallSlabBlock.FACING)
+        .register(WallSlabShape.DOUBLE, Direction.NORTH, doubleSlab)
+        .register(WallSlabShape.DOUBLE, Direction.EAST, doubleSlab)
+        .register(WallSlabShape.DOUBLE, Direction.SOUTH, doubleSlab)
+        .register(WallSlabShape.DOUBLE, Direction.WEST, doubleSlab)
+        .register(WallSlabShape.FLAT, Direction.NORTH, flat)
+        .register(WallSlabShape.FLAT, Direction.EAST, flat.apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(WallSlabShape.FLAT, Direction.SOUTH, flat.apply(ROTATE_Y_180).apply(UV_LOCK))
+        .register(WallSlabShape.FLAT, Direction.WEST, flat.apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(WallSlabShape.INNER_LEFT, Direction.NORTH, inner)
+        .register(WallSlabShape.INNER_LEFT, Direction.EAST, inner.apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(WallSlabShape.INNER_LEFT, Direction.SOUTH, inner.apply(ROTATE_Y_180).apply(UV_LOCK))
+        .register(WallSlabShape.INNER_LEFT, Direction.WEST, inner.apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(WallSlabShape.INNER_RIGHT, Direction.NORTH, inner.apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(WallSlabShape.INNER_RIGHT, Direction.EAST, inner.apply(ROTATE_Y_180).apply(UV_LOCK))
+        .register(WallSlabShape.INNER_RIGHT, Direction.SOUTH, inner.apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(WallSlabShape.INNER_RIGHT, Direction.WEST, inner)
+        .register(WallSlabShape.OUTER_LEFT, Direction.NORTH, outer)
+        .register(WallSlabShape.OUTER_LEFT, Direction.EAST, outer.apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(WallSlabShape.OUTER_LEFT, Direction.SOUTH, outer.apply(ROTATE_Y_180).apply(UV_LOCK))
+        .register(WallSlabShape.OUTER_LEFT, Direction.WEST, outer.apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(WallSlabShape.OUTER_RIGHT, Direction.NORTH, outer.apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(WallSlabShape.OUTER_RIGHT, Direction.EAST, outer.apply(ROTATE_Y_180).apply(UV_LOCK))
+        .register(WallSlabShape.OUTER_RIGHT, Direction.SOUTH, outer.apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(WallSlabShape.OUTER_RIGHT, Direction.WEST, outer)
+    ));
+    Identifier inventoryModel = createObjectModel(block, "wall_slab/simple/item", "/item", assembledTextureMap);
+    this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModels.basic(inventoryModel));
   }
 
   private void registerSimpleItem(Item item, String parent, Map<TextureKey, String> textureMap) {

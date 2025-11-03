@@ -1,8 +1,6 @@
 package syrenyx.distantmoons.content.block;
 
 import net.minecraft.block.*;
-import net.minecraft.block.enums.SlabType;
-import net.minecraft.block.enums.StairShape;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.fluid.Fluid;
@@ -135,22 +133,23 @@ public class WallSlabBlock extends Block implements Waterloggable {
   }
 
   private static BlockState updateState(BlockView world, BlockPos pos, BlockState state) {
+    if (state.get(SHAPE) == WallSlabShape.DOUBLE) return state;
     Direction direction = state.get(FACING);
     BlockState leftBlock = world.getBlockState(pos.offset(direction.rotateYClockwise()));
     boolean leftLocked = leftBlock.getBlock() instanceof WallSlabBlock && leftBlock.get(FACING) == direction && leftBlock.get(SHAPE) != WallSlabShape.DOUBLE;
     BlockState rightBlock = world.getBlockState(pos.offset(direction.rotateYCounterclockwise()));
     boolean rightLocked = rightBlock.getBlock() instanceof WallSlabBlock && rightBlock.get(FACING) == direction && rightBlock.get(SHAPE) != WallSlabShape.DOUBLE;
     BlockState frontBlock = world.getBlockState(pos.offset(direction));
-    if (frontBlock.getBlock() instanceof WallSlabBlock) {
-      Direction facing = frontBlock.get(FACING);
-      if (direction.rotateYClockwise() == facing && !rightLocked) return state.with(SHAPE, WallSlabShape.INNER_RIGHT);
-      if (direction.rotateYCounterclockwise() == facing && !leftLocked) return state.with(SHAPE, WallSlabShape.INNER_LEFT);
-    }
     BlockState backBlock = world.getBlockState(pos.offset(direction.getOpposite()));
     if (backBlock.getBlock() instanceof WallSlabBlock) {
       Direction facing = backBlock.get(FACING);
       if (direction.rotateYClockwise() == facing && !leftLocked) return state.with(SHAPE, WallSlabShape.OUTER_RIGHT);
       if (direction.rotateYCounterclockwise() == facing && !rightLocked) return state.with(SHAPE, WallSlabShape.OUTER_LEFT);
+    }
+    if (frontBlock.getBlock() instanceof WallSlabBlock) {
+      Direction facing = frontBlock.get(FACING);
+      if (direction.rotateYClockwise() == facing && !rightLocked) return state.with(SHAPE, WallSlabShape.INNER_RIGHT);
+      if (direction.rotateYCounterclockwise() == facing && !leftLocked) return state.with(SHAPE, WallSlabShape.INNER_LEFT);
     }
     return state.with(SHAPE, WallSlabShape.FLAT);
   }

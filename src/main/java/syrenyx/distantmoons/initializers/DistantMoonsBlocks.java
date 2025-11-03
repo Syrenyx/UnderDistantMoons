@@ -306,6 +306,12 @@ public abstract class DistantMoonsBlocks {
           .strength(3.0F, 3.0F),
       new Item.Settings().fireproof()
   );
+  public static final Block OAK_WALL_SLAB = register(
+      "oak_wall_slab",
+      WallSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.OAK_PLANKS),
+      new Item.Settings()
+  );
   public static final Block POLISHED_CUT_BASALT = register(
       "polished_cut_basalt",
       PillarSlabBlock::new,

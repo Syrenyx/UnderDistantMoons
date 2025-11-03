@@ -19,6 +19,7 @@ public abstract class DistantMoonsItemGroups {
         DistantMoonsBlocks.STRIPPED_CUT_OAK_LOG.asItem().getDefaultStack(),
         DistantMoonsBlocks.STRIPPED_CUT_OAK_WOOD.asItem().getDefaultStack()
     ));
+    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.OAK_SLAB, List.of(DistantMoonsBlocks.OAK_WALL_SLAB.asItem().getDefaultStack()));
     addToGroup(ItemGroups.BUILDING_BLOCKS, Items.SPRUCE_WOOD, List.of(
         DistantMoonsBlocks.CUT_SPRUCE_LOG.asItem().getDefaultStack(),
         DistantMoonsBlocks.CUT_SPRUCE_WOOD.asItem().getDefaultStack()

@@ -14,6 +14,8 @@ import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
 import net.minecraft.predicate.StatePredicate;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.state.property.Properties;
+import syrenyx.distantmoons.content.block.WallSlabBlock;
+import syrenyx.distantmoons.content.block.block_state_enums.WallSlabShape;
 import syrenyx.distantmoons.initializers.DistantMoonsBlocks;
 
 import java.util.concurrent.CompletableFuture;
@@ -100,6 +102,9 @@ public class DistantMoonsBlockLootTableProvider extends FabricBlockLootTableProv
     this.addSlabDrop(DistantMoonsBlocks.STRIPPED_CUT_SPRUCE_WOOD);
     this.addSlabDrop(DistantMoonsBlocks.STRIPPED_CUT_WARPED_HYPHAE);
     this.addSlabDrop(DistantMoonsBlocks.STRIPPED_CUT_WARPED_STEM);
+
+    //WALL SLAB LOOT TABLES
+    this.addWallSlabDrop(DistantMoonsBlocks.OAK_WALL_SLAB);
   }
 
   private void addSlabDrop(Block block) {
@@ -110,6 +115,20 @@ public class DistantMoonsBlockLootTableProvider extends FabricBlockLootTableProv
             .apply(SetCountLootFunction.builder(new ConstantLootNumberProvider(2.0F))
                 .conditionally(BlockStatePropertyLootCondition.builder(block).properties(StatePredicate.Builder.create()
                     .exactMatch(Properties.SLAB_TYPE, SlabType.DOUBLE))
+                )
+            )
+        )
+    ));
+  }
+
+  private void addWallSlabDrop(Block block) {
+    this.addDrop(block, LootTable.builder().pool(LootPool.builder()
+        .rolls(new ConstantLootNumberProvider(1.0F))
+        .with(ItemEntry.builder(block.asItem())
+            .apply(ExplosionDecayLootFunction.builder())
+            .apply(SetCountLootFunction.builder(new ConstantLootNumberProvider(2.0F))
+                .conditionally(BlockStatePropertyLootCondition.builder(block).properties(StatePredicate.Builder.create()
+                    .exactMatch(WallSlabBlock.SHAPE, WallSlabShape.DOUBLE))
                 )
             )
         )
