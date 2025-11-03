@@ -36,8 +36,8 @@ public class PaneBlockMixin {
       if (connectedState.isIn(DistantMoonsBlockTags.GLASS_PANE_NEVER_CONNECTS_TO)) return false;
       if (connectedState.isIn(DistantMoonsBlockTags.GLASS_PANE_ALWAYS_CONNECTS_TO)) return true;
     }
-    return wrappedCall.call(instance, blockView, blockPos, direction.getOpposite())
-        || connectedState.getBlock() instanceof FixedLadderBlock && FixedLadderBlock.canWallConnect(connectedState, direction.getOpposite());
+    return wrappedCall.call(instance, blockView, blockPos, direction)
+        || connectedState.getBlock() instanceof FixedLadderBlock && FixedLadderBlock.canWallConnect(connectedState, direction);
   }
 
   @Inject(at = @At("HEAD"), cancellable = true, method = "isSideInvisible")
