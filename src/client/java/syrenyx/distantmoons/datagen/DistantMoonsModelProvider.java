@@ -241,18 +241,66 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
 
     //WALL SLABS - SIMPLE
     registerSimpleWallSlabBlock(DistantMoonsBlocks.ACACIA_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/acacia_planks"));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.ANDESITE_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/andesite"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.BAMBOO_MOSAIC_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/bamboo_mosaic"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.BAMBOO_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/bamboo_planks"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.BIRCH_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/birch_planks"));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.BRICK_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/bricks"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.CHERRY_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/cherry_planks"));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.COBBLED_DEEPSLATE_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/cobbled_deepslate"));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.COBBLESTONE_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/cobblestone"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.CRIMSON_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/crimson_planks"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.DARK_OAK_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/dark_oak_planks"));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.DARK_PRISMARINE_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/dark_prismarine"));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.DEEPSLATE_BRICK_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/deepslate_bricks"));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.DEEPSLATE_TILE_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/deepslate_tiles"));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.DIORITE_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/diorite"));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.END_STONE_BRICK_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/end_stone_bricks"));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.GRANITE_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/granite"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.JUNGLE_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/jungle_planks"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.MANGROVE_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/mangrove_planks"));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.MOSSY_COBBLESTONE_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/mossy_cobblestone"));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.MOSSY_STONE_BRICK_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/mossy_stone_bricks"));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.MUD_BRICK_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/mud_bricks"));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.NETHER_BRICK_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/nether_bricks"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.OAK_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/oak_planks"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.PALE_OAK_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/pale_oak_planks"));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.POLISHED_ANDESITE_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/polished_andesite"));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.POLISHED_BLACKSTONE_BRICK_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/polished_blackstone_bricks"));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.POLISHED_BLACKSTONE_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/polished_blackstone"));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.POLISHED_DEEPSLATE_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/polished_deepslate"));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.POLISHED_DIORITE_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/polished_diorite"));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.POLISHED_GRANITE_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/polished_granite"));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.POLISHED_TUFF_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/polished_tuff"));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.PRISMARINE_BRICK_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/prismarine_bricks"));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.PRISMARINE_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/prismarine"));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.PURPUR_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/purpur_block"));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.RED_NETHER_BRICK_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/red_nether_bricks"));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.RESIN_BRICK_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/resin_bricks"));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.SMOOTH_QUARTZ_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/quartz_block_bottom"));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.SMOOTH_RED_SANDSTONE_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/red_sandstone_top"));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.SMOOTH_SANDSTONE_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/sandstone_top"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.SPRUCE_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/spruce_planks"));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.STONE_BRICK_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/stone_bricks"));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.STONE_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/stone"));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.TUFF_BRICK_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/tuff_bricks"));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.TUFF_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/tuff"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.WARPED_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/warped_planks"));
+
+    //WALL SLABS - PILLAR
+    registerPillarWallSlabBlock(DistantMoonsBlocks.BLACKSTONE_WALL_SLAB, Map.of(TextureKey.END, "minecraft:block/blackstone_top", TextureKey.SIDE, "minecraft:block/blackstone"));
+    registerPillarWallSlabBlock(DistantMoonsBlocks.CUT_RED_SANDSTONE_WALL_SLAB, Map.of(TextureKey.END, "minecraft:block/red_sandstone_top", TextureKey.SIDE, "minecraft:block/cut_red_sandstone"));
+    registerPillarWallSlabBlock(DistantMoonsBlocks.CUT_SANDSTONE_WALL_SLAB, Map.of(TextureKey.END, "minecraft:block/sandstone_top", TextureKey.SIDE, "minecraft:block/cut_sandstone"));
+    registerPillarWallSlabBlock(DistantMoonsBlocks.QUARTZ_WALL_SLAB, Map.of(TextureKey.END, "minecraft:block/quartz_block_top", TextureKey.SIDE, "minecraft:block/quartz_block_side"));
+
+    //WALL SLABS - VERTICAL
+    registerVerticalWallSlabBlock(DistantMoonsBlocks.RED_SANDSTONE_WALL_SLAB, Map.of(TextureKey.BOTTOM, "minecraft:block/red_sandstone_bottom", TextureKey.SIDE, "minecraft:block/red_sandstone", TextureKey.TOP, "minecraft:block/red_sandstone_top"));
+    registerVerticalWallSlabBlock(DistantMoonsBlocks.SANDSTONE_WALL_SLAB, Map.of(TextureKey.BOTTOM, "minecraft:block/sandstone_bottom", TextureKey.SIDE, "minecraft:block/sandstone", TextureKey.TOP, "minecraft:block/sandstone_top"));
+
+    //WALL SLABS - LESS SIMPLE
+    /*
+    SMOOTH_STONE_WALL_SLAB
+     */
   }
 
   @Override
@@ -696,10 +744,52 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     Map<TextureKey, String> assembledTextureMap = Map.of(
         TextureKey.SIDE, textureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, textureMap.get(TextureKey.SIDE)
     );
-    WeightedVariant doubleSlab = createWeightedVariant(createObjectModel(block, "simple_block", "/double", assembledTextureMap));
-    WeightedVariant flat = createWeightedVariant(createObjectModel(block, "wall_slab/simple/flat", "/flat", assembledTextureMap));
-    WeightedVariant inner = createWeightedVariant(createObjectModel(block, "wall_slab/simple/inner", "/inner", assembledTextureMap));
-    WeightedVariant outer = createWeightedVariant(createObjectModel(block, "wall_slab/simple/outer", "/outer", assembledTextureMap));
+    registerWallSlabBlock(
+        block,
+        createWeightedVariant(createObjectModel(block, "simple_block", "/double", assembledTextureMap)),
+        createWeightedVariant(createObjectModel(block, "wall_slab/simple/flat", "/flat", assembledTextureMap)),
+        createWeightedVariant(createObjectModel(block, "wall_slab/simple/inner", "/inner", assembledTextureMap)),
+        createWeightedVariant(createObjectModel(block, "wall_slab/simple/outer", "/outer", assembledTextureMap)),
+        createObjectModel(block, "wall_slab/simple/item", "/item", assembledTextureMap)
+    );
+  }
+
+  private void registerPillarWallSlabBlock(Block block, Map<TextureKey, String> textureMap) {
+    Map<TextureKey, String> assembledTextureMap = Map.of(
+        TextureKey.END, textureMap.get(TextureKey.END), TextureKey.SIDE, textureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, textureMap.get(TextureKey.SIDE)
+    );
+    registerWallSlabBlock(
+        block,
+        createWeightedVariant(createObjectModel(block, "pillar/vertical", "/double", assembledTextureMap)),
+        createWeightedVariant(createObjectModel(block, "wall_slab/pillar/flat", "/flat", assembledTextureMap)),
+        createWeightedVariant(createObjectModel(block, "wall_slab/pillar/inner", "/inner", assembledTextureMap)),
+        createWeightedVariant(createObjectModel(block, "wall_slab/pillar/outer", "/outer", assembledTextureMap)),
+        createObjectModel(block, "wall_slab/pillar/item", "/item", assembledTextureMap)
+    );
+  }
+
+  private void registerVerticalWallSlabBlock(Block block, Map<TextureKey, String> textureMap) {
+    Map<TextureKey, String> assembledTextureMap = Map.of(
+        TextureKey.BOTTOM, textureMap.get(TextureKey.BOTTOM), TextureKey.SIDE, textureMap.get(TextureKey.SIDE), TextureKey.TOP, textureMap.get(TextureKey.TOP), TextureKey.PARTICLE, textureMap.get(TextureKey.SIDE)
+    );
+    registerWallSlabBlock(
+        block,
+        createWeightedVariant(createObjectModel(block, "vertical_block", "/double", assembledTextureMap)),
+        createWeightedVariant(createObjectModel(block, "wall_slab/vertical/flat", "/flat", assembledTextureMap)),
+        createWeightedVariant(createObjectModel(block, "wall_slab/vertical/inner", "/inner", assembledTextureMap)),
+        createWeightedVariant(createObjectModel(block, "wall_slab/vertical/outer", "/outer", assembledTextureMap)),
+        createObjectModel(block, "wall_slab/vertical/item", "/item", assembledTextureMap)
+    );
+  }
+
+  private void registerWallSlabBlock(
+      Block block,
+      WeightedVariant doubleSlab,
+      WeightedVariant flat,
+      WeightedVariant inner,
+      WeightedVariant outer,
+      Identifier inventoryModel
+  ) {
     this.blockGenerator.blockStateCollector.accept(VariantsBlockModelDefinitionCreator.of(block).with(BlockStateVariantMap
         .models(WallSlabBlock.SHAPE, WallSlabBlock.FACING)
         .register(WallSlabShape.DOUBLE, Direction.NORTH, doubleSlab)
@@ -727,7 +817,6 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
         .register(WallSlabShape.OUTER_RIGHT, Direction.SOUTH, outer.apply(ROTATE_Y_270).apply(UV_LOCK))
         .register(WallSlabShape.OUTER_RIGHT, Direction.WEST, outer)
     ));
-    Identifier inventoryModel = createObjectModel(block, "wall_slab/simple/item", "/item", assembledTextureMap);
     this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModels.basic(inventoryModel));
   }
 
