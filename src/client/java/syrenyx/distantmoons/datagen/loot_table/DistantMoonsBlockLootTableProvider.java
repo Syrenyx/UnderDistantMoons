@@ -30,9 +30,20 @@ public class DistantMoonsBlockLootTableProvider extends FabricBlockLootTableProv
   public void generate() {
 
     //SIMPLE LOOT TABLES
+    this.addDrop(DistantMoonsBlocks.ACACIA_BEAM);
+    this.addDrop(DistantMoonsBlocks.ACACIA_POLE);
+    this.addDrop(DistantMoonsBlocks.BAMBOO_POLE);
+    this.addDrop(DistantMoonsBlocks.BIRCH_BEAM);
+    this.addDrop(DistantMoonsBlocks.BIRCH_POLE);
     this.addDrop(DistantMoonsBlocks.CHARCOAL_BLOCK);
+    this.addDrop(DistantMoonsBlocks.CHERRY_BEAM);
+    this.addDrop(DistantMoonsBlocks.CHERRY_POLE);
     this.addDrop(DistantMoonsBlocks.COKE_BLOCK);
+    this.addDrop(DistantMoonsBlocks.CRIMSON_BEAM);
+    this.addDrop(DistantMoonsBlocks.CRIMSON_POLE);
     this.addDrop(DistantMoonsBlocks.CRUDE_DEEP_IRON_BLOCK);
+    this.addDrop(DistantMoonsBlocks.DARK_OAK_BEAM);
+    this.addDrop(DistantMoonsBlocks.DARK_OAK_POLE);
     this.addDrop(DistantMoonsBlocks.DEEP_IRON_BARS);
     this.addDrop(DistantMoonsBlocks.DEEP_IRON_CHAIN);
     this.addDrop(DistantMoonsBlocks.DEEP_IRON_FENCE);
@@ -43,8 +54,20 @@ public class DistantMoonsBlockLootTableProvider extends FabricBlockLootTableProv
     this.addDrop(DistantMoonsBlocks.FIXED_WROUGHT_IRON_LADDER);
     this.addDrop(DistantMoonsBlocks.IRON_FENCE);
     this.addDrop(DistantMoonsBlocks.IRON_LADDER);
+    this.addDrop(DistantMoonsBlocks.JUNGLE_BEAM);
+    this.addDrop(DistantMoonsBlocks.JUNGLE_POLE);
+    this.addDrop(DistantMoonsBlocks.MANGROVE_BEAM);
+    this.addDrop(DistantMoonsBlocks.MANGROVE_POLE);
+    this.addDrop(DistantMoonsBlocks.OAK_BEAM);
+    this.addDrop(DistantMoonsBlocks.OAK_POLE);
+    this.addDrop(DistantMoonsBlocks.PALE_OAK_BEAM);
+    this.addDrop(DistantMoonsBlocks.PALE_OAK_POLE);
     this.addDrop(DistantMoonsBlocks.RAW_DEEP_IRON_BLOCK);
     this.addDrop(DistantMoonsBlocks.REFINED_DEEP_IRON_BLOCK);
+    this.addDrop(DistantMoonsBlocks.SPRUCE_BEAM);
+    this.addDrop(DistantMoonsBlocks.SPRUCE_POLE);
+    this.addDrop(DistantMoonsBlocks.WARPED_BEAM);
+    this.addDrop(DistantMoonsBlocks.WARPED_POLE);
     this.addDrop(DistantMoonsBlocks.WROUGHT_IRON_BARS);
     this.addDrop(DistantMoonsBlocks.WROUGHT_IRON_FENCE);
     this.addDrop(DistantMoonsBlocks.WROUGHT_IRON_LADDER);

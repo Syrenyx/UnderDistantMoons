@@ -17,6 +17,18 @@ import java.util.function.Function;
 public abstract class DistantMoonsBlocks {
 
   //SIMPLE BLOCKS
+  public static final Block ACACIA_BEAM = register(
+      "acacia_beam",
+      BeamBlock::new,
+      AbstractBlock.Settings.copy(Blocks.STRIPPED_ACACIA_LOG),
+      new Item.Settings()
+  );
+  public static final Block ACACIA_POLE = register(
+      "acacia_pole",
+      PoleBlock::new,
+      AbstractBlock.Settings.copy(Blocks.ACACIA_PLANKS),
+      new Item.Settings()
+  );
   public static final Block ACACIA_WALL_SLAB = register(
       "acacia_wall_slab",
       WallSlabBlock::new,
@@ -29,6 +41,12 @@ public abstract class DistantMoonsBlocks {
       AbstractBlock.Settings.copy(Blocks.ANDESITE),
       new Item.Settings()
   );
+  public static final Block BAMBOO_POLE = register(
+      "bamboo_pole",
+      PoleBlock::new,
+      AbstractBlock.Settings.copy(Blocks.BAMBOO_PLANKS),
+      new Item.Settings()
+  );
   public static final Block BAMBOO_MOSAIC_WALL_SLAB = register(
       "bamboo_mosaic_wall_slab",
       WallSlabBlock::new,
@@ -39,6 +57,18 @@ public abstract class DistantMoonsBlocks {
       "bamboo_wall_slab",
       WallSlabBlock::new,
       AbstractBlock.Settings.copy(Blocks.BAMBOO_PLANKS),
+      new Item.Settings()
+  );
+  public static final Block BIRCH_BEAM = register(
+      "birch_beam",
+      BeamBlock::new,
+      AbstractBlock.Settings.copy(Blocks.STRIPPED_BIRCH_LOG),
+      new Item.Settings()
+  );
+  public static final Block BIRCH_POLE = register(
+      "birch_pole",
+      PoleBlock::new,
+      AbstractBlock.Settings.copy(Blocks.BIRCH_PLANKS),
       new Item.Settings()
   );
   public static final Block BIRCH_WALL_SLAB = register(
@@ -72,6 +102,18 @@ public abstract class DistantMoonsBlocks {
       AbstractBlock.Settings.copy(Blocks.COAL_BLOCK),
       new Item.Settings()
   );
+  public static final Block CHERRY_BEAM = register(
+      "cherry_beam",
+      BeamBlock::new,
+      AbstractBlock.Settings.copy(Blocks.STRIPPED_CHERRY_LOG),
+      new Item.Settings()
+  );
+  public static final Block CHERRY_POLE = register(
+      "cherry_pole",
+      PoleBlock::new,
+      AbstractBlock.Settings.copy(Blocks.CHERRY_PLANKS),
+      new Item.Settings()
+  );
   public static final Block CHERRY_WALL_SLAB = register(
       "cherry_wall_slab",
       WallSlabBlock::new,
@@ -94,6 +136,18 @@ public abstract class DistantMoonsBlocks {
       "coke_block",
       Block::new,
       AbstractBlock.Settings.copy(Blocks.COAL_BLOCK),
+      new Item.Settings()
+  );
+  public static final Block CRIMSON_BEAM = register(
+      "crimson_beam",
+      BeamBlock::new,
+      AbstractBlock.Settings.copy(Blocks.STRIPPED_CRIMSON_STEM),
+      new Item.Settings()
+  );
+  public static final Block CRIMSON_POLE = register(
+      "crimson_pole",
+      PoleBlock::new,
+      AbstractBlock.Settings.copy(Blocks.CRIMSON_PLANKS),
       new Item.Settings()
   );
   public static final Block CRIMSON_WALL_SLAB = register(
@@ -289,6 +343,18 @@ public abstract class DistantMoonsBlocks {
       AbstractBlock.Settings.copy(Blocks.WARPED_STEM),
       new Item.Settings()
   );
+  public static final Block DARK_OAK_BEAM = register(
+      "dark_oak_beam",
+      BeamBlock::new,
+      AbstractBlock.Settings.copy(Blocks.STRIPPED_DARK_OAK_LOG),
+      new Item.Settings()
+  );
+  public static final Block DARK_OAK_POLE = register(
+      "dark_oak_pole",
+      PoleBlock::new,
+      AbstractBlock.Settings.copy(Blocks.DARK_OAK_PLANKS),
+      new Item.Settings()
+  );
   public static final Block DARK_OAK_WALL_SLAB = register(
       "dark_oak_wall_slab",
       WallSlabBlock::new,
@@ -419,10 +485,34 @@ public abstract class DistantMoonsBlocks {
       AbstractBlock.Settings.copy(Blocks.IRON_BARS),
       new Item.Settings()
   );
+  public static final Block JUNGLE_BEAM = register(
+      "jungle_beam",
+      BeamBlock::new,
+      AbstractBlock.Settings.copy(Blocks.STRIPPED_JUNGLE_LOG),
+      new Item.Settings()
+  );
+  public static final Block JUNGLE_POLE = register(
+      "jungle_pole",
+      PoleBlock::new,
+      AbstractBlock.Settings.copy(Blocks.JUNGLE_PLANKS),
+      new Item.Settings()
+  );
   public static final Block JUNGLE_WALL_SLAB = register(
       "jungle_wall_slab",
       WallSlabBlock::new,
       AbstractBlock.Settings.copy(Blocks.JUNGLE_PLANKS),
+      new Item.Settings()
+  );
+  public static final Block MANGROVE_BEAM = register(
+      "mangrove_beam",
+      BeamBlock::new,
+      AbstractBlock.Settings.copy(Blocks.STRIPPED_MANGROVE_LOG),
+      new Item.Settings()
+  );
+  public static final Block MANGROVE_POLE = register(
+      "mangrove_pole",
+      PoleBlock::new,
+      AbstractBlock.Settings.copy(Blocks.MANGROVE_PLANKS),
       new Item.Settings()
   );
   public static final Block MANGROVE_WALL_SLAB = register(
@@ -462,10 +552,34 @@ public abstract class DistantMoonsBlocks {
           .strength(3.0F, 3.0F),
       new Item.Settings().fireproof()
   );
+  public static final Block OAK_BEAM = register(
+      "oak_beam",
+      BeamBlock::new,
+      AbstractBlock.Settings.copy(Blocks.STRIPPED_OAK_LOG),
+      new Item.Settings()
+  );
+  public static final Block OAK_POLE = register(
+      "oak_pole",
+      PoleBlock::new,
+      AbstractBlock.Settings.copy(Blocks.OAK_PLANKS),
+      new Item.Settings()
+  );
   public static final Block OAK_WALL_SLAB = register(
       "oak_wall_slab",
       WallSlabBlock::new,
       AbstractBlock.Settings.copy(Blocks.OAK_PLANKS),
+      new Item.Settings()
+  );
+  public static final Block PALE_OAK_BEAM = register(
+      "pale_oak_beam",
+      BeamBlock::new,
+      AbstractBlock.Settings.copy(Blocks.STRIPPED_PALE_OAK_LOG),
+      new Item.Settings()
+  );
+  public static final Block PALE_OAK_POLE = register(
+      "pale_oak_pole",
+      PoleBlock::new,
+      AbstractBlock.Settings.copy(Blocks.PALE_OAK_PLANKS),
       new Item.Settings()
   );
   public static final Block PALE_OAK_WALL_SLAB = register(
@@ -606,6 +720,18 @@ public abstract class DistantMoonsBlocks {
       "smooth_stone_wall_slab",
       WallSlabBlock::new,
       AbstractBlock.Settings.copy(Blocks.SMOOTH_STONE),
+      new Item.Settings()
+  );
+  public static final Block SPRUCE_BEAM = register(
+      "spruce_beam",
+      BeamBlock::new,
+      AbstractBlock.Settings.copy(Blocks.STRIPPED_SPRUCE_LOG),
+      new Item.Settings()
+  );
+  public static final Block SPRUCE_POLE = register(
+      "spruce_pole",
+      PoleBlock::new,
+      AbstractBlock.Settings.copy(Blocks.SPRUCE_PLANKS),
       new Item.Settings()
   );
   public static final Block SPRUCE_WALL_SLAB = register(
@@ -774,6 +900,18 @@ public abstract class DistantMoonsBlocks {
       "tuff_wall_slab",
       WallSlabBlock::new,
       AbstractBlock.Settings.copy(Blocks.TUFF),
+      new Item.Settings()
+  );
+  public static final Block WARPED_BEAM = register(
+      "warped_beam",
+      BeamBlock::new,
+      AbstractBlock.Settings.copy(Blocks.STRIPPED_WARPED_STEM),
+      new Item.Settings()
+  );
+  public static final Block WARPED_POLE = register(
+      "warped_pole",
+      PoleBlock::new,
+      AbstractBlock.Settings.copy(Blocks.WARPED_PLANKS),
       new Item.Settings()
   );
   public static final Block WARPED_WALL_SLAB = register(

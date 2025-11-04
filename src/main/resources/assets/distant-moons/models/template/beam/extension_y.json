@@ -1,0 +1,16 @@
+{
+  "parent": "distant-moons:display/block",
+  "elements": [
+    {
+      "from": [4, 16, 4],
+      "to": [12, 20, 12],
+      "faces": {
+        "north": {"uv": [4, 12, 12, 16], "texture": "#vertical"},
+        "east": {"uv": [4, 12, 12, 16], "texture": "#vertical"},
+        "south": {"uv": [4, 12, 12, 16], "texture": "#vertical"},
+        "west": {"uv": [4, 12, 12, 16], "texture": "#vertical"},
+        "up": {"uv": [4, 4, 12, 12], "texture": "#end"}
+      }
+    }
+  ]
+}

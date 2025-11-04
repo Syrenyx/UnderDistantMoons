@@ -10,6 +10,8 @@ public abstract class DistantMoonsBlockTags {
   public static final TagKey<Block> BARS = TagUtil.generateKey(RegistryKeys.BLOCK, "bars");
   public static final TagKey<Block> BARS_ALWAYS_CONNECTS_TO = TagUtil.generateKey(RegistryKeys.BLOCK, "connection_target/bars/always");
   public static final TagKey<Block> BARS_NEVER_CONNECTS_TO = TagUtil.generateKey(RegistryKeys.BLOCK, "connection_target/bars/never");
+  public static final TagKey<Block> BEAM_ALWAYS_CONNECTS_TO = TagUtil.generateKey(RegistryKeys.BLOCK, "connection_target/beam/always");
+  public static final TagKey<Block> BEAM_NEVER_CONNECTS_TO = TagUtil.generateKey(RegistryKeys.BLOCK, "connection_target/beam/never");
   public static final TagKey<Block> BRICK_FENCE = TagUtil.generateKey(RegistryKeys.BLOCK, "brick_fence");
   public static final TagKey<Block> BRICK_FENCE_ALWAYS_CONNECTS_TO = TagUtil.generateKey(RegistryKeys.BLOCK, "connection_target/brick_fence/always");
   public static final TagKey<Block> BRICK_FENCE_NEVER_CONNECTS_TO = TagUtil.generateKey(RegistryKeys.BLOCK, "connection_target/brick_fence/never");
@@ -38,13 +40,17 @@ public abstract class DistantMoonsBlockTags {
   public static final TagKey<Block> MINING_TYPE_PICKAXE = TagUtil.generateKey(RegistryKeys.BLOCK, "mining_tool_group/type/pickaxe");
   public static final TagKey<Block> MINING_TYPE_SHOVEL = TagUtil.generateKey(RegistryKeys.BLOCK, "mining_tool_group/type/shovel");
   public static final TagKey<Block> NEVER_CONNECT_TO = TagUtil.generateKey(RegistryKeys.BLOCK, "connection_target/never");
+  public static final TagKey<Block> POLE_ALWAYS_CONNECTS_TO = TagUtil.generateKey(RegistryKeys.BLOCK, "connection_target/pole/always");
+  public static final TagKey<Block> POLE_NEVER_CONNECTS_TO = TagUtil.generateKey(RegistryKeys.BLOCK, "connection_target/pole/never");
   public static final TagKey<Block> SPIKED_FENCE = TagUtil.generateKey(RegistryKeys.BLOCK, "spiked_fence");
   public static final TagKey<Block> SPIKED_FENCE_ALWAYS_CONNECTS_TO = TagUtil.generateKey(RegistryKeys.BLOCK, "connection_target/spiked_fence/always");
   public static final TagKey<Block> SPIKED_FENCE_NEVER_CONNECTS_TO = TagUtil.generateKey(RegistryKeys.BLOCK, "connection_target/spiked_fence/never");
   public static final TagKey<Block> SPIKED_FENCE_NOT_BLOCKED_BY = TagUtil.generateKey(RegistryKeys.BLOCK, "connection_target/spiked_fence/not_blocked_by");
   public static final TagKey<Block> WALL_ALWAYS_CONNECTS_TO = TagUtil.generateKey(RegistryKeys.BLOCK, "connection_target/wall/always");
   public static final TagKey<Block> WALL_NEVER_CONNECTS_TO = TagUtil.generateKey(RegistryKeys.BLOCK, "connection_target/wall/never");
+  public static final TagKey<Block> WOODEN_BEAM = TagUtil.generateKey(RegistryKeys.BLOCK, "wooden_beam");
   public static final TagKey<Block> WOODEN_FENCE = TagUtil.generateKey(RegistryKeys.BLOCK, "wooden_fence");
   public static final TagKey<Block> WOODEN_FENCE_ALWAYS_CONNECTS_TO = TagUtil.generateKey(RegistryKeys.BLOCK, "connection_target/wooden_fence/always");
   public static final TagKey<Block> WOODEN_FENCE_NEVER_CONNECTS_TO = TagUtil.generateKey(RegistryKeys.BLOCK, "connection_target/wooden_fence/never");
+  public static final TagKey<Block> WOODEN_POLE = TagUtil.generateKey(RegistryKeys.BLOCK, "wooden_pole");
 }
