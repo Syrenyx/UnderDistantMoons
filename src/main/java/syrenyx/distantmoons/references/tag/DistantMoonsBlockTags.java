@@ -48,7 +48,9 @@ public abstract class DistantMoonsBlockTags {
   public static final TagKey<Block> SPIKED_FENCE_NOT_BLOCKED_BY = TagUtil.generateKey(RegistryKeys.BLOCK, "connection_target/spiked_fence/not_blocked_by");
   public static final TagKey<Block> WALL_ALWAYS_CONNECTS_TO = TagUtil.generateKey(RegistryKeys.BLOCK, "connection_target/wall/always");
   public static final TagKey<Block> WALL_NEVER_CONNECTS_TO = TagUtil.generateKey(RegistryKeys.BLOCK, "connection_target/wall/never");
+  public static final TagKey<Block> WOODEN_BEAM = TagUtil.generateKey(RegistryKeys.BLOCK, "wooden_beam");
   public static final TagKey<Block> WOODEN_FENCE = TagUtil.generateKey(RegistryKeys.BLOCK, "wooden_fence");
   public static final TagKey<Block> WOODEN_FENCE_ALWAYS_CONNECTS_TO = TagUtil.generateKey(RegistryKeys.BLOCK, "connection_target/wooden_fence/always");
   public static final TagKey<Block> WOODEN_FENCE_NEVER_CONNECTS_TO = TagUtil.generateKey(RegistryKeys.BLOCK, "connection_target/wooden_fence/never");
+  public static final TagKey<Block> WOODEN_POLE = TagUtil.generateKey(RegistryKeys.BLOCK, "wooden_pole");
 }

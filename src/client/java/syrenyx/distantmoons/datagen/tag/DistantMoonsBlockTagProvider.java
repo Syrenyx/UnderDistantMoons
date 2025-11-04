@@ -47,6 +47,19 @@ public class DistantMoonsBlockTagProvider extends FabricTagProvider.BlockTagProv
         DistantMoonsBlocks.IRON_FENCE,
         DistantMoonsBlocks.WROUGHT_IRON_FENCE
     );
+    this.valueLookupBuilder(DistantMoonsBlockTags.WOODEN_BEAM).add(
+        DistantMoonsBlocks.ACACIA_BEAM,
+        DistantMoonsBlocks.BIRCH_BEAM,
+        DistantMoonsBlocks.CHERRY_BEAM,
+        DistantMoonsBlocks.CRIMSON_BEAM,
+        DistantMoonsBlocks.DARK_OAK_BEAM,
+        DistantMoonsBlocks.JUNGLE_BEAM,
+        DistantMoonsBlocks.MANGROVE_BEAM,
+        DistantMoonsBlocks.OAK_BEAM,
+        DistantMoonsBlocks.PALE_OAK_BEAM,
+        DistantMoonsBlocks.SPRUCE_BEAM,
+        DistantMoonsBlocks.WARPED_BEAM
+    );
     this.valueLookupBuilder(DistantMoonsBlockTags.WOODEN_FENCE).add(
         Blocks.ACACIA_FENCE,
         Blocks.BAMBOO_FENCE,
@@ -60,6 +73,20 @@ public class DistantMoonsBlockTagProvider extends FabricTagProvider.BlockTagProv
         Blocks.PALE_OAK_FENCE,
         Blocks.SPRUCE_FENCE,
         Blocks.WARPED_FENCE
+    );
+    this.valueLookupBuilder(DistantMoonsBlockTags.WOODEN_POLE).add(
+        DistantMoonsBlocks.ACACIA_POLE,
+        DistantMoonsBlocks.BAMBOO_POLE,
+        DistantMoonsBlocks.BIRCH_POLE,
+        DistantMoonsBlocks.CHERRY_POLE,
+        DistantMoonsBlocks.CRIMSON_POLE,
+        DistantMoonsBlocks.DARK_OAK_POLE,
+        DistantMoonsBlocks.JUNGLE_POLE,
+        DistantMoonsBlocks.MANGROVE_POLE,
+        DistantMoonsBlocks.OAK_POLE,
+        DistantMoonsBlocks.PALE_OAK_POLE,
+        DistantMoonsBlocks.SPRUCE_POLE,
+        DistantMoonsBlocks.WARPED_POLE
     );
 
     //COLORED BLOCK GROUPS

@@ -38,7 +38,7 @@ public class BeamBlock extends PoleBlock {
     if (state.isIn(DistantMoonsBlockTags.BEAM_NEVER_CONNECTS_TO)) return false;
     if (state.isIn(DistantMoonsBlockTags.BEAM_ALWAYS_CONNECTS_TO)) return true;
     Direction.Axis axis = direction.getAxis();
-    if (state.get(AXIS) != axis && state.getBlock() instanceof BeamBlock) return true;
+    if (state.getBlock() instanceof BeamBlock && state.get(AXIS) != axis) return true;
     if (axis != Direction.Axis.Y && state.getBlock() instanceof WallBlock && state.get(WallBlock.UP)) return true;
     return false;
   }

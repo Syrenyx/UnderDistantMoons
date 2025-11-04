@@ -126,7 +126,7 @@ public class PoleBlock extends Block implements Waterloggable {
     if (state.isIn(DistantMoonsBlockTags.POLE_NEVER_CONNECTS_TO)) return false;
     if (state.isIn(DistantMoonsBlockTags.POLE_ALWAYS_CONNECTS_TO)) return true;
     Direction.Axis axis = direction.getAxis();
-    if (state.get(AXIS) != axis && state.getBlock() instanceof PoleBlock) return true;
+    if (state.getBlock() instanceof PoleBlock && state.get(AXIS) != axis) return true;
     if (axis != Direction.Axis.Y && (state.getBlock() instanceof FenceBlock || state.getBlock() instanceof WallBlock)) return true;
     return false;
   }

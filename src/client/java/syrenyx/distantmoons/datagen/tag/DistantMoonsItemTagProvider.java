@@ -21,12 +21,26 @@ public class DistantMoonsItemTagProvider extends FabricTagProvider.ItemTagProvid
   protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
 
     //FUEL
-    this.valueLookupBuilder(DistantMoonsItemTags.SMELTING_FUEL_WOOD_BLOCK);
-    this.valueLookupBuilder(DistantMoonsItemTags.SMELTING_FUEL_WOOD_SLAB).add(
+    this.valueLookupBuilder(DistantMoonsItemTags.SMELTING_FUEL_WOOD_BLOCK).add(
+        DistantMoonsBlocks.ACACIA_BEAM.asItem(),
+        DistantMoonsBlocks.BIRCH_BEAM.asItem(),
+        DistantMoonsBlocks.CHERRY_BEAM.asItem(),
+        DistantMoonsBlocks.DARK_OAK_BEAM.asItem(),
+        DistantMoonsBlocks.JUNGLE_BEAM.asItem(),
+        DistantMoonsBlocks.MANGROVE_BEAM.asItem(),
+        DistantMoonsBlocks.OAK_BEAM.asItem(),
+        DistantMoonsBlocks.PALE_OAK_BEAM.asItem(),
+        DistantMoonsBlocks.SPRUCE_BEAM.asItem()
+    );
+    this.valueLookupBuilder(DistantMoonsItemTags.SMELTING_FUEL_WOOD_HALF_BLOCK).add(
+        DistantMoonsBlocks.ACACIA_POLE.asItem(),
         DistantMoonsBlocks.ACACIA_WALL_SLAB.asItem(),
+        DistantMoonsBlocks.BAMBOO_POLE.asItem(),
         DistantMoonsBlocks.BAMBOO_MOSAIC_WALL_SLAB.asItem(),
         DistantMoonsBlocks.BAMBOO_WALL_SLAB.asItem(),
+        DistantMoonsBlocks.BIRCH_POLE.asItem(),
         DistantMoonsBlocks.BIRCH_WALL_SLAB.asItem(),
+        DistantMoonsBlocks.CHERRY_POLE.asItem(),
         DistantMoonsBlocks.CHERRY_WALL_SLAB.asItem(),
         DistantMoonsBlocks.CUT_ACACIA_LOG.asItem(),
         DistantMoonsBlocks.CUT_ACACIA_WOOD.asItem(),
@@ -47,11 +61,17 @@ public class DistantMoonsItemTagProvider extends FabricTagProvider.ItemTagProvid
         DistantMoonsBlocks.CUT_PALE_OAK_WOOD.asItem(),
         DistantMoonsBlocks.CUT_SPRUCE_LOG.asItem(),
         DistantMoonsBlocks.CUT_SPRUCE_WOOD.asItem(),
+        DistantMoonsBlocks.DARK_OAK_POLE.asItem(),
         DistantMoonsBlocks.DARK_OAK_WALL_SLAB.asItem(),
+        DistantMoonsBlocks.JUNGLE_POLE.asItem(),
         DistantMoonsBlocks.JUNGLE_WALL_SLAB.asItem(),
+        DistantMoonsBlocks.MANGROVE_POLE.asItem(),
         DistantMoonsBlocks.MANGROVE_WALL_SLAB.asItem(),
+        DistantMoonsBlocks.OAK_POLE.asItem(),
         DistantMoonsBlocks.OAK_WALL_SLAB.asItem(),
+        DistantMoonsBlocks.PALE_OAK_POLE.asItem(),
         DistantMoonsBlocks.PALE_OAK_WALL_SLAB.asItem(),
+        DistantMoonsBlocks.SPRUCE_POLE.asItem(),
         DistantMoonsBlocks.SPRUCE_WALL_SLAB.asItem(),
         DistantMoonsBlocks.STRIPPED_CUT_ACACIA_LOG.asItem(),
         DistantMoonsBlocks.STRIPPED_CUT_ACACIA_WOOD.asItem(),

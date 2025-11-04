@@ -64,7 +64,7 @@ public abstract class DistantMoonsItemModifications {
 
       //TAGS
       builder.add(DistantMoonsItemTags.SMELTING_FUEL_WOOD_BLOCK, (int) (context.baseSmeltTime() * WOOD_SMELT_TIME_FACTOR));
-      builder.add(DistantMoonsItemTags.SMELTING_FUEL_WOOD_SLAB, (int) (context.baseSmeltTime() * WOOD_SMELT_TIME_FACTOR * 0.5F));
+      builder.add(DistantMoonsItemTags.SMELTING_FUEL_WOOD_HALF_BLOCK, (int) (context.baseSmeltTime() * WOOD_SMELT_TIME_FACTOR * 0.5F));
     });
   }
 

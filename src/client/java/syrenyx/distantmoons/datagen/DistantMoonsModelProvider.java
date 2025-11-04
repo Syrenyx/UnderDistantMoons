@@ -68,6 +68,11 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
       TextureKey.END, UnderDistantMoons.withPrefixedNamespace("block/%/end"),
       TextureKey.SIDE, UnderDistantMoons.withPrefixedNamespace("block/%/side")
   );
+  private static final Map<TextureKey, String> POLE_TEXTURE_MAP = Map.of(
+      TextureKey.END, UnderDistantMoons.withPrefixedNamespace("block/%/end"),
+      DistantMoonsTextureKeys.HORIZONTAL, UnderDistantMoons.withPrefixedNamespace("block/%/horizontal"),
+      DistantMoonsTextureKeys.VERTICAL, UnderDistantMoons.withPrefixedNamespace("block/%/vertical")
+  );
   private static final Map<TextureKey, String> SPIKED_FENCE_TEXTURE_MAP = Map.of(
       TextureKey.BOTTOM, UnderDistantMoons.withPrefixedNamespace("block/%/bottom"),
       TextureKey.SIDE, UnderDistantMoons.withPrefixedNamespace("block/%/side"),
@@ -228,6 +233,33 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     registerHorizontalPillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_SPRUCE_LOG, Map.of(TextureKey.END, "minecraft:block/stripped_spruce_log_top", TextureKey.SIDE, "minecraft:block/stripped_spruce_log"));
     registerHorizontalPillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_WARPED_STEM, Map.of(TextureKey.END, "minecraft:block/stripped_warped_stem_top", TextureKey.SIDE, "minecraft:block/stripped_warped_stem"));
 
+    //POLES - BEAM
+    registerPoleBlock(DistantMoonsBlocks.ACACIA_BEAM, POLE_TEXTURE_MAP, "beam");
+    registerPoleBlock(DistantMoonsBlocks.BIRCH_BEAM, POLE_TEXTURE_MAP, "beam");
+    registerPoleBlock(DistantMoonsBlocks.CHERRY_BEAM, POLE_TEXTURE_MAP, "beam");
+    registerPoleBlock(DistantMoonsBlocks.CRIMSON_BEAM, POLE_TEXTURE_MAP, "beam");
+    registerPoleBlock(DistantMoonsBlocks.DARK_OAK_BEAM, POLE_TEXTURE_MAP, "beam");
+    registerPoleBlock(DistantMoonsBlocks.JUNGLE_BEAM, POLE_TEXTURE_MAP, "beam");
+    registerPoleBlock(DistantMoonsBlocks.MANGROVE_BEAM, POLE_TEXTURE_MAP, "beam");
+    registerPoleBlock(DistantMoonsBlocks.OAK_BEAM, POLE_TEXTURE_MAP, "beam");
+    registerPoleBlock(DistantMoonsBlocks.PALE_OAK_BEAM, POLE_TEXTURE_MAP, "beam");
+    registerPoleBlock(DistantMoonsBlocks.SPRUCE_BEAM, POLE_TEXTURE_MAP, "beam");
+    registerPoleBlock(DistantMoonsBlocks.WARPED_BEAM, POLE_TEXTURE_MAP, "beam");
+
+    //POLES - POLE
+    registerPoleBlock(DistantMoonsBlocks.ACACIA_POLE, POLE_TEXTURE_MAP, "pole");
+    registerPoleBlock(DistantMoonsBlocks.BAMBOO_POLE, POLE_TEXTURE_MAP, "pole");
+    registerPoleBlock(DistantMoonsBlocks.BIRCH_POLE, POLE_TEXTURE_MAP, "pole");
+    registerPoleBlock(DistantMoonsBlocks.CHERRY_POLE, POLE_TEXTURE_MAP, "pole");
+    registerPoleBlock(DistantMoonsBlocks.CRIMSON_POLE, POLE_TEXTURE_MAP, "pole");
+    registerPoleBlock(DistantMoonsBlocks.DARK_OAK_POLE, POLE_TEXTURE_MAP, "pole");
+    registerPoleBlock(DistantMoonsBlocks.JUNGLE_POLE, POLE_TEXTURE_MAP, "pole");
+    registerPoleBlock(DistantMoonsBlocks.MANGROVE_POLE, POLE_TEXTURE_MAP, "pole");
+    registerPoleBlock(DistantMoonsBlocks.OAK_POLE, POLE_TEXTURE_MAP, "pole");
+    registerPoleBlock(DistantMoonsBlocks.PALE_OAK_POLE, POLE_TEXTURE_MAP, "pole");
+    registerPoleBlock(DistantMoonsBlocks.SPRUCE_POLE, POLE_TEXTURE_MAP, "pole");
+    registerPoleBlock(DistantMoonsBlocks.WARPED_POLE, POLE_TEXTURE_MAP, "pole");
+
     //SPIKED FENCES
     registerSpikedFenceBlock(DistantMoonsBlocks.DEEP_IRON_FENCE, SPIKED_FENCE_TEXTURE_MAP);
     registerSpikedFenceBlock(DistantMoonsBlocks.IRON_FENCE, SPIKED_FENCE_TEXTURE_MAP);
@@ -353,7 +385,7 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     WeightedVariant cap = createWeightedVariant(createObjectModel(block, "metal_bars/cap/default", "/cap/default", Map.of(
         TextureKey.END, textureMap.get(TextureKey.END), TextureKey.PARTICLE, textureMap.get(TextureKey.SIDE)
     )));
-    WeightedVariant cap_mirrored = createWeightedVariant(createObjectModel(block, "metal_bars/cap/mirrored", "/cap/mirrored", Map.of(
+    WeightedVariant capMirrored = createWeightedVariant(createObjectModel(block, "metal_bars/cap/mirrored", "/cap/mirrored", Map.of(
         TextureKey.END, textureMap.get(TextureKey.END), TextureKey.PARTICLE, textureMap.get(TextureKey.SIDE)
     )));
     WeightedVariant centerCaps = createWeightedVariant(createObjectModel(block, "metal_bars/center_caps", "/center_caps", Map.of(
@@ -365,10 +397,10 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     WeightedVariant side = createWeightedVariant(createObjectModel(block, "metal_bars/side/default", "/side/default", Map.of(
         TextureKey.END, textureMap.get(TextureKey.END), TextureKey.SIDE, textureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, textureMap.get(TextureKey.SIDE)
     )));
-    WeightedVariant side_left = createWeightedVariant(createObjectModel(block, "metal_bars/side/mirrored_left", "/side/mirrored_left", Map.of(
+    WeightedVariant sideLeft = createWeightedVariant(createObjectModel(block, "metal_bars/side/mirrored_left", "/side/mirrored_left", Map.of(
         TextureKey.END, textureMap.get(TextureKey.END), TextureKey.SIDE, textureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, textureMap.get(TextureKey.SIDE)
     )));
-    WeightedVariant side_right = createWeightedVariant(createObjectModel(block, "metal_bars/side/mirrored_right", "/side/mirrored_right", Map.of(
+    WeightedVariant sideRight = createWeightedVariant(createObjectModel(block, "metal_bars/side/mirrored_right", "/side/mirrored_right", Map.of(
         TextureKey.END, textureMap.get(TextureKey.END), TextureKey.SIDE, textureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, textureMap.get(TextureKey.SIDE)
     )));
     this.blockGenerator.blockStateCollector.accept(MultipartBlockModelDefinitionCreator.create(block)
@@ -376,12 +408,12 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
         .with(directionalMultipartCondition(false, false, false, false), centerPost)
         .with(directionalMultipartCondition(true, false, false, false), cap)
         .with(directionalMultipartCondition(false, true, false, false), cap.apply(ROTATE_Y_90).apply(UV_LOCK))
-        .with(directionalMultipartCondition(false, false, true, false), cap_mirrored.apply(ROTATE_Y_180).apply(UV_LOCK))
-        .with(directionalMultipartCondition(false, false, false, true), cap_mirrored.apply(ROTATE_Y_270).apply(UV_LOCK))
-        .with(directionalMultipartCondition(true, null, null, null), mirrored ? side_left : side)
-        .with(directionalMultipartCondition(null, true, null, null), (mirrored ? side_left : side).apply(ROTATE_Y_90).apply(UV_LOCK))
-        .with(directionalMultipartCondition(null, null, true, null), (mirrored ? side_right : side).apply(ROTATE_Y_180).apply(UV_LOCK))
-        .with(directionalMultipartCondition(null, null, null, true), (mirrored ? side_right : side).apply(ROTATE_Y_270).apply(UV_LOCK))
+        .with(directionalMultipartCondition(false, false, true, false), capMirrored.apply(ROTATE_Y_180).apply(UV_LOCK))
+        .with(directionalMultipartCondition(false, false, false, true), capMirrored.apply(ROTATE_Y_270).apply(UV_LOCK))
+        .with(directionalMultipartCondition(true, null, null, null), mirrored ? sideLeft : side)
+        .with(directionalMultipartCondition(null, true, null, null), (mirrored ? sideLeft : side).apply(ROTATE_Y_90).apply(UV_LOCK))
+        .with(directionalMultipartCondition(null, null, true, null), (mirrored ? sideRight : side).apply(ROTATE_Y_180).apply(UV_LOCK))
+        .with(directionalMultipartCondition(null, null, null, true), (mirrored ? sideRight : side).apply(ROTATE_Y_270).apply(UV_LOCK))
     );
     Identifier inventoryModel = createObjectModel(block, "simple_item", "/item", Map.of(
         TextureKey.TEXTURE, textureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, textureMap.get(TextureKey.SIDE)
@@ -686,6 +718,39 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
         .register(Direction.Axis.Z, SlabType.TOP, topHorizontal.apply(ROTATE_X_90))
     ));
     this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModels.basic(bottomHorizontal.variants().getEntries().getFirst().value().modelId()));
+  }
+
+  private void registerPoleBlock(Block block, Map<TextureKey, String> textureMap, String parentType) {
+    WeightedVariant centerX = createWeightedVariant(createObjectModel(block, parentType + "/center_x", "/center_x", Map.of(
+        TextureKey.END, textureMap.get(TextureKey.END), DistantMoonsTextureKeys.HORIZONTAL, textureMap.get(DistantMoonsTextureKeys.HORIZONTAL), TextureKey.PARTICLE, textureMap.get(DistantMoonsTextureKeys.VERTICAL)
+    )));
+    WeightedVariant centerY = createWeightedVariant(createObjectModel(block, parentType + "/center_y", "/center_y", Map.of(
+        TextureKey.END, textureMap.get(TextureKey.END), DistantMoonsTextureKeys.VERTICAL, textureMap.get(DistantMoonsTextureKeys.VERTICAL), TextureKey.PARTICLE, textureMap.get(DistantMoonsTextureKeys.VERTICAL)
+    )));
+    WeightedVariant centerZ = createWeightedVariant(createObjectModel(block, parentType + "/center_z", "/center_z", Map.of(
+        TextureKey.END, textureMap.get(TextureKey.END), DistantMoonsTextureKeys.HORIZONTAL, textureMap.get(DistantMoonsTextureKeys.HORIZONTAL), DistantMoonsTextureKeys.VERTICAL, textureMap.get(DistantMoonsTextureKeys.VERTICAL), TextureKey.PARTICLE, textureMap.get(DistantMoonsTextureKeys.VERTICAL)
+    )));
+    WeightedVariant extensionX = createWeightedVariant(createObjectModel(block, parentType + "/extension_x", "/extension_x", Map.of(
+        TextureKey.END, textureMap.get(TextureKey.END), DistantMoonsTextureKeys.HORIZONTAL, textureMap.get(DistantMoonsTextureKeys.HORIZONTAL), TextureKey.PARTICLE, textureMap.get(DistantMoonsTextureKeys.VERTICAL)
+    )));
+    WeightedVariant extensionY = createWeightedVariant(createObjectModel(block, parentType + "/extension_y", "/extension_y", Map.of(
+        TextureKey.END, textureMap.get(TextureKey.END), DistantMoonsTextureKeys.VERTICAL, textureMap.get(DistantMoonsTextureKeys.VERTICAL), TextureKey.PARTICLE, textureMap.get(DistantMoonsTextureKeys.VERTICAL)
+    )));
+    WeightedVariant extensionZ = createWeightedVariant(createObjectModel(block, parentType + "/extension_z", "/extension_z", Map.of(
+        TextureKey.END, textureMap.get(TextureKey.END), DistantMoonsTextureKeys.HORIZONTAL, textureMap.get(DistantMoonsTextureKeys.HORIZONTAL), DistantMoonsTextureKeys.VERTICAL, textureMap.get(DistantMoonsTextureKeys.VERTICAL), TextureKey.PARTICLE, textureMap.get(DistantMoonsTextureKeys.VERTICAL)
+    )));
+    this.blockGenerator.blockStateCollector.accept(MultipartBlockModelDefinitionCreator.create(block)
+        .with(new MultipartModelConditionBuilder().put(PoleBlock.AXIS, Direction.Axis.X), centerX.apply(ROTATE_X_90).apply(ROTATE_Y_90).apply(UV_LOCK))
+        .with(new MultipartModelConditionBuilder().put(PoleBlock.AXIS, Direction.Axis.Y), centerY)
+        .with(new MultipartModelConditionBuilder().put(PoleBlock.AXIS, Direction.Axis.Z), centerZ.apply(ROTATE_X_90).apply(UV_LOCK))
+        .with(new MultipartModelConditionBuilder().put(PoleBlock.AXIS, Direction.Axis.X).put(PoleBlock.UP, true), extensionX.apply(ROTATE_X_90).apply(ROTATE_Y_90).apply(UV_LOCK))
+        .with(new MultipartModelConditionBuilder().put(PoleBlock.AXIS, Direction.Axis.Y).put(PoleBlock.UP, true), extensionY)
+        .with(new MultipartModelConditionBuilder().put(PoleBlock.AXIS, Direction.Axis.Z).put(PoleBlock.UP, true), extensionZ.apply(ROTATE_X_90).apply(UV_LOCK))
+        .with(new MultipartModelConditionBuilder().put(PoleBlock.AXIS, Direction.Axis.X).put(PoleBlock.DOWN, true), extensionX.apply(ROTATE_X_270).apply(ROTATE_Y_90).apply(UV_LOCK))
+        .with(new MultipartModelConditionBuilder().put(PoleBlock.AXIS, Direction.Axis.Y).put(PoleBlock.DOWN, true), extensionY.apply(ROTATE_X_180).apply(UV_LOCK))
+        .with(new MultipartModelConditionBuilder().put(PoleBlock.AXIS, Direction.Axis.Z).put(PoleBlock.DOWN, true), extensionZ.apply(ROTATE_X_270).apply(UV_LOCK))
+    );
+    this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModels.basic(centerY.variants().getEntries().getFirst().value().modelId()));
   }
 
   private void registerSpikedFenceBlock(Block block, Map<TextureKey, String> textureMap) {
