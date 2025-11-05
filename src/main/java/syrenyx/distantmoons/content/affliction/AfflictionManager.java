@@ -98,24 +98,24 @@ public abstract class AfflictionManager {
   }
 
   private static void onAfflictionAdded(LivingEntity entity, AfflictionInstance afflictionInstance) {
-    Affliction.processAttributeEffects(entity, false, afflictionInstance);
-    Affliction.processStageChangedEffects(entity, afflictionInstance, false, DistantMoonsAfflictionEffectComponents.STAGE_CHANGED);
+    afflictionInstance.processAttributeEffects(entity, false);
+    afflictionInstance.processStageChangedEffects(entity, false, DistantMoonsAfflictionEffectComponents.STAGE_CHANGED);
   }
 
   private static void onAfflictionRemoved(LivingEntity entity, AfflictionInstance afflictionInstance) {
-    Affliction.processAttributeEffects(entity, true, afflictionInstance);
-    Affliction.processStageChangedEffects(entity, afflictionInstance, true, DistantMoonsAfflictionEffectComponents.STAGE_CHANGED);
+    afflictionInstance.processAttributeEffects(entity, true);
+    afflictionInstance.processStageChangedEffects(entity, true, DistantMoonsAfflictionEffectComponents.STAGE_CHANGED);
   }
 
   private static void onAfflictionStageChanged(LivingEntity entity, AfflictionInstance afflictionInstance) {
-    Affliction.processAttributeEffects(entity, false, afflictionInstance);
-    Affliction.processStageChangedEffects(entity, afflictionInstance, false, DistantMoonsAfflictionEffectComponents.STAGE_CHANGED);
+    afflictionInstance.processAttributeEffects(entity, false);
+    afflictionInstance.processStageChangedEffects(entity, false, DistantMoonsAfflictionEffectComponents.STAGE_CHANGED);
   }
 
   public static float getArmorEffectiveness(LivingEntity entity, DamageSource damageSource, float armorEffectiveness) {
     Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
     for (AfflictionInstance afflictionInstance : activeAfflictions.values()) {
-      armorEffectiveness = Affliction.processArmorEffectiveness(entity, damageSource, armorEffectiveness, afflictionInstance);
+      armorEffectiveness = afflictionInstance.processArmorEffectiveness(entity, damageSource, armorEffectiveness);
     }
     return armorEffectiveness;
   }
@@ -123,7 +123,7 @@ public abstract class AfflictionManager {
   public static float getDamage(LivingEntity entity, Entity target, DamageSource damageSource, float damage) {
     Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
     for (AfflictionInstance afflictionInstance : activeAfflictions.values()) {
-      damage = Affliction.processDamage(entity, target, damageSource, damage, afflictionInstance);
+      damage = afflictionInstance.processDamage(entity, target, damageSource, damage);
     }
     return damage;
   }
@@ -132,7 +132,7 @@ public abstract class AfflictionManager {
     float damageProtection = 0.0F;
     Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
     for (AfflictionInstance afflictionInstance : activeAfflictions.values()) {
-      damageProtection = Affliction.processDamageProtection(entity, damageSource, damageProtection, afflictionInstance);
+      damageProtection = afflictionInstance.processDamageProtection(entity, damageSource, damageProtection);
     }
     return damageProtection;
   }
@@ -141,7 +141,7 @@ public abstract class AfflictionManager {
     float fishingLuckBonus = 0.0F;
     Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
     for (AfflictionInstance afflictionInstance : activeAfflictions.values()) {
-      fishingLuckBonus = Affliction.processFishingLuckBonus(entity, stack, fishingLuckBonus, afflictionInstance);
+      fishingLuckBonus = afflictionInstance.processFishingLuckBonus(entity, stack, fishingLuckBonus);
     }
     return fishingLuckBonus;
   }
@@ -150,7 +150,7 @@ public abstract class AfflictionManager {
     float fishingTimeReduction = 0.0F;
     Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
     for (AfflictionInstance afflictionInstance : activeAfflictions.values()) {
-      fishingTimeReduction = Affliction.processFishingTimeReduction(entity, stack, fishingTimeReduction, afflictionInstance);
+      fishingTimeReduction = afflictionInstance.processFishingTimeReduction(entity, stack, fishingTimeReduction);
     }
     return fishingTimeReduction;
   }
@@ -158,7 +158,7 @@ public abstract class AfflictionManager {
   public static float getKnockback(LivingEntity entity, Entity target, DamageSource damageSource, float knockback) {
     Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
     for (AfflictionInstance afflictionInstance : activeAfflictions.values()) {
-      knockback = Affliction.processKnockback(entity, target, damageSource, knockback, afflictionInstance);
+      knockback = afflictionInstance.processKnockback(entity, target, damageSource, knockback);
     }
     return knockback;
   }
@@ -166,7 +166,7 @@ public abstract class AfflictionManager {
   public static boolean handleDamageImmunity(LivingEntity entity, DamageSource damageSource) {
     Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
     for (AfflictionInstance afflictionInstance : activeAfflictions.values()) {
-      if (Affliction.processDamageImmunityEffects(entity, damageSource, afflictionInstance)) return true;
+      if (afflictionInstance.processDamageImmunityEffects(entity, damageSource)) return true;
     }
     return false;
   }
@@ -174,7 +174,7 @@ public abstract class AfflictionManager {
   public static void handleLocationChanged(LivingEntity entity, boolean remove) {
     Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
     for (AfflictionInstance afflictionInstance : activeAfflictions.values()) {
-      Affliction.processLocationChangedEffects(entity, remove, afflictionInstance, DistantMoonsAfflictionEffectComponents.LOCATION_CHANGED);
+      afflictionInstance.processLocationChangedEffects(entity, remove, DistantMoonsAfflictionEffectComponents.LOCATION_CHANGED);
     }
   }
 
@@ -189,7 +189,7 @@ public abstract class AfflictionManager {
   public static void handleHitBlock(LivingEntity entity, Vec3d pos) {
     Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
     for (AfflictionInstance afflictionInstance : activeAfflictions.values()) {
-      Affliction.processHitBlockEffects(entity, pos, afflictionInstance, DistantMoonsAfflictionEffectComponents.HIT_BLOCK);
+      afflictionInstance.processHitBlockEffects(entity, pos, DistantMoonsAfflictionEffectComponents.HIT_BLOCK);
     }
   }
 
@@ -203,7 +203,7 @@ public abstract class AfflictionManager {
       if (!(entity instanceof LivingEntity afflicted)) continue;
       Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(afflicted);
       for (AfflictionInstance afflictionInstance : activeAfflictions.values()) {
-        Affliction.processPostDamageEffects(victim, damageSource, targetType, afflictionInstance, componentType);
+        afflictionInstance.processPostDamageEffects(victim, damageSource, targetType, componentType);
       }
     }
   }
@@ -211,7 +211,7 @@ public abstract class AfflictionManager {
   public static void handleProjectileSpawned(LivingEntity entity, ProjectileEntity projectile) {
     Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
     for (AfflictionInstance afflictionInstance : activeAfflictions.values()) {
-      Affliction.processProjectileSpawnedEffects(entity, projectile, afflictionInstance, DistantMoonsAfflictionEffectComponents.PROJECTILE_SPAWNED);
+      afflictionInstance.processProjectileSpawnedEffects(entity, projectile, DistantMoonsAfflictionEffectComponents.PROJECTILE_SPAWNED);
     }
   }
 
@@ -219,12 +219,12 @@ public abstract class AfflictionManager {
     Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
     for (AfflictionInstance afflictionInstance : activeAfflictions.values()) {
       Affliction affliction = afflictionInstance.affliction().value();
-      Affliction.processTickEffects(entity, afflictionInstance, DistantMoonsAfflictionEffectComponents.TICK);
+      afflictionInstance.processTickEffects(entity, DistantMoonsAfflictionEffectComponents.TICK);
       if (affliction.tickProgression().isEmpty()) continue;
       float previousProgression = afflictionInstance.progression();
       afflictionInstance.addToProgression(affliction.tickProgression().get().getValue(afflictionInstance.stage()));
       afflictionInstance.limitToAllowedValues();
-      Affliction.processProgressionThresholdEffects(entity, previousProgression, afflictionInstance, DistantMoonsAfflictionEffectComponents.PROGRESSION_THRESHOLD);
+      afflictionInstance.processProgressionThresholdEffects(entity, previousProgression, DistantMoonsAfflictionEffectComponents.PROGRESSION_THRESHOLD);
     }
     if (entity instanceof ServerPlayerEntity player) ServerPlayNetworking.send(player, new ActiveAfflictionsPayload(activeAfflictions.values().stream().map(AfflictionPacket::fromInstance).toList()));
   }
@@ -232,7 +232,7 @@ public abstract class AfflictionManager {
   public static void handleUsedItem(LivingEntity entity, ItemStack item) {
     Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
     for (AfflictionInstance afflictionInstance : activeAfflictions.values()) {
-      Affliction.processUsedItemEffects(entity, item, afflictionInstance, DistantMoonsAfflictionEffectComponents.USED_ITEM);
+      afflictionInstance.processUsedItemEffects(entity, item, DistantMoonsAfflictionEffectComponents.USED_ITEM);
     }
   }
 
