@@ -3,18 +3,36 @@ package syrenyx.distantmoons.content.affliction;
 import com.google.common.collect.ComparisonChain;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.component.ComponentType;
+import net.minecraft.enchantment.effect.EnchantmentEffectTarget;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.item.ItemStack;
+import net.minecraft.loot.context.LootContext;
+import net.minecraft.loot.context.LootContextParameters;
+import net.minecraft.loot.context.LootWorldContext;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.screen.ScreenTexts;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.dynamic.Codecs;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import syrenyx.distantmoons.content.affliction.effect.*;
+import syrenyx.distantmoons.content.affliction.effect.entity.AfflictionEntityEffect;
+import syrenyx.distantmoons.content.affliction.effect.location_based.AfflictionLocationBasedEffect;
 import syrenyx.distantmoons.content.affliction.effect.location_based.AttributeEffect;
+import syrenyx.distantmoons.content.affliction.effect.miscellaneous.DamageImmunityEffect;
+import syrenyx.distantmoons.content.affliction.effect.value.AfflictionValueEffect;
+import syrenyx.distantmoons.initializers.DistantMoonsAfflictionEffectComponents;
+import syrenyx.distantmoons.initializers.DistantMoonsLootContextTypes;
+import syrenyx.distantmoons.references.DistantMoonsLootContextParameters;
 
-import java.util.HashSet;
-import java.util.NoSuchElementException;
-import java.util.Set;
+import java.util.*;
 
 public class AfflictionInstance implements Comparable<AfflictionInstance> {
 
@@ -140,5 +158,289 @@ public class AfflictionInstance implements Comparable<AfflictionInstance> {
     } catch (NoSuchElementException e) {
       return affliction.display().isPresent();
     }
+  }
+
+  public void processAttributeEffects(
+      LivingEntity entity,
+      boolean remove
+  ) {
+    List<AttributeEffect> effects = this.affliction().value().effects().getOrDefault(DistantMoonsAfflictionEffectComponents.ATTRIBUTES, List.of());
+    for (AttributeEffect effect : effects) {
+      effect.remove((ServerWorld) entity.getEntityWorld(), this.stage(), entity, entity.getEntityPos(), this);
+      if (!remove) effect.apply((ServerWorld) entity.getEntityWorld(), this.stage(), entity, entity.getEntityPos(), this);
+    }
+  }
+
+  public float processArmorEffectiveness(
+      LivingEntity entity,
+      DamageSource damageSource,
+      float armorEffectiveness
+  ) {
+    List<AfflictionEffectEntry<AfflictionValueEffect>> effectEntries = this.affliction().value().effects().getOrDefault(DistantMoonsAfflictionEffectComponents.ARMOR_EFFECTIVENESS, List.of());
+    LootContext lootContext = getAfflictedAttackLootContext(entity, damageSource);
+    for (var effectEntry : effectEntries) {
+      if (effectEntry.test(lootContext)) armorEffectiveness = effectEntry.effect().apply(this.stage(), entity.getRandom(), armorEffectiveness);
+    }
+    return armorEffectiveness;
+  }
+
+  public float processDamage(
+      LivingEntity entity,
+      Entity victim,
+      DamageSource damageSource,
+      float damage
+  ) {
+    List<AfflictionEffectEntry<AfflictionValueEffect>> effectEntries = this.affliction().value().effects().getOrDefault(DistantMoonsAfflictionEffectComponents.DAMAGE, List.of());
+    LootContext lootContext = getAfflictedAttackLootContext(victim, damageSource);
+    for (var effectEntry : effectEntries) {
+      if (effectEntry.test(lootContext)) damage = effectEntry.effect().apply(this.stage(), entity.getRandom(), damage);
+    }
+    return damage;
+  }
+
+  public float processDamageProtection(
+      LivingEntity entity,
+      DamageSource damageSource,
+      float damageProtection
+  ) {
+    List<AfflictionEffectEntry<AfflictionValueEffect>> effectEntries = this.affliction().value().effects().getOrDefault(DistantMoonsAfflictionEffectComponents.FISHING_LUCK_BONUS, List.of());
+    LootContext lootContext = getAfflictedAttackLootContext(entity, damageSource);
+    for (var effectEntry : effectEntries) {
+      if (effectEntry.test(lootContext)) damageProtection = effectEntry.effect().apply(this.stage(), entity.getRandom(), damageProtection);
+    }
+    return damageProtection;
+  }
+
+  public float processFishingLuckBonus(
+      LivingEntity entity,
+      ItemStack stack,
+      float fishingLuckBonus
+  ) {
+    List<AfflictionEffectEntry<AfflictionValueEffect>> effectEntries = this.affliction().value().effects().getOrDefault(DistantMoonsAfflictionEffectComponents.FISHING_TIME_REDUCTION, List.of());
+    LootContext lootContext = getAfflictedItemLootContext(entity, stack);
+    for (var effectEntry : effectEntries) {
+      if (effectEntry.test(lootContext)) fishingLuckBonus = effectEntry.effect().apply(this.stage(), entity.getRandom(), fishingLuckBonus);
+    }
+    return fishingLuckBonus;
+  }
+
+  public float processFishingTimeReduction(
+      LivingEntity entity,
+      ItemStack stack,
+      float fishingTimeReduction
+  ) {
+    List<AfflictionEffectEntry<AfflictionValueEffect>> effectEntries = this.affliction().value().effects().getOrDefault(DistantMoonsAfflictionEffectComponents.KNOCKBACK, List.of());
+    LootContext lootContext = getAfflictedItemLootContext(entity, stack);
+    for (var effectEntry : effectEntries) {
+      if (effectEntry.test(lootContext)) fishingTimeReduction = effectEntry.effect().apply(this.stage(), entity.getRandom(), fishingTimeReduction);
+    }
+    return fishingTimeReduction;
+  }
+
+  public float processKnockback(
+      LivingEntity entity,
+      Entity victim,
+      DamageSource damageSource,
+      float knockback
+  ) {
+    List<AfflictionEffectEntry<AfflictionValueEffect>> effectEntries = this.affliction().value().effects().getOrDefault(DistantMoonsAfflictionEffectComponents.KNOCKBACK, List.of());
+    LootContext lootContext = getAfflictedAttackLootContext(victim, damageSource);
+    for (var effectEntry : effectEntries) {
+      if (effectEntry.test(lootContext)) knockback = effectEntry.effect().apply(this.stage(), entity.getRandom(), knockback);
+    }
+    return knockback;
+  }
+
+  public boolean processDamageImmunityEffects(
+      Entity entity,
+      DamageSource damageSource
+  ) {
+    List<AfflictionEffectEntry<DamageImmunityEffect>> effectEntries = this.affliction().value().effects().getOrDefault(DistantMoonsAfflictionEffectComponents.DAMAGE_IMMUNITY, List.of());
+    LootContext lootContext = getAfflictedAttackLootContext(entity, damageSource);
+    for (AfflictionEffectEntry<DamageImmunityEffect> effectEntry : effectEntries) {
+      if (effectEntry.test(lootContext)) return true;
+    }
+    return false;
+  }
+
+  public void processHitBlockEffects(
+      Entity entity,
+      Vec3d pos,
+      ComponentType<List<AfflictionEffectEntry<AfflictionEntityEffect>>> componentType
+  ) {
+    List<AfflictionEffectEntry<AfflictionEntityEffect>> effectEntries = this.affliction().value().effects().getOrDefault(componentType, List.of());
+    LootContext lootContext = getAfflictedBlockLootContext(entity, pos);
+    for (AfflictionEffectEntry<AfflictionEntityEffect> effectEntry : effectEntries) {
+      if (effectEntry.test(lootContext)) effectEntry.effect().apply((ServerWorld) entity.getEntityWorld(), this.stage(), entity, pos);
+    }
+  }
+
+  public void processLocationChangedEffects(
+      Entity entity,
+      boolean remove,
+      ComponentType<List<AfflictionEffectEntry<AfflictionLocationBasedEffect>>> componentType
+  ) {
+    List<AfflictionEffectEntry<AfflictionLocationBasedEffect>> effectEntries = this.affliction().value().effects().getOrDefault(componentType, List.of());
+    LootContext lootContext = getAfflictedEntityLootContext(entity);
+    for (AfflictionEffectEntry<AfflictionLocationBasedEffect> effectEntry : effectEntries) {
+      if (remove) effectEntry.effect().remove((ServerWorld) entity.getEntityWorld(), this.stage(), entity, entity.getEntityPos(), this);
+      else if (effectEntry.test(lootContext)) effectEntry.effect().apply((ServerWorld) entity.getEntityWorld(), this.stage(), entity, entity.getEntityPos(), this);
+    }
+  }
+
+  public void processPostDamageEffects(
+      Entity victim,
+      DamageSource damageSource,
+      EnchantmentEffectTarget afflicted,
+      ComponentType<List<TargetedAfflictionEffectEntry<AfflictionEntityEffect>>> componentType
+  ) {
+    List<TargetedAfflictionEffectEntry<AfflictionEntityEffect>> effectEntries = this.affliction().value().effects().getOrDefault(componentType, List.of());
+    LootContext lootContext = getAfflictedAttackLootContext(victim, damageSource);
+    for (TargetedAfflictionEffectEntry<AfflictionEntityEffect> effectEntry : effectEntries) {
+      if (effectEntry.afflicted() != afflicted) continue;
+      Entity target = switch (effectEntry.affected()) {
+        case ATTACKER -> damageSource.getAttacker();
+        case DAMAGING_ENTITY -> damageSource.getSource();
+        case VICTIM -> victim;
+      };
+      if (target == null) continue;
+      if (effectEntry.test(lootContext)) effectEntry.effect().apply((ServerWorld) target.getEntityWorld(), this.stage(), target, target.getEntityPos());
+    }
+  }
+
+  public void processProgressionThresholdEffects(
+      Entity entity,
+      float previousProgression,
+      ComponentType<List<ProgressionThresholdAfflictionEffectEntry<AfflictionEntityEffect>>> componentType
+  ) {
+    if (this.affliction().value().tickProgression().isEmpty() || this.affliction().value().tickProgression().get().getValue(this.stage()) == 0.0) return;
+    List<ProgressionThresholdAfflictionEffectEntry<AfflictionEntityEffect>> effectEntries = this.affliction().value().effects().getOrDefault(componentType, List.of());
+    LootContext lootContext = getAfflictedEntityLootContext(entity);
+    for (ProgressionThresholdAfflictionEffectEntry<AfflictionEntityEffect> effectEntry : effectEntries) {
+      if (
+          this.progression == previousProgression
+              || effectEntry.type() != ProgressionThresholdPassingType.INCREASING && this.progression < previousProgression && (effectEntry.threshold() < this.progression || effectEntry.threshold() >= previousProgression)
+              || effectEntry.type() != ProgressionThresholdPassingType.DECREASING && this.progression > previousProgression && (effectEntry.threshold() > this.progression || effectEntry.threshold() <= previousProgression)
+      ) continue;
+      if (effectEntry.test(lootContext)) effectEntry.effect().apply((ServerWorld) entity.getEntityWorld(), this.stage(), entity, entity.getEntityPos());
+    }
+  }
+
+  public void processProjectileSpawnedEffects(
+      Entity owner,
+      Entity projectile,
+      ComponentType<List<SpawnedEntityAfflictionEffectEntry<AfflictionEntityEffect>>> componentType
+  ) {
+    List<SpawnedEntityAfflictionEffectEntry<AfflictionEntityEffect>> effectEntries = this.affliction().value().effects().getOrDefault(componentType, List.of());
+    LootContext lootContext = getAfflictedProjectileLootContext(owner, projectile);
+    for (SpawnedEntityAfflictionEffectEntry<AfflictionEntityEffect> effectEntry : effectEntries) {
+      Entity target = effectEntry.target() == SpawnedEntityEffectTarget.ORIGINATOR ? owner : projectile;
+      if (effectEntry.test(lootContext)) effectEntry.effect().apply((ServerWorld) target.getEntityWorld(), this.stage(), target, target.getEntityPos());
+    }
+  }
+
+  public void processStageChangedEffects(
+      Entity entity,
+      boolean cleared,
+      ComponentType<List<AfflictionEffectEntry<AfflictionEntityEffect>>> componentType
+  ) {
+    List<AfflictionEffectEntry<AfflictionEntityEffect>> effectEntries = this.affliction().value().effects().getOrDefault(componentType, List.of());
+    LootContext lootContext = getAfflictedEntityLootContext(entity, cleared ? 0 : this.stage());
+    for (AfflictionEffectEntry<AfflictionEntityEffect> effectEntry : effectEntries) {
+      if (effectEntry.test(lootContext)) effectEntry.effect().apply((ServerWorld) entity.getEntityWorld(), this.stage(), entity, entity.getEntityPos());
+    }
+  }
+
+  public void processTickEffects(
+      Entity entity,
+      ComponentType<List<AfflictionEffectEntry<AfflictionEntityEffect>>> componentType
+  ) {
+    List<AfflictionEffectEntry<AfflictionEntityEffect>> effectEntries = this.affliction().value().effects().getOrDefault(componentType, List.of());
+    LootContext lootContext = getAfflictedEntityLootContext(entity);
+    for (AfflictionEffectEntry<AfflictionEntityEffect> effectEntry : effectEntries) {
+      if (effectEntry.test(lootContext)) effectEntry.effect().apply((ServerWorld) entity.getEntityWorld(), this.stage(), entity, entity.getEntityPos());
+    }
+  }
+
+  public void processUsedItemEffects(
+      Entity entity,
+      ItemStack item,
+      ComponentType<List<AfflictionEffectEntry<AfflictionEntityEffect>>> componentType
+  ) {
+    List<AfflictionEffectEntry<AfflictionEntityEffect>> effectEntries = this.affliction().value().effects().getOrDefault(componentType, List.of());
+    LootContext lootContext = getAfflictedItemLootContext(entity, item);
+    for (AfflictionEffectEntry<AfflictionEntityEffect> effectEntry : effectEntries) {
+      if (effectEntry.test(lootContext)) effectEntry.effect().apply((ServerWorld) entity.getEntityWorld(), this.stage(), entity, entity.getEntityPos());
+    }
+  }
+
+  private LootContext getAfflictedAttackLootContext(Entity victim, DamageSource damageSource) {
+    return new LootContext.Builder(
+        new LootWorldContext
+            .Builder((ServerWorld) victim.getEntityWorld())
+            .add(DistantMoonsLootContextParameters.AFFLICTION_PROGRESSION, this.progression)
+            .add(DistantMoonsLootContextParameters.AFFLICTION_STAGE, this.stage)
+            .add(LootContextParameters.ATTACKING_ENTITY, damageSource.getAttacker())
+            .add(LootContextParameters.DAMAGE_SOURCE, damageSource)
+            .add(LootContextParameters.DIRECT_ATTACKING_ENTITY, damageSource.getSource())
+            .add(LootContextParameters.ORIGIN, victim.getEntityPos())
+            .add(LootContextParameters.THIS_ENTITY, victim)
+            .build(DistantMoonsLootContextTypes.AFFLICTED_ATTACK)
+    ).build(Optional.empty());
+  }
+
+  private LootContext getAfflictedBlockLootContext(Entity victim, Vec3d pos) {
+    return new LootContext.Builder(
+        new LootWorldContext
+            .Builder((ServerWorld) victim.getEntityWorld())
+            .add(DistantMoonsLootContextParameters.AFFLICTION_PROGRESSION, this.progression)
+            .add(DistantMoonsLootContextParameters.AFFLICTION_STAGE, this.stage)
+            .add(LootContextParameters.BLOCK_STATE, victim.getEntityWorld().getBlockState(BlockPos.ofFloored(pos)))
+            .add(LootContextParameters.ORIGIN, pos)
+            .add(LootContextParameters.THIS_ENTITY, victim)
+            .build(DistantMoonsLootContextTypes.AFFLICTED_BLOCK)
+    ).build(Optional.empty());
+  }
+
+  private LootContext getAfflictedEntityLootContext(Entity entity) {
+    return getAfflictedEntityLootContext(entity, this.stage);
+  }
+
+  private LootContext getAfflictedEntityLootContext(Entity entity, int stage) {
+    return new LootContext.Builder(
+        new LootWorldContext
+            .Builder((ServerWorld) entity.getEntityWorld())
+            .add(DistantMoonsLootContextParameters.AFFLICTION_PROGRESSION, this.progression)
+            .add(DistantMoonsLootContextParameters.AFFLICTION_STAGE, stage)
+            .add(LootContextParameters.ORIGIN, entity.getEntityPos())
+            .add(LootContextParameters.THIS_ENTITY, entity)
+            .build(DistantMoonsLootContextTypes.AFFLICTED_ENTITY)
+    ).build(Optional.empty());
+  }
+
+  private LootContext getAfflictedItemLootContext(Entity entity, ItemStack item) {
+    return new LootContext.Builder(
+        new LootWorldContext
+            .Builder((ServerWorld) entity.getEntityWorld())
+            .add(DistantMoonsLootContextParameters.AFFLICTION_PROGRESSION, this.progression)
+            .add(DistantMoonsLootContextParameters.AFFLICTION_STAGE, this.stage)
+            .add(LootContextParameters.ORIGIN, entity.getEntityPos())
+            .add(LootContextParameters.THIS_ENTITY, entity)
+            .add(LootContextParameters.TOOL, item)
+            .build(DistantMoonsLootContextTypes.AFFLICTED_ITEM)
+    ).build(Optional.empty());
+  }
+
+  private LootContext getAfflictedProjectileLootContext(Entity owner, Entity projectile) {
+    return new LootContext.Builder(
+        new LootWorldContext
+            .Builder((ServerWorld) owner.getEntityWorld())
+            .add(DistantMoonsLootContextParameters.AFFLICTION_PROGRESSION, this.progression)
+            .add(DistantMoonsLootContextParameters.AFFLICTION_STAGE, this.stage)
+            .add(DistantMoonsLootContextParameters.SPAWNED_ENTITY, projectile)
+            .add(LootContextParameters.ORIGIN, projectile.getEntityPos())
+            .add(LootContextParameters.THIS_ENTITY, owner)
+            .build(DistantMoonsLootContextTypes.AFFLICTED_PROJECTILE)
+    ).build(Optional.empty());
   }
 }
