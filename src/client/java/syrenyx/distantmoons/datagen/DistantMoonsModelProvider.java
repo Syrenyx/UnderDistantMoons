@@ -22,6 +22,7 @@ import syrenyx.distantmoons.content.block.block_state_enums.FixedLadderSideShape
 import syrenyx.distantmoons.content.block.block_state_enums.HorizontalAxis;
 import syrenyx.distantmoons.content.block.block_state_enums.SpikedFenceShape;
 import syrenyx.distantmoons.content.block.block_state_enums.WallSlabShape;
+import syrenyx.distantmoons.datagen.utility.ModelProviderUtil;
 import syrenyx.distantmoons.initializers.DistantMoonsBlocks;
 import syrenyx.distantmoons.initializers.DistantMoonsItems;
 import syrenyx.distantmoons.references.DistantMoonsTextureKeys;
@@ -393,15 +394,15 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     WeightedVariant variantSideRight = createWeightedVariant(createObjectModel(block, "metal_bars/variantSide/mirrored_right", "/variantSide/mirrored_right", textureMapSide));
     this.blockGenerator.blockStateCollector.accept(MultipartBlockModelDefinitionCreator.create(block)
         .with(variantCenterCaps)
-        .with(directionalMultipartCondition(false, false, false, false), variantCenterPost)
-        .with(directionalMultipartCondition(true, false, false, false), variantCap)
-        .with(directionalMultipartCondition(false, true, false, false), variantCap.apply(ROTATE_Y_90).apply(UV_LOCK))
-        .with(directionalMultipartCondition(false, false, true, false), variantCapMirrored.apply(ROTATE_Y_180).apply(UV_LOCK))
-        .with(directionalMultipartCondition(false, false, false, true), variantCapMirrored.apply(ROTATE_Y_270).apply(UV_LOCK))
-        .with(directionalMultipartCondition(true, null, null, null), mirrored ? variantSideLeft : variantSide)
-        .with(directionalMultipartCondition(null, true, null, null), (mirrored ? variantSideLeft : variantSide).apply(ROTATE_Y_90).apply(UV_LOCK))
-        .with(directionalMultipartCondition(null, null, true, null), (mirrored ? variantSideRight : variantSide).apply(ROTATE_Y_180).apply(UV_LOCK))
-        .with(directionalMultipartCondition(null, null, null, true), (mirrored ? variantSideRight : variantSide).apply(ROTATE_Y_270).apply(UV_LOCK))
+        .with(ModelProviderUtil.directionalMultipartCondition(false, false, false, false), variantCenterPost)
+        .with(ModelProviderUtil.directionalMultipartCondition(true, false, false, false), variantCap)
+        .with(ModelProviderUtil.directionalMultipartCondition(false, true, false, false), variantCap.apply(ROTATE_Y_90).apply(UV_LOCK))
+        .with(ModelProviderUtil.directionalMultipartCondition(false, false, true, false), variantCapMirrored.apply(ROTATE_Y_180).apply(UV_LOCK))
+        .with(ModelProviderUtil.directionalMultipartCondition(false, false, false, true), variantCapMirrored.apply(ROTATE_Y_270).apply(UV_LOCK))
+        .with(ModelProviderUtil.directionalMultipartCondition(true, null, null, null), mirrored ? variantSideLeft : variantSide)
+        .with(ModelProviderUtil.directionalMultipartCondition(null, true, null, null), (mirrored ? variantSideLeft : variantSide).apply(ROTATE_Y_90).apply(UV_LOCK))
+        .with(ModelProviderUtil.directionalMultipartCondition(null, null, true, null), (mirrored ? variantSideRight : variantSide).apply(ROTATE_Y_180).apply(UV_LOCK))
+        .with(ModelProviderUtil.directionalMultipartCondition(null, null, null, true), (mirrored ? variantSideRight : variantSide).apply(ROTATE_Y_270).apply(UV_LOCK))
     );
     Identifier inventoryModel = createObjectModel(block, "simple_item", "/item", textureMapItem);
     this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModels.basic(inventoryModel));
@@ -962,14 +963,5 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
       builder.add(new ModelVariant(block.withSuffixedPath(sharedSuffix + variantSuffix)));
     }
     return new WeightedVariant(builder.build());
-  }
-
-  private static MultipartModelConditionBuilder directionalMultipartCondition(@Nullable Boolean north, @Nullable Boolean east, @Nullable Boolean south, @Nullable Boolean west) {
-    MultipartModelConditionBuilder builder = new MultipartModelConditionBuilder();
-    if (north != null) builder.put(Properties.NORTH, north);
-    if (east != null) builder.put(Properties.EAST, east);
-    if (south != null) builder.put(Properties.SOUTH, south);
-    if (west != null) builder.put(Properties.WEST, west);
-    return builder;
   }
 }
