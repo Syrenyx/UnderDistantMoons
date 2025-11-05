@@ -48,25 +48,25 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
       TextureKey.TEXTURE, UnderDistantMoons.withPrefixedNamespace("item/%")
   );
   private static final Map<TextureKey, String> FIXED_LADDER_TEXTURE_MAP = Map.of(
-      TextureKey.BOTTOM, UnderDistantMoons.withPrefixedNamespace("block/%/bottom"),
-      DistantMoonsTextureKeys.CENTER, UnderDistantMoons.withPrefixedNamespace("block/%/center"),
+      TextureKey.BOTTOM, UnderDistantMoons.withPrefixedNamespace("block/%/variantBottom"),
+      DistantMoonsTextureKeys.CENTER, UnderDistantMoons.withPrefixedNamespace("block/%/variantCenter"),
       TextureKey.END, UnderDistantMoons.withPrefixedNamespace("block/%/end"),
       TextureKey.FRONT, UnderDistantMoons.withPrefixedNamespace("block/%/front"),
-      TextureKey.SIDE, UnderDistantMoons.withPrefixedNamespace("block/%/side"),
-      TextureKey.TOP, UnderDistantMoons.withPrefixedNamespace("block/%/top"),
+      TextureKey.SIDE, UnderDistantMoons.withPrefixedNamespace("block/%/variantSide"),
+      TextureKey.TOP, UnderDistantMoons.withPrefixedNamespace("block/%/variantTop"),
       TextureKey.PARTICLE, UnderDistantMoons.withPrefixedNamespace("block/%/particle")
   );
   private static final Map<TextureKey, String> METAL_LADDER_TEXTURE_MAP = Map.of(
-      TextureKey.BOTTOM, UnderDistantMoons.withPrefixedNamespace("block/%/bottom"),
+      TextureKey.BOTTOM, UnderDistantMoons.withPrefixedNamespace("block/%/variantBottom"),
       DistantMoonsTextureKeys.DETAIL, UnderDistantMoons.withPrefixedNamespace("block/%/detail"),
-      TextureKey.SIDE, UnderDistantMoons.withPrefixedNamespace("block/%/side"),
+      TextureKey.SIDE, UnderDistantMoons.withPrefixedNamespace("block/%/variantSide"),
       DistantMoonsTextureKeys.SUPPORT, UnderDistantMoons.withPrefixedNamespace("block/%/support"),
       TextureKey.TEXTURE, UnderDistantMoons.withPrefixedNamespace("item/%"),
-      TextureKey.TOP, UnderDistantMoons.withPrefixedNamespace("block/%/top")
+      TextureKey.TOP, UnderDistantMoons.withPrefixedNamespace("block/%/variantTop")
   );
   private static final Map<TextureKey, String> PILLAR_TEXTURE_MAP = Map.of(
       TextureKey.END, UnderDistantMoons.withPrefixedNamespace("block/%/end"),
-      TextureKey.SIDE, UnderDistantMoons.withPrefixedNamespace("block/%/side")
+      TextureKey.SIDE, UnderDistantMoons.withPrefixedNamespace("block/%/variantSide")
   );
   private static final Map<TextureKey, String> POLE_TEXTURE_MAP = Map.of(
       TextureKey.END, UnderDistantMoons.withPrefixedNamespace("block/%/end"),
@@ -74,9 +74,9 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
       DistantMoonsTextureKeys.VERTICAL, UnderDistantMoons.withPrefixedNamespace("block/%/vertical")
   );
   private static final Map<TextureKey, String> SPIKED_FENCE_TEXTURE_MAP = Map.of(
-      TextureKey.BOTTOM, UnderDistantMoons.withPrefixedNamespace("block/%/bottom"),
-      TextureKey.SIDE, UnderDistantMoons.withPrefixedNamespace("block/%/side"),
-      TextureKey.TOP, UnderDistantMoons.withPrefixedNamespace("block/%/top"),
+      TextureKey.BOTTOM, UnderDistantMoons.withPrefixedNamespace("block/%/variantBottom"),
+      TextureKey.SIDE, UnderDistantMoons.withPrefixedNamespace("block/%/variantSide"),
+      TextureKey.TOP, UnderDistantMoons.withPrefixedNamespace("block/%/variantTop"),
       DistantMoonsTextureKeys.SIDE_TOP, UnderDistantMoons.withPrefixedNamespace("block/%/side_top"),
       TextureKey.PARTICLE, UnderDistantMoons.withPrefixedNamespace("block/%/particle")
   );
@@ -115,7 +115,7 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
         Map.entry(DistantMoonsTextureKeys.BOTTOM_LEFT, UnderDistantMoons.withPrefixedNamespace("block/deep_iron_door/door/bottom_left")),
         Map.entry(DistantMoonsTextureKeys.BOTTOM_RIGHT, UnderDistantMoons.withPrefixedNamespace("block/deep_iron_door/door/bottom_right")),
         Map.entry(TextureKey.END, UnderDistantMoons.withPrefixedNamespace("block/deep_iron_door/end")),
-        Map.entry(TextureKey.SIDE, UnderDistantMoons.withPrefixedNamespace("block/deep_iron_door/side")),
+        Map.entry(TextureKey.SIDE, UnderDistantMoons.withPrefixedNamespace("block/deep_iron_door/variantSide")),
         Map.entry(TextureKey.TEXTURE, UnderDistantMoons.withPrefixedNamespace("item/deep_iron_door")),
         Map.entry(DistantMoonsTextureKeys.TOP_LEFT, UnderDistantMoons.withPrefixedNamespace("block/deep_iron_door/door/top_left")),
         Map.entry(DistantMoonsTextureKeys.TOP_RIGHT, UnderDistantMoons.withPrefixedNamespace("block/deep_iron_door/door/top_right"))
@@ -134,7 +134,7 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
         Map.entry(DistantMoonsTextureKeys.DOUBLE_TOP_RIGHT, UnderDistantMoons.withPrefixedNamespace("block/deep_iron_door/bar_door/double/top_right")),
         Map.entry(TextureKey.END, UnderDistantMoons.withPrefixedNamespace("block/deep_iron_door/end")),
         Map.entry(TextureKey.INSIDE, UnderDistantMoons.withPrefixedNamespace("block/deep_iron_door/inside")),
-        Map.entry(TextureKey.SIDE, UnderDistantMoons.withPrefixedNamespace("block/deep_iron_door/side")),
+        Map.entry(TextureKey.SIDE, UnderDistantMoons.withPrefixedNamespace("block/deep_iron_door/variantSide")),
         Map.entry(DistantMoonsTextureKeys.SINGLE_BOTTOM_LEFT, UnderDistantMoons.withPrefixedNamespace("block/deep_iron_door/bar_door/single/bottom_left")),
         Map.entry(DistantMoonsTextureKeys.SINGLE_BOTTOM_RIGHT, UnderDistantMoons.withPrefixedNamespace("block/deep_iron_door/bar_door/single/bottom_right")),
         Map.entry(DistantMoonsTextureKeys.SINGLE_TOP_LEFT, UnderDistantMoons.withPrefixedNamespace("block/deep_iron_door/bar_door/single/top_left")),
@@ -148,7 +148,7 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
         Map.entry(DistantMoonsTextureKeys.DOUBLE_TOP_RIGHT, UnderDistantMoons.withPrefixedNamespace("block/iron_door/bar_door/double/top_right")),
         Map.entry(TextureKey.END, UnderDistantMoons.withPrefixedNamespace("block/iron_door/end")),
         Map.entry(TextureKey.INSIDE, UnderDistantMoons.withPrefixedNamespace("block/iron_door/inside")),
-        Map.entry(TextureKey.SIDE, UnderDistantMoons.withPrefixedNamespace("block/iron_door/side")),
+        Map.entry(TextureKey.SIDE, UnderDistantMoons.withPrefixedNamespace("block/iron_door/variantSide")),
         Map.entry(DistantMoonsTextureKeys.SINGLE_BOTTOM_LEFT, UnderDistantMoons.withPrefixedNamespace("block/iron_door/bar_door/single/bottom_left")),
         Map.entry(DistantMoonsTextureKeys.SINGLE_BOTTOM_RIGHT, UnderDistantMoons.withPrefixedNamespace("block/iron_door/bar_door/single/bottom_right")),
         Map.entry(DistantMoonsTextureKeys.SINGLE_TOP_LEFT, UnderDistantMoons.withPrefixedNamespace("block/iron_door/bar_door/single/top_left")),
@@ -162,7 +162,7 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
         Map.entry(DistantMoonsTextureKeys.DOUBLE_TOP_RIGHT, UnderDistantMoons.withPrefixedNamespace("block/wrought_iron_door/bar_door/double/top_right")),
         Map.entry(TextureKey.END, UnderDistantMoons.withPrefixedNamespace("block/wrought_iron_door/end")),
         Map.entry(TextureKey.INSIDE, UnderDistantMoons.withPrefixedNamespace("block/wrought_iron_door/inside")),
-        Map.entry(TextureKey.SIDE, UnderDistantMoons.withPrefixedNamespace("block/wrought_iron_door/side")),
+        Map.entry(TextureKey.SIDE, UnderDistantMoons.withPrefixedNamespace("block/wrought_iron_door/variantSide")),
         Map.entry(DistantMoonsTextureKeys.SINGLE_BOTTOM_LEFT, UnderDistantMoons.withPrefixedNamespace("block/wrought_iron_door/bar_door/single/bottom_left")),
         Map.entry(DistantMoonsTextureKeys.SINGLE_BOTTOM_RIGHT, UnderDistantMoons.withPrefixedNamespace("block/wrought_iron_door/bar_door/single/bottom_right")),
         Map.entry(DistantMoonsTextureKeys.SINGLE_TOP_LEFT, UnderDistantMoons.withPrefixedNamespace("block/wrought_iron_door/bar_door/single/top_left")),
@@ -247,18 +247,18 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     registerPoleBlock(DistantMoonsBlocks.WARPED_BEAM, POLE_TEXTURE_MAP, "beam");
 
     //POLES - POLE
-    registerPoleBlock(DistantMoonsBlocks.ACACIA_POLE, POLE_TEXTURE_MAP, "pole");
-    registerPoleBlock(DistantMoonsBlocks.BAMBOO_POLE, POLE_TEXTURE_MAP, "pole");
-    registerPoleBlock(DistantMoonsBlocks.BIRCH_POLE, POLE_TEXTURE_MAP, "pole");
-    registerPoleBlock(DistantMoonsBlocks.CHERRY_POLE, POLE_TEXTURE_MAP, "pole");
-    registerPoleBlock(DistantMoonsBlocks.CRIMSON_POLE, POLE_TEXTURE_MAP, "pole");
-    registerPoleBlock(DistantMoonsBlocks.DARK_OAK_POLE, POLE_TEXTURE_MAP, "pole");
-    registerPoleBlock(DistantMoonsBlocks.JUNGLE_POLE, POLE_TEXTURE_MAP, "pole");
-    registerPoleBlock(DistantMoonsBlocks.MANGROVE_POLE, POLE_TEXTURE_MAP, "pole");
-    registerPoleBlock(DistantMoonsBlocks.OAK_POLE, POLE_TEXTURE_MAP, "pole");
-    registerPoleBlock(DistantMoonsBlocks.PALE_OAK_POLE, POLE_TEXTURE_MAP, "pole");
-    registerPoleBlock(DistantMoonsBlocks.SPRUCE_POLE, POLE_TEXTURE_MAP, "pole");
-    registerPoleBlock(DistantMoonsBlocks.WARPED_POLE, POLE_TEXTURE_MAP, "pole");
+    registerPoleBlock(DistantMoonsBlocks.ACACIA_POLE, POLE_TEXTURE_MAP, "variantPole");
+    registerPoleBlock(DistantMoonsBlocks.BAMBOO_POLE, POLE_TEXTURE_MAP, "variantPole");
+    registerPoleBlock(DistantMoonsBlocks.BIRCH_POLE, POLE_TEXTURE_MAP, "variantPole");
+    registerPoleBlock(DistantMoonsBlocks.CHERRY_POLE, POLE_TEXTURE_MAP, "variantPole");
+    registerPoleBlock(DistantMoonsBlocks.CRIMSON_POLE, POLE_TEXTURE_MAP, "variantPole");
+    registerPoleBlock(DistantMoonsBlocks.DARK_OAK_POLE, POLE_TEXTURE_MAP, "variantPole");
+    registerPoleBlock(DistantMoonsBlocks.JUNGLE_POLE, POLE_TEXTURE_MAP, "variantPole");
+    registerPoleBlock(DistantMoonsBlocks.MANGROVE_POLE, POLE_TEXTURE_MAP, "variantPole");
+    registerPoleBlock(DistantMoonsBlocks.OAK_POLE, POLE_TEXTURE_MAP, "variantPole");
+    registerPoleBlock(DistantMoonsBlocks.PALE_OAK_POLE, POLE_TEXTURE_MAP, "variantPole");
+    registerPoleBlock(DistantMoonsBlocks.SPRUCE_POLE, POLE_TEXTURE_MAP, "variantPole");
+    registerPoleBlock(DistantMoonsBlocks.WARPED_POLE, POLE_TEXTURE_MAP, "variantPole");
 
     //SPIKED FENCES
     registerSpikedFenceBlock(DistantMoonsBlocks.DEEP_IRON_FENCE, SPIKED_FENCE_TEXTURE_MAP);
@@ -335,11 +335,11 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
         DistantMoonsTextureKeys.BOTTOM_RIGHT, UnderDistantMoons.withPrefixedNamespace("block/smooth_stone_stairs/end/bottom_right"),
         DistantMoonsTextureKeys.HORIZONTAL_END, UnderDistantMoons.withPrefixedNamespace("block/smooth_stone_slab/end/horizontal"),
         DistantMoonsTextureKeys.HORIZONTAL_SIDE, "minecraft:block/smooth_stone_slab_side",
-        TextureKey.SIDE, UnderDistantMoons.withPrefixedNamespace("block/smooth_stone_slab/side/flat"),
+        TextureKey.SIDE, UnderDistantMoons.withPrefixedNamespace("block/smooth_stone_slab/variantSide/variantFlat"),
         DistantMoonsTextureKeys.TOP_LEFT, UnderDistantMoons.withPrefixedNamespace("block/smooth_stone_stairs/end/top_left"),
         DistantMoonsTextureKeys.TOP_RIGHT, UnderDistantMoons.withPrefixedNamespace("block/smooth_stone_stairs/end/top_right"),
         DistantMoonsTextureKeys.VERTICAL_END, UnderDistantMoons.withPrefixedNamespace("block/smooth_stone_slab/end/vertical"),
-        DistantMoonsTextureKeys.VERTICAL_SIDE, UnderDistantMoons.withPrefixedNamespace("block/smooth_stone_slab/side/vertical")
+        DistantMoonsTextureKeys.VERTICAL_SIDE, UnderDistantMoons.withPrefixedNamespace("block/smooth_stone_slab/variantSide/vertical")
     ));
   }
 
@@ -373,265 +373,230 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     registerSimpleItem(DistantMoonsItems.WROUGHT_IRON_ROD, "stick", SIMPLE_ITEM_TEXTURE_MAP);
   }
 
-  private void registerSimpleBlock(Block block, Map<TextureKey, String> textureMap) {
-    WeightedVariant variant = createWeightedVariant(createObjectModel(block, "simple_block", null, Map.of(
-        TextureKey.SIDE, textureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, textureMap.get(TextureKey.SIDE)
-    )));
+  private void registerSimpleBlock(Block block, Map<TextureKey, String> rawTextureMap) {
+    Map<TextureKey, String> textureMap = Map.of(TextureKey.SIDE, rawTextureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, rawTextureMap.get(TextureKey.SIDE));
+    WeightedVariant variant = createWeightedVariant(createObjectModel(block, "simple_block", null, textureMap));
     this.blockGenerator.blockStateCollector.accept(VariantsBlockModelDefinitionCreator.of(block, variant));
     this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModels.basic(getFirstEntryOf(variant)));
   }
 
-  private void registerBarsBlock(Block block, boolean mirrored, Map<TextureKey, String> textureMap) {
-    WeightedVariant cap = createWeightedVariant(createObjectModel(block, "metal_bars/cap/default", "/cap/default", Map.of(
-        TextureKey.END, textureMap.get(TextureKey.END), TextureKey.PARTICLE, textureMap.get(TextureKey.SIDE)
-    )));
-    WeightedVariant capMirrored = createWeightedVariant(createObjectModel(block, "metal_bars/cap/mirrored", "/cap/mirrored", Map.of(
-        TextureKey.END, textureMap.get(TextureKey.END), TextureKey.PARTICLE, textureMap.get(TextureKey.SIDE)
-    )));
-    WeightedVariant centerCaps = createWeightedVariant(createObjectModel(block, "metal_bars/center_caps", "/center_caps", Map.of(
-        TextureKey.END, textureMap.get(TextureKey.END), TextureKey.PARTICLE, textureMap.get(TextureKey.SIDE)
-    )));
-    WeightedVariant centerPost = createWeightedVariant(createObjectModel(block, "metal_bars/center_post", "/center_post", Map.of(
-        TextureKey.END, textureMap.get(TextureKey.END), TextureKey.PARTICLE, textureMap.get(TextureKey.SIDE)
-    )));
-    WeightedVariant side = createWeightedVariant(createObjectModel(block, "metal_bars/side/default", "/side/default", Map.of(
-        TextureKey.END, textureMap.get(TextureKey.END), TextureKey.SIDE, textureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, textureMap.get(TextureKey.SIDE)
-    )));
-    WeightedVariant sideLeft = createWeightedVariant(createObjectModel(block, "metal_bars/side/mirrored_left", "/side/mirrored_left", Map.of(
-        TextureKey.END, textureMap.get(TextureKey.END), TextureKey.SIDE, textureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, textureMap.get(TextureKey.SIDE)
-    )));
-    WeightedVariant sideRight = createWeightedVariant(createObjectModel(block, "metal_bars/side/mirrored_right", "/side/mirrored_right", Map.of(
-        TextureKey.END, textureMap.get(TextureKey.END), TextureKey.SIDE, textureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, textureMap.get(TextureKey.SIDE)
-    )));
+  private void registerBarsBlock(Block block, boolean mirrored, Map<TextureKey, String> rawTextureMap) {
+    Map<TextureKey, String> textureMapCap = Map.of(TextureKey.END, rawTextureMap.get(TextureKey.END), TextureKey.PARTICLE, rawTextureMap.get(TextureKey.SIDE));
+    Map<TextureKey, String> textureMapItem = Map.of(TextureKey.TEXTURE, rawTextureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, rawTextureMap.get(TextureKey.SIDE));
+    Map<TextureKey, String> textureMapSide = Map.of(TextureKey.END, rawTextureMap.get(TextureKey.END), TextureKey.SIDE, rawTextureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, rawTextureMap.get(TextureKey.SIDE));
+    WeightedVariant variantCap = createWeightedVariant(createObjectModel(block, "metal_bars/cap/default", "/cap/default", textureMapCap));
+    WeightedVariant variantCapMirrored = createWeightedVariant(createObjectModel(block, "metal_bars/cap/mirrored", "/cap/mirrored", textureMapCap));
+    WeightedVariant variantCenterCaps = createWeightedVariant(createObjectModel(block, "metal_bars/variantCenterCaps", "/variantCenterCaps", textureMapCap));
+    WeightedVariant variantCenterPost = createWeightedVariant(createObjectModel(block, "metal_bars/center_post", "/center_post", textureMapCap));
+    WeightedVariant variantSide = createWeightedVariant(createObjectModel(block, "metal_bars/variantSide/default", "/variantSide/default", textureMapSide));
+    WeightedVariant variantSideLeft = createWeightedVariant(createObjectModel(block, "metal_bars/variantSide/mirrored_left", "/variantSide/mirrored_left", textureMapSide));
+    WeightedVariant variantSideRight = createWeightedVariant(createObjectModel(block, "metal_bars/variantSide/mirrored_right", "/variantSide/mirrored_right", textureMapSide));
     this.blockGenerator.blockStateCollector.accept(MultipartBlockModelDefinitionCreator.create(block)
-        .with(centerCaps)
-        .with(directionalMultipartCondition(false, false, false, false), centerPost)
-        .with(directionalMultipartCondition(true, false, false, false), cap)
-        .with(directionalMultipartCondition(false, true, false, false), cap.apply(ROTATE_Y_90).apply(UV_LOCK))
-        .with(directionalMultipartCondition(false, false, true, false), capMirrored.apply(ROTATE_Y_180).apply(UV_LOCK))
-        .with(directionalMultipartCondition(false, false, false, true), capMirrored.apply(ROTATE_Y_270).apply(UV_LOCK))
-        .with(directionalMultipartCondition(true, null, null, null), mirrored ? sideLeft : side)
-        .with(directionalMultipartCondition(null, true, null, null), (mirrored ? sideLeft : side).apply(ROTATE_Y_90).apply(UV_LOCK))
-        .with(directionalMultipartCondition(null, null, true, null), (mirrored ? sideRight : side).apply(ROTATE_Y_180).apply(UV_LOCK))
-        .with(directionalMultipartCondition(null, null, null, true), (mirrored ? sideRight : side).apply(ROTATE_Y_270).apply(UV_LOCK))
+        .with(variantCenterCaps)
+        .with(directionalMultipartCondition(false, false, false, false), variantCenterPost)
+        .with(directionalMultipartCondition(true, false, false, false), variantCap)
+        .with(directionalMultipartCondition(false, true, false, false), variantCap.apply(ROTATE_Y_90).apply(UV_LOCK))
+        .with(directionalMultipartCondition(false, false, true, false), variantCapMirrored.apply(ROTATE_Y_180).apply(UV_LOCK))
+        .with(directionalMultipartCondition(false, false, false, true), variantCapMirrored.apply(ROTATE_Y_270).apply(UV_LOCK))
+        .with(directionalMultipartCondition(true, null, null, null), mirrored ? variantSideLeft : variantSide)
+        .with(directionalMultipartCondition(null, true, null, null), (mirrored ? variantSideLeft : variantSide).apply(ROTATE_Y_90).apply(UV_LOCK))
+        .with(directionalMultipartCondition(null, null, true, null), (mirrored ? variantSideRight : variantSide).apply(ROTATE_Y_180).apply(UV_LOCK))
+        .with(directionalMultipartCondition(null, null, null, true), (mirrored ? variantSideRight : variantSide).apply(ROTATE_Y_270).apply(UV_LOCK))
     );
-    Identifier inventoryModel = createObjectModel(block, "simple_item", "/item", Map.of(
-        TextureKey.TEXTURE, textureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, textureMap.get(TextureKey.SIDE)
-    ));
+    Identifier inventoryModel = createObjectModel(block, "simple_item", "/item", textureMapItem);
     this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModels.basic(inventoryModel));
   }
 
-  private void registerChainBlock(Block block, Map<TextureKey, String> textureMap) {
-    WeightedVariant variant = createWeightedVariant(createObjectModel(block, "chain", null, Map.of(
-        TextureKey.SIDE, textureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, textureMap.get(TextureKey.SIDE)
-    )));
+  private void registerChainBlock(Block block, Map<TextureKey, String> rawTextureMap) {
+    Map<TextureKey, String> textureMapBlock = Map.of(TextureKey.SIDE, rawTextureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, rawTextureMap.get(TextureKey.SIDE));
+    Map<TextureKey, String> textureMapItem = Map.of(TextureKey.TEXTURE, rawTextureMap.get(TextureKey.TEXTURE), TextureKey.PARTICLE, rawTextureMap.get(TextureKey.TEXTURE));
+    WeightedVariant variant = createWeightedVariant(createObjectModel(block, "chain", null, textureMapBlock));
     this.blockGenerator.blockStateCollector.accept(VariantsBlockModelDefinitionCreator.of(block).with(BlockStateVariantMap
         .models(ChainBlock.AXIS)
         .register(Direction.Axis.X, variant.apply(ROTATE_X_90).apply(ROTATE_Y_90))
         .register(Direction.Axis.Y, variant)
         .register(Direction.Axis.Z, variant.apply(ROTATE_X_90))
     ));
-    Identifier inventoryModel = createObjectModel(block, "simple_item", "/item", Map.of(
-        TextureKey.TEXTURE, textureMap.get(TextureKey.TEXTURE), TextureKey.PARTICLE, textureMap.get(TextureKey.TEXTURE)
-    ));
+    Identifier inventoryModel = createObjectModel(block, "simple_item", "/item", textureMapItem);
     this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModels.basic(inventoryModel));
   }
 
-  private void registerDoorBlock(Block block, Map<TextureKey, String> textureMap) {
-    WeightedVariant bottomLeft = createWeightedVariant(createObjectModel(block, "door/bottom", "/bottom_left", Map.of(
-        TextureKey.END, textureMap.get(TextureKey.END), TextureKey.INSIDE, textureMap.get(DistantMoonsTextureKeys.BOTTOM_RIGHT), DistantMoonsTextureKeys.OUTSIDE, textureMap.get(DistantMoonsTextureKeys.BOTTOM_LEFT), TextureKey.SIDE, textureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, textureMap.get(DistantMoonsTextureKeys.BOTTOM_LEFT)
-    )));
-    WeightedVariant bottomRight = createWeightedVariant(createObjectModel(block, "door/bottom", "/bottom_right", Map.of(
-        TextureKey.END, textureMap.get(TextureKey.END), TextureKey.INSIDE, textureMap.get(DistantMoonsTextureKeys.BOTTOM_LEFT), DistantMoonsTextureKeys.OUTSIDE, textureMap.get(DistantMoonsTextureKeys.BOTTOM_RIGHT), TextureKey.SIDE, textureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, textureMap.get(DistantMoonsTextureKeys.BOTTOM_RIGHT)
-    )));
-    WeightedVariant topLeft = createWeightedVariant(createObjectModel(block, "door/top", "/top_left", Map.of(
-        TextureKey.END, textureMap.get(TextureKey.END), TextureKey.INSIDE, textureMap.get(DistantMoonsTextureKeys.TOP_RIGHT), DistantMoonsTextureKeys.OUTSIDE, textureMap.get(DistantMoonsTextureKeys.TOP_LEFT), TextureKey.SIDE, textureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, textureMap.get(DistantMoonsTextureKeys.TOP_LEFT)
-    )));
-    WeightedVariant topRight = createWeightedVariant(createObjectModel(block, "door/top", "/top_right", Map.of(
-        TextureKey.END, textureMap.get(TextureKey.END), TextureKey.INSIDE, textureMap.get(DistantMoonsTextureKeys.TOP_LEFT), DistantMoonsTextureKeys.OUTSIDE, textureMap.get(DistantMoonsTextureKeys.TOP_RIGHT), TextureKey.SIDE, textureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, textureMap.get(DistantMoonsTextureKeys.TOP_RIGHT)
-    )));
+  private void registerDoorBlock(Block block, Map<TextureKey, String> rawTextureMap) {
+    Map<TextureKey, String> textureMapBottomLeft = Map.of(TextureKey.END, rawTextureMap.get(TextureKey.END), TextureKey.INSIDE, rawTextureMap.get(DistantMoonsTextureKeys.BOTTOM_RIGHT), DistantMoonsTextureKeys.OUTSIDE, rawTextureMap.get(DistantMoonsTextureKeys.BOTTOM_LEFT), TextureKey.SIDE, rawTextureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.BOTTOM_LEFT));
+    Map<TextureKey, String> textureMapBottomRight = Map.of(TextureKey.END, rawTextureMap.get(TextureKey.END), TextureKey.INSIDE, rawTextureMap.get(DistantMoonsTextureKeys.BOTTOM_LEFT), DistantMoonsTextureKeys.OUTSIDE, rawTextureMap.get(DistantMoonsTextureKeys.BOTTOM_RIGHT), TextureKey.SIDE, rawTextureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.BOTTOM_RIGHT));
+    Map<TextureKey, String> textureMapTopLeft = Map.of(TextureKey.END, rawTextureMap.get(TextureKey.END), TextureKey.INSIDE, rawTextureMap.get(DistantMoonsTextureKeys.TOP_RIGHT), DistantMoonsTextureKeys.OUTSIDE, rawTextureMap.get(DistantMoonsTextureKeys.TOP_LEFT), TextureKey.SIDE, rawTextureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.TOP_LEFT));
+    Map<TextureKey, String> textureMapTopRight = Map.of(TextureKey.END, rawTextureMap.get(TextureKey.END), TextureKey.INSIDE, rawTextureMap.get(DistantMoonsTextureKeys.TOP_LEFT), DistantMoonsTextureKeys.OUTSIDE, rawTextureMap.get(DistantMoonsTextureKeys.TOP_RIGHT), TextureKey.SIDE, rawTextureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.TOP_RIGHT));
+    Map<TextureKey, String> textureMapItem = Map.of(TextureKey.TEXTURE, rawTextureMap.get(TextureKey.TEXTURE), TextureKey.PARTICLE, rawTextureMap.get(TextureKey.TEXTURE));
+    WeightedVariant variantBottomLeft = createWeightedVariant(createObjectModel(block, "door/variantBottom", "/bottom_left", textureMapBottomLeft));
+    WeightedVariant variantBottomRight = createWeightedVariant(createObjectModel(block, "door/variantBottom", "/bottom_right", textureMapBottomRight));
+    WeightedVariant variantTopLeft = createWeightedVariant(createObjectModel(block, "door/variantTop", "/top_left", textureMapTopLeft));
+    WeightedVariant variantTopRight = createWeightedVariant(createObjectModel(block, "door/variantTop", "/top_right", textureMapTopRight));
     this.blockGenerator.blockStateCollector.accept(VariantsBlockModelDefinitionCreator.of(block).with(BlockStateVariantMap
         .models(DoorBlock.HALF, DoorBlock.FACING, DoorBlock.HINGE, DoorBlock.OPEN)
-        .register(DoubleBlockHalf.LOWER, Direction.NORTH, DoorHinge.LEFT, false, bottomLeft)
-        .register(DoubleBlockHalf.LOWER, Direction.EAST, DoorHinge.LEFT, false, bottomLeft.apply(ROTATE_Y_90).apply(UV_LOCK))
-        .register(DoubleBlockHalf.LOWER, Direction.SOUTH, DoorHinge.LEFT, false, bottomLeft.apply(ROTATE_Y_180).apply(UV_LOCK))
-        .register(DoubleBlockHalf.LOWER, Direction.WEST, DoorHinge.LEFT, false, bottomLeft.apply(ROTATE_Y_270).apply(UV_LOCK))
-        .register(DoubleBlockHalf.LOWER, Direction.NORTH, DoorHinge.LEFT, true, bottomRight.apply(ROTATE_Y_90).apply(UV_LOCK))
-        .register(DoubleBlockHalf.LOWER, Direction.EAST, DoorHinge.LEFT, true, bottomRight.apply(ROTATE_Y_180).apply(UV_LOCK))
-        .register(DoubleBlockHalf.LOWER, Direction.SOUTH, DoorHinge.LEFT, true, bottomRight.apply(ROTATE_Y_270).apply(UV_LOCK))
-        .register(DoubleBlockHalf.LOWER, Direction.WEST, DoorHinge.LEFT, true, bottomRight)
-        .register(DoubleBlockHalf.LOWER, Direction.NORTH, DoorHinge.RIGHT, false, bottomRight)
-        .register(DoubleBlockHalf.LOWER, Direction.EAST, DoorHinge.RIGHT, false, bottomRight.apply(ROTATE_Y_90).apply(UV_LOCK))
-        .register(DoubleBlockHalf.LOWER, Direction.SOUTH, DoorHinge.RIGHT, false, bottomRight.apply(ROTATE_Y_180).apply(UV_LOCK))
-        .register(DoubleBlockHalf.LOWER, Direction.WEST, DoorHinge.RIGHT, false, bottomRight.apply(ROTATE_Y_270).apply(UV_LOCK))
-        .register(DoubleBlockHalf.LOWER, Direction.NORTH, DoorHinge.RIGHT, true, bottomLeft.apply(ROTATE_Y_270).apply(UV_LOCK))
-        .register(DoubleBlockHalf.LOWER, Direction.EAST, DoorHinge.RIGHT, true, bottomLeft)
-        .register(DoubleBlockHalf.LOWER, Direction.SOUTH, DoorHinge.RIGHT, true, bottomLeft.apply(ROTATE_Y_90).apply(UV_LOCK))
-        .register(DoubleBlockHalf.LOWER, Direction.WEST, DoorHinge.RIGHT, true, bottomLeft.apply(ROTATE_Y_180).apply(UV_LOCK))
-        .register(DoubleBlockHalf.UPPER, Direction.NORTH, DoorHinge.LEFT, false, topLeft)
-        .register(DoubleBlockHalf.UPPER, Direction.EAST, DoorHinge.LEFT, false, topLeft.apply(ROTATE_Y_90).apply(UV_LOCK))
-        .register(DoubleBlockHalf.UPPER, Direction.SOUTH, DoorHinge.LEFT, false, topLeft.apply(ROTATE_Y_180).apply(UV_LOCK))
-        .register(DoubleBlockHalf.UPPER, Direction.WEST, DoorHinge.LEFT, false, topLeft.apply(ROTATE_Y_270).apply(UV_LOCK))
-        .register(DoubleBlockHalf.UPPER, Direction.NORTH, DoorHinge.LEFT, true, topRight.apply(ROTATE_Y_90).apply(UV_LOCK))
-        .register(DoubleBlockHalf.UPPER, Direction.EAST, DoorHinge.LEFT, true, topRight.apply(ROTATE_Y_180).apply(UV_LOCK))
-        .register(DoubleBlockHalf.UPPER, Direction.SOUTH, DoorHinge.LEFT, true, topRight.apply(ROTATE_Y_270).apply(UV_LOCK))
-        .register(DoubleBlockHalf.UPPER, Direction.WEST, DoorHinge.LEFT, true, topRight)
-        .register(DoubleBlockHalf.UPPER, Direction.NORTH, DoorHinge.RIGHT, false, topRight)
-        .register(DoubleBlockHalf.UPPER, Direction.EAST, DoorHinge.RIGHT, false, topRight.apply(ROTATE_Y_90).apply(UV_LOCK))
-        .register(DoubleBlockHalf.UPPER, Direction.SOUTH, DoorHinge.RIGHT, false, topRight.apply(ROTATE_Y_180).apply(UV_LOCK))
-        .register(DoubleBlockHalf.UPPER, Direction.WEST, DoorHinge.RIGHT, false, topRight.apply(ROTATE_Y_270).apply(UV_LOCK))
-        .register(DoubleBlockHalf.UPPER, Direction.NORTH, DoorHinge.RIGHT, true, topLeft.apply(ROTATE_Y_270).apply(UV_LOCK))
-        .register(DoubleBlockHalf.UPPER, Direction.EAST, DoorHinge.RIGHT, true, topLeft)
-        .register(DoubleBlockHalf.UPPER, Direction.SOUTH, DoorHinge.RIGHT, true, topLeft.apply(ROTATE_Y_90).apply(UV_LOCK))
-        .register(DoubleBlockHalf.UPPER, Direction.WEST, DoorHinge.RIGHT, true, topLeft.apply(ROTATE_Y_180).apply(UV_LOCK))
+        .register(DoubleBlockHalf.LOWER, Direction.NORTH, DoorHinge.LEFT, false, variantBottomLeft)
+        .register(DoubleBlockHalf.LOWER, Direction.EAST, DoorHinge.LEFT, false, variantBottomLeft.apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(DoubleBlockHalf.LOWER, Direction.SOUTH, DoorHinge.LEFT, false, variantBottomLeft.apply(ROTATE_Y_180).apply(UV_LOCK))
+        .register(DoubleBlockHalf.LOWER, Direction.WEST, DoorHinge.LEFT, false, variantBottomLeft.apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(DoubleBlockHalf.LOWER, Direction.NORTH, DoorHinge.LEFT, true, variantBottomRight.apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(DoubleBlockHalf.LOWER, Direction.EAST, DoorHinge.LEFT, true, variantBottomRight.apply(ROTATE_Y_180).apply(UV_LOCK))
+        .register(DoubleBlockHalf.LOWER, Direction.SOUTH, DoorHinge.LEFT, true, variantBottomRight.apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(DoubleBlockHalf.LOWER, Direction.WEST, DoorHinge.LEFT, true, variantBottomRight)
+        .register(DoubleBlockHalf.LOWER, Direction.NORTH, DoorHinge.RIGHT, false, variantBottomRight)
+        .register(DoubleBlockHalf.LOWER, Direction.EAST, DoorHinge.RIGHT, false, variantBottomRight.apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(DoubleBlockHalf.LOWER, Direction.SOUTH, DoorHinge.RIGHT, false, variantBottomRight.apply(ROTATE_Y_180).apply(UV_LOCK))
+        .register(DoubleBlockHalf.LOWER, Direction.WEST, DoorHinge.RIGHT, false, variantBottomRight.apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(DoubleBlockHalf.LOWER, Direction.NORTH, DoorHinge.RIGHT, true, variantBottomLeft.apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(DoubleBlockHalf.LOWER, Direction.EAST, DoorHinge.RIGHT, true, variantBottomLeft)
+        .register(DoubleBlockHalf.LOWER, Direction.SOUTH, DoorHinge.RIGHT, true, variantBottomLeft.apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(DoubleBlockHalf.LOWER, Direction.WEST, DoorHinge.RIGHT, true, variantBottomLeft.apply(ROTATE_Y_180).apply(UV_LOCK))
+        .register(DoubleBlockHalf.UPPER, Direction.NORTH, DoorHinge.LEFT, false, variantTopLeft)
+        .register(DoubleBlockHalf.UPPER, Direction.EAST, DoorHinge.LEFT, false, variantTopLeft.apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(DoubleBlockHalf.UPPER, Direction.SOUTH, DoorHinge.LEFT, false, variantTopLeft.apply(ROTATE_Y_180).apply(UV_LOCK))
+        .register(DoubleBlockHalf.UPPER, Direction.WEST, DoorHinge.LEFT, false, variantTopLeft.apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(DoubleBlockHalf.UPPER, Direction.NORTH, DoorHinge.LEFT, true, variantTopRight.apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(DoubleBlockHalf.UPPER, Direction.EAST, DoorHinge.LEFT, true, variantTopRight.apply(ROTATE_Y_180).apply(UV_LOCK))
+        .register(DoubleBlockHalf.UPPER, Direction.SOUTH, DoorHinge.LEFT, true, variantTopRight.apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(DoubleBlockHalf.UPPER, Direction.WEST, DoorHinge.LEFT, true, variantTopRight)
+        .register(DoubleBlockHalf.UPPER, Direction.NORTH, DoorHinge.RIGHT, false, variantTopRight)
+        .register(DoubleBlockHalf.UPPER, Direction.EAST, DoorHinge.RIGHT, false, variantTopRight.apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(DoubleBlockHalf.UPPER, Direction.SOUTH, DoorHinge.RIGHT, false, variantTopRight.apply(ROTATE_Y_180).apply(UV_LOCK))
+        .register(DoubleBlockHalf.UPPER, Direction.WEST, DoorHinge.RIGHT, false, variantTopRight.apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(DoubleBlockHalf.UPPER, Direction.NORTH, DoorHinge.RIGHT, true, variantTopLeft.apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(DoubleBlockHalf.UPPER, Direction.EAST, DoorHinge.RIGHT, true, variantTopLeft)
+        .register(DoubleBlockHalf.UPPER, Direction.SOUTH, DoorHinge.RIGHT, true, variantTopLeft.apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(DoubleBlockHalf.UPPER, Direction.WEST, DoorHinge.RIGHT, true, variantTopLeft.apply(ROTATE_Y_180).apply(UV_LOCK))
     ));
-    Identifier inventoryModel = createObjectModel(block, "simple_item", "/item", Map.of(
-        TextureKey.TEXTURE, textureMap.get(TextureKey.TEXTURE), TextureKey.PARTICLE, textureMap.get(TextureKey.TEXTURE)
-    ));
+    Identifier inventoryModel = createObjectModel(block, "simple_item", "/item", textureMapItem);
     this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModels.basic(inventoryModel));
   }
 
-  private void registerFixedLadderBlock(Block block, Map<TextureKey, String> textureMap) {
-    WeightedVariant center = createWeightedVariant(createObjectModel(block, "fixed_ladder/center", "/center", Map.of(
-        TextureKey.BOTTOM, textureMap.get(TextureKey.BOTTOM), TextureKey.FRONT, textureMap.get(TextureKey.FRONT), TextureKey.SIDE, textureMap.get(DistantMoonsTextureKeys.CENTER), TextureKey.TOP, textureMap.get(TextureKey.TOP), TextureKey.PARTICLE, textureMap.get(TextureKey.PARTICLE)
-    )));
-    WeightedVariant center_caps = createWeightedVariant(createObjectModel(block, "fixed_ladder/caps/center", "/caps/center", Map.of(
-        TextureKey.END, textureMap.get(TextureKey.END), TextureKey.PARTICLE, textureMap.get(TextureKey.PARTICLE)
-    )));
-    WeightedVariant extension = createWeightedVariant(createObjectModel(block, "fixed_ladder/extension", "/extension", Map.of(
-        TextureKey.BOTTOM, textureMap.get(TextureKey.BOTTOM), TextureKey.FRONT, textureMap.get(TextureKey.FRONT), TextureKey.TOP, textureMap.get(TextureKey.TOP), TextureKey.PARTICLE, textureMap.get(TextureKey.PARTICLE)
-    )));
-    WeightedVariant side = createWeightedVariant(createObjectModel(block, "fixed_ladder/side", "/side", Map.of(
-        TextureKey.SIDE, textureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, textureMap.get(TextureKey.PARTICLE)
-    )));
-    WeightedVariant side_caps = createWeightedVariant(createObjectModel(block, "fixed_ladder/caps/side", "/caps/side", Map.of(
-        TextureKey.END, textureMap.get(TextureKey.END), TextureKey.PARTICLE, textureMap.get(TextureKey.PARTICLE)
-    )));
+  private void registerFixedLadderBlock(Block block, Map<TextureKey, String> rawTextureMap) {
+    Map<TextureKey, String> textureMapCenter = Map.of(TextureKey.BOTTOM, rawTextureMap.get(TextureKey.BOTTOM), TextureKey.FRONT, rawTextureMap.get(TextureKey.FRONT), TextureKey.SIDE, rawTextureMap.get(DistantMoonsTextureKeys.CENTER), TextureKey.TOP, rawTextureMap.get(TextureKey.TOP), TextureKey.PARTICLE, rawTextureMap.get(TextureKey.PARTICLE));
+    Map<TextureKey, String> textureMapCenterCaps = Map.of(TextureKey.END, rawTextureMap.get(TextureKey.END), TextureKey.PARTICLE, rawTextureMap.get(TextureKey.PARTICLE));
+    Map<TextureKey, String> textureMapExtension = Map.of(TextureKey.BOTTOM, rawTextureMap.get(TextureKey.BOTTOM), TextureKey.FRONT, rawTextureMap.get(TextureKey.FRONT), TextureKey.TOP, rawTextureMap.get(TextureKey.TOP), TextureKey.PARTICLE, rawTextureMap.get(TextureKey.PARTICLE));
+    Map<TextureKey, String> textureMapSide = Map.of(TextureKey.SIDE, rawTextureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, rawTextureMap.get(TextureKey.PARTICLE));
+    Map<TextureKey, String> textureMapSideCaps = Map.of(TextureKey.END, rawTextureMap.get(TextureKey.END), TextureKey.PARTICLE, rawTextureMap.get(TextureKey.PARTICLE));
+    WeightedVariant variantCenter = createWeightedVariant(createObjectModel(block, "fixed_ladder/variantCenter", "/variantCenter", textureMapCenter));
+    WeightedVariant variantCenterCaps = createWeightedVariant(createObjectModel(block, "fixed_ladder/caps/variantCenter", "/caps/variantCenter", textureMapCenterCaps));
+    WeightedVariant variantExtension = createWeightedVariant(createObjectModel(block, "fixed_ladder/variantExtension", "/variantExtension", textureMapExtension));
+    WeightedVariant variantSide = createWeightedVariant(createObjectModel(block, "fixed_ladder/variantSide", "/variantSide", textureMapSide));
+    WeightedVariant variantSideCaps = createWeightedVariant(createObjectModel(block, "fixed_ladder/caps/variantSide", "/caps/variantSide", textureMapSideCaps));
     this.blockGenerator.blockStateCollector.accept(MultipartBlockModelDefinitionCreator.create(block)
-        .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.AXIS, HorizontalAxis.X), center.apply(ROTATE_Y_90))
-        .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.AXIS, HorizontalAxis.Z), center)
-        .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.AXIS, HorizontalAxis.X).put(FixedLadderBlock.LEFT_SHAPE, FixedLadderSideShape.ATTACHED, FixedLadderSideShape.CONNECTED), side.apply(ROTATE_Y_180))
-        .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.AXIS, HorizontalAxis.X).put(FixedLadderBlock.RIGHT_SHAPE, FixedLadderSideShape.ATTACHED, FixedLadderSideShape.CONNECTED), side)
-        .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.AXIS, HorizontalAxis.Z).put(FixedLadderBlock.LEFT_SHAPE, FixedLadderSideShape.ATTACHED, FixedLadderSideShape.CONNECTED), side.apply(ROTATE_Y_90))
-        .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.AXIS, HorizontalAxis.Z).put(FixedLadderBlock.RIGHT_SHAPE, FixedLadderSideShape.ATTACHED, FixedLadderSideShape.CONNECTED), side.apply(ROTATE_Y_270))
-        .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.AXIS, HorizontalAxis.X).put(FixedLadderBlock.LEFT_SHAPE, FixedLadderSideShape.ATTACHED), extension.apply(ROTATE_Y_180))
-        .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.AXIS, HorizontalAxis.X).put(FixedLadderBlock.RIGHT_SHAPE, FixedLadderSideShape.ATTACHED), extension)
-        .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.AXIS, HorizontalAxis.Z).put(FixedLadderBlock.LEFT_SHAPE, FixedLadderSideShape.ATTACHED), extension.apply(ROTATE_Y_90))
-        .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.AXIS, HorizontalAxis.Z).put(FixedLadderBlock.RIGHT_SHAPE, FixedLadderSideShape.ATTACHED), extension.apply(ROTATE_Y_270))
+        .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.AXIS, HorizontalAxis.X), variantCenter.apply(ROTATE_Y_90))
+        .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.AXIS, HorizontalAxis.Z), variantCenter)
+        .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.AXIS, HorizontalAxis.X).put(FixedLadderBlock.LEFT_SHAPE, FixedLadderSideShape.ATTACHED, FixedLadderSideShape.CONNECTED), variantSide.apply(ROTATE_Y_180))
+        .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.AXIS, HorizontalAxis.X).put(FixedLadderBlock.RIGHT_SHAPE, FixedLadderSideShape.ATTACHED, FixedLadderSideShape.CONNECTED), variantSide)
+        .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.AXIS, HorizontalAxis.Z).put(FixedLadderBlock.LEFT_SHAPE, FixedLadderSideShape.ATTACHED, FixedLadderSideShape.CONNECTED), variantSide.apply(ROTATE_Y_90))
+        .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.AXIS, HorizontalAxis.Z).put(FixedLadderBlock.RIGHT_SHAPE, FixedLadderSideShape.ATTACHED, FixedLadderSideShape.CONNECTED), variantSide.apply(ROTATE_Y_270))
+        .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.AXIS, HorizontalAxis.X).put(FixedLadderBlock.LEFT_SHAPE, FixedLadderSideShape.ATTACHED), variantExtension.apply(ROTATE_Y_180))
+        .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.AXIS, HorizontalAxis.X).put(FixedLadderBlock.RIGHT_SHAPE, FixedLadderSideShape.ATTACHED), variantExtension)
+        .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.AXIS, HorizontalAxis.Z).put(FixedLadderBlock.LEFT_SHAPE, FixedLadderSideShape.ATTACHED), variantExtension.apply(ROTATE_Y_90))
+        .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.AXIS, HorizontalAxis.Z).put(FixedLadderBlock.RIGHT_SHAPE, FixedLadderSideShape.ATTACHED), variantExtension.apply(ROTATE_Y_270))
+        .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.AXIS, HorizontalAxis.X).put(FixedLadderBlock.LEFT_CAPPED, true), variantSideCaps.apply(ROTATE_Y_180).apply(UV_LOCK))
+        .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.AXIS, HorizontalAxis.X).put(FixedLadderBlock.RIGHT_CAPPED, true), variantSideCaps.apply(UV_LOCK))
+        .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.AXIS, HorizontalAxis.Z).put(FixedLadderBlock.LEFT_CAPPED, true), variantSideCaps.apply(ROTATE_Y_90).apply(UV_LOCK))
+        .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.AXIS, HorizontalAxis.Z).put(FixedLadderBlock.RIGHT_CAPPED, true), variantSideCaps.apply(ROTATE_Y_270).apply(UV_LOCK))
         .with(new MultipartModelCombinedCondition(MultipartModelCombinedCondition.LogicalOperator.OR, List.of(
             new MultipartModelConditionBuilder().put(FixedLadderBlock.LEFT_CAPPED, true).build(),
             new MultipartModelConditionBuilder().put(FixedLadderBlock.RIGHT_CAPPED, true).build())
-        ), center_caps)
-        .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.AXIS, HorizontalAxis.X).put(FixedLadderBlock.LEFT_CAPPED, true), side_caps.apply(ROTATE_Y_180).apply(UV_LOCK))
-        .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.AXIS, HorizontalAxis.X).put(FixedLadderBlock.RIGHT_CAPPED, true), side_caps.apply(UV_LOCK))
-        .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.AXIS, HorizontalAxis.Z).put(FixedLadderBlock.LEFT_CAPPED, true), side_caps.apply(ROTATE_Y_90).apply(UV_LOCK))
-        .with(new MultipartModelConditionBuilder().put(FixedLadderBlock.AXIS, HorizontalAxis.Z).put(FixedLadderBlock.RIGHT_CAPPED, true), side_caps.apply(ROTATE_Y_270).apply(UV_LOCK))
+        ), variantCenterCaps)
     );
-    this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModels.basic(center.variants().getEntries().getFirst().value().modelId()));
+    this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModels.basic(variantCenter.variants().getEntries().getFirst().value().modelId()));
   }
 
-  private void registerMetalBarDoorBlock(Block block, Map<TextureKey, String> textureMap) {
-    WeightedVariant doubleBottomLeft = createWeightedVariant(createObjectModel(block, "metal_bar_door/double/bottom_left", "/double/bottom_left", Map.of(
-        TextureKey.END, textureMap.get(TextureKey.END), TextureKey.BACK, textureMap.get(DistantMoonsTextureKeys.DOUBLE_BOTTOM_RIGHT), TextureKey.FRONT, textureMap.get(DistantMoonsTextureKeys.DOUBLE_BOTTOM_LEFT), TextureKey.INSIDE, textureMap.get(TextureKey.INSIDE), TextureKey.SIDE, textureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, textureMap.get(DistantMoonsTextureKeys.DOUBLE_BOTTOM_LEFT)
-    )));
-    WeightedVariant doubleBottomRight = createWeightedVariant(createObjectModel(block, "metal_bar_door/double/bottom_right", "/double/bottom_right", Map.of(
-        TextureKey.END, textureMap.get(TextureKey.END), TextureKey.BACK, textureMap.get(DistantMoonsTextureKeys.DOUBLE_BOTTOM_LEFT), TextureKey.FRONT, textureMap.get(DistantMoonsTextureKeys.DOUBLE_BOTTOM_RIGHT), TextureKey.INSIDE, textureMap.get(TextureKey.INSIDE), TextureKey.SIDE, textureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, textureMap.get(DistantMoonsTextureKeys.DOUBLE_BOTTOM_RIGHT)
-    )));
-    WeightedVariant doubleTopLeft = createWeightedVariant(createObjectModel(block, "metal_bar_door/double/top_left", "/double/top_left", Map.of(
-        TextureKey.END, textureMap.get(TextureKey.END), TextureKey.BACK, textureMap.get(DistantMoonsTextureKeys.DOUBLE_TOP_RIGHT), TextureKey.FRONT, textureMap.get(DistantMoonsTextureKeys.DOUBLE_TOP_LEFT), TextureKey.INSIDE, textureMap.get(TextureKey.INSIDE), TextureKey.SIDE, textureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, textureMap.get(DistantMoonsTextureKeys.DOUBLE_TOP_LEFT)
-    )));
-    WeightedVariant doubleTopRight = createWeightedVariant(createObjectModel(block, "metal_bar_door/double/top_right", "/double/top_right", Map.of(
-        TextureKey.END, textureMap.get(TextureKey.END), TextureKey.BACK, textureMap.get(DistantMoonsTextureKeys.DOUBLE_TOP_LEFT), TextureKey.FRONT, textureMap.get(DistantMoonsTextureKeys.DOUBLE_TOP_RIGHT), TextureKey.INSIDE, textureMap.get(TextureKey.INSIDE), TextureKey.SIDE, textureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, textureMap.get(DistantMoonsTextureKeys.DOUBLE_TOP_RIGHT)
-    )));
-    WeightedVariant singleBottomLeft = createWeightedVariant(createObjectModel(block, "metal_bar_door/single/bottom", "/single/bottom_left", Map.of(
-        TextureKey.END, textureMap.get(TextureKey.END), TextureKey.BACK, textureMap.get(DistantMoonsTextureKeys.SINGLE_BOTTOM_RIGHT), TextureKey.FRONT, textureMap.get(DistantMoonsTextureKeys.SINGLE_BOTTOM_LEFT), TextureKey.INSIDE, textureMap.get(TextureKey.INSIDE), TextureKey.SIDE, textureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, textureMap.get(DistantMoonsTextureKeys.SINGLE_BOTTOM_LEFT)
-    )));
-    WeightedVariant singleBottomRight = createWeightedVariant(createObjectModel(block, "metal_bar_door/single/bottom", "/single/bottom_right", Map.of(
-        TextureKey.END, textureMap.get(TextureKey.END), TextureKey.BACK, textureMap.get(DistantMoonsTextureKeys.SINGLE_BOTTOM_LEFT), TextureKey.FRONT, textureMap.get(DistantMoonsTextureKeys.SINGLE_BOTTOM_RIGHT), TextureKey.INSIDE, textureMap.get(TextureKey.INSIDE), TextureKey.SIDE, textureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, textureMap.get(DistantMoonsTextureKeys.SINGLE_BOTTOM_RIGHT)
-    )));
-    WeightedVariant singleTopLeft = createWeightedVariant(createObjectModel(block, "metal_bar_door/single/top", "/single/top_left", Map.of(
-        TextureKey.END, textureMap.get(TextureKey.END), TextureKey.BACK, textureMap.get(DistantMoonsTextureKeys.SINGLE_TOP_RIGHT), TextureKey.FRONT, textureMap.get(DistantMoonsTextureKeys.SINGLE_TOP_LEFT), TextureKey.INSIDE, textureMap.get(TextureKey.INSIDE), TextureKey.SIDE, textureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, textureMap.get(DistantMoonsTextureKeys.SINGLE_TOP_LEFT)
-    )));
-    WeightedVariant singleTopRight = createWeightedVariant(createObjectModel(block, "metal_bar_door/single/top", "/single/top_right", Map.of(
-        TextureKey.END, textureMap.get(TextureKey.END), TextureKey.BACK, textureMap.get(DistantMoonsTextureKeys.SINGLE_TOP_LEFT), TextureKey.FRONT, textureMap.get(DistantMoonsTextureKeys.SINGLE_TOP_RIGHT), TextureKey.INSIDE, textureMap.get(TextureKey.INSIDE), TextureKey.SIDE, textureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, textureMap.get(DistantMoonsTextureKeys.SINGLE_TOP_RIGHT)
-    )));
+  private void registerMetalBarDoorBlock(Block block, Map<TextureKey, String> rawTextureMap) {
+    Map<TextureKey, String> textureMapDoubleBottomLeft = Map.of(TextureKey.END, rawTextureMap.get(TextureKey.END), TextureKey.BACK, rawTextureMap.get(DistantMoonsTextureKeys.DOUBLE_BOTTOM_RIGHT), TextureKey.FRONT, rawTextureMap.get(DistantMoonsTextureKeys.DOUBLE_BOTTOM_LEFT), TextureKey.INSIDE, rawTextureMap.get(TextureKey.INSIDE), TextureKey.SIDE, rawTextureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.DOUBLE_BOTTOM_LEFT));
+    Map<TextureKey, String> textureMapDoubleBottomRight = Map.of(TextureKey.END, rawTextureMap.get(TextureKey.END), TextureKey.BACK, rawTextureMap.get(DistantMoonsTextureKeys.DOUBLE_BOTTOM_LEFT), TextureKey.FRONT, rawTextureMap.get(DistantMoonsTextureKeys.DOUBLE_BOTTOM_RIGHT), TextureKey.INSIDE, rawTextureMap.get(TextureKey.INSIDE), TextureKey.SIDE, rawTextureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.DOUBLE_BOTTOM_RIGHT));
+    Map<TextureKey, String> textureMapDoubleTopLeft = Map.of(TextureKey.END, rawTextureMap.get(TextureKey.END), TextureKey.BACK, rawTextureMap.get(DistantMoonsTextureKeys.DOUBLE_TOP_RIGHT), TextureKey.FRONT, rawTextureMap.get(DistantMoonsTextureKeys.DOUBLE_TOP_LEFT), TextureKey.INSIDE, rawTextureMap.get(TextureKey.INSIDE), TextureKey.SIDE, rawTextureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.DOUBLE_TOP_LEFT));
+    Map<TextureKey, String> textureMapDoubleTopRight = Map.of(TextureKey.END, rawTextureMap.get(TextureKey.END), TextureKey.BACK, rawTextureMap.get(DistantMoonsTextureKeys.DOUBLE_TOP_LEFT), TextureKey.FRONT, rawTextureMap.get(DistantMoonsTextureKeys.DOUBLE_TOP_RIGHT), TextureKey.INSIDE, rawTextureMap.get(TextureKey.INSIDE), TextureKey.SIDE, rawTextureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.DOUBLE_TOP_RIGHT));
+    Map<TextureKey, String> textureMapSingleBottomLeft = Map.of(TextureKey.END, rawTextureMap.get(TextureKey.END), TextureKey.BACK, rawTextureMap.get(DistantMoonsTextureKeys.SINGLE_BOTTOM_RIGHT), TextureKey.FRONT, rawTextureMap.get(DistantMoonsTextureKeys.SINGLE_BOTTOM_LEFT), TextureKey.INSIDE, rawTextureMap.get(TextureKey.INSIDE), TextureKey.SIDE, rawTextureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.SINGLE_BOTTOM_LEFT));
+    Map<TextureKey, String> textureMapSingleBottomRight = Map.of(TextureKey.END, rawTextureMap.get(TextureKey.END), TextureKey.BACK, rawTextureMap.get(DistantMoonsTextureKeys.SINGLE_BOTTOM_LEFT), TextureKey.FRONT, rawTextureMap.get(DistantMoonsTextureKeys.SINGLE_BOTTOM_RIGHT), TextureKey.INSIDE, rawTextureMap.get(TextureKey.INSIDE), TextureKey.SIDE, rawTextureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.SINGLE_BOTTOM_RIGHT));
+    Map<TextureKey, String> textureMapSingleTopLeft = Map.of(TextureKey.END, rawTextureMap.get(TextureKey.END), TextureKey.BACK, rawTextureMap.get(DistantMoonsTextureKeys.SINGLE_TOP_RIGHT), TextureKey.FRONT, rawTextureMap.get(DistantMoonsTextureKeys.SINGLE_TOP_LEFT), TextureKey.INSIDE, rawTextureMap.get(TextureKey.INSIDE), TextureKey.SIDE, rawTextureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.SINGLE_TOP_LEFT));
+    Map<TextureKey, String> textureMapSingleTopRight = Map.of(TextureKey.END, rawTextureMap.get(TextureKey.END), TextureKey.BACK, rawTextureMap.get(DistantMoonsTextureKeys.SINGLE_TOP_LEFT), TextureKey.FRONT, rawTextureMap.get(DistantMoonsTextureKeys.SINGLE_TOP_RIGHT), TextureKey.INSIDE, rawTextureMap.get(TextureKey.INSIDE), TextureKey.SIDE, rawTextureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.SINGLE_TOP_RIGHT));
+    Map<TextureKey, String> textureMapItem = Map.of(TextureKey.TEXTURE, rawTextureMap.get(TextureKey.TEXTURE), TextureKey.PARTICLE, rawTextureMap.get(TextureKey.TEXTURE));
+    WeightedVariant variantDoubleBottomLeft = createWeightedVariant(createObjectModel(block, "metal_bar_door/double/bottom_left", "/double/bottom_left", textureMapDoubleBottomLeft));
+    WeightedVariant variantDoubleBottomRight = createWeightedVariant(createObjectModel(block, "metal_bar_door/double/bottom_right", "/double/bottom_right", textureMapDoubleBottomRight));
+    WeightedVariant variantDoubleTopLeft = createWeightedVariant(createObjectModel(block, "metal_bar_door/double/top_left", "/double/top_left", textureMapDoubleTopLeft));
+    WeightedVariant variantDoubleTopRight = createWeightedVariant(createObjectModel(block, "metal_bar_door/double/top_right", "/double/top_right", textureMapDoubleTopRight));
+    WeightedVariant variantSingleBottomLeft = createWeightedVariant(createObjectModel(block, "metal_bar_door/single/variantBottom", "/single/bottom_left", textureMapSingleBottomLeft));
+    WeightedVariant variantSingleBottomRight = createWeightedVariant(createObjectModel(block, "metal_bar_door/single/variantBottom", "/single/bottom_right", textureMapSingleBottomRight));
+    WeightedVariant variantSingleTopLeft = createWeightedVariant(createObjectModel(block, "metal_bar_door/single/variantTop", "/single/top_left", textureMapSingleTopLeft));
+    WeightedVariant variantSingleTopRight = createWeightedVariant(createObjectModel(block, "metal_bar_door/single/variantTop", "/single/top_right", textureMapSingleTopRight));
     this.blockGenerator.blockStateCollector.accept(VariantsBlockModelDefinitionCreator.of(block).with(BlockStateVariantMap
         .models(MetalBarDoorBlock.DOUBLE, DoorBlock.HALF, DoorBlock.FACING, DoorBlock.HINGE, DoorBlock.OPEN)
-        .register(false, DoubleBlockHalf.LOWER, Direction.NORTH, DoorHinge.LEFT, false, singleBottomLeft)
-        .register(false, DoubleBlockHalf.LOWER, Direction.EAST, DoorHinge.LEFT, false, singleBottomLeft.apply(ROTATE_Y_90).apply(UV_LOCK))
-        .register(false, DoubleBlockHalf.LOWER, Direction.SOUTH, DoorHinge.LEFT, false, singleBottomLeft.apply(ROTATE_Y_180).apply(UV_LOCK))
-        .register(false, DoubleBlockHalf.LOWER, Direction.WEST, DoorHinge.LEFT, false, singleBottomLeft.apply(ROTATE_Y_270).apply(UV_LOCK))
-        .register(false, DoubleBlockHalf.LOWER, Direction.NORTH, DoorHinge.LEFT, true, singleBottomRight.apply(ROTATE_Y_90).apply(UV_LOCK))
-        .register(false, DoubleBlockHalf.LOWER, Direction.EAST, DoorHinge.LEFT, true, singleBottomRight.apply(ROTATE_Y_180).apply(UV_LOCK))
-        .register(false, DoubleBlockHalf.LOWER, Direction.SOUTH, DoorHinge.LEFT, true, singleBottomRight.apply(ROTATE_Y_270).apply(UV_LOCK))
-        .register(false, DoubleBlockHalf.LOWER, Direction.WEST, DoorHinge.LEFT, true, singleBottomRight)
-        .register(false, DoubleBlockHalf.LOWER, Direction.NORTH, DoorHinge.RIGHT, false, singleBottomRight)
-        .register(false, DoubleBlockHalf.LOWER, Direction.EAST, DoorHinge.RIGHT, false, singleBottomRight.apply(ROTATE_Y_90).apply(UV_LOCK))
-        .register(false, DoubleBlockHalf.LOWER, Direction.SOUTH, DoorHinge.RIGHT, false, singleBottomRight.apply(ROTATE_Y_180).apply(UV_LOCK))
-        .register(false, DoubleBlockHalf.LOWER, Direction.WEST, DoorHinge.RIGHT, false, singleBottomRight.apply(ROTATE_Y_270).apply(UV_LOCK))
-        .register(false, DoubleBlockHalf.LOWER, Direction.NORTH, DoorHinge.RIGHT, true, singleBottomLeft.apply(ROTATE_Y_270).apply(UV_LOCK))
-        .register(false, DoubleBlockHalf.LOWER, Direction.EAST, DoorHinge.RIGHT, true, singleBottomLeft)
-        .register(false, DoubleBlockHalf.LOWER, Direction.SOUTH, DoorHinge.RIGHT, true, singleBottomLeft.apply(ROTATE_Y_90).apply(UV_LOCK))
-        .register(false, DoubleBlockHalf.LOWER, Direction.WEST, DoorHinge.RIGHT, true, singleBottomLeft.apply(ROTATE_Y_180).apply(UV_LOCK))
-        .register(false, DoubleBlockHalf.UPPER, Direction.NORTH, DoorHinge.LEFT, false, singleTopLeft)
-        .register(false, DoubleBlockHalf.UPPER, Direction.EAST, DoorHinge.LEFT, false, singleTopLeft.apply(ROTATE_Y_90).apply(UV_LOCK))
-        .register(false, DoubleBlockHalf.UPPER, Direction.SOUTH, DoorHinge.LEFT, false, singleTopLeft.apply(ROTATE_Y_180).apply(UV_LOCK))
-        .register(false, DoubleBlockHalf.UPPER, Direction.WEST, DoorHinge.LEFT, false, singleTopLeft.apply(ROTATE_Y_270).apply(UV_LOCK))
-        .register(false, DoubleBlockHalf.UPPER, Direction.NORTH, DoorHinge.LEFT, true, singleTopRight.apply(ROTATE_Y_90).apply(UV_LOCK))
-        .register(false, DoubleBlockHalf.UPPER, Direction.EAST, DoorHinge.LEFT, true, singleTopRight.apply(ROTATE_Y_180).apply(UV_LOCK))
-        .register(false, DoubleBlockHalf.UPPER, Direction.SOUTH, DoorHinge.LEFT, true, singleTopRight.apply(ROTATE_Y_270).apply(UV_LOCK))
-        .register(false, DoubleBlockHalf.UPPER, Direction.WEST, DoorHinge.LEFT, true, singleTopRight)
-        .register(false, DoubleBlockHalf.UPPER, Direction.NORTH, DoorHinge.RIGHT, false, singleTopRight)
-        .register(false, DoubleBlockHalf.UPPER, Direction.EAST, DoorHinge.RIGHT, false, singleTopRight.apply(ROTATE_Y_90).apply(UV_LOCK))
-        .register(false, DoubleBlockHalf.UPPER, Direction.SOUTH, DoorHinge.RIGHT, false, singleTopRight.apply(ROTATE_Y_180).apply(UV_LOCK))
-        .register(false, DoubleBlockHalf.UPPER, Direction.WEST, DoorHinge.RIGHT, false, singleTopRight.apply(ROTATE_Y_270).apply(UV_LOCK))
-        .register(false, DoubleBlockHalf.UPPER, Direction.NORTH, DoorHinge.RIGHT, true, singleTopLeft.apply(ROTATE_Y_270).apply(UV_LOCK))
-        .register(false, DoubleBlockHalf.UPPER, Direction.EAST, DoorHinge.RIGHT, true, singleTopLeft)
-        .register(false, DoubleBlockHalf.UPPER, Direction.SOUTH, DoorHinge.RIGHT, true, singleTopLeft.apply(ROTATE_Y_90).apply(UV_LOCK))
-        .register(false, DoubleBlockHalf.UPPER, Direction.WEST, DoorHinge.RIGHT, true, singleTopLeft.apply(ROTATE_Y_180).apply(UV_LOCK))
-        .register(true, DoubleBlockHalf.LOWER, Direction.NORTH, DoorHinge.LEFT, false, doubleBottomLeft)
-        .register(true, DoubleBlockHalf.LOWER, Direction.EAST, DoorHinge.LEFT, false, doubleBottomLeft.apply(ROTATE_Y_90).apply(UV_LOCK))
-        .register(true, DoubleBlockHalf.LOWER, Direction.SOUTH, DoorHinge.LEFT, false, doubleBottomLeft.apply(ROTATE_Y_180).apply(UV_LOCK))
-        .register(true, DoubleBlockHalf.LOWER, Direction.WEST, DoorHinge.LEFT, false, doubleBottomLeft.apply(ROTATE_Y_270).apply(UV_LOCK))
-        .register(true, DoubleBlockHalf.LOWER, Direction.NORTH, DoorHinge.LEFT, true, doubleBottomRight.apply(ROTATE_Y_90).apply(UV_LOCK))
-        .register(true, DoubleBlockHalf.LOWER, Direction.EAST, DoorHinge.LEFT, true, doubleBottomRight.apply(ROTATE_Y_180).apply(UV_LOCK))
-        .register(true, DoubleBlockHalf.LOWER, Direction.SOUTH, DoorHinge.LEFT, true, doubleBottomRight.apply(ROTATE_Y_270).apply(UV_LOCK))
-        .register(true, DoubleBlockHalf.LOWER, Direction.WEST, DoorHinge.LEFT, true, doubleBottomRight)
-        .register(true, DoubleBlockHalf.LOWER, Direction.NORTH, DoorHinge.RIGHT, false, doubleBottomRight)
-        .register(true, DoubleBlockHalf.LOWER, Direction.EAST, DoorHinge.RIGHT, false, doubleBottomRight.apply(ROTATE_Y_90).apply(UV_LOCK))
-        .register(true, DoubleBlockHalf.LOWER, Direction.SOUTH, DoorHinge.RIGHT, false, doubleBottomRight.apply(ROTATE_Y_180).apply(UV_LOCK))
-        .register(true, DoubleBlockHalf.LOWER, Direction.WEST, DoorHinge.RIGHT, false, doubleBottomRight.apply(ROTATE_Y_270).apply(UV_LOCK))
-        .register(true, DoubleBlockHalf.LOWER, Direction.NORTH, DoorHinge.RIGHT, true, doubleBottomLeft.apply(ROTATE_Y_270).apply(UV_LOCK))
-        .register(true, DoubleBlockHalf.LOWER, Direction.EAST, DoorHinge.RIGHT, true, doubleBottomLeft)
-        .register(true, DoubleBlockHalf.LOWER, Direction.SOUTH, DoorHinge.RIGHT, true, doubleBottomLeft.apply(ROTATE_Y_90).apply(UV_LOCK))
-        .register(true, DoubleBlockHalf.LOWER, Direction.WEST, DoorHinge.RIGHT, true, doubleBottomLeft.apply(ROTATE_Y_180).apply(UV_LOCK))
-        .register(true, DoubleBlockHalf.UPPER, Direction.NORTH, DoorHinge.LEFT, false, doubleTopLeft)
-        .register(true, DoubleBlockHalf.UPPER, Direction.EAST, DoorHinge.LEFT, false, doubleTopLeft.apply(ROTATE_Y_90).apply(UV_LOCK))
-        .register(true, DoubleBlockHalf.UPPER, Direction.SOUTH, DoorHinge.LEFT, false, doubleTopLeft.apply(ROTATE_Y_180).apply(UV_LOCK))
-        .register(true, DoubleBlockHalf.UPPER, Direction.WEST, DoorHinge.LEFT, false, doubleTopLeft.apply(ROTATE_Y_270).apply(UV_LOCK))
-        .register(true, DoubleBlockHalf.UPPER, Direction.NORTH, DoorHinge.LEFT, true, doubleTopRight.apply(ROTATE_Y_90).apply(UV_LOCK))
-        .register(true, DoubleBlockHalf.UPPER, Direction.EAST, DoorHinge.LEFT, true, doubleTopRight.apply(ROTATE_Y_180).apply(UV_LOCK))
-        .register(true, DoubleBlockHalf.UPPER, Direction.SOUTH, DoorHinge.LEFT, true, doubleTopRight.apply(ROTATE_Y_270).apply(UV_LOCK))
-        .register(true, DoubleBlockHalf.UPPER, Direction.WEST, DoorHinge.LEFT, true, doubleTopRight)
-        .register(true, DoubleBlockHalf.UPPER, Direction.NORTH, DoorHinge.RIGHT, false, doubleTopRight)
-        .register(true, DoubleBlockHalf.UPPER, Direction.EAST, DoorHinge.RIGHT, false, doubleTopRight.apply(ROTATE_Y_90).apply(UV_LOCK))
-        .register(true, DoubleBlockHalf.UPPER, Direction.SOUTH, DoorHinge.RIGHT, false, doubleTopRight.apply(ROTATE_Y_180).apply(UV_LOCK))
-        .register(true, DoubleBlockHalf.UPPER, Direction.WEST, DoorHinge.RIGHT, false, doubleTopRight.apply(ROTATE_Y_270).apply(UV_LOCK))
-        .register(true, DoubleBlockHalf.UPPER, Direction.NORTH, DoorHinge.RIGHT, true, doubleTopLeft.apply(ROTATE_Y_270).apply(UV_LOCK))
-        .register(true, DoubleBlockHalf.UPPER, Direction.EAST, DoorHinge.RIGHT, true, doubleTopLeft)
-        .register(true, DoubleBlockHalf.UPPER, Direction.SOUTH, DoorHinge.RIGHT, true, doubleTopLeft.apply(ROTATE_Y_90).apply(UV_LOCK))
-        .register(true, DoubleBlockHalf.UPPER, Direction.WEST, DoorHinge.RIGHT, true, doubleTopLeft.apply(ROTATE_Y_180).apply(UV_LOCK))
+        .register(false, DoubleBlockHalf.LOWER, Direction.NORTH, DoorHinge.LEFT, false, variantSingleBottomLeft)
+        .register(false, DoubleBlockHalf.LOWER, Direction.EAST, DoorHinge.LEFT, false, variantSingleBottomLeft.apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(false, DoubleBlockHalf.LOWER, Direction.SOUTH, DoorHinge.LEFT, false, variantSingleBottomLeft.apply(ROTATE_Y_180).apply(UV_LOCK))
+        .register(false, DoubleBlockHalf.LOWER, Direction.WEST, DoorHinge.LEFT, false, variantSingleBottomLeft.apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(false, DoubleBlockHalf.LOWER, Direction.NORTH, DoorHinge.LEFT, true, variantSingleBottomRight.apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(false, DoubleBlockHalf.LOWER, Direction.EAST, DoorHinge.LEFT, true, variantSingleBottomRight.apply(ROTATE_Y_180).apply(UV_LOCK))
+        .register(false, DoubleBlockHalf.LOWER, Direction.SOUTH, DoorHinge.LEFT, true, variantSingleBottomRight.apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(false, DoubleBlockHalf.LOWER, Direction.WEST, DoorHinge.LEFT, true, variantSingleBottomRight)
+        .register(false, DoubleBlockHalf.LOWER, Direction.NORTH, DoorHinge.RIGHT, false, variantSingleBottomRight)
+        .register(false, DoubleBlockHalf.LOWER, Direction.EAST, DoorHinge.RIGHT, false, variantSingleBottomRight.apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(false, DoubleBlockHalf.LOWER, Direction.SOUTH, DoorHinge.RIGHT, false, variantSingleBottomRight.apply(ROTATE_Y_180).apply(UV_LOCK))
+        .register(false, DoubleBlockHalf.LOWER, Direction.WEST, DoorHinge.RIGHT, false, variantSingleBottomRight.apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(false, DoubleBlockHalf.LOWER, Direction.NORTH, DoorHinge.RIGHT, true, variantSingleBottomLeft.apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(false, DoubleBlockHalf.LOWER, Direction.EAST, DoorHinge.RIGHT, true, variantSingleBottomLeft)
+        .register(false, DoubleBlockHalf.LOWER, Direction.SOUTH, DoorHinge.RIGHT, true, variantSingleBottomLeft.apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(false, DoubleBlockHalf.LOWER, Direction.WEST, DoorHinge.RIGHT, true, variantSingleBottomLeft.apply(ROTATE_Y_180).apply(UV_LOCK))
+        .register(false, DoubleBlockHalf.UPPER, Direction.NORTH, DoorHinge.LEFT, false, variantSingleTopLeft)
+        .register(false, DoubleBlockHalf.UPPER, Direction.EAST, DoorHinge.LEFT, false, variantSingleTopLeft.apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(false, DoubleBlockHalf.UPPER, Direction.SOUTH, DoorHinge.LEFT, false, variantSingleTopLeft.apply(ROTATE_Y_180).apply(UV_LOCK))
+        .register(false, DoubleBlockHalf.UPPER, Direction.WEST, DoorHinge.LEFT, false, variantSingleTopLeft.apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(false, DoubleBlockHalf.UPPER, Direction.NORTH, DoorHinge.LEFT, true, variantSingleTopRight.apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(false, DoubleBlockHalf.UPPER, Direction.EAST, DoorHinge.LEFT, true, variantSingleTopRight.apply(ROTATE_Y_180).apply(UV_LOCK))
+        .register(false, DoubleBlockHalf.UPPER, Direction.SOUTH, DoorHinge.LEFT, true, variantSingleTopRight.apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(false, DoubleBlockHalf.UPPER, Direction.WEST, DoorHinge.LEFT, true, variantSingleTopRight)
+        .register(false, DoubleBlockHalf.UPPER, Direction.NORTH, DoorHinge.RIGHT, false, variantSingleTopRight)
+        .register(false, DoubleBlockHalf.UPPER, Direction.EAST, DoorHinge.RIGHT, false, variantSingleTopRight.apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(false, DoubleBlockHalf.UPPER, Direction.SOUTH, DoorHinge.RIGHT, false, variantSingleTopRight.apply(ROTATE_Y_180).apply(UV_LOCK))
+        .register(false, DoubleBlockHalf.UPPER, Direction.WEST, DoorHinge.RIGHT, false, variantSingleTopRight.apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(false, DoubleBlockHalf.UPPER, Direction.NORTH, DoorHinge.RIGHT, true, variantSingleTopLeft.apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(false, DoubleBlockHalf.UPPER, Direction.EAST, DoorHinge.RIGHT, true, variantSingleTopLeft)
+        .register(false, DoubleBlockHalf.UPPER, Direction.SOUTH, DoorHinge.RIGHT, true, variantSingleTopLeft.apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(false, DoubleBlockHalf.UPPER, Direction.WEST, DoorHinge.RIGHT, true, variantSingleTopLeft.apply(ROTATE_Y_180).apply(UV_LOCK))
+        .register(true, DoubleBlockHalf.LOWER, Direction.NORTH, DoorHinge.LEFT, false, variantDoubleBottomLeft)
+        .register(true, DoubleBlockHalf.LOWER, Direction.EAST, DoorHinge.LEFT, false, variantDoubleBottomLeft.apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(true, DoubleBlockHalf.LOWER, Direction.SOUTH, DoorHinge.LEFT, false, variantDoubleBottomLeft.apply(ROTATE_Y_180).apply(UV_LOCK))
+        .register(true, DoubleBlockHalf.LOWER, Direction.WEST, DoorHinge.LEFT, false, variantDoubleBottomLeft.apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(true, DoubleBlockHalf.LOWER, Direction.NORTH, DoorHinge.LEFT, true, variantDoubleBottomRight.apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(true, DoubleBlockHalf.LOWER, Direction.EAST, DoorHinge.LEFT, true, variantDoubleBottomRight.apply(ROTATE_Y_180).apply(UV_LOCK))
+        .register(true, DoubleBlockHalf.LOWER, Direction.SOUTH, DoorHinge.LEFT, true, variantDoubleBottomRight.apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(true, DoubleBlockHalf.LOWER, Direction.WEST, DoorHinge.LEFT, true, variantDoubleBottomRight)
+        .register(true, DoubleBlockHalf.LOWER, Direction.NORTH, DoorHinge.RIGHT, false, variantDoubleBottomRight)
+        .register(true, DoubleBlockHalf.LOWER, Direction.EAST, DoorHinge.RIGHT, false, variantDoubleBottomRight.apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(true, DoubleBlockHalf.LOWER, Direction.SOUTH, DoorHinge.RIGHT, false, variantDoubleBottomRight.apply(ROTATE_Y_180).apply(UV_LOCK))
+        .register(true, DoubleBlockHalf.LOWER, Direction.WEST, DoorHinge.RIGHT, false, variantDoubleBottomRight.apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(true, DoubleBlockHalf.LOWER, Direction.NORTH, DoorHinge.RIGHT, true, variantDoubleBottomLeft.apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(true, DoubleBlockHalf.LOWER, Direction.EAST, DoorHinge.RIGHT, true, variantDoubleBottomLeft)
+        .register(true, DoubleBlockHalf.LOWER, Direction.SOUTH, DoorHinge.RIGHT, true, variantDoubleBottomLeft.apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(true, DoubleBlockHalf.LOWER, Direction.WEST, DoorHinge.RIGHT, true, variantDoubleBottomLeft.apply(ROTATE_Y_180).apply(UV_LOCK))
+        .register(true, DoubleBlockHalf.UPPER, Direction.NORTH, DoorHinge.LEFT, false, variantDoubleTopLeft)
+        .register(true, DoubleBlockHalf.UPPER, Direction.EAST, DoorHinge.LEFT, false, variantDoubleTopLeft.apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(true, DoubleBlockHalf.UPPER, Direction.SOUTH, DoorHinge.LEFT, false, variantDoubleTopLeft.apply(ROTATE_Y_180).apply(UV_LOCK))
+        .register(true, DoubleBlockHalf.UPPER, Direction.WEST, DoorHinge.LEFT, false, variantDoubleTopLeft.apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(true, DoubleBlockHalf.UPPER, Direction.NORTH, DoorHinge.LEFT, true, variantDoubleTopRight.apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(true, DoubleBlockHalf.UPPER, Direction.EAST, DoorHinge.LEFT, true, variantDoubleTopRight.apply(ROTATE_Y_180).apply(UV_LOCK))
+        .register(true, DoubleBlockHalf.UPPER, Direction.SOUTH, DoorHinge.LEFT, true, variantDoubleTopRight.apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(true, DoubleBlockHalf.UPPER, Direction.WEST, DoorHinge.LEFT, true, variantDoubleTopRight)
+        .register(true, DoubleBlockHalf.UPPER, Direction.NORTH, DoorHinge.RIGHT, false, variantDoubleTopRight)
+        .register(true, DoubleBlockHalf.UPPER, Direction.EAST, DoorHinge.RIGHT, false, variantDoubleTopRight.apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(true, DoubleBlockHalf.UPPER, Direction.SOUTH, DoorHinge.RIGHT, false, variantDoubleTopRight.apply(ROTATE_Y_180).apply(UV_LOCK))
+        .register(true, DoubleBlockHalf.UPPER, Direction.WEST, DoorHinge.RIGHT, false, variantDoubleTopRight.apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(true, DoubleBlockHalf.UPPER, Direction.NORTH, DoorHinge.RIGHT, true, variantDoubleTopLeft.apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(true, DoubleBlockHalf.UPPER, Direction.EAST, DoorHinge.RIGHT, true, variantDoubleTopLeft)
+        .register(true, DoubleBlockHalf.UPPER, Direction.SOUTH, DoorHinge.RIGHT, true, variantDoubleTopLeft.apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(true, DoubleBlockHalf.UPPER, Direction.WEST, DoorHinge.RIGHT, true, variantDoubleTopLeft.apply(ROTATE_Y_180).apply(UV_LOCK))
     ));
-    Identifier inventoryModel = createObjectModel(block, "simple_item", "/item", Map.of(
-        TextureKey.TEXTURE, textureMap.get(TextureKey.TEXTURE), TextureKey.PARTICLE, textureMap.get(TextureKey.TEXTURE)
-    ));
+    Identifier inventoryModel = createObjectModel(block, "simple_item", "/item", textureMapItem);
     this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModels.basic(inventoryModel));
   }
 
-  private void registerMetalLadderBlock(Block block, Map<TextureKey, String> textureMap) {
-    WeightedVariant variant = createWeightedVariant(createObjectModel(block, "metal_ladder", "/block", Map.of(
-        TextureKey.BOTTOM, textureMap.get(TextureKey.BOTTOM), DistantMoonsTextureKeys.DETAIL, textureMap.get(DistantMoonsTextureKeys.DETAIL), TextureKey.SIDE, textureMap.get(TextureKey.SIDE), DistantMoonsTextureKeys.SUPPORT, textureMap.get(DistantMoonsTextureKeys.SUPPORT), TextureKey.TOP, textureMap.get(TextureKey.TOP), TextureKey.PARTICLE, textureMap.get(TextureKey.SIDE)
-    )));
+  private void registerMetalLadderBlock(Block block, Map<TextureKey, String> rawTextureMap) {
+    Map<TextureKey, String> textureMapBlock = Map.of(TextureKey.BOTTOM, rawTextureMap.get(TextureKey.BOTTOM), DistantMoonsTextureKeys.DETAIL, rawTextureMap.get(DistantMoonsTextureKeys.DETAIL), TextureKey.SIDE, rawTextureMap.get(TextureKey.SIDE), DistantMoonsTextureKeys.SUPPORT, rawTextureMap.get(DistantMoonsTextureKeys.SUPPORT), TextureKey.TOP, rawTextureMap.get(TextureKey.TOP), TextureKey.PARTICLE, rawTextureMap.get(TextureKey.SIDE));
+    Map<TextureKey, String> textureMapItem = Map.of(TextureKey.TEXTURE, rawTextureMap.get(TextureKey.TEXTURE), TextureKey.PARTICLE, rawTextureMap.get(TextureKey.TEXTURE));
+    WeightedVariant variant = createWeightedVariant(createObjectModel(block, "metal_ladder", "/block", textureMapBlock));
     this.blockGenerator.blockStateCollector.accept(VariantsBlockModelDefinitionCreator.of(block).with(BlockStateVariantMap
         .models(LadderBlock.FACING)
         .register(Direction.NORTH, variant)
@@ -639,332 +604,289 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
         .register(Direction.SOUTH, variant.apply(ROTATE_Y_180))
         .register(Direction.WEST, variant.apply(ROTATE_Y_270))
     ));
-    Identifier inventoryModel = createObjectModel(block, "simple_item", "/item", Map.of(
-        TextureKey.TEXTURE, textureMap.get(TextureKey.TEXTURE), TextureKey.PARTICLE, textureMap.get(TextureKey.TEXTURE)
-    ));
+    Identifier inventoryModel = createObjectModel(block, "simple_item", "/item", textureMapItem);
     this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModels.basic(inventoryModel));
   }
 
-  private void registerSimplePillarSlabBlock(Block block, Map<TextureKey, String> textureMap) {
-    Map<TextureKey, String> assembledTextureMap = Map.of(
-        TextureKey.END, textureMap.get(TextureKey.END), TextureKey.SIDE, textureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, textureMap.get(TextureKey.SIDE)
-    );
-    WeightedVariant bottom = createWeightedVariant(createObjectModel(block, "slab/pillar/vertical/bottom", "/bottom_vertical", assembledTextureMap));
-    WeightedVariant doubleSlab = createWeightedVariant(createObjectModel(block, "pillar/vertical", "/double_vertical", assembledTextureMap));
-    WeightedVariant top = createWeightedVariant(createObjectModel(block, "slab/pillar/vertical/top", "/top_vertical", assembledTextureMap));
+  private void registerSimplePillarSlabBlock(Block block, Map<TextureKey, String> rawTextureMap) {
+    Map<TextureKey, String> textureMap = Map.of(TextureKey.END, rawTextureMap.get(TextureKey.END), TextureKey.SIDE, rawTextureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, rawTextureMap.get(TextureKey.SIDE));
+    WeightedVariant variantBottom = createWeightedVariant(createObjectModel(block, "slab/pillar/vertical/variantBottom", "/bottom_vertical", textureMap));
+    WeightedVariant variantDouble = createWeightedVariant(createObjectModel(block, "pillar/vertical", "/double_vertical", textureMap));
+    WeightedVariant variantTop = createWeightedVariant(createObjectModel(block, "slab/pillar/vertical/variantTop", "/top_vertical", textureMap));
     this.blockGenerator.blockStateCollector.accept(VariantsBlockModelDefinitionCreator.of(block).with(BlockStateVariantMap
         .models(PillarSlabBlock.AXIS, PillarSlabBlock.TYPE)
-        .register(Direction.Axis.X, SlabType.BOTTOM, bottom.apply(ROTATE_X_90).apply(ROTATE_Y_90))
-        .register(Direction.Axis.X, SlabType.DOUBLE, doubleSlab.apply(ROTATE_X_90).apply(ROTATE_Y_90))
-        .register(Direction.Axis.X, SlabType.TOP, top.apply(ROTATE_X_90).apply(ROTATE_Y_90))
-        .register(Direction.Axis.Y, SlabType.BOTTOM, bottom)
-        .register(Direction.Axis.Y, SlabType.DOUBLE, doubleSlab)
-        .register(Direction.Axis.Y, SlabType.TOP, top)
-        .register(Direction.Axis.Z, SlabType.BOTTOM, bottom.apply(ROTATE_X_90))
-        .register(Direction.Axis.Z, SlabType.DOUBLE, doubleSlab.apply(ROTATE_X_90))
-        .register(Direction.Axis.Z, SlabType.TOP, top.apply(ROTATE_X_90))
+        .register(Direction.Axis.X, SlabType.BOTTOM, variantBottom.apply(ROTATE_X_90).apply(ROTATE_Y_90))
+        .register(Direction.Axis.X, SlabType.DOUBLE, variantDouble.apply(ROTATE_X_90).apply(ROTATE_Y_90))
+        .register(Direction.Axis.X, SlabType.TOP, variantTop.apply(ROTATE_X_90).apply(ROTATE_Y_90))
+        .register(Direction.Axis.Y, SlabType.BOTTOM, variantBottom)
+        .register(Direction.Axis.Y, SlabType.DOUBLE, variantDouble)
+        .register(Direction.Axis.Y, SlabType.TOP, variantTop)
+        .register(Direction.Axis.Z, SlabType.BOTTOM, variantBottom.apply(ROTATE_X_90))
+        .register(Direction.Axis.Z, SlabType.DOUBLE, variantDouble.apply(ROTATE_X_90))
+        .register(Direction.Axis.Z, SlabType.TOP, variantTop.apply(ROTATE_X_90))
     ));
-    this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModels.basic(bottom.variants().getEntries().getFirst().value().modelId()));
+    this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModels.basic(variantBottom.variants().getEntries().getFirst().value().modelId()));
   }
 
-  private void registerAxisPillarSlabBlock(Block block, Map<TextureKey, String> textureMap) {
-    Map<TextureKey, String> assembledTextureMap = Map.of(
-        TextureKey.END, textureMap.get(TextureKey.END), TextureKey.SIDE, textureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, textureMap.get(TextureKey.SIDE)
-    );
-    WeightedVariant bottomX = createWeightedVariant(createObjectModel(block, "slab/pillar/west", "/bottom_x", assembledTextureMap));
-    WeightedVariant bottomY = createWeightedVariant(createObjectModel(block, "slab/pillar/vertical/bottom", "/bottom_y", assembledTextureMap));
-    WeightedVariant bottomZ = createWeightedVariant(createObjectModel(block, "slab/pillar/south", "/bottom_z", assembledTextureMap));
-    WeightedVariant doubleX = createWeightedVariant(createObjectModel(block, "pillar/axis_x", "/double_x", assembledTextureMap));
-    WeightedVariant doubleY = createWeightedVariant(createObjectModel(block, "pillar/vertical", "/double_y", assembledTextureMap));
-    WeightedVariant doubleZ = createWeightedVariant(createObjectModel(block, "pillar/axis_z", "/double_z", assembledTextureMap));
-    WeightedVariant topX = createWeightedVariant(createObjectModel(block, "slab/pillar/east", "/top_x", assembledTextureMap));
-    WeightedVariant topY = createWeightedVariant(createObjectModel(block, "slab/pillar/vertical/top", "/top_y", assembledTextureMap));
-    WeightedVariant topZ = createWeightedVariant(createObjectModel(block, "slab/pillar/north", "/top_z", assembledTextureMap));
+  private void registerAxisPillarSlabBlock(Block block, Map<TextureKey, String> rawTextureMap) {
+    Map<TextureKey, String> textureMap = Map.of(TextureKey.END, rawTextureMap.get(TextureKey.END), TextureKey.SIDE, rawTextureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, rawTextureMap.get(TextureKey.SIDE));
+    WeightedVariant variantBottomX = createWeightedVariant(createObjectModel(block, "slab/pillar/west", "/bottom_x", textureMap));
+    WeightedVariant variantBottomY = createWeightedVariant(createObjectModel(block, "slab/pillar/vertical/variantBottom", "/bottom_y", textureMap));
+    WeightedVariant variantBottomZ = createWeightedVariant(createObjectModel(block, "slab/pillar/south", "/bottom_z", textureMap));
+    WeightedVariant variantDoubleX = createWeightedVariant(createObjectModel(block, "pillar/axis_x", "/double_x", textureMap));
+    WeightedVariant variantDoubleY = createWeightedVariant(createObjectModel(block, "pillar/vertical", "/double_y", textureMap));
+    WeightedVariant variantDoubleZ = createWeightedVariant(createObjectModel(block, "pillar/axis_z", "/double_z", textureMap));
+    WeightedVariant variantTopX = createWeightedVariant(createObjectModel(block, "slab/pillar/east", "/top_x", textureMap));
+    WeightedVariant variantTopY = createWeightedVariant(createObjectModel(block, "slab/pillar/vertical/variantTop", "/top_y", textureMap));
+    WeightedVariant variantTopZ = createWeightedVariant(createObjectModel(block, "slab/pillar/north", "/top_z", textureMap));
     this.blockGenerator.blockStateCollector.accept(VariantsBlockModelDefinitionCreator.of(block).with(BlockStateVariantMap
         .models(PillarSlabBlock.AXIS, PillarSlabBlock.TYPE)
-        .register(Direction.Axis.X, SlabType.BOTTOM, bottomX)
-        .register(Direction.Axis.X, SlabType.DOUBLE, doubleX)
-        .register(Direction.Axis.X, SlabType.TOP, topX)
-        .register(Direction.Axis.Y, SlabType.BOTTOM, bottomY)
-        .register(Direction.Axis.Y, SlabType.DOUBLE, doubleY)
-        .register(Direction.Axis.Y, SlabType.TOP, topY)
-        .register(Direction.Axis.Z, SlabType.BOTTOM, bottomZ)
-        .register(Direction.Axis.Z, SlabType.DOUBLE, doubleZ)
-        .register(Direction.Axis.Z, SlabType.TOP, topZ)
+        .register(Direction.Axis.X, SlabType.BOTTOM, variantBottomX)
+        .register(Direction.Axis.X, SlabType.DOUBLE, variantDoubleX)
+        .register(Direction.Axis.X, SlabType.TOP, variantTopX)
+        .register(Direction.Axis.Y, SlabType.BOTTOM, variantBottomY)
+        .register(Direction.Axis.Y, SlabType.DOUBLE, variantDoubleY)
+        .register(Direction.Axis.Y, SlabType.TOP, variantTopY)
+        .register(Direction.Axis.Z, SlabType.BOTTOM, variantBottomZ)
+        .register(Direction.Axis.Z, SlabType.DOUBLE, variantDoubleZ)
+        .register(Direction.Axis.Z, SlabType.TOP, variantTopZ)
     ));
-    this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModels.basic(bottomY.variants().getEntries().getFirst().value().modelId()));
+    this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModels.basic(variantBottomY.variants().getEntries().getFirst().value().modelId()));
   }
 
-  private void registerHorizontalPillarSlabBlock(Block block, Map<TextureKey, String> textureMap) {
-    Map<TextureKey, String> assembledTextureMap = Map.of(
-        TextureKey.END, textureMap.get(TextureKey.END), TextureKey.SIDE, textureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, textureMap.get(TextureKey.SIDE)
-    );
-    WeightedVariant bottomHorizontal = createWeightedVariant(createObjectModel(block, "slab/pillar/horizontal/bottom", "/bottom_horizontal", assembledTextureMap));
-    WeightedVariant bottomVertical = createWeightedVariant(createObjectModel(block, "slab/pillar/vertical/bottom", "/bottom_vertical", assembledTextureMap));
-    WeightedVariant doubleHorizontal = createWeightedVariant(createObjectModel(block, "pillar/horizontal", "/double_horizontal", assembledTextureMap));
-    WeightedVariant doubleVertical = createWeightedVariant(createObjectModel(block, "pillar/vertical", "/double_vertical", assembledTextureMap));
-    WeightedVariant topHorizontal = createWeightedVariant(createObjectModel(block, "slab/pillar/horizontal/top", "/top_horizontal", assembledTextureMap));
-    WeightedVariant topVertical = createWeightedVariant(createObjectModel(block, "slab/pillar/vertical/top", "/top_vertical", assembledTextureMap));
+  private void registerHorizontalPillarSlabBlock(Block block, Map<TextureKey, String> rawTextureMap) {
+    Map<TextureKey, String> textureMap = Map.of(TextureKey.END, rawTextureMap.get(TextureKey.END), TextureKey.SIDE, rawTextureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, rawTextureMap.get(TextureKey.SIDE));
+    WeightedVariant variantBottomHorizontal = createWeightedVariant(createObjectModel(block, "slab/pillar/horizontal/variantBottom", "/bottom_horizontal", textureMap));
+    WeightedVariant variantBottomVertical = createWeightedVariant(createObjectModel(block, "slab/pillar/vertical/variantBottom", "/bottom_vertical", textureMap));
+    WeightedVariant variantDoubleHorizontal = createWeightedVariant(createObjectModel(block, "pillar/horizontal", "/double_horizontal", textureMap));
+    WeightedVariant variantDoubleVertical = createWeightedVariant(createObjectModel(block, "pillar/vertical", "/double_vertical", textureMap));
+    WeightedVariant variantTopHorizontal = createWeightedVariant(createObjectModel(block, "slab/pillar/horizontal/variantTop", "/top_horizontal", textureMap));
+    WeightedVariant variantTopVertical = createWeightedVariant(createObjectModel(block, "slab/pillar/vertical/variantTop", "/top_vertical", textureMap));
     this.blockGenerator.blockStateCollector.accept(VariantsBlockModelDefinitionCreator.of(block).with(BlockStateVariantMap
         .models(PillarSlabBlock.AXIS, PillarSlabBlock.TYPE)
-        .register(Direction.Axis.X, SlabType.BOTTOM, bottomHorizontal.apply(ROTATE_X_90).apply(ROTATE_Y_90))
-        .register(Direction.Axis.X, SlabType.DOUBLE, doubleHorizontal.apply(ROTATE_X_90).apply(ROTATE_Y_90))
-        .register(Direction.Axis.X, SlabType.TOP, topHorizontal.apply(ROTATE_X_90).apply(ROTATE_Y_90))
-        .register(Direction.Axis.Y, SlabType.BOTTOM, bottomVertical)
-        .register(Direction.Axis.Y, SlabType.DOUBLE, doubleVertical)
-        .register(Direction.Axis.Y, SlabType.TOP, topVertical)
-        .register(Direction.Axis.Z, SlabType.BOTTOM, bottomHorizontal.apply(ROTATE_X_90))
-        .register(Direction.Axis.Z, SlabType.DOUBLE, doubleHorizontal.apply(ROTATE_X_90))
-        .register(Direction.Axis.Z, SlabType.TOP, topHorizontal.apply(ROTATE_X_90))
+        .register(Direction.Axis.X, SlabType.BOTTOM, variantBottomHorizontal.apply(ROTATE_X_90).apply(ROTATE_Y_90))
+        .register(Direction.Axis.X, SlabType.DOUBLE, variantDoubleHorizontal.apply(ROTATE_X_90).apply(ROTATE_Y_90))
+        .register(Direction.Axis.X, SlabType.TOP, variantTopHorizontal.apply(ROTATE_X_90).apply(ROTATE_Y_90))
+        .register(Direction.Axis.Y, SlabType.BOTTOM, variantBottomVertical)
+        .register(Direction.Axis.Y, SlabType.DOUBLE, variantDoubleVertical)
+        .register(Direction.Axis.Y, SlabType.TOP, variantTopVertical)
+        .register(Direction.Axis.Z, SlabType.BOTTOM, variantBottomHorizontal.apply(ROTATE_X_90))
+        .register(Direction.Axis.Z, SlabType.DOUBLE, variantDoubleHorizontal.apply(ROTATE_X_90))
+        .register(Direction.Axis.Z, SlabType.TOP, variantTopHorizontal.apply(ROTATE_X_90))
     ));
-    this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModels.basic(bottomHorizontal.variants().getEntries().getFirst().value().modelId()));
+    this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModels.basic(variantBottomHorizontal.variants().getEntries().getFirst().value().modelId()));
   }
 
-  private void registerPoleBlock(Block block, Map<TextureKey, String> textureMap, String parentType) {
-    WeightedVariant centerX = createWeightedVariant(createObjectModel(block, parentType + "/center_x", "/center_x", Map.of(
-        TextureKey.END, textureMap.get(TextureKey.END), DistantMoonsTextureKeys.HORIZONTAL, textureMap.get(DistantMoonsTextureKeys.HORIZONTAL), TextureKey.PARTICLE, textureMap.get(DistantMoonsTextureKeys.VERTICAL)
-    )));
-    WeightedVariant centerY = createWeightedVariant(createObjectModel(block, parentType + "/center_y", "/center_y", Map.of(
-        TextureKey.END, textureMap.get(TextureKey.END), DistantMoonsTextureKeys.VERTICAL, textureMap.get(DistantMoonsTextureKeys.VERTICAL), TextureKey.PARTICLE, textureMap.get(DistantMoonsTextureKeys.VERTICAL)
-    )));
-    WeightedVariant centerZ = createWeightedVariant(createObjectModel(block, parentType + "/center_z", "/center_z", Map.of(
-        TextureKey.END, textureMap.get(TextureKey.END), DistantMoonsTextureKeys.HORIZONTAL, textureMap.get(DistantMoonsTextureKeys.HORIZONTAL), DistantMoonsTextureKeys.VERTICAL, textureMap.get(DistantMoonsTextureKeys.VERTICAL), TextureKey.PARTICLE, textureMap.get(DistantMoonsTextureKeys.VERTICAL)
-    )));
-    WeightedVariant extensionX = createWeightedVariant(createObjectModel(block, parentType + "/extension_x", "/extension_x", Map.of(
-        TextureKey.END, textureMap.get(TextureKey.END), DistantMoonsTextureKeys.HORIZONTAL, textureMap.get(DistantMoonsTextureKeys.HORIZONTAL), TextureKey.PARTICLE, textureMap.get(DistantMoonsTextureKeys.VERTICAL)
-    )));
-    WeightedVariant extensionY = createWeightedVariant(createObjectModel(block, parentType + "/extension_y", "/extension_y", Map.of(
-        TextureKey.END, textureMap.get(TextureKey.END), DistantMoonsTextureKeys.VERTICAL, textureMap.get(DistantMoonsTextureKeys.VERTICAL), TextureKey.PARTICLE, textureMap.get(DistantMoonsTextureKeys.VERTICAL)
-    )));
-    WeightedVariant extensionZ = createWeightedVariant(createObjectModel(block, parentType + "/extension_z", "/extension_z", Map.of(
-        TextureKey.END, textureMap.get(TextureKey.END), DistantMoonsTextureKeys.HORIZONTAL, textureMap.get(DistantMoonsTextureKeys.HORIZONTAL), DistantMoonsTextureKeys.VERTICAL, textureMap.get(DistantMoonsTextureKeys.VERTICAL), TextureKey.PARTICLE, textureMap.get(DistantMoonsTextureKeys.VERTICAL)
-    )));
+  private void registerPoleBlock(Block block, Map<TextureKey, String> rawTextureMap, String parentType) {
+    Map<TextureKey, String> textureMapX = Map.of(TextureKey.END, rawTextureMap.get(TextureKey.END), DistantMoonsTextureKeys.HORIZONTAL, rawTextureMap.get(DistantMoonsTextureKeys.HORIZONTAL), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL));
+    Map<TextureKey, String> textureMapY = Map.of(TextureKey.END, rawTextureMap.get(TextureKey.END), DistantMoonsTextureKeys.VERTICAL, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL));
+    Map<TextureKey, String> textureMapZ = Map.of(TextureKey.END, rawTextureMap.get(TextureKey.END), DistantMoonsTextureKeys.HORIZONTAL, rawTextureMap.get(DistantMoonsTextureKeys.HORIZONTAL), DistantMoonsTextureKeys.VERTICAL, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL));
+    WeightedVariant variantCenterX = createWeightedVariant(createObjectModel(block, parentType + "/center_x", "/center_x", textureMapX));
+    WeightedVariant variantCenterY = createWeightedVariant(createObjectModel(block, parentType + "/center_y", "/center_y", textureMapY));
+    WeightedVariant variantCenterZ = createWeightedVariant(createObjectModel(block, parentType + "/center_z", "/center_z", textureMapZ));
+    WeightedVariant variantExtensionX = createWeightedVariant(createObjectModel(block, parentType + "/extension_x", "/extension_x", textureMapX));
+    WeightedVariant variantExtensionY = createWeightedVariant(createObjectModel(block, parentType + "/extension_y", "/extension_y", textureMapY));
+    WeightedVariant variantExtensionZ = createWeightedVariant(createObjectModel(block, parentType + "/extension_z", "/extension_z", textureMapZ));
     this.blockGenerator.blockStateCollector.accept(MultipartBlockModelDefinitionCreator.create(block)
-        .with(new MultipartModelConditionBuilder().put(PoleBlock.AXIS, Direction.Axis.X), centerX.apply(ROTATE_X_90).apply(ROTATE_Y_90).apply(UV_LOCK))
-        .with(new MultipartModelConditionBuilder().put(PoleBlock.AXIS, Direction.Axis.Y), centerY)
-        .with(new MultipartModelConditionBuilder().put(PoleBlock.AXIS, Direction.Axis.Z), centerZ.apply(ROTATE_X_90).apply(UV_LOCK))
-        .with(new MultipartModelConditionBuilder().put(PoleBlock.AXIS, Direction.Axis.X).put(PoleBlock.UP, true), extensionX.apply(ROTATE_X_90).apply(ROTATE_Y_90).apply(UV_LOCK))
-        .with(new MultipartModelConditionBuilder().put(PoleBlock.AXIS, Direction.Axis.Y).put(PoleBlock.UP, true), extensionY)
-        .with(new MultipartModelConditionBuilder().put(PoleBlock.AXIS, Direction.Axis.Z).put(PoleBlock.UP, true), extensionZ.apply(ROTATE_X_90).apply(UV_LOCK))
-        .with(new MultipartModelConditionBuilder().put(PoleBlock.AXIS, Direction.Axis.X).put(PoleBlock.DOWN, true), extensionX.apply(ROTATE_X_270).apply(ROTATE_Y_90).apply(UV_LOCK))
-        .with(new MultipartModelConditionBuilder().put(PoleBlock.AXIS, Direction.Axis.Y).put(PoleBlock.DOWN, true), extensionY.apply(ROTATE_X_180).apply(UV_LOCK))
-        .with(new MultipartModelConditionBuilder().put(PoleBlock.AXIS, Direction.Axis.Z).put(PoleBlock.DOWN, true), extensionZ.apply(ROTATE_X_270).apply(UV_LOCK))
+        .with(new MultipartModelConditionBuilder().put(PoleBlock.AXIS, Direction.Axis.X), variantCenterX.apply(ROTATE_X_90).apply(ROTATE_Y_90).apply(UV_LOCK))
+        .with(new MultipartModelConditionBuilder().put(PoleBlock.AXIS, Direction.Axis.Y), variantCenterY)
+        .with(new MultipartModelConditionBuilder().put(PoleBlock.AXIS, Direction.Axis.Z), variantCenterZ.apply(ROTATE_X_90).apply(UV_LOCK))
+        .with(new MultipartModelConditionBuilder().put(PoleBlock.AXIS, Direction.Axis.X).put(PoleBlock.UP, true), variantExtensionX.apply(ROTATE_X_90).apply(ROTATE_Y_90).apply(UV_LOCK))
+        .with(new MultipartModelConditionBuilder().put(PoleBlock.AXIS, Direction.Axis.Y).put(PoleBlock.UP, true), variantExtensionY)
+        .with(new MultipartModelConditionBuilder().put(PoleBlock.AXIS, Direction.Axis.Z).put(PoleBlock.UP, true), variantExtensionZ.apply(ROTATE_X_90).apply(UV_LOCK))
+        .with(new MultipartModelConditionBuilder().put(PoleBlock.AXIS, Direction.Axis.X).put(PoleBlock.DOWN, true), variantExtensionX.apply(ROTATE_X_270).apply(ROTATE_Y_90).apply(UV_LOCK))
+        .with(new MultipartModelConditionBuilder().put(PoleBlock.AXIS, Direction.Axis.Y).put(PoleBlock.DOWN, true), variantExtensionY.apply(ROTATE_X_180).apply(UV_LOCK))
+        .with(new MultipartModelConditionBuilder().put(PoleBlock.AXIS, Direction.Axis.Z).put(PoleBlock.DOWN, true), variantExtensionZ.apply(ROTATE_X_270).apply(UV_LOCK))
     );
-    this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModels.basic(centerY.variants().getEntries().getFirst().value().modelId()));
+    this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModels.basic(variantCenterY.variants().getEntries().getFirst().value().modelId()));
   }
 
-  private void registerSpikedFenceBlock(Block block, Map<TextureKey, String> textureMap) {
-    WeightedVariant pole = createWeightedVariant(createObjectModel(block, "spiked_fence/pole", "/pole", Map.of(
-        TextureKey.BOTTOM, textureMap.get(TextureKey.BOTTOM), TextureKey.SIDE, textureMap.get(TextureKey.SIDE), TextureKey.TOP, textureMap.get(TextureKey.BOTTOM), TextureKey.PARTICLE, textureMap.get(TextureKey.SIDE)
-    )));
-    WeightedVariant topPole = createWeightedVariant(createObjectModel(block, "spiked_fence/pole", "/top_pole", Map.of(
-        TextureKey.BOTTOM, textureMap.get(TextureKey.BOTTOM), TextureKey.SIDE, textureMap.get(DistantMoonsTextureKeys.SIDE_TOP), TextureKey.TOP, textureMap.get(TextureKey.TOP), TextureKey.PARTICLE, textureMap.get(DistantMoonsTextureKeys.SIDE_TOP)
-    )));
-    WeightedVariant side = createWeightedVariant(createObjectModel(block, "spiked_fence/side", "/side", Map.of(
-        TextureKey.SIDE, textureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, textureMap.get(TextureKey.SIDE)
-    )));
-    WeightedVariant topSide = createWeightedVariant(createObjectModel(block, "spiked_fence/side", "/top_side", Map.of(
-        TextureKey.SIDE, textureMap.get(DistantMoonsTextureKeys.SIDE_TOP), TextureKey.PARTICLE, textureMap.get(DistantMoonsTextureKeys.SIDE_TOP)
-    )));
+  private void registerSpikedFenceBlock(Block block, Map<TextureKey, String> rawTextureMap) {
+    Map<TextureKey, String> textureMapPole = Map.of(TextureKey.BOTTOM, rawTextureMap.get(TextureKey.BOTTOM), TextureKey.SIDE, rawTextureMap.get(TextureKey.SIDE), TextureKey.TOP, rawTextureMap.get(TextureKey.BOTTOM), TextureKey.PARTICLE, rawTextureMap.get(TextureKey.SIDE));
+    Map<TextureKey, String> textureMapSide = Map.of(TextureKey.SIDE, rawTextureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, rawTextureMap.get(TextureKey.SIDE));
+    Map<TextureKey, String> textureMapTopPole = Map.of(TextureKey.BOTTOM, rawTextureMap.get(TextureKey.BOTTOM), TextureKey.SIDE, rawTextureMap.get(DistantMoonsTextureKeys.SIDE_TOP), TextureKey.TOP, rawTextureMap.get(TextureKey.TOP), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.SIDE_TOP));
+    Map<TextureKey, String> textureMapTopSide = Map.of(TextureKey.SIDE, rawTextureMap.get(DistantMoonsTextureKeys.SIDE_TOP), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.SIDE_TOP));
+    Map<TextureKey, String> textureMapItem = Map.of(TextureKey.BOTTOM, rawTextureMap.get(TextureKey.BOTTOM), DistantMoonsTextureKeys.LOWER_SIDE, rawTextureMap.get(TextureKey.SIDE), TextureKey.TOP, rawTextureMap.get(TextureKey.TOP), DistantMoonsTextureKeys.UPPER_SIDE, rawTextureMap.get(DistantMoonsTextureKeys.SIDE_TOP), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.SIDE_TOP));
+    WeightedVariant variantPole = createWeightedVariant(createObjectModel(block, "spiked_fence/variantPole", "/variantPole", textureMapPole));
+    WeightedVariant variantSide = createWeightedVariant(createObjectModel(block, "spiked_fence/variantSide", "/variantSide", textureMapSide));
+    WeightedVariant variantTopPole = createWeightedVariant(createObjectModel(block, "spiked_fence/variantPole", "/top_pole", textureMapTopPole));
+    WeightedVariant variantTopSide = createWeightedVariant(createObjectModel(block, "spiked_fence/variantSide", "/top_side", textureMapTopSide));
     this.blockGenerator.blockStateCollector.accept(MultipartBlockModelDefinitionCreator.create(block)
-        .with(new MultipartModelConditionBuilder().put(SpikedFenceBlock.TOP, false), pole)
-        .with(new MultipartModelConditionBuilder().put(SpikedFenceBlock.TOP, true), topPole)
-        .with(new MultipartModelConditionBuilder().put(SpikedFenceBlock.NORTH, SpikedFenceShape.SIDE), side)
-        .with(new MultipartModelConditionBuilder().put(SpikedFenceBlock.EAST, SpikedFenceShape.SIDE), side.apply(ROTATE_Y_90))
-        .with(new MultipartModelConditionBuilder().put(SpikedFenceBlock.SOUTH, SpikedFenceShape.SIDE), side.apply(ROTATE_Y_180))
-        .with(new MultipartModelConditionBuilder().put(SpikedFenceBlock.WEST, SpikedFenceShape.SIDE), side.apply(ROTATE_Y_270))
-        .with(new MultipartModelConditionBuilder().put(SpikedFenceBlock.NORTH, SpikedFenceShape.TOP), topSide)
-        .with(new MultipartModelConditionBuilder().put(SpikedFenceBlock.EAST, SpikedFenceShape.TOP), topSide.apply(ROTATE_Y_90))
-        .with(new MultipartModelConditionBuilder().put(SpikedFenceBlock.SOUTH, SpikedFenceShape.TOP), topSide.apply(ROTATE_Y_180))
-        .with(new MultipartModelConditionBuilder().put(SpikedFenceBlock.WEST, SpikedFenceShape.TOP), topSide.apply(ROTATE_Y_270))
+        .with(new MultipartModelConditionBuilder().put(SpikedFenceBlock.TOP, false), variantPole)
+        .with(new MultipartModelConditionBuilder().put(SpikedFenceBlock.TOP, true), variantTopPole)
+        .with(new MultipartModelConditionBuilder().put(SpikedFenceBlock.NORTH, SpikedFenceShape.SIDE), variantSide)
+        .with(new MultipartModelConditionBuilder().put(SpikedFenceBlock.EAST, SpikedFenceShape.SIDE), variantSide.apply(ROTATE_Y_90))
+        .with(new MultipartModelConditionBuilder().put(SpikedFenceBlock.SOUTH, SpikedFenceShape.SIDE), variantSide.apply(ROTATE_Y_180))
+        .with(new MultipartModelConditionBuilder().put(SpikedFenceBlock.WEST, SpikedFenceShape.SIDE), variantSide.apply(ROTATE_Y_270))
+        .with(new MultipartModelConditionBuilder().put(SpikedFenceBlock.NORTH, SpikedFenceShape.TOP), variantTopSide)
+        .with(new MultipartModelConditionBuilder().put(SpikedFenceBlock.EAST, SpikedFenceShape.TOP), variantTopSide.apply(ROTATE_Y_90))
+        .with(new MultipartModelConditionBuilder().put(SpikedFenceBlock.SOUTH, SpikedFenceShape.TOP), variantTopSide.apply(ROTATE_Y_180))
+        .with(new MultipartModelConditionBuilder().put(SpikedFenceBlock.WEST, SpikedFenceShape.TOP), variantTopSide.apply(ROTATE_Y_270))
     );
-    Identifier inventoryModel = createObjectModel(block, "spiked_fence/item", "/item", Map.of(
-        TextureKey.BOTTOM, textureMap.get(TextureKey.BOTTOM), TextureKey.of("lower_side"), textureMap.get(TextureKey.SIDE), TextureKey.TOP, textureMap.get(TextureKey.TOP), TextureKey.of("upper_side"), textureMap.get(DistantMoonsTextureKeys.SIDE_TOP), TextureKey.PARTICLE, textureMap.get(DistantMoonsTextureKeys.SIDE_TOP)
-    ));
+    Identifier inventoryModel = createObjectModel(block, "spiked_fence/item", "/item", textureMapItem);
     this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModels.basic(inventoryModel));
   }
 
-  private void registerTrapdoorBlock(Block block, boolean orientable, Map<TextureKey, String> textureMap) {
-    Map<TextureKey, String> assembledTextureMap = Map.of(
-        TextureKey.END, textureMap.get(TextureKey.END), TextureKey.SIDE, textureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, textureMap.get(TextureKey.END)
-    );
-    WeightedVariant bottom = createWeightedVariant(createObjectModel(block, "trapdoor/bottom", "/bottom", assembledTextureMap));
-    WeightedVariant open = createWeightedVariant(createObjectModel(block, "trapdoor/open", "/open", assembledTextureMap));
-    WeightedVariant top = createWeightedVariant(createObjectModel(block, "trapdoor/top", "/top", assembledTextureMap));
+  private void registerTrapdoorBlock(Block block, boolean orientable, Map<TextureKey, String> rawTextureMap) {
+    Map<TextureKey, String> textureMap = Map.of(TextureKey.END, rawTextureMap.get(TextureKey.END), TextureKey.SIDE, rawTextureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, rawTextureMap.get(TextureKey.END));
+    WeightedVariant variantBottom = createWeightedVariant(createObjectModel(block, "trapdoor/variantBottom", "/variantBottom", textureMap));
+    WeightedVariant variantOpen = createWeightedVariant(createObjectModel(block, "trapdoor/variantOpen", "/variantOpen", textureMap));
+    WeightedVariant variantTop = createWeightedVariant(createObjectModel(block, "trapdoor/variantTop", "/variantTop", textureMap));
     this.blockGenerator.blockStateCollector.accept(VariantsBlockModelDefinitionCreator.of(block).with(BlockStateVariantMap
         .models(TrapdoorBlock.HALF, TrapdoorBlock.FACING, TrapdoorBlock.OPEN)
-        .register(BlockHalf.BOTTOM, Direction.NORTH, false, bottom)
-        .register(BlockHalf.BOTTOM, Direction.EAST, false, bottom.apply(orientable ? ROTATE_Y_90 : NO_OP).apply(orientable ? UV_LOCK : NO_OP))
-        .register(BlockHalf.BOTTOM, Direction.SOUTH, false, bottom.apply(orientable ? ROTATE_Y_180 : NO_OP).apply(orientable ? UV_LOCK : NO_OP))
-        .register(BlockHalf.BOTTOM, Direction.WEST, false, bottom.apply(orientable ? ROTATE_Y_270 : NO_OP).apply(orientable ? UV_LOCK : NO_OP))
-        .register(BlockHalf.BOTTOM, Direction.NORTH, true, open)
-        .register(BlockHalf.BOTTOM, Direction.EAST, true, open.apply(ROTATE_Y_90).apply(UV_LOCK))
-        .register(BlockHalf.BOTTOM, Direction.SOUTH, true, open.apply(ROTATE_Y_180).apply(UV_LOCK))
-        .register(BlockHalf.BOTTOM, Direction.WEST, true, open.apply(ROTATE_Y_270).apply(UV_LOCK))
-        .register(BlockHalf.TOP, Direction.NORTH, false, top)
-        .register(BlockHalf.TOP, Direction.EAST, false, top.apply(orientable ? ROTATE_Y_90 : NO_OP).apply(orientable ? UV_LOCK : NO_OP))
-        .register(BlockHalf.TOP, Direction.SOUTH, false, top.apply(orientable ? ROTATE_Y_180 : NO_OP).apply(orientable ? UV_LOCK : NO_OP))
-        .register(BlockHalf.TOP, Direction.WEST, false, top.apply(orientable ? ROTATE_Y_270 : NO_OP).apply(orientable ? UV_LOCK : NO_OP))
-        .register(BlockHalf.TOP, Direction.NORTH, true, open.apply(orientable ? ROTATE_X_180 : NO_OP).apply(orientable ? ROTATE_Y_180 : NO_OP).apply(orientable ? UV_LOCK : NO_OP))
-        .register(BlockHalf.TOP, Direction.EAST, true, open.apply(orientable ? ROTATE_X_180 : NO_OP).apply(orientable ? ROTATE_Y_270 : ROTATE_Y_90).apply(orientable ? UV_LOCK : NO_OP))
-        .register(BlockHalf.TOP, Direction.SOUTH, true, open.apply(orientable ? ROTATE_X_180 : NO_OP).apply(orientable ? NO_OP : ROTATE_Y_180).apply(orientable ? UV_LOCK : NO_OP))
-        .register(BlockHalf.TOP, Direction.WEST, true, open.apply(orientable ? ROTATE_X_180 : NO_OP).apply(orientable ? ROTATE_Y_90 : ROTATE_Y_270).apply(orientable ? UV_LOCK : NO_OP))
+        .register(BlockHalf.BOTTOM, Direction.NORTH, false, variantBottom)
+        .register(BlockHalf.BOTTOM, Direction.EAST, false, variantBottom.apply(orientable ? ROTATE_Y_90 : NO_OP).apply(orientable ? UV_LOCK : NO_OP))
+        .register(BlockHalf.BOTTOM, Direction.SOUTH, false, variantBottom.apply(orientable ? ROTATE_Y_180 : NO_OP).apply(orientable ? UV_LOCK : NO_OP))
+        .register(BlockHalf.BOTTOM, Direction.WEST, false, variantBottom.apply(orientable ? ROTATE_Y_270 : NO_OP).apply(orientable ? UV_LOCK : NO_OP))
+        .register(BlockHalf.BOTTOM, Direction.NORTH, true, variantOpen)
+        .register(BlockHalf.BOTTOM, Direction.EAST, true, variantOpen.apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(BlockHalf.BOTTOM, Direction.SOUTH, true, variantOpen.apply(ROTATE_Y_180).apply(UV_LOCK))
+        .register(BlockHalf.BOTTOM, Direction.WEST, true, variantOpen.apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(BlockHalf.TOP, Direction.NORTH, false, variantTop)
+        .register(BlockHalf.TOP, Direction.EAST, false, variantTop.apply(orientable ? ROTATE_Y_90 : NO_OP).apply(orientable ? UV_LOCK : NO_OP))
+        .register(BlockHalf.TOP, Direction.SOUTH, false, variantTop.apply(orientable ? ROTATE_Y_180 : NO_OP).apply(orientable ? UV_LOCK : NO_OP))
+        .register(BlockHalf.TOP, Direction.WEST, false, variantTop.apply(orientable ? ROTATE_Y_270 : NO_OP).apply(orientable ? UV_LOCK : NO_OP))
+        .register(BlockHalf.TOP, Direction.NORTH, true, variantOpen.apply(orientable ? ROTATE_X_180 : NO_OP).apply(orientable ? ROTATE_Y_180 : NO_OP).apply(orientable ? UV_LOCK : NO_OP))
+        .register(BlockHalf.TOP, Direction.EAST, true, variantOpen.apply(orientable ? ROTATE_X_180 : NO_OP).apply(orientable ? ROTATE_Y_270 : ROTATE_Y_90).apply(orientable ? UV_LOCK : NO_OP))
+        .register(BlockHalf.TOP, Direction.SOUTH, true, variantOpen.apply(orientable ? ROTATE_X_180 : NO_OP).apply(orientable ? NO_OP : ROTATE_Y_180).apply(orientable ? UV_LOCK : NO_OP))
+        .register(BlockHalf.TOP, Direction.WEST, true, variantOpen.apply(orientable ? ROTATE_X_180 : NO_OP).apply(orientable ? ROTATE_Y_90 : ROTATE_Y_270).apply(orientable ? UV_LOCK : NO_OP))
     ));
-    this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModels.basic(bottom.variants().getEntries().getFirst().value().modelId()));
+    this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModels.basic(variantBottom.variants().getEntries().getFirst().value().modelId()));
   }
 
-  private void registerSimpleWallSlabBlock(Block block, Map<TextureKey, String> textureMap) {
-    Map<TextureKey, String> assembledTextureMap = Map.of(
-        TextureKey.SIDE, textureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, textureMap.get(TextureKey.SIDE)
-    );
+  private void registerSimpleWallSlabBlock(Block block, Map<TextureKey, String> rawTextureMap) {
+    Map<TextureKey, String> textureMap = Map.of(TextureKey.SIDE, rawTextureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, rawTextureMap.get(TextureKey.SIDE));
     registerWallSlabBlock(
         block,
-        createWeightedVariant(createObjectModel(block, "simple_block", "/double", assembledTextureMap)),
-        createWeightedVariant(createObjectModel(block, "wall_slab/simple/flat", "/flat", assembledTextureMap)),
-        createWeightedVariant(createObjectModel(block, "wall_slab/simple/inner", "/inner", assembledTextureMap)),
-        createWeightedVariant(createObjectModel(block, "wall_slab/simple/outer", "/outer", assembledTextureMap)),
-        createObjectModel(block, "wall_slab/simple/item", "/item", assembledTextureMap)
-    );
-  }
-
-  private void registerPillarWallSlabBlock(Block block, Map<TextureKey, String> textureMap) {
-    Map<TextureKey, String> assembledTextureMap = Map.of(
-        TextureKey.END, textureMap.get(TextureKey.END), TextureKey.SIDE, textureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, textureMap.get(TextureKey.SIDE)
-    );
-    registerWallSlabBlock(
-        block,
-        createWeightedVariant(createObjectModel(block, "pillar/vertical", "/double", assembledTextureMap)),
-        createWeightedVariant(createObjectModel(block, "wall_slab/pillar/flat", "/flat", assembledTextureMap)),
-        createWeightedVariant(createObjectModel(block, "wall_slab/pillar/inner", "/inner", assembledTextureMap)),
-        createWeightedVariant(createObjectModel(block, "wall_slab/pillar/outer", "/outer", assembledTextureMap)),
-        createObjectModel(block, "wall_slab/pillar/item", "/item", assembledTextureMap)
+        createWeightedVariant(createObjectModel(block, "simple_block", "/double", textureMap)),
+        createWeightedVariant(createObjectModel(block, "wall_slab/simple/variantFlat", "/variantFlat", textureMap)),
+        createWeightedVariant(createObjectModel(block, "wall_slab/simple/variantInner", "/variantInner", textureMap)),
+        createWeightedVariant(createObjectModel(block, "wall_slab/simple/variantOuter", "/variantOuter", textureMap)),
+        createObjectModel(block, "wall_slab/simple/item", "/item", textureMap)
     );
   }
 
-  private void registerVerticalWallSlabBlock(Block block, Map<TextureKey, String> textureMap) {
-    Map<TextureKey, String> assembledTextureMap = Map.of(
-        TextureKey.BOTTOM, textureMap.get(TextureKey.BOTTOM), TextureKey.SIDE, textureMap.get(TextureKey.SIDE), TextureKey.TOP, textureMap.get(TextureKey.TOP), TextureKey.PARTICLE, textureMap.get(TextureKey.SIDE)
-    );
+  private void registerPillarWallSlabBlock(Block block, Map<TextureKey, String> rawTextureMap) {
+    Map<TextureKey, String> textureMap = Map.of(TextureKey.END, rawTextureMap.get(TextureKey.END), TextureKey.SIDE, rawTextureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, rawTextureMap.get(TextureKey.SIDE));
     registerWallSlabBlock(
         block,
-        createWeightedVariant(createObjectModel(block, "vertical_block", "/double", assembledTextureMap)),
-        createWeightedVariant(createObjectModel(block, "wall_slab/vertical/flat", "/flat", assembledTextureMap)),
-        createWeightedVariant(createObjectModel(block, "wall_slab/vertical/inner", "/inner", assembledTextureMap)),
-        createWeightedVariant(createObjectModel(block, "wall_slab/vertical/outer", "/outer", assembledTextureMap)),
-        createObjectModel(block, "wall_slab/vertical/item", "/item", assembledTextureMap)
+        createWeightedVariant(createObjectModel(block, "pillar/vertical", "/double", textureMap)),
+        createWeightedVariant(createObjectModel(block, "wall_slab/pillar/variantFlat", "/variantFlat", textureMap)),
+        createWeightedVariant(createObjectModel(block, "wall_slab/pillar/variantInner", "/variantInner", textureMap)),
+        createWeightedVariant(createObjectModel(block, "wall_slab/pillar/variantOuter", "/variantOuter", textureMap)),
+        createObjectModel(block, "wall_slab/pillar/item", "/item", textureMap)
+    );
+  }
+
+  private void registerVerticalWallSlabBlock(Block block, Map<TextureKey, String> rawTextureMap) {
+    Map<TextureKey, String> textureMap = Map.of(TextureKey.BOTTOM, rawTextureMap.get(TextureKey.BOTTOM), TextureKey.SIDE, rawTextureMap.get(TextureKey.SIDE), TextureKey.TOP, rawTextureMap.get(TextureKey.TOP), TextureKey.PARTICLE, rawTextureMap.get(TextureKey.SIDE));
+    registerWallSlabBlock(
+        block,
+        createWeightedVariant(createObjectModel(block, "vertical_block", "/double", textureMap)),
+        createWeightedVariant(createObjectModel(block, "wall_slab/vertical/variantFlat", "/variantFlat", textureMap)),
+        createWeightedVariant(createObjectModel(block, "wall_slab/vertical/variantInner", "/variantInner", textureMap)),
+        createWeightedVariant(createObjectModel(block, "wall_slab/vertical/variantOuter", "/variantOuter", textureMap)),
+        createObjectModel(block, "wall_slab/vertical/item", "/item", textureMap)
     );
   }
 
   private void registerWallSlabBlock(
       Block block,
-      WeightedVariant doubleSlab,
-      WeightedVariant flat,
-      WeightedVariant inner,
-      WeightedVariant outer,
+      WeightedVariant variantDouble,
+      WeightedVariant variantFlat,
+      WeightedVariant variantInner,
+      WeightedVariant variantOuter,
       Identifier inventoryModel
   ) {
     this.blockGenerator.blockStateCollector.accept(VariantsBlockModelDefinitionCreator.of(block).with(BlockStateVariantMap
         .models(WallSlabBlock.SHAPE, WallSlabBlock.FACING)
-        .register(WallSlabShape.DOUBLE, Direction.NORTH, doubleSlab)
-        .register(WallSlabShape.DOUBLE, Direction.EAST, doubleSlab)
-        .register(WallSlabShape.DOUBLE, Direction.SOUTH, doubleSlab)
-        .register(WallSlabShape.DOUBLE, Direction.WEST, doubleSlab)
-        .register(WallSlabShape.FLAT, Direction.NORTH, flat)
-        .register(WallSlabShape.FLAT, Direction.EAST, flat.apply(ROTATE_Y_90).apply(UV_LOCK))
-        .register(WallSlabShape.FLAT, Direction.SOUTH, flat.apply(ROTATE_Y_180).apply(UV_LOCK))
-        .register(WallSlabShape.FLAT, Direction.WEST, flat.apply(ROTATE_Y_270).apply(UV_LOCK))
-        .register(WallSlabShape.INNER_LEFT, Direction.NORTH, inner)
-        .register(WallSlabShape.INNER_LEFT, Direction.EAST, inner.apply(ROTATE_Y_90).apply(UV_LOCK))
-        .register(WallSlabShape.INNER_LEFT, Direction.SOUTH, inner.apply(ROTATE_Y_180).apply(UV_LOCK))
-        .register(WallSlabShape.INNER_LEFT, Direction.WEST, inner.apply(ROTATE_Y_270).apply(UV_LOCK))
-        .register(WallSlabShape.INNER_RIGHT, Direction.NORTH, inner.apply(ROTATE_Y_90).apply(UV_LOCK))
-        .register(WallSlabShape.INNER_RIGHT, Direction.EAST, inner.apply(ROTATE_Y_180).apply(UV_LOCK))
-        .register(WallSlabShape.INNER_RIGHT, Direction.SOUTH, inner.apply(ROTATE_Y_270).apply(UV_LOCK))
-        .register(WallSlabShape.INNER_RIGHT, Direction.WEST, inner)
-        .register(WallSlabShape.OUTER_LEFT, Direction.NORTH, outer)
-        .register(WallSlabShape.OUTER_LEFT, Direction.EAST, outer.apply(ROTATE_Y_90).apply(UV_LOCK))
-        .register(WallSlabShape.OUTER_LEFT, Direction.SOUTH, outer.apply(ROTATE_Y_180).apply(UV_LOCK))
-        .register(WallSlabShape.OUTER_LEFT, Direction.WEST, outer.apply(ROTATE_Y_270).apply(UV_LOCK))
-        .register(WallSlabShape.OUTER_RIGHT, Direction.NORTH, outer.apply(ROTATE_Y_90).apply(UV_LOCK))
-        .register(WallSlabShape.OUTER_RIGHT, Direction.EAST, outer.apply(ROTATE_Y_180).apply(UV_LOCK))
-        .register(WallSlabShape.OUTER_RIGHT, Direction.SOUTH, outer.apply(ROTATE_Y_270).apply(UV_LOCK))
-        .register(WallSlabShape.OUTER_RIGHT, Direction.WEST, outer)
+        .register(WallSlabShape.DOUBLE, Direction.NORTH, variantDouble)
+        .register(WallSlabShape.DOUBLE, Direction.EAST, variantDouble)
+        .register(WallSlabShape.DOUBLE, Direction.SOUTH, variantDouble)
+        .register(WallSlabShape.DOUBLE, Direction.WEST, variantDouble)
+        .register(WallSlabShape.FLAT, Direction.NORTH, variantFlat)
+        .register(WallSlabShape.FLAT, Direction.EAST, variantFlat.apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(WallSlabShape.FLAT, Direction.SOUTH, variantFlat.apply(ROTATE_Y_180).apply(UV_LOCK))
+        .register(WallSlabShape.FLAT, Direction.WEST, variantFlat.apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(WallSlabShape.INNER_LEFT, Direction.NORTH, variantInner)
+        .register(WallSlabShape.INNER_LEFT, Direction.EAST, variantInner.apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(WallSlabShape.INNER_LEFT, Direction.SOUTH, variantInner.apply(ROTATE_Y_180).apply(UV_LOCK))
+        .register(WallSlabShape.INNER_LEFT, Direction.WEST, variantInner.apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(WallSlabShape.INNER_RIGHT, Direction.NORTH, variantInner.apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(WallSlabShape.INNER_RIGHT, Direction.EAST, variantInner.apply(ROTATE_Y_180).apply(UV_LOCK))
+        .register(WallSlabShape.INNER_RIGHT, Direction.SOUTH, variantInner.apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(WallSlabShape.INNER_RIGHT, Direction.WEST, variantInner)
+        .register(WallSlabShape.OUTER_LEFT, Direction.NORTH, variantOuter)
+        .register(WallSlabShape.OUTER_LEFT, Direction.EAST, variantOuter.apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(WallSlabShape.OUTER_LEFT, Direction.SOUTH, variantOuter.apply(ROTATE_Y_180).apply(UV_LOCK))
+        .register(WallSlabShape.OUTER_LEFT, Direction.WEST, variantOuter.apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(WallSlabShape.OUTER_RIGHT, Direction.NORTH, variantOuter.apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(WallSlabShape.OUTER_RIGHT, Direction.EAST, variantOuter.apply(ROTATE_Y_180).apply(UV_LOCK))
+        .register(WallSlabShape.OUTER_RIGHT, Direction.SOUTH, variantOuter.apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(WallSlabShape.OUTER_RIGHT, Direction.WEST, variantOuter)
     ));
     this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModels.basic(inventoryModel));
   }
 
-  private void registerComplexWallSlabBlock(Block block, Map<TextureKey, String> textureMap) {
-    WeightedVariant doubleX = createWeightedVariant(createObjectModel(block, "axis_block", "/double_x", Map.of(
-        TextureKey.END, textureMap.get(DistantMoonsTextureKeys.VERTICAL_END), TextureKey.FRONT, textureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), TextureKey.SIDE, textureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, textureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE)
-    )));
-    WeightedVariant doubleZ = createWeightedVariant(createObjectModel(block, "axis_block", "/double_z", Map.of(
-        TextureKey.END, textureMap.get(DistantMoonsTextureKeys.HORIZONTAL_END), TextureKey.FRONT, textureMap.get(TextureKey.SIDE), TextureKey.SIDE, textureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), TextureKey.PARTICLE, textureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE)
-    )));
-    WeightedVariant flatX = createWeightedVariant(createObjectModel(block, "wall_slab/complex/flat", "/flat_x", Map.of(
-        TextureKey.END, textureMap.get(DistantMoonsTextureKeys.VERTICAL_END), TextureKey.FRONT, textureMap.get(TextureKey.SIDE), TextureKey.SIDE, textureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), TextureKey.PARTICLE, textureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE)
-    )));
-    WeightedVariant flatZ = createWeightedVariant(createObjectModel(block, "wall_slab/complex/flat", "/flat_z", Map.of(
-        TextureKey.END, textureMap.get(DistantMoonsTextureKeys.HORIZONTAL_END), TextureKey.FRONT, textureMap.get(TextureKey.SIDE), TextureKey.SIDE, textureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), TextureKey.PARTICLE, textureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE)
-    )));
-    WeightedVariant innerBottomLeft = createWeightedVariant(createObjectModel(block, "wall_slab/complex/inner", "/inner/bottom_left", Map.of(
-        TextureKey.BOTTOM, textureMap.get(DistantMoonsTextureKeys.TOP_LEFT), TextureKey.INSIDE, textureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), DistantMoonsTextureKeys.OUTSIDE, textureMap.get(TextureKey.SIDE), TextureKey.TOP, textureMap.get(DistantMoonsTextureKeys.BOTTOM_LEFT), TextureKey.PARTICLE, textureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE)
-    )));
-    WeightedVariant innerBottomRight = createWeightedVariant(createObjectModel(block, "wall_slab/complex/inner", "/inner/bottom_right", Map.of(
-        TextureKey.BOTTOM, textureMap.get(DistantMoonsTextureKeys.TOP_RIGHT), TextureKey.INSIDE, textureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), DistantMoonsTextureKeys.OUTSIDE, textureMap.get(TextureKey.SIDE), TextureKey.TOP, textureMap.get(DistantMoonsTextureKeys.BOTTOM_RIGHT), TextureKey.PARTICLE, textureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE)
-    )));
-    WeightedVariant innerTopLeft = createWeightedVariant(createObjectModel(block, "wall_slab/complex/inner", "/inner/top_left", Map.of(
-        TextureKey.BOTTOM, textureMap.get(DistantMoonsTextureKeys.BOTTOM_LEFT), TextureKey.INSIDE, textureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), DistantMoonsTextureKeys.OUTSIDE, textureMap.get(TextureKey.SIDE), TextureKey.TOP, textureMap.get(DistantMoonsTextureKeys.TOP_LEFT), TextureKey.PARTICLE, textureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE)
-    )));
-    WeightedVariant innerTopRight = createWeightedVariant(createObjectModel(block, "wall_slab/complex/inner", "/inner/top_right", Map.of(
-        TextureKey.BOTTOM, textureMap.get(DistantMoonsTextureKeys.BOTTOM_RIGHT), TextureKey.INSIDE, textureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), DistantMoonsTextureKeys.OUTSIDE, textureMap.get(TextureKey.SIDE), TextureKey.TOP, textureMap.get(DistantMoonsTextureKeys.TOP_RIGHT), TextureKey.PARTICLE, textureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE)
-    )));
-    WeightedVariant outerBottomLeft = createWeightedVariant(createObjectModel(block, "wall_slab/complex/outer", "/outer/bottom_left", Map.of(
-        TextureKey.BOTTOM, textureMap.get(DistantMoonsTextureKeys.TOP_LEFT), TextureKey.SIDE, textureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), TextureKey.TOP, textureMap.get(DistantMoonsTextureKeys.BOTTOM_LEFT), TextureKey.PARTICLE, textureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE)
-    )));
-    WeightedVariant outerBottomRight = createWeightedVariant(createObjectModel(block, "wall_slab/complex/outer", "/outer/bottom_right", Map.of(
-        TextureKey.BOTTOM, textureMap.get(DistantMoonsTextureKeys.TOP_RIGHT), TextureKey.SIDE, textureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), TextureKey.TOP, textureMap.get(DistantMoonsTextureKeys.BOTTOM_RIGHT), TextureKey.PARTICLE, textureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE)
-    )));
-    WeightedVariant outerTopLeft = createWeightedVariant(createObjectModel(block, "wall_slab/complex/outer", "/outer/top_left", Map.of(
-        TextureKey.BOTTOM, textureMap.get(DistantMoonsTextureKeys.BOTTOM_LEFT), TextureKey.SIDE, textureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), TextureKey.TOP, textureMap.get(DistantMoonsTextureKeys.TOP_LEFT), TextureKey.PARTICLE, textureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE)
-    )));
-    WeightedVariant outerTopRight = createWeightedVariant(createObjectModel(block, "wall_slab/complex/outer", "/outer/top_right", Map.of(
-        TextureKey.BOTTOM, textureMap.get(DistantMoonsTextureKeys.BOTTOM_RIGHT), TextureKey.SIDE, textureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), TextureKey.TOP, textureMap.get(DistantMoonsTextureKeys.TOP_RIGHT), TextureKey.PARTICLE, textureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE)
-    )));
+  private void registerComplexWallSlabBlock(Block block, Map<TextureKey, String> rawTextureMap) {
+    Map<TextureKey, String> textureMapDoubleX = Map.of(TextureKey.END, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_END), TextureKey.FRONT, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), TextureKey.SIDE, rawTextureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE));
+    Map<TextureKey, String> textureMapDoubleZ = Map.of(TextureKey.END, rawTextureMap.get(DistantMoonsTextureKeys.HORIZONTAL_END), TextureKey.FRONT, rawTextureMap.get(TextureKey.SIDE), TextureKey.SIDE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE));
+    Map<TextureKey, String> textureMapFlatX = Map.of(TextureKey.END, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_END), TextureKey.FRONT, rawTextureMap.get(TextureKey.SIDE), TextureKey.SIDE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE));
+    Map<TextureKey, String> textureMapFlatZ = Map.of(TextureKey.END, rawTextureMap.get(DistantMoonsTextureKeys.HORIZONTAL_END), TextureKey.FRONT, rawTextureMap.get(TextureKey.SIDE), TextureKey.SIDE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE));
+    Map<TextureKey, String> textureMapInnerBottomLeft = Map.of(TextureKey.BOTTOM, rawTextureMap.get(DistantMoonsTextureKeys.TOP_LEFT), TextureKey.INSIDE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), DistantMoonsTextureKeys.OUTSIDE, rawTextureMap.get(TextureKey.SIDE), TextureKey.TOP, rawTextureMap.get(DistantMoonsTextureKeys.BOTTOM_LEFT), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE));
+    Map<TextureKey, String> textureMapInnerBottomRight = Map.of(TextureKey.BOTTOM, rawTextureMap.get(DistantMoonsTextureKeys.TOP_RIGHT), TextureKey.INSIDE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), DistantMoonsTextureKeys.OUTSIDE, rawTextureMap.get(TextureKey.SIDE), TextureKey.TOP, rawTextureMap.get(DistantMoonsTextureKeys.BOTTOM_RIGHT), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE));
+    Map<TextureKey, String> textureMapInnerTopLeft = Map.of(TextureKey.BOTTOM, rawTextureMap.get(DistantMoonsTextureKeys.BOTTOM_LEFT), TextureKey.INSIDE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), DistantMoonsTextureKeys.OUTSIDE, rawTextureMap.get(TextureKey.SIDE), TextureKey.TOP, rawTextureMap.get(DistantMoonsTextureKeys.TOP_LEFT), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE));
+    Map<TextureKey, String> textureMapInnerTopRight = Map.of(TextureKey.BOTTOM, rawTextureMap.get(DistantMoonsTextureKeys.BOTTOM_RIGHT), TextureKey.INSIDE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), DistantMoonsTextureKeys.OUTSIDE, rawTextureMap.get(TextureKey.SIDE), TextureKey.TOP, rawTextureMap.get(DistantMoonsTextureKeys.TOP_RIGHT), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE));
+    Map<TextureKey, String> textureMapOuterBottomLeft = Map.of(TextureKey.BOTTOM, rawTextureMap.get(DistantMoonsTextureKeys.TOP_LEFT), TextureKey.SIDE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), TextureKey.TOP, rawTextureMap.get(DistantMoonsTextureKeys.BOTTOM_LEFT), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE));
+    Map<TextureKey, String> textureMapOuterBottomRight = Map.of(TextureKey.BOTTOM, rawTextureMap.get(DistantMoonsTextureKeys.TOP_RIGHT), TextureKey.SIDE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), TextureKey.TOP, rawTextureMap.get(DistantMoonsTextureKeys.BOTTOM_RIGHT), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE));
+    Map<TextureKey, String> textureMapOuterTopLeft = Map.of(TextureKey.BOTTOM, rawTextureMap.get(DistantMoonsTextureKeys.BOTTOM_LEFT), TextureKey.SIDE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), TextureKey.TOP, rawTextureMap.get(DistantMoonsTextureKeys.TOP_LEFT), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE));
+    Map<TextureKey, String> textureMapOuterTopRight = Map.of(TextureKey.BOTTOM, rawTextureMap.get(DistantMoonsTextureKeys.BOTTOM_RIGHT), TextureKey.SIDE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), TextureKey.TOP, rawTextureMap.get(DistantMoonsTextureKeys.TOP_RIGHT), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE));
+    WeightedVariant variantDoubleX = createWeightedVariant(createObjectModel(block, "axis_block", "/double_x", textureMapDoubleX));
+    WeightedVariant variantDoubleZ = createWeightedVariant(createObjectModel(block, "axis_block", "/double_z", textureMapDoubleZ));
+    WeightedVariant variantFlatX = createWeightedVariant(createObjectModel(block, "wall_slab/complex/variantFlat", "/flat_x", textureMapFlatX));
+    WeightedVariant variantFlatZ = createWeightedVariant(createObjectModel(block, "wall_slab/complex/variantFlat", "/flat_z", textureMapFlatZ));
+    WeightedVariant variantInnerBottomLeft = createWeightedVariant(createObjectModel(block, "wall_slab/complex/variantInner", "/variantInner/bottom_left", textureMapInnerBottomLeft));
+    WeightedVariant variantInnerBottomRight = createWeightedVariant(createObjectModel(block, "wall_slab/complex/variantInner", "/variantInner/bottom_right", textureMapInnerBottomRight));
+    WeightedVariant variantInnerTopLeft = createWeightedVariant(createObjectModel(block, "wall_slab/complex/variantInner", "/variantInner/top_left", textureMapInnerTopLeft));
+    WeightedVariant variantInnerTopRight = createWeightedVariant(createObjectModel(block, "wall_slab/complex/variantInner", "/variantInner/top_right", textureMapInnerTopRight));
+    WeightedVariant variantOuterBottomLeft = createWeightedVariant(createObjectModel(block, "wall_slab/complex/variantOuter", "/variantOuter/bottom_left", textureMapOuterBottomLeft));
+    WeightedVariant variantOuterBottomRight = createWeightedVariant(createObjectModel(block, "wall_slab/complex/variantOuter", "/variantOuter/bottom_right", textureMapOuterBottomRight));
+    WeightedVariant variantOuterTopLeft = createWeightedVariant(createObjectModel(block, "wall_slab/complex/variantOuter", "/variantOuter/top_left", textureMapOuterTopLeft));
+    WeightedVariant variantOuterTopRight = createWeightedVariant(createObjectModel(block, "wall_slab/complex/variantOuter", "/variantOuter/top_right", textureMapOuterTopRight));
     this.blockGenerator.blockStateCollector.accept(VariantsBlockModelDefinitionCreator.of(block).with(BlockStateVariantMap
         .models(WallSlabBlock.SHAPE, WallSlabBlock.FACING)
-        .register(WallSlabShape.DOUBLE, Direction.NORTH, doubleZ)
-        .register(WallSlabShape.DOUBLE, Direction.EAST, doubleX)
-        .register(WallSlabShape.DOUBLE, Direction.SOUTH, doubleZ)
-        .register(WallSlabShape.DOUBLE, Direction.WEST, doubleX)
-        .register(WallSlabShape.FLAT, Direction.NORTH, flatZ)
-        .register(WallSlabShape.FLAT, Direction.EAST, flatX.apply(ROTATE_Y_90).apply(UV_LOCK))
-        .register(WallSlabShape.FLAT, Direction.SOUTH, flatZ.apply(ROTATE_Y_180).apply(UV_LOCK))
-        .register(WallSlabShape.FLAT, Direction.WEST, flatX.apply(ROTATE_Y_270).apply(UV_LOCK))
-        .register(WallSlabShape.INNER_LEFT, Direction.NORTH, innerTopLeft)
-        .register(WallSlabShape.INNER_LEFT, Direction.EAST, innerTopRight.apply(ROTATE_Y_90).apply(UV_LOCK))
-        .register(WallSlabShape.INNER_LEFT, Direction.SOUTH, innerBottomRight.apply(ROTATE_Y_180).apply(UV_LOCK))
-        .register(WallSlabShape.INNER_LEFT, Direction.WEST, innerBottomLeft.apply(ROTATE_Y_270).apply(UV_LOCK))
-        .register(WallSlabShape.INNER_RIGHT, Direction.NORTH, innerTopRight.apply(ROTATE_Y_90).apply(UV_LOCK))
-        .register(WallSlabShape.INNER_RIGHT, Direction.EAST, innerBottomRight.apply(ROTATE_Y_180).apply(UV_LOCK))
-        .register(WallSlabShape.INNER_RIGHT, Direction.SOUTH, innerBottomLeft.apply(ROTATE_Y_270).apply(UV_LOCK))
-        .register(WallSlabShape.INNER_RIGHT, Direction.WEST, innerTopLeft)
-        .register(WallSlabShape.OUTER_LEFT, Direction.NORTH, outerBottomRight)
-        .register(WallSlabShape.OUTER_LEFT, Direction.EAST, outerBottomLeft.apply(ROTATE_Y_90).apply(UV_LOCK))
-        .register(WallSlabShape.OUTER_LEFT, Direction.SOUTH, outerTopLeft.apply(ROTATE_Y_180).apply(UV_LOCK))
-        .register(WallSlabShape.OUTER_LEFT, Direction.WEST, outerTopRight.apply(ROTATE_Y_270).apply(UV_LOCK))
-        .register(WallSlabShape.OUTER_RIGHT, Direction.NORTH, outerBottomLeft.apply(ROTATE_Y_90).apply(UV_LOCK))
-        .register(WallSlabShape.OUTER_RIGHT, Direction.EAST, outerTopLeft.apply(ROTATE_Y_180).apply(UV_LOCK))
-        .register(WallSlabShape.OUTER_RIGHT, Direction.SOUTH, outerTopRight.apply(ROTATE_Y_270).apply(UV_LOCK))
-        .register(WallSlabShape.OUTER_RIGHT, Direction.WEST, outerBottomRight)
+        .register(WallSlabShape.DOUBLE, Direction.NORTH, variantDoubleZ)
+        .register(WallSlabShape.DOUBLE, Direction.EAST, variantDoubleX)
+        .register(WallSlabShape.DOUBLE, Direction.SOUTH, variantDoubleZ)
+        .register(WallSlabShape.DOUBLE, Direction.WEST, variantDoubleX)
+        .register(WallSlabShape.FLAT, Direction.NORTH, variantFlatZ)
+        .register(WallSlabShape.FLAT, Direction.EAST, variantFlatX.apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(WallSlabShape.FLAT, Direction.SOUTH, variantFlatZ.apply(ROTATE_Y_180).apply(UV_LOCK))
+        .register(WallSlabShape.FLAT, Direction.WEST, variantFlatX.apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(WallSlabShape.INNER_LEFT, Direction.NORTH, variantInnerTopLeft)
+        .register(WallSlabShape.INNER_LEFT, Direction.EAST, variantInnerTopRight.apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(WallSlabShape.INNER_LEFT, Direction.SOUTH, variantInnerBottomRight.apply(ROTATE_Y_180).apply(UV_LOCK))
+        .register(WallSlabShape.INNER_LEFT, Direction.WEST, variantInnerBottomLeft.apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(WallSlabShape.INNER_RIGHT, Direction.NORTH, variantInnerTopRight.apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(WallSlabShape.INNER_RIGHT, Direction.EAST, variantInnerBottomRight.apply(ROTATE_Y_180).apply(UV_LOCK))
+        .register(WallSlabShape.INNER_RIGHT, Direction.SOUTH, variantInnerBottomLeft.apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(WallSlabShape.INNER_RIGHT, Direction.WEST, variantInnerTopLeft)
+        .register(WallSlabShape.OUTER_LEFT, Direction.NORTH, variantOuterBottomRight)
+        .register(WallSlabShape.OUTER_LEFT, Direction.EAST, variantOuterBottomLeft.apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(WallSlabShape.OUTER_LEFT, Direction.SOUTH, variantOuterTopLeft.apply(ROTATE_Y_180).apply(UV_LOCK))
+        .register(WallSlabShape.OUTER_LEFT, Direction.WEST, variantOuterTopRight.apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(WallSlabShape.OUTER_RIGHT, Direction.NORTH, variantOuterBottomLeft.apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(WallSlabShape.OUTER_RIGHT, Direction.EAST, variantOuterTopLeft.apply(ROTATE_Y_180).apply(UV_LOCK))
+        .register(WallSlabShape.OUTER_RIGHT, Direction.SOUTH, variantOuterTopRight.apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(WallSlabShape.OUTER_RIGHT, Direction.WEST, variantOuterBottomRight)
     ));
-    Identifier inventoryModel = createObjectModel(block, "wall_slab/complex/item", "/item", Map.of(
-        TextureKey.END, textureMap.get(DistantMoonsTextureKeys.HORIZONTAL_END), TextureKey.FRONT, textureMap.get(TextureKey.SIDE), TextureKey.SIDE, textureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), TextureKey.PARTICLE, textureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE)
-    ));
+    Identifier inventoryModel = createObjectModel(block, "wall_slab/complex/item", "/item", textureMapFlatZ);
     this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModels.basic(inventoryModel));
   }
 
-  private void registerSimpleItem(Item item, String parent, Map<TextureKey, String> textureMap) {
-    this.itemGenerator.output.accept(item, ItemModels.basic(createObjectModel(item, parent, null, Map.of(TextureKey.TEXTURE, textureMap.get(TextureKey.TEXTURE), TextureKey.PARTICLE, textureMap.get(TextureKey.TEXTURE)))));
+  private void registerSimpleItem(Item item, String parent, Map<TextureKey, String> rawTextureMap) {
+    Map<TextureKey, String> textureMap = Map.of(TextureKey.TEXTURE, rawTextureMap.get(TextureKey.TEXTURE), TextureKey.PARTICLE, rawTextureMap.get(TextureKey.TEXTURE));
+    this.itemGenerator.output.accept(item, ItemModels.basic(createObjectModel(item, parent, null, textureMap)));
   }
 
   private static String getStringIdOf(Block block) {

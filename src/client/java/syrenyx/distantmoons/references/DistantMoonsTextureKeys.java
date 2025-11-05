@@ -15,6 +15,7 @@ public abstract class DistantMoonsTextureKeys {
   public static final TextureKey HORIZONTAL = TextureKey.of("horizontal");
   public static final TextureKey HORIZONTAL_END = TextureKey.of("horizontal_end");
   public static final TextureKey HORIZONTAL_SIDE = TextureKey.of("horizontal_side");
+  public static final TextureKey LOWER_SIDE = TextureKey.of("lower_side");
   public static final TextureKey OUTSIDE = TextureKey.of("outside");
   public static final TextureKey SIDE_TOP = TextureKey.of("bottom_left");
   public static final TextureKey SINGLE_BOTTOM_LEFT = TextureKey.of("single_bottom_left");
@@ -24,6 +25,7 @@ public abstract class DistantMoonsTextureKeys {
   public static final TextureKey SUPPORT = TextureKey.of("support");
   public static final TextureKey TOP_LEFT = TextureKey.of("bottom_left");
   public static final TextureKey TOP_RIGHT = TextureKey.of("bottom_right");
+  public static final TextureKey UPPER_SIDE = TextureKey.of("upper_side");
   public static final TextureKey VERTICAL = TextureKey.of("vertical");
   public static final TextureKey VERTICAL_END = TextureKey.of("vertical_end");
   public static final TextureKey VERTICAL_SIDE = TextureKey.of("vertical_side");
