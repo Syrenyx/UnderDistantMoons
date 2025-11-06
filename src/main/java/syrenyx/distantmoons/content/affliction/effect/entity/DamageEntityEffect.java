@@ -33,7 +33,10 @@ public record DamageEntityEffect(
 
   @Override
   public void apply(ServerWorld world, int stage, Entity target, Vec3d pos) {
-    float f = MathHelper.nextBetween(target.getRandom(), this.minDamage.getValue(stage), this.maxDamage.getValue(stage));
-    target.damage(world, new DamageSource(this.damageType, pos), f);
+    target.damage(
+        world,
+        new DamageSource(this.damageType, pos),
+        MathHelper.nextBetween(target.getRandom(), this.minDamage.getValue(stage), this.maxDamage.getValue(stage))
+    );
   }
 }

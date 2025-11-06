@@ -7,8 +7,7 @@ import net.minecraft.loot.context.LootContextParameters;
 import net.minecraft.util.StringIdentifiable;
 import org.jetbrains.annotations.Nullable;
 
-public enum RunFunctionPoolEntryTarget implements StringIdentifiable {
-  NONE("none"),
+public enum EffectPoolEntryTarget implements StringIdentifiable {
   ATTACKER("attacker"),
   ATTACKING_PLAYER("attacking_player"),
   DIRECT_ATTACHER("direct_attacker"),
@@ -16,10 +15,10 @@ public enum RunFunctionPoolEntryTarget implements StringIdentifiable {
   TARGET_ENTITY("target_entity"),
   THIS("this");
 
-  public static final Codec<RunFunctionPoolEntryTarget> CODEC = StringIdentifiable.createCodec(RunFunctionPoolEntryTarget::values);
+  public static final Codec<EffectPoolEntryTarget> CODEC = StringIdentifiable.createCodec(EffectPoolEntryTarget::values);
   private final String id;
 
-  <T extends Entity> RunFunctionPoolEntryTarget(final String id) {
+  <T extends Entity> EffectPoolEntryTarget(final String id) {
     this.id = id;
   }
 
@@ -29,9 +28,8 @@ public enum RunFunctionPoolEntryTarget implements StringIdentifiable {
   }
 
   @Nullable
-  public Entity tryGetEntityFromContext(LootContext context) {
+  public Entity tryGettingEntityFromContext(LootContext context) {
     return switch (this) {
-      case NONE -> null;
       case ATTACKER -> context.get(LootContextParameters.ATTACKING_ENTITY);
       case ATTACKING_PLAYER -> context.get(LootContextParameters.LAST_DAMAGE_PLAYER);
       case DIRECT_ATTACHER -> context.get(LootContextParameters.DIRECT_ATTACKING_ENTITY);

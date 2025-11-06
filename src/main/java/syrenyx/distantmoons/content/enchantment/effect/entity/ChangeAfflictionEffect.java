@@ -15,14 +15,14 @@ import net.minecraft.util.math.Vec3d;
 import syrenyx.distantmoons.content.affliction.Affliction;
 import syrenyx.distantmoons.content.affliction.AfflictionInstance;
 import syrenyx.distantmoons.content.affliction.AfflictionManager;
-import syrenyx.distantmoons.content.affliction.effect.entity.ChangeAfflictionEffectOperation;
+import syrenyx.distantmoons.content.affliction.ChangeAfflictionOperation;
 import syrenyx.distantmoons.references.DistantMoonsRegistryKeys;
 
 import java.util.Optional;
 
 public record ChangeAfflictionEffect(
     Identifier affliction,
-    ChangeAfflictionEffectOperation operation,
+    ChangeAfflictionOperation operation,
     Optional<EnchantmentLevelBasedValue> stage,
     Optional<EnchantmentLevelBasedValue> progression
 ) implements EnchantmentEntityEffect {
@@ -30,7 +30,7 @@ public record ChangeAfflictionEffect(
   public static final MapCodec<ChangeAfflictionEffect> CODEC = RecordCodecBuilder.mapCodec(instance -> instance
       .group(
           Identifier.CODEC.fieldOf("affliction").forGetter(ChangeAfflictionEffect::affliction),
-          ChangeAfflictionEffectOperation.CODEC.fieldOf("operation").forGetter(ChangeAfflictionEffect::operation),
+          ChangeAfflictionOperation.CODEC.fieldOf("operation").forGetter(ChangeAfflictionEffect::operation),
           EnchantmentLevelBasedValue.CODEC.optionalFieldOf("stage").forGetter(ChangeAfflictionEffect::stage),
           EnchantmentLevelBasedValue.CODEC.optionalFieldOf("progression").forGetter(ChangeAfflictionEffect::progression)
       )

@@ -2,6 +2,7 @@ package syrenyx.distantmoons.mixin;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.stat.Stat;
 import net.minecraft.stat.Stats;
 import org.spongepowered.asm.mixin.Mixin;
@@ -11,6 +12,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import syrenyx.distantmoons.content.affliction.AfflictionManager;
 import syrenyx.distantmoons.content.enchantment.EnchantmentManager;
+import syrenyx.distantmoons.initializers.DistantMoonsAdvancementCriteria;
 
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin {
@@ -30,6 +32,7 @@ public abstract class PlayerEntityMixin {
     ItemStack activeItem = thisPlayerEntity.getActiveItem();
     ItemStack stack = activeItem.isEmpty() ? this.savedItemStack : activeItem;
     if (stack == null) return;
+    if (thisPlayerEntity instanceof ServerPlayerEntity serverPlayer) DistantMoonsAdvancementCriteria.USED_ITEM.trigger(serverPlayer, stack);
     AfflictionManager.handleUsedItem(thisPlayerEntity, stack);
     EnchantmentManager.handleUsedItem(thisPlayerEntity, stack);
   }
