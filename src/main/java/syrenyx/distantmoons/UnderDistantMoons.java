@@ -16,6 +16,7 @@ public class UnderDistantMoons implements ModInitializer {
 	@Override
 	public void onInitialize() {
     LOGGER.info("Initializing Modded Content");
+    DistantMoonsAdvancementCriteria.initialize();
     DistantMoonsAfflictionEffectComponents.initialize();
     DistantMoonsAfflictionEntityEffects.initialize();
     DistantMoonsAfflictionLocationBasedEffects.initialize();

@@ -89,7 +89,8 @@ public class PoleBlock extends Block implements Waterloggable {
 
   @Override
   public BlockState getPlacementState(ItemPlacementContext context) {
-    return this.updateState(context.getWorld(), context.getBlockPos(), this.getDefaultState().with(AXIS, context.getSide().getAxis()));
+    BlockPos pos = context.getBlockPos();
+    return this.updateState(context.getWorld(), pos, this.getDefaultState().with(AXIS, context.getSide().getAxis()).with(WATERLOGGED, context.getWorld().getFluidState(pos).getFluid() == Fluids.WATER));
   }
 
   @Override
