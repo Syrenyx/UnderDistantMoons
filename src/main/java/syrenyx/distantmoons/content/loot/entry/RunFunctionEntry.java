@@ -31,7 +31,7 @@ public class RunFunctionEntry extends LeafEntry {
   public static final MapCodec<RunFunctionEntry> CODEC = RecordCodecBuilder.mapCodec(instance -> instance
       .group(
           Identifier.CODEC.fieldOf("function").forGetter(entry -> entry.function),
-          RunFunctionPoolEntryTarget.CODEC.optionalFieldOf("target", RunFunctionPoolEntryTarget.NONE).forGetter(entry -> entry.target),
+          OptionalEffectPoolEntryTarget.CODEC.optionalFieldOf("target", OptionalEffectPoolEntryTarget.NONE).forGetter(entry -> entry.target),
           Codec.INT.optionalFieldOf("weight", LeafEntry.DEFAULT_WEIGHT).forGetter(entry -> entry.weight),
           Codec.INT.optionalFieldOf("quality", LeafEntry.DEFAULT_QUALITY).forGetter(entry -> entry.quality)
       )
@@ -39,9 +39,9 @@ public class RunFunctionEntry extends LeafEntry {
       .apply(instance, RunFunctionEntry::new)
   );
   protected final Identifier function;
-  protected final RunFunctionPoolEntryTarget target;
+  protected final OptionalEffectPoolEntryTarget target;
 
-  protected RunFunctionEntry(Identifier function, RunFunctionPoolEntryTarget target, int weight, int quality, List<LootCondition> conditions) {
+  protected RunFunctionEntry(Identifier function, OptionalEffectPoolEntryTarget target, int weight, int quality, List<LootCondition> conditions) {
     super(weight, quality, conditions, Collections.emptyList());
     this.function = function;
     this.target = target;
@@ -63,17 +63,17 @@ public class RunFunctionEntry extends LeafEntry {
       UnderDistantMoons.LOGGER.error("Loot Table run_function pool entry failed for non-existent function {}", this.function);
       return true;
     }
-    Entity entity = this.target.tryGetEntityFromContext(context);
+    Entity target = this.target.tryGettingEntityFromContext(context);
     commandFunctionManager.execute(
         function.get(),
         minecraftServer
             .getCommandSource()
             .withLevel(PermissionLevel.GAMEMASTER.get())
             .withSilent()
-            .withEntity(entity)
+            .withEntity(target)
             .withWorld(world)
             .withPosition(context.hasParameter(LootContextParameters.ORIGIN) ? context.get(LootContextParameters.ORIGIN) : minecraftServer.getCommandSource().getPosition())
-            .withRotation(entity != null ? entity.getRotationClient() : minecraftServer.getCommandSource().getRotation())
+            .withRotation(target != null ? target.getRotationClient() : minecraftServer.getCommandSource().getRotation())
     );
     return true;
   }

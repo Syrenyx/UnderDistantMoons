@@ -43,11 +43,11 @@ public record SpawnParticlesEffect(
     Random random = target.getRandom();
     Vec3d movement = target.getMovement();
     float width = target.getWidth();
-    float heigh = target.getHeight();
+    float height = target.getHeight();
     world.spawnParticles(
         this.particle,
         this.horizontalPosition.getPosition(pos.getX(), pos.getX(), width, random),
-        this.verticalPosition.getPosition(pos.getY(), pos.getY() + heigh / 2.0F, heigh, random),
+        this.verticalPosition.getPosition(pos.getY(), pos.getY() + height / 2.0F, height, random),
         this.horizontalPosition.getPosition(pos.getZ(), pos.getZ(), width, random),
         0,
         this.horizontalVelocity.getVelocity(movement.getX(), random),

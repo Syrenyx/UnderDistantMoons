@@ -13,13 +13,14 @@ import net.minecraft.util.math.Vec3d;
 import syrenyx.distantmoons.content.affliction.Affliction;
 import syrenyx.distantmoons.content.affliction.AfflictionInstance;
 import syrenyx.distantmoons.content.affliction.AfflictionManager;
+import syrenyx.distantmoons.content.affliction.ChangeAfflictionOperation;
 import syrenyx.distantmoons.references.DistantMoonsRegistryKeys;
 
 import java.util.Optional;
 
 public record ChangeAfflictionEffect(
     Identifier affliction,
-    ChangeAfflictionEffectOperation operation,
+    ChangeAfflictionOperation operation,
     Optional<EnchantmentLevelBasedValue> stage,
     Optional<EnchantmentLevelBasedValue> progression
 ) implements AfflictionEntityEffect {
@@ -27,7 +28,7 @@ public record ChangeAfflictionEffect(
   public static final MapCodec<ChangeAfflictionEffect> CODEC = RecordCodecBuilder.mapCodec(instance -> instance
       .group(
           Identifier.CODEC.fieldOf("affliction").forGetter(ChangeAfflictionEffect::affliction),
-          ChangeAfflictionEffectOperation.CODEC.fieldOf("operation").forGetter(ChangeAfflictionEffect::operation),
+          ChangeAfflictionOperation.CODEC.fieldOf("operation").forGetter(ChangeAfflictionEffect::operation),
           EnchantmentLevelBasedValue.CODEC.optionalFieldOf("stage").forGetter(ChangeAfflictionEffect::stage),
           EnchantmentLevelBasedValue.CODEC.optionalFieldOf("progression").forGetter(ChangeAfflictionEffect::progression)
       )
@@ -54,12 +55,12 @@ public record ChangeAfflictionEffect(
       case GIVE -> AfflictionManager.giveAffliction(livingEntity, new AfflictionInstance(
           afflictionEntry.get(),
           this.stage.map(stageBasedValue -> (int) stageBasedValue.getValue(afflictionStage)).orElse(Affliction.DEFAULT_STAGE),
-      this.progression.map(stageBasedValue -> stageBasedValue.getValue(afflictionStage)).orElse(0.0F)
+          this.progression.map(stageBasedValue -> stageBasedValue.getValue(afflictionStage)).orElse(0.0F)
       ));
       case SET -> AfflictionManager.setAffliction(livingEntity, new AfflictionInstance(
           afflictionEntry.get(),
           this.stage.map(stageBasedValue -> (int) stageBasedValue.getValue(afflictionStage)).orElse(Affliction.DEFAULT_STAGE),
-      this.progression.map(stageBasedValue -> stageBasedValue.getValue(afflictionStage)).orElse(0.0F)
+          this.progression.map(stageBasedValue -> stageBasedValue.getValue(afflictionStage)).orElse(0.0F)
       ));
     }
   }

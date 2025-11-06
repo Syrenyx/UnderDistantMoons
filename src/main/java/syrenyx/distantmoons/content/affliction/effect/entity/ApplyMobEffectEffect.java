@@ -47,10 +47,9 @@ public record ApplyMobEffectEffect(
     if (!(target instanceof LivingEntity livingEntity)) return;
     Random random = livingEntity.getRandom();
     Optional<RegistryEntry<StatusEffect>> optional = this.toApply.getRandom(random);
-    if (optional.isPresent()) {
-      int i = Math.round(MathHelper.nextBetween(random, this.minDuration.getValue(stage), this.maxDuration.getValue(stage)) * 20.0F);
-      int j = Math.max(0, Math.round(MathHelper.nextBetween(random, this.minAmplifier.getValue(stage), this.maxAmplifier.getValue(stage))));
-      livingEntity.addStatusEffect(new StatusEffectInstance(optional.get(), i, j));
-    }
+    if (optional.isEmpty()) return;
+    int duration = Math.round(MathHelper.nextBetween(random, this.minDuration.getValue(stage), this.maxDuration.getValue(stage)) * 20.0F);
+    int amplifier = Math.max(0, Math.round(MathHelper.nextBetween(random, this.minAmplifier.getValue(stage), this.maxAmplifier.getValue(stage))));
+    livingEntity.addStatusEffect(new StatusEffectInstance(optional.get(), duration, amplifier));
   }
 }
