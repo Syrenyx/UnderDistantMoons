@@ -7,6 +7,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
+import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import syrenyx.distantmoons.UnderDistantMoons;
 import syrenyx.distantmoons.content.block.*;
@@ -690,6 +691,14 @@ public abstract class DistantMoonsBlocks {
       "resin_brick_wall_slab",
       WallSlabBlock::new,
       AbstractBlock.Settings.copy(Blocks.RESIN_BRICKS),
+      new Item.Settings()
+  );
+  public static final Block ROPE_LADDER = register(
+      "rope_ladder",
+      RopeLadderBlock::new,
+      AbstractBlock.Settings.copy(Blocks.LADDER)
+          .sounds(BlockSoundGroup.WOOL)
+          .strength(0.5F),
       new Item.Settings()
   );
   public static final Block SANDSTONE_WALL_SLAB = register(

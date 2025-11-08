@@ -71,6 +71,7 @@ public class DistantMoonsItemTagProvider extends FabricTagProvider.ItemTagProvid
         DistantMoonsBlocks.OAK_WALL_SLAB.asItem(),
         DistantMoonsBlocks.PALE_OAK_POLE.asItem(),
         DistantMoonsBlocks.PALE_OAK_WALL_SLAB.asItem(),
+        DistantMoonsBlocks.ROPE_LADDER.asItem(),
         DistantMoonsBlocks.SPRUCE_POLE.asItem(),
         DistantMoonsBlocks.SPRUCE_WALL_SLAB.asItem(),
         DistantMoonsBlocks.STRIPPED_CUT_ACACIA_LOG.asItem(),

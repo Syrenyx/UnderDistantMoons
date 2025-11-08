@@ -134,6 +134,7 @@ public class en_us extends FabricLanguageProvider {
     builder.add(DistantMoonsBlocks.RED_SANDSTONE_WALL_SLAB, "Red Sandstone Wall Slab");
     builder.add(DistantMoonsBlocks.REFINED_DEEP_IRON_BLOCK, "Block of Refined Deep Iron");
     builder.add(DistantMoonsBlocks.RESIN_BRICK_WALL_SLAB, "Resin Brick Wall Slab");
+    builder.add(DistantMoonsBlocks.ROPE_LADDER, "Rope Ladder");
     builder.add(DistantMoonsBlocks.SANDSTONE_WALL_SLAB, "Sandstone Wall Slab");
     builder.add(DistantMoonsBlocks.SMOOTH_QUARTZ_WALL_SLAB, "Smooth Quartz Wall Slab");
     builder.add(DistantMoonsBlocks.SMOOTH_RED_SANDSTONE_WALL_SLAB, "Smooth Red Sandstone Wall Slab");

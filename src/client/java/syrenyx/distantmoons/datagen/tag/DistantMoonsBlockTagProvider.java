@@ -352,6 +352,7 @@ public class DistantMoonsBlockTagProvider extends FabricTagProvider.BlockTagProv
             DistantMoonsBlocks.FIXED_DEEP_IRON_LADDER,
             DistantMoonsBlocks.FIXED_IRON_LADDER,
             DistantMoonsBlocks.FIXED_WROUGHT_IRON_LADDER,
+            DistantMoonsBlocks.ROPE_LADDER,
             DistantMoonsBlocks.WROUGHT_IRON_LADDER
         );
 
