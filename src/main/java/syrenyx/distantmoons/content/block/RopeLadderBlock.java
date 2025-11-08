@@ -5,6 +5,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.ai.pathing.NavigationType;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
@@ -83,21 +84,23 @@ public class RopeLadderBlock extends Block {
   public BlockState getPlacementState(ItemPlacementContext context) {
     World world = context.getWorld();
     BlockPos pos = context.getBlockPos();
-    RopeLadderDirection ropeLadderDirection = Arrays.stream(context.getPlacementDirections())
+    PlayerEntity player = context.getPlayer();
+    boolean sneaking = player != null && player.isSneaking();
+    BlockState top = world.getBlockState(pos.up());
+    RopeLadderDirection ropeLadderDirection = !sneaking && top.isOf(this) ? top.get(DIRECTION) : Arrays
+        .stream(context.getPlacementDirections())
         .filter(direction -> {
           if (direction.getAxis() != Direction.Axis.Y && world.getBlockState(pos.offset(direction)).isSideSolidFullSquare(world, pos.offset(direction), direction.getOpposite())) return true;
           return direction == Direction.UP && (Block.sideCoversSmallSquare(world, pos.up(), Direction.DOWN) || world.getBlockState(pos.up()).isOf(this));
         })
         .findFirst()
-        .map(direction -> {
-          if (direction != Direction.UP) return RopeLadderDirection.fromDirection(direction.getOpposite());
-          BlockState top = world.getBlockState(pos.up());
-          return top.isOf(this) ? top.get(DIRECTION) : RopeLadderDirection.fromAxis(context.getHorizontalPlayerFacing().getAxis());
-        })
+        .map(direction -> direction != Direction.UP
+            ? RopeLadderDirection.fromDirection(direction.getOpposite())
+            : top.isOf(this) ? top.get(DIRECTION) : RopeLadderDirection.fromAxis(context.getHorizontalPlayerFacing().getAxis())
+        )
         .orElse(null);
     if (ropeLadderDirection == null) return Blocks.AIR.getDefaultState();
     BlockState bottom = world.getBlockState(pos.down());
-    BlockState top = world.getBlockState(pos.up());
     return this.getDefaultState()
         .with(DIRECTION, ropeLadderDirection)
         .with(BOTTOM, !bottom.isOf(this) || bottom.get(DIRECTION) != ropeLadderDirection)
