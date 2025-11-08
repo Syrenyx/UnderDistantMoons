@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "0": "minecraft:string",
+    "1": "minecraft:stick"
+  },
+  "pattern": [
+    "0 0",
+    "111",
+    "0 0"
+  ],
+  "result": {
+    "id": "distant-moons:rope_ladder",
+    "count": 12
+  }
+}

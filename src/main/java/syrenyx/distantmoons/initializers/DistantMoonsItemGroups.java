@@ -257,7 +257,8 @@ public abstract class DistantMoonsItemGroups {
         DistantMoonsBlocks.DEEP_IRON_LADDER.asItem().getDefaultStack(),
         DistantMoonsBlocks.FIXED_IRON_LADDER.asItem().getDefaultStack(),
         DistantMoonsBlocks.FIXED_WROUGHT_IRON_LADDER.asItem().getDefaultStack(),
-        DistantMoonsBlocks.FIXED_DEEP_IRON_LADDER.asItem().getDefaultStack()
+        DistantMoonsBlocks.FIXED_DEEP_IRON_LADDER.asItem().getDefaultStack(),
+        DistantMoonsBlocks.ROPE_LADDER.asItem().getDefaultStack()
     ));
     addToGroup(ItemGroups.FUNCTIONAL, Items.DRAGON_EGG, List.of(
         Items.SPAWNER.getDefaultStack(),

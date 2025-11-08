@@ -11,17 +11,13 @@ import net.minecraft.client.data.*;
 import net.minecraft.client.render.model.json.*;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
-import net.minecraft.state.property.Properties;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.Pool;
 import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.Nullable;
 import syrenyx.distantmoons.UnderDistantMoons;
 import syrenyx.distantmoons.content.block.*;
-import syrenyx.distantmoons.content.block.block_state_enums.FixedLadderSideShape;
-import syrenyx.distantmoons.content.block.block_state_enums.HorizontalAxis;
-import syrenyx.distantmoons.content.block.block_state_enums.SpikedFenceShape;
-import syrenyx.distantmoons.content.block.block_state_enums.WallSlabShape;
+import syrenyx.distantmoons.content.block.block_state_enums.*;
 import syrenyx.distantmoons.datagen.utility.ModelProviderUtil;
 import syrenyx.distantmoons.initializers.DistantMoonsBlocks;
 import syrenyx.distantmoons.initializers.DistantMoonsItems;
@@ -73,6 +69,15 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
       TextureKey.END, UnderDistantMoons.withPrefixedNamespace("block/%/end"),
       DistantMoonsTextureKeys.HORIZONTAL, UnderDistantMoons.withPrefixedNamespace("block/%/horizontal"),
       DistantMoonsTextureKeys.VERTICAL, UnderDistantMoons.withPrefixedNamespace("block/%/vertical")
+  );
+  private static final Map<TextureKey, String> ROPE_LADDER_TEXTURE_MAP = Map.of(
+      DistantMoonsTextureKeys.CEILING, UnderDistantMoons.withPrefixedNamespace("block/%/ropes/ceiling"),
+      TextureKey.END, UnderDistantMoons.withPrefixedNamespace("block/%/end"),
+      DistantMoonsTextureKeys.ENDS, UnderDistantMoons.withPrefixedNamespace("block/%/ropes/ends"),
+      DistantMoonsTextureKeys.MIDDLE, UnderDistantMoons.withPrefixedNamespace("block/%/ropes/middle"),
+      TextureKey.SIDE, UnderDistantMoons.withPrefixedNamespace("block/%/side"),
+      TextureKey.TEXTURE, UnderDistantMoons.withPrefixedNamespace("item/%"),
+      TextureKey.PARTICLE, UnderDistantMoons.withPrefixedNamespace("block/%/particle")
   );
   private static final Map<TextureKey, String> SPIKED_FENCE_TEXTURE_MAP = Map.of(
       TextureKey.BOTTOM, UnderDistantMoons.withPrefixedNamespace("block/%/bottom"),
@@ -260,6 +265,9 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     registerPoleBlock(DistantMoonsBlocks.PALE_OAK_POLE, POLE_TEXTURE_MAP, "pole");
     registerPoleBlock(DistantMoonsBlocks.SPRUCE_POLE, POLE_TEXTURE_MAP, "pole");
     registerPoleBlock(DistantMoonsBlocks.WARPED_POLE, POLE_TEXTURE_MAP, "pole");
+
+    //ROPE LADDERS
+    registerRopeLadderBlock(DistantMoonsBlocks.ROPE_LADDER, ROPE_LADDER_TEXTURE_MAP);
 
     //SPIKED FENCES
     registerSpikedFenceBlock(DistantMoonsBlocks.DEEP_IRON_FENCE, SPIKED_FENCE_TEXTURE_MAP);
@@ -700,6 +708,53 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
         .with(new MultipartModelConditionBuilder().put(PoleBlock.AXIS, Direction.Axis.Z).put(PoleBlock.DOWN, true), variantExtensionZ.apply(ROTATE_X_270).apply(UV_LOCK))
     );
     this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModels.basic(variantCenterY.variants().getEntries().getFirst().value().modelId()));
+  }
+
+  private void registerRopeLadderBlock(Block block, Map<TextureKey, String> rawTextureMap) {
+    Map<TextureKey, String> textureMapBottom = Map.of(TextureKey.BOTTOM, rawTextureMap.get(DistantMoonsTextureKeys.ENDS), TextureKey.END, rawTextureMap.get(TextureKey.END), TextureKey.SIDE, rawTextureMap.get(TextureKey.SIDE), TextureKey.TOP, rawTextureMap.get(DistantMoonsTextureKeys.MIDDLE), TextureKey.PARTICLE, rawTextureMap.get(TextureKey.PARTICLE));
+    Map<TextureKey, String> textureMapInnerEnds = Map.of(TextureKey.BOTTOM, rawTextureMap.get(DistantMoonsTextureKeys.ENDS), TextureKey.END, rawTextureMap.get(TextureKey.END), TextureKey.SIDE, rawTextureMap.get(TextureKey.SIDE), TextureKey.TOP, rawTextureMap.get(DistantMoonsTextureKeys.CEILING), TextureKey.PARTICLE, rawTextureMap.get(TextureKey.PARTICLE));
+    Map<TextureKey, String> textureMapInnerTop = Map.of(TextureKey.BOTTOM, rawTextureMap.get(DistantMoonsTextureKeys.MIDDLE), TextureKey.END, rawTextureMap.get(TextureKey.END), TextureKey.SIDE, rawTextureMap.get(TextureKey.SIDE), TextureKey.TOP, rawTextureMap.get(DistantMoonsTextureKeys.CEILING), TextureKey.PARTICLE, rawTextureMap.get(TextureKey.PARTICLE));
+    Map<TextureKey, String> textureMapMiddle = Map.of(TextureKey.BOTTOM, rawTextureMap.get(DistantMoonsTextureKeys.MIDDLE), TextureKey.END, rawTextureMap.get(TextureKey.END), TextureKey.SIDE, rawTextureMap.get(TextureKey.SIDE), TextureKey.TOP, rawTextureMap.get(DistantMoonsTextureKeys.MIDDLE), TextureKey.PARTICLE, rawTextureMap.get(TextureKey.PARTICLE));
+    Map<TextureKey, String> textureMapOuterEnds = Map.of(TextureKey.BOTTOM, rawTextureMap.get(DistantMoonsTextureKeys.ENDS), TextureKey.END, rawTextureMap.get(TextureKey.END), TextureKey.SIDE, rawTextureMap.get(TextureKey.SIDE), TextureKey.TOP, rawTextureMap.get(DistantMoonsTextureKeys.ENDS), TextureKey.PARTICLE, rawTextureMap.get(TextureKey.PARTICLE));
+    Map<TextureKey, String> textureMapOuterTop = Map.of(TextureKey.BOTTOM, rawTextureMap.get(DistantMoonsTextureKeys.MIDDLE), TextureKey.END, rawTextureMap.get(TextureKey.END), TextureKey.SIDE, rawTextureMap.get(TextureKey.SIDE), TextureKey.TOP, rawTextureMap.get(DistantMoonsTextureKeys.ENDS), TextureKey.PARTICLE, rawTextureMap.get(TextureKey.PARTICLE));
+    Map<TextureKey, String> textureMapItem = Map.of(TextureKey.TEXTURE, rawTextureMap.get(TextureKey.TEXTURE), TextureKey.PARTICLE, rawTextureMap.get(TextureKey.TEXTURE));
+    WeightedVariant variantInnerBottom = createWeightedVariant(createObjectModel(block, "rope_ladder/inner", "/inner/bottom", textureMapBottom));
+    WeightedVariant variantInnerEnds = createWeightedVariant(createObjectModel(block, "rope_ladder/ceiling", "/inner/ends", textureMapInnerEnds));
+    WeightedVariant variantInnerMiddle = createWeightedVariant(createObjectModel(block, "rope_ladder/inner", "/inner/middle", textureMapMiddle));
+    WeightedVariant variantInnerTop = createWeightedVariant(createObjectModel(block, "rope_ladder/ceiling", "/inner/top", textureMapInnerTop));
+    WeightedVariant variantOuterBottom = createWeightedVariant(createObjectModel(block, "rope_ladder/outer", "/outer/bottom", textureMapBottom));
+    WeightedVariant variantOuterEnds = createWeightedVariant(createObjectModel(block, "rope_ladder/outer", "/outer/ends", textureMapOuterEnds));
+    WeightedVariant variantOuterMiddle = createWeightedVariant(createObjectModel(block, "rope_ladder/outer", "/outer/middle", textureMapMiddle));
+    WeightedVariant variantOuterTop = createWeightedVariant(createObjectModel(block, "rope_ladder/outer", "/outer/top", textureMapOuterTop));
+    this.blockGenerator.blockStateCollector.accept(VariantsBlockModelDefinitionCreator.of(block).with(BlockStateVariantMap
+        .models(RopeLadderBlock.DIRECTION, RopeLadderBlock.TOP, RopeLadderBlock.BOTTOM)
+        .register(RopeLadderDirection.NORTH, false, false, variantOuterMiddle)
+        .register(RopeLadderDirection.NORTH, false, true, variantOuterBottom)
+        .register(RopeLadderDirection.NORTH, true, false, variantOuterTop)
+        .register(RopeLadderDirection.NORTH, true, true, variantOuterEnds)
+        .register(RopeLadderDirection.EAST, false, false, variantOuterMiddle.apply(ROTATE_Y_90))
+        .register(RopeLadderDirection.EAST, false, true, variantOuterBottom.apply(ROTATE_Y_90))
+        .register(RopeLadderDirection.EAST, true, false, variantOuterTop.apply(ROTATE_Y_90))
+        .register(RopeLadderDirection.EAST, true, true, variantOuterEnds.apply(ROTATE_Y_90))
+        .register(RopeLadderDirection.SOUTH, false, false, variantOuterMiddle.apply(ROTATE_Y_180))
+        .register(RopeLadderDirection.SOUTH, false, true, variantOuterBottom.apply(ROTATE_Y_180))
+        .register(RopeLadderDirection.SOUTH, true, false, variantOuterTop.apply(ROTATE_Y_180))
+        .register(RopeLadderDirection.SOUTH, true, true, variantOuterEnds.apply(ROTATE_Y_180))
+        .register(RopeLadderDirection.WEST, false, false, variantOuterMiddle.apply(ROTATE_Y_270))
+        .register(RopeLadderDirection.WEST, false, true, variantOuterBottom.apply(ROTATE_Y_270))
+        .register(RopeLadderDirection.WEST, true, false, variantOuterTop.apply(ROTATE_Y_270))
+        .register(RopeLadderDirection.WEST, true, true, variantOuterEnds.apply(ROTATE_Y_270))
+        .register(RopeLadderDirection.X, false, false, variantInnerMiddle.apply(ROTATE_Y_270))
+        .register(RopeLadderDirection.X, false, true, variantInnerBottom.apply(ROTATE_Y_270))
+        .register(RopeLadderDirection.X, true, false, variantInnerTop.apply(ROTATE_Y_270))
+        .register(RopeLadderDirection.X, true, true, variantInnerEnds.apply(ROTATE_Y_270))
+        .register(RopeLadderDirection.Z, false, false, variantInnerMiddle)
+        .register(RopeLadderDirection.Z, false, true, variantInnerBottom)
+        .register(RopeLadderDirection.Z, true, false, variantInnerTop)
+        .register(RopeLadderDirection.Z, true, true, variantInnerEnds)
+    ));
+    Identifier inventoryModel = createObjectModel(block, "simple_item", "/item", textureMapItem);
+    this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModels.basic(inventoryModel));
   }
 
   private void registerSpikedFenceBlock(Block block, Map<TextureKey, String> rawTextureMap) {
