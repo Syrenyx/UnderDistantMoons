@@ -1,0 +1,46 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_pale_prismarine_shard": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "distant-moons:pale_prismarine_shard"
+          }
+        ]
+      }
+    },
+    "has_prismarine_crystals": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:prismarine_crystals"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "distant-moons:pale_sea_lantern"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_pale_prismarine_shard"
+    ],
+    [
+      "has_the_recipe",
+      "has_prismarine_crystals"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "distant-moons:pale_sea_lantern"
+    ]
+  }
+}

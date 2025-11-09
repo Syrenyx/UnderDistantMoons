@@ -198,7 +198,27 @@ public abstract class DistantMoonsItemGroups {
         DistantMoonsBlocks.PRISMARINE_TILE_SLAB.asItem().getDefaultStack(),
         DistantMoonsBlocks.PRISMARINE_TILE_WALL_SLAB.asItem().getDefaultStack()
     ));
-    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.DARK_PRISMARINE_SLAB, List.of(DistantMoonsBlocks.DARK_PRISMARINE_WALL_SLAB.asItem().getDefaultStack()));
+    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.DARK_PRISMARINE_SLAB, List.of(
+        DistantMoonsBlocks.DARK_PRISMARINE_WALL_SLAB.asItem().getDefaultStack(),
+        DistantMoonsBlocks.PALE_SEA_LANTERN.asItem().getDefaultStack(),
+        DistantMoonsBlocks.PALE_PRISMARINE.asItem().getDefaultStack(),
+        DistantMoonsBlocks.PALE_PRISMARINE_STAIRS.asItem().getDefaultStack(),
+        DistantMoonsBlocks.PALE_PRISMARINE_SLAB.asItem().getDefaultStack(),
+        DistantMoonsBlocks.PALE_PRISMARINE_WALL_SLAB.asItem().getDefaultStack(),
+        DistantMoonsBlocks.PALE_PRISMARINE_WALL.asItem().getDefaultStack(),
+        DistantMoonsBlocks.PALE_PRISMARINE_BRICKS.asItem().getDefaultStack(),
+        DistantMoonsBlocks.PALE_PRISMARINE_BRICK_SLAB.asItem().getDefaultStack(),
+        DistantMoonsBlocks.PALE_PRISMARINE_BRICK_STAIRS.asItem().getDefaultStack(),
+        DistantMoonsBlocks.PALE_PRISMARINE_BRICK_WALL_SLAB.asItem().getDefaultStack(),
+        DistantMoonsBlocks.PALE_PRISMARINE_TILES.asItem().getDefaultStack(),
+        DistantMoonsBlocks.PALE_PRISMARINE_TILE_SLAB.asItem().getDefaultStack(),
+        DistantMoonsBlocks.PALE_PRISMARINE_TILE_STAIRS.asItem().getDefaultStack(),
+        DistantMoonsBlocks.PALE_PRISMARINE_TILE_WALL_SLAB.asItem().getDefaultStack(),
+        DistantMoonsBlocks.GRAY_PRISMARINE.asItem().getDefaultStack(),
+        DistantMoonsBlocks.GRAY_PRISMARINE_STAIRS.asItem().getDefaultStack(),
+        DistantMoonsBlocks.GRAY_PRISMARINE_SLAB.asItem().getDefaultStack(),
+        DistantMoonsBlocks.GRAY_PRISMARINE_WALL_SLAB.asItem().getDefaultStack()
+    ));
     addToGroup(ItemGroups.BUILDING_BLOCKS, Items.NETHER_BRICK_SLAB, List.of(DistantMoonsBlocks.NETHER_BRICK_WALL_SLAB.asItem().getDefaultStack()));
     addToGroup(ItemGroups.BUILDING_BLOCKS, Items.RED_NETHER_BRICK_SLAB, List.of(DistantMoonsBlocks.RED_NETHER_BRICK_WALL_SLAB.asItem().getDefaultStack()));
     addToGroup(ItemGroups.BUILDING_BLOCKS, Items.BASALT, List.of(DistantMoonsBlocks.CUT_BASALT.asItem().getDefaultStack()));
@@ -320,6 +340,7 @@ public abstract class DistantMoonsItemGroups {
         DistantMoonsItems.WROUGHT_IRON_ROD.getDefaultStack(),
         DistantMoonsItems.REFINED_DEEP_IRON_ROD.getDefaultStack()
     ));
+    addToGroup(ItemGroups.INGREDIENTS, Items.PRISMARINE_SHARD, List.of(DistantMoonsItems.PALE_PRISMARINE_SHARD.getDefaultStack()));
     addToGroup(ItemGroups.INGREDIENTS, Items.BOOK, List.of(DistantMoonsItems.UNDERWORLD_DUST.getDefaultStack()));
 
     //SPAWN EGGS

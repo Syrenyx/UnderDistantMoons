@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "0": "distant-moons:pale_prismarine_shard",
+    "1": "minecraft:prismarine_crystals"
+  },
+  "pattern": [
+    "010",
+    "111",
+    "010"
+  ],
+  "result": {
+    "id": "distant-moons:pale_sea_lantern"
+  }
+}

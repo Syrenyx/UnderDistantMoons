@@ -468,6 +468,34 @@ public abstract class DistantMoonsBlocks {
       AbstractBlock.Settings.copy(Blocks.GRANITE),
       new Item.Settings()
   );
+  public static final Block GRAY_PRISMARINE = register(
+      "gray_prismarine",
+      Block::new,
+      AbstractBlock.Settings.copy(Blocks.DARK_PRISMARINE)
+          .mapColor(MapColor.TERRACOTTA_BROWN),
+      new Item.Settings()
+  );
+  public static final Block GRAY_PRISMARINE_SLAB = register(
+      "gray_prismarine_slab",
+      SlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.DARK_PRISMARINE_SLAB)
+          .mapColor(MapColor.TERRACOTTA_BROWN),
+      new Item.Settings()
+  );
+  public static final Block GRAY_PRISMARINE_STAIRS = register(
+      "gray_prismarine_stairs",
+      SimplifiedStairsBlock::new,
+      AbstractBlock.Settings.copy(Blocks.DARK_PRISMARINE_STAIRS)
+          .mapColor(MapColor.TERRACOTTA_BROWN),
+      new Item.Settings()
+  );
+  public static final Block GRAY_PRISMARINE_WALL_SLAB = register(
+      "gray_prismarine_wall_slab",
+      WallSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.DARK_PRISMARINE_SLAB)
+          .mapColor(MapColor.TERRACOTTA_BROWN),
+      new Item.Settings()
+  );
   public static final Block IRON_BAR_DOOR = register(
       "iron_bar_door",
       settings -> new MetalBarDoorBlock(BlockSetType.IRON, settings),
@@ -587,6 +615,104 @@ public abstract class DistantMoonsBlocks {
       "pale_oak_wall_slab",
       WallSlabBlock::new,
       AbstractBlock.Settings.copy(Blocks.PALE_OAK_PLANKS),
+      new Item.Settings()
+  );
+  public static final Block PALE_PRISMARINE = register(
+      "pale_prismarine",
+      Block::new,
+      AbstractBlock.Settings.copy(Blocks.PRISMARINE)
+          .mapColor(MapColor.TERRACOTTA_WHITE),
+      new Item.Settings()
+  );
+  public static final Block PALE_PRISMARINE_BRICK_SLAB = register(
+      "pale_prismarine_brick_slab",
+      SlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.PRISMARINE_BRICK_SLAB)
+          .mapColor(MapColor.TERRACOTTA_WHITE),
+      new Item.Settings()
+  );
+  public static final Block PALE_PRISMARINE_BRICK_STAIRS = register(
+      "pale_prismarine_brick_stairs",
+      SimplifiedStairsBlock::new,
+      AbstractBlock.Settings.copy(Blocks.PRISMARINE_BRICK_STAIRS)
+          .mapColor(MapColor.TERRACOTTA_WHITE),
+      new Item.Settings()
+  );
+  public static final Block PALE_PRISMARINE_BRICK_WALL_SLAB = register(
+      "pale_prismarine_brick_wall_slab",
+      WallSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.PRISMARINE_BRICK_SLAB)
+          .mapColor(MapColor.TERRACOTTA_WHITE),
+      new Item.Settings()
+  );
+  public static final Block PALE_PRISMARINE_BRICKS = register(
+      "pale_prismarine_bricks",
+      Block::new,
+      AbstractBlock.Settings.copy(Blocks.PRISMARINE_BRICKS)
+          .mapColor(MapColor.TERRACOTTA_WHITE),
+      new Item.Settings()
+  );
+  public static final Block PALE_PRISMARINE_SLAB = register(
+      "pale_prismarine_slab",
+      SlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.PRISMARINE_SLAB)
+          .mapColor(MapColor.TERRACOTTA_WHITE),
+      new Item.Settings()
+  );
+  public static final Block PALE_PRISMARINE_STAIRS = register(
+      "pale_prismarine_stairs",
+      SimplifiedStairsBlock::new,
+      AbstractBlock.Settings.copy(Blocks.PRISMARINE_STAIRS)
+          .mapColor(MapColor.TERRACOTTA_WHITE),
+      new Item.Settings()
+  );
+  public static final Block PALE_PRISMARINE_TILE_SLAB = register(
+      "pale_prismarine_tile_slab",
+      SlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.PRISMARINE_BRICK_SLAB)
+          .mapColor(MapColor.TERRACOTTA_WHITE),
+      new Item.Settings()
+  );
+  public static final Block PALE_PRISMARINE_TILE_STAIRS = register(
+      "pale_prismarine_tile_stairs",
+      SimplifiedStairsBlock::new,
+      AbstractBlock.Settings.copy(Blocks.PRISMARINE_BRICK_STAIRS)
+          .mapColor(MapColor.TERRACOTTA_WHITE),
+      new Item.Settings()
+  );
+  public static final Block PALE_PRISMARINE_TILE_WALL_SLAB = register(
+      "pale_prismarine_tile_wall_slab",
+      WallSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.PRISMARINE_BRICK_SLAB)
+          .mapColor(MapColor.TERRACOTTA_WHITE),
+      new Item.Settings()
+  );
+  public static final Block PALE_PRISMARINE_TILES = register(
+      "pale_prismarine_tiles",
+      Block::new,
+      AbstractBlock.Settings.copy(Blocks.PRISMARINE_BRICKS)
+          .mapColor(MapColor.TERRACOTTA_WHITE),
+      new Item.Settings()
+  );
+  public static final Block PALE_PRISMARINE_WALL = register(
+      "pale_prismarine_wall",
+      WallBlock::new,
+      AbstractBlock.Settings.copy(Blocks.PRISMARINE_WALL)
+          .mapColor(MapColor.TERRACOTTA_WHITE),
+      new Item.Settings()
+  );
+  public static final Block PALE_PRISMARINE_WALL_SLAB = register(
+      "pale_prismarine_wall_slab",
+      WallSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.PRISMARINE_SLAB)
+          .mapColor(MapColor.TERRACOTTA_WHITE),
+      new Item.Settings()
+  );
+  public static final Block PALE_SEA_LANTERN = register(
+      "pale_sea_lantern",
+      Block::new,
+      AbstractBlock.Settings.copy(Blocks.SEA_LANTERN)
+          .luminance(state -> 10),
       new Item.Settings()
   );
   public static final Block POLISHED_ANDESITE_WALL_SLAB = register(
