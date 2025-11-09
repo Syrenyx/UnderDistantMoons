@@ -36,6 +36,12 @@ public abstract class DistantMoonsBlocks {
       AbstractBlock.Settings.copy(Blocks.ACACIA_PLANKS),
       new Item.Settings()
   );
+  public static final Block ANDESITE_POST = register(
+      "andesite_post",
+      BeamBlock::new,
+      AbstractBlock.Settings.copy(Blocks.ANDESITE),
+      new Item.Settings()
+  );
   public static final Block ANDESITE_WALL_SLAB = register(
       "andesite_wall_slab",
       WallSlabBlock::new,
@@ -121,10 +127,22 @@ public abstract class DistantMoonsBlocks {
       AbstractBlock.Settings.copy(Blocks.CHERRY_PLANKS),
       new Item.Settings()
   );
+  public static final Block COBBLED_DEEPSLATE_POST = register(
+      "cobbled_deepslate_post",
+      BeamBlock::new,
+      AbstractBlock.Settings.copy(Blocks.COBBLED_DEEPSLATE),
+      new Item.Settings()
+  );
   public static final Block COBBLED_DEEPSLATE_WALL_SLAB = register(
       "cobbled_deepslate_wall_slab",
       WallSlabBlock::new,
       AbstractBlock.Settings.copy(Blocks.COBBLED_DEEPSLATE),
+      new Item.Settings()
+  );
+  public static final Block COBBLESTONE_POST = register(
+      "cobblestone_post",
+      BeamBlock::new,
+      AbstractBlock.Settings.copy(Blocks.COBBLESTONE),
       new Item.Settings()
   );
   public static final Block COBBLESTONE_WALL_SLAB = register(
@@ -137,6 +155,36 @@ public abstract class DistantMoonsBlocks {
       "coke_block",
       Block::new,
       AbstractBlock.Settings.copy(Blocks.COAL_BLOCK),
+      new Item.Settings()
+  );
+  public static final Block CRACKED_STONE_BRICK_POST = register(
+      "cracked_stone_brick_post",
+      BeamBlock::new,
+      AbstractBlock.Settings.copy(Blocks.CRACKED_STONE_BRICKS),
+      new Item.Settings()
+  );
+  public static final Block CRACKED_STONE_BRICK_SLAB = register(
+      "cracked_stone_brick_slab",
+      SlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.CRACKED_STONE_BRICKS),
+      new Item.Settings()
+  );
+  public static final Block CRACKED_STONE_BRICK_STAIRS = register(
+      "cracked_stone_brick_stairs",
+      SimplifiedStairsBlock::new,
+      AbstractBlock.Settings.copy(Blocks.CRACKED_STONE_BRICKS),
+      new Item.Settings()
+  );
+  public static final Block CRACKED_STONE_BRICK_WALL = register(
+      "cracked_stone_brick_wall",
+      WallBlock::new,
+      AbstractBlock.Settings.copy(Blocks.CRACKED_STONE_BRICKS),
+      new Item.Settings()
+  );
+  public static final Block CRACKED_STONE_BRICK_WALL_SLAB = register(
+      "cracked_stone_brick_wall_slab",
+      WallSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.CRACKED_STONE_BRICKS),
       new Item.Settings()
   );
   public static final Block CRIMSON_BEAM = register(
@@ -432,6 +480,12 @@ public abstract class DistantMoonsBlocks {
       AbstractBlock.Settings.copy(Blocks.DEEPSLATE_TILES),
       new Item.Settings()
   );
+  public static final Block DIORITE_POST = register(
+      "diorite_post",
+      BeamBlock::new,
+      AbstractBlock.Settings.copy(Blocks.DIORITE),
+      new Item.Settings()
+  );
   public static final Block DIORITE_WALL_SLAB = register(
       "diorite_wall_slab",
       WallSlabBlock::new,
@@ -460,6 +514,12 @@ public abstract class DistantMoonsBlocks {
       "fixed_wrought_iron_ladder",
       FixedLadderBlock::new,
       AbstractBlock.Settings.copy(Blocks.IRON_BARS),
+      new Item.Settings()
+  );
+  public static final Block GRANITE_POST = register(
+      "granite_post",
+      BeamBlock::new,
+      AbstractBlock.Settings.copy(Blocks.GRANITE),
       new Item.Settings()
   );
   public static final Block GRANITE_WALL_SLAB = register(
@@ -550,10 +610,22 @@ public abstract class DistantMoonsBlocks {
       AbstractBlock.Settings.copy(Blocks.MANGROVE_PLANKS),
       new Item.Settings()
   );
+  public static final Block MOSSY_COBBLESTONE_POST = register(
+      "mossy_cobblestone_post",
+      BeamBlock::new,
+      AbstractBlock.Settings.copy(Blocks.MOSSY_COBBLESTONE),
+      new Item.Settings()
+  );
   public static final Block MOSSY_COBBLESTONE_WALL_SLAB = register(
       "mossy_cobblestone_wall_slab",
       WallSlabBlock::new,
       AbstractBlock.Settings.copy(Blocks.MOSSY_COBBLESTONE),
+      new Item.Settings()
+  );
+  public static final Block MOSSY_STONE_BRICK_POST = register(
+      "mossy_stone_brick_post",
+      BeamBlock::new,
+      AbstractBlock.Settings.copy(Blocks.MOSSY_STONE_BRICKS),
       new Item.Settings()
   );
   public static final Block MOSSY_STONE_BRICK_WALL_SLAB = register(
@@ -715,6 +787,18 @@ public abstract class DistantMoonsBlocks {
           .luminance(state -> 10),
       new Item.Settings()
   );
+  public static final Block POLISHED_ANDESITE_POST = register(
+      "polished_andesite_post",
+      BeamBlock::new,
+      AbstractBlock.Settings.copy(Blocks.POLISHED_ANDESITE),
+      new Item.Settings()
+  );
+  public static final Block POLISHED_ANDESITE_WALL = register(
+      "polished_andesite_wall",
+      WallBlock::new,
+      AbstractBlock.Settings.copy(Blocks.POLISHED_ANDESITE),
+      new Item.Settings()
+  );
   public static final Block POLISHED_ANDESITE_WALL_SLAB = register(
       "polished_andesite_wall_slab",
       WallSlabBlock::new,
@@ -745,10 +829,34 @@ public abstract class DistantMoonsBlocks {
       AbstractBlock.Settings.copy(Blocks.POLISHED_DEEPSLATE),
       new Item.Settings()
   );
+  public static final Block POLISHED_DIORITE_POST = register(
+      "polished_diorite_post",
+      BeamBlock::new,
+      AbstractBlock.Settings.copy(Blocks.POLISHED_DIORITE),
+      new Item.Settings()
+  );
+  public static final Block POLISHED_DIORITE_WALL = register(
+      "polished_diorite_wall",
+      WallBlock::new,
+      AbstractBlock.Settings.copy(Blocks.POLISHED_DIORITE),
+      new Item.Settings()
+  );
   public static final Block POLISHED_DIORITE_WALL_SLAB = register(
       "polished_diorite_wall_slab",
       WallSlabBlock::new,
       AbstractBlock.Settings.copy(Blocks.POLISHED_DIORITE),
+      new Item.Settings()
+  );
+  public static final Block POLISHED_GRANITE_POST = register(
+      "polished_granite_post",
+      BeamBlock::new,
+      AbstractBlock.Settings.copy(Blocks.POLISHED_GRANITE),
+      new Item.Settings()
+  );
+  public static final Block POLISHED_GRANITE_WALL = register(
+      "polished_granite_wall",
+      WallBlock::new,
+      AbstractBlock.Settings.copy(Blocks.POLISHED_GRANITE),
       new Item.Settings()
   );
   public static final Block POLISHED_GRANITE_WALL_SLAB = register(
@@ -875,6 +983,24 @@ public abstract class DistantMoonsBlocks {
       AbstractBlock.Settings.copy(Blocks.SMOOTH_SANDSTONE),
       new Item.Settings()
   );
+  public static final Block SMOOTH_STONE_POST = register(
+      "smooth_stone_post",
+      BeamBlock::new,
+      AbstractBlock.Settings.copy(Blocks.SMOOTH_STONE),
+      new Item.Settings()
+  );
+  public static final Block SMOOTH_STONE_STAIRS = register(
+      "smooth_stone_stairs",
+      SimplifiedStairsBlock::new,
+      AbstractBlock.Settings.copy(Blocks.SMOOTH_STONE),
+      new Item.Settings()
+  );
+  public static final Block SMOOTH_STONE_WALL = register(
+      "smooth_stone_wall",
+      WallBlock::new,
+      AbstractBlock.Settings.copy(Blocks.SMOOTH_STONE),
+      new Item.Settings()
+  );
   public static final Block SMOOTH_STONE_WALL_SLAB = register(
       "smooth_stone_wall_slab",
       WallSlabBlock::new,
@@ -899,10 +1025,28 @@ public abstract class DistantMoonsBlocks {
       AbstractBlock.Settings.copy(Blocks.SPRUCE_PLANKS),
       new Item.Settings()
   );
+  public static final Block STONE_POST = register(
+      "stone_post",
+      BeamBlock::new,
+      AbstractBlock.Settings.copy(Blocks.STONE),
+      new Item.Settings()
+  );
+  public static final Block STONE_BRICK_POST = register(
+      "stone_brick_post",
+      BeamBlock::new,
+      AbstractBlock.Settings.copy(Blocks.STONE_BRICKS),
+      new Item.Settings()
+  );
   public static final Block STONE_BRICK_WALL_SLAB = register(
       "stone_brick_wall_slab",
       WallSlabBlock::new,
       AbstractBlock.Settings.copy(Blocks.STONE_BRICKS),
+      new Item.Settings()
+  );
+  public static final Block STONE_WALL = register(
+      "stone_wall",
+      WallBlock::new,
+      AbstractBlock.Settings.copy(Blocks.STONE),
       new Item.Settings()
   );
   public static final Block STONE_WALL_SLAB = register(

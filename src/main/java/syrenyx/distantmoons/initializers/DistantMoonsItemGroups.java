@@ -169,7 +169,7 @@ public abstract class DistantMoonsItemGroups {
     addToGroup(ItemGroups.BUILDING_BLOCKS, Items.MOSSY_STONE_BRICK_SLAB, List.of(DistantMoonsBlocks.MOSSY_STONE_BRICK_WALL_SLAB.asItem().getDefaultStack()));
     addToGroup(ItemGroups.BUILDING_BLOCKS, Items.GRANITE_SLAB, List.of(DistantMoonsBlocks.GRANITE_WALL_SLAB.asItem().getDefaultStack()));
     addToGroup(ItemGroups.BUILDING_BLOCKS, Items.POLISHED_GRANITE_SLAB, List.of(DistantMoonsBlocks.POLISHED_GRANITE_WALL_SLAB.asItem().getDefaultStack()));
-    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.GRANITE_SLAB, List.of(DistantMoonsBlocks.DIORITE_WALL_SLAB.asItem().getDefaultStack()));
+    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.DIORITE_SLAB, List.of(DistantMoonsBlocks.DIORITE_WALL_SLAB.asItem().getDefaultStack()));
     addToGroup(ItemGroups.BUILDING_BLOCKS, Items.POLISHED_DIORITE_SLAB, List.of(DistantMoonsBlocks.POLISHED_DIORITE_WALL_SLAB.asItem().getDefaultStack()));
     addToGroup(ItemGroups.BUILDING_BLOCKS, Items.ANDESITE_SLAB, List.of(DistantMoonsBlocks.ANDESITE_WALL_SLAB.asItem().getDefaultStack()));
     addToGroup(ItemGroups.BUILDING_BLOCKS, Items.POLISHED_ANDESITE_SLAB, List.of(DistantMoonsBlocks.POLISHED_ANDESITE_WALL_SLAB.asItem().getDefaultStack()));
