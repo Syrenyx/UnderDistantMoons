@@ -191,7 +191,13 @@ public abstract class DistantMoonsItemGroups {
     addToGroup(ItemGroups.BUILDING_BLOCKS, Items.SMOOTH_RED_SANDSTONE_SLAB, List.of(DistantMoonsBlocks.SMOOTH_RED_SANDSTONE_WALL_SLAB.asItem().getDefaultStack()));
     addToGroup(ItemGroups.BUILDING_BLOCKS, Items.CUT_RED_SANDSTONE_SLAB, List.of(DistantMoonsBlocks.CUT_RED_SANDSTONE_WALL_SLAB.asItem().getDefaultStack()));
     addToGroup(ItemGroups.BUILDING_BLOCKS, Items.PRISMARINE_SLAB, List.of(DistantMoonsBlocks.PRISMARINE_WALL_SLAB.asItem().getDefaultStack()));
-    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.PRISMARINE_BRICK_SLAB, List.of(DistantMoonsBlocks.PRISMARINE_BRICK_WALL_SLAB.asItem().getDefaultStack()));
+    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.PRISMARINE_BRICK_SLAB, List.of(
+        DistantMoonsBlocks.PRISMARINE_BRICK_WALL_SLAB.asItem().getDefaultStack(),
+        DistantMoonsBlocks.PRISMARINE_TILES.asItem().getDefaultStack(),
+        DistantMoonsBlocks.PRISMARINE_TILE_STAIRS.asItem().getDefaultStack(),
+        DistantMoonsBlocks.PRISMARINE_TILE_SLAB.asItem().getDefaultStack(),
+        DistantMoonsBlocks.PRISMARINE_TILE_WALL_SLAB.asItem().getDefaultStack()
+    ));
     addToGroup(ItemGroups.BUILDING_BLOCKS, Items.DARK_PRISMARINE_SLAB, List.of(DistantMoonsBlocks.DARK_PRISMARINE_WALL_SLAB.asItem().getDefaultStack()));
     addToGroup(ItemGroups.BUILDING_BLOCKS, Items.NETHER_BRICK_SLAB, List.of(DistantMoonsBlocks.NETHER_BRICK_WALL_SLAB.asItem().getDefaultStack()));
     addToGroup(ItemGroups.BUILDING_BLOCKS, Items.RED_NETHER_BRICK_SLAB, List.of(DistantMoonsBlocks.RED_NETHER_BRICK_WALL_SLAB.asItem().getDefaultStack()));

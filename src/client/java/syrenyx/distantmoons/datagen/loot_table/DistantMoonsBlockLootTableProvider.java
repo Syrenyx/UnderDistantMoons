@@ -62,6 +62,8 @@ public class DistantMoonsBlockLootTableProvider extends FabricBlockLootTableProv
     this.addDrop(DistantMoonsBlocks.OAK_POLE);
     this.addDrop(DistantMoonsBlocks.PALE_OAK_BEAM);
     this.addDrop(DistantMoonsBlocks.PALE_OAK_POLE);
+    this.addDrop(DistantMoonsBlocks.PRISMARINE_TILE_STAIRS);
+    this.addDrop(DistantMoonsBlocks.PRISMARINE_TILES);
     this.addDrop(DistantMoonsBlocks.RAW_DEEP_IRON_BLOCK);
     this.addDrop(DistantMoonsBlocks.REFINED_DEEP_IRON_BLOCK);
     this.addDrop(DistantMoonsBlocks.ROPE_LADDER);
@@ -103,6 +105,7 @@ public class DistantMoonsBlockLootTableProvider extends FabricBlockLootTableProv
     this.addSlabDrop(DistantMoonsBlocks.CUT_WARPED_HYPHAE);
     this.addSlabDrop(DistantMoonsBlocks.CUT_WARPED_STEM);
     this.addSlabDrop(DistantMoonsBlocks.POLISHED_CUT_BASALT);
+    this.addSlabDrop(DistantMoonsBlocks.PRISMARINE_TILE_SLAB);
     this.addSlabDrop(DistantMoonsBlocks.STRIPPED_CUT_ACACIA_LOG);
     this.addSlabDrop(DistantMoonsBlocks.STRIPPED_CUT_ACACIA_WOOD);
     this.addSlabDrop(DistantMoonsBlocks.STRIPPED_CUT_BAMBOO_BLOCK);
@@ -164,6 +167,7 @@ public class DistantMoonsBlockLootTableProvider extends FabricBlockLootTableProv
     this.addWallSlabDrop(DistantMoonsBlocks.POLISHED_GRANITE_WALL_SLAB);
     this.addWallSlabDrop(DistantMoonsBlocks.POLISHED_TUFF_WALL_SLAB);
     this.addWallSlabDrop(DistantMoonsBlocks.PRISMARINE_BRICK_WALL_SLAB);
+    this.addWallSlabDrop(DistantMoonsBlocks.PRISMARINE_TILE_WALL_SLAB);
     this.addWallSlabDrop(DistantMoonsBlocks.PRISMARINE_WALL_SLAB);
     this.addWallSlabDrop(DistantMoonsBlocks.PURPUR_WALL_SLAB);
     this.addWallSlabDrop(DistantMoonsBlocks.QUARTZ_WALL_SLAB);

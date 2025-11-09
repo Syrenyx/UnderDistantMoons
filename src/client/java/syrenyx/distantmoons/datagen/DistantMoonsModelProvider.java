@@ -3,10 +3,7 @@ package syrenyx.distantmoons.datagen;
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.block.*;
-import net.minecraft.block.enums.BlockHalf;
-import net.minecraft.block.enums.DoorHinge;
-import net.minecraft.block.enums.DoubleBlockHalf;
-import net.minecraft.block.enums.SlabType;
+import net.minecraft.block.enums.*;
 import net.minecraft.client.data.*;
 import net.minecraft.client.render.model.json.*;
 import net.minecraft.item.Item;
@@ -106,6 +103,7 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     registerSimpleBlock(DistantMoonsBlocks.CRUDE_DEEP_IRON_BLOCK, SIMPLE_BLOCK_TEXTURE_MAP);
     registerSimpleBlock(DistantMoonsBlocks.DEEPSLATE_DEEP_IRON_ORE, SIMPLE_BLOCK_TEXTURE_MAP);
     registerSimpleBlock(DistantMoonsBlocks.NETHERRACK_DEEP_IRON_ORE, SIMPLE_BLOCK_TEXTURE_MAP);
+    registerSimpleBlock(DistantMoonsBlocks.PRISMARINE_TILES, SIMPLE_BLOCK_TEXTURE_MAP);
     registerSimpleBlock(DistantMoonsBlocks.RAW_DEEP_IRON_BLOCK, SIMPLE_BLOCK_TEXTURE_MAP);
     registerSimpleBlock(DistantMoonsBlocks.REFINED_DEEP_IRON_BLOCK, SIMPLE_BLOCK_TEXTURE_MAP);
 
@@ -269,10 +267,16 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     //ROPE LADDERS
     registerRopeLadderBlock(DistantMoonsBlocks.ROPE_LADDER, ROPE_LADDER_TEXTURE_MAP);
 
+    //SLABS
+    registerSimpleSlabBlock(DistantMoonsBlocks.PRISMARINE_TILE_SLAB, Map.of(TextureKey.SIDE, UnderDistantMoons.withPrefixedNamespace("block/prismarine_tiles")));
+
     //SPIKED FENCES
     registerSpikedFenceBlock(DistantMoonsBlocks.DEEP_IRON_FENCE, SPIKED_FENCE_TEXTURE_MAP);
     registerSpikedFenceBlock(DistantMoonsBlocks.IRON_FENCE, SPIKED_FENCE_TEXTURE_MAP);
     registerSpikedFenceBlock(DistantMoonsBlocks.WROUGHT_IRON_FENCE, SPIKED_FENCE_TEXTURE_MAP);
+
+    //STAIRS
+    registerSimpleStairsBlock(DistantMoonsBlocks.PRISMARINE_TILE_STAIRS, Map.of(TextureKey.SIDE, UnderDistantMoons.withPrefixedNamespace("block/prismarine_tiles")));
 
     //TRAPDOORS
     registerTrapdoorBlock(DistantMoonsBlocks.DEEP_IRON_TRAPDOOR, false, Map.of(
@@ -314,6 +318,7 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     registerSimpleWallSlabBlock(DistantMoonsBlocks.POLISHED_GRANITE_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/polished_granite"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.POLISHED_TUFF_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/polished_tuff"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.PRISMARINE_BRICK_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/prismarine_bricks"));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.PRISMARINE_TILE_WALL_SLAB, Map.of(TextureKey.SIDE, UnderDistantMoons.withPrefixedNamespace("block/prismarine_tiles")));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.PRISMARINE_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/prismarine"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.PURPUR_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/purpur_block"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.RED_NETHER_BRICK_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/red_nether_bricks"));
@@ -757,6 +762,31 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModels.basic(inventoryModel));
   }
 
+  private void registerSimpleSlabBlock(Block block, Map<TextureKey, String> rawTextureMap) {
+    Map<TextureKey, String> textureMap = Map.of(TextureKey.SIDE, rawTextureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, rawTextureMap.get(TextureKey.SIDE));
+    registerSlabBlock(
+        block,
+        createWeightedVariant(createObjectModel(block, "slab/simple/bottom", "/bottom", textureMap)),
+        createWeightedVariant(createObjectModel(block, "simple_block", "/double", textureMap)),
+        createWeightedVariant(createObjectModel(block, "slab/simple/top", "/top", textureMap))
+    );
+  }
+
+  private void registerSlabBlock(
+      Block block,
+      WeightedVariant variantBottom,
+      WeightedVariant variantDouble,
+      WeightedVariant variantTop
+  ) {
+    this.blockGenerator.blockStateCollector.accept(VariantsBlockModelDefinitionCreator.of(block).with(BlockStateVariantMap
+        .models(SlabBlock.TYPE)
+        .register(SlabType.BOTTOM, variantBottom)
+        .register(SlabType.DOUBLE, variantDouble)
+        .register(SlabType.TOP, variantTop)
+    ));
+    this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModels.basic(variantBottom.variants().getEntries().getFirst().value().modelId()));
+  }
+
   private void registerSpikedFenceBlock(Block block, Map<TextureKey, String> rawTextureMap) {
     Map<TextureKey, String> textureMapPole = Map.of(TextureKey.BOTTOM, rawTextureMap.get(TextureKey.BOTTOM), TextureKey.SIDE, rawTextureMap.get(TextureKey.SIDE), TextureKey.TOP, rawTextureMap.get(TextureKey.BOTTOM), TextureKey.PARTICLE, rawTextureMap.get(TextureKey.SIDE));
     Map<TextureKey, String> textureMapSide = Map.of(TextureKey.SIDE, rawTextureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, rawTextureMap.get(TextureKey.SIDE));
@@ -780,6 +810,50 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
         .with(new MultipartModelConditionBuilder().put(SpikedFenceBlock.WEST, SpikedFenceShape.TOP), variantTopSide.apply(ROTATE_Y_270))
     );
     Identifier inventoryModel = createObjectModel(block, "spiked_fence/item", "/item", textureMapItem);
+    this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModels.basic(inventoryModel));
+  }
+
+  private void registerSimpleStairsBlock(Block block, Map<TextureKey, String> rawTextureMap) {
+    Map<TextureKey, String> textureMap = Map.of(TextureKey.SIDE, rawTextureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, rawTextureMap.get(TextureKey.SIDE));
+    registerStairsBlock(
+        block,
+        createWeightedVariant(createObjectModel(block, "stairs/simple/straight", "/straight", textureMap)),
+        createWeightedVariant(createObjectModel(block, "stairs/simple/inner", "/inner", textureMap)),
+        createWeightedVariant(createObjectModel(block, "stairs/simple/outer", "/outer", textureMap)),
+        createObjectModel(block, "stairs/simple/item", "/item", textureMap)
+    );
+  }
+
+  private void registerStairsBlock(
+      Block block,
+      WeightedVariant variantStraight,
+      WeightedVariant variantInner,
+      WeightedVariant variantOuter,
+      Identifier inventoryModel
+  ) {
+    this.blockGenerator.blockStateCollector.accept(VariantsBlockModelDefinitionCreator.of(block).with(BlockStateVariantMap
+        .models(SimplifiedStairsBlock.SHAPE, SimplifiedStairsBlock.FACING)
+        .register(StairShape.STRAIGHT, Direction.NORTH, variantStraight.apply(ROTATE_Y_180).apply(UV_LOCK))
+        .register(StairShape.STRAIGHT, Direction.EAST, variantStraight.apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(StairShape.STRAIGHT, Direction.SOUTH, variantStraight)
+        .register(StairShape.STRAIGHT, Direction.WEST, variantStraight.apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(StairShape.INNER_LEFT, Direction.NORTH, variantInner.apply(ROTATE_Y_180).apply(UV_LOCK))
+        .register(StairShape.INNER_LEFT, Direction.EAST, variantInner.apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(StairShape.INNER_LEFT, Direction.SOUTH, variantInner)
+        .register(StairShape.INNER_LEFT, Direction.WEST, variantInner.apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(StairShape.INNER_RIGHT, Direction.NORTH, variantInner.apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(StairShape.INNER_RIGHT, Direction.EAST, variantInner)
+        .register(StairShape.INNER_RIGHT, Direction.SOUTH, variantInner.apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(StairShape.INNER_RIGHT, Direction.WEST, variantInner.apply(ROTATE_Y_180).apply(UV_LOCK))
+        .register(StairShape.OUTER_LEFT, Direction.NORTH, variantOuter.apply(ROTATE_Y_180).apply(UV_LOCK))
+        .register(StairShape.OUTER_LEFT, Direction.EAST, variantOuter.apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(StairShape.OUTER_LEFT, Direction.SOUTH, variantOuter)
+        .register(StairShape.OUTER_LEFT, Direction.WEST, variantOuter.apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(StairShape.OUTER_RIGHT, Direction.NORTH, variantOuter.apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(StairShape.OUTER_RIGHT, Direction.EAST, variantOuter)
+        .register(StairShape.OUTER_RIGHT, Direction.SOUTH, variantOuter.apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(StairShape.OUTER_RIGHT, Direction.WEST, variantOuter.apply(ROTATE_Y_180).apply(UV_LOCK))
+    ));
     this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModels.basic(inventoryModel));
   }
 

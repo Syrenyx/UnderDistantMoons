@@ -643,6 +643,30 @@ public abstract class DistantMoonsBlocks {
       AbstractBlock.Settings.copy(Blocks.PRISMARINE_BRICKS),
       new Item.Settings()
   );
+  public static final Block PRISMARINE_TILE_SLAB = register(
+      "prismarine_tile_slab",
+      SlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.PRISMARINE_BRICK_SLAB),
+      new Item.Settings()
+  );
+  public static final Block PRISMARINE_TILE_STAIRS = register(
+      "prismarine_tile_stairs",
+      SimplifiedStairsBlock::new,
+      AbstractBlock.Settings.copy(Blocks.PRISMARINE_BRICK_STAIRS),
+      new Item.Settings()
+  );
+  public static final Block PRISMARINE_TILE_WALL_SLAB = register(
+      "prismarine_tile_wall_slab",
+      WallSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.PRISMARINE_BRICK_SLAB),
+      new Item.Settings()
+  );
+  public static final Block PRISMARINE_TILES = register(
+      "prismarine_tiles",
+      Block::new,
+      AbstractBlock.Settings.copy(Blocks.PRISMARINE_BRICKS),
+      new Item.Settings()
+  );
   public static final Block PRISMARINE_WALL_SLAB = register(
       "prismarine_wall_slab",
       WallSlabBlock::new,

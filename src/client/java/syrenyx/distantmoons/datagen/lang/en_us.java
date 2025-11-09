@@ -126,6 +126,10 @@ public class en_us extends FabricLanguageProvider {
     builder.add(DistantMoonsBlocks.POLISHED_GRANITE_WALL_SLAB, "Polished Granite Wall Slab");
     builder.add(DistantMoonsBlocks.POLISHED_TUFF_WALL_SLAB, "Polished Tuff Wall Slab");
     builder.add(DistantMoonsBlocks.PRISMARINE_BRICK_WALL_SLAB, "Prismarine Brick Wall Slab");
+    builder.add(DistantMoonsBlocks.PRISMARINE_TILE_SLAB, "Prismarine Tile Slab");
+    builder.add(DistantMoonsBlocks.PRISMARINE_TILE_STAIRS, "Prismarine Tile Stairs");
+    builder.add(DistantMoonsBlocks.PRISMARINE_TILE_WALL_SLAB, "Prismarine Tile Wall Slab");
+    builder.add(DistantMoonsBlocks.PRISMARINE_TILES, "Prismarine Tiles");
     builder.add(DistantMoonsBlocks.PRISMARINE_WALL_SLAB, "Prismarine Wall Slab");
     builder.add(DistantMoonsBlocks.PURPUR_WALL_SLAB, "Purpur Wall Slab");
     builder.add(DistantMoonsBlocks.QUARTZ_WALL_SLAB, "Quartz Wall Slab");
