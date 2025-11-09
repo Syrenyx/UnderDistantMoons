@@ -93,6 +93,11 @@ public abstract class DistantMoonsItems {
       Item::new,
       new Item.Settings()
   );
+  public static final Item PALE_PRISMARINE_SHARD = register(
+      "pale_prismarine_shard",
+      Item::new,
+      new Item.Settings()
+  );
   public static final Item RAW_DEEP_IRON = register(
       "raw_deep_iron",
       Item::new,

@@ -69,8 +69,8 @@ public abstract class WallBlockMixin {
       Direction side,
       CallbackInfoReturnable<Boolean> callbackInfo
   ) {
-    if (state.isIn(DistantMoonsBlockTags.WALL_NEVER_CONNECTS_TO)) MixinUtil.cancelAndReturnValue(false, callbackInfo);
-    if (state.isIn(DistantMoonsBlockTags.WALL_ALWAYS_CONNECTS_TO)) MixinUtil.cancelAndReturnValue(true, callbackInfo);
-    if (state.getBlock() instanceof FixedLadderBlock) MixinUtil.cancelAndReturnValue(FixedLadderBlock.canWallConnect(state, side), callbackInfo);
+    if (state.isIn(DistantMoonsBlockTags.WALL_NEVER_CONNECTS_TO)) MixinUtil.cancelAndSetReturnValue(false, callbackInfo);
+    else if (state.isIn(DistantMoonsBlockTags.WALL_ALWAYS_CONNECTS_TO)) MixinUtil.cancelAndSetReturnValue(true, callbackInfo);
+    else if (state.getBlock() instanceof FixedLadderBlock) MixinUtil.cancelAndSetReturnValue(FixedLadderBlock.canWallConnect(state, side), callbackInfo);
   }
 }

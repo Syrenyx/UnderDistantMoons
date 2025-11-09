@@ -22,12 +22,12 @@ public class FenceBlockMixin {
   ) {
     BlockState defaultState = ((FenceBlock) (Object) this).getDefaultState();
     if (defaultState.isIn(DistantMoonsBlockTags.BRICK_FENCE)) {
-      if (state.isIn(DistantMoonsBlockTags.BRICK_FENCE_NEVER_CONNECTS_TO)) MixinUtil.cancelAndReturnValue(false, callbackInfo);
-      if (state.isIn(DistantMoonsBlockTags.BRICK_FENCE_ALWAYS_CONNECTS_TO)) MixinUtil.cancelAndReturnValue(true, callbackInfo);
+      if (state.isIn(DistantMoonsBlockTags.BRICK_FENCE_NEVER_CONNECTS_TO)) MixinUtil.cancelAndSetReturnValue(false, callbackInfo);
+      else if (state.isIn(DistantMoonsBlockTags.BRICK_FENCE_ALWAYS_CONNECTS_TO)) MixinUtil.cancelAndSetReturnValue(true, callbackInfo);
     }
-    if (defaultState.isIn(DistantMoonsBlockTags.WOODEN_FENCE)) {
-      if (state.isIn(DistantMoonsBlockTags.WOODEN_FENCE_NEVER_CONNECTS_TO)) MixinUtil.cancelAndReturnValue(false, callbackInfo);
-      if (state.isIn(DistantMoonsBlockTags.WOODEN_FENCE_ALWAYS_CONNECTS_TO)) MixinUtil.cancelAndReturnValue(true, callbackInfo);
+    else if (defaultState.isIn(DistantMoonsBlockTags.WOODEN_FENCE)) {
+      if (state.isIn(DistantMoonsBlockTags.WOODEN_FENCE_NEVER_CONNECTS_TO)) MixinUtil.cancelAndSetReturnValue(false, callbackInfo);
+      else if (state.isIn(DistantMoonsBlockTags.WOODEN_FENCE_ALWAYS_CONNECTS_TO)) MixinUtil.cancelAndSetReturnValue(true, callbackInfo);
     }
   }
 }

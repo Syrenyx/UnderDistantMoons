@@ -38,8 +38,8 @@ public class WallSlabBlock extends Block implements Waterloggable {
   public static final EnumProperty<Direction> FACING = HorizontalFacingBlock.FACING;
   public static final EnumProperty<WallSlabShape> SHAPE = EnumProperty.of("shape", WallSlabShape.class);
   public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
-  private static final VoxelShape FLAT_SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 16.0, 8.0);
-  private static final VoxelShape OUTER_SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 8.0, 16.0, 8.0);
+  private static final VoxelShape FLAT_SHAPE = Block.createCuboidShape(0.0, 0.0, 8.0, 16.0, 16.0, 16.0);
+  private static final VoxelShape OUTER_SHAPE = Block.createCuboidShape(8.0, 0.0, 8.0, 16.0, 16.0, 16.0);
   private static final VoxelShape INNER_SHAPE = VoxelShapes.union(FLAT_SHAPE, VoxelShapes.transform(OUTER_SHAPE, DirectionTransformation.fromRotations(AxisRotation.R0, AxisRotation.R270)));
   private static final Map<Direction, VoxelShape> FLAT_SHAPES_BY_DIRECTION = VoxelShapeUtil.createHorizontalDirectionShapeMap(FLAT_SHAPE);
   private static final Map<Direction, VoxelShape> OUTER_SHAPES_BY_DIRECTION = VoxelShapeUtil.createHorizontalDirectionShapeMap(OUTER_SHAPE);
@@ -112,7 +112,7 @@ public class WallSlabBlock extends Block implements Waterloggable {
     return updateState(
         world, pos,
         this.getDefaultState()
-            .with(FACING, placementDirection == Direction.DOWN || placementDirection == Direction.UP ? context.getHorizontalPlayerFacing().getOpposite() : placementDirection)
+            .with(FACING, placementDirection.getAxis() == Direction.Axis.Y ? context.getHorizontalPlayerFacing() : placementDirection.getOpposite())
             .with(WATERLOGGED, world.getFluidState(pos).getFluid() == Fluids.WATER)
     );
   }
@@ -135,23 +135,27 @@ public class WallSlabBlock extends Block implements Waterloggable {
   private static BlockState updateState(BlockView world, BlockPos pos, BlockState state) {
     if (state.get(SHAPE) == WallSlabShape.DOUBLE) return state;
     Direction direction = state.get(FACING);
-    BlockState leftBlock = world.getBlockState(pos.offset(direction.rotateYClockwise()));
-    boolean leftLocked = leftBlock.getBlock() instanceof WallSlabBlock && leftBlock.get(FACING) == direction && leftBlock.get(SHAPE) != WallSlabShape.DOUBLE;
-    BlockState rightBlock = world.getBlockState(pos.offset(direction.rotateYCounterclockwise()));
-    boolean rightLocked = rightBlock.getBlock() instanceof WallSlabBlock && rightBlock.get(FACING) == direction && rightBlock.get(SHAPE) != WallSlabShape.DOUBLE;
-    BlockState frontBlock = world.getBlockState(pos.offset(direction));
-    BlockState backBlock = world.getBlockState(pos.offset(direction.getOpposite()));
-    if (backBlock.getBlock() instanceof WallSlabBlock) {
-      Direction facing = backBlock.get(FACING);
-      if (direction.rotateYClockwise() == facing && !leftLocked) return state.with(SHAPE, WallSlabShape.OUTER_RIGHT);
-      if (direction.rotateYCounterclockwise() == facing && !rightLocked) return state.with(SHAPE, WallSlabShape.OUTER_LEFT);
-    }
-    if (frontBlock.getBlock() instanceof WallSlabBlock) {
-      Direction facing = frontBlock.get(FACING);
-      if (direction.rotateYClockwise() == facing && !rightLocked) return state.with(SHAPE, WallSlabShape.INNER_RIGHT);
+    BlockState leftState = world.getBlockState(pos.offset(direction.rotateYCounterclockwise()));
+    boolean leftLocked = canConnectTo(leftState.getBlock()) && leftState.get(FACING) == direction;
+    BlockState rightState = world.getBlockState(pos.offset(direction.rotateYClockwise()));
+    boolean rightLocked = canConnectTo(rightState.getBlock()) && rightState.get(FACING) == direction;
+    BlockState frontState = world.getBlockState(pos.offset(direction.getOpposite()));
+    BlockState backState = world.getBlockState(pos.offset(direction));
+    if (canConnectTo(frontState.getBlock())) {
+      Direction facing = frontState.get(FACING);
       if (direction.rotateYCounterclockwise() == facing && !leftLocked) return state.with(SHAPE, WallSlabShape.INNER_LEFT);
+      if (direction.rotateYClockwise() == facing && !rightLocked) return state.with(SHAPE, WallSlabShape.INNER_RIGHT);
+    }
+    if (canConnectTo(backState.getBlock())) {
+      Direction facing = backState.get(FACING);
+      if (direction.rotateYCounterclockwise() == facing && !rightLocked) return state.with(SHAPE, WallSlabShape.OUTER_LEFT);
+      if (direction.rotateYClockwise() == facing && !leftLocked) return state.with(SHAPE, WallSlabShape.OUTER_RIGHT);
     }
     return state.with(SHAPE, WallSlabShape.FLAT);
+  }
+
+  private static boolean canConnectTo(Block block) {
+    return block instanceof StairsBlock || block instanceof WallSlabBlock;
   }
 
   @Override

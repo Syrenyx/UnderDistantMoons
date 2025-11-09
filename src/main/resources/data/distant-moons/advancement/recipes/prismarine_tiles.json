@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_prismarine_bricks": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:prismarine_bricks"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "distant-moons:prismarine_tiles"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_prismarine_bricks"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "distant-moons:prismarine_tiles"
+    ]
+  }
+}

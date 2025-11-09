@@ -8,7 +8,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:prismarine_shard",
+          "name": "distant-moons:pale_prismarine_shard",
           "functions": [
             {
               "function": "minecraft:set_count",

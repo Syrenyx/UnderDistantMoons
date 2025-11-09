@@ -3,10 +3,7 @@ package syrenyx.distantmoons.datagen;
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.block.*;
-import net.minecraft.block.enums.BlockHalf;
-import net.minecraft.block.enums.DoorHinge;
-import net.minecraft.block.enums.DoubleBlockHalf;
-import net.minecraft.block.enums.SlabType;
+import net.minecraft.block.enums.*;
 import net.minecraft.client.data.*;
 import net.minecraft.client.render.model.json.*;
 import net.minecraft.item.Item;
@@ -105,7 +102,13 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     registerSimpleBlock(DistantMoonsBlocks.COKE_BLOCK, SIMPLE_BLOCK_TEXTURE_MAP);
     registerSimpleBlock(DistantMoonsBlocks.CRUDE_DEEP_IRON_BLOCK, SIMPLE_BLOCK_TEXTURE_MAP);
     registerSimpleBlock(DistantMoonsBlocks.DEEPSLATE_DEEP_IRON_ORE, SIMPLE_BLOCK_TEXTURE_MAP);
+    registerSimpleBlock(DistantMoonsBlocks.GRAY_PRISMARINE, SIMPLE_BLOCK_TEXTURE_MAP);
     registerSimpleBlock(DistantMoonsBlocks.NETHERRACK_DEEP_IRON_ORE, SIMPLE_BLOCK_TEXTURE_MAP);
+    registerSimpleBlock(DistantMoonsBlocks.PALE_PRISMARINE, SIMPLE_BLOCK_TEXTURE_MAP);
+    registerSimpleBlock(DistantMoonsBlocks.PALE_PRISMARINE_BRICKS, SIMPLE_BLOCK_TEXTURE_MAP);
+    registerSimpleBlock(DistantMoonsBlocks.PALE_PRISMARINE_TILES, SIMPLE_BLOCK_TEXTURE_MAP);
+    registerSimpleBlock(DistantMoonsBlocks.PALE_SEA_LANTERN, SIMPLE_BLOCK_TEXTURE_MAP);
+    registerSimpleBlock(DistantMoonsBlocks.PRISMARINE_TILES, SIMPLE_BLOCK_TEXTURE_MAP);
     registerSimpleBlock(DistantMoonsBlocks.RAW_DEEP_IRON_BLOCK, SIMPLE_BLOCK_TEXTURE_MAP);
     registerSimpleBlock(DistantMoonsBlocks.REFINED_DEEP_IRON_BLOCK, SIMPLE_BLOCK_TEXTURE_MAP);
 
@@ -269,16 +272,33 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     //ROPE LADDERS
     registerRopeLadderBlock(DistantMoonsBlocks.ROPE_LADDER, ROPE_LADDER_TEXTURE_MAP);
 
+    //SLABS
+    registerSimpleSlabBlock(DistantMoonsBlocks.GRAY_PRISMARINE_SLAB, Map.of(TextureKey.SIDE, UnderDistantMoons.withPrefixedNamespace("block/gray_prismarine")));
+    registerSimpleSlabBlock(DistantMoonsBlocks.PALE_PRISMARINE_BRICK_SLAB, Map.of(TextureKey.SIDE, UnderDistantMoons.withPrefixedNamespace("block/pale_prismarine_bricks")));
+    registerSimpleSlabBlock(DistantMoonsBlocks.PALE_PRISMARINE_SLAB, Map.of(TextureKey.SIDE, UnderDistantMoons.withPrefixedNamespace("block/pale_prismarine")));
+    registerSimpleSlabBlock(DistantMoonsBlocks.PALE_PRISMARINE_TILE_SLAB, Map.of(TextureKey.SIDE, UnderDistantMoons.withPrefixedNamespace("block/pale_prismarine_tiles")));
+    registerSimpleSlabBlock(DistantMoonsBlocks.PRISMARINE_TILE_SLAB, Map.of(TextureKey.SIDE, UnderDistantMoons.withPrefixedNamespace("block/prismarine_tiles")));
+
     //SPIKED FENCES
     registerSpikedFenceBlock(DistantMoonsBlocks.DEEP_IRON_FENCE, SPIKED_FENCE_TEXTURE_MAP);
     registerSpikedFenceBlock(DistantMoonsBlocks.IRON_FENCE, SPIKED_FENCE_TEXTURE_MAP);
     registerSpikedFenceBlock(DistantMoonsBlocks.WROUGHT_IRON_FENCE, SPIKED_FENCE_TEXTURE_MAP);
+
+    //STAIRS
+    registerSimpleStairsBlock(DistantMoonsBlocks.GRAY_PRISMARINE_STAIRS, Map.of(TextureKey.SIDE, UnderDistantMoons.withPrefixedNamespace("block/gray_prismarine")));
+    registerSimpleStairsBlock(DistantMoonsBlocks.PALE_PRISMARINE_BRICK_STAIRS, Map.of(TextureKey.SIDE, UnderDistantMoons.withPrefixedNamespace("block/pale_prismarine_bricks")));
+    registerSimpleStairsBlock(DistantMoonsBlocks.PALE_PRISMARINE_STAIRS, Map.of(TextureKey.SIDE, UnderDistantMoons.withPrefixedNamespace("block/pale_prismarine")));
+    registerSimpleStairsBlock(DistantMoonsBlocks.PALE_PRISMARINE_TILE_STAIRS, Map.of(TextureKey.SIDE, UnderDistantMoons.withPrefixedNamespace("block/pale_prismarine_tiles")));
+    registerSimpleStairsBlock(DistantMoonsBlocks.PRISMARINE_TILE_STAIRS, Map.of(TextureKey.SIDE, UnderDistantMoons.withPrefixedNamespace("block/prismarine_tiles")));
 
     //TRAPDOORS
     registerTrapdoorBlock(DistantMoonsBlocks.DEEP_IRON_TRAPDOOR, false, Map.of(
         TextureKey.END, UnderDistantMoons.withPrefixedNamespace("block/deep_iron_door/trapdoor"),
         TextureKey.SIDE, UnderDistantMoons.withPrefixedNamespace("block/deep_iron_door/end")
     ));
+
+    //WALLS
+    registerSimpleWallBlock(DistantMoonsBlocks.PALE_PRISMARINE_WALL, Map.of(TextureKey.SIDE, UnderDistantMoons.withPrefixedNamespace("block/pale_prismarine")));
 
     //WALL SLABS - SIMPLE
     registerSimpleWallSlabBlock(DistantMoonsBlocks.ACACIA_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/acacia_planks"));
@@ -298,6 +318,7 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     registerSimpleWallSlabBlock(DistantMoonsBlocks.DIORITE_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/diorite"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.END_STONE_BRICK_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/end_stone_bricks"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.GRANITE_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/granite"));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.GRAY_PRISMARINE_WALL_SLAB, Map.of(TextureKey.SIDE, UnderDistantMoons.withPrefixedNamespace("block/gray_prismarine")));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.JUNGLE_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/jungle_planks"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.MANGROVE_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/mangrove_planks"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.MOSSY_COBBLESTONE_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/mossy_cobblestone"));
@@ -306,6 +327,9 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     registerSimpleWallSlabBlock(DistantMoonsBlocks.NETHER_BRICK_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/nether_bricks"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.OAK_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/oak_planks"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.PALE_OAK_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/pale_oak_planks"));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.PALE_PRISMARINE_BRICK_WALL_SLAB, Map.of(TextureKey.SIDE, UnderDistantMoons.withPrefixedNamespace("block/pale_prismarine_bricks")));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.PALE_PRISMARINE_TILE_WALL_SLAB, Map.of(TextureKey.SIDE, UnderDistantMoons.withPrefixedNamespace("block/pale_prismarine_tiles")));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.PALE_PRISMARINE_WALL_SLAB, Map.of(TextureKey.SIDE, UnderDistantMoons.withPrefixedNamespace("block/pale_prismarine")));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.POLISHED_ANDESITE_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/polished_andesite"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.POLISHED_BLACKSTONE_BRICK_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/polished_blackstone_bricks"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.POLISHED_BLACKSTONE_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/polished_blackstone"));
@@ -314,6 +338,7 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     registerSimpleWallSlabBlock(DistantMoonsBlocks.POLISHED_GRANITE_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/polished_granite"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.POLISHED_TUFF_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/polished_tuff"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.PRISMARINE_BRICK_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/prismarine_bricks"));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.PRISMARINE_TILE_WALL_SLAB, Map.of(TextureKey.SIDE, UnderDistantMoons.withPrefixedNamespace("block/prismarine_tiles")));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.PRISMARINE_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/prismarine"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.PURPUR_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/purpur_block"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.RED_NETHER_BRICK_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/red_nether_bricks"));
@@ -372,6 +397,7 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     registerSimpleItem(DistantMoonsItems.DEEP_IRON_SHOVEL, "shovel", SIMPLE_ITEM_TEXTURE_MAP);
     registerSimpleItem(DistantMoonsItems.DEEP_IRON_SWORD, "sword", SIMPLE_ITEM_TEXTURE_MAP);
     registerSimpleItem(DistantMoonsItems.IRON_ROD, "stick", SIMPLE_ITEM_TEXTURE_MAP);
+    registerSimpleItem(DistantMoonsItems.PALE_PRISMARINE_SHARD, "simple_item", SIMPLE_ITEM_TEXTURE_MAP);
     registerSimpleItem(DistantMoonsItems.RAW_DEEP_IRON, "simple_item", SIMPLE_ITEM_TEXTURE_MAP);
     registerSimpleItem(DistantMoonsItems.REFINED_DEEP_IRON_INGOT, "simple_item", SIMPLE_ITEM_TEXTURE_MAP);
     registerSimpleItem(DistantMoonsItems.REFINED_DEEP_IRON_NUGGET, "simple_item", SIMPLE_ITEM_TEXTURE_MAP);
@@ -757,6 +783,31 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModels.basic(inventoryModel));
   }
 
+  private void registerSimpleSlabBlock(Block block, Map<TextureKey, String> rawTextureMap) {
+    Map<TextureKey, String> textureMap = Map.of(TextureKey.SIDE, rawTextureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, rawTextureMap.get(TextureKey.SIDE));
+    registerSlabBlock(
+        block,
+        createWeightedVariant(createObjectModel(block, "slab/simple/bottom", "/bottom", textureMap)),
+        createWeightedVariant(createObjectModel(block, "simple_block", "/double", textureMap)),
+        createWeightedVariant(createObjectModel(block, "slab/simple/top", "/top", textureMap))
+    );
+  }
+
+  private void registerSlabBlock(
+      Block block,
+      WeightedVariant variantBottom,
+      WeightedVariant variantDouble,
+      WeightedVariant variantTop
+  ) {
+    this.blockGenerator.blockStateCollector.accept(VariantsBlockModelDefinitionCreator.of(block).with(BlockStateVariantMap
+        .models(SlabBlock.TYPE)
+        .register(SlabType.BOTTOM, variantBottom)
+        .register(SlabType.DOUBLE, variantDouble)
+        .register(SlabType.TOP, variantTop)
+    ));
+    this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModels.basic(variantBottom.variants().getEntries().getFirst().value().modelId()));
+  }
+
   private void registerSpikedFenceBlock(Block block, Map<TextureKey, String> rawTextureMap) {
     Map<TextureKey, String> textureMapPole = Map.of(TextureKey.BOTTOM, rawTextureMap.get(TextureKey.BOTTOM), TextureKey.SIDE, rawTextureMap.get(TextureKey.SIDE), TextureKey.TOP, rawTextureMap.get(TextureKey.BOTTOM), TextureKey.PARTICLE, rawTextureMap.get(TextureKey.SIDE));
     Map<TextureKey, String> textureMapSide = Map.of(TextureKey.SIDE, rawTextureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, rawTextureMap.get(TextureKey.SIDE));
@@ -780,6 +831,70 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
         .with(new MultipartModelConditionBuilder().put(SpikedFenceBlock.WEST, SpikedFenceShape.TOP), variantTopSide.apply(ROTATE_Y_270))
     );
     Identifier inventoryModel = createObjectModel(block, "spiked_fence/item", "/item", textureMapItem);
+    this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModels.basic(inventoryModel));
+  }
+
+  private void registerSimpleStairsBlock(Block block, Map<TextureKey, String> rawTextureMap) {
+    Map<TextureKey, String> textureMap = Map.of(TextureKey.SIDE, rawTextureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, rawTextureMap.get(TextureKey.SIDE));
+    registerStairsBlock(
+        block,
+        createWeightedVariant(createObjectModel(block, "stairs/simple/straight", "/straight", textureMap)),
+        createWeightedVariant(createObjectModel(block, "stairs/simple/inner", "/inner", textureMap)),
+        createWeightedVariant(createObjectModel(block, "stairs/simple/outer", "/outer", textureMap)),
+        createObjectModel(block, "stairs/simple/item", "/item", textureMap)
+    );
+  }
+
+  private void registerStairsBlock(
+      Block block,
+      WeightedVariant variantStraight,
+      WeightedVariant variantInner,
+      WeightedVariant variantOuter,
+      Identifier inventoryModel
+  ) {
+    this.blockGenerator.blockStateCollector.accept(VariantsBlockModelDefinitionCreator.of(block).with(BlockStateVariantMap
+        .models(SimplifiedStairsBlock.HALF, SimplifiedStairsBlock.SHAPE, SimplifiedStairsBlock.FACING)
+        .register(BlockHalf.BOTTOM, StairShape.STRAIGHT, Direction.NORTH, variantStraight)
+        .register(BlockHalf.BOTTOM, StairShape.STRAIGHT, Direction.EAST, variantStraight.apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(BlockHalf.BOTTOM, StairShape.STRAIGHT, Direction.SOUTH, variantStraight.apply(ROTATE_Y_180).apply(UV_LOCK))
+        .register(BlockHalf.BOTTOM, StairShape.STRAIGHT, Direction.WEST, variantStraight.apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(BlockHalf.BOTTOM, StairShape.INNER_LEFT, Direction.NORTH, variantInner)
+        .register(BlockHalf.BOTTOM, StairShape.INNER_LEFT, Direction.EAST, variantInner.apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(BlockHalf.BOTTOM, StairShape.INNER_LEFT, Direction.SOUTH, variantInner.apply(ROTATE_Y_180).apply(UV_LOCK))
+        .register(BlockHalf.BOTTOM, StairShape.INNER_LEFT, Direction.WEST, variantInner.apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(BlockHalf.BOTTOM, StairShape.INNER_RIGHT, Direction.NORTH, variantInner.apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(BlockHalf.BOTTOM, StairShape.INNER_RIGHT, Direction.EAST, variantInner.apply(ROTATE_Y_180).apply(UV_LOCK))
+        .register(BlockHalf.BOTTOM, StairShape.INNER_RIGHT, Direction.SOUTH, variantInner.apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(BlockHalf.BOTTOM, StairShape.INNER_RIGHT, Direction.WEST, variantInner)
+        .register(BlockHalf.BOTTOM, StairShape.OUTER_LEFT, Direction.NORTH, variantOuter)
+        .register(BlockHalf.BOTTOM, StairShape.OUTER_LEFT, Direction.EAST, variantOuter.apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(BlockHalf.BOTTOM, StairShape.OUTER_LEFT, Direction.SOUTH, variantOuter.apply(ROTATE_Y_180).apply(UV_LOCK))
+        .register(BlockHalf.BOTTOM, StairShape.OUTER_LEFT, Direction.WEST, variantOuter.apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(BlockHalf.BOTTOM, StairShape.OUTER_RIGHT, Direction.NORTH, variantOuter.apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(BlockHalf.BOTTOM, StairShape.OUTER_RIGHT, Direction.EAST, variantOuter.apply(ROTATE_Y_180).apply(UV_LOCK))
+        .register(BlockHalf.BOTTOM, StairShape.OUTER_RIGHT, Direction.SOUTH, variantOuter.apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(BlockHalf.BOTTOM, StairShape.OUTER_RIGHT, Direction.WEST, variantOuter)
+        .register(BlockHalf.TOP, StairShape.STRAIGHT, Direction.NORTH, variantStraight.apply(ROTATE_X_180).apply(ROTATE_Y_180).apply(UV_LOCK))
+        .register(BlockHalf.TOP, StairShape.STRAIGHT, Direction.EAST, variantStraight.apply(ROTATE_X_180).apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(BlockHalf.TOP, StairShape.STRAIGHT, Direction.SOUTH, variantStraight.apply(ROTATE_X_180).apply(UV_LOCK))
+        .register(BlockHalf.TOP, StairShape.STRAIGHT, Direction.WEST, variantStraight.apply(ROTATE_X_180).apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(BlockHalf.TOP, StairShape.INNER_LEFT, Direction.NORTH, variantInner.apply(ROTATE_X_180).apply(UV_LOCK))
+        .register(BlockHalf.TOP, StairShape.INNER_LEFT, Direction.EAST, variantInner.apply(ROTATE_X_180).apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(BlockHalf.TOP, StairShape.INNER_LEFT, Direction.SOUTH, variantInner.apply(ROTATE_X_180).apply(UV_LOCK))
+        .register(BlockHalf.TOP, StairShape.INNER_LEFT, Direction.WEST, variantInner.apply(ROTATE_X_180).apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(BlockHalf.TOP, StairShape.INNER_RIGHT, Direction.NORTH, variantInner.apply(ROTATE_X_180).apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(BlockHalf.TOP, StairShape.INNER_RIGHT, Direction.EAST, variantInner.apply(ROTATE_X_180).apply(UV_LOCK))
+        .register(BlockHalf.TOP, StairShape.INNER_RIGHT, Direction.SOUTH, variantInner.apply(ROTATE_X_180).apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(BlockHalf.TOP, StairShape.INNER_RIGHT, Direction.WEST, variantInner.apply(ROTATE_X_180).apply(ROTATE_Y_180))
+        .register(BlockHalf.TOP, StairShape.OUTER_LEFT, Direction.NORTH, variantOuter.apply(ROTATE_X_180).apply(ROTATE_Y_180).apply(UV_LOCK))
+        .register(BlockHalf.TOP, StairShape.OUTER_LEFT, Direction.EAST, variantOuter.apply(ROTATE_X_180).apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(BlockHalf.TOP, StairShape.OUTER_LEFT, Direction.SOUTH, variantOuter.apply(ROTATE_X_180).apply(UV_LOCK))
+        .register(BlockHalf.TOP, StairShape.OUTER_LEFT, Direction.WEST, variantOuter.apply(ROTATE_X_180).apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(BlockHalf.TOP, StairShape.OUTER_RIGHT, Direction.NORTH, variantOuter.apply(ROTATE_X_180).apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(BlockHalf.TOP, StairShape.OUTER_RIGHT, Direction.EAST, variantOuter.apply(ROTATE_X_180).apply(UV_LOCK))
+        .register(BlockHalf.TOP, StairShape.OUTER_RIGHT, Direction.SOUTH, variantOuter.apply(ROTATE_X_180).apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(BlockHalf.TOP, StairShape.OUTER_RIGHT, Direction.WEST, variantOuter.apply(ROTATE_X_180).apply(ROTATE_Y_180).apply(UV_LOCK))
+    ));
     this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModels.basic(inventoryModel));
   }
 
@@ -808,6 +923,38 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
         .register(BlockHalf.TOP, Direction.WEST, true, variantOpen.apply(orientable ? ROTATE_X_180 : NO_OP).apply(orientable ? ROTATE_Y_90 : ROTATE_Y_270).apply(orientable ? UV_LOCK : NO_OP))
     ));
     this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModels.basic(variantBottom.variants().getEntries().getFirst().value().modelId()));
+  }
+
+  private void registerSimpleWallBlock(Block block, Map<TextureKey, String> rawTextureMap) {
+    Map<TextureKey, String> textureMap = Map.of(TextureKey.SIDE, rawTextureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, rawTextureMap.get(TextureKey.SIDE));
+    registerWallBlock(
+        block,
+        createWeightedVariant(createObjectModel(block, "wall/simple/low", "/low", textureMap)),
+        createWeightedVariant(createObjectModel(block, "wall/simple/post", "/post", textureMap)),
+        createWeightedVariant(createObjectModel(block, "wall/simple/tall", "/tall", textureMap)),
+        createObjectModel(block, "wall/simple/item", "/item", textureMap)
+    );
+  }
+
+  private void registerWallBlock(
+      Block block,
+      WeightedVariant variantLow,
+      WeightedVariant variantPost,
+      WeightedVariant variantTall,
+      Identifier inventoryModel
+  ) {
+    this.blockGenerator.blockStateCollector.accept(MultipartBlockModelDefinitionCreator.create(block)
+        .with(new MultipartModelConditionBuilder().put(WallBlock.UP, true), variantPost)
+        .with(new MultipartModelConditionBuilder().put(WallBlock.NORTH_WALL_SHAPE, WallShape.LOW), variantLow)
+        .with(new MultipartModelConditionBuilder().put(WallBlock.NORTH_WALL_SHAPE, WallShape.TALL), variantTall)
+        .with(new MultipartModelConditionBuilder().put(WallBlock.EAST_WALL_SHAPE, WallShape.LOW), variantLow.apply(ROTATE_Y_90).apply(UV_LOCK))
+        .with(new MultipartModelConditionBuilder().put(WallBlock.EAST_WALL_SHAPE, WallShape.TALL), variantTall.apply(ROTATE_Y_90).apply(UV_LOCK))
+        .with(new MultipartModelConditionBuilder().put(WallBlock.SOUTH_WALL_SHAPE, WallShape.LOW), variantLow.apply(ROTATE_Y_180).apply(UV_LOCK))
+        .with(new MultipartModelConditionBuilder().put(WallBlock.SOUTH_WALL_SHAPE, WallShape.TALL), variantTall.apply(ROTATE_Y_180).apply(UV_LOCK))
+        .with(new MultipartModelConditionBuilder().put(WallBlock.WEST_WALL_SHAPE, WallShape.LOW), variantLow.apply(ROTATE_Y_270).apply(UV_LOCK))
+        .with(new MultipartModelConditionBuilder().put(WallBlock.WEST_WALL_SHAPE, WallShape.TALL), variantTall.apply(ROTATE_Y_270).apply(UV_LOCK))
+    );
+    this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModels.basic(inventoryModel));
   }
 
   private void registerSimpleWallSlabBlock(Block block, Map<TextureKey, String> rawTextureMap) {
@@ -889,14 +1036,14 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     Map<TextureKey, String> textureMapDoubleZ = Map.of(TextureKey.END, rawTextureMap.get(DistantMoonsTextureKeys.HORIZONTAL_END), TextureKey.FRONT, rawTextureMap.get(TextureKey.SIDE), TextureKey.SIDE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE));
     Map<TextureKey, String> textureMapFlatX = Map.of(TextureKey.END, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_END), TextureKey.FRONT, rawTextureMap.get(TextureKey.SIDE), TextureKey.SIDE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE));
     Map<TextureKey, String> textureMapFlatZ = Map.of(TextureKey.END, rawTextureMap.get(DistantMoonsTextureKeys.HORIZONTAL_END), TextureKey.FRONT, rawTextureMap.get(TextureKey.SIDE), TextureKey.SIDE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE));
-    Map<TextureKey, String> textureMapInnerBottomLeft = Map.of(TextureKey.BOTTOM, rawTextureMap.get(DistantMoonsTextureKeys.TOP_LEFT), TextureKey.INSIDE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), DistantMoonsTextureKeys.OUTSIDE, rawTextureMap.get(TextureKey.SIDE), TextureKey.TOP, rawTextureMap.get(DistantMoonsTextureKeys.BOTTOM_LEFT), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE));
-    Map<TextureKey, String> textureMapInnerBottomRight = Map.of(TextureKey.BOTTOM, rawTextureMap.get(DistantMoonsTextureKeys.TOP_RIGHT), TextureKey.INSIDE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), DistantMoonsTextureKeys.OUTSIDE, rawTextureMap.get(TextureKey.SIDE), TextureKey.TOP, rawTextureMap.get(DistantMoonsTextureKeys.BOTTOM_RIGHT), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE));
-    Map<TextureKey, String> textureMapInnerTopLeft = Map.of(TextureKey.BOTTOM, rawTextureMap.get(DistantMoonsTextureKeys.BOTTOM_LEFT), TextureKey.INSIDE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), DistantMoonsTextureKeys.OUTSIDE, rawTextureMap.get(TextureKey.SIDE), TextureKey.TOP, rawTextureMap.get(DistantMoonsTextureKeys.TOP_LEFT), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE));
-    Map<TextureKey, String> textureMapInnerTopRight = Map.of(TextureKey.BOTTOM, rawTextureMap.get(DistantMoonsTextureKeys.BOTTOM_RIGHT), TextureKey.INSIDE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), DistantMoonsTextureKeys.OUTSIDE, rawTextureMap.get(TextureKey.SIDE), TextureKey.TOP, rawTextureMap.get(DistantMoonsTextureKeys.TOP_RIGHT), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE));
-    Map<TextureKey, String> textureMapOuterBottomLeft = Map.of(TextureKey.BOTTOM, rawTextureMap.get(DistantMoonsTextureKeys.TOP_LEFT), TextureKey.SIDE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), TextureKey.TOP, rawTextureMap.get(DistantMoonsTextureKeys.BOTTOM_LEFT), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE));
-    Map<TextureKey, String> textureMapOuterBottomRight = Map.of(TextureKey.BOTTOM, rawTextureMap.get(DistantMoonsTextureKeys.TOP_RIGHT), TextureKey.SIDE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), TextureKey.TOP, rawTextureMap.get(DistantMoonsTextureKeys.BOTTOM_RIGHT), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE));
-    Map<TextureKey, String> textureMapOuterTopLeft = Map.of(TextureKey.BOTTOM, rawTextureMap.get(DistantMoonsTextureKeys.BOTTOM_LEFT), TextureKey.SIDE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), TextureKey.TOP, rawTextureMap.get(DistantMoonsTextureKeys.TOP_LEFT), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE));
-    Map<TextureKey, String> textureMapOuterTopRight = Map.of(TextureKey.BOTTOM, rawTextureMap.get(DistantMoonsTextureKeys.BOTTOM_RIGHT), TextureKey.SIDE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), TextureKey.TOP, rawTextureMap.get(DistantMoonsTextureKeys.TOP_RIGHT), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE));
+    Map<TextureKey, String> textureMapInnerBottomLeft = Map.of(TextureKey.BOTTOM, rawTextureMap.get(DistantMoonsTextureKeys.BOTTOM_RIGHT), TextureKey.INSIDE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), DistantMoonsTextureKeys.OUTSIDE, rawTextureMap.get(TextureKey.SIDE), TextureKey.TOP, rawTextureMap.get(DistantMoonsTextureKeys.TOP_RIGHT), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE));
+    Map<TextureKey, String> textureMapInnerBottomRight = Map.of(TextureKey.BOTTOM, rawTextureMap.get(DistantMoonsTextureKeys.BOTTOM_LEFT), TextureKey.INSIDE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), DistantMoonsTextureKeys.OUTSIDE, rawTextureMap.get(TextureKey.SIDE), TextureKey.TOP, rawTextureMap.get(DistantMoonsTextureKeys.TOP_LEFT), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE));
+    Map<TextureKey, String> textureMapInnerTopLeft = Map.of(TextureKey.BOTTOM, rawTextureMap.get(DistantMoonsTextureKeys.TOP_RIGHT), TextureKey.INSIDE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), DistantMoonsTextureKeys.OUTSIDE, rawTextureMap.get(TextureKey.SIDE), TextureKey.TOP, rawTextureMap.get(DistantMoonsTextureKeys.BOTTOM_RIGHT), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE));
+    Map<TextureKey, String> textureMapInnerTopRight = Map.of(TextureKey.BOTTOM, rawTextureMap.get(DistantMoonsTextureKeys.TOP_LEFT), TextureKey.INSIDE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), DistantMoonsTextureKeys.OUTSIDE, rawTextureMap.get(TextureKey.SIDE), TextureKey.TOP, rawTextureMap.get(DistantMoonsTextureKeys.BOTTOM_LEFT), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE));
+    Map<TextureKey, String> textureMapOuterBottomLeft = Map.of(TextureKey.BOTTOM, rawTextureMap.get(DistantMoonsTextureKeys.BOTTOM_RIGHT), TextureKey.SIDE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), TextureKey.TOP, rawTextureMap.get(DistantMoonsTextureKeys.TOP_RIGHT), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE));
+    Map<TextureKey, String> textureMapOuterBottomRight = Map.of(TextureKey.BOTTOM, rawTextureMap.get(DistantMoonsTextureKeys.BOTTOM_LEFT), TextureKey.SIDE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), TextureKey.TOP, rawTextureMap.get(DistantMoonsTextureKeys.TOP_LEFT), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE));
+    Map<TextureKey, String> textureMapOuterTopLeft = Map.of(TextureKey.BOTTOM, rawTextureMap.get(DistantMoonsTextureKeys.TOP_RIGHT), TextureKey.SIDE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), TextureKey.TOP, rawTextureMap.get(DistantMoonsTextureKeys.BOTTOM_RIGHT), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE));
+    Map<TextureKey, String> textureMapOuterTopRight = Map.of(TextureKey.BOTTOM, rawTextureMap.get(DistantMoonsTextureKeys.TOP_LEFT), TextureKey.SIDE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), TextureKey.TOP, rawTextureMap.get(DistantMoonsTextureKeys.BOTTOM_LEFT), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE));
     WeightedVariant variantDoubleX = createWeightedVariant(createObjectModel(block, "axis_block", "/double_x", textureMapDoubleX));
     WeightedVariant variantDoubleZ = createWeightedVariant(createObjectModel(block, "axis_block", "/double_z", textureMapDoubleZ));
     WeightedVariant variantFlatX = createWeightedVariant(createObjectModel(block, "wall_slab/complex/flat", "/flat_x", textureMapFlatX));
