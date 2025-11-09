@@ -24,7 +24,7 @@ public class PaneBlockMixin {
       at = @At(value = "INVOKE", target = "Lnet/minecraft/block/BlockState;isSideSolidFullSquare(Lnet/minecraft/world/BlockView;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/util/math/Direction;)Z"),
       method = {"getPlacementState", "getStateForNeighborUpdate"}
   ) private boolean determineConnectionStates(
-      BlockState instance, BlockView blockView, BlockPos blockPos, Direction direction, Operation<Boolean> wrappedCall
+      BlockState state, BlockView blockView, BlockPos blockPos, Direction direction, Operation<Boolean> wrappedCall
   ) {
     BlockState defaultState = ((PaneBlock) (Object) this).getDefaultState();
     BlockState connectedState = blockView.getBlockState(blockPos);
@@ -36,7 +36,7 @@ public class PaneBlockMixin {
       if (connectedState.isIn(DistantMoonsBlockTags.GLASS_PANE_NEVER_CONNECTS_TO)) return false;
       if (connectedState.isIn(DistantMoonsBlockTags.GLASS_PANE_ALWAYS_CONNECTS_TO)) return true;
     }
-    return wrappedCall.call(instance, blockView, blockPos, direction)
+    return wrappedCall.call(state, blockView, blockPos, direction)
         || connectedState.getBlock() instanceof FixedLadderBlock && FixedLadderBlock.canWallConnect(connectedState, direction);
   }
 
@@ -48,6 +48,6 @@ public class PaneBlockMixin {
         state.isIn(BlockTags.BARS)
             && (stateFrom.getBlock() instanceof FixedLadderBlock
             || stateFrom.getBlock() instanceof SpikedFenceBlock)
-    ) MixinUtil.cancelAndReturnValue(true, callbackInfo);
+    ) MixinUtil.cancelAndSetReturnValue(true, callbackInfo);
   }
 }

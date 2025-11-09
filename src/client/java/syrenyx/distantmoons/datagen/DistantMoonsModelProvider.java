@@ -832,27 +832,47 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
       Identifier inventoryModel
   ) {
     this.blockGenerator.blockStateCollector.accept(VariantsBlockModelDefinitionCreator.of(block).with(BlockStateVariantMap
-        .models(SimplifiedStairsBlock.SHAPE, SimplifiedStairsBlock.FACING)
-        .register(StairShape.STRAIGHT, Direction.NORTH, variantStraight.apply(ROTATE_Y_180).apply(UV_LOCK))
-        .register(StairShape.STRAIGHT, Direction.EAST, variantStraight.apply(ROTATE_Y_270).apply(UV_LOCK))
-        .register(StairShape.STRAIGHT, Direction.SOUTH, variantStraight)
-        .register(StairShape.STRAIGHT, Direction.WEST, variantStraight.apply(ROTATE_Y_90).apply(UV_LOCK))
-        .register(StairShape.INNER_LEFT, Direction.NORTH, variantInner.apply(ROTATE_Y_180).apply(UV_LOCK))
-        .register(StairShape.INNER_LEFT, Direction.EAST, variantInner.apply(ROTATE_Y_270).apply(UV_LOCK))
-        .register(StairShape.INNER_LEFT, Direction.SOUTH, variantInner)
-        .register(StairShape.INNER_LEFT, Direction.WEST, variantInner.apply(ROTATE_Y_90).apply(UV_LOCK))
-        .register(StairShape.INNER_RIGHT, Direction.NORTH, variantInner.apply(ROTATE_Y_270).apply(UV_LOCK))
-        .register(StairShape.INNER_RIGHT, Direction.EAST, variantInner)
-        .register(StairShape.INNER_RIGHT, Direction.SOUTH, variantInner.apply(ROTATE_Y_90).apply(UV_LOCK))
-        .register(StairShape.INNER_RIGHT, Direction.WEST, variantInner.apply(ROTATE_Y_180).apply(UV_LOCK))
-        .register(StairShape.OUTER_LEFT, Direction.NORTH, variantOuter.apply(ROTATE_Y_180).apply(UV_LOCK))
-        .register(StairShape.OUTER_LEFT, Direction.EAST, variantOuter.apply(ROTATE_Y_270).apply(UV_LOCK))
-        .register(StairShape.OUTER_LEFT, Direction.SOUTH, variantOuter)
-        .register(StairShape.OUTER_LEFT, Direction.WEST, variantOuter.apply(ROTATE_Y_90).apply(UV_LOCK))
-        .register(StairShape.OUTER_RIGHT, Direction.NORTH, variantOuter.apply(ROTATE_Y_270).apply(UV_LOCK))
-        .register(StairShape.OUTER_RIGHT, Direction.EAST, variantOuter)
-        .register(StairShape.OUTER_RIGHT, Direction.SOUTH, variantOuter.apply(ROTATE_Y_90).apply(UV_LOCK))
-        .register(StairShape.OUTER_RIGHT, Direction.WEST, variantOuter.apply(ROTATE_Y_180).apply(UV_LOCK))
+        .models(SimplifiedStairsBlock.HALF, SimplifiedStairsBlock.SHAPE, SimplifiedStairsBlock.FACING)
+        .register(BlockHalf.BOTTOM, StairShape.STRAIGHT, Direction.NORTH, variantStraight)
+        .register(BlockHalf.BOTTOM, StairShape.STRAIGHT, Direction.EAST, variantStraight.apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(BlockHalf.BOTTOM, StairShape.STRAIGHT, Direction.SOUTH, variantStraight.apply(ROTATE_Y_180).apply(UV_LOCK))
+        .register(BlockHalf.BOTTOM, StairShape.STRAIGHT, Direction.WEST, variantStraight.apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(BlockHalf.BOTTOM, StairShape.INNER_LEFT, Direction.NORTH, variantInner)
+        .register(BlockHalf.BOTTOM, StairShape.INNER_LEFT, Direction.EAST, variantInner.apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(BlockHalf.BOTTOM, StairShape.INNER_LEFT, Direction.SOUTH, variantInner.apply(ROTATE_Y_180).apply(UV_LOCK))
+        .register(BlockHalf.BOTTOM, StairShape.INNER_LEFT, Direction.WEST, variantInner.apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(BlockHalf.BOTTOM, StairShape.INNER_RIGHT, Direction.NORTH, variantInner.apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(BlockHalf.BOTTOM, StairShape.INNER_RIGHT, Direction.EAST, variantInner.apply(ROTATE_Y_180).apply(UV_LOCK))
+        .register(BlockHalf.BOTTOM, StairShape.INNER_RIGHT, Direction.SOUTH, variantInner.apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(BlockHalf.BOTTOM, StairShape.INNER_RIGHT, Direction.WEST, variantInner)
+        .register(BlockHalf.BOTTOM, StairShape.OUTER_LEFT, Direction.NORTH, variantOuter)
+        .register(BlockHalf.BOTTOM, StairShape.OUTER_LEFT, Direction.EAST, variantOuter.apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(BlockHalf.BOTTOM, StairShape.OUTER_LEFT, Direction.SOUTH, variantOuter.apply(ROTATE_Y_180).apply(UV_LOCK))
+        .register(BlockHalf.BOTTOM, StairShape.OUTER_LEFT, Direction.WEST, variantOuter.apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(BlockHalf.BOTTOM, StairShape.OUTER_RIGHT, Direction.NORTH, variantOuter.apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(BlockHalf.BOTTOM, StairShape.OUTER_RIGHT, Direction.EAST, variantOuter.apply(ROTATE_Y_180).apply(UV_LOCK))
+        .register(BlockHalf.BOTTOM, StairShape.OUTER_RIGHT, Direction.SOUTH, variantOuter.apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(BlockHalf.BOTTOM, StairShape.OUTER_RIGHT, Direction.WEST, variantOuter)
+        .register(BlockHalf.TOP, StairShape.STRAIGHT, Direction.NORTH, variantStraight.apply(ROTATE_X_180).apply(ROTATE_Y_180).apply(UV_LOCK))
+        .register(BlockHalf.TOP, StairShape.STRAIGHT, Direction.EAST, variantStraight.apply(ROTATE_X_180).apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(BlockHalf.TOP, StairShape.STRAIGHT, Direction.SOUTH, variantStraight.apply(ROTATE_X_180).apply(UV_LOCK))
+        .register(BlockHalf.TOP, StairShape.STRAIGHT, Direction.WEST, variantStraight.apply(ROTATE_X_180).apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(BlockHalf.TOP, StairShape.INNER_LEFT, Direction.NORTH, variantInner.apply(ROTATE_X_180).apply(UV_LOCK))
+        .register(BlockHalf.TOP, StairShape.INNER_LEFT, Direction.EAST, variantInner.apply(ROTATE_X_180).apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(BlockHalf.TOP, StairShape.INNER_LEFT, Direction.SOUTH, variantInner.apply(ROTATE_X_180).apply(UV_LOCK))
+        .register(BlockHalf.TOP, StairShape.INNER_LEFT, Direction.WEST, variantInner.apply(ROTATE_X_180).apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(BlockHalf.TOP, StairShape.INNER_RIGHT, Direction.NORTH, variantInner.apply(ROTATE_X_180).apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(BlockHalf.TOP, StairShape.INNER_RIGHT, Direction.EAST, variantInner.apply(ROTATE_X_180).apply(UV_LOCK))
+        .register(BlockHalf.TOP, StairShape.INNER_RIGHT, Direction.SOUTH, variantInner.apply(ROTATE_X_180).apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(BlockHalf.TOP, StairShape.INNER_RIGHT, Direction.WEST, variantInner.apply(ROTATE_X_180).apply(ROTATE_Y_180))
+        .register(BlockHalf.TOP, StairShape.OUTER_LEFT, Direction.NORTH, variantOuter.apply(ROTATE_X_180).apply(ROTATE_Y_180).apply(UV_LOCK))
+        .register(BlockHalf.TOP, StairShape.OUTER_LEFT, Direction.EAST, variantOuter.apply(ROTATE_X_180).apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(BlockHalf.TOP, StairShape.OUTER_LEFT, Direction.SOUTH, variantOuter.apply(ROTATE_X_180).apply(UV_LOCK))
+        .register(BlockHalf.TOP, StairShape.OUTER_LEFT, Direction.WEST, variantOuter.apply(ROTATE_X_180).apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(BlockHalf.TOP, StairShape.OUTER_RIGHT, Direction.NORTH, variantOuter.apply(ROTATE_X_180).apply(ROTATE_Y_270).apply(UV_LOCK))
+        .register(BlockHalf.TOP, StairShape.OUTER_RIGHT, Direction.EAST, variantOuter.apply(ROTATE_X_180).apply(UV_LOCK))
+        .register(BlockHalf.TOP, StairShape.OUTER_RIGHT, Direction.SOUTH, variantOuter.apply(ROTATE_X_180).apply(ROTATE_Y_90).apply(UV_LOCK))
+        .register(BlockHalf.TOP, StairShape.OUTER_RIGHT, Direction.WEST, variantOuter.apply(ROTATE_X_180).apply(ROTATE_Y_180).apply(UV_LOCK))
     ));
     this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModels.basic(inventoryModel));
   }
@@ -963,14 +983,14 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     Map<TextureKey, String> textureMapDoubleZ = Map.of(TextureKey.END, rawTextureMap.get(DistantMoonsTextureKeys.HORIZONTAL_END), TextureKey.FRONT, rawTextureMap.get(TextureKey.SIDE), TextureKey.SIDE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE));
     Map<TextureKey, String> textureMapFlatX = Map.of(TextureKey.END, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_END), TextureKey.FRONT, rawTextureMap.get(TextureKey.SIDE), TextureKey.SIDE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE));
     Map<TextureKey, String> textureMapFlatZ = Map.of(TextureKey.END, rawTextureMap.get(DistantMoonsTextureKeys.HORIZONTAL_END), TextureKey.FRONT, rawTextureMap.get(TextureKey.SIDE), TextureKey.SIDE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE));
-    Map<TextureKey, String> textureMapInnerBottomLeft = Map.of(TextureKey.BOTTOM, rawTextureMap.get(DistantMoonsTextureKeys.TOP_LEFT), TextureKey.INSIDE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), DistantMoonsTextureKeys.OUTSIDE, rawTextureMap.get(TextureKey.SIDE), TextureKey.TOP, rawTextureMap.get(DistantMoonsTextureKeys.BOTTOM_LEFT), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE));
-    Map<TextureKey, String> textureMapInnerBottomRight = Map.of(TextureKey.BOTTOM, rawTextureMap.get(DistantMoonsTextureKeys.TOP_RIGHT), TextureKey.INSIDE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), DistantMoonsTextureKeys.OUTSIDE, rawTextureMap.get(TextureKey.SIDE), TextureKey.TOP, rawTextureMap.get(DistantMoonsTextureKeys.BOTTOM_RIGHT), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE));
-    Map<TextureKey, String> textureMapInnerTopLeft = Map.of(TextureKey.BOTTOM, rawTextureMap.get(DistantMoonsTextureKeys.BOTTOM_LEFT), TextureKey.INSIDE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), DistantMoonsTextureKeys.OUTSIDE, rawTextureMap.get(TextureKey.SIDE), TextureKey.TOP, rawTextureMap.get(DistantMoonsTextureKeys.TOP_LEFT), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE));
-    Map<TextureKey, String> textureMapInnerTopRight = Map.of(TextureKey.BOTTOM, rawTextureMap.get(DistantMoonsTextureKeys.BOTTOM_RIGHT), TextureKey.INSIDE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), DistantMoonsTextureKeys.OUTSIDE, rawTextureMap.get(TextureKey.SIDE), TextureKey.TOP, rawTextureMap.get(DistantMoonsTextureKeys.TOP_RIGHT), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE));
-    Map<TextureKey, String> textureMapOuterBottomLeft = Map.of(TextureKey.BOTTOM, rawTextureMap.get(DistantMoonsTextureKeys.TOP_LEFT), TextureKey.SIDE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), TextureKey.TOP, rawTextureMap.get(DistantMoonsTextureKeys.BOTTOM_LEFT), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE));
-    Map<TextureKey, String> textureMapOuterBottomRight = Map.of(TextureKey.BOTTOM, rawTextureMap.get(DistantMoonsTextureKeys.TOP_RIGHT), TextureKey.SIDE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), TextureKey.TOP, rawTextureMap.get(DistantMoonsTextureKeys.BOTTOM_RIGHT), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE));
-    Map<TextureKey, String> textureMapOuterTopLeft = Map.of(TextureKey.BOTTOM, rawTextureMap.get(DistantMoonsTextureKeys.BOTTOM_LEFT), TextureKey.SIDE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), TextureKey.TOP, rawTextureMap.get(DistantMoonsTextureKeys.TOP_LEFT), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE));
-    Map<TextureKey, String> textureMapOuterTopRight = Map.of(TextureKey.BOTTOM, rawTextureMap.get(DistantMoonsTextureKeys.BOTTOM_RIGHT), TextureKey.SIDE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), TextureKey.TOP, rawTextureMap.get(DistantMoonsTextureKeys.TOP_RIGHT), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE));
+    Map<TextureKey, String> textureMapInnerBottomLeft = Map.of(TextureKey.BOTTOM, rawTextureMap.get(DistantMoonsTextureKeys.BOTTOM_RIGHT), TextureKey.INSIDE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), DistantMoonsTextureKeys.OUTSIDE, rawTextureMap.get(TextureKey.SIDE), TextureKey.TOP, rawTextureMap.get(DistantMoonsTextureKeys.TOP_RIGHT), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE));
+    Map<TextureKey, String> textureMapInnerBottomRight = Map.of(TextureKey.BOTTOM, rawTextureMap.get(DistantMoonsTextureKeys.BOTTOM_LEFT), TextureKey.INSIDE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), DistantMoonsTextureKeys.OUTSIDE, rawTextureMap.get(TextureKey.SIDE), TextureKey.TOP, rawTextureMap.get(DistantMoonsTextureKeys.TOP_LEFT), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE));
+    Map<TextureKey, String> textureMapInnerTopLeft = Map.of(TextureKey.BOTTOM, rawTextureMap.get(DistantMoonsTextureKeys.TOP_RIGHT), TextureKey.INSIDE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), DistantMoonsTextureKeys.OUTSIDE, rawTextureMap.get(TextureKey.SIDE), TextureKey.TOP, rawTextureMap.get(DistantMoonsTextureKeys.BOTTOM_RIGHT), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE));
+    Map<TextureKey, String> textureMapInnerTopRight = Map.of(TextureKey.BOTTOM, rawTextureMap.get(DistantMoonsTextureKeys.TOP_LEFT), TextureKey.INSIDE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), DistantMoonsTextureKeys.OUTSIDE, rawTextureMap.get(TextureKey.SIDE), TextureKey.TOP, rawTextureMap.get(DistantMoonsTextureKeys.BOTTOM_LEFT), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE));
+    Map<TextureKey, String> textureMapOuterBottomLeft = Map.of(TextureKey.BOTTOM, rawTextureMap.get(DistantMoonsTextureKeys.BOTTOM_RIGHT), TextureKey.SIDE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), TextureKey.TOP, rawTextureMap.get(DistantMoonsTextureKeys.TOP_RIGHT), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE));
+    Map<TextureKey, String> textureMapOuterBottomRight = Map.of(TextureKey.BOTTOM, rawTextureMap.get(DistantMoonsTextureKeys.BOTTOM_LEFT), TextureKey.SIDE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), TextureKey.TOP, rawTextureMap.get(DistantMoonsTextureKeys.TOP_LEFT), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE));
+    Map<TextureKey, String> textureMapOuterTopLeft = Map.of(TextureKey.BOTTOM, rawTextureMap.get(DistantMoonsTextureKeys.TOP_RIGHT), TextureKey.SIDE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), TextureKey.TOP, rawTextureMap.get(DistantMoonsTextureKeys.BOTTOM_RIGHT), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE));
+    Map<TextureKey, String> textureMapOuterTopRight = Map.of(TextureKey.BOTTOM, rawTextureMap.get(DistantMoonsTextureKeys.TOP_LEFT), TextureKey.SIDE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), TextureKey.TOP, rawTextureMap.get(DistantMoonsTextureKeys.BOTTOM_LEFT), TextureKey.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE));
     WeightedVariant variantDoubleX = createWeightedVariant(createObjectModel(block, "axis_block", "/double_x", textureMapDoubleX));
     WeightedVariant variantDoubleZ = createWeightedVariant(createObjectModel(block, "axis_block", "/double_z", textureMapDoubleZ));
     WeightedVariant variantFlatX = createWeightedVariant(createObjectModel(block, "wall_slab/complex/flat", "/flat_x", textureMapFlatX));
