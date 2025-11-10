@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_pale_prismarine_shard": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "distant-moons:pale_prismarine_shard"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "distant-moons:pale_prismarine_bricks"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_pale_prismarine_shard"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "distant-moons:pale_prismarine_bricks"
+    ]
+  }
+}
