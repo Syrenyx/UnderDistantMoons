@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "0": "distant-moons:pale_prismarine_shard",
+    "1": "minecraft:black_dye"
+  },
+  "pattern": [
+    "000",
+    "010",
+    "000"
+  ],
+  "result": {
+    "id": "distant-moons:gray_prismarine"
+  }
+}
