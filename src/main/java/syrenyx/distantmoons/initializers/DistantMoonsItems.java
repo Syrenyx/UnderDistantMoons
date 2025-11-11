@@ -1,21 +1,16 @@
 package syrenyx.distantmoons.initializers;
 
+import net.minecraft.block.Block;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.ConsumableComponent;
 import net.minecraft.component.type.ConsumableComponents;
-import net.minecraft.component.type.EquippableComponent;
 import net.minecraft.component.type.FoodComponent;
-import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.*;
-import net.minecraft.item.consume.ApplyEffectsConsumeEffect;
-import net.minecraft.item.equipment.ArmorMaterial;
-import net.minecraft.item.equipment.ArmorMaterials;
 import net.minecraft.item.equipment.EquipmentType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.tag.BlockTags;
 import syrenyx.distantmoons.UnderDistantMoons;
 import syrenyx.distantmoons.references.DistantMoonsItemMaterials;
 
@@ -146,6 +141,15 @@ public abstract class DistantMoonsItems {
   private static Item register(String id, Function<Item.Settings, Item> itemFactory, Item.Settings settings) {
     RegistryKey<Item> key = RegistryKey.of(RegistryKeys.ITEM, UnderDistantMoons.identifierOf(id));
     return Registry.register(Registries.ITEM, key, itemFactory.apply(settings.registryKey(key)));
+  }
+
+  protected static void registerBlockItem(String id, Block block, Item.Settings itemSettings) {
+    RegistryKey<Item> key = RegistryKey.of(RegistryKeys.ITEM, UnderDistantMoons.identifierOf(id));
+    Registry.register(Registries.ITEM, key, new BlockItem(block, itemSettings.registryKey(key).useBlockPrefixedTranslationKey()));
+  }
+
+  public static String getStringIdOf(Item item) {
+    return Registries.ITEM.getEntry(item).getIdAsString().split(":")[1];
   }
 
   public static void initialize() {}

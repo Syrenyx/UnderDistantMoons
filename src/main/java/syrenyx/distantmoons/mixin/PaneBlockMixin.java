@@ -18,7 +18,7 @@ import syrenyx.distantmoons.references.tag.DistantMoonsBlockTags;
 import syrenyx.distantmoons.utility.MixinUtil;
 
 @Mixin(PaneBlock.class)
-public class PaneBlockMixin {
+public abstract class PaneBlockMixin {
 
   @WrapOperation(
       at = @At(value = "INVOKE", target = "Lnet/minecraft/block/BlockState;isSideSolidFullSquare(Lnet/minecraft/world/BlockView;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/util/math/Direction;)Z"),

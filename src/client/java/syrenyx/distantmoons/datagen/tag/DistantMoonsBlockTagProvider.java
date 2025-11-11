@@ -106,6 +106,12 @@ public class DistantMoonsBlockTagProvider extends FabricTagProvider.BlockTagProv
         Blocks.PURPLE_STAINED_GLASS_PANE, Blocks.RED_STAINED_GLASS_PANE, Blocks.WHITE_STAINED_GLASS_PANE, Blocks.YELLOW_STAINED_GLASS_PANE
     );
 
+    //OXIDIZABLE BLOCK GROUPS
+    this.valueLookupBuilder(DistantMoonsBlockTags.OXIDIZABLE_IRON_BLOCK).add(
+        Blocks.IRON_BLOCK, DistantMoonsBlocks.EXPOSED_IRON_BLOCK, DistantMoonsBlocks.WEATHERED_IRON_BLOCK, DistantMoonsBlocks.RUSTED_IRON_BLOCK,
+        DistantMoonsBlocks.WAXED_IRON_BLOCK, DistantMoonsBlocks.WAXED_EXPOSED_IRON_BLOCK, DistantMoonsBlocks.WAXED_WEATHERED_IRON_BLOCK, DistantMoonsBlocks.WAXED_RUSTED_IRON_BLOCK
+    );
+
     //CONNECTION TARGETS
     this.valueLookupBuilder(DistantMoonsBlockTags.NEVER_CONNECT_TO)
         .forceAddTag(BlockTags.SHULKER_BOXES)

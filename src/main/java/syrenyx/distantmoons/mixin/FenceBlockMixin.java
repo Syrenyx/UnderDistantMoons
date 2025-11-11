@@ -11,7 +11,7 @@ import syrenyx.distantmoons.references.tag.DistantMoonsBlockTags;
 import syrenyx.distantmoons.utility.MixinUtil;
 
 @Mixin(FenceBlock.class)
-public class FenceBlockMixin {
+public abstract class FenceBlockMixin {
 
   @Inject(at = @At("HEAD"), cancellable = true, method = "canConnect")
   private void canConnect(

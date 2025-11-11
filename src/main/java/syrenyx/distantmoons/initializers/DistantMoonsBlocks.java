@@ -1,7 +1,6 @@
 package syrenyx.distantmoons.initializers;
 
 import net.minecraft.block.*;
-import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -1105,16 +1104,73 @@ public abstract class DistantMoonsBlocks {
       new Item.Settings()
   );
 
-  private static Block register(String id, Function<AbstractBlock.Settings, Block> blockFactory, AbstractBlock.Settings settings) {
+  //OXIDIZABLE BLOCKS
+  public static final Block EXPOSED_IRON_BLOCK = register(
+      "exposed_iron_block",
+      Block::new,
+      AbstractBlock.Settings.copy(Blocks.IRON_BLOCK)
+          .mapColor(MapColor.TERRACOTTA_LIGHT_GRAY),
+      new Item.Settings()
+  );
+  public static final Block WEATHERED_IRON_BLOCK = register(
+      "weathered_iron_block",
+      Block::new,
+      AbstractBlock.Settings.copy(Blocks.IRON_BLOCK)
+          .mapColor(MapColor.DIRT_BROWN),
+      new Item.Settings()
+  );
+  public static final Block RUSTED_IRON_BLOCK = register(
+      "rusted_iron_block",
+      Block::new,
+      AbstractBlock.Settings.copy(Blocks.IRON_BLOCK)
+          .mapColor(MapColor.BROWN),
+      new Item.Settings()
+  );
+  public static final Block WAXED_IRON_BLOCK = register(
+      "waxed_iron_block",
+      Block::new,
+      AbstractBlock.Settings.copy(Blocks.IRON_BLOCK),
+      new Item.Settings()
+  );
+  public static final Block WAXED_EXPOSED_IRON_BLOCK = register(
+      "waxed_exposed_iron_block",
+      Block::new,
+      AbstractBlock.Settings.copy(Blocks.IRON_BLOCK)
+          .mapColor(MapColor.TERRACOTTA_LIGHT_GRAY),
+      new Item.Settings()
+  );
+  public static final Block WAXED_WEATHERED_IRON_BLOCK = register(
+      "waxed_weathered_iron_block",
+      Block::new,
+      AbstractBlock.Settings.copy(Blocks.IRON_BLOCK)
+          .mapColor(MapColor.DIRT_BROWN),
+      new Item.Settings()
+  );
+  public static final Block WAXED_RUSTED_IRON_BLOCK = register(
+      "waxed_rusted_iron_block",
+      Block::new,
+      AbstractBlock.Settings.copy(Blocks.IRON_BLOCK)
+          .mapColor(MapColor.BROWN),
+      new Item.Settings()
+  );
+
+  private static Block register(
+      String id, Function<AbstractBlock.Settings, Block> blockFactory, AbstractBlock.Settings settings
+  ) {
     RegistryKey<Block> key = RegistryKey.of(RegistryKeys.BLOCK, UnderDistantMoons.identifierOf(id));
     return Registry.register(Registries.BLOCK, key, blockFactory.apply(settings.registryKey(key)));
   }
 
-  private static Block register(String id, Function<AbstractBlock.Settings, Block> blockFactory, AbstractBlock.Settings blockSettings, Item.Settings itemSettings) {
+  private static Block register(
+      String id, Function<AbstractBlock.Settings, Block> blockFactory, AbstractBlock.Settings blockSettings, Item.Settings itemSettings
+  ) {
     Block block = register(id, blockFactory, blockSettings);
-    RegistryKey<Item> key = RegistryKey.of(RegistryKeys.ITEM, UnderDistantMoons.identifierOf(id));
-    Registry.register(Registries.ITEM, key, new BlockItem(block, itemSettings.registryKey(key).useBlockPrefixedTranslationKey()));
+    DistantMoonsItems.registerBlockItem(id, block, itemSettings);
     return block;
+  }
+
+  public static String getStringIdOf(Block block) {
+    return Registries.BLOCK.getEntry(block).getIdAsString().split(":")[1];
   }
 
   public static void initialize() {}
