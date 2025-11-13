@@ -12,10 +12,10 @@ import java.util.function.Function;
 
 public abstract class BlockOxidizationManager {
 
+  public static final float OXIDIZATION_CHANCE = 0.05688889F;
   public static final float DEFAULT_OXIDIZATION_CHANCE_MULTIPLIER = 1.0F;
   public static final float UNAFFECTED_OXIDIZATION_CHANCE_MULTIPLIER = 0.75F;
   public static final int RADIUS = 4;
-  public static final float OXIDIZATION_CHANCE = 0.05688889F;
   public static final int WAX_OFF_WORLD_EVENT = 3004;
   public static final int SCRAPE_WORLD_EVENT = 3005;
 

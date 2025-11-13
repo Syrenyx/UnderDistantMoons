@@ -1109,14 +1109,16 @@ public abstract class DistantMoonsBlocks {
       "exposed_iron_block",
       Block::new,
       AbstractBlock.Settings.copy(Blocks.IRON_BLOCK)
-          .mapColor(MapColor.TERRACOTTA_LIGHT_GRAY),
+          .mapColor(MapColor.TERRACOTTA_LIGHT_GRAY)
+          .ticksRandomly(),
       new Item.Settings()
   );
   public static final Block WEATHERED_IRON_BLOCK = register(
       "weathered_iron_block",
       Block::new,
       AbstractBlock.Settings.copy(Blocks.IRON_BLOCK)
-          .mapColor(MapColor.DIRT_BROWN),
+          .mapColor(MapColor.DIRT_BROWN)
+          .ticksRandomly(),
       new Item.Settings()
   );
   public static final Block RUSTED_IRON_BLOCK = register(

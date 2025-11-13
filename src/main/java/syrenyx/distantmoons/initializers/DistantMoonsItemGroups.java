@@ -3,6 +3,7 @@ package syrenyx.distantmoons.initializers;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.*;
 import net.minecraft.registry.RegistryKey;
+import syrenyx.distantmoons.references.tag.DistantMoonsBlockTags;
 
 import java.util.List;
 
@@ -246,6 +247,13 @@ public abstract class DistantMoonsItemGroups {
         DistantMoonsBlocks.FIXED_IRON_LADDER.asItem().getDefaultStack()
     ));
     addToGroup(ItemGroups.BUILDING_BLOCKS, Items.IRON_CHAIN, List.of(
+        DistantMoonsBlocks.EXPOSED_IRON_BLOCK.asItem().getDefaultStack(),
+        DistantMoonsBlocks.WEATHERED_IRON_BLOCK.asItem().getDefaultStack(),
+        DistantMoonsBlocks.RUSTED_IRON_BLOCK.asItem().getDefaultStack(),
+        DistantMoonsBlocks.WAXED_IRON_BLOCK.asItem().getDefaultStack(),
+        DistantMoonsBlocks.WAXED_EXPOSED_IRON_BLOCK.asItem().getDefaultStack(),
+        DistantMoonsBlocks.WAXED_WEATHERED_IRON_BLOCK.asItem().getDefaultStack(),
+        DistantMoonsBlocks.WAXED_RUSTED_IRON_BLOCK.asItem().getDefaultStack(),
         DistantMoonsBlocks.WROUGHT_IRON_BARS.asItem().getDefaultStack(),
         DistantMoonsBlocks.WROUGHT_IRON_FENCE.asItem().getDefaultStack(),
         DistantMoonsBlocks.WROUGHT_IRON_BAR_DOOR.asItem().getDefaultStack(),

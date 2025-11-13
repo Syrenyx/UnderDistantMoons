@@ -143,9 +143,9 @@ public abstract class DistantMoonsItems {
     return Registry.register(Registries.ITEM, key, itemFactory.apply(settings.registryKey(key)));
   }
 
-  protected static void registerBlockItem(String id, Block block, Item.Settings itemSettings) {
+  protected static Item registerBlockItem(String id, Block block, Item.Settings itemSettings) {
     RegistryKey<Item> key = RegistryKey.of(RegistryKeys.ITEM, UnderDistantMoons.identifierOf(id));
-    Registry.register(Registries.ITEM, key, new BlockItem(block, itemSettings.registryKey(key).useBlockPrefixedTranslationKey()));
+    return Registry.register(Registries.ITEM, key, new BlockItem(block, itemSettings.registryKey(key).useBlockPrefixedTranslationKey()));
   }
 
   public static String getStringIdOf(Item item) {

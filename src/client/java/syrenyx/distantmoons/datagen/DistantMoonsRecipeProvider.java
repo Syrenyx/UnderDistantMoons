@@ -132,6 +132,8 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
         this.createResourceCompressionRecipes(DistantMoonsItems.RAW_DEEP_IRON, DistantMoonsBlocks.RAW_DEEP_IRON_BLOCK);
         this.createResourceCompressionRecipes(DistantMoonsItems.REFINED_DEEP_IRON_NUGGET, DistantMoonsItems.REFINED_DEEP_IRON_INGOT, DistantMoonsBlocks.REFINED_DEEP_IRON_BLOCK);
 
+        this.createResourceDecompressionRecipe(DistantMoonsBlocks.WAXED_IRON_BLOCK, Items.IRON_INGOT, "iron_ingot");
+
         //ORE SMELTING
         this.createOreSmeltingRecipes(
             List.of(DistantMoonsItems.RAW_DEEP_IRON, DistantMoonsBlocks.DEEPSLATE_DEEP_IRON_ORE, DistantMoonsBlocks.NETHERRACK_DEEP_IRON_ORE, DistantMoonsBlocks.BLACKSTONE_DEEP_IRON_ORE),
@@ -246,6 +248,12 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
         this.createWallSlabRecipes(Items.TUFF_BRICKS, DistantMoonsBlocks.TUFF_BRICK_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.TUFF, DistantMoonsBlocks.TUFF_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.WARPED_PLANKS, DistantMoonsBlocks.WARPED_WALL_SLAB, "plank_wall_slab");
+
+        //WAXING RECIPES
+        this.createWaxingRecipe(Blocks.IRON_BLOCK, DistantMoonsBlocks.WAXED_IRON_BLOCK);
+        this.createWaxingRecipe(DistantMoonsBlocks.EXPOSED_IRON_BLOCK, DistantMoonsBlocks.WAXED_EXPOSED_IRON_BLOCK);
+        this.createWaxingRecipe(DistantMoonsBlocks.WEATHERED_IRON_BLOCK, DistantMoonsBlocks.WAXED_WEATHERED_IRON_BLOCK);
+        this.createWaxingRecipe(DistantMoonsBlocks.RUSTED_IRON_BLOCK, DistantMoonsBlocks.WAXED_RUSTED_IRON_BLOCK);
       }
 
       private void createBeamRecipes(ItemConvertible ingredient, ItemConvertible result, String group) {
@@ -333,25 +341,25 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
         ItemConvertible current = null;
         for (ItemConvertible next : items) {
           if (current != null) {
-            this.createResourceCompressionRecipe(current, next);
-            this.createResourceDecompressionRecipe(next, current);
+            this.createResourceCompressionRecipe(current, next, null);
+            this.createResourceDecompressionRecipe(next, current, null);
           }
           current = next;
         }
       }
 
-      private void createResourceCompressionRecipe(ItemConvertible ingredient, ItemConvertible result) {
+      private void createResourceCompressionRecipe(ItemConvertible ingredient, ItemConvertible result, @Nullable String groupOverride) {
         this.createShaped(result instanceof Block ? RecipeCategory.BUILDING_BLOCKS : RecipeCategory.MISC, result)
-            .group(getItemId(result) + "_from_resource_compression")
+            .group(groupOverride != null ? groupOverride : getItemId(result) + "_from_resource_compression")
             .pattern("000").pattern("000").pattern("000")
             .input('0', ingredient)
             .criterion(hasItem(ingredient), conditionsFromItem(ingredient))
             .offerTo(this.exporter, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/compressing_" + getItemId(ingredient)));
       }
 
-      private void createResourceDecompressionRecipe(ItemConvertible ingredient, ItemConvertible result) {
+      private void createResourceDecompressionRecipe(ItemConvertible ingredient, ItemConvertible result, @Nullable String groupOverride) {
         this.createShapeless(result instanceof Block ? RecipeCategory.BUILDING_BLOCKS : RecipeCategory.MISC, result, 9)
-            .group(getItemId(result) + "_from_resource_compression")
+            .group(groupOverride != null ? groupOverride : getItemId(result) + "_from_resource_compression")
             .input(ingredient)
             .criterion(hasItem(ingredient), conditionsFromItem(ingredient))
             .offerTo(this.exporter, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/decompressing_" + getItemId(ingredient)));
@@ -438,6 +446,15 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
         StonecuttingRecipeJsonBuilder.createStonecutting(Ingredient.ofItem(ingredient), RecipeCategory.MISC, result)
             .criterion(hasItem(ingredient), conditionsFromItem(ingredient))
             .offerTo(this.exporter, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/stonecutting"));
+      }
+
+      private void createWaxingRecipe(ItemConvertible ingredient, ItemConvertible result) {
+        this.createShapeless(RecipeCategory.BUILDING_BLOCKS, result)
+            .group(getItemId(result))
+            .input(ingredient)
+            .input(Items.HONEYCOMB)
+            .criterion(hasItem(ingredient), conditionsFromItem(ingredient))
+            .offerTo(this.exporter, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/waxing"));
       }
 
       private static String getItemId(ItemConvertible item) {

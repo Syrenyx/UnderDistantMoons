@@ -200,9 +200,13 @@ public class en_us extends FabricLanguageProvider {
     builder.add(DistantMoonsBlocks.WROUGHT_IRON_FENCE, "Wrought Iron Fence");
     builder.add(DistantMoonsBlocks.WROUGHT_IRON_LADDER, "Wrought Iron Ladder");
 
-    builder.add(DistantMoonsBlocks.EXPOSED_IRON_BLOCK, "Exposed Iron Block");
-    builder.add(DistantMoonsBlocks.WEATHERED_IRON_BLOCK, "Weathered Iron Block");
-    builder.add(DistantMoonsBlocks.RUSTED_IRON_BLOCK, "Rusted Iron Block");
+    builder.add(DistantMoonsBlocks.EXPOSED_IRON_BLOCK, "Exposed Iron");
+    builder.add(DistantMoonsBlocks.WEATHERED_IRON_BLOCK, "Weathered Iron");
+    builder.add(DistantMoonsBlocks.RUSTED_IRON_BLOCK, "Rusted Iron");
+    builder.add(DistantMoonsBlocks.WAXED_IRON_BLOCK, "Waxed Block of Iron");
+    builder.add(DistantMoonsBlocks.WAXED_EXPOSED_IRON_BLOCK, "Waxed Exposed Iron");
+    builder.add(DistantMoonsBlocks.WAXED_WEATHERED_IRON_BLOCK, "Waxed Weathered Iron");
+    builder.add(DistantMoonsBlocks.WAXED_RUSTED_IRON_BLOCK, "Waxed Rusted Iron");
 
     builder.add("commands.distant-moons.affliction.add.failed", "Unable to apply this affliction (target is either immune to afflictions, has something stronger, or the operation produced an invalid affliction instance)");
     builder.add("commands.distant-moons.affliction.add.success.multiple", "Added affliction %s to %s targets");
