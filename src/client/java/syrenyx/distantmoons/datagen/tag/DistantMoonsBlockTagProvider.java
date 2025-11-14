@@ -107,6 +107,10 @@ public class DistantMoonsBlockTagProvider extends FabricTagProvider.BlockTagProv
     );
 
     //OXIDIZABLE BLOCK GROUPS
+    this.valueLookupBuilder(DistantMoonsBlockTags.OXIDIZABLE_CUT_COPPER_WALL_SLAB).add(
+        DistantMoonsBlocks.CUT_COPPER_WALL_SLAB, DistantMoonsBlocks.EXPOSED_CUT_COPPER_WALL_SLAB, DistantMoonsBlocks.WEATHERED_CUT_COPPER_WALL_SLAB, DistantMoonsBlocks.OXIDIZED_CUT_COPPER_WALL_SLAB,
+        DistantMoonsBlocks.WAXED_CUT_COPPER_WALL_SLAB, DistantMoonsBlocks.WAXED_EXPOSED_CUT_COPPER_WALL_SLAB, DistantMoonsBlocks.WAXED_WEATHERED_CUT_COPPER_WALL_SLAB, DistantMoonsBlocks.WAXED_OXIDIZED_CUT_COPPER_WALL_SLAB
+    );
     this.valueLookupBuilder(DistantMoonsBlockTags.OXIDIZABLE_IRON_BLOCK).add(
         Blocks.IRON_BLOCK, DistantMoonsBlocks.EXPOSED_IRON_BLOCK, DistantMoonsBlocks.WEATHERED_IRON_BLOCK, DistantMoonsBlocks.RUSTED_IRON_BLOCK,
         DistantMoonsBlocks.WAXED_IRON_BLOCK, DistantMoonsBlocks.WAXED_EXPOSED_IRON_BLOCK, DistantMoonsBlocks.WAXED_WEATHERED_IRON_BLOCK, DistantMoonsBlocks.WAXED_RUSTED_IRON_BLOCK
@@ -116,6 +120,16 @@ public class DistantMoonsBlockTagProvider extends FabricTagProvider.BlockTagProv
     this.valueLookupBuilder(DistantMoonsBlockTags.NEVER_CONNECT_TO)
         .forceAddTag(BlockTags.SHULKER_BOXES)
         .add(Blocks.BARRIER, Blocks.CARVED_PUMPKIN, Blocks.JACK_O_LANTERN, Blocks.MELON, Blocks.PUMPKIN);
+
+    this.valueLookupBuilder(DistantMoonsBlockTags.BARS_ALWAYS_CONNECTS_TO)
+        .addTag(DistantMoonsBlockTags.GLASS_PANE)
+        .addTag(DistantMoonsBlockTags.SPIKED_FENCE)
+        .forceAddTag(BlockTags.BARS)
+        .forceAddTag(BlockTags.WALLS);
+    this.valueLookupBuilder(DistantMoonsBlockTags.BARS_NEVER_CONNECTS_TO)
+        .addTag(DistantMoonsBlockTags.COLORED_STAINED_GLASS)
+        .addTag(DistantMoonsBlockTags.METAL_BAR_DOOR)
+        .addTag(DistantMoonsBlockTags.NEVER_CONNECT_TO);
 
     this.valueLookupBuilder(DistantMoonsBlockTags.BEAM_ALWAYS_CONNECTS_TO);
     this.valueLookupBuilder(DistantMoonsBlockTags.BEAM_NEVER_CONNECTS_TO)
@@ -147,16 +161,6 @@ public class DistantMoonsBlockTagProvider extends FabricTagProvider.BlockTagProv
         .forceAddTag(BlockTags.BARS)
         .forceAddTag(BlockTags.WALLS);
     this.valueLookupBuilder(DistantMoonsBlockTags.GLASS_PANE_NEVER_CONNECTS_TO)
-        .addTag(DistantMoonsBlockTags.METAL_BAR_DOOR)
-        .addTag(DistantMoonsBlockTags.NEVER_CONNECT_TO);
-
-    this.valueLookupBuilder(DistantMoonsBlockTags.BARS_ALWAYS_CONNECTS_TO)
-        .addTag(DistantMoonsBlockTags.GLASS_PANE)
-        .addTag(DistantMoonsBlockTags.SPIKED_FENCE)
-        .forceAddTag(BlockTags.BARS)
-        .forceAddTag(BlockTags.WALLS);
-    this.valueLookupBuilder(DistantMoonsBlockTags.BARS_NEVER_CONNECTS_TO)
-        .addTag(DistantMoonsBlockTags.COLORED_STAINED_GLASS)
         .addTag(DistantMoonsBlockTags.METAL_BAR_DOOR)
         .addTag(DistantMoonsBlockTags.NEVER_CONNECT_TO);
 
@@ -208,6 +212,7 @@ public class DistantMoonsBlockTagProvider extends FabricTagProvider.BlockTagProv
     this.valueLookupBuilder(DistantMoonsBlockTags.MINING_TIER_DIAMOND);
     this.valueLookupBuilder(DistantMoonsBlockTags.MINING_TIER_IRON);
     this.valueLookupBuilder(DistantMoonsBlockTags.MINING_TIER_STONE)
+        .addTag(DistantMoonsBlockTags.OXIDIZABLE_CUT_COPPER_WALL_SLAB)
         .addTag(DistantMoonsBlockTags.OXIDIZABLE_IRON_BLOCK)
         .add(
             DistantMoonsBlocks.BLACKSTONE_DEEP_IRON_ORE,
@@ -281,6 +286,7 @@ public class DistantMoonsBlockTagProvider extends FabricTagProvider.BlockTagProv
     );
     this.valueLookupBuilder(DistantMoonsBlockTags.MINING_TYPE_HOE);
     this.valueLookupBuilder(DistantMoonsBlockTags.MINING_TYPE_PICKAXE)
+        .addTag(DistantMoonsBlockTags.OXIDIZABLE_CUT_COPPER_WALL_SLAB)
         .addTag(DistantMoonsBlockTags.OXIDIZABLE_IRON_BLOCK)
         .add(
             DistantMoonsBlocks.ANDESITE_WALL_SLAB,

@@ -49,6 +49,7 @@ public class DistantMoonsBlockLootTableProvider extends FabricBlockLootTableProv
     this.addDrop(DistantMoonsBlocks.DEEP_IRON_FENCE);
     this.addDrop(DistantMoonsBlocks.DEEP_IRON_LADDER);
     this.addDrop(DistantMoonsBlocks.DEEP_IRON_TRAPDOOR);
+    this.addDrop(DistantMoonsBlocks.EXPOSED_IRON_BLOCK);
     this.addDrop(DistantMoonsBlocks.FIXED_DEEP_IRON_LADDER);
     this.addDrop(DistantMoonsBlocks.FIXED_IRON_LADDER);
     this.addDrop(DistantMoonsBlocks.FIXED_WROUGHT_IRON_LADDER);
@@ -76,10 +77,16 @@ public class DistantMoonsBlockLootTableProvider extends FabricBlockLootTableProv
     this.addDrop(DistantMoonsBlocks.RAW_DEEP_IRON_BLOCK);
     this.addDrop(DistantMoonsBlocks.REFINED_DEEP_IRON_BLOCK);
     this.addDrop(DistantMoonsBlocks.ROPE_LADDER);
+    this.addDrop(DistantMoonsBlocks.RUSTED_IRON_BLOCK);
     this.addDrop(DistantMoonsBlocks.SPRUCE_BEAM);
     this.addDrop(DistantMoonsBlocks.SPRUCE_POLE);
     this.addDrop(DistantMoonsBlocks.WARPED_BEAM);
     this.addDrop(DistantMoonsBlocks.WARPED_POLE);
+    this.addDrop(DistantMoonsBlocks.WAXED_EXPOSED_IRON_BLOCK);
+    this.addDrop(DistantMoonsBlocks.WAXED_IRON_BLOCK);
+    this.addDrop(DistantMoonsBlocks.WAXED_RUSTED_IRON_BLOCK);
+    this.addDrop(DistantMoonsBlocks.WAXED_WEATHERED_IRON_BLOCK);
+    this.addDrop(DistantMoonsBlocks.WEATHERED_IRON_BLOCK);
     this.addDrop(DistantMoonsBlocks.WROUGHT_IRON_BARS);
     this.addDrop(DistantMoonsBlocks.WROUGHT_IRON_FENCE);
     this.addDrop(DistantMoonsBlocks.WROUGHT_IRON_LADDER);
@@ -155,6 +162,7 @@ public class DistantMoonsBlockLootTableProvider extends FabricBlockLootTableProv
     this.addWallSlabDrop(DistantMoonsBlocks.COBBLED_DEEPSLATE_WALL_SLAB);
     this.addWallSlabDrop(DistantMoonsBlocks.COBBLESTONE_WALL_SLAB);
     this.addWallSlabDrop(DistantMoonsBlocks.CRIMSON_WALL_SLAB);
+    this.addWallSlabDrop(DistantMoonsBlocks.CUT_COPPER_WALL_SLAB);
     this.addWallSlabDrop(DistantMoonsBlocks.CUT_RED_SANDSTONE_WALL_SLAB);
     this.addWallSlabDrop(DistantMoonsBlocks.CUT_SANDSTONE_WALL_SLAB);
     this.addWallSlabDrop(DistantMoonsBlocks.DARK_OAK_WALL_SLAB);
@@ -163,6 +171,7 @@ public class DistantMoonsBlockLootTableProvider extends FabricBlockLootTableProv
     this.addWallSlabDrop(DistantMoonsBlocks.DEEPSLATE_TILE_WALL_SLAB);
     this.addWallSlabDrop(DistantMoonsBlocks.DIORITE_WALL_SLAB);
     this.addWallSlabDrop(DistantMoonsBlocks.END_STONE_BRICK_WALL_SLAB);
+    this.addWallSlabDrop(DistantMoonsBlocks.EXPOSED_CUT_COPPER_WALL_SLAB);
     this.addWallSlabDrop(DistantMoonsBlocks.GRANITE_WALL_SLAB);
     this.addWallSlabDrop(DistantMoonsBlocks.GRAY_PRISMARINE_WALL_SLAB);
     this.addWallSlabDrop(DistantMoonsBlocks.JUNGLE_WALL_SLAB);
@@ -172,6 +181,7 @@ public class DistantMoonsBlockLootTableProvider extends FabricBlockLootTableProv
     this.addWallSlabDrop(DistantMoonsBlocks.MUD_BRICK_WALL_SLAB);
     this.addWallSlabDrop(DistantMoonsBlocks.NETHER_BRICK_WALL_SLAB);
     this.addWallSlabDrop(DistantMoonsBlocks.OAK_WALL_SLAB);
+    this.addWallSlabDrop(DistantMoonsBlocks.OXIDIZED_CUT_COPPER_WALL_SLAB);
     this.addWallSlabDrop(DistantMoonsBlocks.PALE_OAK_WALL_SLAB);
     this.addWallSlabDrop(DistantMoonsBlocks.PALE_PRISMARINE_BRICK_WALL_SLAB);
     this.addWallSlabDrop(DistantMoonsBlocks.PALE_PRISMARINE_TILE_WALL_SLAB);
@@ -202,6 +212,11 @@ public class DistantMoonsBlockLootTableProvider extends FabricBlockLootTableProv
     this.addWallSlabDrop(DistantMoonsBlocks.TUFF_BRICK_WALL_SLAB);
     this.addWallSlabDrop(DistantMoonsBlocks.TUFF_WALL_SLAB);
     this.addWallSlabDrop(DistantMoonsBlocks.WARPED_WALL_SLAB);
+    this.addWallSlabDrop(DistantMoonsBlocks.WAXED_CUT_COPPER_WALL_SLAB);
+    this.addWallSlabDrop(DistantMoonsBlocks.WAXED_EXPOSED_CUT_COPPER_WALL_SLAB);
+    this.addWallSlabDrop(DistantMoonsBlocks.WAXED_OXIDIZED_CUT_COPPER_WALL_SLAB);
+    this.addWallSlabDrop(DistantMoonsBlocks.WAXED_WEATHERED_CUT_COPPER_WALL_SLAB);
+    this.addWallSlabDrop(DistantMoonsBlocks.WEATHERED_CUT_COPPER_WALL_SLAB);
   }
 
   private void addSlabDrop(Block block) {

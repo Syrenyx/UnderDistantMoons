@@ -201,6 +201,7 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
         this.createWallSlabRecipes(Items.COBBLED_DEEPSLATE, DistantMoonsBlocks.COBBLED_DEEPSLATE_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.COBBLESTONE, DistantMoonsBlocks.COBBLESTONE_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.CRIMSON_PLANKS, DistantMoonsBlocks.CRIMSON_WALL_SLAB, "plank_wall_slab");
+        this.createWallSlabRecipes(Items.CUT_COPPER, DistantMoonsBlocks.CUT_COPPER_WALL_SLAB, "cut_copper_wall_slab");
         this.createWallSlabRecipes(Items.CUT_RED_SANDSTONE, DistantMoonsBlocks.CUT_RED_SANDSTONE_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.CUT_SANDSTONE, DistantMoonsBlocks.CUT_SANDSTONE_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.DARK_OAK_PLANKS, DistantMoonsBlocks.DARK_OAK_WALL_SLAB, "plank_wall_slab");
@@ -209,6 +210,7 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
         this.createWallSlabRecipes(Items.DEEPSLATE_TILES, DistantMoonsBlocks.DEEPSLATE_TILE_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.DIORITE, DistantMoonsBlocks.DIORITE_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.END_STONE_BRICKS, DistantMoonsBlocks.END_STONE_BRICK_WALL_SLAB, null);
+        this.createWallSlabRecipes(Items.EXPOSED_CUT_COPPER, DistantMoonsBlocks.EXPOSED_CUT_COPPER_WALL_SLAB, "exposed_cut_copper_wall_slab");
         this.createWallSlabRecipes(Items.GRANITE, DistantMoonsBlocks.GRANITE_WALL_SLAB, null);
         this.createWallSlabRecipes(DistantMoonsBlocks.GRAY_PRISMARINE, DistantMoonsBlocks.GRAY_PRISMARINE_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.JUNGLE_PLANKS, DistantMoonsBlocks.JUNGLE_WALL_SLAB, "plank_wall_slab");
@@ -218,6 +220,7 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
         this.createWallSlabRecipes(Items.MUD_BRICKS, DistantMoonsBlocks.MUD_BRICK_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.NETHER_BRICKS, DistantMoonsBlocks.NETHER_BRICK_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.OAK_PLANKS, DistantMoonsBlocks.OAK_WALL_SLAB, "plank_wall_slab");
+        this.createWallSlabRecipes(Items.OXIDIZED_CUT_COPPER, DistantMoonsBlocks.OXIDIZED_CUT_COPPER_WALL_SLAB, "oxidized_cut_copper_wall_slab");
         this.createWallSlabRecipes(Items.PALE_OAK_PLANKS, DistantMoonsBlocks.PALE_OAK_WALL_SLAB, "plank_wall_slab");
         this.createWallSlabRecipes(DistantMoonsBlocks.PALE_PRISMARINE_BRICKS, DistantMoonsBlocks.PALE_PRISMARINE_BRICK_WALL_SLAB, null);
         this.createWallSlabRecipes(DistantMoonsBlocks.PALE_PRISMARINE_TILES, DistantMoonsBlocks.PALE_PRISMARINE_TILE_WALL_SLAB, null);
@@ -248,8 +251,17 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
         this.createWallSlabRecipes(Items.TUFF_BRICKS, DistantMoonsBlocks.TUFF_BRICK_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.TUFF, DistantMoonsBlocks.TUFF_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.WARPED_PLANKS, DistantMoonsBlocks.WARPED_WALL_SLAB, "plank_wall_slab");
+        this.createWallSlabRecipes(Items.WAXED_CUT_COPPER, DistantMoonsBlocks.WAXED_CUT_COPPER_WALL_SLAB, "waxed_cut_copper_wall_slab");
+        this.createWallSlabRecipes(Items.WAXED_EXPOSED_CUT_COPPER, DistantMoonsBlocks.WAXED_EXPOSED_CUT_COPPER_WALL_SLAB, "waxed_exposed_cut_copper_wall_slab");
+        this.createWallSlabRecipes(Items.WAXED_OXIDIZED_CUT_COPPER, DistantMoonsBlocks.WAXED_OXIDIZED_CUT_COPPER_WALL_SLAB, "waxed_oxidized_cut_copper_wall_slab");
+        this.createWallSlabRecipes(Items.WAXED_WEATHERED_CUT_COPPER, DistantMoonsBlocks.WAXED_WEATHERED_CUT_COPPER_WALL_SLAB, "waxed_weathered_cut_copper_wall_slab");
+        this.createWallSlabRecipes(Items.WEATHERED_CUT_COPPER, DistantMoonsBlocks.WEATHERED_CUT_COPPER_WALL_SLAB, "weathered_cut_copper_wall_slab");
 
         //WAXING RECIPES
+        this.createWaxingRecipe(DistantMoonsBlocks.CUT_COPPER_WALL_SLAB, DistantMoonsBlocks.WAXED_CUT_COPPER_WALL_SLAB);
+        this.createWaxingRecipe(DistantMoonsBlocks.EXPOSED_CUT_COPPER_WALL_SLAB, DistantMoonsBlocks.WAXED_EXPOSED_CUT_COPPER_WALL_SLAB);
+        this.createWaxingRecipe(DistantMoonsBlocks.WEATHERED_CUT_COPPER_WALL_SLAB, DistantMoonsBlocks.WAXED_WEATHERED_CUT_COPPER_WALL_SLAB);
+        this.createWaxingRecipe(DistantMoonsBlocks.OXIDIZED_CUT_COPPER_WALL_SLAB, DistantMoonsBlocks.WAXED_OXIDIZED_CUT_COPPER_WALL_SLAB);
         this.createWaxingRecipe(Blocks.IRON_BLOCK, DistantMoonsBlocks.WAXED_IRON_BLOCK);
         this.createWaxingRecipe(DistantMoonsBlocks.EXPOSED_IRON_BLOCK, DistantMoonsBlocks.WAXED_EXPOSED_IRON_BLOCK);
         this.createWaxingRecipe(DistantMoonsBlocks.WEATHERED_IRON_BLOCK, DistantMoonsBlocks.WAXED_WEATHERED_IRON_BLOCK);

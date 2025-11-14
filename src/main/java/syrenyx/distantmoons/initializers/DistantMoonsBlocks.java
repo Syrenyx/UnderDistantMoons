@@ -1105,6 +1105,60 @@ public abstract class DistantMoonsBlocks {
   );
 
   //OXIDIZABLE BLOCKS
+  public static final Block CUT_COPPER_WALL_SLAB = register(
+      "cut_copper_wall_slab",
+      WallSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.CUT_COPPER_SLAB)
+          .ticksRandomly(),
+      new Item.Settings()
+  );
+  public static final Block EXPOSED_CUT_COPPER_WALL_SLAB = register(
+      "exposed_cut_copper_wall_slab",
+      WallSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.EXPOSED_CUT_COPPER_SLAB)
+          .ticksRandomly(),
+      new Item.Settings()
+  );
+  public static final Block WEATHERED_CUT_COPPER_WALL_SLAB = register(
+      "weathered_cut_copper_wall_slab",
+      WallSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.WEATHERED_CUT_COPPER_SLAB)
+          .ticksRandomly(),
+      new Item.Settings()
+  );
+  public static final Block OXIDIZED_CUT_COPPER_WALL_SLAB = register(
+      "oxidized_cut_copper_wall_slab",
+      WallSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.OXIDIZED_CUT_COPPER_SLAB),
+      new Item.Settings()
+  );
+  public static final Block WAXED_CUT_COPPER_WALL_SLAB = register(
+      "waxed_cut_copper_wall_slab",
+      WallSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.WAXED_CUT_COPPER_SLAB)
+          .ticksRandomly(),
+      new Item.Settings()
+  );
+  public static final Block WAXED_EXPOSED_CUT_COPPER_WALL_SLAB = register(
+      "waxed_exposed_cut_copper_wall_slab",
+      WallSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.WAXED_EXPOSED_CUT_COPPER_SLAB)
+          .ticksRandomly(),
+      new Item.Settings()
+  );
+  public static final Block WAXED_WEATHERED_CUT_COPPER_WALL_SLAB = register(
+      "waxed_weathered_cut_copper_wall_slab",
+      WallSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.WAXED_WEATHERED_CUT_COPPER_SLAB)
+          .ticksRandomly(),
+      new Item.Settings()
+  );
+  public static final Block WAXED_OXIDIZED_CUT_COPPER_WALL_SLAB = register(
+      "waxed_oxidized_cut_copper_wall_slab",
+      WallSlabBlock::new,
+      AbstractBlock.Settings.copy(Blocks.WAXED_OXIDIZED_CUT_COPPER_SLAB),
+      new Item.Settings()
+  );
   public static final Block EXPOSED_IRON_BLOCK = register(
       "exposed_iron_block",
       Block::new,

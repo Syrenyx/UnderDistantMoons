@@ -320,12 +320,14 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     registerSimpleWallSlabBlock(DistantMoonsBlocks.COBBLED_DEEPSLATE_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/cobbled_deepslate"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.COBBLESTONE_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/cobblestone"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.CRIMSON_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/crimson_planks"));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.CUT_COPPER_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/cut_copper"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.DARK_OAK_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/dark_oak_planks"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.DARK_PRISMARINE_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/dark_prismarine"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.DEEPSLATE_BRICK_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/deepslate_bricks"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.DEEPSLATE_TILE_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/deepslate_tiles"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.DIORITE_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/diorite"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.END_STONE_BRICK_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/end_stone_bricks"));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.EXPOSED_CUT_COPPER_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/exposed_cut_copper"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.GRANITE_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/granite"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.GRAY_PRISMARINE_WALL_SLAB, Map.of(TextureKey.SIDE, UnderDistantMoons.withPrefixedNamespace("block/gray_prismarine")));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.JUNGLE_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/jungle_planks"));
@@ -335,6 +337,7 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     registerSimpleWallSlabBlock(DistantMoonsBlocks.MUD_BRICK_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/mud_bricks"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.NETHER_BRICK_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/nether_bricks"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.OAK_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/oak_planks"));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.OXIDIZED_CUT_COPPER_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/oxidized_cut_copper"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.PALE_OAK_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/pale_oak_planks"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.PALE_PRISMARINE_BRICK_WALL_SLAB, Map.of(TextureKey.SIDE, UnderDistantMoons.withPrefixedNamespace("block/pale_prismarine_bricks")));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.PALE_PRISMARINE_TILE_WALL_SLAB, Map.of(TextureKey.SIDE, UnderDistantMoons.withPrefixedNamespace("block/pale_prismarine_tiles")));
@@ -361,6 +364,11 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     registerSimpleWallSlabBlock(DistantMoonsBlocks.TUFF_BRICK_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/tuff_bricks"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.TUFF_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/tuff"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.WARPED_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/warped_planks"));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.WAXED_CUT_COPPER_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/cut_copper"));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.WAXED_EXPOSED_CUT_COPPER_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/exposed_cut_copper"));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.WAXED_OXIDIZED_CUT_COPPER_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/oxidized_cut_copper"));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.WAXED_WEATHERED_CUT_COPPER_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/weathered_cut_copper"));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.WEATHERED_CUT_COPPER_WALL_SLAB, Map.of(TextureKey.SIDE, "minecraft:block/weathered_cut_copper"));
 
     //WALL SLABS - PILLAR
     registerPillarWallSlabBlock(DistantMoonsBlocks.BLACKSTONE_WALL_SLAB, Map.of(TextureKey.END, "minecraft:block/blackstone_top", TextureKey.SIDE, "minecraft:block/blackstone"));
