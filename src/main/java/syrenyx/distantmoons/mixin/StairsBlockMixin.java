@@ -20,7 +20,7 @@ import syrenyx.distantmoons.content.block.WallSlabBlock;
 import syrenyx.distantmoons.utility.MixinUtil;
 
 @Mixin(StairsBlock.class)
-public class StairsBlockMixin {
+public abstract class StairsBlockMixin {
 
   @Shadow @Final
   public static EnumProperty<BlockHalf> HALF;

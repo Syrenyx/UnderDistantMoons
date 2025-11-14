@@ -3,6 +3,7 @@ package syrenyx.distantmoons.initializers;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.*;
 import net.minecraft.registry.RegistryKey;
+import syrenyx.distantmoons.references.tag.DistantMoonsBlockTags;
 
 import java.util.List;
 
@@ -246,6 +247,13 @@ public abstract class DistantMoonsItemGroups {
         DistantMoonsBlocks.FIXED_IRON_LADDER.asItem().getDefaultStack()
     ));
     addToGroup(ItemGroups.BUILDING_BLOCKS, Items.IRON_CHAIN, List.of(
+        DistantMoonsBlocks.EXPOSED_IRON_BLOCK.asItem().getDefaultStack(),
+        DistantMoonsBlocks.WEATHERED_IRON_BLOCK.asItem().getDefaultStack(),
+        DistantMoonsBlocks.RUSTED_IRON_BLOCK.asItem().getDefaultStack(),
+        DistantMoonsBlocks.WAXED_IRON_BLOCK.asItem().getDefaultStack(),
+        DistantMoonsBlocks.WAXED_EXPOSED_IRON_BLOCK.asItem().getDefaultStack(),
+        DistantMoonsBlocks.WAXED_WEATHERED_IRON_BLOCK.asItem().getDefaultStack(),
+        DistantMoonsBlocks.WAXED_RUSTED_IRON_BLOCK.asItem().getDefaultStack(),
         DistantMoonsBlocks.WROUGHT_IRON_BARS.asItem().getDefaultStack(),
         DistantMoonsBlocks.WROUGHT_IRON_FENCE.asItem().getDefaultStack(),
         DistantMoonsBlocks.WROUGHT_IRON_BAR_DOOR.asItem().getDefaultStack(),
@@ -265,6 +273,14 @@ public abstract class DistantMoonsItemGroups {
     addToGroup(ItemGroups.BUILDING_BLOCKS, Items.QUARTZ_SLAB, List.of(DistantMoonsBlocks.QUARTZ_WALL_SLAB.asItem().getDefaultStack()));
     addToGroup(ItemGroups.BUILDING_BLOCKS, Items.QUARTZ_PILLAR, List.of(DistantMoonsBlocks.CUT_QUARTZ_PILLAR.asItem().getDefaultStack()));
     addToGroup(ItemGroups.BUILDING_BLOCKS, Items.SMOOTH_QUARTZ_SLAB, List.of(DistantMoonsBlocks.SMOOTH_QUARTZ_WALL_SLAB.asItem().getDefaultStack()));
+    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.CUT_COPPER_SLAB, List.of(DistantMoonsBlocks.CUT_COPPER_WALL_SLAB.asItem().getDefaultStack()));
+    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.EXPOSED_CUT_COPPER_SLAB, List.of(DistantMoonsBlocks.EXPOSED_CUT_COPPER_WALL_SLAB.asItem().getDefaultStack()));
+    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.WEATHERED_CUT_COPPER_SLAB, List.of(DistantMoonsBlocks.WEATHERED_CUT_COPPER_WALL_SLAB.asItem().getDefaultStack()));
+    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.OXIDIZED_CUT_COPPER_SLAB, List.of(DistantMoonsBlocks.OXIDIZED_CUT_COPPER_WALL_SLAB.asItem().getDefaultStack()));
+    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.WAXED_CUT_COPPER_SLAB, List.of(DistantMoonsBlocks.WAXED_CUT_COPPER_WALL_SLAB.asItem().getDefaultStack()));
+    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.WAXED_EXPOSED_CUT_COPPER_SLAB, List.of(DistantMoonsBlocks.WAXED_EXPOSED_CUT_COPPER_WALL_SLAB.asItem().getDefaultStack()));
+    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.WAXED_WEATHERED_CUT_COPPER_SLAB, List.of(DistantMoonsBlocks.WAXED_WEATHERED_CUT_COPPER_WALL_SLAB.asItem().getDefaultStack()));
+    addToGroup(ItemGroups.BUILDING_BLOCKS, Items.WAXED_OXIDIZED_CUT_COPPER_SLAB, List.of(DistantMoonsBlocks.WAXED_OXIDIZED_CUT_COPPER_WALL_SLAB.asItem().getDefaultStack()));
 
     //COLORED BLOCKS
 

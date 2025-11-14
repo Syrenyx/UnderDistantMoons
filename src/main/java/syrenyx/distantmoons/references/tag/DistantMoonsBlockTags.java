@@ -40,6 +40,8 @@ public abstract class DistantMoonsBlockTags {
   public static final TagKey<Block> MINING_TYPE_PICKAXE = TagUtil.generateKey(RegistryKeys.BLOCK, "mining_tool_group/type/pickaxe");
   public static final TagKey<Block> MINING_TYPE_SHOVEL = TagUtil.generateKey(RegistryKeys.BLOCK, "mining_tool_group/type/shovel");
   public static final TagKey<Block> NEVER_CONNECT_TO = TagUtil.generateKey(RegistryKeys.BLOCK, "connection_target/never");
+  public static final TagKey<Block> OXIDIZABLE_CUT_COPPER_WALL_SLAB = TagUtil.generateKey(RegistryKeys.BLOCK, "oxidizable/cut_copper_wall_slab");
+  public static final TagKey<Block> OXIDIZABLE_IRON_BLOCK = TagUtil.generateKey(RegistryKeys.BLOCK, "oxidizable/iron_block");
   public static final TagKey<Block> POLE_ALWAYS_CONNECTS_TO = TagUtil.generateKey(RegistryKeys.BLOCK, "connection_target/pole/always");
   public static final TagKey<Block> POLE_NEVER_CONNECTS_TO = TagUtil.generateKey(RegistryKeys.BLOCK, "connection_target/pole/never");
   public static final TagKey<Block> SPIKED_FENCE = TagUtil.generateKey(RegistryKeys.BLOCK, "spiked_fence");
