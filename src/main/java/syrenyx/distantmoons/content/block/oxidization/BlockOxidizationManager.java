@@ -24,33 +24,33 @@ public abstract class BlockOxidizationManager {
           Oxidizable.OxidationLevel.UNAFFECTED,
           true,
           UNAFFECTED_OXIDIZATION_CHANCE_MULTIPLIER,
-          state -> DistantMoonsBlocks.EXPOSED_IRON_BLOCK.getDefaultState(),
+          DistantMoonsBlocks.EXPOSED_IRON_BLOCK,
           null,
-          state -> DistantMoonsBlocks.WAXED_IRON_BLOCK.getDefaultState()
+          DistantMoonsBlocks.WAXED_IRON_BLOCK
       )),
       Map.entry(DistantMoonsBlocks.EXPOSED_IRON_BLOCK, new BlockOxidizationDefinition(
           Oxidizable.OxidationLevel.EXPOSED,
           true,
           DEFAULT_OXIDIZATION_CHANCE_MULTIPLIER,
-          state -> DistantMoonsBlocks.WEATHERED_IRON_BLOCK.getDefaultState(),
-          state -> Blocks.IRON_BLOCK.getDefaultState(),
-          state -> DistantMoonsBlocks.WAXED_EXPOSED_IRON_BLOCK.getDefaultState()
+          DistantMoonsBlocks.WEATHERED_IRON_BLOCK,
+          Blocks.IRON_BLOCK,
+          DistantMoonsBlocks.WAXED_EXPOSED_IRON_BLOCK
       )),
       Map.entry(DistantMoonsBlocks.WEATHERED_IRON_BLOCK, new BlockOxidizationDefinition(
           Oxidizable.OxidationLevel.WEATHERED,
           true,
           DEFAULT_OXIDIZATION_CHANCE_MULTIPLIER,
-          state -> DistantMoonsBlocks.RUSTED_IRON_BLOCK.getDefaultState(),
-          state -> DistantMoonsBlocks.EXPOSED_IRON_BLOCK.getDefaultState(),
-          state -> DistantMoonsBlocks.WAXED_WEATHERED_IRON_BLOCK.getDefaultState()
+          DistantMoonsBlocks.RUSTED_IRON_BLOCK,
+          DistantMoonsBlocks.EXPOSED_IRON_BLOCK,
+          DistantMoonsBlocks.WAXED_WEATHERED_IRON_BLOCK
       )),
       Map.entry(DistantMoonsBlocks.RUSTED_IRON_BLOCK, new BlockOxidizationDefinition(
           Oxidizable.OxidationLevel.OXIDIZED,
           true,
           DEFAULT_OXIDIZATION_CHANCE_MULTIPLIER,
           null,
-          state -> DistantMoonsBlocks.WEATHERED_IRON_BLOCK.getDefaultState(),
-          state -> DistantMoonsBlocks.WAXED_RUSTED_IRON_BLOCK.getDefaultState()
+          DistantMoonsBlocks.WEATHERED_IRON_BLOCK,
+          DistantMoonsBlocks.WAXED_RUSTED_IRON_BLOCK
       ))
   );
 

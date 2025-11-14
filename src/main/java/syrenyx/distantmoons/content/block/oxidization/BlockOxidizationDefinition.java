@@ -1,5 +1,6 @@
 package syrenyx.distantmoons.content.block.oxidization;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Oxidizable;
 import org.jetbrains.annotations.Nullable;
@@ -15,6 +16,38 @@ public record BlockOxidizationDefinition(
     @Nullable Function<BlockState, BlockState> scrapingStateTransformation,
     @Nullable Function<BlockState, BlockState> waxingStateTransformation
 ) {
+
+  public BlockOxidizationDefinition(
+      Oxidizable.OxidationLevel level,
+      boolean rust,
+      float oxidizationChanceMultiplier,
+      @Nullable Block oxidizedBlock,
+      @Nullable Block scrapedBlock,
+      @Nullable Block waxedBlock
+  ) {
+    this(
+        level, rust, oxidizationChanceMultiplier,
+        oxidizedBlock != null ? state -> oxidizedBlock.getDefaultState() : null,
+        scrapedBlock != null ? state -> scrapedBlock.getDefaultState() : null,
+        waxedBlock != null ? state -> waxedBlock.getDefaultState() : null
+    );
+  }
+
+  public BlockOxidizationDefinition(
+      Oxidizable.OxidationLevel level,
+      boolean rust,
+      float oxidizationChanceMultiplier,
+      @Nullable BlockState oxidizedBlockState,
+      @Nullable BlockState scrapedBlockState,
+      @Nullable BlockState waxedBlockState
+  ) {
+    this(
+        level, rust, oxidizationChanceMultiplier,
+        oxidizedBlockState != null ? state -> oxidizedBlockState : null,
+        scrapedBlockState != null ? state -> scrapedBlockState : null,
+        waxedBlockState != null ? state -> waxedBlockState : null
+    );
+  }
 
   public Optional<BlockState> getOxidizedStateOf(BlockState state) {
     return this.canOxidize() ? Optional.of(this.oxidizationStateTransformation.apply(state)) : Optional.empty();
