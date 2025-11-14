@@ -36,6 +36,7 @@ public class UnderDistantMoons implements ModInitializer {
     DistantMoonsLootPoolEntryTypes.initialize();
     DistantMoonsLootNumberProviders.initialize();
     DistantMoonsNetworking.initialize();
+    DistantMoonsParticleTypes.initialize();
     DistantMoonsRegistries.initialize();
     DistantMoonsSoundEvents.initialize();
     LOGGER.info("Content Successfully Initialized");

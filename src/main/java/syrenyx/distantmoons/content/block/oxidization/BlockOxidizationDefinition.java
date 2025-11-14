@@ -9,6 +9,7 @@ import java.util.function.Function;
 
 public record BlockOxidizationDefinition(
     Oxidizable.OxidationLevel level,
+    boolean rust,
     float oxidizationChanceMultiplier,
     @Nullable Function<BlockState, BlockState> oxidizationStateTransformation,
     @Nullable Function<BlockState, BlockState> scrapingStateTransformation,

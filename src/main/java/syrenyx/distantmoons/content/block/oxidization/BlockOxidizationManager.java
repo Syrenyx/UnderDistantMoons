@@ -22,6 +22,7 @@ public abstract class BlockOxidizationManager {
   public static final Map<Block, BlockOxidizationDefinition> BLOCK_OXIDIZATION_MAP = Map.ofEntries(
       Map.entry(Blocks.IRON_BLOCK, new BlockOxidizationDefinition(
           Oxidizable.OxidationLevel.UNAFFECTED,
+          true,
           UNAFFECTED_OXIDIZATION_CHANCE_MULTIPLIER,
           state -> DistantMoonsBlocks.EXPOSED_IRON_BLOCK.getDefaultState(),
           null,
@@ -29,6 +30,7 @@ public abstract class BlockOxidizationManager {
       )),
       Map.entry(DistantMoonsBlocks.EXPOSED_IRON_BLOCK, new BlockOxidizationDefinition(
           Oxidizable.OxidationLevel.EXPOSED,
+          true,
           DEFAULT_OXIDIZATION_CHANCE_MULTIPLIER,
           state -> DistantMoonsBlocks.WEATHERED_IRON_BLOCK.getDefaultState(),
           state -> Blocks.IRON_BLOCK.getDefaultState(),
@@ -36,6 +38,7 @@ public abstract class BlockOxidizationManager {
       )),
       Map.entry(DistantMoonsBlocks.WEATHERED_IRON_BLOCK, new BlockOxidizationDefinition(
           Oxidizable.OxidationLevel.WEATHERED,
+          true,
           DEFAULT_OXIDIZATION_CHANCE_MULTIPLIER,
           state -> DistantMoonsBlocks.RUSTED_IRON_BLOCK.getDefaultState(),
           state -> DistantMoonsBlocks.EXPOSED_IRON_BLOCK.getDefaultState(),
@@ -43,6 +46,7 @@ public abstract class BlockOxidizationManager {
       )),
       Map.entry(DistantMoonsBlocks.RUSTED_IRON_BLOCK, new BlockOxidizationDefinition(
           Oxidizable.OxidationLevel.OXIDIZED,
+          true,
           DEFAULT_OXIDIZATION_CHANCE_MULTIPLIER,
           null,
           state -> DistantMoonsBlocks.WEATHERED_IRON_BLOCK.getDefaultState(),
