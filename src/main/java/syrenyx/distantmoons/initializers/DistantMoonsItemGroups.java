@@ -332,6 +332,7 @@ public abstract class DistantMoonsItemGroups {
         DistantMoonsItems.DEEP_IRON_AXE.getDefaultStack(),
         DistantMoonsItems.DEEP_IRON_HOE.getDefaultStack()
     ));
+    addToGroup(ItemGroups.TOOLS, Items.TNT_MINECART, List.of(DistantMoonsBlocks.COILED_ROPE_LADDER.getDefaultStack()));
 
     //COMBAT
     addToGroup(ItemGroups.COMBAT, Items.IRON_SWORD, List.of(DistantMoonsItems.DEEP_IRON_SWORD.getDefaultStack()));

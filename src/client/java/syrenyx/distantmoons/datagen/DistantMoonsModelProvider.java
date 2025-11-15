@@ -409,6 +409,7 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     this.itemGenerator = generator;
 
     //SIMPLE ITEMS
+    registerSimpleItem(DistantMoonsBlocks.COILED_ROPE_LADDER, "simple_item", SIMPLE_ITEM_TEXTURE_MAP);
     registerSimpleItem(DistantMoonsItems.COKE, "simple_item", SIMPLE_ITEM_TEXTURE_MAP);
     registerSimpleItem(DistantMoonsItems.COPPER_ROD, "stick", SIMPLE_ITEM_TEXTURE_MAP);
     registerSimpleItem(DistantMoonsItems.CRUDE_DEEP_IRON_CHUNK, "simple_item", SIMPLE_ITEM_TEXTURE_MAP);

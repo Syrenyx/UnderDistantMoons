@@ -12,6 +12,8 @@ import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import syrenyx.distantmoons.UnderDistantMoons;
+import syrenyx.distantmoons.content.data_component.CoiledBlockComponent;
+import syrenyx.distantmoons.content.item.CoilItem;
 import syrenyx.distantmoons.references.DistantMoonsItemMaterials;
 
 import java.util.function.Function;
