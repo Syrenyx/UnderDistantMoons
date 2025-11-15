@@ -294,6 +294,7 @@ public abstract class DistantMoonsItemGroups {
 
     //FUNCTIONAL
     addToGroup(ItemGroups.FUNCTIONAL, Items.IRON_CHAIN, List.of(DistantMoonsBlocks.DEEP_IRON_CHAIN.asItem().getDefaultStack()));
+    addToGroup(ItemGroups.FUNCTIONAL, Items.SEA_LANTERN, List.of(DistantMoonsBlocks.PALE_SEA_LANTERN.asItem().getDefaultStack()));
     addToGroup(ItemGroups.FUNCTIONAL, Items.LADDER, List.of(
         DistantMoonsBlocks.IRON_LADDER.asItem().getDefaultStack(),
         DistantMoonsBlocks.WROUGHT_IRON_LADDER.asItem().getDefaultStack(),
