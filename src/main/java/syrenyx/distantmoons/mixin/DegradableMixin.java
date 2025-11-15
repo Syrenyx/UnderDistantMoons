@@ -20,7 +20,7 @@ import java.util.Optional;
 public interface DegradableMixin {
 
   @Inject(at = @At(value = "HEAD"), cancellable = true, method = "tryDegrade")
-  private void tryDegrade(
+  private void distantMoons$tryDegrade(
       BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfoReturnable<Optional<BlockState>> callbackInfo
   ) {
     Block thisBlock = (Block) this;

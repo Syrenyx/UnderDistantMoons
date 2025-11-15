@@ -20,13 +20,13 @@ public abstract class PlayerEntityMixin {
   @Unique ItemStack savedItemStack;
 
   @Inject(at = @At("HEAD"), method = "tick")
-  public void tick(CallbackInfo callbackInfo) {
+  public void distantMoons$tick(CallbackInfo callbackInfo) {
     ItemStack activeItem = ((PlayerEntity) (Object) this).getActiveItem();
     if (!activeItem.isEmpty()) this.savedItemStack = activeItem.copy();
   }
 
   @Inject(at = @At("HEAD"), method = "incrementStat(Lnet/minecraft/stat/Stat;)V")
-  public void incrementStat(Stat<?> stat, CallbackInfo callbackInfo) {
+  public void distantMoons$incrementStat(Stat<?> stat, CallbackInfo callbackInfo) {
     PlayerEntity thisPlayerEntity = (PlayerEntity) (Object) this;
     if (thisPlayerEntity.getEntityWorld().isClient() || stat.getType() != Stats.USED) return;
     ItemStack activeItem = thisPlayerEntity.getActiveItem();

@@ -61,7 +61,7 @@ public abstract class StatusEffectsDisplayMixin {
   @Unique private AfflictionInstance hoveredAffliction;
 
   @Inject(at = @At("HEAD"), cancellable = true, method = "drawStatusEffects")
-  public void drawStatusEffects(DrawContext context, int mouseX, int mouseY, CallbackInfo callbackInfo) {
+  public void distantMoons$drawStatusEffects(DrawContext context, int mouseX, int mouseY, CallbackInfo callbackInfo) {
     callbackInfo.cancel();
     if (this.client.player == null) return;
     HandledScreenAccessor parentAccessor = (HandledScreenAccessor) this.parent;
@@ -78,7 +78,7 @@ public abstract class StatusEffectsDisplayMixin {
     int x = horizontalPosition;
     int y = parentAccessor.y();
     for (AfflictionInstance affliction : iterableAfflictions) {
-      drawAfflictionWidget(context, x, y, wide, affliction, this.parent.getTextRenderer());
+      distantMoons$drawAfflictionWidget(context, x, y, wide, affliction, this.parent.getTextRenderer());
       y += WIDGET_SPACING;
       if (y - parentAccessor.y() > WIDGET_SPACING * 4) {
         y = parentAccessor.y();
@@ -87,7 +87,7 @@ public abstract class StatusEffectsDisplayMixin {
     }
     for (var statusEffect : iterableEffects) {
       assert this.client.world != null;
-      drawStatusEffectWidget(context, x, y, wide, statusEffect, this.parent.getTextRenderer(), this.client.world.getTickManager());
+      distantMoons$drawStatusEffectWidget(context, x, y, wide, statusEffect, this.parent.getTextRenderer(), this.client.world.getTickManager());
       y += WIDGET_SPACING;
       if (y - parentAccessor.y() > WIDGET_SPACING * 4) {
         y = parentAccessor.y();
@@ -115,17 +115,17 @@ public abstract class StatusEffectsDisplayMixin {
   }
 
   @Inject(at = @At("HEAD"), cancellable = true, method = "drawStatusEffectTooltip")
-  public void drawStatusEffectTooltip(DrawContext context, int mouseX, int mouseY, CallbackInfo callbackInfo) {
+  public void distantMoons$drawStatusEffectTooltip(DrawContext context, int mouseX, int mouseY, CallbackInfo callbackInfo) {
     callbackInfo.cancel();
     if (this.hoveredAffliction != null) {
-      List<Text> text = List.of(this.hoveredAffliction.getDescription(), getProgressionText(this.hoveredAffliction));
+      List<Text> text = List.of(this.hoveredAffliction.getDescription(), distantMoons$getProgressionText(this.hoveredAffliction));
       Identifier tooltipStyle = this.hoveredAffliction.getTooltipStyle();
       if (tooltipStyle != null) context.drawTooltip(this.parent.getTextRenderer(), text, Optional.empty(), mouseX, mouseY, tooltipStyle);
       else context.drawTooltip(this.parent.getTextRenderer(), text, Optional.empty(), mouseX, mouseY);
     } else if (this.hoveredStatusEffect != null) {
       assert this.client.world != null;
       List<Text> text = List.of(
-          getDescription(this.hoveredStatusEffect),
+          distantMoons$getDescription(this.hoveredStatusEffect),
           StatusEffectUtil.getDurationText(this.hoveredStatusEffect, 1.0F, this.client.world.getTickManager().getTickRate())
       );
       context.drawTooltip(this.parent.getTextRenderer(), text, Optional.empty(), mouseX, mouseY);
@@ -133,13 +133,13 @@ public abstract class StatusEffectsDisplayMixin {
   }
 
   @Unique
-  private static void drawAfflictionWidget(DrawContext context, int x, int y, boolean wide, AfflictionInstance afflictionInstance, TextRenderer textRenderer) {
+  private static void distantMoons$drawAfflictionWidget(DrawContext context, int x, int y, boolean wide, AfflictionInstance afflictionInstance, TextRenderer textRenderer) {
     Affliction affliction = afflictionInstance.affliction().value();
     Identifier texture = affliction.persistent()
         ? (wide ? LARGE_PERSISTENT_AFFLICTION_BACKGROUND_TEXTURE : SMALL_PERSISTENT_AFFLICTION_BACKGROUND_TEXTURE)
         : (wide ? LARGE_AFFLICTION_BACKGROUND_TEXTURE : SMALL_AFFLICTION_BACKGROUND_TEXTURE);
     context.drawGuiTexture(RenderPipelines.GUI_TEXTURED, texture, x, y, wide ? FULL_SIZE : MIN_SIZE, MIN_SIZE);
-    context.drawGuiTexture(RenderPipelines.GUI_TEXTURED, getIcon(afflictionInstance), x + (wide ? 6 : 7), y + 7, 18, 18);
+    context.drawGuiTexture(RenderPipelines.GUI_TEXTURED, distantMoons$getIcon(afflictionInstance), x + (wide ? 6 : 7), y + 7, 18, 18);
     if (!wide) return;
     context.drawTextWithShadow(textRenderer, afflictionInstance.getDescription(), x + 28, y + 6, Colors.WHITE);
     switch (afflictionInstance.getProgressionBarStyle()) {
@@ -178,31 +178,31 @@ public abstract class StatusEffectsDisplayMixin {
   }
 
   @Unique
-  private static void drawStatusEffectWidget(DrawContext context, int x, int y, boolean wide, StatusEffectInstance statusEffect, TextRenderer textRenderer, TickManager tickManager) {
+  private static void distantMoons$drawStatusEffectWidget(DrawContext context, int x, int y, boolean wide, StatusEffectInstance statusEffect, TextRenderer textRenderer, TickManager tickManager) {
     context.drawGuiTexture(RenderPipelines.GUI_TEXTURED, wide ? LARGE_EFFECT_BACKGROUND_TEXTURE : SMALL_EFFECT_BACKGROUND_TEXTURE, x, y, wide ? FULL_SIZE : MIN_SIZE, MIN_SIZE);
     context.drawGuiTexture(RenderPipelines.GUI_TEXTURED, InGameHud.getEffectTexture(statusEffect.getEffectType()), x + (wide ? 6 : 7), y + 7, 18, 18);
     if (wide) {
-      context.drawTextWithShadow(textRenderer, getDescription(statusEffect), x + 28, y + 6, Colors.WHITE);
+      context.drawTextWithShadow(textRenderer, distantMoons$getDescription(statusEffect), x + 28, y + 6, Colors.WHITE);
       context.drawTextWithShadow(textRenderer, StatusEffectUtil.getDurationText(statusEffect, 1.0F, tickManager.getTickRate()), x + 28, y + 16, -8421505);
     }
   }
 
   @Unique
-  private static Text getDescription(StatusEffectInstance statusEffect) {
+  private static Text distantMoons$getDescription(StatusEffectInstance statusEffect) {
     MutableText text = statusEffect.getEffectType().value().getName().copy();
     if (statusEffect.getAmplifier() >= 1) text.append(ScreenTexts.SPACE).append(Text.translatable("enchantment.level." + (statusEffect.getAmplifier() + 1)));
     return text;
   }
 
   @Unique
-  private static Identifier getIcon(AfflictionInstance afflictionInstance) {
+  private static Identifier distantMoons$getIcon(AfflictionInstance afflictionInstance) {
     Identifier icon = afflictionInstance.getIcon();
     if (icon == null) return MissingSprite.getMissingSpriteId();
     return icon.withPrefixedPath("mob_effect/");
   }
 
   @Unique
-  private static Text getProgressionText(AfflictionInstance affliction) {
+  private static Text distantMoons$getProgressionText(AfflictionInstance affliction) {
     if (affliction.getProgressionBarStyle() == ProgressionBarStyle.INFINITE) return Text.translatable("effect.duration.infinite");
     float progression = switch (affliction.getProgressionBarStyle()) {
       case EMPTY -> 0.0F;

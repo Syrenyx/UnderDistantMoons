@@ -16,7 +16,7 @@ import java.util.Optional;
 public abstract class HoneycombItemMixin {
 
   @Inject(at = @At("HEAD"), cancellable = true, method = "getWaxedState")
-  private static void getWaxedState(BlockState state, CallbackInfoReturnable<Optional<BlockState>> callbackInfo) {
+  private static void distantMoons$getWaxedState(BlockState state, CallbackInfoReturnable<Optional<BlockState>> callbackInfo) {
     BlockOxidizationDefinition oxidizationRules = BlockOxidizationManager.BLOCK_OXIDIZATION_MAP.get(state.getBlock());
     if (oxidizationRules == null || !oxidizationRules.canBeWaxed()) return;
     MixinUtil.cancelAndSetReturnValue(oxidizationRules.getWaxedStateOf(state), callbackInfo);

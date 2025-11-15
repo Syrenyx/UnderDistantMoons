@@ -14,7 +14,7 @@ import syrenyx.distantmoons.utility.MixinUtil;
 public abstract class FenceBlockMixin {
 
   @Inject(at = @At("HEAD"), cancellable = true, method = "canConnect")
-  private void canConnect(
+  private void distantMoons$canConnect(
       BlockState state,
       boolean neighborIsFullSquare,
       Direction dir,
