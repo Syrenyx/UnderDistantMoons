@@ -26,7 +26,7 @@ import java.util.function.Consumer;
 public abstract class EnchantmentHelperMixin {
 
   @Inject(at = @At("HEAD"), method = "applyLocationBasedEffects(Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/entity/LivingEntity;)V")
-  private static void applyLocationBasedEffects(
+  private static void distantMoons$applyLocationBasedEffects(
       ServerWorld world,
       LivingEntity user,
       CallbackInfo callbackInfo
@@ -35,7 +35,7 @@ public abstract class EnchantmentHelperMixin {
   }
 
   @Inject(at = @At("HEAD"), method = "applyLocationBasedEffects(Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/item/ItemStack;Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/entity/EquipmentSlot;)V")
-  private static void applyLocationBasedEffects(
+  private static void distantMoons$applyLocationBasedEffects(
       ServerWorld world,
       ItemStack stack,
       LivingEntity user,
@@ -46,7 +46,7 @@ public abstract class EnchantmentHelperMixin {
   }
 
   @Inject(at = @At("HEAD"), cancellable = true, method =  "getArmorEffectiveness")
-  private static void getArmorEffectiveness(
+  private static void distantMoons$getArmorEffectiveness(
       ServerWorld world,
       ItemStack stack,
       Entity user,
@@ -62,7 +62,7 @@ public abstract class EnchantmentHelperMixin {
   }
 
   @Inject(at = @At("HEAD"), cancellable = true, method =  "getDamage")
-  private static void getDamage(
+  private static void distantMoons$getDamage(
       ServerWorld world,
       ItemStack stack,
       Entity target,
@@ -78,7 +78,7 @@ public abstract class EnchantmentHelperMixin {
   }
 
   @Inject(at = @At("HEAD"), cancellable = true, method =  "getFishingLuckBonus")
-  private static void getFishingLuckBonus(
+  private static void distantMoons$getFishingLuckBonus(
       ServerWorld world,
       ItemStack stack,
       Entity user,
@@ -92,7 +92,7 @@ public abstract class EnchantmentHelperMixin {
   }
 
   @Inject(at = @At("HEAD"), cancellable = true, method =  "getFishingTimeReduction")
-  private static void getFishingTimeReduction(
+  private static void distantMoons$getFishingTimeReduction(
       ServerWorld world,
       ItemStack stack,
       Entity user,
@@ -106,7 +106,7 @@ public abstract class EnchantmentHelperMixin {
   }
 
   @Inject(at = @At("HEAD"), cancellable = true, method =  "getProtectionAmount")
-  private static void getProtectionAmount(
+  private static void distantMoons$getProtectionAmount(
       ServerWorld world,
       LivingEntity user,
       DamageSource damageSource,
@@ -120,7 +120,7 @@ public abstract class EnchantmentHelperMixin {
   }
 
   @Inject(at = @At("HEAD"), cancellable = true, method =  "modifyKnockback")
-  private static void modifyKnockback(
+  private static void distantMoons$modifyKnockback(
       ServerWorld world,
       ItemStack stack,
       Entity target,
@@ -137,7 +137,7 @@ public abstract class EnchantmentHelperMixin {
   }
 
   @Inject(at = @At("HEAD"), cancellable = true, method = "isInvulnerableTo")
-  private static void isInvulnerableTo(
+  private static void distantMoons$isInvulnerableTo(
       ServerWorld world,
       LivingEntity user,
       DamageSource damageSource,
@@ -150,7 +150,7 @@ public abstract class EnchantmentHelperMixin {
   }
 
   @Inject(at = @At("HEAD"), method = "onHitBlock")
-  private static void onHitBlock(
+  private static void distantMoons$onHitBlock(
       ServerWorld world,
       ItemStack stack,
       @Nullable LivingEntity user,
@@ -165,7 +165,7 @@ public abstract class EnchantmentHelperMixin {
   }
 
   @Inject(at = @At("HEAD"), method = "onTargetDamaged(Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/entity/Entity;Lnet/minecraft/entity/damage/DamageSource;Lnet/minecraft/item/ItemStack;Ljava/util/function/Consumer;)V")
-  private static void onTargetDamaged(
+  private static void distantMoons$onTargetDamaged(
       ServerWorld world,
       Entity target,
       DamageSource damageSource,
@@ -177,7 +177,7 @@ public abstract class EnchantmentHelperMixin {
   }
 
   @Inject(at = @At("HEAD"), method = "removeLocationBasedEffects(Lnet/minecraft/entity/LivingEntity;)V")
-  private static void removeLocationBasedEffects(
+  private static void distantMoons$removeLocationBasedEffects(
       LivingEntity user,
       CallbackInfo callbackInfo
   ) {
@@ -185,7 +185,7 @@ public abstract class EnchantmentHelperMixin {
   }
 
   @Inject(at = @At("HEAD"), method = "removeLocationBasedEffects(Lnet/minecraft/item/ItemStack;Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/entity/EquipmentSlot;)V")
-  private static void removeLocationBasedEffects(
+  private static void distantMoons$removeLocationBasedEffects(
       ItemStack stack,
       LivingEntity user,
       EquipmentSlot slot,

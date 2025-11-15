@@ -23,7 +23,7 @@ public abstract class PaneBlockMixin {
   @WrapOperation(
       at = @At(value = "INVOKE", target = "Lnet/minecraft/block/BlockState;isSideSolidFullSquare(Lnet/minecraft/world/BlockView;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/util/math/Direction;)Z"),
       method = {"getPlacementState", "getStateForNeighborUpdate"}
-  ) private boolean determineConnectionStates(
+  ) private boolean distantMoons$determineConnectionStates(
       BlockState state, BlockView blockView, BlockPos blockPos, Direction direction, Operation<Boolean> wrappedCall
   ) {
     BlockState defaultState = ((PaneBlock) (Object) this).getDefaultState();
@@ -41,7 +41,7 @@ public abstract class PaneBlockMixin {
   }
 
   @Inject(at = @At("HEAD"), cancellable = true, method = "isSideInvisible")
-  private void isSideInvisible(
+  private void distantMoons$isSideInvisible(
       BlockState state, BlockState stateFrom, Direction direction, CallbackInfoReturnable<Boolean> callbackInfo
   ) {
     if (

@@ -14,13 +14,13 @@ import syrenyx.distantmoons.initializers.DistantMoonsAfflictionEffectComponents;
 public abstract class LivingEntityMixin {
 
   @Inject(at = @At("HEAD"), method = "baseTick")
-  public void baseTick(CallbackInfo callbackInfo) {
+  public void distantMoons$baseTick(CallbackInfo callbackInfo) {
     LivingEntity entity = (LivingEntity) (Object) this;
     if (entity.getEntityWorld() instanceof ServerWorld) AfflictionManager.handleTick(entity);
   }
 
   @Inject(at = @At("HEAD"), method = "onDeath")
-  public void onDeath(DamageSource damageSource, CallbackInfo callbackInfo) {
+  public void distantMoons$onDeath(DamageSource damageSource, CallbackInfo callbackInfo) {
     LivingEntity entity = (LivingEntity) (Object) this;
     if (entity.getEntityWorld() instanceof ServerWorld) AfflictionManager.handlePostDamage(entity, damageSource, DistantMoonsAfflictionEffectComponents.POST_DEATH);
   }

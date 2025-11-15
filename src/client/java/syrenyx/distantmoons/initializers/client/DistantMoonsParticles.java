@@ -2,7 +2,7 @@ package syrenyx.distantmoons.initializers.client;
 
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import syrenyx.distantmoons.initializers.DistantMoonsParticleTypes;
-import syrenyx.distantmoons.particle.SparkParticle;
+import syrenyx.distantmoons.content.particle.SparkParticle;
 
 public class DistantMoonsParticles {
 

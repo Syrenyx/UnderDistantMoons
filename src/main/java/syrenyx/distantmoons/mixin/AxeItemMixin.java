@@ -32,13 +32,13 @@ public abstract class AxeItemMixin {
   private static void strip(World world, BlockPos pos, @Nullable PlayerEntity player, BlockState state, SoundEvent sound, int worldEvent) {}
 
   @Inject(at = @At("HEAD"), cancellable = true, method = "tryStrip")
-  private void tryStrip(
+  private void distantMoons$tryStrip(
       World world, BlockPos pos, @Nullable PlayerEntity player, BlockState state, CallbackInfoReturnable<Optional<BlockState>> callbackInfo
   ) {
     Block block = state.getBlock();
     BlockOxidizationDefinition oxidizationRules = BlockOxidizationManager.BLOCK_OXIDIZATION_MAP.get(block);
     if (oxidizationRules != null && oxidizationRules.canBeScraped()) {
-      if (oxidizationRules.rust()) scrapeRust(world, pos, player, state);
+      if (oxidizationRules.rust()) distantMoons$scrapeRust(world, pos, player, state);
       else strip(world, pos, player, state, SoundEvents.ITEM_AXE_SCRAPE, BlockOxidizationManager.SCRAPE_WORLD_EVENT);
       MixinUtil.cancelAndSetReturnValue(oxidizationRules.getScrapedStateOf(state), callbackInfo);
     } else if (BlockOxidizationManager.WAXED_BLOCK_SCRAPING_MAP.containsKey(block)) {
@@ -48,7 +48,7 @@ public abstract class AxeItemMixin {
   }
 
   @Unique
-  private static void scrapeRust(World world, BlockPos pos, @Nullable PlayerEntity player, BlockState state) {
+  private static void distantMoons$scrapeRust(World world, BlockPos pos, @Nullable PlayerEntity player, BlockState state) {
     world.playSound(player, pos, SoundEvents.ITEM_AXE_SCRAPE, SoundCategory.BLOCKS, 1.0F, 1.0F);
     ParticleUtil.spawnParticle(world, pos, DistantMoonsParticleTypes.SCRAPE_RUST, UniformIntProvider.create(3, 5));
   }

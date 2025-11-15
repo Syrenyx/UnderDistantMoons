@@ -35,7 +35,7 @@ public abstract class WallBlockMixin {
   protected abstract boolean shouldHavePost(BlockState state, BlockState aboveState, VoxelShape aboveShape);
 
   @Inject(at = @At("RETURN"), cancellable = true, method = "getStateWith(Lnet/minecraft/world/WorldView;Lnet/minecraft/block/BlockState;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;ZZZZ)Lnet/minecraft/block/BlockState;")
-  private void getStateWith(
+  private void distantMoons$getStateWith(
       WorldView world,
       BlockState state,
       BlockPos pos,
@@ -63,7 +63,7 @@ public abstract class WallBlockMixin {
   }
 
   @Inject(at = @At("HEAD"), cancellable = true, method = "shouldConnectTo")
-  private void shouldConnectTo(
+  private void distantMoons$shouldConnectTo(
       BlockState state,
       boolean faceFullSquare,
       Direction side,
