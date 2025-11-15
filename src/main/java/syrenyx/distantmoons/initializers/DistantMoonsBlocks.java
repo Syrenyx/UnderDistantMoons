@@ -1314,8 +1314,7 @@ public abstract class DistantMoonsBlocks {
   }
 
   private static Item register(String id, Function<Item.Settings, Item> itemFactory, Item.Settings settings) {
-    RegistryKey<Item> key = RegistryKey.of(RegistryKeys.ITEM, UnderDistantMoons.identifierOf(id));
-    return Registry.register(Registries.ITEM, key, itemFactory.apply(settings.registryKey(key)));
+    return DistantMoonsItems.register(id, itemFactory, settings);
   }
 
   public static String getStringIdOf(Block block) {

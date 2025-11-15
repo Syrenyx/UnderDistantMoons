@@ -140,7 +140,7 @@ public abstract class DistantMoonsItems {
       new Item.Settings()
   );
 
-  private static Item register(String id, Function<Item.Settings, Item> itemFactory, Item.Settings settings) {
+  protected static Item register(String id, Function<Item.Settings, Item> itemFactory, Item.Settings settings) {
     RegistryKey<Item> key = RegistryKey.of(RegistryKeys.ITEM, UnderDistantMoons.identifierOf(id));
     return Registry.register(Registries.ITEM, key, itemFactory.apply(settings.registryKey(key)));
   }
