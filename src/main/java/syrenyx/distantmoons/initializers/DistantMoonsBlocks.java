@@ -495,6 +495,76 @@ public abstract class DistantMoonsBlocks {
           .mapColor(MapColor.TERRACOTTA_BROWN),
       new Item.Settings()
   );
+  public static final Block INFESTED_CHISELED_DEEPSLATE = register(
+      "infested_chiseled_deepslate",
+      settings -> new InfestedBlock(Blocks.CHISELED_DEEPSLATE, settings),
+      AbstractBlock.Settings.create()
+          .mapColor(MapColor.DEEPSLATE_GRAY)
+          .sounds(BlockSoundGroup.DEEPSLATE),
+      new Item.Settings()
+  );
+  public static final Block INFESTED_COBBLED_DEEPSLATE = register(
+      "infested_cobbled_deepslate",
+      settings -> new InfestedBlock(Blocks.COBBLED_DEEPSLATE, settings),
+      AbstractBlock.Settings.create()
+          .mapColor(MapColor.DEEPSLATE_GRAY)
+          .sounds(BlockSoundGroup.DEEPSLATE),
+      new Item.Settings()
+  );
+  public static final Block INFESTED_CRACKED_DEEPSLATE_BRICKS = register(
+      "infested_cracked_deepslate_bricks",
+      settings -> new InfestedBlock(Blocks.CRACKED_DEEPSLATE_BRICKS, settings),
+      AbstractBlock.Settings.create()
+          .mapColor(MapColor.DEEPSLATE_GRAY)
+          .sounds(BlockSoundGroup.DEEPSLATE),
+      new Item.Settings()
+  );
+  public static final Block INFESTED_CRACKED_DEEPSLATE_TILES = register(
+      "infested_cracked_deepslate_tiles",
+      settings -> new InfestedBlock(Blocks.CRACKED_DEEPSLATE_TILES, settings),
+      AbstractBlock.Settings.create()
+          .mapColor(MapColor.DEEPSLATE_GRAY)
+          .sounds(BlockSoundGroup.DEEPSLATE),
+      new Item.Settings()
+  );
+  public static final Block INFESTED_DEEPSLATE_BRICKS = register(
+      "infested_deepslate_bricks",
+      settings -> new InfestedBlock(Blocks.DEEPSLATE_BRICKS, settings),
+      AbstractBlock.Settings.create()
+          .mapColor(MapColor.DEEPSLATE_GRAY)
+          .sounds(BlockSoundGroup.DEEPSLATE),
+      new Item.Settings()
+  );
+  public static final Block INFESTED_DEEPSLATE_TILES = register(
+      "infested_deepslate_tiles",
+      settings -> new InfestedBlock(Blocks.DEEPSLATE_TILES, settings),
+      AbstractBlock.Settings.create()
+          .mapColor(MapColor.DEEPSLATE_GRAY)
+          .sounds(BlockSoundGroup.DEEPSLATE),
+      new Item.Settings()
+  );
+  public static final Block INFESTED_MOSSY_COBBLESTONE = register(
+      "infested_mossy_cobblestone",
+      settings -> new InfestedBlock(Blocks.MOSSY_COBBLESTONE, settings),
+      AbstractBlock.Settings.create()
+          .mapColor(MapColor.LIGHT_BLUE_GRAY),
+      new Item.Settings()
+  );
+  public static final Block INFESTED_POLISHED_DEEPSLATE = register(
+      "infested_polished_deepslate",
+      settings -> new InfestedBlock(Blocks.POLISHED_DEEPSLATE, settings),
+      AbstractBlock.Settings.create()
+          .mapColor(MapColor.DEEPSLATE_GRAY)
+          .sounds(BlockSoundGroup.DEEPSLATE),
+      new Item.Settings()
+  );
+  public static final Block INFESTED_SMOOTH_STONE = register(
+      "infested_smooth_stone",
+      settings -> new InfestedBlock(Blocks.SMOOTH_STONE, settings),
+      AbstractBlock.Settings.create()
+          .mapColor(MapColor.LIGHT_BLUE_GRAY),
+      new Item.Settings()
+  );
   public static final Block IRON_BAR_DOOR = register(
       "iron_bar_door",
       settings -> new MetalBarDoorBlock(BlockSetType.IRON, settings),

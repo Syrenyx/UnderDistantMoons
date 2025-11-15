@@ -10,14 +10,13 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import syrenyx.distantmoons.content.block.oxidization.BlockOxidizationManager;
-import syrenyx.distantmoons.utility.MixinUtil;
 
 @Mixin(AbstractBlock.class)
 public abstract class AbstractBlockMixin {
 
   @Inject(at = @At("HEAD"), cancellable = true, method = "hasRandomTicks")
   private void distantMoons$hasRandomTicks(BlockState state, CallbackInfoReturnable<Boolean> callbackInfo) {
-    if (state.isOf(Blocks.IRON_BLOCK)) MixinUtil.cancelAndSetReturnValue(true, callbackInfo);
+    if (state.isOf(Blocks.IRON_BLOCK)) callbackInfo.setReturnValue(true);
   }
 
   @Inject(at = @At("HEAD"), method = "randomTick")

@@ -17,7 +17,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import syrenyx.distantmoons.content.block.WallSlabBlock;
-import syrenyx.distantmoons.utility.MixinUtil;
 
 @Mixin(StairsBlock.class)
 public abstract class StairsBlockMixin {
@@ -38,15 +37,15 @@ public abstract class StairsBlockMixin {
     BlockState frontState = world.getBlockState(pos.offset(direction.getOpposite()));
     if (distantMoons$canConnectTo(state, frontState)) {
       Direction facing = frontState.get(HorizontalFacingBlock.FACING);
-      if (direction.rotateYCounterclockwise() == facing && !leftLocked) MixinUtil.cancelAndSetReturnValue(StairShape.INNER_LEFT, callbackInfo);
-      if (direction.rotateYClockwise() == facing && !rightLocked) MixinUtil.cancelAndSetReturnValue(StairShape.INNER_RIGHT, callbackInfo);
+      if (direction.rotateYCounterclockwise() == facing && !leftLocked) callbackInfo.setReturnValue(StairShape.INNER_LEFT);
+      if (direction.rotateYClockwise() == facing && !rightLocked) callbackInfo.setReturnValue(StairShape.INNER_RIGHT);
     }
     else if (distantMoons$canConnectTo(state, backState)) {
       Direction facing = backState.get(HorizontalFacingBlock.FACING);
-      if (direction.rotateYCounterclockwise() == facing && !rightLocked) MixinUtil.cancelAndSetReturnValue(StairShape.OUTER_LEFT, callbackInfo);
-      if (direction.rotateYClockwise() == facing && !leftLocked) MixinUtil.cancelAndSetReturnValue(StairShape.OUTER_RIGHT, callbackInfo);
+      if (direction.rotateYCounterclockwise() == facing && !rightLocked) callbackInfo.setReturnValue(StairShape.OUTER_LEFT);
+      if (direction.rotateYClockwise() == facing && !leftLocked) callbackInfo.setReturnValue(StairShape.OUTER_RIGHT);
     }
-    else MixinUtil.cancelAndSetReturnValue(StairShape.STRAIGHT, callbackInfo);
+    else callbackInfo.setReturnValue(StairShape.STRAIGHT);
   }
 
   @Unique

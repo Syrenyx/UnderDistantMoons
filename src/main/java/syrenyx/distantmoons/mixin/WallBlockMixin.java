@@ -3,6 +3,7 @@ package syrenyx.distantmoons.mixin;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.WallBlock;
+import net.minecraft.block.enums.StairShape;
 import net.minecraft.block.enums.WallShape;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.EnumProperty;
@@ -20,7 +21,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import syrenyx.distantmoons.content.block.FixedLadderBlock;
 import syrenyx.distantmoons.content.block.block_state_enums.FixedLadderSideShape;
 import syrenyx.distantmoons.references.tag.DistantMoonsBlockTags;
-import syrenyx.distantmoons.utility.MixinUtil;
 
 @Mixin(WallBlock.class)
 public abstract class WallBlockMixin {
@@ -69,8 +69,8 @@ public abstract class WallBlockMixin {
       Direction side,
       CallbackInfoReturnable<Boolean> callbackInfo
   ) {
-    if (state.isIn(DistantMoonsBlockTags.WALL_NEVER_CONNECTS_TO)) MixinUtil.cancelAndSetReturnValue(false, callbackInfo);
-    else if (state.isIn(DistantMoonsBlockTags.WALL_ALWAYS_CONNECTS_TO)) MixinUtil.cancelAndSetReturnValue(true, callbackInfo);
-    else if (state.getBlock() instanceof FixedLadderBlock) MixinUtil.cancelAndSetReturnValue(FixedLadderBlock.canWallConnect(state, side), callbackInfo);
+    if (state.isIn(DistantMoonsBlockTags.WALL_NEVER_CONNECTS_TO)) callbackInfo.setReturnValue(false);
+    else if (state.isIn(DistantMoonsBlockTags.WALL_ALWAYS_CONNECTS_TO)) callbackInfo.setReturnValue(true);
+    else if (state.getBlock() instanceof FixedLadderBlock) callbackInfo.setReturnValue(FixedLadderBlock.canWallConnect(state, side));
   }
 }

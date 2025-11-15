@@ -21,7 +21,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import syrenyx.distantmoons.content.block.oxidization.BlockOxidizationDefinition;
 import syrenyx.distantmoons.content.block.oxidization.BlockOxidizationManager;
 import syrenyx.distantmoons.initializers.DistantMoonsParticleTypes;
-import syrenyx.distantmoons.utility.MixinUtil;
 
 import java.util.Optional;
 
@@ -40,10 +39,10 @@ public abstract class AxeItemMixin {
     if (oxidizationRules != null && oxidizationRules.canBeScraped()) {
       if (oxidizationRules.rust()) distantMoons$scrapeRust(world, pos, player, state);
       else strip(world, pos, player, state, SoundEvents.ITEM_AXE_SCRAPE, BlockOxidizationManager.SCRAPE_WORLD_EVENT);
-      MixinUtil.cancelAndSetReturnValue(oxidizationRules.getScrapedStateOf(state), callbackInfo);
+      callbackInfo.setReturnValue(oxidizationRules.getScrapedStateOf(state));
     } else if (BlockOxidizationManager.WAXED_BLOCK_SCRAPING_MAP.containsKey(block)) {
       strip(world, pos, player, state, SoundEvents.ITEM_AXE_WAX_OFF, BlockOxidizationManager.WAX_OFF_WORLD_EVENT);
-      MixinUtil.cancelAndSetReturnValue(Optional.of(BlockOxidizationManager.WAXED_BLOCK_SCRAPING_MAP.get(block).apply(state)), callbackInfo);
+      callbackInfo.setReturnValue(Optional.of(BlockOxidizationManager.WAXED_BLOCK_SCRAPING_MAP.get(block).apply(state)));
     }
   }
 

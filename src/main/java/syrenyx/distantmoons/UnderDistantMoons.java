@@ -2,6 +2,9 @@ package syrenyx.distantmoons;
 
 import net.fabricmc.api.ModInitializer;
 
+import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,11 +45,19 @@ public class UnderDistantMoons implements ModInitializer {
     LOGGER.info("Content Successfully Initialized");
 	}
 
+  public static String withPrefixedNamespace(String string) {
+    return MOD_ID + ":" + string;
+  }
+
   public static Identifier identifierOf(String string) {
     return Identifier.of(MOD_ID, string);
   }
 
-  public static String withPrefixedNamespace(String string) {
-    return MOD_ID + ":" + string;
+  public static <T> RegistryKey<T> registryKeyOf(String string, RegistryKey<Registry<T>> key) {
+    return RegistryKey.of(key, identifierOf(string));
+  }
+
+  public static <T> TagKey<T> tagKeyOf(String string, RegistryKey<Registry<T>> key) {
+    return TagKey.of(key, identifierOf(string));
   }
 }

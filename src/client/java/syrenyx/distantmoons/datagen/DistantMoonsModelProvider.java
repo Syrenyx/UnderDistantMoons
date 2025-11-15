@@ -104,6 +104,15 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     registerSimpleBlock(DistantMoonsBlocks.CRUDE_DEEP_IRON_BLOCK, SIMPLE_BLOCK_TEXTURE_MAP);
     registerSimpleBlock(DistantMoonsBlocks.DEEPSLATE_DEEP_IRON_ORE, SIMPLE_BLOCK_TEXTURE_MAP);
     registerSimpleBlock(DistantMoonsBlocks.GRAY_PRISMARINE, SIMPLE_BLOCK_TEXTURE_MAP);
+    registerSimpleBlock(DistantMoonsBlocks.INFESTED_CHISELED_DEEPSLATE, Map.of(TextureKey.SIDE, "minecraft:block/chiseled_deepslate"));
+    registerSimpleBlock(DistantMoonsBlocks.INFESTED_COBBLED_DEEPSLATE, Map.of(TextureKey.SIDE, "minecraft:block/cobbled_deepslate"));
+    registerSimpleBlock(DistantMoonsBlocks.INFESTED_CRACKED_DEEPSLATE_BRICKS, Map.of(TextureKey.SIDE, "minecraft:block/cracked_deepslate_bricks"));
+    registerSimpleBlock(DistantMoonsBlocks.INFESTED_CRACKED_DEEPSLATE_TILES, Map.of(TextureKey.SIDE, "minecraft:block/cracked_deepslate_tiles"));
+    registerSimpleBlock(DistantMoonsBlocks.INFESTED_DEEPSLATE_BRICKS, Map.of(TextureKey.SIDE, "minecraft:block/deepslate_bricks"));
+    registerSimpleBlock(DistantMoonsBlocks.INFESTED_DEEPSLATE_TILES, Map.of(TextureKey.SIDE, "minecraft:block/deepslate_tiles"));
+    registerSimpleBlock(DistantMoonsBlocks.INFESTED_MOSSY_COBBLESTONE, Map.of(TextureKey.SIDE, "minecraft:block/mossy_cobblestone"));
+    registerSimpleBlock(DistantMoonsBlocks.INFESTED_POLISHED_DEEPSLATE, Map.of(TextureKey.SIDE, "minecraft:block/polished_deepslate"));
+    registerSimpleBlock(DistantMoonsBlocks.INFESTED_SMOOTH_STONE, Map.of(TextureKey.SIDE, "minecraft:block/smooth_stone"));
     registerSimpleBlock(DistantMoonsBlocks.NETHERRACK_DEEP_IRON_ORE, SIMPLE_BLOCK_TEXTURE_MAP);
     registerSimpleBlock(DistantMoonsBlocks.PALE_PRISMARINE, SIMPLE_BLOCK_TEXTURE_MAP);
     registerSimpleBlock(DistantMoonsBlocks.PALE_PRISMARINE_BRICKS, SIMPLE_BLOCK_TEXTURE_MAP);
