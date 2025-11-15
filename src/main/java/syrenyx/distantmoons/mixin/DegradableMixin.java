@@ -12,7 +12,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import syrenyx.distantmoons.content.block.oxidization.BlockOxidizationManager;
-import syrenyx.distantmoons.utility.MixinUtil;
 
 import java.util.Optional;
 
@@ -25,6 +24,6 @@ public interface DegradableMixin {
   ) {
     Block thisBlock = (Block) this;
     if (!(thisBlock instanceof Degradable<?> degradableBlock) || degradableBlock.getDegradationLevel().getClass() != Oxidizable.OxidationLevel.class) return;
-    MixinUtil.cancelAndSetReturnValue(BlockOxidizationManager.tryToOxidize(thisBlock, state, world, pos, random), callbackInfo);
+    callbackInfo.setReturnValue(BlockOxidizationManager.tryToOxidize(thisBlock, state, world, pos, random));
   }
 }

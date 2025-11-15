@@ -3,10 +3,12 @@ package syrenyx.distantmoons.datagen.loot_table;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 import net.minecraft.block.Block;
+import net.minecraft.block.InfestedBlock;
 import net.minecraft.block.enums.SlabType;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTable;
 import net.minecraft.loot.condition.BlockStatePropertyLootCondition;
+import net.minecraft.loot.condition.ReferenceLootCondition;
 import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.loot.function.ExplosionDecayLootFunction;
 import net.minecraft.loot.function.SetCountLootFunction;
@@ -17,6 +19,7 @@ import net.minecraft.state.property.Properties;
 import syrenyx.distantmoons.content.block.WallSlabBlock;
 import syrenyx.distantmoons.content.block.block_state_enums.WallSlabShape;
 import syrenyx.distantmoons.initializers.DistantMoonsBlocks;
+import syrenyx.distantmoons.references.data.DistantMoonsPredicates;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -90,6 +93,17 @@ public class DistantMoonsBlockLootTableProvider extends FabricBlockLootTableProv
     this.addDrop(DistantMoonsBlocks.WROUGHT_IRON_BARS);
     this.addDrop(DistantMoonsBlocks.WROUGHT_IRON_FENCE);
     this.addDrop(DistantMoonsBlocks.WROUGHT_IRON_LADDER);
+
+    //INFESTED BLOCK LOOT TABLES
+    this.addInfestedBlockDrop(DistantMoonsBlocks.INFESTED_CHISELED_DEEPSLATE);
+    this.addInfestedBlockDrop(DistantMoonsBlocks.INFESTED_COBBLED_DEEPSLATE);
+    this.addInfestedBlockDrop(DistantMoonsBlocks.INFESTED_CRACKED_DEEPSLATE_BRICKS);
+    this.addInfestedBlockDrop(DistantMoonsBlocks.INFESTED_CRACKED_DEEPSLATE_TILES);
+    this.addInfestedBlockDrop(DistantMoonsBlocks.INFESTED_DEEPSLATE_BRICKS);
+    this.addInfestedBlockDrop(DistantMoonsBlocks.INFESTED_DEEPSLATE_TILES);
+    this.addInfestedBlockDrop(DistantMoonsBlocks.INFESTED_MOSSY_COBBLESTONE);
+    this.addInfestedBlockDrop(DistantMoonsBlocks.INFESTED_POLISHED_DEEPSLATE);
+    this.addInfestedBlockDrop(DistantMoonsBlocks.INFESTED_SMOOTH_STONE);
 
     //SLAB LOOT TABLES
     this.addSlabDrop(DistantMoonsBlocks.CUT_ACACIA_LOG);
@@ -217,6 +231,15 @@ public class DistantMoonsBlockLootTableProvider extends FabricBlockLootTableProv
     this.addWallSlabDrop(DistantMoonsBlocks.WAXED_OXIDIZED_CUT_COPPER_WALL_SLAB);
     this.addWallSlabDrop(DistantMoonsBlocks.WAXED_WEATHERED_CUT_COPPER_WALL_SLAB);
     this.addWallSlabDrop(DistantMoonsBlocks.WEATHERED_CUT_COPPER_WALL_SLAB);
+  }
+
+  private void addInfestedBlockDrop(Block block) {
+    if (!(block instanceof InfestedBlock infestedBlock)) throw new IllegalArgumentException("Cannot register Infested Block drop for non-infested block.");
+    this.addDrop(block, LootTable.builder().pool(LootPool.builder()
+        .rolls(new ConstantLootNumberProvider(1.0F))
+        .with(ItemEntry.builder(infestedBlock.getRegularBlock().asItem()))
+        .conditionally(ReferenceLootCondition.builder(DistantMoonsPredicates.SILK_TOUCH_TOOL))
+    ));
   }
 
   private void addSlabDrop(Block block) {

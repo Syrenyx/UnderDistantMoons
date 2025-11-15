@@ -8,7 +8,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import syrenyx.distantmoons.content.block.oxidization.BlockOxidizationDefinition;
 import syrenyx.distantmoons.content.block.oxidization.BlockOxidizationManager;
-import syrenyx.distantmoons.utility.MixinUtil;
 
 import java.util.Optional;
 
@@ -19,6 +18,6 @@ public abstract class HoneycombItemMixin {
   private static void distantMoons$getWaxedState(BlockState state, CallbackInfoReturnable<Optional<BlockState>> callbackInfo) {
     BlockOxidizationDefinition oxidizationRules = BlockOxidizationManager.BLOCK_OXIDIZATION_MAP.get(state.getBlock());
     if (oxidizationRules == null || !oxidizationRules.canBeWaxed()) return;
-    MixinUtil.cancelAndSetReturnValue(oxidizationRules.getWaxedStateOf(state), callbackInfo);
+    callbackInfo.setReturnValue(oxidizationRules.getWaxedStateOf(state));
   }
 }

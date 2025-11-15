@@ -309,6 +309,19 @@ public abstract class DistantMoonsItemGroups {
         Items.TRIAL_SPAWNER.getDefaultStack(),
         Items.CREAKING_HEART.getDefaultStack()
     ));
+    addToGroup(ItemGroups.FUNCTIONAL, Items.INFESTED_COBBLESTONE, List.of(
+        DistantMoonsBlocks.INFESTED_MOSSY_COBBLESTONE.asItem().getDefaultStack(),
+        DistantMoonsBlocks.INFESTED_SMOOTH_STONE.asItem().getDefaultStack()
+    ));
+    addToGroup(ItemGroups.FUNCTIONAL, Items.INFESTED_DEEPSLATE, List.of(
+        DistantMoonsBlocks.INFESTED_COBBLED_DEEPSLATE .asItem().getDefaultStack(),
+        DistantMoonsBlocks.INFESTED_CHISELED_DEEPSLATE.asItem().getDefaultStack(),
+        DistantMoonsBlocks.INFESTED_POLISHED_DEEPSLATE.asItem().getDefaultStack(),
+        DistantMoonsBlocks.INFESTED_DEEPSLATE_BRICKS.asItem().getDefaultStack(),
+        DistantMoonsBlocks.INFESTED_CRACKED_DEEPSLATE_BRICKS.asItem().getDefaultStack(),
+        DistantMoonsBlocks.INFESTED_DEEPSLATE_TILES.asItem().getDefaultStack(),
+        DistantMoonsBlocks.INFESTED_CRACKED_DEEPSLATE_TILES.asItem().getDefaultStack()
+    ));
 
     //REDSTONE
 
@@ -366,11 +379,20 @@ public abstract class DistantMoonsItemGroups {
         Items.SCULK_SHRIEKER.getDefaultStack(),
         Items.INFESTED_STONE.getDefaultStack(),
         Items.INFESTED_COBBLESTONE.getDefaultStack(),
+        DistantMoonsBlocks.INFESTED_MOSSY_COBBLESTONE.asItem().getDefaultStack(),
+        DistantMoonsBlocks.INFESTED_SMOOTH_STONE.asItem().getDefaultStack(),
         Items.INFESTED_STONE_BRICKS.getDefaultStack(),
         Items.INFESTED_MOSSY_STONE_BRICKS.getDefaultStack(),
         Items.INFESTED_CRACKED_STONE_BRICKS.getDefaultStack(),
         Items.INFESTED_CHISELED_STONE_BRICKS.getDefaultStack(),
-        Items.INFESTED_DEEPSLATE.getDefaultStack()
+        Items.INFESTED_DEEPSLATE.getDefaultStack(),
+        DistantMoonsBlocks.INFESTED_COBBLED_DEEPSLATE .asItem().getDefaultStack(),
+        DistantMoonsBlocks.INFESTED_CHISELED_DEEPSLATE.asItem().getDefaultStack(),
+        DistantMoonsBlocks.INFESTED_POLISHED_DEEPSLATE.asItem().getDefaultStack(),
+        DistantMoonsBlocks.INFESTED_DEEPSLATE_BRICKS.asItem().getDefaultStack(),
+        DistantMoonsBlocks.INFESTED_CRACKED_DEEPSLATE_BRICKS.asItem().getDefaultStack(),
+        DistantMoonsBlocks.INFESTED_DEEPSLATE_TILES.asItem().getDefaultStack(),
+        DistantMoonsBlocks.INFESTED_CRACKED_DEEPSLATE_TILES.asItem().getDefaultStack()
     ));
 
     //OPERATOR

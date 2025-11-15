@@ -101,6 +101,15 @@ public class en_us extends FabricLanguageProvider {
     builder.add(DistantMoonsBlocks.GRAY_PRISMARINE_SLAB, "Gray Prismarine Slab");
     builder.add(DistantMoonsBlocks.GRAY_PRISMARINE_STAIRS, "Gray Prismarine Stairs");
     builder.add(DistantMoonsBlocks.GRAY_PRISMARINE_WALL_SLAB, "Gray Prismarine Wall Slab");
+    builder.add(DistantMoonsBlocks.INFESTED_CHISELED_DEEPSLATE, "Infested Chiseled Deepslate");
+    builder.add(DistantMoonsBlocks.INFESTED_COBBLED_DEEPSLATE, "Infested Cobbled Deepslate");
+    builder.add(DistantMoonsBlocks.INFESTED_CRACKED_DEEPSLATE_BRICKS, "Infested Cracked Deepslate Bricks");
+    builder.add(DistantMoonsBlocks.INFESTED_CRACKED_DEEPSLATE_TILES, "Infested Cracked Deepslate Tiles");
+    builder.add(DistantMoonsBlocks.INFESTED_DEEPSLATE_BRICKS, "Infested Deepslate Bricks");
+    builder.add(DistantMoonsBlocks.INFESTED_DEEPSLATE_TILES, "Infested Deepslate Tiles");
+    builder.add(DistantMoonsBlocks.INFESTED_MOSSY_COBBLESTONE, "Infested Mossy Cobblestone");
+    builder.add(DistantMoonsBlocks.INFESTED_POLISHED_DEEPSLATE, "Infested Polished Deepslate");
+    builder.add(DistantMoonsBlocks.INFESTED_SMOOTH_STONE, "Infested Smooth Stone");
     builder.add(DistantMoonsBlocks.IRON_BAR_DOOR, "Iron Bar Door");
     builder.add(DistantMoonsBlocks.IRON_FENCE, "Iron Fence");
     builder.add(DistantMoonsBlocks.IRON_LADDER, "Iron Ladder");
