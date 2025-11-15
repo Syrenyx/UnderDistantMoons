@@ -2,16 +2,22 @@ package syrenyx.distantmoons.initializers;
 
 import net.minecraft.block.*;
 import net.minecraft.item.Item;
+import net.minecraft.predicate.BlockPredicate;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.entry.RegistryEntryList;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import syrenyx.distantmoons.UnderDistantMoons;
 import syrenyx.distantmoons.content.block.*;
+import syrenyx.distantmoons.content.data_component.CoiledBlockComponent;
+import syrenyx.distantmoons.content.item.CoilItem;
 import syrenyx.distantmoons.references.DistantMoonsBlockSetTypes;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.function.Function;
 
 public abstract class DistantMoonsBlocks {
@@ -1280,6 +1286,18 @@ public abstract class DistantMoonsBlocks {
       new Item.Settings()
   );
 
+  //INDEPENDENT BLOCK ITEMS
+  public static final Item COILED_ROPE_LADDER = register(
+      "coiled_rope_ladder",
+      settings -> new CoilItem(DistantMoonsBlocks.ROPE_LADDER, settings),
+      new Item.Settings()
+          .component(
+              DistantMoonsDataComponentTypes.COILED_BLOCK,
+              new CoiledBlockComponent.Builder().amount(9).build()
+          )
+          .maxCount(16)
+  );
+
   private static Block register(
       String id, Function<AbstractBlock.Settings, Block> blockFactory, AbstractBlock.Settings settings
   ) {
@@ -1293,6 +1311,10 @@ public abstract class DistantMoonsBlocks {
     Block block = register(id, blockFactory, blockSettings);
     DistantMoonsItems.registerBlockItem(id, block, itemSettings);
     return block;
+  }
+
+  private static Item register(String id, Function<Item.Settings, Item> itemFactory, Item.Settings settings) {
+    return DistantMoonsItems.register(id, itemFactory, settings);
   }
 
   public static String getStringIdOf(Block block) {

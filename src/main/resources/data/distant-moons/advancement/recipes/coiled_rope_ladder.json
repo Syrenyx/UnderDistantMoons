@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_rope_ladder": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "distant-moons:rope_ladder"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "distant-moons:coiled_rope_ladder"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_rope_ladder"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "distant-moons:coiled_rope_ladder"
+    ]
+  }
+}
