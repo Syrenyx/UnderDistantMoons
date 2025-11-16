@@ -30,6 +30,7 @@ public abstract class DistantMoonsBlockTags {
   public static final TagKey<Block> GLASS_PANE_NEVER_CONNECTS_TO = keyOf("connection_target/glass_pane/never");
   public static final TagKey<Block> IMMUNE_TO_DRAGON = keyOf("immunity/ender_dragon");
   public static final TagKey<Block> IMMUNE_TO_WITHER = keyOf("immunity/wither");
+  public static final TagKey<Block> LEAVES_WITHOUT_LEAF_PARTICLES = keyOf("leaves_without_leaf_particles");
   public static final TagKey<Block> METAL_BAR_DOOR = keyOf("metal_bar_door");
   public static final TagKey<Block> METAL_BAR_DOOR_NEVER_CONNECTS_TO = keyOf("connection_target/metal_bar_door/never");
   public static final TagKey<Block> MINING_TIER_DIAMOND = keyOf("mining_tool_group/tier/diamond");
