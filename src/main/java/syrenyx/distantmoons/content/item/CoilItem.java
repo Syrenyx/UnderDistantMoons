@@ -38,10 +38,10 @@ public class CoilItem extends IndependentBlockItem {
     while (placed < component.amount()) {
       BlockPos offsetPos = pos.offset(direction, placed);
       BlockState currentState = world.getBlockState(offsetPos);
-      if (!currentState.isReplaceable() || !waterloggable && currentState.getBlock() instanceof FluidBlock) break;
+      if (!currentState.isReplaceable() || !waterloggable && currentState.getBlock() instanceof FluidBlock && placed != 0) break;
       boolean underwater = currentState.isOf(Blocks.WATER);
       if (waterloggable && currentState.getBlock() instanceof FluidBlock && !underwater) break;
-      if (!world.setBlockState(offsetPos, underwater ? placedState.with(Properties.WATERLOGGED, true) : placedState, Block.NOTIFY_ALL_AND_REDRAW)) break;
+      if (!world.setBlockState(offsetPos, underwater && waterloggable ? placedState.with(Properties.WATERLOGGED, true) : placedState, Block.NOTIFY_ALL_AND_REDRAW)) break;
       placed++;
     }
     if (placed == 0) return false;

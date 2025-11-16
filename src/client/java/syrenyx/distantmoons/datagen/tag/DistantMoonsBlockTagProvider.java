@@ -405,6 +405,8 @@ public class DistantMoonsBlockTagProvider extends FabricTagProvider.BlockTagProv
             DistantMoonsBlocks.ROPE_LADDER,
             DistantMoonsBlocks.WROUGHT_IRON_LADDER
         );
+    this.valueLookupBuilder(DistantMoonsBlockTags.LEAVES_WITHOUT_LEAF_PARTICLES)
+        .add(Blocks.SPRUCE_LEAVES);
 
     //VANILLA TAG REDIRECTS
     this.valueLookupBuilder(BlockTags.AXE_MINEABLE).addTag(DistantMoonsBlockTags.MINING_TYPE_AXE);

@@ -9,6 +9,7 @@
     "EnchantmentHelperMixin",
     "FenceBlockMixin",
     "HoneycombItemMixin",
+    "LeavesBlockMixin",
     "LivingEntityMixin",
     "LootContextTypesAccessor",
     "PaneBlockMixin",
