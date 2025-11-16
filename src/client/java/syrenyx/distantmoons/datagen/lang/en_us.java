@@ -245,7 +245,7 @@ public class en_us extends FabricLanguageProvider {
     builder.add("commands.distant-moons.affliction.set.success.multiple", "Applied affliction %s to %s targets");
     builder.add("commands.distant-moons.affliction.set.success.single", "Applied affliction %s to %s");
 
-    builder.add(DistantMoonsBlocks.COILED_ROPE_LADDER, "Coiled Rope Ladder");
+    builder.add(DistantMoonsItems.COILED_ROPE_LADDER, "Coiled Rope Ladder");
     builder.add(DistantMoonsItems.COKE, "Coke");
     builder.add(DistantMoonsItems.COPPER_ROD, "Copper Rod");
     builder.add(DistantMoonsItems.CRUDE_DEEP_IRON_CHUNK, "Crude Deep Iron Chunk");

@@ -1,6 +1,5 @@
 package syrenyx.distantmoons.initializers;
 
-import net.minecraft.block.Block;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.ConsumableComponent;
 import net.minecraft.component.type.ConsumableComponents;
@@ -20,6 +19,16 @@ import java.util.function.Function;
 
 public abstract class DistantMoonsItems {
 
+  public static final Item COILED_ROPE_LADDER = register(
+      "coiled_rope_ladder",
+      settings -> new CoilItem(DistantMoonsBlocks.ROPE_LADDER, settings),
+      new Item.Settings()
+          .component(
+              DistantMoonsDataComponentTypes.COILED_BLOCK,
+              new CoiledBlockComponent.Builder().amount(9).build()
+          )
+          .maxCount(16)
+  );
   public static final Item COKE = register(
       "coke",
       Item::new,
@@ -140,14 +149,9 @@ public abstract class DistantMoonsItems {
       new Item.Settings()
   );
 
-  protected static Item register(String id, Function<Item.Settings, Item> itemFactory, Item.Settings settings) {
+  private static Item register(String id, Function<Item.Settings, Item> itemFactory, Item.Settings settings) {
     RegistryKey<Item> key = RegistryKey.of(RegistryKeys.ITEM, UnderDistantMoons.identifierOf(id));
     return Registry.register(Registries.ITEM, key, itemFactory.apply(settings.registryKey(key)));
-  }
-
-  protected static Item registerBlockItem(String id, Block block, Item.Settings itemSettings) {
-    RegistryKey<Item> key = RegistryKey.of(RegistryKeys.ITEM, UnderDistantMoons.identifierOf(id));
-    return Registry.register(Registries.ITEM, key, new BlockItem(block, itemSettings.registryKey(key).useBlockPrefixedTranslationKey()));
   }
 
   public static String getStringIdOf(Item item) {

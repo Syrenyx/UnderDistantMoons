@@ -303,7 +303,7 @@ public abstract class DistantMoonsItemGroups {
         DistantMoonsBlocks.FIXED_WROUGHT_IRON_LADDER.asItem().getDefaultStack(),
         DistantMoonsBlocks.FIXED_DEEP_IRON_LADDER.asItem().getDefaultStack(),
         DistantMoonsBlocks.ROPE_LADDER.asItem().getDefaultStack(),
-        DistantMoonsBlocks.COILED_ROPE_LADDER.getDefaultStack()
+        DistantMoonsItems.COILED_ROPE_LADDER.getDefaultStack()
     ));
     addToGroup(ItemGroups.FUNCTIONAL, Items.DRAGON_EGG, List.of(
         Items.SPAWNER.getDefaultStack(),
@@ -333,7 +333,7 @@ public abstract class DistantMoonsItemGroups {
         DistantMoonsItems.DEEP_IRON_AXE.getDefaultStack(),
         DistantMoonsItems.DEEP_IRON_HOE.getDefaultStack()
     ));
-    addToGroup(ItemGroups.TOOLS, Items.TNT_MINECART, List.of(DistantMoonsBlocks.COILED_ROPE_LADDER.getDefaultStack()));
+    addToGroup(ItemGroups.TOOLS, Items.TNT_MINECART, List.of(DistantMoonsItems.COILED_ROPE_LADDER.getDefaultStack()));
 
     //COMBAT
     addToGroup(ItemGroups.COMBAT, Items.IRON_SWORD, List.of(DistantMoonsItems.DEEP_IRON_SWORD.getDefaultStack()));
