@@ -296,6 +296,7 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     registerSimpleSlabBlock(DistantMoonsBlocks.PALE_PRISMARINE_SLAB, Map.of(TextureKey.SIDE, UnderDistantMoons.withPrefixedNamespace("block/pale_prismarine")));
     registerSimpleSlabBlock(DistantMoonsBlocks.PALE_PRISMARINE_TILE_SLAB, Map.of(TextureKey.SIDE, UnderDistantMoons.withPrefixedNamespace("block/pale_prismarine_tiles")));
     registerSimpleSlabBlock(DistantMoonsBlocks.PRISMARINE_TILE_SLAB, Map.of(TextureKey.SIDE, UnderDistantMoons.withPrefixedNamespace("block/prismarine_tiles")));
+    DistantMoonsBlocks.DYED_PILLOWS.values().forEach(block -> registerPillarSlabBlock(block, PILLAR_TEXTURE_MAP));
 
     //SPIKED FENCES
     registerSpikedFenceBlock(DistantMoonsBlocks.DEEP_IRON_FENCE, SPIKED_FENCE_TEXTURE_MAP);
@@ -817,6 +818,16 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
         createWeightedVariant(createObjectModel(block, "slab/simple/bottom", "/bottom", textureMap)),
         createWeightedVariant(createObjectModel(block, "simple_block", "/double", textureMap)),
         createWeightedVariant(createObjectModel(block, "slab/simple/top", "/top", textureMap))
+    );
+  }
+
+  private void registerPillarSlabBlock(Block block, Map<TextureKey, String> rawTextureMap) {
+    Map<TextureKey, String> textureMap = Map.of(TextureKey.END, rawTextureMap.get(TextureKey.END), TextureKey.SIDE, rawTextureMap.get(TextureKey.SIDE), TextureKey.PARTICLE, rawTextureMap.get(TextureKey.SIDE));
+    registerSlabBlock(
+        block,
+        createWeightedVariant(createObjectModel(block, "slab/pillar/horizontal/bottom", "/bottom", textureMap)),
+        createWeightedVariant(createObjectModel(block, "pillar/vertical", "/double", textureMap)),
+        createWeightedVariant(createObjectModel(block, "slab/pillar/horizontal/top", "/top", textureMap))
     );
   }
 

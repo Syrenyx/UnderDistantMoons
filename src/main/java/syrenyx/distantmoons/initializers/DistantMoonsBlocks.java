@@ -8,11 +8,14 @@ import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.util.DyeColor;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import syrenyx.distantmoons.UnderDistantMoons;
 import syrenyx.distantmoons.content.block.*;
 import syrenyx.distantmoons.references.DistantMoonsBlockSetTypes;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Function;
 
 public abstract class DistantMoonsBlocks {
@@ -1175,6 +1178,14 @@ public abstract class DistantMoonsBlocks {
       new Item.Settings()
   );
 
+  //DYED BLOCKS
+  public static final Map<DyeColor, Block> DYED_PILLOWS = registerDyedVariants(
+      "pillow",
+      PillowBlock::new,
+      AbstractBlock.Settings.copy(Blocks.WHITE_WOOL),
+      new Item.Settings()
+  );
+
   //OXIDIZABLE BLOCKS
   public static final Block CUT_COPPER_WALL_SLAB = register(
       "cut_copper_wall_slab",
@@ -1295,6 +1306,12 @@ public abstract class DistantMoonsBlocks {
     RegistryKey<Item> key = RegistryKey.of(RegistryKeys.ITEM, UnderDistantMoons.identifierOf(id));
     Registry.register(Registries.ITEM, key, new BlockItem(block, itemSettings.registryKey(key).useBlockPrefixedTranslationKey()));
     return block;
+  }
+
+  private static Map<DyeColor, Block> registerDyedVariants(String id, Function<AbstractBlock.Settings, Block> blockFactory, AbstractBlock.Settings settings, Item.Settings itemSettings) {
+    Map<DyeColor, Block> blocks = new HashMap<>();
+    for (DyeColor color : DyeColor.values()) blocks.put(color, register(color.getId() + "_" + id, blockFactory, settings.mapColor(color), itemSettings));
+    return blocks;
   }
 
   public static String getStringIdOf(Block block) {

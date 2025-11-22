@@ -92,7 +92,10 @@ public class DistantMoonsBlockTagProvider extends FabricTagProvider.BlockTagProv
         DistantMoonsBlocks.WARPED_POLE
     );
 
-    //COLORED BLOCK GROUPS
+    //SYED BLOCK GROUPS
+    this.valueLookupBuilder(DistantMoonsBlockTags.DYED_PILLOW).add(
+        DistantMoonsBlocks.DYED_PILLOWS.values()
+    );
     this.valueLookupBuilder(DistantMoonsBlockTags.COLORED_STAINED_GLASS).add(
         Blocks.BLACK_STAINED_GLASS, Blocks.BLUE_STAINED_GLASS, Blocks.BROWN_STAINED_GLASS, Blocks.CYAN_STAINED_GLASS,
         Blocks.GRAY_STAINED_GLASS, Blocks.GREEN_STAINED_GLASS, Blocks.LIGHT_BLUE_STAINED_GLASS, Blocks.LIGHT_GRAY_STAINED_GLASS,
@@ -405,8 +408,16 @@ public class DistantMoonsBlockTagProvider extends FabricTagProvider.BlockTagProv
             DistantMoonsBlocks.ROPE_LADDER,
             DistantMoonsBlocks.WROUGHT_IRON_LADDER
         );
+    this.valueLookupBuilder(DistantMoonsBlockTags.DAMPENS_VIBRATIONS)
+        .addTag(DistantMoonsBlockTags.DYED_PILLOW);
     this.valueLookupBuilder(DistantMoonsBlockTags.LEAVES_WITHOUT_LEAF_PARTICLES)
         .add(Blocks.SPRUCE_LEAVES);
+    this.valueLookupBuilder(DistantMoonsBlockTags.OCCLUDES_VIBRATIONS)
+        .addTag(DistantMoonsBlockTags.DYED_PILLOW);
+
+    //SUPPORT BLOCKS
+    this.valueLookupBuilder(DistantMoonsBlockTags.SUPPORT_BLOCK_FOR_SITTING_SPOT)
+        .addTag(DistantMoonsBlockTags.DYED_PILLOW);
 
     //VANILLA TAG REDIRECTS
     this.valueLookupBuilder(BlockTags.AXE_MINEABLE).addTag(DistantMoonsBlockTags.MINING_TYPE_AXE);

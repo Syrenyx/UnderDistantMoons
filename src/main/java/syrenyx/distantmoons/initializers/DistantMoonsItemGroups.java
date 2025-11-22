@@ -1,11 +1,15 @@
 package syrenyx.distantmoons.initializers;
 
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.minecraft.block.Block;
 import net.minecraft.item.*;
 import net.minecraft.registry.RegistryKey;
-import syrenyx.distantmoons.references.tag.DistantMoonsBlockTags;
+import net.minecraft.util.DyeColor;
+import net.minecraft.util.math.ColorHelper;
+import syrenyx.distantmoons.utility.ColorUtil;
 
 import java.util.List;
+import java.util.Map;
 
 public abstract class DistantMoonsItemGroups {
 
@@ -283,6 +287,7 @@ public abstract class DistantMoonsItemGroups {
     addToGroup(ItemGroups.BUILDING_BLOCKS, Items.WAXED_OXIDIZED_CUT_COPPER_SLAB, List.of(DistantMoonsBlocks.WAXED_OXIDIZED_CUT_COPPER_WALL_SLAB.asItem().getDefaultStack()));
 
     //COLORED BLOCKS
+    addToGroup(ItemGroups.COLORED_BLOCKS, Items.PINK_BED, DistantMoonsBlocks.DYED_PILLOWS);
 
     //NATURAL
     addToGroup(ItemGroups.NATURAL, Items.NETHER_QUARTZ_ORE, List.of(
@@ -400,14 +405,12 @@ public abstract class DistantMoonsItemGroups {
     //OPERATOR
   }
 
-  private static void addToGroup(
-      RegistryKey<ItemGroup> groupKey,
-      Item anchor,
-      List<ItemStack> itemStacks
-  ) {
-    ItemGroupEvents
-        .modifyEntriesEvent(groupKey)
-        .register(group -> group.addAfter(anchor, itemStacks));
+  private static void addToGroup(RegistryKey<ItemGroup> groupKey, Item anchor, List<ItemStack> itemStacks) {
+    ItemGroupEvents.modifyEntriesEvent(groupKey).register(group -> group.addAfter(anchor, itemStacks));
+  }
+
+  private static void addToGroup(RegistryKey<ItemGroup> groupKey, Item anchor, Map<DyeColor, Block> dyedBlocks) {
+    ColorUtil.SORTED_DYE_COLORS.forEach(color -> ItemGroupEvents.modifyEntriesEvent(groupKey).register(group -> group.addAfter(anchor, dyedBlocks.get(color))));
   }
 
   public static void initialize() {}

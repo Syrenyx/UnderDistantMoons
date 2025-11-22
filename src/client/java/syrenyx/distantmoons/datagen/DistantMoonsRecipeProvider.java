@@ -4,21 +4,24 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.data.recipe.CookingRecipeJsonBuilder;
-import net.minecraft.data.recipe.RecipeExporter;
-import net.minecraft.data.recipe.RecipeGenerator;
-import net.minecraft.data.recipe.StonecuttingRecipeJsonBuilder;
+import net.minecraft.data.recipe.*;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.*;
+import net.minecraft.recipe.book.CraftingRecipeCategory;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.registry.tag.TagKey;
+import net.minecraft.util.DyeColor;
 import org.apache.logging.log4j.core.jackson.MapEntry;
 import org.jetbrains.annotations.Nullable;
 import syrenyx.distantmoons.UnderDistantMoons;
 import syrenyx.distantmoons.initializers.DistantMoonsBlocks;
 import syrenyx.distantmoons.initializers.DistantMoonsItems;
+import syrenyx.distantmoons.references.tag.DistantMoonsItemTags;
+import syrenyx.distantmoons.utility.ColorUtil;
 
 import java.util.List;
 import java.util.Map;
@@ -63,64 +66,85 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
         //COOKING
         this.createCookingRecipes(Items.BROWN_MUSHROOM, DistantMoonsItems.ROASTED_BROWN_MUSHROOM, 0.35F, DEFAULT_SMELTING_TIME);
 
+        //DYEING
+        this.createDyeingRecipes(DistantMoonsBlocks.DYED_PILLOWS, DistantMoonsItemTags.DYED_PILLOW, true);
+
         //SLAB CRAFTING
-        this.createSlabRecipes(Items.ACACIA_LOG, DistantMoonsBlocks.CUT_ACACIA_LOG, "cut_log");
-        this.createSlabRecipes(Items.ACACIA_WOOD, DistantMoonsBlocks.CUT_ACACIA_WOOD, "cut_wood");
-        this.createSlabRecipes(Items.BAMBOO_BLOCK, DistantMoonsBlocks.CUT_BAMBOO_BLOCK, null);
-        this.createSlabRecipes(Items.BASALT, DistantMoonsBlocks.CUT_BASALT, null);
-        this.createSlabRecipes(Items.BIRCH_LOG, DistantMoonsBlocks.CUT_BIRCH_LOG, "cut_log");
-        this.createSlabRecipes(Items.BIRCH_WOOD, DistantMoonsBlocks.CUT_BIRCH_WOOD, "cut_wood");
-        this.createSlabRecipes(Items.BONE_BLOCK, DistantMoonsBlocks.CUT_BONE_BLOCK, null);
-        this.createSlabRecipes(Items.CHERRY_LOG, DistantMoonsBlocks.CUT_CHERRY_LOG, "cut_log");
-        this.createSlabRecipes(Items.CHERRY_WOOD, DistantMoonsBlocks.CUT_CHERRY_WOOD, "cut_wood");
-        this.createSlabRecipes(Items.CRIMSON_HYPHAE, DistantMoonsBlocks.CUT_CRIMSON_HYPHAE, "cut_wood");
-        this.createSlabRecipes(Items.CRIMSON_STEM, DistantMoonsBlocks.CUT_CRIMSON_STEM, "cut_log");
-        this.createSlabRecipes(Items.DARK_OAK_LOG, DistantMoonsBlocks.CUT_DARK_OAK_LOG, "cut_log");
-        this.createSlabRecipes(Items.DARK_OAK_WOOD, DistantMoonsBlocks.CUT_DARK_OAK_WOOD, "cut_wood");
-        this.createSlabRecipes(Items.DEEPSLATE, DistantMoonsBlocks.CUT_DEEPSLATE, null);
-        this.createSlabRecipes(DistantMoonsBlocks.GRAY_PRISMARINE, DistantMoonsBlocks.GRAY_PRISMARINE_SLAB, null);
-        this.createSlabRecipes(Items.JUNGLE_LOG, DistantMoonsBlocks.CUT_JUNGLE_LOG, "cut_log");
-        this.createSlabRecipes(Items.JUNGLE_WOOD, DistantMoonsBlocks.CUT_JUNGLE_WOOD, "cut_wood");
-        this.createSlabRecipes(Items.MANGROVE_LOG, DistantMoonsBlocks.CUT_MANGROVE_LOG, "cut_log");
-        this.createSlabRecipes(Items.MANGROVE_WOOD, DistantMoonsBlocks.CUT_MANGROVE_WOOD, "cut_wood");
-        this.createSlabRecipes(Items.OAK_LOG, DistantMoonsBlocks.CUT_OAK_LOG, "cut_log");
-        this.createSlabRecipes(Items.OAK_WOOD, DistantMoonsBlocks.CUT_OAK_WOOD, "cut_wood");
-        this.createSlabRecipes(Items.PALE_OAK_LOG, DistantMoonsBlocks.CUT_PALE_OAK_LOG, "cut_log");
-        this.createSlabRecipes(Items.PALE_OAK_WOOD, DistantMoonsBlocks.CUT_PALE_OAK_WOOD, "cut_wood");
-        this.createSlabRecipes(Items.PURPUR_PILLAR, DistantMoonsBlocks.CUT_PURPUR_PILLAR, null);
-        this.createSlabRecipes(Items.QUARTZ_PILLAR, DistantMoonsBlocks.CUT_QUARTZ_PILLAR, null);
-        this.createSlabRecipes(Items.SPRUCE_LOG, DistantMoonsBlocks.CUT_SPRUCE_LOG, "cut_log");
-        this.createSlabRecipes(Items.SPRUCE_WOOD, DistantMoonsBlocks.CUT_SPRUCE_WOOD, "cut_wood");
-        this.createSlabRecipes(Items.WARPED_HYPHAE, DistantMoonsBlocks.CUT_WARPED_HYPHAE, "cut_wood");
-        this.createSlabRecipes(Items.WARPED_STEM, DistantMoonsBlocks.CUT_WARPED_STEM, "cut_log");
-        this.createSlabRecipes(DistantMoonsBlocks.PALE_PRISMARINE_BRICKS, DistantMoonsBlocks.PALE_PRISMARINE_BRICK_SLAB, null);
-        this.createSlabRecipes(DistantMoonsBlocks.PALE_PRISMARINE, DistantMoonsBlocks.PALE_PRISMARINE_SLAB, null);
-        this.createSlabRecipes(DistantMoonsBlocks.PALE_PRISMARINE_TILES, DistantMoonsBlocks.PALE_PRISMARINE_TILE_SLAB, null);
-        this.createSlabRecipes(Items.POLISHED_BASALT, DistantMoonsBlocks.POLISHED_CUT_BASALT, null);
-        this.createSlabRecipes(DistantMoonsBlocks.PRISMARINE_TILES, DistantMoonsBlocks.PRISMARINE_TILE_SLAB, null);
-        this.createSlabRecipes(Items.STRIPPED_ACACIA_LOG, DistantMoonsBlocks.STRIPPED_CUT_ACACIA_LOG, "stripped_cut_log");
-        this.createSlabRecipes(Items.STRIPPED_ACACIA_WOOD, DistantMoonsBlocks.STRIPPED_CUT_ACACIA_WOOD, "stripped_cut_wood");
-        this.createSlabRecipes(Items.STRIPPED_BAMBOO_BLOCK, DistantMoonsBlocks.STRIPPED_CUT_BAMBOO_BLOCK, null);
-        this.createSlabRecipes(Items.STRIPPED_BIRCH_LOG, DistantMoonsBlocks.STRIPPED_CUT_BIRCH_LOG, "stripped_cut_log");
-        this.createSlabRecipes(Items.STRIPPED_BIRCH_WOOD, DistantMoonsBlocks.STRIPPED_CUT_BIRCH_WOOD, "stripped_cut_wood");
-        this.createSlabRecipes(Items.STRIPPED_CHERRY_LOG, DistantMoonsBlocks.STRIPPED_CUT_CHERRY_LOG, "stripped_cut_log");
-        this.createSlabRecipes(Items.STRIPPED_CHERRY_WOOD, DistantMoonsBlocks.STRIPPED_CUT_CHERRY_WOOD, "stripped_cut_wood");
-        this.createSlabRecipes(Items.STRIPPED_CRIMSON_HYPHAE, DistantMoonsBlocks.STRIPPED_CUT_CRIMSON_HYPHAE, "stripped_cut_wood");
-        this.createSlabRecipes(Items.STRIPPED_CRIMSON_STEM, DistantMoonsBlocks.STRIPPED_CUT_CRIMSON_STEM, "stripped_cut_log");
-        this.createSlabRecipes(Items.STRIPPED_DARK_OAK_LOG, DistantMoonsBlocks.STRIPPED_CUT_DARK_OAK_LOG, "stripped_cut_log");
-        this.createSlabRecipes(Items.STRIPPED_DARK_OAK_WOOD, DistantMoonsBlocks.STRIPPED_CUT_DARK_OAK_WOOD, "stripped_cut_wood");
-        this.createSlabRecipes(Items.STRIPPED_JUNGLE_LOG, DistantMoonsBlocks.STRIPPED_CUT_JUNGLE_LOG, "stripped_cut_log");
-        this.createSlabRecipes(Items.STRIPPED_JUNGLE_WOOD, DistantMoonsBlocks.STRIPPED_CUT_JUNGLE_WOOD, "stripped_cut_wood");
-        this.createSlabRecipes(Items.STRIPPED_MANGROVE_LOG, DistantMoonsBlocks.STRIPPED_CUT_MANGROVE_LOG, "stripped_cut_log");
-        this.createSlabRecipes(Items.STRIPPED_MANGROVE_WOOD, DistantMoonsBlocks.STRIPPED_CUT_MANGROVE_WOOD, "stripped_cut_wood");
-        this.createSlabRecipes(Items.STRIPPED_OAK_LOG, DistantMoonsBlocks.STRIPPED_CUT_OAK_LOG, "stripped_cut_log");
-        this.createSlabRecipes(Items.STRIPPED_OAK_WOOD, DistantMoonsBlocks.STRIPPED_CUT_OAK_WOOD, "stripped_cut_wood");
-        this.createSlabRecipes(Items.STRIPPED_PALE_OAK_LOG, DistantMoonsBlocks.STRIPPED_CUT_PALE_OAK_LOG, "stripped_cut_log");
-        this.createSlabRecipes(Items.STRIPPED_PALE_OAK_WOOD, DistantMoonsBlocks.STRIPPED_CUT_PALE_OAK_WOOD, "stripped_cut_wood");
-        this.createSlabRecipes(Items.STRIPPED_SPRUCE_LOG, DistantMoonsBlocks.STRIPPED_CUT_SPRUCE_LOG, "stripped_cut_log");
-        this.createSlabRecipes(Items.STRIPPED_SPRUCE_WOOD, DistantMoonsBlocks.STRIPPED_CUT_SPRUCE_WOOD, "stripped_cut_wood");
-        this.createSlabRecipes(Items.STRIPPED_WARPED_HYPHAE, DistantMoonsBlocks.STRIPPED_CUT_WARPED_HYPHAE, "stripped_cut_wood");
-        this.createSlabRecipes(Items.STRIPPED_WARPED_STEM, DistantMoonsBlocks.STRIPPED_CUT_WARPED_STEM, "stripped_cut_log");
+        this.createSlabRecipes(Items.ACACIA_LOG, DistantMoonsBlocks.CUT_ACACIA_LOG, RecipeCategory.BUILDING_BLOCKS, "cut_log");
+        this.createSlabRecipes(Items.ACACIA_WOOD, DistantMoonsBlocks.CUT_ACACIA_WOOD, RecipeCategory.BUILDING_BLOCKS, "cut_wood");
+        this.createSlabRecipes(Items.BAMBOO_BLOCK, DistantMoonsBlocks.CUT_BAMBOO_BLOCK, RecipeCategory.BUILDING_BLOCKS, null);
+        this.createSlabRecipes(Items.BASALT, DistantMoonsBlocks.CUT_BASALT, RecipeCategory.BUILDING_BLOCKS, null);
+        this.createSlabRecipes(Items.BIRCH_LOG, DistantMoonsBlocks.CUT_BIRCH_LOG, RecipeCategory.BUILDING_BLOCKS, "cut_log");
+        this.createSlabRecipes(Items.BIRCH_WOOD, DistantMoonsBlocks.CUT_BIRCH_WOOD, RecipeCategory.BUILDING_BLOCKS, "cut_wood");
+        this.createSlabRecipes(Items.BONE_BLOCK, DistantMoonsBlocks.CUT_BONE_BLOCK, RecipeCategory.BUILDING_BLOCKS, null);
+        this.createSlabRecipes(Items.CHERRY_LOG, DistantMoonsBlocks.CUT_CHERRY_LOG, RecipeCategory.BUILDING_BLOCKS, "cut_log");
+        this.createSlabRecipes(Items.CHERRY_WOOD, DistantMoonsBlocks.CUT_CHERRY_WOOD, RecipeCategory.BUILDING_BLOCKS, "cut_wood");
+        this.createSlabRecipes(Items.CRIMSON_HYPHAE, DistantMoonsBlocks.CUT_CRIMSON_HYPHAE, RecipeCategory.BUILDING_BLOCKS, "cut_wood");
+        this.createSlabRecipes(Items.CRIMSON_STEM, DistantMoonsBlocks.CUT_CRIMSON_STEM, RecipeCategory.BUILDING_BLOCKS, "cut_log");
+        this.createSlabRecipes(Items.DARK_OAK_LOG, DistantMoonsBlocks.CUT_DARK_OAK_LOG, RecipeCategory.BUILDING_BLOCKS, "cut_log");
+        this.createSlabRecipes(Items.DARK_OAK_WOOD, DistantMoonsBlocks.CUT_DARK_OAK_WOOD, RecipeCategory.BUILDING_BLOCKS, "cut_wood");
+        this.createSlabRecipes(Items.DEEPSLATE, DistantMoonsBlocks.CUT_DEEPSLATE, RecipeCategory.BUILDING_BLOCKS, null);
+        this.createSlabRecipes(DistantMoonsBlocks.GRAY_PRISMARINE, DistantMoonsBlocks.GRAY_PRISMARINE_SLAB, RecipeCategory.BUILDING_BLOCKS, null);
+        this.createSlabRecipes(Items.JUNGLE_LOG, DistantMoonsBlocks.CUT_JUNGLE_LOG, RecipeCategory.BUILDING_BLOCKS, "cut_log");
+        this.createSlabRecipes(Items.JUNGLE_WOOD, DistantMoonsBlocks.CUT_JUNGLE_WOOD, RecipeCategory.BUILDING_BLOCKS, "cut_wood");
+        this.createSlabRecipes(Items.MANGROVE_LOG, DistantMoonsBlocks.CUT_MANGROVE_LOG, RecipeCategory.BUILDING_BLOCKS, "cut_log");
+        this.createSlabRecipes(Items.MANGROVE_WOOD, DistantMoonsBlocks.CUT_MANGROVE_WOOD, RecipeCategory.BUILDING_BLOCKS, "cut_wood");
+        this.createSlabRecipes(Items.OAK_LOG, DistantMoonsBlocks.CUT_OAK_LOG, RecipeCategory.BUILDING_BLOCKS, "cut_log");
+        this.createSlabRecipes(Items.OAK_WOOD, DistantMoonsBlocks.CUT_OAK_WOOD, RecipeCategory.BUILDING_BLOCKS, "cut_wood");
+        this.createSlabRecipes(Items.PALE_OAK_LOG, DistantMoonsBlocks.CUT_PALE_OAK_LOG, RecipeCategory.BUILDING_BLOCKS, "cut_log");
+        this.createSlabRecipes(Items.PALE_OAK_WOOD, DistantMoonsBlocks.CUT_PALE_OAK_WOOD, RecipeCategory.BUILDING_BLOCKS, "cut_wood");
+        this.createSlabRecipes(Items.PURPUR_PILLAR, DistantMoonsBlocks.CUT_PURPUR_PILLAR, RecipeCategory.BUILDING_BLOCKS, null);
+        this.createSlabRecipes(Items.QUARTZ_PILLAR, DistantMoonsBlocks.CUT_QUARTZ_PILLAR, RecipeCategory.BUILDING_BLOCKS, null);
+        this.createSlabRecipes(Items.SPRUCE_LOG, DistantMoonsBlocks.CUT_SPRUCE_LOG, RecipeCategory.BUILDING_BLOCKS, "cut_log");
+        this.createSlabRecipes(Items.SPRUCE_WOOD, DistantMoonsBlocks.CUT_SPRUCE_WOOD, RecipeCategory.BUILDING_BLOCKS, "cut_wood");
+        this.createSlabRecipes(Items.WARPED_HYPHAE, DistantMoonsBlocks.CUT_WARPED_HYPHAE, RecipeCategory.BUILDING_BLOCKS, "cut_wood");
+        this.createSlabRecipes(Items.WARPED_STEM, DistantMoonsBlocks.CUT_WARPED_STEM, RecipeCategory.BUILDING_BLOCKS, "cut_log");
+        this.createSlabRecipes(DistantMoonsBlocks.PALE_PRISMARINE_BRICKS, DistantMoonsBlocks.PALE_PRISMARINE_BRICK_SLAB, RecipeCategory.BUILDING_BLOCKS, null);
+        this.createSlabRecipes(DistantMoonsBlocks.PALE_PRISMARINE, DistantMoonsBlocks.PALE_PRISMARINE_SLAB, RecipeCategory.BUILDING_BLOCKS, null);
+        this.createSlabRecipes(DistantMoonsBlocks.PALE_PRISMARINE_TILES, DistantMoonsBlocks.PALE_PRISMARINE_TILE_SLAB, RecipeCategory.BUILDING_BLOCKS, null);
+        this.createSlabRecipes(Items.POLISHED_BASALT, DistantMoonsBlocks.POLISHED_CUT_BASALT, RecipeCategory.BUILDING_BLOCKS, null);
+        this.createSlabRecipes(DistantMoonsBlocks.PRISMARINE_TILES, DistantMoonsBlocks.PRISMARINE_TILE_SLAB, RecipeCategory.BUILDING_BLOCKS, null);
+        this.createSlabRecipes(Items.STRIPPED_ACACIA_LOG, DistantMoonsBlocks.STRIPPED_CUT_ACACIA_LOG, RecipeCategory.BUILDING_BLOCKS, "stripped_cut_log");
+        this.createSlabRecipes(Items.STRIPPED_ACACIA_WOOD, DistantMoonsBlocks.STRIPPED_CUT_ACACIA_WOOD, RecipeCategory.BUILDING_BLOCKS, "stripped_cut_wood");
+        this.createSlabRecipes(Items.STRIPPED_BAMBOO_BLOCK, DistantMoonsBlocks.STRIPPED_CUT_BAMBOO_BLOCK, RecipeCategory.BUILDING_BLOCKS, null);
+        this.createSlabRecipes(Items.STRIPPED_BIRCH_LOG, DistantMoonsBlocks.STRIPPED_CUT_BIRCH_LOG, RecipeCategory.BUILDING_BLOCKS, "stripped_cut_log");
+        this.createSlabRecipes(Items.STRIPPED_BIRCH_WOOD, DistantMoonsBlocks.STRIPPED_CUT_BIRCH_WOOD, RecipeCategory.BUILDING_BLOCKS, "stripped_cut_wood");
+        this.createSlabRecipes(Items.STRIPPED_CHERRY_LOG, DistantMoonsBlocks.STRIPPED_CUT_CHERRY_LOG, RecipeCategory.BUILDING_BLOCKS, "stripped_cut_log");
+        this.createSlabRecipes(Items.STRIPPED_CHERRY_WOOD, DistantMoonsBlocks.STRIPPED_CUT_CHERRY_WOOD, RecipeCategory.BUILDING_BLOCKS, "stripped_cut_wood");
+        this.createSlabRecipes(Items.STRIPPED_CRIMSON_HYPHAE, DistantMoonsBlocks.STRIPPED_CUT_CRIMSON_HYPHAE, RecipeCategory.BUILDING_BLOCKS, "stripped_cut_wood");
+        this.createSlabRecipes(Items.STRIPPED_CRIMSON_STEM, DistantMoonsBlocks.STRIPPED_CUT_CRIMSON_STEM, RecipeCategory.BUILDING_BLOCKS, "stripped_cut_log");
+        this.createSlabRecipes(Items.STRIPPED_DARK_OAK_LOG, DistantMoonsBlocks.STRIPPED_CUT_DARK_OAK_LOG, RecipeCategory.BUILDING_BLOCKS, "stripped_cut_log");
+        this.createSlabRecipes(Items.STRIPPED_DARK_OAK_WOOD, DistantMoonsBlocks.STRIPPED_CUT_DARK_OAK_WOOD, RecipeCategory.BUILDING_BLOCKS, "stripped_cut_wood");
+        this.createSlabRecipes(Items.STRIPPED_JUNGLE_LOG, DistantMoonsBlocks.STRIPPED_CUT_JUNGLE_LOG, RecipeCategory.BUILDING_BLOCKS, "stripped_cut_log");
+        this.createSlabRecipes(Items.STRIPPED_JUNGLE_WOOD, DistantMoonsBlocks.STRIPPED_CUT_JUNGLE_WOOD, RecipeCategory.BUILDING_BLOCKS, "stripped_cut_wood");
+        this.createSlabRecipes(Items.STRIPPED_MANGROVE_LOG, DistantMoonsBlocks.STRIPPED_CUT_MANGROVE_LOG, RecipeCategory.BUILDING_BLOCKS, "stripped_cut_log");
+        this.createSlabRecipes(Items.STRIPPED_MANGROVE_WOOD, DistantMoonsBlocks.STRIPPED_CUT_MANGROVE_WOOD, RecipeCategory.BUILDING_BLOCKS, "stripped_cut_wood");
+        this.createSlabRecipes(Items.STRIPPED_OAK_LOG, DistantMoonsBlocks.STRIPPED_CUT_OAK_LOG, RecipeCategory.BUILDING_BLOCKS, "stripped_cut_log");
+        this.createSlabRecipes(Items.STRIPPED_OAK_WOOD, DistantMoonsBlocks.STRIPPED_CUT_OAK_WOOD, RecipeCategory.BUILDING_BLOCKS, "stripped_cut_wood");
+        this.createSlabRecipes(Items.STRIPPED_PALE_OAK_LOG, DistantMoonsBlocks.STRIPPED_CUT_PALE_OAK_LOG, RecipeCategory.BUILDING_BLOCKS, "stripped_cut_log");
+        this.createSlabRecipes(Items.STRIPPED_PALE_OAK_WOOD, DistantMoonsBlocks.STRIPPED_CUT_PALE_OAK_WOOD, RecipeCategory.BUILDING_BLOCKS, "stripped_cut_wood");
+        this.createSlabRecipes(Items.STRIPPED_SPRUCE_LOG, DistantMoonsBlocks.STRIPPED_CUT_SPRUCE_LOG, RecipeCategory.BUILDING_BLOCKS, "stripped_cut_log");
+        this.createSlabRecipes(Items.STRIPPED_SPRUCE_WOOD, DistantMoonsBlocks.STRIPPED_CUT_SPRUCE_WOOD, RecipeCategory.BUILDING_BLOCKS, "stripped_cut_wood");
+        this.createSlabRecipes(Items.STRIPPED_WARPED_HYPHAE, DistantMoonsBlocks.STRIPPED_CUT_WARPED_HYPHAE, RecipeCategory.BUILDING_BLOCKS, "stripped_cut_wood");
+        this.createSlabRecipes(Items.STRIPPED_WARPED_STEM, DistantMoonsBlocks.STRIPPED_CUT_WARPED_STEM, RecipeCategory.BUILDING_BLOCKS, "stripped_cut_log");
+
+        this.createSlabRecipes(Items.WHITE_WOOL, DistantMoonsBlocks.DYED_PILLOWS.get(DyeColor.WHITE), RecipeCategory.MISC, "pillow");
+        this.createSlabRecipes(Items.LIGHT_GRAY_WOOL, DistantMoonsBlocks.DYED_PILLOWS.get(DyeColor.LIGHT_GRAY), RecipeCategory.MISC, "pillow");
+        this.createSlabRecipes(Items.GRAY_WOOL, DistantMoonsBlocks.DYED_PILLOWS.get(DyeColor.GRAY), RecipeCategory.MISC, "pillow");
+        this.createSlabRecipes(Items.BLACK_WOOL, DistantMoonsBlocks.DYED_PILLOWS.get(DyeColor.BLACK), RecipeCategory.MISC, "pillow");
+        this.createSlabRecipes(Items.BROWN_WOOL, DistantMoonsBlocks.DYED_PILLOWS.get(DyeColor.BROWN), RecipeCategory.MISC, "pillow");
+        this.createSlabRecipes(Items.RED_WOOL, DistantMoonsBlocks.DYED_PILLOWS.get(DyeColor.RED), RecipeCategory.MISC, "pillow");
+        this.createSlabRecipes(Items.ORANGE_WOOL, DistantMoonsBlocks.DYED_PILLOWS.get(DyeColor.ORANGE), RecipeCategory.MISC, "pillow");
+        this.createSlabRecipes(Items.YELLOW_WOOL, DistantMoonsBlocks.DYED_PILLOWS.get(DyeColor.YELLOW), RecipeCategory.MISC, "pillow");
+        this.createSlabRecipes(Items.LIME_WOOL, DistantMoonsBlocks.DYED_PILLOWS.get(DyeColor.LIME), RecipeCategory.MISC, "pillow");
+        this.createSlabRecipes(Items.GREEN_WOOL, DistantMoonsBlocks.DYED_PILLOWS.get(DyeColor.GREEN), RecipeCategory.MISC, "pillow");
+        this.createSlabRecipes(Items.CYAN_WOOL, DistantMoonsBlocks.DYED_PILLOWS.get(DyeColor.CYAN), RecipeCategory.MISC, "pillow");
+        this.createSlabRecipes(Items.LIGHT_BLUE_WOOL, DistantMoonsBlocks.DYED_PILLOWS.get(DyeColor.LIGHT_BLUE), RecipeCategory.MISC, "pillow");
+        this.createSlabRecipes(Items.BLUE_WOOL, DistantMoonsBlocks.DYED_PILLOWS.get(DyeColor.BLUE), RecipeCategory.MISC, "pillow");
+        this.createSlabRecipes(Items.PURPLE_WOOL, DistantMoonsBlocks.DYED_PILLOWS.get(DyeColor.PURPLE), RecipeCategory.MISC, "pillow");
+        this.createSlabRecipes(Items.MAGENTA_WOOL, DistantMoonsBlocks.DYED_PILLOWS.get(DyeColor.MAGENTA), RecipeCategory.MISC, "pillow");
+        this.createSlabRecipes(Items.PINK_WOOL, DistantMoonsBlocks.DYED_PILLOWS.get(DyeColor.PINK), RecipeCategory.MISC, "pillow");
+
 
         //MISCELLANEOUS SMELTING
         this.createMetalSmeltingRecipes(DistantMoonsItems.IRON_ROD, DistantMoonsItems.WROUGHT_IRON_ROD, 0.0F, DEFAULT_SMELTING_TIME);
@@ -233,7 +257,7 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
         this.createWallSlabRecipes(Items.POLISHED_GRANITE, DistantMoonsBlocks.POLISHED_GRANITE_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.POLISHED_TUFF, DistantMoonsBlocks.POLISHED_TUFF_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.PRISMARINE_BRICKS, DistantMoonsBlocks.PRISMARINE_BRICK_WALL_SLAB, null);
-        this.createSlabRecipes(DistantMoonsBlocks.PRISMARINE_TILES, DistantMoonsBlocks.PRISMARINE_TILE_WALL_SLAB, null);
+        this.createWallSlabRecipes(DistantMoonsBlocks.PRISMARINE_TILES, DistantMoonsBlocks.PRISMARINE_TILE_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.PRISMARINE, DistantMoonsBlocks.PRISMARINE_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.PURPUR_BLOCK, DistantMoonsBlocks.PURPUR_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.QUARTZ_BLOCK, DistantMoonsBlocks.QUARTZ_WALL_SLAB, null);
@@ -301,6 +325,27 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
             .create(Ingredient.ofItem(ingredient), RecipeCategory.FOOD, result, experience, cookingTime * 3, RecipeSerializer.CAMPFIRE_COOKING, CampfireCookingRecipe::new)
             .criterion(hasItem(ingredient), this.conditionsFromItem(ingredient))
             .offerTo(this.exporter, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/campfire_cooking_" + getItemId(ingredient)));
+      }
+
+      private void createDyeingRecipes(Map<DyeColor, Block> blocks, TagKey<Item> ingredient, boolean single) {
+        for (DyeColor dyeColor : DyeColor.values()) {
+          ItemConvertible result = blocks.get(dyeColor);
+          ItemConvertible dye = ColorUtil.getDyeItemByColor(dyeColor);
+          String group = "dyed_" + getItemId(result);
+          String path = UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/dyeing");
+          if (single) this.createShapeless(RecipeCategory.MISC, result)
+              .group(group)
+              .input(dye)
+              .input(ingredient)
+              .criterion(hasItem(dye), this.conditionsFromItem(dye))
+              .offerTo(this.exporter, path);
+          else this.createShaped(RecipeCategory.MISC, result, 8)
+              .group(group)
+              .pattern("000").pattern("010").pattern("000")
+              .input('0', ingredient).input('1', dye)
+              .criterion(hasItem(dye), this.conditionsFromItem(dye))
+              .offerTo(this.exporter, path);
+        }
       }
 
       private void createMetalSmeltingRecipes(ItemConvertible ingredient, ItemConvertible result, float experience, int cookingTime) {
@@ -377,8 +422,8 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
             .offerTo(this.exporter, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/decompressing_" + getItemId(ingredient)));
       }
 
-      private void createSlabRecipes(ItemConvertible ingredient, ItemConvertible result, @Nullable String group) {
-        this.createSlabCraftingRecipe(ingredient, result, group);
+      private void createSlabRecipes(ItemConvertible ingredient, ItemConvertible result, RecipeCategory category, @Nullable String group) {
+        this.createSlabCraftingRecipe(ingredient, result, category, group);
         this.createSlabCuttingRecipe(ingredient, result);
       }
 
@@ -387,8 +432,8 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
         this.createSlabCuttingRecipe(ingredient, result);
       }
 
-      private void createSlabCraftingRecipe(ItemConvertible ingredient, ItemConvertible result, @Nullable String group) {
-        this.createShaped(RecipeCategory.BUILDING_BLOCKS, result, 6)
+      private void createSlabCraftingRecipe(ItemConvertible ingredient, ItemConvertible result, RecipeCategory category, @Nullable String group) {
+        this.createShaped(category, result, 6)
             .group(group)
             .pattern("000")
             .input('0', ingredient)

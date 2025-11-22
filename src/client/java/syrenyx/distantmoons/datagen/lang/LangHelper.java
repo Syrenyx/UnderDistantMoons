@@ -1,10 +1,15 @@
 package syrenyx.distantmoons.datagen.lang;
 
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
+import net.minecraft.block.Block;
+import net.minecraft.util.DyeColor;
 
+import java.util.Map;
 import java.util.TreeMap;
 
-public abstract class EnchantmentLevelUtil {
+public record LangHelper(
+    FabricLanguageProvider.TranslationBuilder builder
+) {
 
   private static final TreeMap<Integer, String> map = new TreeMap<>();
 
@@ -24,15 +29,17 @@ public abstract class EnchantmentLevelUtil {
     map.put(1, "I");
   }
 
-  public static void generateEnchantmentLevels(FabricLanguageProvider.TranslationBuilder builder, int from, int to) {
-    for (int i = from; i <= to; i++) {
-      builder.add("enchantment.level." + i, toRomanNumeral(i));
-    }
+  public void generateEnchantmentLevels(int from, int to) {
+    for (int i = from; i <= to; i++) this.builder.add("enchantment.level." + i, toRomanNumeral(i));
   }
 
   private static String toRomanNumeral(int i) {
     int result = map.floorKey(i);
     if (i == result) return map.get(i);
     return map.get(result) + toRomanNumeral(i - result);
+  }
+
+  public void generateDyedBlockNames(Map<DyeColor, Block> blocks, String name, Map<DyeColor, String> colorNames) {
+    for (DyeColor color : DyeColor.values()) this.builder.add(blocks.get(color), name.replaceAll("%c", colorNames.get(color)));
   }
 }

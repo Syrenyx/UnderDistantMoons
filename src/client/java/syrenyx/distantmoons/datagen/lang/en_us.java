@@ -3,13 +3,35 @@ package syrenyx.distantmoons.datagen.lang;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.util.DyeColor;
 import syrenyx.distantmoons.initializers.DistantMoonsBlocks;
+import syrenyx.distantmoons.initializers.DistantMoonsEntityTypes;
 import syrenyx.distantmoons.initializers.DistantMoonsItems;
 import syrenyx.distantmoons.references.tag.DistantMoonsItemTags;
 
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 public class en_us extends FabricLanguageProvider {
+
+  private static final Map<DyeColor, String> COLOR_NAMES = Map.ofEntries(
+      Map.entry(DyeColor.WHITE, "White"),
+      Map.entry(DyeColor.LIGHT_GRAY, "Light Gray"),
+      Map.entry(DyeColor.GRAY, "Gray"),
+      Map.entry(DyeColor.BLACK, "Black"),
+      Map.entry(DyeColor.BROWN, "Brown"),
+      Map.entry(DyeColor.RED, "Red"),
+      Map.entry(DyeColor.ORANGE, "Orange"),
+      Map.entry(DyeColor.YELLOW, "Yellow"),
+      Map.entry(DyeColor.LIME, "Lime"),
+      Map.entry(DyeColor.GREEN, "Green"),
+      Map.entry(DyeColor.CYAN, "Cyan"),
+      Map.entry(DyeColor.LIGHT_BLUE, "Light Blue"),
+      Map.entry(DyeColor.BLUE, "Blue"),
+      Map.entry(DyeColor.PURPLE, "Purple"),
+      Map.entry(DyeColor.MAGENTA, "Magenta"),
+      Map.entry(DyeColor.PINK, "Pink")
+  );
 
   public en_us(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
     super(dataOutput, "en_us", registryLookup);
@@ -17,6 +39,9 @@ public class en_us extends FabricLanguageProvider {
 
   @Override
   public void generateTranslations(RegistryWrapper.WrapperLookup wrapperLookup, TranslationBuilder builder) {
+
+    LangHelper helper = new LangHelper(builder);
+
     builder.add("affliction.distant-moons.curse_of_the_night", "Curse of the Night");
     builder.add("affliction.distant-moons.curse_of_the_night_waning", "Waning Curse of the Night");
     builder.add("affliction.distant-moons.curse_of_the_underworld", "Curse of the Underworld");
@@ -209,6 +234,8 @@ public class en_us extends FabricLanguageProvider {
     builder.add(DistantMoonsBlocks.WROUGHT_IRON_FENCE, "Wrought Iron Fence");
     builder.add(DistantMoonsBlocks.WROUGHT_IRON_LADDER, "Wrought Iron Ladder");
 
+    helper.generateDyedBlockNames(DistantMoonsBlocks.DYED_PILLOWS, "%c Pillow", COLOR_NAMES);
+
     builder.add(DistantMoonsBlocks.CUT_COPPER_WALL_SLAB, "Cut Copper Wall Slab");
     builder.add(DistantMoonsBlocks.EXPOSED_CUT_COPPER_WALL_SLAB, "Exposed Cut Copper Wall Slab");
     builder.add(DistantMoonsBlocks.WEATHERED_CUT_COPPER_WALL_SLAB, "Weathered Cut Copper Wall Slab");
@@ -245,6 +272,8 @@ public class en_us extends FabricLanguageProvider {
     builder.add("commands.distant-moons.affliction.set.success.multiple", "Applied affliction %s to %s targets");
     builder.add("commands.distant-moons.affliction.set.success.single", "Applied affliction %s to %s");
 
+    builder.add(DistantMoonsEntityTypes.SITTING_SPOT, "Sitting Spot");
+
     builder.add(DistantMoonsItems.COILED_ROPE_LADDER, "Coiled Rope Ladder");
     builder.add(DistantMoonsItems.COKE, "Coke");
     builder.add(DistantMoonsItems.COPPER_ROD, "Copper Rod");
@@ -273,11 +302,12 @@ public class en_us extends FabricLanguageProvider {
     builder.add("subtitles.distant-moons.entity.begin_curing_curse", "Curse wanes");
     builder.add("subtitles.distant-moons.entity.finish_curing_curse", "Curse lifts");
 
+    builder.add(DistantMoonsItemTags.DYED_PILLOW, "Dyed Pillow");
     builder.add(DistantMoonsItemTags.REPAIRS_DEEP_IRON_EQUIPMENT, "Repairs Deep Iron Equipment");
     builder.add(DistantMoonsItemTags.SMELTING_FUEL_WOOD_BLOCK, "Wooden Block Fuel");
     builder.add(DistantMoonsItemTags.SMELTING_FUEL_WOOD_HALF_BLOCK, "Wooden Slab Fuel");
     builder.add(DistantMoonsItemTags.SWORD, "Sword");
 
-    EnchantmentLevelUtil.generateEnchantmentLevels(builder, 11, 255);
+    helper.generateEnchantmentLevels(11, 255);
   }
 }
