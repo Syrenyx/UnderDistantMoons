@@ -20,13 +20,13 @@
             "data": {
               "Name": "minecraft:blackstone"
             },
-            "weight": 7
+            "weight": 10
           },
           {
             "data": {
               "Name": "distant-moons:blackstone_deep_iron_ore"
             },
-            "weight": 10
+            "weight": 8
           },
           {
             "data": {
