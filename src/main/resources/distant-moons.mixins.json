@@ -6,6 +6,8 @@
     "AbstractBlockMixin",
     "AxeItemMixin",
     "DegradableMixin",
+    "DensityFunctionsAccessor",
+    "DensityFunctionsMixin",
     "EnchantmentHelperMixin",
     "FenceBlockMixin",
     "HoneycombItemMixin",

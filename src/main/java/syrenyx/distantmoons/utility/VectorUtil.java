@@ -11,14 +11,19 @@ public abstract class VectorUtil {
   public static Vec3d randomCrossProductVector(Random random, Vec3d vector, double length) {
     Vec3d crossProduct = vector.crossProduct(randomGaussianVector(random));
     if (crossProduct == Vec3d.ZERO) {
-      crossProduct = new Vec3d(0, 1, 0).crossProduct(vector);
-      if (crossProduct == Vec3d.ZERO) crossProduct = new Vec3d(1, 0, 0).crossProduct(vector);
+      crossProduct = Vec3d.Y.crossProduct(vector);
+      if (crossProduct == Vec3d.ZERO) crossProduct = Vec3d.X.crossProduct(vector);
     }
     return crossProduct.normalize().multiply(length);
   }
 
   public static Vec3d randomGaussianVector(Random random) {
     return new Vec3d(nextGaussian(random, 0, 1), nextGaussian(random, 0, 1), nextGaussian(random, 0, 1));
+  }
+
+  public static Vec3d randomOffsetVector(Random random, Vec3d vector, double offset) {
+    double length = vector.length();
+    return vector.add(randomCrossProductVector(random, vector, offset)).normalize().multiply(length);
   }
 
   public static Vec3d randomPointOnSphere(Random random, float radius) {
