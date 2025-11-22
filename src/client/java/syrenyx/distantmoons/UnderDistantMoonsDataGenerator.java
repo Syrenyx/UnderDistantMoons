@@ -2,9 +2,9 @@ package syrenyx.distantmoons;
 
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
-import net.minecraft.registry.RegistryKeys;
 import syrenyx.distantmoons.datagen.DistantMoonsModelProvider;
 import syrenyx.distantmoons.datagen.DistantMoonsRecipeProvider;
+import syrenyx.distantmoons.datagen.lang.de_de;
 import syrenyx.distantmoons.datagen.lang.en_us;
 import syrenyx.distantmoons.datagen.loot_table.DistantMoonsBlockLootTableProvider;
 import syrenyx.distantmoons.datagen.tag.DistantMoonsBiomeTagProvider;
@@ -27,6 +27,7 @@ public class UnderDistantMoonsDataGenerator implements DataGeneratorEntrypoint {
     pack.addProvider((output, registriesFuture) -> new DistantMoonsItemTagProvider(output, registriesFuture, null));
 
     //LANGUAGES
+    pack.addProvider(de_de::new);
     pack.addProvider(en_us::new);
 	}
 }

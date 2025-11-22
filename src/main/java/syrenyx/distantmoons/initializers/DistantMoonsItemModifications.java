@@ -3,14 +3,24 @@ package syrenyx.distantmoons.initializers;
 import net.fabricmc.fabric.api.item.v1.DefaultItemComponentEvents;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistryEvents;
+import net.minecraft.block.Block;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.ConsumableComponent;
 import net.minecraft.component.type.FoodComponent;
+import net.minecraft.component.type.ToolComponent;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.Items;
 import net.minecraft.item.consume.ApplyEffectsConsumeEffect;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.RegistryEntryLookup;
+import syrenyx.distantmoons.references.tag.DistantMoonsBlockTags;
 import syrenyx.distantmoons.references.tag.DistantMoonsItemTags;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 
 public abstract class DistantMoonsItemModifications {
 
@@ -26,6 +36,8 @@ public abstract class DistantMoonsItemModifications {
       .build();
 
   static {
+
+    final RegistryEntryLookup<Block> registryEntryLookup = Registries.createEntryLookup(Registries.BLOCK);
 
     //DEFAULT COMPONENTS
     DefaultItemComponentEvents.MODIFY.register(context -> {
@@ -45,6 +57,10 @@ public abstract class DistantMoonsItemModifications {
         component.add(DataComponentTypes.CONSUMABLE, RED_MUSHROOM_CONSUMABLE);
         component.add(DataComponentTypes.FOOD, new FoodComponent(1, 0.6F, false));
       });
+      context.modify(Items.SHEARS, component -> component.add(DataComponentTypes.TOOL, addRulesToToolComponent(
+          Objects.requireNonNull(Items.SHEARS.getComponents().get(DataComponentTypes.TOOL)),
+          ToolComponent.Rule.of(registryEntryLookup.getOrThrow(DistantMoonsBlockTags.DYED_PILLOW), 5.0F)
+      )));
       context.modify(Items.WARPED_FUNGUS, component -> {
         component.add(DataComponentTypes.CONSUMABLE, NETHER_FUNGUS_CONSUMABLE);
         component.add(DataComponentTypes.FOOD, new FoodComponent(1, 0.6F, false));
@@ -66,6 +82,17 @@ public abstract class DistantMoonsItemModifications {
       builder.add(DistantMoonsItemTags.SMELTING_FUEL_WOOD_BLOCK, (int) (context.baseSmeltTime() * WOOD_SMELT_TIME_FACTOR));
       builder.add(DistantMoonsItemTags.SMELTING_FUEL_WOOD_HALF_BLOCK, (int) (context.baseSmeltTime() * WOOD_SMELT_TIME_FACTOR * 0.5F));
     });
+  }
+
+  private static ToolComponent addRulesToToolComponent(ToolComponent component, ToolComponent.Rule ... rules) {
+    List<ToolComponent.Rule> rulesList = new ArrayList<>(component.rules());
+    rulesList.addAll(Arrays.asList(rules));
+    return new ToolComponent(
+        rulesList,
+        component.defaultMiningSpeed(),
+        component.damagePerBlock(),
+        component.canDestroyBlocksInCreative()
+    );
   }
 
   public static void initialize() {}

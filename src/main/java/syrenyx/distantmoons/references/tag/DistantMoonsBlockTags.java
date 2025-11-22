@@ -16,7 +16,9 @@ public abstract class DistantMoonsBlockTags {
   public static final TagKey<Block> BRICK_FENCE_ALWAYS_CONNECTS_TO = keyOf("connection_target/brick_fence/always");
   public static final TagKey<Block> BRICK_FENCE_NEVER_CONNECTS_TO = keyOf("connection_target/brick_fence/never");
   public static final TagKey<Block> CHAIN = keyOf("chain");
-  public static final TagKey<Block> CLIMBABLE = keyOf("climbable");
+  public static final TagKey<Block> CLIMBABLE = keyOf("misc/climbable");
+  public static final TagKey<Block> DAMPENS_VIBRATIONS = keyOf("misc/dampens_vibrations");
+  public static final TagKey<Block> DYED_PILLOW = keyOf("dyed/pillow");
   public static final TagKey<Block> COLORED_STAINED_GLASS = keyOf("colored/stained_glass");
   public static final TagKey<Block> COLORED_STAINED_GLASS_PANE = keyOf("colored/stained_glass_pane");
   public static final TagKey<Block> FIXED_LADDER = keyOf("fixed_ladder");
@@ -30,7 +32,7 @@ public abstract class DistantMoonsBlockTags {
   public static final TagKey<Block> GLASS_PANE_NEVER_CONNECTS_TO = keyOf("connection_target/glass_pane/never");
   public static final TagKey<Block> IMMUNE_TO_DRAGON = keyOf("immunity/ender_dragon");
   public static final TagKey<Block> IMMUNE_TO_WITHER = keyOf("immunity/wither");
-  public static final TagKey<Block> LEAVES_WITHOUT_LEAF_PARTICLES = keyOf("leaves_without_leaf_particles");
+  public static final TagKey<Block> LEAVES_WITHOUT_LEAF_PARTICLES = keyOf("misc/leaves_without_leaf_particles");
   public static final TagKey<Block> METAL_BAR_DOOR = keyOf("metal_bar_door");
   public static final TagKey<Block> METAL_BAR_DOOR_NEVER_CONNECTS_TO = keyOf("connection_target/metal_bar_door/never");
   public static final TagKey<Block> MINING_TIER_DIAMOND = keyOf("mining_tool_group/tier/diamond");
@@ -41,6 +43,7 @@ public abstract class DistantMoonsBlockTags {
   public static final TagKey<Block> MINING_TYPE_PICKAXE = keyOf("mining_tool_group/type/pickaxe");
   public static final TagKey<Block> MINING_TYPE_SHOVEL = keyOf("mining_tool_group/type/shovel");
   public static final TagKey<Block> NEVER_CONNECT_TO = keyOf("connection_target/never");
+  public static final TagKey<Block> OCCLUDES_VIBRATIONS = keyOf("misc/occludes_vibrations");
   public static final TagKey<Block> OXIDIZABLE_CUT_COPPER_WALL_SLAB = keyOf("oxidizable/cut_copper_wall_slab");
   public static final TagKey<Block> OXIDIZABLE_IRON_BLOCK = keyOf("oxidizable/iron_block");
   public static final TagKey<Block> POLE_ALWAYS_CONNECTS_TO = keyOf("connection_target/pole/always");
@@ -49,6 +52,7 @@ public abstract class DistantMoonsBlockTags {
   public static final TagKey<Block> SPIKED_FENCE_ALWAYS_CONNECTS_TO = keyOf("connection_target/spiked_fence/always");
   public static final TagKey<Block> SPIKED_FENCE_NEVER_CONNECTS_TO = keyOf("connection_target/spiked_fence/never");
   public static final TagKey<Block> SPIKED_FENCE_NOT_BLOCKED_BY = keyOf("connection_target/spiked_fence/not_blocked_by");
+  public static final TagKey<Block> SUPPORT_BLOCK_FOR_SITTING_SPOT = keyOf("support_block/sitting_spot");
   public static final TagKey<Block> WALL = keyOf("wall");
   public static final TagKey<Block> WALL_ALWAYS_CONNECTS_TO = keyOf("connection_target/wall/always");
   public static final TagKey<Block> WALL_NEVER_CONNECTS_TO = keyOf("connection_target/wall/never");

@@ -2,11 +2,13 @@ package syrenyx.distantmoons.datagen.tag;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.minecraft.block.Block;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.ItemTags;
 import org.jetbrains.annotations.Nullable;
 import syrenyx.distantmoons.initializers.DistantMoonsBlocks;
 import syrenyx.distantmoons.initializers.DistantMoonsItems;
+import syrenyx.distantmoons.references.tag.DistantMoonsBlockTags;
 import syrenyx.distantmoons.references.tag.DistantMoonsItemTags;
 
 import java.util.concurrent.CompletableFuture;
@@ -19,6 +21,11 @@ public class DistantMoonsItemTagProvider extends FabricTagProvider.ItemTagProvid
 
   @Override
   protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
+
+    //DYED ITEMS
+    this.valueLookupBuilder(DistantMoonsItemTags.DYED_PILLOW).add(
+        DistantMoonsBlocks.DYED_PILLOWS.values().stream().map(Block::asItem)
+    );
 
     //FUEL
     this.valueLookupBuilder(DistantMoonsItemTags.SMELTING_FUEL_WOOD_BLOCK).add(

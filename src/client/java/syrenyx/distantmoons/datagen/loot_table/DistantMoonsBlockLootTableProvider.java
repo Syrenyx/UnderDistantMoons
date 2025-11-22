@@ -16,11 +16,13 @@ import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
 import net.minecraft.predicate.StatePredicate;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.state.property.Properties;
+import net.minecraft.util.DyeColor;
 import syrenyx.distantmoons.content.block.WallSlabBlock;
 import syrenyx.distantmoons.content.block.block_state_enums.WallSlabShape;
 import syrenyx.distantmoons.initializers.DistantMoonsBlocks;
 import syrenyx.distantmoons.references.data.DistantMoonsPredicates;
 
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 public class DistantMoonsBlockLootTableProvider extends FabricBlockLootTableProvider {
@@ -163,6 +165,8 @@ public class DistantMoonsBlockLootTableProvider extends FabricBlockLootTableProv
     this.addSlabDrop(DistantMoonsBlocks.STRIPPED_CUT_SPRUCE_WOOD);
     this.addSlabDrop(DistantMoonsBlocks.STRIPPED_CUT_WARPED_HYPHAE);
     this.addSlabDrop(DistantMoonsBlocks.STRIPPED_CUT_WARPED_STEM);
+
+    DistantMoonsBlocks.DYED_PILLOWS.values().forEach(this::addSlabDrop);
 
     //WALL SLAB LOOT TABLES
     this.addWallSlabDrop(DistantMoonsBlocks.ACACIA_WALL_SLAB);
