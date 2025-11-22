@@ -10,6 +10,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.Vec3d;
+import org.apache.commons.lang3.mutable.MutableFloat;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -45,6 +46,15 @@ public abstract class EnchantmentHelperMixin {
     AfflictionManager.handleLocationChanged(user, false);
   }
 
+  @Inject(at = @At("RETURN"), cancellable = true, method = "getAmmoUse")
+  private static void distantMoons$getAmmoUse(
+      ServerWorld world, ItemStack rangedWeaponStack, ItemStack projectileStack, int baseAmmoUse, CallbackInfoReturnable<Integer> callbackInfo
+  ) {
+    MutableFloat mutableFloat = new MutableFloat(callbackInfo.getReturnValue());
+    EnchantmentHelper.forEachEnchantment(projectileStack, (enchantment, level) -> enchantment.value().modifyAmmoUse(world, level, projectileStack, mutableFloat));
+    callbackInfo.setReturnValue(mutableFloat.intValue());
+  }
+
   @Inject(at = @At("HEAD"), cancellable = true, method =  "getArmorEffectiveness")
   private static void distantMoons$getArmorEffectiveness(
       ServerWorld world,
@@ -57,7 +67,6 @@ public abstract class EnchantmentHelperMixin {
     if (!(user instanceof LivingEntity livingEntity)) return;
     float armorEffectiveness = AfflictionManager.getArmorEffectiveness(livingEntity, damageSource, baseArmorEffectiveness);
     if (armorEffectiveness == baseArmorEffectiveness) return;
-    callbackInfo.cancel();
     callbackInfo.setReturnValue(EnchantmentManager.getArmorEffectiveness(user, stack, damageSource, armorEffectiveness));
   }
 
@@ -73,7 +82,6 @@ public abstract class EnchantmentHelperMixin {
     if (!(damageSource.getAttacker() instanceof LivingEntity livingEntity)) return;
     float damage = AfflictionManager.getDamage(livingEntity, target, damageSource, baseDamage);
     if (damage == baseDamage) return;
-    callbackInfo.cancel();
     callbackInfo.setReturnValue(EnchantmentManager.getDamage(target, stack, damageSource, damage));
   }
 
@@ -87,7 +95,6 @@ public abstract class EnchantmentHelperMixin {
     if (!(user instanceof LivingEntity livingEntity)) return;
     float fishingLuckBonus = AfflictionManager.getFishingLuckBonus(livingEntity, stack);
     if (fishingLuckBonus == 0.0F) return;
-    callbackInfo.cancel();
     callbackInfo.setReturnValue((int) EnchantmentManager.getFishingLuckBonus(user, stack, fishingLuckBonus));
   }
 
@@ -101,7 +108,6 @@ public abstract class EnchantmentHelperMixin {
     if (!(user instanceof LivingEntity livingEntity)) return;
     float fishingTimeReduction = AfflictionManager.getFishingTimeReduction(livingEntity, stack);
     if (fishingTimeReduction == 0.0F) return;
-    callbackInfo.cancel();
     callbackInfo.setReturnValue((int) EnchantmentManager.getFishingTimeReduction(user, stack, fishingTimeReduction));
   }
 
@@ -115,7 +121,6 @@ public abstract class EnchantmentHelperMixin {
     if (!(user instanceof LivingEntity livingEntity)) return;
     float damageProtection = AfflictionManager.getDamageProtection(livingEntity, damageSource);
     if (damageProtection == 0.0F) return;
-    callbackInfo.cancel();
     callbackInfo.setReturnValue(EnchantmentManager.getDamageProtection(user, damageSource, damageProtection));
   }
 
@@ -132,7 +137,6 @@ public abstract class EnchantmentHelperMixin {
     if (!(damageSource.getAttacker() instanceof LivingEntity livingEntity) || user == null) return;
     float knockback = AfflictionManager.getKnockback(livingEntity, user, damageSource, baseKnockback);
     if (knockback == baseKnockback) return;
-    callbackInfo.cancel();
     callbackInfo.setReturnValue(EnchantmentManager.getKnockback(user, stack, damageSource, knockback));
   }
 
@@ -144,7 +148,6 @@ public abstract class EnchantmentHelperMixin {
       CallbackInfoReturnable<Boolean> callbackInfo
   ) {
     if (AfflictionManager.handleDamageImmunity(user, damageSource)) {
-      callbackInfo.cancel();
       callbackInfo.setReturnValue(true);
     }
   }
