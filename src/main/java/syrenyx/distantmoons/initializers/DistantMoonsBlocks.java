@@ -10,6 +10,7 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
+import org.jetbrains.annotations.Nullable;
 import syrenyx.distantmoons.UnderDistantMoons;
 import syrenyx.distantmoons.content.block.*;
 import syrenyx.distantmoons.references.DistantMoonsBlockSetTypes;
@@ -1309,8 +1310,17 @@ public abstract class DistantMoonsBlocks {
   }
 
   private static Map<DyeColor, Block> registerDyedVariants(String id, Function<AbstractBlock.Settings, Block> blockFactory, AbstractBlock.Settings settings, Item.Settings itemSettings) {
+    return registerDyedVariants(id, blockFactory, settings, itemSettings, null);
+  }
+
+  private static Map<DyeColor, Block> registerDyedVariants(String id, Function<AbstractBlock.Settings, Block> blockFactory, AbstractBlock.Settings settings, Item.Settings itemSettings, @Nullable Map<DyeColor, MapColor> mapColors) {
     Map<DyeColor, Block> blocks = new HashMap<>();
-    for (DyeColor color : DyeColor.values()) blocks.put(color, register(color.getId() + "_" + id, blockFactory, settings.mapColor(color), itemSettings));
+    for (DyeColor color : DyeColor.values()) blocks.put(color, register(
+        color.getId() + "_" + id,
+        blockFactory,
+        settings.mapColor(mapColors == null ? color.getMapColor() : mapColors.get(color)),
+        itemSettings
+    ));
     return blocks;
   }
 
