@@ -40,7 +40,7 @@ public class WallSlabBlock extends Block implements Waterloggable {
   public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
   private static final VoxelShape FLAT_SHAPE = Block.createCuboidShape(0.0, 0.0, 8.0, 16.0, 16.0, 16.0);
   private static final VoxelShape OUTER_SHAPE = Block.createCuboidShape(8.0, 0.0, 8.0, 16.0, 16.0, 16.0);
-  private static final VoxelShape INNER_SHAPE = VoxelShapes.union(FLAT_SHAPE, VoxelShapes.transform(OUTER_SHAPE, DirectionTransformation.fromRotations(AxisRotation.R0, AxisRotation.R270)));
+  private static final VoxelShape INNER_SHAPE = VoxelShapes.union(FLAT_SHAPE, VoxelShapes.transform(OUTER_SHAPE, DirectionTransformation.ROT_90_Y_POS));
   private static final Map<Direction, VoxelShape> FLAT_SHAPES_BY_DIRECTION = VoxelShapeUtil.createHorizontalDirectionShapeMap(FLAT_SHAPE);
   private static final Map<Direction, VoxelShape> OUTER_SHAPES_BY_DIRECTION = VoxelShapeUtil.createHorizontalDirectionShapeMap(OUTER_SHAPE);
   private static final Map<Direction, VoxelShape> INNER_SHAPES_BY_DIRECTION = VoxelShapeUtil.createHorizontalDirectionShapeMap(INNER_SHAPE);

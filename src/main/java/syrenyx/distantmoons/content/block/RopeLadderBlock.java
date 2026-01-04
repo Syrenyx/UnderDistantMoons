@@ -33,9 +33,9 @@ public class RopeLadderBlock extends Block {
   public static final BooleanProperty TOP = BooleanProperty.of("top");
   private static final VoxelShape OUTER_SHAPE = Block.createCuboidShape(0.0, 0.0, 14.0, 16.0, 16.0, 16.0);
   private static final VoxelShape INNER_SHAPE_X = Block.createCuboidShape(7.0, 0.0, 0.0, 9.0, 16.0, 16.0);
-  private static final VoxelShape INNER_SHAPE_Z = VoxelShapes.transform(INNER_SHAPE_X, DirectionTransformation.fromRotations(AxisRotation.R0, AxisRotation.R90), VoxelShapeUtil.BLOCK_CENTER_ANCHOR);
+  private static final VoxelShape INNER_SHAPE_Z = VoxelShapes.transform(INNER_SHAPE_X, DirectionTransformation.ROT_90_Y_POS, VoxelShapeUtil.BLOCK_CENTER_ANCHOR);
   private static final VoxelShape CEILING_SHAPE_X = Block.createCuboidShape(7.0, 0.0, 0.0, 9.0, 5.0, 16.0);
-  private static final VoxelShape CEILING_SHAPE_Z = VoxelShapes.transform(CEILING_SHAPE_X, DirectionTransformation.fromRotations(AxisRotation.R0, AxisRotation.R90), VoxelShapeUtil.BLOCK_CENTER_ANCHOR);
+  private static final VoxelShape CEILING_SHAPE_Z = VoxelShapes.transform(CEILING_SHAPE_X, DirectionTransformation.ROT_90_Y_POS, VoxelShapeUtil.BLOCK_CENTER_ANCHOR);
   private static final Map<Direction, VoxelShape> OUTER_SHAPES_BY_DIRECTION = VoxelShapeUtil.createHorizontalDirectionShapeMap(OUTER_SHAPE);
 
   public RopeLadderBlock(Settings settings) {

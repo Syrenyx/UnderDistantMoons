@@ -29,7 +29,7 @@ public abstract class AfflictionCommand {
   public static void register(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess registryAccess) {
     dispatcher.register(CommandManager
         .literal(UnderDistantMoons.withPrefixedNamespace("affliction"))
-        .requires(source -> source.hasPermissionLevel(PermissionLevel.GAMEMASTER.get()))
+        .requires(CommandManager.requirePermissionLevel(CommandManager.GAMEMASTERS_CHECK))
         .then(CommandManager
             .literal("add")
             .then(CommandManager

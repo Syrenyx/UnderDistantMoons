@@ -10,7 +10,7 @@ import java.util.List;
 
 public record ActiveAfflictionsPayload(List<AfflictionPacket> afflictions) implements CustomPayload {
 
-  public static final CustomPayload.Id<ActiveAfflictionsPayload> ID = new CustomPayload.Id<>(UnderDistantMoons.identifierOf("active_afflictions_payload"));
+  public static final Id<ActiveAfflictionsPayload> ID = new Id<>(UnderDistantMoons.identifierOf("active_afflictions_payload"));
   public static final PacketCodec<RegistryByteBuf, ActiveAfflictionsPayload> CODEC = PacketCodec.tuple(
       AfflictionPacket.PACKET_CODEC.collect(PacketCodecs.toList()), ActiveAfflictionsPayload::afflictions,
       ActiveAfflictionsPayload::new

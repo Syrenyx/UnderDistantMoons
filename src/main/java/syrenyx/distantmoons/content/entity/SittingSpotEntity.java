@@ -53,7 +53,7 @@ public class SittingSpotEntity extends Entity {
   }
 
   @Override
-  protected void updatePassengerPosition(Entity passenger, Entity.PositionUpdater positionUpdater) {
+  protected void updatePassengerPosition(Entity passenger, PositionUpdater positionUpdater) {
     super.updatePassengerPosition(passenger, positionUpdater);
     if (passenger instanceof LivingEntity entity) entity.bodyYaw = this.getYaw();
   }

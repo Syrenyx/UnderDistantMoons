@@ -41,7 +41,7 @@ public class PoleBlock extends Block implements Waterloggable {
   private static final VoxelShape EXTENSION_SHAPE = Block.createCuboidShape(6.0, 16.0, 6.0, 10.0, 22.0, 10.0);
   private static final Map<Direction.Axis, VoxelShape> CENTER_SHAPES_BY_AXIS = VoxelShapeUtil.createAxisShapeMap(Block.createCuboidShape(6.0, 0.0, 6.0, 10.0, 16.0, 10.0));
   private static final Map<Direction.Axis, VoxelShape> UP_SHAPES_BY_AXIS = VoxelShapeUtil.createAxisShapeMap(EXTENSION_SHAPE);
-  private static final Map<Direction.Axis, VoxelShape> DOWN_SHAPES_BY_AXIS = VoxelShapeUtil.createAxisShapeMap(VoxelShapes.transform(EXTENSION_SHAPE, DirectionTransformation.fromRotations(AxisRotation.R180, AxisRotation.R0), VoxelShapeUtil.BLOCK_CENTER_ANCHOR));
+  private static final Map<Direction.Axis, VoxelShape> DOWN_SHAPES_BY_AXIS = VoxelShapeUtil.createAxisShapeMap(VoxelShapes.transform(EXTENSION_SHAPE, DirectionTransformation.ROT_180_FACE_XY, VoxelShapeUtil.BLOCK_CENTER_ANCHOR));
 
   public PoleBlock(Settings settings) {
     super(settings);

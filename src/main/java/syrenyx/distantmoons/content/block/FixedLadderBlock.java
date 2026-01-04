@@ -35,7 +35,7 @@ public class FixedLadderBlock extends Block {
   public static final BooleanProperty RIGHT_CAPPED = BooleanProperty.of("right_capped");
   public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
   private static final VoxelShape X_SHAPE = Block.createCuboidShape(7.0, 0.0, 0.0, 9.0, 16.0, 16.0);
-  private static final VoxelShape Z_SHAPE = VoxelShapes.transform(X_SHAPE, DirectionTransformation.fromRotations(AxisRotation.R0, AxisRotation.R90), new Vec3d(0.5, 0.5, 0.5));
+  private static final VoxelShape Z_SHAPE = VoxelShapes.transform(X_SHAPE, DirectionTransformation.ROT_90_Y_POS, new Vec3d(0.5, 0.5, 0.5));
 
   public FixedLadderBlock(Settings settings) {
     super(settings);

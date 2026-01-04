@@ -2,6 +2,7 @@ package syrenyx.distantmoons.content.affliction.effect.entity;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.command.permission.LeveledPermissionPredicate;
 import net.minecraft.entity.Entity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.ServerCommandSource;
@@ -42,7 +43,7 @@ public record RunFunctionEffect(Identifier function) implements AfflictionEntity
         function.get(),
         minecraftServer
             .getCommandSource()
-            .withLevel(PermissionLevel.GAMEMASTER.get())
+            .withPermissions(LeveledPermissionPredicate.GAMEMASTERS)
             .withSilent()
             .withEntity(target)
             .withWorld(world)

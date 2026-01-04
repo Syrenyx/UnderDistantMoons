@@ -14,7 +14,7 @@ public enum TargetEntityType implements StringIdentifiable {
   ATTACKING_PLAYER("attacking_player", LootContextParameters.LAST_DAMAGE_PLAYER),
   SPAWNED_ENTITY("spawned_entity", DistantMoonsLootContextParameters.SPAWNED_ENTITY);
 
-  public static final StringIdentifiable.EnumCodec<TargetEntityType> CODEC = StringIdentifiable.createCodec(TargetEntityType::values);
+  public static final EnumCodec<TargetEntityType> CODEC = StringIdentifiable.createCodec(TargetEntityType::values);
   private final String type;
   private final ContextParameter<? extends Entity> parameter;
 

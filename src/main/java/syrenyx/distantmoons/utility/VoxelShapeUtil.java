@@ -1,7 +1,6 @@
 package syrenyx.distantmoons.utility;
 
 import com.google.common.collect.Maps;
-import net.minecraft.util.math.AxisRotation;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.DirectionTransformation;
 import net.minecraft.util.math.Vec3d;
@@ -16,18 +15,18 @@ public abstract class VoxelShapeUtil {
 
   public static Map<Direction.Axis, VoxelShape> createAxisShapeMap(VoxelShape shape) {
     return Maps.newEnumMap(Map.of(
-        Direction.Axis.X, VoxelShapes.transform(shape, DirectionTransformation.fromRotations(AxisRotation.R90, AxisRotation.R90), BLOCK_CENTER_ANCHOR),
+        Direction.Axis.X, VoxelShapes.transform(shape, DirectionTransformation.ROT_90_Z_NEG, BLOCK_CENTER_ANCHOR),
         Direction.Axis.Y, shape,
-        Direction.Axis.Z, VoxelShapes.transform(shape, DirectionTransformation.fromRotations(AxisRotation.R90, AxisRotation.R0), BLOCK_CENTER_ANCHOR)
+        Direction.Axis.Z, VoxelShapes.transform(shape, DirectionTransformation.ROT_90_X_NEG, BLOCK_CENTER_ANCHOR)
     ));
   }
 
   public static Map<Direction, VoxelShape> createHorizontalDirectionShapeMap(VoxelShape shape) {
     return Maps.newEnumMap(Map.of(
         Direction.NORTH, shape,
-        Direction.EAST, VoxelShapes.transform(shape, DirectionTransformation.fromRotations(AxisRotation.R0, AxisRotation.R90), BLOCK_CENTER_ANCHOR),
-        Direction.SOUTH, VoxelShapes.transform(shape, DirectionTransformation.fromRotations(AxisRotation.R0, AxisRotation.R180), BLOCK_CENTER_ANCHOR),
-        Direction.WEST, VoxelShapes.transform(shape, DirectionTransformation.fromRotations(AxisRotation.R0, AxisRotation.R270), BLOCK_CENTER_ANCHOR)
+        Direction.EAST, VoxelShapes.transform(shape, DirectionTransformation.ROT_90_Y_NEG, BLOCK_CENTER_ANCHOR),
+        Direction.SOUTH, VoxelShapes.transform(shape, DirectionTransformation.ROT_180_FACE_XZ, BLOCK_CENTER_ANCHOR),
+        Direction.WEST, VoxelShapes.transform(shape, DirectionTransformation.ROT_90_Y_POS, BLOCK_CENTER_ANCHOR)
     ));
   }
 }

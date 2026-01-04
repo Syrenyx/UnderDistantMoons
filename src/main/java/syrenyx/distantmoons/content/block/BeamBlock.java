@@ -18,7 +18,7 @@ public class BeamBlock extends PoleBlock {
   public static final VoxelShape EXTENSION_SHAPE = Block.createCuboidShape(4.0, 16.0, 4.0, 12.0, 20.0, 12.0);
   private static final Map<Direction.Axis, VoxelShape> CENTER_SHAPES_BY_AXIS = VoxelShapeUtil.createAxisShapeMap(Block.createCuboidShape(4.0, 0.0, 4.0, 12.0, 16.0, 12.0));
   private static final Map<Direction.Axis, VoxelShape> UP_SHAPES_BY_AXIS = VoxelShapeUtil.createAxisShapeMap(EXTENSION_SHAPE);
-  private static final Map<Direction.Axis, VoxelShape> DOWN_SHAPES_BY_AXIS = VoxelShapeUtil.createAxisShapeMap(VoxelShapes.transform(EXTENSION_SHAPE, DirectionTransformation.fromRotations(AxisRotation.R180, AxisRotation.R0), VoxelShapeUtil.BLOCK_CENTER_ANCHOR));
+  private static final Map<Direction.Axis, VoxelShape> DOWN_SHAPES_BY_AXIS = VoxelShapeUtil.createAxisShapeMap(VoxelShapes.transform(EXTENSION_SHAPE, DirectionTransformation.ROT_180_FACE_XY, VoxelShapeUtil.BLOCK_CENTER_ANCHOR));
 
   public BeamBlock(Settings settings) {
     super(settings);

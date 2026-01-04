@@ -7,6 +7,9 @@ import net.minecraft.block.ShapeContext;
 import net.minecraft.block.ShulkerBoxBlock;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.command.DefaultPermissions;
+import net.minecraft.command.permission.LeveledPermissionPredicate;
+import net.minecraft.command.permission.Permission;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.BlockStateComponent;
 import net.minecraft.component.type.ContainerComponent;
@@ -125,7 +128,7 @@ public class IndependentBlockItem extends Item {
 
   @Override
   public boolean shouldShowOperatorBlockWarnings(ItemStack stack, @Nullable PlayerEntity player) {
-    if (player == null || player.getPermissionLevel() < 2) return false;
+    if (player == null || !player.getPermissions().hasPermission(DefaultPermissions.GAMEMASTERS)) return false;
     TypedEntityData<BlockEntityType<?>> typedEntityData = stack.get(DataComponentTypes.BLOCK_ENTITY_DATA);
     if (typedEntityData == null) return false;
     return typedEntityData.getType().canPotentiallyExecuteCommands();

@@ -3,6 +3,7 @@ package syrenyx.distantmoons.content.loot.entry;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.command.permission.LeveledPermissionPredicate;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.LootChoice;
@@ -18,7 +19,6 @@ import net.minecraft.server.function.CommandFunctionManager;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
 import syrenyx.distantmoons.UnderDistantMoons;
-import syrenyx.distantmoons.content.command.PermissionLevel;
 import syrenyx.distantmoons.initializers.DistantMoonsLootPoolEntryTypes;
 
 import java.util.Collections;
@@ -68,7 +68,7 @@ public class RunFunctionEntry extends LeafEntry {
         function.get(),
         minecraftServer
             .getCommandSource()
-            .withLevel(PermissionLevel.GAMEMASTER.get())
+            .withPermissions(LeveledPermissionPredicate.GAMEMASTERS)
             .withSilent()
             .withEntity(target)
             .withWorld(world)

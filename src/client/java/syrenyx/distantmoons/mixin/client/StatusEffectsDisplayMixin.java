@@ -29,8 +29,8 @@ import syrenyx.distantmoons.content.affliction.ProgressionBarStyle;
 import syrenyx.distantmoons.data.attachment.ClientPlayerAttachment;
 
 import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
+
+//TODO: Rewrite entirely
 
 @Mixin(StatusEffectsDisplay.class)
 public abstract class StatusEffectsDisplayMixin {
@@ -57,25 +57,25 @@ public abstract class StatusEffectsDisplayMixin {
 
   @Final @Shadow private HandledScreen<?> parent;
   @Final @Shadow private MinecraftClient client;
-  @Shadow private StatusEffectInstance hoveredStatusEffect;
+  @Unique private StatusEffectInstance hoveredStatusEffect;
   @Unique private AfflictionInstance hoveredAffliction;
 
   @Inject(at = @At("HEAD"), cancellable = true, method = "drawStatusEffects")
-  public void distantMoons$drawStatusEffects(DrawContext context, int mouseX, int mouseY, CallbackInfo callbackInfo) {
+  public void distantMoons$drawStatusEffects(DrawContext context, Collection<StatusEffectInstance> effects, int x, int height, int mouseX, int mouseY, int width, CallbackInfo callbackInfo) {
     callbackInfo.cancel();
     if (this.client.player == null) return;
     HandledScreenAccessor parentAccessor = (HandledScreenAccessor) this.parent;
     this.hoveredAffliction = null;
     this.hoveredStatusEffect = null;
     int horizontalPosition = parentAccessor.x() + parentAccessor.backgroundWidth() + 2;
-    int height = parent.width - horizontalPosition;
+    //int height = parent.width - horizontalPosition;
     Collection<AfflictionInstance> activeAfflictions = ClientPlayerAttachment.getOrCreate(this.client.player).activeAfflictions().stream().filter(AfflictionInstance::isVisible).toList();
     Collection<StatusEffectInstance> statusEffects = this.client.player.getStatusEffects();
     if (height < MIN_SIZE || statusEffects.isEmpty() && activeAfflictions.isEmpty()) return;
     boolean wide = height >= FULL_SIZE && activeAfflictions.size() + statusEffects.size() < 6;
     Iterable<AfflictionInstance> iterableAfflictions = Ordering.natural().sortedCopy(activeAfflictions);
     Iterable<StatusEffectInstance> iterableEffects = Ordering.natural().sortedCopy(statusEffects);
-    int x = horizontalPosition;
+    //int x = horizontalPosition;
     int y = parentAccessor.y();
     for (AfflictionInstance affliction : iterableAfflictions) {
       distantMoons$drawAfflictionWidget(context, x, y, wide, affliction, this.parent.getTextRenderer());
@@ -114,6 +114,7 @@ public abstract class StatusEffectsDisplayMixin {
     }
   }
 
+  /*
   @Inject(at = @At("HEAD"), cancellable = true, method = "drawStatusEffectTooltip")
   public void distantMoons$drawStatusEffectTooltip(DrawContext context, int mouseX, int mouseY, CallbackInfo callbackInfo) {
     callbackInfo.cancel();
@@ -131,6 +132,7 @@ public abstract class StatusEffectsDisplayMixin {
       context.drawTooltip(this.parent.getTextRenderer(), text, Optional.empty(), mouseX, mouseY);
     }
   }
+   */
 
   @Unique
   private static void distantMoons$drawAfflictionWidget(DrawContext context, int x, int y, boolean wide, AfflictionInstance afflictionInstance, TextRenderer textRenderer) {
