@@ -1,17 +1,17 @@
 package syrenyx.distantmoons.datagen.utility;
 
-import net.minecraft.client.render.model.json.MultipartModelConditionBuilder;
-import net.minecraft.state.property.Properties;
+import net.minecraft.client.data.models.blockstates.ConditionBuilder;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class ModelProviderUtil {
 
-  public static MultipartModelConditionBuilder directionalMultipartCondition(@Nullable Boolean north, @Nullable Boolean east, @Nullable Boolean south, @Nullable Boolean west) {
-    MultipartModelConditionBuilder builder = new MultipartModelConditionBuilder();
-    if (north != null) builder.put(Properties.NORTH, north);
-    if (east != null) builder.put(Properties.EAST, east);
-    if (south != null) builder.put(Properties.SOUTH, south);
-    if (west != null) builder.put(Properties.WEST, west);
+  public static ConditionBuilder directionalMultipartCondition(@Nullable Boolean north, @Nullable Boolean east, @Nullable Boolean south, @Nullable Boolean west) {
+    ConditionBuilder builder = new ConditionBuilder();
+    if (north != null) builder.term(BlockStateProperties.NORTH, north);
+    if (east != null) builder.term(BlockStateProperties.EAST, east);
+    if (south != null) builder.term(BlockStateProperties.SOUTH, south);
+    if (west != null) builder.term(BlockStateProperties.WEST, west);
     return builder;
   }
 }

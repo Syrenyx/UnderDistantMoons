@@ -1,60 +1,60 @@
 package syrenyx.distantmoons.content.entity;
 
-import net.minecraft.block.piston.PistonBehavior;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.data.DataTracker;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.storage.ReadView;
-import net.minecraft.storage.WriteView;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.material.PushReaction;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import syrenyx.distantmoons.references.tag.DistantMoonsBlockTags;
 
 public class SittingSpotEntity extends Entity {
 
-  public SittingSpotEntity(EntityType<?> type, World world) {
+  public SittingSpotEntity(EntityType<?> type, Level world) {
     super(type, world);
-    this.noClip = true;
+    this.noPhysics = true;
   }
 
   @Override
-  protected void initDataTracker(DataTracker.Builder builder) {}
+  protected void defineSynchedData(SynchedEntityData.Builder builder) {}
 
   @Override
-  public boolean damage(ServerWorld world, DamageSource source, float amount) {
+  public boolean hurtServer(ServerLevel world, DamageSource source, float amount) {
     return false;
   }
 
   @Override
-  protected void readCustomData(ReadView view) {}
+  protected void readAdditionalSaveData(ValueInput view) {}
 
   @Override
-  protected void writeCustomData(WriteView view) {}
+  protected void addAdditionalSaveData(ValueOutput view) {}
 
   @Override
   protected void removePassenger(Entity passenger) {
     super.removePassenger(passenger);
-    if (this.getEntityWorld() instanceof ServerWorld serverWorld) this.kill(serverWorld);
+    if (this.level() instanceof ServerLevel serverWorld) this.kill(serverWorld);
   }
 
-  public PistonBehavior getPistonBehavior() {
-    return PistonBehavior.IGNORE;
+  public PushReaction getPistonPushReaction() {
+    return PushReaction.IGNORE;
   }
 
   @Override
   public void tick() {
     super.tick();
-    if (this.getFirstPassenger() instanceof LivingEntity entity) this.setRotation(entity.getYaw(), 0.0F);
-    if (!(this.getEntityWorld() instanceof ServerWorld serverWorld)) return;
-    if (!serverWorld.getBlockState(BlockPos.ofFloored(this.getEntityPos())).isIn(DistantMoonsBlockTags.SUPPORT_BLOCK_FOR_SITTING_SPOT)) this.kill(serverWorld);
+    if (this.getFirstPassenger() instanceof LivingEntity entity) this.setRot(entity.getYRot(), 0.0F);
+    if (!(this.level() instanceof ServerLevel serverWorld)) return;
+    if (!serverWorld.getBlockState(BlockPos.containing(this.position())).is(DistantMoonsBlockTags.SUPPORT_BLOCK_FOR_SITTING_SPOT)) this.kill(serverWorld);
   }
 
   @Override
-  protected void updatePassengerPosition(Entity passenger, PositionUpdater positionUpdater) {
-    super.updatePassengerPosition(passenger, positionUpdater);
-    if (passenger instanceof LivingEntity entity) entity.bodyYaw = this.getYaw();
+  protected void positionRider(Entity passenger, MoveFunction positionUpdater) {
+    super.positionRider(passenger, positionUpdater);
+    if (passenger instanceof LivingEntity entity) entity.yBodyRot = this.getYRot();
   }
 }

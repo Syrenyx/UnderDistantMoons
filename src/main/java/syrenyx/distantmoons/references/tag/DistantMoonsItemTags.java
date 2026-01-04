@@ -1,8 +1,8 @@
 package syrenyx.distantmoons.references.tag;
 
-import net.minecraft.item.Item;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.tag.TagKey;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import syrenyx.distantmoons.UnderDistantMoons;
 
 public abstract class DistantMoonsItemTags {
@@ -14,6 +14,6 @@ public abstract class DistantMoonsItemTags {
   public static final TagKey<Item> SWORD = keyOf("sword");
 
   private static TagKey<Item> keyOf(String id) {
-    return UnderDistantMoons.tagKeyOf(id, RegistryKeys.ITEM);
+    return UnderDistantMoons.tagKeyOf(id, Registries.ITEM);
   }
 }

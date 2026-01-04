@@ -3,17 +3,16 @@ package syrenyx.distantmoons.content.affliction.effect;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.loot.LootTableReporter;
-import net.minecraft.loot.condition.LootCondition;
-import net.minecraft.loot.context.LootContext;
-import net.minecraft.util.ErrorReporter;
-import net.minecraft.util.context.ContextType;
-
 import java.util.Optional;
+import net.minecraft.util.ProblemReporter;
+import net.minecraft.util.context.ContextKeySet;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.ValidationContext;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 
-public record AfflictionEffectEntry<T>(T effect, Optional<LootCondition> requirements) {
+public record AfflictionEffectEntry<T>(T effect, Optional<LootItemCondition> requirements) {
 
-  public static <T> Codec<AfflictionEffectEntry<T>> createCodec(Codec<T> effectCodec, ContextType lootContextType) {
+  public static <T> Codec<AfflictionEffectEntry<T>> createCodec(Codec<T> effectCodec, ContextKeySet lootContextType) {
     return RecordCodecBuilder.create(instance -> instance
         .group(
             effectCodec.fieldOf("effect").forGetter(AfflictionEffectEntry::effect),
@@ -23,14 +22,14 @@ public record AfflictionEffectEntry<T>(T effect, Optional<LootCondition> require
     );
   }
 
-  public static Codec<LootCondition> createRequirementsCodec(ContextType lootContextType) {
-    return LootCondition.CODEC.validate(
+  public static Codec<LootItemCondition> createRequirementsCodec(ContextKeySet lootContextType) {
+    return LootItemCondition.DIRECT_CODEC.validate(
         condition -> {
-          ErrorReporter.Impl impl = new ErrorReporter.Impl();
-          LootTableReporter lootTableReporter = new LootTableReporter(impl, lootContextType);
+          ProblemReporter.Collector impl = new ProblemReporter.Collector();
+          ValidationContext lootTableReporter = new ValidationContext(impl, lootContextType);
           condition.validate(lootTableReporter);
           return !impl.isEmpty()
-              ? DataResult.error(() -> "Validation error in affliction effect condition: " + impl.getErrorsAsString())
+              ? DataResult.error(() -> "Validation error in affliction effect condition: " + impl.getReport())
               : DataResult.success(condition);
         }
     );

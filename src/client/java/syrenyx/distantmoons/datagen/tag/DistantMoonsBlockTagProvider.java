@@ -2,9 +2,9 @@ package syrenyx.distantmoons.datagen.tag;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
-import net.minecraft.block.Blocks;
-import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.block.Blocks;
 import syrenyx.distantmoons.initializers.DistantMoonsBlocks;
 import syrenyx.distantmoons.references.tag.DistantMoonsBlockTags;
 
@@ -12,12 +12,12 @@ import java.util.concurrent.CompletableFuture;
 
 public class DistantMoonsBlockTagProvider extends FabricTagProvider.BlockTagProvider {
 
-  public DistantMoonsBlockTagProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+  public DistantMoonsBlockTagProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
     super(output, registriesFuture);
   }
 
   @Override
-  protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
+  protected void addTags(HolderLookup.Provider wrapperLookup) {
 
     //BLOCK GROUPS
     this.valueLookupBuilder(DistantMoonsBlockTags.BRICK_FENCE).add(Blocks.NETHER_BRICK_FENCE);
@@ -93,7 +93,7 @@ public class DistantMoonsBlockTagProvider extends FabricTagProvider.BlockTagProv
     );
 
     //SYED BLOCK GROUPS
-    this.valueLookupBuilder(DistantMoonsBlockTags.DYED_PILLOW).add(
+    this.valueLookupBuilder(DistantMoonsBlockTags.DYED_PILLOW).addAll(
         DistantMoonsBlocks.DYED_PILLOWS.values()
     );
     this.valueLookupBuilder(DistantMoonsBlockTags.COLORED_STAINED_GLASS).add(
@@ -420,17 +420,17 @@ public class DistantMoonsBlockTagProvider extends FabricTagProvider.BlockTagProv
         .addTag(DistantMoonsBlockTags.DYED_PILLOW);
 
     //VANILLA TAG REDIRECTS
-    this.valueLookupBuilder(BlockTags.AXE_MINEABLE).addTag(DistantMoonsBlockTags.MINING_TYPE_AXE);
+    this.valueLookupBuilder(BlockTags.MINEABLE_WITH_AXE).addTag(DistantMoonsBlockTags.MINING_TYPE_AXE);
     this.valueLookupBuilder(BlockTags.BARS).addTag(DistantMoonsBlockTags.BARS);
     this.valueLookupBuilder(BlockTags.CHAINS).addTag(DistantMoonsBlockTags.CHAIN);
     this.valueLookupBuilder(BlockTags.CLIMBABLE).addTag(DistantMoonsBlockTags.CLIMBABLE);
     this.valueLookupBuilder(BlockTags.DRAGON_IMMUNE).addTag(DistantMoonsBlockTags.IMMUNE_TO_DRAGON);
-    this.valueLookupBuilder(BlockTags.HOE_MINEABLE).addTag(DistantMoonsBlockTags.MINING_TYPE_HOE);
+    this.valueLookupBuilder(BlockTags.MINEABLE_WITH_HOE).addTag(DistantMoonsBlockTags.MINING_TYPE_HOE);
     this.valueLookupBuilder(BlockTags.NEEDS_DIAMOND_TOOL).addTag(DistantMoonsBlockTags.MINING_TIER_DIAMOND);
     this.valueLookupBuilder(BlockTags.NEEDS_IRON_TOOL).addTag(DistantMoonsBlockTags.MINING_TIER_IRON);
     this.valueLookupBuilder(BlockTags.NEEDS_STONE_TOOL).addTag(DistantMoonsBlockTags.MINING_TIER_STONE);
-    this.valueLookupBuilder(BlockTags.PICKAXE_MINEABLE).addTag(DistantMoonsBlockTags.MINING_TYPE_PICKAXE);
-    this.valueLookupBuilder(BlockTags.SHOVEL_MINEABLE).addTag(DistantMoonsBlockTags.MINING_TYPE_SHOVEL);
+    this.valueLookupBuilder(BlockTags.MINEABLE_WITH_PICKAXE).addTag(DistantMoonsBlockTags.MINING_TYPE_PICKAXE);
+    this.valueLookupBuilder(BlockTags.MINEABLE_WITH_SHOVEL).addTag(DistantMoonsBlockTags.MINING_TYPE_SHOVEL);
     this.valueLookupBuilder(BlockTags.WITHER_IMMUNE).addTag(DistantMoonsBlockTags.IMMUNE_TO_WITHER);
     this.valueLookupBuilder(BlockTags.WALLS).addTag(DistantMoonsBlockTags.WALL);
   }

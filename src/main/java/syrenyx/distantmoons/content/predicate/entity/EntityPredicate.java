@@ -4,15 +4,21 @@ import com.google.common.collect.Sets;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.predicate.NbtPredicate;
-import net.minecraft.predicate.component.ComponentsPredicate;
-import net.minecraft.predicate.entity.*;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.dynamic.Codecs;
-import net.minecraft.util.math.Vec3d;
-
+import net.minecraft.advancements.criterion.DataComponentMatchers;
+import net.minecraft.advancements.criterion.DistancePredicate;
+import net.minecraft.advancements.criterion.EntityEquipmentPredicate;
+import net.minecraft.advancements.criterion.EntityFlagsPredicate;
+import net.minecraft.advancements.criterion.EntitySubPredicate;
+import net.minecraft.advancements.criterion.EntityTypePredicate;
+import net.minecraft.advancements.criterion.MobEffectsPredicate;
+import net.minecraft.advancements.criterion.MovementPredicate;
+import net.minecraft.advancements.criterion.NbtPredicate;
+import net.minecraft.advancements.criterion.SlotsPredicate;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.ExtraCodecs;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.phys.Vec3;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -23,7 +29,7 @@ public record EntityPredicate(
     Optional<DistancePredicate> distance,
     Optional<MovementPredicate> movement,
     PositionalEntityPredicates location,
-    Optional<EntityEffectPredicate> effects,
+    Optional<MobEffectsPredicate> effects,
     Optional<NbtPredicate> nbt,
     Optional<EntityFlagsPredicate> flags,
     Optional<EntityEquipmentPredicate> equipment,
@@ -45,12 +51,12 @@ public record EntityPredicate(
               DistancePredicate.CODEC.optionalFieldOf("distance").forGetter(EntityPredicate::distance),
               MovementPredicate.CODEC.optionalFieldOf("movement").forGetter(EntityPredicate::movement),
               PositionalEntityPredicates.CODEC.forGetter(EntityPredicate::location),
-              EntityEffectPredicate.CODEC.optionalFieldOf("effects").forGetter(EntityPredicate::effects),
+              MobEffectsPredicate.CODEC.optionalFieldOf("effects").forGetter(EntityPredicate::effects),
               NbtPredicate.CODEC.optionalFieldOf("nbt").forGetter(EntityPredicate::nbt),
               EntityFlagsPredicate.CODEC.optionalFieldOf("flags").forGetter(EntityPredicate::flags),
               EntityEquipmentPredicate.CODEC.optionalFieldOf("equipment").forGetter(EntityPredicate::equipment),
               EntitySubPredicate.CODEC.optionalFieldOf("type_specific").forGetter(EntityPredicate::typeSpecific),
-              Codecs.POSITIVE_INT.optionalFieldOf("periodic_tick").forGetter(EntityPredicate::periodicTick),
+              ExtraCodecs.POSITIVE_INT.optionalFieldOf("periodic_tick").forGetter(EntityPredicate::periodicTick),
               entityPredicateCodec.optionalFieldOf("vehicle").forGetter(EntityPredicate::vehicle),
               entityPredicateCodec.optionalFieldOf("passenger").forGetter(EntityPredicate::passenger),
               entityPredicateCodec.optionalFieldOf("targeted_entity").forGetter(EntityPredicate::targetedEntity),
@@ -62,43 +68,43 @@ public record EntityPredicate(
       )
   );
 
-  public boolean test(ServerWorld world, Vec3d pos, Entity entity) {
+  public boolean test(ServerLevel world, Vec3 pos, Entity entity) {
     if (entity == null) return false;
     if (this.type.isPresent() && !this.type.get().matches(entity.getType())) return false;
-    if (this.distance.isPresent() && (pos == null || !this.distance.get().test(pos.getX(), pos.getY(), pos.getZ(), entity.getX(), entity.getY(), entity.getZ()))) return false;
+    if (this.distance.isPresent() && (pos == null || !this.distance.get().matches(pos.x(), pos.y(), pos.z(), entity.getX(), entity.getY(), entity.getZ()))) return false;
     if (this.movement.isPresent()) {
-      Vec3d vector = entity.getMovement().multiply(20.0F);
-      if (!this.movement.get().test(vector.x, vector.y, vector.z, entity.fallDistance)) return false;
+      Vec3 vector = entity.getKnownMovement().scale(20.0F);
+      if (!this.movement.get().matches(vector.x, vector.y, vector.z, entity.fallDistance)) return false;
     }
     if (this.location.located().isPresent() && !this.location.located().get().test(world, entity.getX(), entity.getY(), entity.getZ())) return false;
     if (this.location.eyeLevel().isPresent()) {
-      Vec3d eyePos = entity.getEyePos();
-      if (!this.location.eyeLevel().get().test(world, eyePos.getX(), eyePos.getY(), eyePos.getZ())) return false;
+      Vec3 eyePos = entity.getEyePosition();
+      if (!this.location.eyeLevel().get().test(world, eyePos.x(), eyePos.y(), eyePos.z())) return false;
     }
     if (this.location.steppingOn().isPresent()) {
-      Vec3d steppingPos = Vec3d.ofCenter(entity.getSteppingPos());
-      if (!entity.isOnGround() || !this.location.steppingOn().get().test(world, steppingPos.getX(), steppingPos.getY(), steppingPos.getZ())) return false;
+      Vec3 steppingPos = Vec3.atCenterOf(entity.getOnPos());
+      if (!entity.onGround() || !this.location.steppingOn().get().test(world, steppingPos.x(), steppingPos.y(), steppingPos.z())) return false;
     }
     if (this.location.affectsMovement().isPresent()) {
-      Vec3d affectingPos = Vec3d.ofCenter(entity.getVelocityAffectingPos());
-      if (!entity.isOnGround() || !this.location.affectsMovement().get().test(world, affectingPos.getX(), affectingPos.getY(), affectingPos.getZ())) return false;
+      Vec3 affectingPos = Vec3.atCenterOf(entity.getBlockPosBelowThatAffectsMyMovement());
+      if (!entity.onGround() || !this.location.affectsMovement().get().test(world, affectingPos.x(), affectingPos.y(), affectingPos.z())) return false;
     }
-    if (this.effects.isPresent() && !this.effects.get().test(entity)) return false;
-    if (this.nbt.isPresent() && !this.nbt.get().test(entity)) return false;
-    if (this.flags.isPresent() && !this.flags.get().test(entity)) return false;
-    if (this.equipment.isPresent() && !this.equipment.get().test(entity)) return false;
-    if (this.typeSpecific.isPresent() && !this.typeSpecific.get().test(entity, world, pos)) return false;
-    if (this.periodicTick.isPresent() && entity.age % this.periodicTick.get() != 0) return false;
+    if (this.effects.isPresent() && !this.effects.get().matches(entity)) return false;
+    if (this.nbt.isPresent() && !this.nbt.get().matches(entity)) return false;
+    if (this.flags.isPresent() && !this.flags.get().matches(entity)) return false;
+    if (this.equipment.isPresent() && !this.equipment.get().matches(entity)) return false;
+    if (this.typeSpecific.isPresent() && !this.typeSpecific.get().matches(entity, world, pos)) return false;
+    if (this.periodicTick.isPresent() && entity.tickCount % this.periodicTick.get() != 0) return false;
     if (this.vehicle.isPresent() && !this.vehicle.get().test(world, pos, entity.getVehicle())) return false;
-    if (this.passenger.isPresent() && entity.getPassengerList().stream().noneMatch(passengerEntity -> this.passenger.get().test(world, pos, passengerEntity))) return false;
-    if (this.targetedEntity.isPresent() && !this.targetedEntity.get().test(world, pos, entity instanceof MobEntity mobEntity ? mobEntity.getTarget() : null)) return false;
-    if (this.team.isPresent() && (entity.getScoreboardTeam() == null || !this.team.get().equals(entity.getScoreboardTeam().getName()))) return false;
+    if (this.passenger.isPresent() && entity.getPassengers().stream().noneMatch(passengerEntity -> this.passenger.get().test(world, pos, passengerEntity))) return false;
+    if (this.targetedEntity.isPresent() && !this.targetedEntity.get().test(world, pos, entity instanceof Mob mobEntity ? mobEntity.getTarget() : null)) return false;
+    if (this.team.isPresent() && (entity.getTeam() == null || !this.team.get().equals(entity.getTeam().getName()))) return false;
     if (this.slots.isPresent() && !this.slots.get().matches(entity)) return false;
     if (!this.extension.components.test(entity)) return false;
     if (this.extension.checks.isPresent() && !this.extension.checks.get().test(entity, world, pos)) return false;
     if (this.extension.afflictions.isPresent() && !this.extension.afflictions.get().test(entity)) return false;
     if (this.extension.tags.isPresent()) {
-      Set<String> entityTags = entity.getCommandTags();
+      Set<String> entityTags = entity.getTags();
       for (List<String> tagList : this.extension.tags.get()) {
         if (Sets.intersection(entityTags, new HashSet<>(tagList)).isEmpty()) return false;
       }
@@ -107,7 +113,7 @@ public record EntityPredicate(
   }
 
   public record EntityPredicateExtension(
-      ComponentsPredicate components,
+      DataComponentMatchers components,
       Optional<EntityChecks> checks,
       Optional<AfflictionPredicate> afflictions,
       Optional<List<List<String>>> tags
@@ -115,7 +121,7 @@ public record EntityPredicate(
 
     public static final MapCodec<EntityPredicateExtension> CODEC = RecordCodecBuilder.mapCodec(instance -> instance
         .group(
-            ComponentsPredicate.CODEC.forGetter(EntityPredicateExtension::components),
+            DataComponentMatchers.CODEC.forGetter(EntityPredicateExtension::components),
             EntityChecks.CODEC.optionalFieldOf("checks").forGetter(EntityPredicateExtension::checks),
             AfflictionPredicate.CODEC.optionalFieldOf("afflictions").forGetter(EntityPredicateExtension::afflictions),
             Codec.STRING.listOf().listOf().optionalFieldOf("tags").forGetter(EntityPredicateExtension::tags)

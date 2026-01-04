@@ -1,35 +1,35 @@
 package syrenyx.distantmoons.references;
 
-import net.minecraft.client.data.TextureKey;
+import net.minecraft.client.data.models.model.TextureSlot;
 
 public abstract class DistantMoonsTextureKeys {
 
-  public static final TextureKey BOTTOM_LEFT = TextureKey.of("bottom_left");
-  public static final TextureKey BOTTOM_RIGHT = TextureKey.of("bottom_right");
-  public static final TextureKey CEILING = TextureKey.of("ceiling");
-  public static final TextureKey CENTER = TextureKey.of("center");
-  public static final TextureKey DETAIL = TextureKey.of("detail");
-  public static final TextureKey DOUBLE_BOTTOM_LEFT = TextureKey.of("double_bottom_left");
-  public static final TextureKey DOUBLE_BOTTOM_RIGHT = TextureKey.of("double_bottom_right");
-  public static final TextureKey DOUBLE_TOP_LEFT = TextureKey.of("double_top_left");
-  public static final TextureKey DOUBLE_TOP_RIGHT = TextureKey.of("double_top_right");
-  public static final TextureKey ENDS = TextureKey.of("ends");
-  public static final TextureKey HORIZONTAL = TextureKey.of("horizontal");
-  public static final TextureKey HORIZONTAL_END = TextureKey.of("horizontal_end");
-  public static final TextureKey HORIZONTAL_SIDE = TextureKey.of("horizontal_side");
-  public static final TextureKey LOWER_SIDE = TextureKey.of("lower_side");
-  public static final TextureKey MIDDLE = TextureKey.of("middle");
-  public static final TextureKey OUTSIDE = TextureKey.of("outside");
-  public static final TextureKey SIDE_TOP = TextureKey.of("bottom_left");
-  public static final TextureKey SINGLE_BOTTOM_LEFT = TextureKey.of("single_bottom_left");
-  public static final TextureKey SINGLE_BOTTOM_RIGHT = TextureKey.of("single_bottom_right");
-  public static final TextureKey SINGLE_TOP_LEFT = TextureKey.of("single_top_left");
-  public static final TextureKey SINGLE_TOP_RIGHT = TextureKey.of("single_top_right");
-  public static final TextureKey SUPPORT = TextureKey.of("support");
-  public static final TextureKey TOP_LEFT = TextureKey.of("bottom_left");
-  public static final TextureKey TOP_RIGHT = TextureKey.of("bottom_right");
-  public static final TextureKey UPPER_SIDE = TextureKey.of("upper_side");
-  public static final TextureKey VERTICAL = TextureKey.of("vertical");
-  public static final TextureKey VERTICAL_END = TextureKey.of("vertical_end");
-  public static final TextureKey VERTICAL_SIDE = TextureKey.of("vertical_side");
+  public static final TextureSlot BOTTOM_LEFT = TextureSlot.create("bottom_left");
+  public static final TextureSlot BOTTOM_RIGHT = TextureSlot.create("bottom_right");
+  public static final TextureSlot CEILING = TextureSlot.create("ceiling");
+  public static final TextureSlot CENTER = TextureSlot.create("center");
+  public static final TextureSlot DETAIL = TextureSlot.create("detail");
+  public static final TextureSlot DOUBLE_BOTTOM_LEFT = TextureSlot.create("double_bottom_left");
+  public static final TextureSlot DOUBLE_BOTTOM_RIGHT = TextureSlot.create("double_bottom_right");
+  public static final TextureSlot DOUBLE_TOP_LEFT = TextureSlot.create("double_top_left");
+  public static final TextureSlot DOUBLE_TOP_RIGHT = TextureSlot.create("double_top_right");
+  public static final TextureSlot ENDS = TextureSlot.create("ends");
+  public static final TextureSlot HORIZONTAL = TextureSlot.create("horizontal");
+  public static final TextureSlot HORIZONTAL_END = TextureSlot.create("horizontal_end");
+  public static final TextureSlot HORIZONTAL_SIDE = TextureSlot.create("horizontal_side");
+  public static final TextureSlot LOWER_SIDE = TextureSlot.create("lower_side");
+  public static final TextureSlot MIDDLE = TextureSlot.create("middle");
+  public static final TextureSlot OUTSIDE = TextureSlot.create("outside");
+  public static final TextureSlot SIDE_TOP = TextureSlot.create("bottom_left");
+  public static final TextureSlot SINGLE_BOTTOM_LEFT = TextureSlot.create("single_bottom_left");
+  public static final TextureSlot SINGLE_BOTTOM_RIGHT = TextureSlot.create("single_bottom_right");
+  public static final TextureSlot SINGLE_TOP_LEFT = TextureSlot.create("single_top_left");
+  public static final TextureSlot SINGLE_TOP_RIGHT = TextureSlot.create("single_top_right");
+  public static final TextureSlot SUPPORT = TextureSlot.create("support");
+  public static final TextureSlot TOP_LEFT = TextureSlot.create("bottom_left");
+  public static final TextureSlot TOP_RIGHT = TextureSlot.create("bottom_right");
+  public static final TextureSlot UPPER_SIDE = TextureSlot.create("upper_side");
+  public static final TextureSlot VERTICAL = TextureSlot.create("vertical");
+  public static final TextureSlot VERTICAL_END = TextureSlot.create("vertical_end");
+  public static final TextureSlot VERTICAL_SIDE = TextureSlot.create("vertical_side");
 }

@@ -1,15 +1,15 @@
 package syrenyx.distantmoons.content.affliction;
 
 import com.mojang.serialization.Codec;
-import net.minecraft.util.StringIdentifiable;
+import net.minecraft.util.StringRepresentable;
 
-public enum ProgressionBarStyle implements StringIdentifiable {
+public enum ProgressionBarStyle implements StringRepresentable {
   DEFAULT("default"),
   EMPTY("empty"),
   FULL("full"),
   INFINITE("infinite");
 
-  public static final Codec<ProgressionBarStyle> CODEC = StringIdentifiable.createCodec(ProgressionBarStyle::values);
+  public static final Codec<ProgressionBarStyle> CODEC = StringRepresentable.fromEnum(ProgressionBarStyle::values);
   private final String id;
 
   ProgressionBarStyle(final String id) {
@@ -17,7 +17,7 @@ public enum ProgressionBarStyle implements StringIdentifiable {
   }
 
   @Override
-  public String asString() {
+  public String getSerializedName() {
     return this.id;
   }
 }

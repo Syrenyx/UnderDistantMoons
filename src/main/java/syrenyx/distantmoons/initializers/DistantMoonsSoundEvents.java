@@ -1,9 +1,9 @@
 package syrenyx.distantmoons.initializers;
 
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.util.Identifier;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.sounds.SoundEvent;
 import syrenyx.distantmoons.UnderDistantMoons;
 
 public abstract class DistantMoonsSoundEvents {
@@ -25,9 +25,9 @@ public abstract class DistantMoonsSoundEvents {
   private static SoundEvent register(String id) {
     Identifier identifier = UnderDistantMoons.identifierOf(id);
     return Registry.register(
-        Registries.SOUND_EVENT,
+        BuiltInRegistries.SOUND_EVENT,
         identifier,
-        SoundEvent.of(identifier)
+        SoundEvent.createVariableRangeEvent(identifier)
     );
   }
 

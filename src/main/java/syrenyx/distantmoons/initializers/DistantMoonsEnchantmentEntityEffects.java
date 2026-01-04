@@ -1,9 +1,9 @@
 package syrenyx.distantmoons.initializers;
 
 import com.mojang.serialization.MapCodec;
-import net.minecraft.enchantment.effect.EnchantmentEntityEffect;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.item.enchantment.effects.EnchantmentEntityEffect;
 import syrenyx.distantmoons.UnderDistantMoons;
 import syrenyx.distantmoons.content.enchantment.effect.entity.ChangeAfflictionEffect;
 
@@ -14,7 +14,7 @@ public abstract class DistantMoonsEnchantmentEntityEffects {
   }
 
   private static <T extends EnchantmentEntityEffect> void register(String id, MapCodec<T> codec) {
-    Registry.register(Registries.ENCHANTMENT_ENTITY_EFFECT_TYPE, UnderDistantMoons.identifierOf(id), codec);
+    Registry.register(BuiltInRegistries.ENCHANTMENT_ENTITY_EFFECT_TYPE, UnderDistantMoons.identifierOf(id), codec);
   }
 
   public static void initialize() {}

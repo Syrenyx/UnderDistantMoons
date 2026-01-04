@@ -6,15 +6,6 @@ import com.mojang.brigadier.arguments.FloatArgumentType;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
-import net.minecraft.command.CommandRegistryAccess;
-import net.minecraft.command.argument.EntityArgumentType;
-import net.minecraft.command.argument.RegistryEntryReferenceArgumentType;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.server.command.CommandManager;
-import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.text.Text;
 import org.jetbrains.annotations.Nullable;
 import syrenyx.distantmoons.UnderDistantMoons;
 import syrenyx.distantmoons.content.affliction.Affliction;
@@ -23,36 +14,45 @@ import syrenyx.distantmoons.content.affliction.AfflictionManager;
 import syrenyx.distantmoons.references.DistantMoonsRegistryKeys;
 
 import java.util.Collection;
+import net.minecraft.commands.CommandBuildContext;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.commands.Commands;
+import net.minecraft.commands.arguments.EntityArgument;
+import net.minecraft.commands.arguments.ResourceArgument;
+import net.minecraft.core.Holder;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 
 public abstract class AfflictionCommand {
 
-  public static void register(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess registryAccess) {
-    dispatcher.register(CommandManager
+  public static void register(CommandDispatcher<CommandSourceStack> dispatcher, CommandBuildContext registryAccess) {
+    dispatcher.register(Commands
         .literal(UnderDistantMoons.withPrefixedNamespace("affliction"))
-        .requires(CommandManager.requirePermissionLevel(CommandManager.GAMEMASTERS_CHECK))
-        .then(CommandManager
+        .requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS))
+        .then(Commands
             .literal("add")
-            .then(CommandManager
-                .argument("targets", EntityArgumentType.entities())
-                .then(CommandManager
-                    .argument("affliction", RegistryEntryReferenceArgumentType.registryEntry(registryAccess, DistantMoonsRegistryKeys.AFFLICTION_REGISTRY_KEY))
-                    .then(CommandManager
+            .then(Commands
+                .argument("targets", EntityArgument.entities())
+                .then(Commands
+                    .argument("affliction", ResourceArgument.resource(registryAccess, DistantMoonsRegistryKeys.AFFLICTION_REGISTRY_KEY))
+                    .then(Commands
                         .argument("stage", IntegerArgumentType.integer(1, Affliction.MAX_STAGE))
                         .executes(context -> executeAdd(
                             context.getSource(),
-                            EntityArgumentType.getEntities(context, "targets"),
+                            EntityArgument.getEntities(context, "targets"),
                             new AfflictionInstance(
-                                RegistryEntryReferenceArgumentType.getRegistryEntry(context, "affliction", DistantMoonsRegistryKeys.AFFLICTION_REGISTRY_KEY),
+                                ResourceArgument.getResource(context, "affliction", DistantMoonsRegistryKeys.AFFLICTION_REGISTRY_KEY),
                                 IntegerArgumentType.getInteger(context, "stage")
                             )
                         ))
-                        .then(CommandManager
+                        .then(Commands
                             .argument("progression", FloatArgumentType.floatArg(0.0F, Affliction.MAX_PROGRESSION))
                             .executes(context -> executeAdd(
                                 context.getSource(),
-                                EntityArgumentType.getEntities(context, "targets"),
+                                EntityArgument.getEntities(context, "targets"),
                                 new AfflictionInstance(
-                                    RegistryEntryReferenceArgumentType.getRegistryEntry(context, "affliction", DistantMoonsRegistryKeys.AFFLICTION_REGISTRY_KEY),
+                                    ResourceArgument.getResource(context, "affliction", DistantMoonsRegistryKeys.AFFLICTION_REGISTRY_KEY),
                                     IntegerArgumentType.getInteger(context, "stage"),
                                     FloatArgumentType.getFloat(context, "progression")
                                 )
@@ -62,87 +62,87 @@ public abstract class AfflictionCommand {
                 )
             )
         )
-        .then(CommandManager
+        .then(Commands
             .literal("clear")
             .executes(context -> executeClear(
                 context.getSource(),
-                ImmutableList.of(context.getSource().getEntityOrThrow()),
+                ImmutableList.of(context.getSource().getEntityOrException()),
                 null)
             )
-            .then(CommandManager
-                .argument("targets", EntityArgumentType.entities())
+            .then(Commands
+                .argument("targets", EntityArgument.entities())
                 .executes(context -> executeClear(
                     context.getSource(),
-                    EntityArgumentType.getEntities(context, "targets"),
+                    EntityArgument.getEntities(context, "targets"),
                     null
                 ))
-                .then(CommandManager
-                    .argument("affliction", RegistryEntryReferenceArgumentType.registryEntry(registryAccess, DistantMoonsRegistryKeys.AFFLICTION_REGISTRY_KEY))
+                .then(Commands
+                    .argument("affliction", ResourceArgument.resource(registryAccess, DistantMoonsRegistryKeys.AFFLICTION_REGISTRY_KEY))
                     .executes(context -> executeClear(
                         context.getSource(),
-                        EntityArgumentType.getEntities(context, "targets"),
-                        RegistryEntryReferenceArgumentType.getRegistryEntry(context, "affliction", DistantMoonsRegistryKeys.AFFLICTION_REGISTRY_KEY)
+                        EntityArgument.getEntities(context, "targets"),
+                        ResourceArgument.getResource(context, "affliction", DistantMoonsRegistryKeys.AFFLICTION_REGISTRY_KEY)
                     ))
                 )
             )
         )
-        .then(CommandManager
+        .then(Commands
             .literal("get")
-            .then(CommandManager
-                .argument("target", EntityArgumentType.entity())
-                .then(CommandManager
-                    .argument("affliction", RegistryEntryReferenceArgumentType.registryEntry(registryAccess, DistantMoonsRegistryKeys.AFFLICTION_REGISTRY_KEY))
-                    .then(CommandManager
+            .then(Commands
+                .argument("target", EntityArgument.entity())
+                .then(Commands
+                    .argument("affliction", ResourceArgument.resource(registryAccess, DistantMoonsRegistryKeys.AFFLICTION_REGISTRY_KEY))
+                    .then(Commands
                         .literal("stage")
                         .executes(context -> executeGet(
                             context.getSource(),
-                            EntityArgumentType.getEntity(context, "target"),
-                            RegistryEntryReferenceArgumentType.getRegistryEntry(context, "affliction", DistantMoonsRegistryKeys.AFFLICTION_REGISTRY_KEY),
+                            EntityArgument.getEntity(context, "target"),
+                            ResourceArgument.getResource(context, "affliction", DistantMoonsRegistryKeys.AFFLICTION_REGISTRY_KEY),
                             true
                         ))
                     )
-                    .then(CommandManager
+                    .then(Commands
                         .literal("progression")
                         .executes(context -> executeGet(
                             context.getSource(),
-                            EntityArgumentType.getEntity(context, "target"),
-                            RegistryEntryReferenceArgumentType.getRegistryEntry(context, "affliction", DistantMoonsRegistryKeys.AFFLICTION_REGISTRY_KEY),
+                            EntityArgument.getEntity(context, "target"),
+                            ResourceArgument.getResource(context, "affliction", DistantMoonsRegistryKeys.AFFLICTION_REGISTRY_KEY),
                             false
                         ))
                     )
                 )
             )
         )
-        .then(CommandManager
+        .then(Commands
             .literal("give")
-            .then(CommandManager
-                .argument("targets", EntityArgumentType.entities())
-                .then(CommandManager
-                    .argument("affliction", RegistryEntryReferenceArgumentType.registryEntry(registryAccess, DistantMoonsRegistryKeys.AFFLICTION_REGISTRY_KEY))
+            .then(Commands
+                .argument("targets", EntityArgument.entities())
+                .then(Commands
+                    .argument("affliction", ResourceArgument.resource(registryAccess, DistantMoonsRegistryKeys.AFFLICTION_REGISTRY_KEY))
                     .executes(context -> executeGive(
                         context.getSource(),
-                        EntityArgumentType.getEntities(context, "targets"),
+                        EntityArgument.getEntities(context, "targets"),
                         new AfflictionInstance(
-                            RegistryEntryReferenceArgumentType.getRegistryEntry(context, "affliction", DistantMoonsRegistryKeys.AFFLICTION_REGISTRY_KEY)
+                            ResourceArgument.getResource(context, "affliction", DistantMoonsRegistryKeys.AFFLICTION_REGISTRY_KEY)
                         )
                     ))
-                    .then(CommandManager
+                    .then(Commands
                         .argument("stage", IntegerArgumentType.integer(1, Affliction.MAX_STAGE))
                         .executes(context -> executeGive(
                             context.getSource(),
-                            EntityArgumentType.getEntities(context, "targets"),
+                            EntityArgument.getEntities(context, "targets"),
                             new AfflictionInstance(
-                                RegistryEntryReferenceArgumentType.getRegistryEntry(context, "affliction", DistantMoonsRegistryKeys.AFFLICTION_REGISTRY_KEY),
+                                ResourceArgument.getResource(context, "affliction", DistantMoonsRegistryKeys.AFFLICTION_REGISTRY_KEY),
                                 IntegerArgumentType.getInteger(context, "stage")
                             )
                         ))
-                        .then(CommandManager
+                        .then(Commands
                             .argument("progression", FloatArgumentType.floatArg(0.0F, Affliction.MAX_PROGRESSION))
                             .executes(context -> executeGive(
                                 context.getSource(),
-                                EntityArgumentType.getEntities(context, "targets"),
+                                EntityArgument.getEntities(context, "targets"),
                                 new AfflictionInstance(
-                                    RegistryEntryReferenceArgumentType.getRegistryEntry(context, "affliction", DistantMoonsRegistryKeys.AFFLICTION_REGISTRY_KEY),
+                                    ResourceArgument.getResource(context, "affliction", DistantMoonsRegistryKeys.AFFLICTION_REGISTRY_KEY),
                                     IntegerArgumentType.getInteger(context, "stage"),
                                     FloatArgumentType.getFloat(context, "progression")
                                 )
@@ -152,29 +152,29 @@ public abstract class AfflictionCommand {
                 )
             )
         )
-        .then(CommandManager
+        .then(Commands
             .literal("set")
-            .then(CommandManager
-                .argument("targets", EntityArgumentType.entities())
-                .then(CommandManager
-                    .argument("affliction", RegistryEntryReferenceArgumentType.registryEntry(registryAccess, DistantMoonsRegistryKeys.AFFLICTION_REGISTRY_KEY))
-                    .then(CommandManager
+            .then(Commands
+                .argument("targets", EntityArgument.entities())
+                .then(Commands
+                    .argument("affliction", ResourceArgument.resource(registryAccess, DistantMoonsRegistryKeys.AFFLICTION_REGISTRY_KEY))
+                    .then(Commands
                         .argument("stage", IntegerArgumentType.integer(1, Affliction.MAX_STAGE))
                         .executes(context -> executeSet(
                             context.getSource(),
-                            EntityArgumentType.getEntities(context, "targets"),
+                            EntityArgument.getEntities(context, "targets"),
                             new AfflictionInstance(
-                                RegistryEntryReferenceArgumentType.getRegistryEntry(context, "affliction", DistantMoonsRegistryKeys.AFFLICTION_REGISTRY_KEY),
+                                ResourceArgument.getResource(context, "affliction", DistantMoonsRegistryKeys.AFFLICTION_REGISTRY_KEY),
                                 IntegerArgumentType.getInteger(context, "stage")
                             )
                         ))
-                        .then(CommandManager
+                        .then(Commands
                             .argument("progression", FloatArgumentType.floatArg(0.0F, Affliction.MAX_PROGRESSION))
                             .executes(context -> executeSet(
                                 context.getSource(),
-                                EntityArgumentType.getEntities(context, "targets"),
+                                EntityArgument.getEntities(context, "targets"),
                                 new AfflictionInstance(
-                                    RegistryEntryReferenceArgumentType.getRegistryEntry(context, "affliction", DistantMoonsRegistryKeys.AFFLICTION_REGISTRY_KEY),
+                                    ResourceArgument.getResource(context, "affliction", DistantMoonsRegistryKeys.AFFLICTION_REGISTRY_KEY),
                                     IntegerArgumentType.getInteger(context, "stage"),
                                     FloatArgumentType.getFloat(context, "progression")
                                 )
@@ -187,16 +187,16 @@ public abstract class AfflictionCommand {
     );
   }
 
-  private static final SimpleCommandExceptionType ADD_FAILED_EXCEPTION = new SimpleCommandExceptionType(Text.translatable("commands.distant-moons.affliction.add.failed"));
-  private static final SimpleCommandExceptionType CLEAR_EVERYTHING_FAILED_EXCEPTION = new SimpleCommandExceptionType(Text.translatable("commands.distant-moons.affliction.clear.everything.failed"));
-  private static final SimpleCommandExceptionType CLEAR_SPECIFIC_FAILED_EXCEPTION = new SimpleCommandExceptionType(Text.translatable("commands.distant-moons.affliction.clear.specific.failed"));
-  private static final SimpleCommandExceptionType GET_FAILED_AFFLICTION_EXCEPTION = new SimpleCommandExceptionType(Text.translatable("commands.distant-moons.affliction.get.failed.affliction"));
-  private static final SimpleCommandExceptionType GET_FAILED_ENTITY_EXCEPTION = new SimpleCommandExceptionType(Text.translatable("commands.distant-moons.affliction.get.failed.entity"));
-  private static final SimpleCommandExceptionType GIVE_FAILED_EXCEPTION = new SimpleCommandExceptionType(Text.translatable("commands.distant-moons.affliction.give.failed"));
-  private static final SimpleCommandExceptionType SET_FAILED_EXCEPTION = new SimpleCommandExceptionType(Text.translatable("commands.distant-moons.affliction.set.failed"));
+  private static final SimpleCommandExceptionType ADD_FAILED_EXCEPTION = new SimpleCommandExceptionType(Component.translatable("commands.distant-moons.affliction.add.failed"));
+  private static final SimpleCommandExceptionType CLEAR_EVERYTHING_FAILED_EXCEPTION = new SimpleCommandExceptionType(Component.translatable("commands.distant-moons.affliction.clear.everything.failed"));
+  private static final SimpleCommandExceptionType CLEAR_SPECIFIC_FAILED_EXCEPTION = new SimpleCommandExceptionType(Component.translatable("commands.distant-moons.affliction.clear.specific.failed"));
+  private static final SimpleCommandExceptionType GET_FAILED_AFFLICTION_EXCEPTION = new SimpleCommandExceptionType(Component.translatable("commands.distant-moons.affliction.get.failed.affliction"));
+  private static final SimpleCommandExceptionType GET_FAILED_ENTITY_EXCEPTION = new SimpleCommandExceptionType(Component.translatable("commands.distant-moons.affliction.get.failed.entity"));
+  private static final SimpleCommandExceptionType GIVE_FAILED_EXCEPTION = new SimpleCommandExceptionType(Component.translatable("commands.distant-moons.affliction.give.failed"));
+  private static final SimpleCommandExceptionType SET_FAILED_EXCEPTION = new SimpleCommandExceptionType(Component.translatable("commands.distant-moons.affliction.set.failed"));
 
   private static int executeAdd(
-      ServerCommandSource source,
+      CommandSourceStack source,
       Collection<? extends Entity> targets,
       AfflictionInstance affliction
   ) throws CommandSyntaxException {
@@ -205,44 +205,44 @@ public abstract class AfflictionCommand {
       if (target instanceof LivingEntity livingEntity && AfflictionManager.addToAffliction(livingEntity, affliction)) result++;
     }
     if (result == 0) throw ADD_FAILED_EXCEPTION.create();
-    if (targets.size() == 1) source.sendFeedback(() -> Text.translatable("commands.distant-moons.affliction.add.success.single", affliction.affliction().value().description(), targets.iterator().next().getDisplayName()), true);
-    else source.sendFeedback(() -> Text.translatable("commands.distant-moons.affliction.add.success.multiple", affliction.affliction().value().description(), targets.size()), true);
+    if (targets.size() == 1) source.sendSuccess(() -> Component.translatable("commands.distant-moons.affliction.add.success.single", affliction.affliction().value().description(), targets.iterator().next().getDisplayName()), true);
+    else source.sendSuccess(() -> Component.translatable("commands.distant-moons.affliction.add.success.multiple", affliction.affliction().value().description(), targets.size()), true);
     return result;
   }
 
   private static int executeClear(
-      ServerCommandSource source,
+      CommandSourceStack source,
       Collection<? extends Entity> targets,
-      @Nullable RegistryEntry<Affliction> affliction
+      @Nullable Holder<Affliction> affliction
   ) throws CommandSyntaxException {
     int result = 0;
     for (Entity target : targets) {
       if (target instanceof LivingEntity livingEntity && AfflictionManager.clearAffliction(livingEntity, affliction)) result++;
     }
     if (result == 0) throw affliction == null ? CLEAR_EVERYTHING_FAILED_EXCEPTION.create() : CLEAR_SPECIFIC_FAILED_EXCEPTION.create();
-    if (targets.size() == 1 && affliction == null) source.sendFeedback(() -> Text.translatable("commands.distant-moons.affliction.clear.everything.success.single", targets.iterator().next().getDisplayName()), true);
-    else if (targets.size() == 1) source.sendFeedback(() -> Text.translatable("commands.distant-moons.affliction.clear.specific.success.single", affliction.value().description(), targets.iterator().next().getDisplayName()), true);
-    else if (affliction == null) source.sendFeedback(() -> Text.translatable("commands.distant-moons.affliction.clear.everything.success.multiple", targets.size()), true);
-    else source.sendFeedback(() -> Text.translatable("commands.distant-moons.affliction.clear.specific.success.multiple", affliction.value().description(), targets.size()), true);
+    if (targets.size() == 1 && affliction == null) source.sendSuccess(() -> Component.translatable("commands.distant-moons.affliction.clear.everything.success.single", targets.iterator().next().getDisplayName()), true);
+    else if (targets.size() == 1) source.sendSuccess(() -> Component.translatable("commands.distant-moons.affliction.clear.specific.success.single", affliction.value().description(), targets.iterator().next().getDisplayName()), true);
+    else if (affliction == null) source.sendSuccess(() -> Component.translatable("commands.distant-moons.affliction.clear.everything.success.multiple", targets.size()), true);
+    else source.sendSuccess(() -> Component.translatable("commands.distant-moons.affliction.clear.specific.success.multiple", affliction.value().description(), targets.size()), true);
     return result;
   }
 
   private static int executeGet(
-      ServerCommandSource source,
+      CommandSourceStack source,
       Entity target,
-      RegistryEntry<Affliction> affliction,
+      Holder<Affliction> affliction,
       boolean stage
   ) throws CommandSyntaxException {
     if (!(target instanceof LivingEntity livingEntity)) throw GET_FAILED_ENTITY_EXCEPTION.create();
     AfflictionInstance afflictionInstance = AfflictionManager.getAffliction(livingEntity, affliction);
     if (afflictionInstance == null) throw GET_FAILED_AFFLICTION_EXCEPTION.create();
-    if (stage) source.sendFeedback(() -> Text.translatable("commands.distant-moons.affliction.get.success.stage", affliction.value().description(), afflictionInstance.stage()), true);
-    else source.sendFeedback(() -> Text.translatable("commands.distant-moons.affliction.get.success.progression", affliction.value().description(), afflictionInstance.progression()), true);
+    if (stage) source.sendSuccess(() -> Component.translatable("commands.distant-moons.affliction.get.success.stage", affliction.value().description(), afflictionInstance.stage()), true);
+    else source.sendSuccess(() -> Component.translatable("commands.distant-moons.affliction.get.success.progression", affliction.value().description(), afflictionInstance.progression()), true);
     return stage ? afflictionInstance.stage() : (int) afflictionInstance.progression();
   }
 
   private static int executeGive(
-      ServerCommandSource source,
+      CommandSourceStack source,
       Collection<? extends Entity> targets,
       AfflictionInstance affliction
   ) throws CommandSyntaxException {
@@ -251,13 +251,13 @@ public abstract class AfflictionCommand {
       if (target instanceof LivingEntity livingEntity && AfflictionManager.giveAffliction(livingEntity, affliction)) result++;
     }
     if (result == 0) throw GIVE_FAILED_EXCEPTION.create();
-    if (targets.size() == 1) source.sendFeedback(() -> Text.translatable("commands.distant-moons.affliction.give.success.single", affliction.affliction().value().description(), targets.iterator().next().getDisplayName()), true);
-    else source.sendFeedback(() -> Text.translatable("commands.distant-moons.affliction.give.success.multiple", affliction.affliction().value().description(), targets.size()), true);
+    if (targets.size() == 1) source.sendSuccess(() -> Component.translatable("commands.distant-moons.affliction.give.success.single", affliction.affliction().value().description(), targets.iterator().next().getDisplayName()), true);
+    else source.sendSuccess(() -> Component.translatable("commands.distant-moons.affliction.give.success.multiple", affliction.affliction().value().description(), targets.size()), true);
     return result;
   }
 
   private static int executeSet(
-      ServerCommandSource source,
+      CommandSourceStack source,
       Collection<? extends Entity> targets,
       AfflictionInstance affliction
   ) throws CommandSyntaxException {
@@ -266,8 +266,8 @@ public abstract class AfflictionCommand {
       if (target instanceof LivingEntity livingEntity && AfflictionManager.setAffliction(livingEntity, affliction)) result++;
     }
     if (result == 0) throw SET_FAILED_EXCEPTION.create();
-    if (targets.size() == 1) source.sendFeedback(() -> Text.translatable("commands.distant-moons.affliction.set.success.single", affliction.affliction().value().description(), targets.iterator().next().getDisplayName()), true);
-    else source.sendFeedback(() -> Text.translatable("commands.distant-moons.affliction.set.success.multiple", affliction.affliction().value().description(), targets.size()), true);
+    if (targets.size() == 1) source.sendSuccess(() -> Component.translatable("commands.distant-moons.affliction.set.success.single", affliction.affliction().value().description(), targets.iterator().next().getDisplayName()), true);
+    else source.sendSuccess(() -> Component.translatable("commands.distant-moons.affliction.set.success.multiple", affliction.affliction().value().description(), targets.size()), true);
     return result;
   }
 }

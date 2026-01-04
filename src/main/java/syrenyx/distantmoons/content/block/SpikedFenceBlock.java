@@ -1,27 +1,31 @@
 package syrenyx.distantmoons.content.block;
 
-import net.minecraft.block.*;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.ai.pathing.NavigationType;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.EnumProperty;
-import net.minecraft.state.property.Properties;
-import net.minecraft.util.BlockMirror;
-import net.minecraft.util.BlockRotation;
-import net.minecraft.util.function.BooleanBiFunction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldView;
-import net.minecraft.world.tick.ScheduledTickView;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.FenceGateBlock;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.phys.shapes.BooleanOp;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 import syrenyx.distantmoons.content.block.block_state_enums.SpikedFenceShape;
 import syrenyx.distantmoons.references.tag.DistantMoonsBlockTags;
@@ -29,175 +33,175 @@ import syrenyx.distantmoons.utility.VoxelShapeUtil;
 
 import java.util.Map;
 
-public class SpikedFenceBlock extends Block implements Waterloggable {
+public class SpikedFenceBlock extends Block implements SimpleWaterloggedBlock {
 
-  public static final BooleanProperty TOP = BooleanProperty.of("top");
-  public static final EnumProperty<SpikedFenceShape> NORTH = EnumProperty.of("north", SpikedFenceShape.class);
-  public static final EnumProperty<SpikedFenceShape> EAST = EnumProperty.of("east", SpikedFenceShape.class);
-  public static final EnumProperty<SpikedFenceShape> SOUTH = EnumProperty.of("south", SpikedFenceShape.class);
-  public static final EnumProperty<SpikedFenceShape> WEST = EnumProperty.of("west", SpikedFenceShape.class);
-  public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
-  private static final VoxelShape CENTER_SHAPE = Block.createCuboidShape(7.0, 0.0, 7.0, 9.0, 16.0, 9.0);
-  private static final VoxelShape SIDE_SHAPE = Block.createCuboidShape(7.0, 0.0, 0.0, 9.0, 16.0, 7.0);
+  public static final BooleanProperty TOP = BooleanProperty.create("top");
+  public static final EnumProperty<SpikedFenceShape> NORTH = EnumProperty.create("north", SpikedFenceShape.class);
+  public static final EnumProperty<SpikedFenceShape> EAST = EnumProperty.create("east", SpikedFenceShape.class);
+  public static final EnumProperty<SpikedFenceShape> SOUTH = EnumProperty.create("south", SpikedFenceShape.class);
+  public static final EnumProperty<SpikedFenceShape> WEST = EnumProperty.create("west", SpikedFenceShape.class);
+  public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+  private static final VoxelShape CENTER_SHAPE = Block.box(7.0, 0.0, 7.0, 9.0, 16.0, 9.0);
+  private static final VoxelShape SIDE_SHAPE = Block.box(7.0, 0.0, 0.0, 9.0, 16.0, 7.0);
   private static final Map<Direction, VoxelShape> SIDE_SHAPES_BY_DIRECTION = VoxelShapeUtil.createHorizontalDirectionShapeMap(SIDE_SHAPE);
-  private static final VoxelShape TALL_CENTER_SHAPE = Block.createCuboidShape(7.0, 0.0, 7.0, 9.0, 24.0, 9.0);
-  private static final VoxelShape TALL_SIDE_SHAPE = Block.createCuboidShape(7.0, 0.0, 0.0, 9.0, 24.0, 7.0);
+  private static final VoxelShape TALL_CENTER_SHAPE = Block.box(7.0, 0.0, 7.0, 9.0, 24.0, 9.0);
+  private static final VoxelShape TALL_SIDE_SHAPE = Block.box(7.0, 0.0, 0.0, 9.0, 24.0, 7.0);
   private static final Map<Direction, VoxelShape> TALL_SIDE_SHAPES_BY_DIRECTION = VoxelShapeUtil.createHorizontalDirectionShapeMap(TALL_SIDE_SHAPE);
 
-  public SpikedFenceBlock(Settings settings) {
+  public SpikedFenceBlock(Properties settings) {
     super(settings);
-    this.setDefaultState(this.getDefaultState()
-        .with(TOP, true)
-        .with(NORTH, SpikedFenceShape.NONE)
-        .with(EAST, SpikedFenceShape.NONE)
-        .with(SOUTH, SpikedFenceShape.NONE)
-        .with(WEST, SpikedFenceShape.NONE)
-        .with(WATERLOGGED, false)
+    this.registerDefaultState(this.defaultBlockState()
+        .setValue(TOP, true)
+        .setValue(NORTH, SpikedFenceShape.NONE)
+        .setValue(EAST, SpikedFenceShape.NONE)
+        .setValue(SOUTH, SpikedFenceShape.NONE)
+        .setValue(WEST, SpikedFenceShape.NONE)
+        .setValue(WATERLOGGED, false)
     );
   }
 
   @Override
-  protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+  protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
     builder.add(TOP, NORTH, EAST, SOUTH, WEST, WATERLOGGED);
   }
 
   @Override
-  public void onLandedUpon(World world, BlockState state, BlockPos pos, Entity entity, double fallDistance) {
+  public void fallOn(Level world, BlockState state, BlockPos pos, Entity entity, double fallDistance) {
     if (
-        state.get(NORTH) != SpikedFenceShape.NONE
-            || state.get(EAST) != SpikedFenceShape.NONE
-            || state.get(SOUTH) != SpikedFenceShape.NONE
-            || state.get(WEST) != SpikedFenceShape.NONE
+        state.getValue(NORTH) != SpikedFenceShape.NONE
+            || state.getValue(EAST) != SpikedFenceShape.NONE
+            || state.getValue(SOUTH) != SpikedFenceShape.NONE
+            || state.getValue(WEST) != SpikedFenceShape.NONE
     ) {
-      entity.handleFallDamage(fallDistance + 2.5, 2.0F, world.getDamageSources().fall());
-    } else super.onLandedUpon(world, state, pos, entity, fallDistance);
+      entity.causeFallDamage(fallDistance + 2.5, 2.0F, world.damageSources().fall());
+    } else super.fallOn(world, state, pos, entity, fallDistance);
   }
 
   @Override
-  protected boolean canPathfindThrough(BlockState state, NavigationType type) {
+  protected boolean isPathfindable(BlockState state, PathComputationType type) {
     return false;
   }
 
   @Override
   protected FluidState getFluidState(BlockState state) {
-    return state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
+    return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
   }
 
   @Override
-  protected boolean isTransparent(BlockState state) {
-    return !state.get(WATERLOGGED);
+  protected boolean propagatesSkylightDown(BlockState state) {
+    return !state.getValue(WATERLOGGED);
   }
 
   @Nullable
   @Override
-  public BlockState getPlacementState(ItemPlacementContext context) {
-    World world = context.getWorld();
-    BlockPos pos = context.getBlockPos();
+  public BlockState getStateForPlacement(BlockPlaceContext context) {
+    Level world = context.getLevel();
+    BlockPos pos = context.getClickedPos();
     return this.updateState(
         world, pos,
-        this.getDefaultState().with(WATERLOGGED, world.getFluidState(pos).getFluid() == Fluids.WATER)
+        this.defaultBlockState().setValue(WATERLOGGED, world.getFluidState(pos).getType() == Fluids.WATER)
     );
   }
 
   @Override
-  protected BlockState getStateForNeighborUpdate(
+  protected BlockState updateShape(
       BlockState state,
-      WorldView world,
-      ScheduledTickView tickView,
+      LevelReader world,
+      ScheduledTickAccess tickView,
       BlockPos pos,
       Direction direction,
       BlockPos neighborPos,
       BlockState neighborState,
-      Random random
+      RandomSource random
   ) {
-    tickView.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+    tickView.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(world));
     return this.updateState(world, pos, state);
   }
 
-  private BlockState updateState(BlockView world, BlockPos pos, BlockState state) {
-    BlockState topState = world.getBlockState(pos.up());
-    VoxelShape topFace = topState.getCollisionShape(world, pos.up()).getFace(Direction.DOWN);
+  private BlockState updateState(BlockGetter world, BlockPos pos, BlockState state) {
+    BlockState topState = world.getBlockState(pos.above());
+    VoxelShape topFace = topState.getCollisionShape(world, pos.above()).getFaceShape(Direction.DOWN);
     return state
-        .with(TOP, !blockedTop(Direction.UP, topFace, topState))
-        .with(NORTH, this.canConnectTo(world, pos, Direction.NORTH) ? (blockedTop(Direction.NORTH, topFace, topState) ? SpikedFenceShape.SIDE : SpikedFenceShape.TOP) : SpikedFenceShape.NONE)
-        .with(EAST, this.canConnectTo(world, pos, Direction.EAST) ? (blockedTop(Direction.EAST, topFace, topState) ? SpikedFenceShape.SIDE : SpikedFenceShape.TOP) : SpikedFenceShape.NONE)
-        .with(SOUTH, this.canConnectTo(world, pos, Direction.SOUTH) ? (blockedTop(Direction.SOUTH, topFace, topState) ? SpikedFenceShape.SIDE : SpikedFenceShape.TOP) : SpikedFenceShape.NONE)
-        .with(WEST, this.canConnectTo(world, pos, Direction.WEST) ? (blockedTop(Direction.WEST, topFace, topState) ? SpikedFenceShape.SIDE : SpikedFenceShape.TOP) : SpikedFenceShape.NONE);
+        .setValue(TOP, !blockedTop(Direction.UP, topFace, topState))
+        .setValue(NORTH, this.canConnectTo(world, pos, Direction.NORTH) ? (blockedTop(Direction.NORTH, topFace, topState) ? SpikedFenceShape.SIDE : SpikedFenceShape.TOP) : SpikedFenceShape.NONE)
+        .setValue(EAST, this.canConnectTo(world, pos, Direction.EAST) ? (blockedTop(Direction.EAST, topFace, topState) ? SpikedFenceShape.SIDE : SpikedFenceShape.TOP) : SpikedFenceShape.NONE)
+        .setValue(SOUTH, this.canConnectTo(world, pos, Direction.SOUTH) ? (blockedTop(Direction.SOUTH, topFace, topState) ? SpikedFenceShape.SIDE : SpikedFenceShape.TOP) : SpikedFenceShape.NONE)
+        .setValue(WEST, this.canConnectTo(world, pos, Direction.WEST) ? (blockedTop(Direction.WEST, topFace, topState) ? SpikedFenceShape.SIDE : SpikedFenceShape.TOP) : SpikedFenceShape.NONE);
   }
 
   private static boolean blockedTop(Direction direction, VoxelShape topFace, BlockState topState) {
-    if (topState.isIn(DistantMoonsBlockTags.SPIKED_FENCE_NOT_BLOCKED_BY)) return false;
+    if (topState.is(DistantMoonsBlockTags.SPIKED_FENCE_NOT_BLOCKED_BY)) return false;
     if (topState.getBlock() instanceof FixedLadderBlock) return FixedLadderBlock.blocksTop(topState, direction);
-    return !VoxelShapes.matchesAnywhere(SIDE_SHAPES_BY_DIRECTION.getOrDefault(direction, CENTER_SHAPE), topFace, BooleanBiFunction.ONLY_FIRST);
+    return !Shapes.joinIsNotEmpty(SIDE_SHAPES_BY_DIRECTION.getOrDefault(direction, CENTER_SHAPE), topFace, BooleanOp.ONLY_FIRST);
   }
 
-  private boolean canConnectTo(BlockView world, BlockPos pos, Direction direction) {
-    BlockState state = world.getBlockState(pos.offset(direction));
-    if (state.isIn(DistantMoonsBlockTags.SPIKED_FENCE_NEVER_CONNECTS_TO)) return false;
-    if (state.isIn(DistantMoonsBlockTags.SPIKED_FENCE_ALWAYS_CONNECTS_TO)) return true;
-    if (state.getBlock() instanceof FenceGateBlock) return FenceGateBlock.canWallConnect(state, direction);
+  private boolean canConnectTo(BlockGetter world, BlockPos pos, Direction direction) {
+    BlockState state = world.getBlockState(pos.relative(direction));
+    if (state.is(DistantMoonsBlockTags.SPIKED_FENCE_NEVER_CONNECTS_TO)) return false;
+    if (state.is(DistantMoonsBlockTags.SPIKED_FENCE_ALWAYS_CONNECTS_TO)) return true;
+    if (state.getBlock() instanceof FenceGateBlock) return FenceGateBlock.connectsToDirection(state, direction);
     if (state.getBlock() instanceof FixedLadderBlock) return FixedLadderBlock.canWallConnect(state, direction);
-    if (state.isSideSolidFullSquare(world, pos.offset(direction), direction.getOpposite())) return true;
+    if (state.isFaceSturdy(world, pos.relative(direction), direction.getOpposite())) return true;
     return false;
   }
 
   @Override
-  protected VoxelShape getCameraCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-    return VoxelShapes.empty();
+  protected VoxelShape getVisualShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+    return Shapes.empty();
   }
 
   @Override
-  protected VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+  protected VoxelShape getCollisionShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
     VoxelShape shape = TALL_CENTER_SHAPE;
-    if (state.get(NORTH) != SpikedFenceShape.NONE) shape = VoxelShapes.union(shape, TALL_SIDE_SHAPES_BY_DIRECTION.get(Direction.NORTH));
-    if (state.get(EAST) != SpikedFenceShape.NONE) shape = VoxelShapes.union(shape, TALL_SIDE_SHAPES_BY_DIRECTION.get(Direction.EAST));
-    if (state.get(SOUTH) != SpikedFenceShape.NONE) shape = VoxelShapes.union(shape, TALL_SIDE_SHAPES_BY_DIRECTION.get(Direction.SOUTH));
-    if (state.get(WEST) != SpikedFenceShape.NONE) shape = VoxelShapes.union(shape, TALL_SIDE_SHAPES_BY_DIRECTION.get(Direction.WEST));
+    if (state.getValue(NORTH) != SpikedFenceShape.NONE) shape = Shapes.or(shape, TALL_SIDE_SHAPES_BY_DIRECTION.get(Direction.NORTH));
+    if (state.getValue(EAST) != SpikedFenceShape.NONE) shape = Shapes.or(shape, TALL_SIDE_SHAPES_BY_DIRECTION.get(Direction.EAST));
+    if (state.getValue(SOUTH) != SpikedFenceShape.NONE) shape = Shapes.or(shape, TALL_SIDE_SHAPES_BY_DIRECTION.get(Direction.SOUTH));
+    if (state.getValue(WEST) != SpikedFenceShape.NONE) shape = Shapes.or(shape, TALL_SIDE_SHAPES_BY_DIRECTION.get(Direction.WEST));
     return shape;
   }
 
   @Override
-  protected VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+  protected VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
     VoxelShape shape = CENTER_SHAPE;
-    if (state.get(NORTH) != SpikedFenceShape.NONE) shape = VoxelShapes.union(shape, SIDE_SHAPES_BY_DIRECTION.get(Direction.NORTH));
-    if (state.get(EAST) != SpikedFenceShape.NONE) shape = VoxelShapes.union(shape, SIDE_SHAPES_BY_DIRECTION.get(Direction.EAST));
-    if (state.get(SOUTH) != SpikedFenceShape.NONE) shape = VoxelShapes.union(shape, SIDE_SHAPES_BY_DIRECTION.get(Direction.SOUTH));
-    if (state.get(WEST) != SpikedFenceShape.NONE) shape = VoxelShapes.union(shape, SIDE_SHAPES_BY_DIRECTION.get(Direction.WEST));
+    if (state.getValue(NORTH) != SpikedFenceShape.NONE) shape = Shapes.or(shape, SIDE_SHAPES_BY_DIRECTION.get(Direction.NORTH));
+    if (state.getValue(EAST) != SpikedFenceShape.NONE) shape = Shapes.or(shape, SIDE_SHAPES_BY_DIRECTION.get(Direction.EAST));
+    if (state.getValue(SOUTH) != SpikedFenceShape.NONE) shape = Shapes.or(shape, SIDE_SHAPES_BY_DIRECTION.get(Direction.SOUTH));
+    if (state.getValue(WEST) != SpikedFenceShape.NONE) shape = Shapes.or(shape, SIDE_SHAPES_BY_DIRECTION.get(Direction.WEST));
     return shape;
   }
 
   @Override
-  protected BlockState rotate(BlockState state, BlockRotation rotation) {
+  protected BlockState rotate(BlockState state, Rotation rotation) {
     return switch (rotation) {
       case NONE -> state;
       case CLOCKWISE_90 -> state
-          .with(NORTH, state.get(WEST))
-          .with(EAST, state.get(NORTH))
-          .with(SOUTH, state.get(EAST))
-          .with(WEST, state.get(SOUTH));
+          .setValue(NORTH, state.getValue(WEST))
+          .setValue(EAST, state.getValue(NORTH))
+          .setValue(SOUTH, state.getValue(EAST))
+          .setValue(WEST, state.getValue(SOUTH));
       case CLOCKWISE_180 -> state
-          .with(NORTH, state.get(SOUTH))
-          .with(EAST, state.get(WEST))
-          .with(SOUTH, state.get(NORTH))
-          .with(WEST, state.get(EAST));
+          .setValue(NORTH, state.getValue(SOUTH))
+          .setValue(EAST, state.getValue(WEST))
+          .setValue(SOUTH, state.getValue(NORTH))
+          .setValue(WEST, state.getValue(EAST));
       case COUNTERCLOCKWISE_90 -> state
-          .with(NORTH, state.get(EAST))
-          .with(EAST, state.get(SOUTH))
-          .with(SOUTH, state.get(WEST))
-          .with(WEST, state.get(NORTH));
+          .setValue(NORTH, state.getValue(EAST))
+          .setValue(EAST, state.getValue(SOUTH))
+          .setValue(SOUTH, state.getValue(WEST))
+          .setValue(WEST, state.getValue(NORTH));
     };
   }
 
   @Override
-  protected BlockState mirror(BlockState state, BlockMirror mirror) {
+  protected BlockState mirror(BlockState state, Mirror mirror) {
     return switch (mirror) {
       case NONE -> state;
       case LEFT_RIGHT -> state
-          .with(NORTH, state.get(SOUTH))
-          .with(SOUTH, state.get(NORTH));
+          .setValue(NORTH, state.getValue(SOUTH))
+          .setValue(SOUTH, state.getValue(NORTH));
       case FRONT_BACK -> state
-          .with(EAST, state.get(WEST))
-          .with(WEST, state.get(EAST));
+          .setValue(EAST, state.getValue(WEST))
+          .setValue(WEST, state.getValue(EAST));
     };
   }
 }

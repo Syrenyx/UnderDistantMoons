@@ -2,20 +2,19 @@ package syrenyx.distantmoons.content.affliction.effect;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.loot.condition.LootCondition;
-import net.minecraft.loot.context.LootContext;
-import net.minecraft.util.context.ContextType;
-
 import java.util.Optional;
+import net.minecraft.util.context.ContextKeySet;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 
 public record ProgressionThresholdAfflictionEffectEntry<T>(
     T effect,
-    Optional<LootCondition> requirements,
+    Optional<LootItemCondition> requirements,
     int threshold,
     ProgressionThresholdPassingType type
 ) {
 
-  public static <T> Codec<ProgressionThresholdAfflictionEffectEntry<T>> createCodec(Codec<T> effectCodec, ContextType lootContextType) {
+  public static <T> Codec<ProgressionThresholdAfflictionEffectEntry<T>> createCodec(Codec<T> effectCodec, ContextKeySet lootContextType) {
     return RecordCodecBuilder.create(instance -> instance
         .group(
             effectCodec.fieldOf("effect").forGetter(ProgressionThresholdAfflictionEffectEntry::effect),

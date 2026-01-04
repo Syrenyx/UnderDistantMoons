@@ -2,8 +2,8 @@ package syrenyx.distantmoons.datagen.lang;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
-import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.util.DyeColor;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.world.item.DyeColor;
 import syrenyx.distantmoons.initializers.DistantMoonsBlocks;
 import syrenyx.distantmoons.initializers.DistantMoonsEntityTypes;
 import syrenyx.distantmoons.initializers.DistantMoonsItems;
@@ -69,12 +69,12 @@ public class de_de extends FabricLanguageProvider {
       Map.entry(DyeColor.PINK, "Rosa")
   );
 
-  public de_de(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
+  public de_de(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
     super(dataOutput, "de_de", registryLookup);
   }
 
   @Override
-  public void generateTranslations(RegistryWrapper.WrapperLookup wrapperLookup, TranslationBuilder builder) {
+  public void generateTranslations(HolderLookup.Provider wrapperLookup, TranslationBuilder builder) {
 
     LangHelper helper = new LangHelper(builder);
 

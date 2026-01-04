@@ -2,12 +2,11 @@ package syrenyx.distantmoons.content.data_component;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.block.Block;
-import net.minecraft.registry.Registries;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.Direction;
-
 import java.util.Optional;
+import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.level.block.Block;
 
 public record CoiledBlockComponent(
     Optional<Identifier> block,
@@ -36,7 +35,7 @@ public record CoiledBlockComponent(
     private Direction direction = DEFAULT_DIRECTION;
 
     public Builder block(Block block) {
-      this.block = Optional.of(Registries.BLOCK.getId(block));
+      this.block = Optional.of(BuiltInRegistries.BLOCK.getKey(block));
       return this;
     }
 

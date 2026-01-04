@@ -1,37 +1,37 @@
 package syrenyx.distantmoons.content.loot.entry;
 
 import com.mojang.serialization.Codec;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.util.StringIdentifiable;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.StringRepresentable;
 
-public enum StringIdentifiableSoundCategory implements StringIdentifiable {
-  MASTER("master", SoundCategory.MASTER),
-  MUSIC("music", SoundCategory.MUSIC),
-  RECORDS("record", SoundCategory.RECORDS),
-  WEATHER("weather", SoundCategory.WEATHER),
-  BLOCKS("block", SoundCategory.BLOCKS),
-  HOSTILE("hostile", SoundCategory.HOSTILE),
-  NEUTRAL("neutral", SoundCategory.NEUTRAL),
-  PLAYERS("player", SoundCategory.PLAYERS),
-  AMBIENT("ambient", SoundCategory.AMBIENT),
-  VOICE("voice", SoundCategory.VOICE),
-  UI("ui", SoundCategory.UI);
+public enum StringIdentifiableSoundCategory implements StringRepresentable {
+  MASTER("master", SoundSource.MASTER),
+  MUSIC("music", SoundSource.MUSIC),
+  RECORDS("record", SoundSource.RECORDS),
+  WEATHER("weather", SoundSource.WEATHER),
+  BLOCKS("block", SoundSource.BLOCKS),
+  HOSTILE("hostile", SoundSource.HOSTILE),
+  NEUTRAL("neutral", SoundSource.NEUTRAL),
+  PLAYERS("player", SoundSource.PLAYERS),
+  AMBIENT("ambient", SoundSource.AMBIENT),
+  VOICE("voice", SoundSource.VOICE),
+  UI("ui", SoundSource.UI);
 
-  public static final Codec<StringIdentifiableSoundCategory> CODEC = StringIdentifiable.createCodec(StringIdentifiableSoundCategory::values);
+  public static final Codec<StringIdentifiableSoundCategory> CODEC = StringRepresentable.fromEnum(StringIdentifiableSoundCategory::values);
   private final String id;
-  public final SoundCategory category;
+  public final SoundSource category;
 
-  StringIdentifiableSoundCategory(final String id, SoundCategory category) {
+  StringIdentifiableSoundCategory(final String id, SoundSource category) {
     this.id = id;
     this.category = category;
   }
 
   @Override
-  public String asString() {
+  public String getSerializedName() {
     return this.id;
   }
 
-  public static StringIdentifiableSoundCategory get(SoundCategory category) {
+  public static StringIdentifiableSoundCategory get(SoundSource category) {
     return switch (category) {
       case MASTER -> MASTER;
       case MUSIC -> MUSIC;

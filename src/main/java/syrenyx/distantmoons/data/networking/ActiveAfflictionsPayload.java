@@ -1,23 +1,23 @@
 package syrenyx.distantmoons.data.networking;
 
-import net.minecraft.network.RegistryByteBuf;
-import net.minecraft.network.codec.PacketCodec;
-import net.minecraft.network.codec.PacketCodecs;
-import net.minecraft.network.packet.CustomPayload;
 import syrenyx.distantmoons.UnderDistantMoons;
 
 import java.util.List;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 
-public record ActiveAfflictionsPayload(List<AfflictionPacket> afflictions) implements CustomPayload {
+public record ActiveAfflictionsPayload(List<AfflictionPacket> afflictions) implements CustomPacketPayload {
 
-  public static final Id<ActiveAfflictionsPayload> ID = new Id<>(UnderDistantMoons.identifierOf("active_afflictions_payload"));
-  public static final PacketCodec<RegistryByteBuf, ActiveAfflictionsPayload> CODEC = PacketCodec.tuple(
-      AfflictionPacket.PACKET_CODEC.collect(PacketCodecs.toList()), ActiveAfflictionsPayload::afflictions,
+  public static final Type<ActiveAfflictionsPayload> ID = new Type<>(UnderDistantMoons.identifierOf("active_afflictions_payload"));
+  public static final StreamCodec<RegistryFriendlyByteBuf, ActiveAfflictionsPayload> CODEC = StreamCodec.composite(
+      AfflictionPacket.PACKET_CODEC.apply(ByteBufCodecs.list()), ActiveAfflictionsPayload::afflictions,
       ActiveAfflictionsPayload::new
   );
 
   @Override
-  public Id<? extends CustomPayload> getId() {
+  public Type<? extends CustomPacketPayload> type() {
     return ID;
   }
 }

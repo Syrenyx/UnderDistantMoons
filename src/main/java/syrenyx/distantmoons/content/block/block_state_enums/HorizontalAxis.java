@@ -1,10 +1,10 @@
 package syrenyx.distantmoons.content.block.block_state_enums;
 
-import net.minecraft.util.StringIdentifiable;
-import net.minecraft.util.math.Direction;
+import net.minecraft.core.Direction;
+import net.minecraft.util.StringRepresentable;
 import org.jetbrains.annotations.Nullable;
 
-public enum HorizontalAxis implements StringIdentifiable {
+public enum HorizontalAxis implements StringRepresentable {
   X("x"),
   Z("z");
 
@@ -15,7 +15,7 @@ public enum HorizontalAxis implements StringIdentifiable {
   }
 
   @Override
-  public String asString() {
+  public String getSerializedName() {
     return this.id;
   }
 

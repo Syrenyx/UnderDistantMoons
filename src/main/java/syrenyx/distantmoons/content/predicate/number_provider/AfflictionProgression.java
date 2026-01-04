@@ -1,13 +1,13 @@
 package syrenyx.distantmoons.content.predicate.number_provider;
 
 import com.mojang.serialization.MapCodec;
-import net.minecraft.loot.context.LootContext;
-import net.minecraft.loot.provider.number.LootNumberProvider;
-import net.minecraft.loot.provider.number.LootNumberProviderType;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.providers.number.LootNumberProviderType;
+import net.minecraft.world.level.storage.loot.providers.number.NumberProvider;
 import syrenyx.distantmoons.initializers.DistantMoonsLootNumberProviders;
 import syrenyx.distantmoons.references.DistantMoonsLootContextParameters;
 
-public record AfflictionProgression() implements LootNumberProvider {
+public record AfflictionProgression() implements NumberProvider {
 
   public static final MapCodec<AfflictionProgression> CODEC = MapCodec.unit(AfflictionProgression::new);
 
@@ -17,7 +17,7 @@ public record AfflictionProgression() implements LootNumberProvider {
   }
 
   @Override
-  public float nextFloat(LootContext context) {
-    return context.getOrThrow(DistantMoonsLootContextParameters.AFFLICTION_PROGRESSION);
+  public float getFloat(LootContext context) {
+    return context.getParameter(DistantMoonsLootContextParameters.AFFLICTION_PROGRESSION);
   }
 }

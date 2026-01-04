@@ -2,14 +2,14 @@ package syrenyx.distantmoons.content.affliction.effect.value;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.enchantment.EnchantmentLevelBasedValue;
-import net.minecraft.util.math.random.Random;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.item.enchantment.LevelBasedValue;
 
-public record AddEffect(EnchantmentLevelBasedValue value) implements AfflictionValueEffect {
+public record AddEffect(LevelBasedValue value) implements AfflictionValueEffect {
 
   public static final MapCodec<AddEffect> CODEC = RecordCodecBuilder.mapCodec(instance -> instance
       .group(
-          EnchantmentLevelBasedValue.CODEC.fieldOf("value").forGetter(AddEffect::value)
+          LevelBasedValue.CODEC.fieldOf("value").forGetter(AddEffect::value)
       )
       .apply(instance, AddEffect::new)
   );
@@ -20,7 +20,7 @@ public record AddEffect(EnchantmentLevelBasedValue value) implements AfflictionV
   }
 
   @Override
-  public float apply(int stage, Random random, float input) {
-    return this.value.getValue(stage) + input;
+  public float apply(int stage, RandomSource random, float input) {
+    return this.value.calculate(stage) + input;
   }
 }

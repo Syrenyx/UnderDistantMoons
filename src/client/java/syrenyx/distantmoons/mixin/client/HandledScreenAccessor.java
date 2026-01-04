@@ -1,13 +1,13 @@
 package syrenyx.distantmoons.mixin.client;
 
-import net.minecraft.client.gui.screen.ingame.HandledScreen;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
-@Mixin(HandledScreen.class)
+@Mixin(AbstractContainerScreen.class)
 public interface HandledScreenAccessor {
 
-  @Accessor("backgroundWidth") int backgroundWidth();
-  @Accessor("x") int x();
-  @Accessor("y") int y();
+  @Accessor("imageWidth") int backgroundWidth();
+  @Accessor("leftPos") int x();
+  @Accessor("topPos") int y();
 }

@@ -2,16 +2,16 @@ package syrenyx.distantmoons.content.worldgen.feature;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.block.Block;
-import net.minecraft.registry.Registries;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.StructureWorldAccess;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.FeatureConfig;
-import net.minecraft.world.gen.feature.util.FeatureContext;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
+import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
+import net.minecraft.world.phys.Vec3;
 import syrenyx.distantmoons.utility.RandomUtil;
 import syrenyx.distantmoons.utility.VectorUtil;
 
@@ -29,48 +29,48 @@ public class BranchingOreVeinFeature extends Feature<BranchingOreVeinFeature.Con
   }
 
   @Override
-  public boolean generate(FeatureContext<Config> context) {
-    Vec3d initialVector = VectorUtil.randomPointOnSphere(context.getRandom(), BRANCH_DISTANCE);
-    generateBranch(0, context.getOrigin().mutableCopy().add(VectorUtil.toVec3i(initialVector)), initialVector, context);
-    generateBranch(0, context.getOrigin().mutableCopy(), initialVector.multiply(-1.0), context);
+  public boolean place(FeaturePlaceContext<Config> context) {
+    Vec3 initialVector = VectorUtil.randomPointOnSphere(context.random(), BRANCH_DISTANCE);
+    generateBranch(0, context.origin().mutable().offset(VectorUtil.toVec3i(initialVector)), initialVector, context);
+    generateBranch(0, context.origin().mutable(), initialVector.scale(-1.0), context);
     return true;
   }
 
-  private void generateBranch(int depth, BlockPos pos, Vec3d branchVector, FeatureContext<Config> context) {
+  private void generateBranch(int depth, BlockPos pos, Vec3 branchVector, FeaturePlaceContext<Config> context) {
     if (depth >= MAX_DEPTH) return;
-    Random random = context.getRandom();
+    RandomSource random = context.random();
     generateBlob(pos, RandomUtil.nextFloatBetween(MIN_BLOB_RADIUS, MAX_BLOB_RADIUS, random), context);
     if (depth < MAX_DEPTH - 1 && random.nextFloat() <= BRANCH_CHANCE) {
-      Vec3d newBranchVector = VectorUtil.randomCrossProductVector(random, branchVector, branchVector.length());
+      Vec3 newBranchVector = VectorUtil.randomCrossProductVector(random, branchVector, branchVector.length());
       generateBranch(
           Math.min(depth * 2, MAX_DEPTH - 1),
-          pos.mutableCopy().add(VectorUtil.toVec3i(newBranchVector)),
-          VectorUtil.randomOffsetVector(random, newBranchVector, random.nextBetween(0, MAX_OFFSET)),
+          pos.mutable().offset(VectorUtil.toVec3i(newBranchVector)),
+          VectorUtil.randomOffsetVector(random, newBranchVector, random.nextIntBetweenInclusive(0, MAX_OFFSET)),
           context
       );
     }
     generateBranch(
         depth + 1,
-        pos.add(VectorUtil.toVec3i(branchVector)),
-        VectorUtil.randomOffsetVector(random, branchVector, random.nextBetween(0, MAX_OFFSET)),
+        pos.offset(VectorUtil.toVec3i(branchVector)),
+        VectorUtil.randomOffsetVector(random, branchVector, random.nextIntBetweenInclusive(0, MAX_OFFSET)),
         context
     );
   }
 
-  private void generateBlob(BlockPos pos, float radius, FeatureContext<Config> context) {
-    StructureWorldAccess world = context.getWorld();
-    Config config = context.getConfig();
+  private void generateBlob(BlockPos pos, float radius, FeaturePlaceContext<Config> context) {
+    WorldGenLevel world = context.level();
+    Config config = context.config();
     int weightSum = config.oreWeight() + config.rawOreBlockWeight() + config.stoneWeight();
-    int iterationRadius = MathHelper.ceil(radius);
-    BlockPos.iterate(
+    int iterationRadius = Mth.ceil(radius);
+    BlockPos.betweenClosed(
         pos.getX() - iterationRadius, pos.getY() - iterationRadius, pos.getZ() - iterationRadius,
         pos.getX() + iterationRadius, pos.getY() + iterationRadius, pos.getZ() + iterationRadius
     ).forEach(iteratedPos -> {
-      if (!iteratedPos.isWithinDistance(pos, radius)) return;
-      int weight = context.getRandom().nextBetween(1, weightSum);
-      if (weight <= config.oreWeight()) world.setBlockState(iteratedPos, context.getConfig().ore().getDefaultState(), Block.NOTIFY_LISTENERS);
-      else if (weight <= config.rawOreBlockWeight() + config.oreWeight()) world.setBlockState(iteratedPos, context.getConfig().rawOreBlock().getDefaultState(), Block.NOTIFY_LISTENERS);
-      else world.setBlockState(iteratedPos, context.getConfig().stone().getDefaultState(), Block.NOTIFY_LISTENERS);
+      if (!iteratedPos.closerThan(pos, radius)) return;
+      int weight = context.random().nextIntBetweenInclusive(1, weightSum);
+      if (weight <= config.oreWeight()) world.setBlock(iteratedPos, context.config().ore().defaultBlockState(), Block.UPDATE_CLIENTS);
+      else if (weight <= config.rawOreBlockWeight() + config.oreWeight()) world.setBlock(iteratedPos, context.config().rawOreBlock().defaultBlockState(), Block.UPDATE_CLIENTS);
+      else world.setBlock(iteratedPos, context.config().stone().defaultBlockState(), Block.UPDATE_CLIENTS);
     });
   }
 
@@ -81,7 +81,7 @@ public class BranchingOreVeinFeature extends Feature<BranchingOreVeinFeature.Con
       int oreWeight,
       int rawOreBlockWeight,
       int stoneWeight
-  ) implements FeatureConfig {
+  ) implements FeatureConfiguration {
 
     private static final int DEFAULT_ORE_WEIGHT = 4;
     private static final int DEFAULT_RAW_ORE_BLOCK_WEIGHT = 1;
@@ -89,9 +89,9 @@ public class BranchingOreVeinFeature extends Feature<BranchingOreVeinFeature.Con
 
     public static final Codec<Config> CODEC = RecordCodecBuilder.create(instance -> instance
         .group(
-            Registries.BLOCK.getCodec().fieldOf("ore").forGetter(Config::ore),
-            Registries.BLOCK.getCodec().fieldOf("raw_ore_block").forGetter(Config::rawOreBlock),
-            Registries.BLOCK.getCodec().fieldOf("stone").forGetter(Config::stone),
+            BuiltInRegistries.BLOCK.byNameCodec().fieldOf("ore").forGetter(Config::ore),
+            BuiltInRegistries.BLOCK.byNameCodec().fieldOf("raw_ore_block").forGetter(Config::rawOreBlock),
+            BuiltInRegistries.BLOCK.byNameCodec().fieldOf("stone").forGetter(Config::stone),
             Codec.INT.optionalFieldOf("ore_weight", DEFAULT_ORE_WEIGHT).forGetter(Config::oreWeight),
             Codec.INT.optionalFieldOf("raw_ore_block_weight", DEFAULT_RAW_ORE_BLOCK_WEIGHT).forGetter(Config::rawOreBlockWeight),
             Codec.INT.optionalFieldOf("stone_weight", DEFAULT_STONE_WEIGHT).forGetter(Config::stoneWeight)

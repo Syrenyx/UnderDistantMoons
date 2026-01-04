@@ -1,13 +1,13 @@
 package syrenyx.distantmoons.content.loot.entry;
 
 import com.mojang.serialization.Codec;
-import net.minecraft.entity.Entity;
-import net.minecraft.loot.context.LootContext;
-import net.minecraft.loot.context.LootContextParameters;
-import net.minecraft.util.StringIdentifiable;
+import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import org.jetbrains.annotations.Nullable;
 
-public enum EffectPoolEntryTarget implements StringIdentifiable {
+public enum EffectPoolEntryTarget implements StringRepresentable {
   ATTACKER("attacker"),
   ATTACKING_PLAYER("attacking_player"),
   DIRECT_ATTACHER("direct_attacker"),
@@ -15,7 +15,7 @@ public enum EffectPoolEntryTarget implements StringIdentifiable {
   TARGET_ENTITY("target_entity"),
   THIS("this");
 
-  public static final Codec<EffectPoolEntryTarget> CODEC = StringIdentifiable.createCodec(EffectPoolEntryTarget::values);
+  public static final Codec<EffectPoolEntryTarget> CODEC = StringRepresentable.fromEnum(EffectPoolEntryTarget::values);
   private final String id;
 
   <T extends Entity> EffectPoolEntryTarget(final String id) {
@@ -23,19 +23,19 @@ public enum EffectPoolEntryTarget implements StringIdentifiable {
   }
 
   @Override
-  public String asString() {
+  public String getSerializedName() {
     return this.id;
   }
 
   @Nullable
   public Entity tryGettingEntityFromContext(LootContext context) {
     return switch (this) {
-      case ATTACKER -> context.get(LootContextParameters.ATTACKING_ENTITY);
-      case ATTACKING_PLAYER -> context.get(LootContextParameters.LAST_DAMAGE_PLAYER);
-      case DIRECT_ATTACHER -> context.get(LootContextParameters.DIRECT_ATTACKING_ENTITY);
-      case INTERACTING_ENTITY -> context.get(LootContextParameters.INTERACTING_ENTITY);
-      case TARGET_ENTITY -> context.get(LootContextParameters.TARGET_ENTITY);
-      case THIS -> context.get(LootContextParameters.THIS_ENTITY);
+      case ATTACKER -> context.getOptionalParameter(LootContextParams.ATTACKING_ENTITY);
+      case ATTACKING_PLAYER -> context.getOptionalParameter(LootContextParams.LAST_DAMAGE_PLAYER);
+      case DIRECT_ATTACHER -> context.getOptionalParameter(LootContextParams.DIRECT_ATTACKING_ENTITY);
+      case INTERACTING_ENTITY -> context.getOptionalParameter(LootContextParams.INTERACTING_ENTITY);
+      case TARGET_ENTITY -> context.getOptionalParameter(LootContextParams.TARGET_ENTITY);
+      case THIS -> context.getOptionalParameter(LootContextParams.THIS_ENTITY);
     };
   }
 }

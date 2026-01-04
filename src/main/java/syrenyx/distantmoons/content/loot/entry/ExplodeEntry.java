@@ -3,31 +3,6 @@ package syrenyx.distantmoons.content.loot.entry;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.damage.DamageType;
-import net.minecraft.item.ItemStack;
-import net.minecraft.loot.LootChoice;
-import net.minecraft.loot.condition.LootCondition;
-import net.minecraft.loot.context.LootContext;
-import net.minecraft.loot.context.LootContextParameters;
-import net.minecraft.loot.entry.LeafEntry;
-import net.minecraft.loot.entry.LootPoolEntryType;
-import net.minecraft.loot.provider.number.LootNumberProvider;
-import net.minecraft.loot.provider.number.LootNumberProviderTypes;
-import net.minecraft.particle.BlockParticleEffect;
-import net.minecraft.particle.ParticleEffect;
-import net.minecraft.particle.ParticleTypes;
-import net.minecraft.registry.RegistryCodecs;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.registry.entry.RegistryEntryList;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.util.collection.Pool;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.World;
-import net.minecraft.world.explosion.AdvancedExplosionBehavior;
 import org.jetbrains.annotations.Nullable;
 import syrenyx.distantmoons.initializers.DistantMoonsLootPoolEntryTypes;
 
@@ -35,58 +10,83 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderSet;
+import net.minecraft.core.RegistryCodecs;
+import net.minecraft.core.particles.ExplosionParticleInfo;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.util.random.WeightedList;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageType;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.SimpleExplosionDamageCalculator;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.entries.LootPoolEntry;
+import net.minecraft.world.level.storage.loot.entries.LootPoolEntryType;
+import net.minecraft.world.level.storage.loot.entries.LootPoolSingletonContainer;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
+import net.minecraft.world.level.storage.loot.providers.number.NumberProvider;
+import net.minecraft.world.level.storage.loot.providers.number.NumberProviders;
+import net.minecraft.world.phys.Vec3;
 
-public class ExplodeEntry extends LeafEntry {
+public class ExplodeEntry extends LootPoolSingletonContainer {
 
   public static final MapCodec<ExplodeEntry> CODEC = RecordCodecBuilder.mapCodec(instance -> instance
       .group(
-          DamageType.ENTRY_CODEC.optionalFieldOf("damage_type").forGetter(entry -> entry.damageType),
-          LootNumberProviderTypes.CODEC.optionalFieldOf("knockback_multiplier").forGetter(entry -> entry.knockbackMultiplier),
-          RegistryCodecs.entryList(RegistryKeys.BLOCK).optionalFieldOf("immune_blocks").forGetter(entry -> entry.immuneBlocks),
-          Vec3d.CODEC.optionalFieldOf("offset", Vec3d.ZERO).forGetter(entry -> entry.offset),
-          LootNumberProviderTypes.CODEC.fieldOf("radius").forGetter(entry -> entry.radius),
+          DamageType.CODEC.optionalFieldOf("damage_type").forGetter(entry -> entry.damageType),
+          NumberProviders.CODEC.optionalFieldOf("knockback_multiplier").forGetter(entry -> entry.knockbackMultiplier),
+          RegistryCodecs.homogeneousList(Registries.BLOCK).optionalFieldOf("immune_blocks").forGetter(entry -> entry.immuneBlocks),
+          Vec3.CODEC.optionalFieldOf("offset", Vec3.ZERO).forGetter(entry -> entry.offset),
+          NumberProviders.CODEC.fieldOf("radius").forGetter(entry -> entry.radius),
           Codec.BOOL.optionalFieldOf("create_fire", false).forGetter(entry -> entry.createFire),
-          World.ExplosionSourceType.CODEC.fieldOf("block_interaction").forGetter(entry -> entry.blockInteraction),
-          ParticleTypes.TYPE_CODEC.fieldOf("small_particle").forGetter(entry -> entry.smallParticle),
-          ParticleTypes.TYPE_CODEC.fieldOf("large_particle").forGetter(entry -> entry.largeParticle),
-          Pool.createCodec(BlockParticleEffect.CODEC).optionalFieldOf("block_particles", Pool.empty()).forGetter(entry -> entry.blockParticles),
-          SoundEvent.ENTRY_CODEC.fieldOf("sound").forGetter(entry -> entry.sound),
+          Level.ExplosionInteraction.CODEC.fieldOf("block_interaction").forGetter(entry -> entry.blockInteraction),
+          ParticleTypes.CODEC.fieldOf("small_particle").forGetter(entry -> entry.smallParticle),
+          ParticleTypes.CODEC.fieldOf("large_particle").forGetter(entry -> entry.largeParticle),
+          WeightedList.codec(ExplosionParticleInfo.CODEC).optionalFieldOf("block_particles", WeightedList.of()).forGetter(entry -> entry.blockParticles),
+          SoundEvent.CODEC.fieldOf("sound").forGetter(entry -> entry.sound),
           OptionalEffectPoolEntryTarget.CODEC.optionalFieldOf("user", OptionalEffectPoolEntryTarget.NONE).forGetter(entry -> entry.user),
-          Codec.INT.optionalFieldOf("weight", LeafEntry.DEFAULT_WEIGHT).forGetter(entry -> entry.weight),
-          Codec.INT.optionalFieldOf("quality", LeafEntry.DEFAULT_QUALITY).forGetter(entry -> entry.quality),
-          LootCondition.CODEC.listOf().optionalFieldOf("conditions", List.of()).forGetter(entry -> entry.conditions)
+          Codec.INT.optionalFieldOf("weight", LootPoolSingletonContainer.DEFAULT_WEIGHT).forGetter(entry -> entry.weight),
+          Codec.INT.optionalFieldOf("quality", LootPoolSingletonContainer.DEFAULT_QUALITY).forGetter(entry -> entry.quality),
+          LootItemCondition.DIRECT_CODEC.listOf().optionalFieldOf("conditions", List.of()).forGetter(entry -> entry.conditions)
       )
       .apply(instance, ExplodeEntry::new)
   );
-  protected final Optional<RegistryEntry<DamageType>> damageType;
-  protected final Optional<LootNumberProvider> knockbackMultiplier;
-  protected final Optional<RegistryEntryList<Block>> immuneBlocks;
-  protected final Vec3d offset;
-  protected final LootNumberProvider radius;
+  protected final Optional<Holder<DamageType>> damageType;
+  protected final Optional<NumberProvider> knockbackMultiplier;
+  protected final Optional<HolderSet<Block>> immuneBlocks;
+  protected final Vec3 offset;
+  protected final NumberProvider radius;
   protected final boolean createFire;
-  protected final World.ExplosionSourceType blockInteraction;
-  protected final ParticleEffect smallParticle;
-  protected final ParticleEffect largeParticle;
-  protected final Pool<BlockParticleEffect> blockParticles;
-  protected final RegistryEntry<SoundEvent> sound;
+  protected final Level.ExplosionInteraction blockInteraction;
+  protected final ParticleOptions smallParticle;
+  protected final ParticleOptions largeParticle;
+  protected final WeightedList<ExplosionParticleInfo> blockParticles;
+  protected final Holder<SoundEvent> sound;
   protected final OptionalEffectPoolEntryTarget user;
 
   protected ExplodeEntry(
-      Optional<RegistryEntry<DamageType>> damageType,
-      Optional<LootNumberProvider> knockbackMultiplier,
-      Optional<RegistryEntryList<Block>> immuneBlocks,
-      Vec3d offset,
-      LootNumberProvider radius,
+      Optional<Holder<DamageType>> damageType,
+      Optional<NumberProvider> knockbackMultiplier,
+      Optional<HolderSet<Block>> immuneBlocks,
+      Vec3 offset,
+      NumberProvider radius,
       boolean createFire,
-      World.ExplosionSourceType blockInteraction,
-      ParticleEffect smallParticle,
-      ParticleEffect largeParticle,
-      Pool<BlockParticleEffect> blockParticles,
-      RegistryEntry<SoundEvent> sound,
+      Level.ExplosionInteraction blockInteraction,
+      ParticleOptions smallParticle,
+      ParticleOptions largeParticle,
+      WeightedList<ExplosionParticleInfo> blockParticles,
+      Holder<SoundEvent> sound,
       OptionalEffectPoolEntryTarget user,
       int weight,
       int quality,
-      List<LootCondition> conditions
+      List<LootItemCondition> conditions
   ) {
     super(weight, quality, conditions, Collections.emptyList());
     this.damageType = damageType;
@@ -109,23 +109,23 @@ public class ExplodeEntry extends LeafEntry {
   }
 
   @Override
-  public boolean expand(LootContext context, Consumer<LootChoice> consumer) {
-    if (!this.test(context)) return false;
-    Vec3d pos = context.get(LootContextParameters.ORIGIN);
+  public boolean expand(LootContext context, Consumer<LootPoolEntry> consumer) {
+    if (!this.canRun(context)) return false;
+    Vec3 pos = context.getOptionalParameter(LootContextParams.ORIGIN);
     if (pos == null) return true;
-    Vec3d offsetPosition = pos.add(this.offset);
+    Vec3 offsetPosition = pos.add(this.offset);
     Entity entity = this.user.tryGettingEntityFromContext(context);
-    context.getWorld().createExplosion(
+    context.getLevel().explode(
         entity,
         this.getDamageSource(entity, offsetPosition),
-        new AdvancedExplosionBehavior(
-            this.blockInteraction != World.ExplosionSourceType.NONE,
+        new SimpleExplosionDamageCalculator(
+            this.blockInteraction != Level.ExplosionInteraction.NONE,
             this.damageType.isPresent(),
-            this.knockbackMultiplier.map(knockbackMultiplier -> knockbackMultiplier.nextFloat(context)),
+            this.knockbackMultiplier.map(knockbackMultiplier -> knockbackMultiplier.getFloat(context)),
             this.immuneBlocks
         ),
-        offsetPosition.getX(), offsetPosition.getY(), offsetPosition.getZ(),
-        Math.max(this.radius.nextFloat(context), 0.0F),
+        offsetPosition.x(), offsetPosition.y(), offsetPosition.z(),
+        Math.max(this.radius.getFloat(context), 0.0F),
         this.createFire,
         this.blockInteraction,
         this.smallParticle,
@@ -137,7 +137,7 @@ public class ExplodeEntry extends LeafEntry {
   }
 
   @Nullable
-  private DamageSource getDamageSource(Entity user, Vec3d pos) {
+  private DamageSource getDamageSource(Entity user, Vec3 pos) {
     return this.damageType.map(damageTypeRegistryEntry -> user != null
         ? new DamageSource(damageTypeRegistryEntry, user)
         : new DamageSource(damageTypeRegistryEntry, pos)
@@ -145,5 +145,5 @@ public class ExplodeEntry extends LeafEntry {
   }
 
   @Override
-  protected void generateLoot(Consumer<ItemStack> lootConsumer, LootContext context) {}
+  protected void createItemStack(Consumer<ItemStack> lootConsumer, LootContext context) {}
 }

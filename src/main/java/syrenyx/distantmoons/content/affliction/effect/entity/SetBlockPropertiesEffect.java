@@ -2,28 +2,27 @@ package syrenyx.distantmoons.content.affliction.effect.entity;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.component.type.BlockStateComponent;
-import net.minecraft.entity.Entity;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.math.Vec3i;
-import net.minecraft.world.event.GameEvent;
-
 import java.util.Optional;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
+import net.minecraft.core.Vec3i;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.component.BlockItemStateProperties;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.phys.Vec3;
 
 public record SetBlockPropertiesEffect(
-    BlockStateComponent properties,
+    BlockItemStateProperties properties,
     Vec3i offset,
-    Optional<RegistryEntry<GameEvent>> triggerGameEvent
+    Optional<Holder<GameEvent>> triggerGameEvent
 ) implements AfflictionEntityEffect {
 
   public static final MapCodec<SetBlockPropertiesEffect> CODEC = RecordCodecBuilder.mapCodec(instance -> instance
       .group(
-          BlockStateComponent.CODEC.fieldOf("properties").forGetter(SetBlockPropertiesEffect::properties),
+          BlockItemStateProperties.CODEC.fieldOf("properties").forGetter(SetBlockPropertiesEffect::properties),
           Vec3i.CODEC.optionalFieldOf("offset", Vec3i.ZERO).forGetter(SetBlockPropertiesEffect::offset),
           GameEvent.CODEC.optionalFieldOf("trigger_game_event").forGetter(SetBlockPropertiesEffect::triggerGameEvent)
       )
@@ -36,12 +35,12 @@ public record SetBlockPropertiesEffect(
   }
 
   @Override
-  public void apply(ServerWorld world, int stage, Entity target, Vec3d pos) {
-    BlockPos blockPos = BlockPos.ofFloored(pos).add(this.offset);
-    BlockState originalBlockState = target.getEntityWorld().getBlockState(blockPos);
-    BlockState newBlockState = this.properties.applyToState(originalBlockState);
-    if (originalBlockState != newBlockState && target.getEntityWorld().setBlockState(blockPos, newBlockState, Block.NOTIFY_ALL)) {
-      this.triggerGameEvent.ifPresent(gameEvent -> world.emitGameEvent(target, gameEvent, blockPos));
+  public void apply(ServerLevel world, int stage, Entity target, Vec3 pos) {
+    BlockPos blockPos = BlockPos.containing(pos).offset(this.offset);
+    BlockState originalBlockState = target.level().getBlockState(blockPos);
+    BlockState newBlockState = this.properties.apply(originalBlockState);
+    if (originalBlockState != newBlockState && target.level().setBlock(blockPos, newBlockState, Block.UPDATE_ALL)) {
+      this.triggerGameEvent.ifPresent(gameEvent -> world.gameEvent(target, gameEvent, blockPos));
     }
   }
 }

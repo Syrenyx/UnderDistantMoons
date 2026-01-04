@@ -2,10 +2,9 @@ package syrenyx.distantmoons.content.affliction;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.util.Identifier;
-
 import java.util.Map;
 import java.util.Optional;
+import net.minecraft.resources.Identifier;
 
 public record AfflictionDisplay(
     Identifier icon,

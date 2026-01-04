@@ -2,9 +2,9 @@ package syrenyx.distantmoons.datagen.tag;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
-import net.minecraft.block.Block;
-import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.registry.tag.ItemTags;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.Nullable;
 import syrenyx.distantmoons.initializers.DistantMoonsBlocks;
 import syrenyx.distantmoons.initializers.DistantMoonsItems;
@@ -15,15 +15,15 @@ import java.util.concurrent.CompletableFuture;
 
 public class DistantMoonsItemTagProvider extends FabricTagProvider.ItemTagProvider {
 
-  public DistantMoonsItemTagProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture, @Nullable BlockTagProvider blockTagProvider) {
+  public DistantMoonsItemTagProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture, @Nullable BlockTagProvider blockTagProvider) {
     super(output, registriesFuture, blockTagProvider);
   }
 
   @Override
-  protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
+  protected void addTags(HolderLookup.Provider wrapperLookup) {
 
     //DYED ITEMS
-    this.valueLookupBuilder(DistantMoonsItemTags.DYED_PILLOW).add(
+    this.valueLookupBuilder(DistantMoonsItemTags.DYED_PILLOW).addAll(
         DistantMoonsBlocks.DYED_PILLOWS.values().stream().map(Block::asItem)
     );
 
