@@ -1,15 +1,15 @@
 package syrenyx.distantmoons.content.affliction;
 
 import com.mojang.serialization.Codec;
-import net.minecraft.util.StringIdentifiable;
+import net.minecraft.util.StringRepresentable;
 
-public enum ChangeAfflictionOperation implements StringIdentifiable {
+public enum ChangeAfflictionOperation implements StringRepresentable {
   ADD("add"),
   CLEAR("clear"),
   GIVE("give"),
   SET("set");
 
-  public static final Codec<ChangeAfflictionOperation> CODEC = StringIdentifiable.createCodec(ChangeAfflictionOperation::values);
+  public static final Codec<ChangeAfflictionOperation> CODEC = StringRepresentable.fromEnum(ChangeAfflictionOperation::values);
   private final String id;
 
   ChangeAfflictionOperation(final String id) {
@@ -17,7 +17,7 @@ public enum ChangeAfflictionOperation implements StringIdentifiable {
   }
 
   @Override
-  public String asString() {
+  public String getSerializedName() {
     return this.id;
   }
 }

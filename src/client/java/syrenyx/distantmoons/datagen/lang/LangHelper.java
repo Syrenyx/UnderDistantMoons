@@ -1,9 +1,8 @@
 package syrenyx.distantmoons.datagen.lang;
 
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
-import net.minecraft.block.Block;
-import net.minecraft.util.DyeColor;
-
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.level.block.Block;
 import java.util.Map;
 import java.util.TreeMap;
 

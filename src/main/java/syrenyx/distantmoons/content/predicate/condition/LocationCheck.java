@@ -3,24 +3,24 @@ package syrenyx.distantmoons.content.predicate.condition;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.loot.condition.LootCondition;
-import net.minecraft.loot.condition.LootConditionType;
-import net.minecraft.loot.context.LootContext;
-import net.minecraft.loot.context.LootContextParameters;
-import net.minecraft.util.context.ContextParameter;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.math.Vec3i;
 import syrenyx.distantmoons.initializers.DistantMoonsLootConditions;
 import syrenyx.distantmoons.content.predicate.location.LocationPredicate;
 
 import java.util.Optional;
 import java.util.Set;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Vec3i;
+import net.minecraft.util.context.ContextKey;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
+import net.minecraft.world.phys.Vec3;
 
 public record LocationCheck(
     Optional<LocationPredicate> predicate,
     BlockPos offset
-) implements LootCondition {
+) implements LootItemCondition {
 
   private static final MapCodec<BlockPos> OFFSET_CODEC = RecordCodecBuilder.mapCodec(instance -> instance
       .group(
@@ -39,24 +39,24 @@ public record LocationCheck(
   );
 
   @Override
-  public LootConditionType getType() {
+  public LootItemConditionType getType() {
     return DistantMoonsLootConditions.LOCATION_CHECK;
   }
 
   @Override
-  public Set<ContextParameter<?>> getAllowedParameters() {
-    return Set.of(LootContextParameters.ORIGIN);
+  public Set<ContextKey<?>> getReferencedContextParams() {
+    return Set.of(LootContextParams.ORIGIN);
   }
 
   @Override
   public boolean test(LootContext context) {
-    Vec3d location = context.get(LootContextParameters.ORIGIN);
+    Vec3 location = context.getOptionalParameter(LootContextParams.ORIGIN);
     return location != null && (
         this.predicate.isEmpty() || this.predicate.get().test(
-            context.getWorld(),
-            location.getX() + this.offset.getX(),
-            location.getY() + this.offset.getY(),
-            location.getZ() + this.offset.getZ()
+            context.getLevel(),
+            location.x() + this.offset.getX(),
+            location.y() + this.offset.getY(),
+            location.z() + this.offset.getZ()
         )
     );
   }

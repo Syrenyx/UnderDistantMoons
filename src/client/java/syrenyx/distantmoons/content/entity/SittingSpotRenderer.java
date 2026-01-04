@@ -1,13 +1,14 @@
 package syrenyx.distantmoons.content.entity;
 
-import net.minecraft.client.render.Frustum;
-import net.minecraft.client.render.entity.EntityRenderer;
-import net.minecraft.client.render.entity.EntityRendererFactory;
-import net.minecraft.client.render.entity.state.EntityRenderState;
+import net.minecraft.client.renderer.culling.Frustum;
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.state.EntityRenderState;
+import org.jspecify.annotations.NonNull;
 
 public class SittingSpotRenderer extends EntityRenderer<SittingSpotEntity, EntityRenderState> {
 
-  public SittingSpotRenderer(EntityRendererFactory.Context context) {
+  public SittingSpotRenderer(EntityRendererProvider.Context context) {
     super(context);
   }
 
@@ -17,7 +18,7 @@ public class SittingSpotRenderer extends EntityRenderer<SittingSpotEntity, Entit
   }
 
   @Override
-  public boolean shouldRender(SittingSpotEntity entity, Frustum frustum, double x, double y, double z) {
+  public boolean shouldRender(SittingSpotEntity entity, @NonNull Frustum frustum, double x, double y, double z) {
     return false;
   }
 }

@@ -1,18 +1,18 @@
 package syrenyx.distantmoons.content.affliction;
 
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
-import net.minecraft.component.ComponentType;
-import net.minecraft.enchantment.effect.EnchantmentEffectTarget;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.ProjectileEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.core.Holder;
+import net.minecraft.core.component.DataComponentType;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.EnchantmentTarget;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 import syrenyx.distantmoons.content.affliction.effect.entity.AfflictionEntityEffect;
 import syrenyx.distantmoons.content.affliction.effect.TargetedAfflictionEffectEntry;
@@ -30,7 +30,7 @@ public abstract class AfflictionManager {
   public static boolean addToAffliction(LivingEntity entity, AfflictionInstance afflictionInstance) {
     if (isImmune(entity, afflictionInstance.affliction())) return false;
     if (afflictionInstance.stage() == 0 && afflictionInstance.progression() == 0.0F) return false;
-    Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
+    Map<Holder<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
     AfflictionInstance activeAffliction = getActiveAfflictions(entity).get(afflictionInstance.affliction());
     if (activeAffliction == null) {
       if (afflictionInstance.stage() < 1 || afflictionInstance.progression() < 0.0F) return false;
@@ -52,8 +52,8 @@ public abstract class AfflictionManager {
     return true;
   }
 
-  public static boolean clearAffliction(LivingEntity entity, @Nullable RegistryEntry<Affliction> affliction) {
-    Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
+  public static boolean clearAffliction(LivingEntity entity, @Nullable Holder<Affliction> affliction) {
+    Map<Holder<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
     if (activeAfflictions.isEmpty()) return false;
     if (affliction != null) {
       if (activeAfflictions.get(affliction) == null) return false;
@@ -68,14 +68,14 @@ public abstract class AfflictionManager {
     return true;
   }
 
-  public static @Nullable AfflictionInstance getAffliction(LivingEntity entity, RegistryEntry<Affliction> affliction) {
+  public static @Nullable AfflictionInstance getAffliction(LivingEntity entity, Holder<Affliction> affliction) {
     return getActiveAfflictions(entity).get(affliction);
   }
 
   public static boolean giveAffliction(LivingEntity entity, AfflictionInstance afflictionInstance) {
     if (isImmune(entity, afflictionInstance.affliction())) return false;
     afflictionInstance.limitToAllowedValues();
-    Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
+    Map<Holder<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
     AfflictionInstance activeAffliction = activeAfflictions.putIfAbsent(afflictionInstance.affliction(), afflictionInstance);
     if (activeAffliction == null) return true;
     boolean result = false;
@@ -91,7 +91,7 @@ public abstract class AfflictionManager {
   public static boolean setAffliction(LivingEntity entity, AfflictionInstance afflictionInstance) {
     if (isImmune(entity, afflictionInstance.affliction())) return false;
     afflictionInstance.limitToAllowedValues();
-    Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
+    Map<Holder<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
     activeAfflictions.put(afflictionInstance.affliction(), afflictionInstance);
     onAfflictionAdded(entity, afflictionInstance);
     return true;
@@ -113,7 +113,7 @@ public abstract class AfflictionManager {
   }
 
   public static float getArmorEffectiveness(LivingEntity entity, DamageSource damageSource, float armorEffectiveness) {
-    Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
+    Map<Holder<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
     for (AfflictionInstance afflictionInstance : activeAfflictions.values()) {
       armorEffectiveness = afflictionInstance.processArmorEffectiveness(entity, damageSource, armorEffectiveness);
     }
@@ -121,7 +121,7 @@ public abstract class AfflictionManager {
   }
 
   public static float getDamage(LivingEntity entity, Entity target, DamageSource damageSource, float damage) {
-    Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
+    Map<Holder<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
     for (AfflictionInstance afflictionInstance : activeAfflictions.values()) {
       damage = afflictionInstance.processDamage(entity, target, damageSource, damage);
     }
@@ -130,7 +130,7 @@ public abstract class AfflictionManager {
 
   public static float getDamageProtection(LivingEntity entity, DamageSource damageSource) {
     float damageProtection = 0.0F;
-    Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
+    Map<Holder<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
     for (AfflictionInstance afflictionInstance : activeAfflictions.values()) {
       damageProtection = afflictionInstance.processDamageProtection(entity, damageSource, damageProtection);
     }
@@ -139,7 +139,7 @@ public abstract class AfflictionManager {
 
   public static float getFishingLuckBonus(LivingEntity entity, ItemStack stack) {
     float fishingLuckBonus = 0.0F;
-    Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
+    Map<Holder<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
     for (AfflictionInstance afflictionInstance : activeAfflictions.values()) {
       fishingLuckBonus = afflictionInstance.processFishingLuckBonus(entity, stack, fishingLuckBonus);
     }
@@ -148,7 +148,7 @@ public abstract class AfflictionManager {
 
   public static float getFishingTimeReduction(LivingEntity entity, ItemStack stack) {
     float fishingTimeReduction = 0.0F;
-    Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
+    Map<Holder<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
     for (AfflictionInstance afflictionInstance : activeAfflictions.values()) {
       fishingTimeReduction = afflictionInstance.processFishingTimeReduction(entity, stack, fishingTimeReduction);
     }
@@ -156,7 +156,7 @@ public abstract class AfflictionManager {
   }
 
   public static float getKnockback(LivingEntity entity, Entity target, DamageSource damageSource, float knockback) {
-    Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
+    Map<Holder<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
     for (AfflictionInstance afflictionInstance : activeAfflictions.values()) {
       knockback = afflictionInstance.processKnockback(entity, target, damageSource, knockback);
     }
@@ -164,7 +164,7 @@ public abstract class AfflictionManager {
   }
 
   public static boolean handleDamageImmunity(LivingEntity entity, DamageSource damageSource) {
-    Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
+    Map<Holder<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
     for (AfflictionInstance afflictionInstance : activeAfflictions.values()) {
       if (afflictionInstance.processDamageImmunityEffects(entity, damageSource)) return true;
     }
@@ -172,78 +172,78 @@ public abstract class AfflictionManager {
   }
 
   public static void handleLocationChanged(LivingEntity entity, boolean remove) {
-    Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
+    Map<Holder<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
     for (AfflictionInstance afflictionInstance : activeAfflictions.values()) {
       afflictionInstance.processLocationChangedEffects(entity, remove, DistantMoonsAfflictionEffectComponents.LOCATION_CHANGED);
     }
   }
 
-  public static void handlePlayerDeath(ServerPlayerEntity player, DamageSource damageSource) {
+  public static void handlePlayerDeath(ServerPlayer player, DamageSource damageSource) {
     handlePostDamage(player, damageSource, DistantMoonsAfflictionEffectComponents.POST_DEATH);
-    Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(player);
-    for (RegistryEntry<Affliction> affliction : activeAfflictions.keySet()) {
+    Map<Holder<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(player);
+    for (Holder<Affliction> affliction : activeAfflictions.keySet()) {
       if (!affliction.value().persistent()) activeAfflictions.remove(affliction);
     }
   }
 
-  public static void handleHitBlock(LivingEntity entity, Vec3d pos) {
-    Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
+  public static void handleHitBlock(LivingEntity entity, Vec3 pos) {
+    Map<Holder<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
     for (AfflictionInstance afflictionInstance : activeAfflictions.values()) {
       afflictionInstance.processHitBlockEffects(entity, pos, DistantMoonsAfflictionEffectComponents.HIT_BLOCK);
     }
   }
 
-  public static void handlePostDamage(Entity victim, DamageSource damageSource, ComponentType<List<TargetedAfflictionEffectEntry<AfflictionEntityEffect>>> componentType) {
-    for (EnchantmentEffectTarget targetType : EnchantmentEffectTarget.values()) {
+  public static void handlePostDamage(Entity victim, DamageSource damageSource, DataComponentType<List<TargetedAfflictionEffectEntry<AfflictionEntityEffect>>> componentType) {
+    for (EnchantmentTarget targetType : EnchantmentTarget.values()) {
       Entity entity = switch (targetType) {
-        case ATTACKER -> damageSource.getAttacker();
-        case DAMAGING_ENTITY -> damageSource.getSource();
+        case ATTACKER -> damageSource.getEntity();
+        case DAMAGING_ENTITY -> damageSource.getDirectEntity();
         case VICTIM -> victim;
       };
       if (!(entity instanceof LivingEntity afflicted)) continue;
-      Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(afflicted);
+      Map<Holder<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(afflicted);
       for (AfflictionInstance afflictionInstance : activeAfflictions.values()) {
         afflictionInstance.processPostDamageEffects(victim, damageSource, targetType, componentType);
       }
     }
   }
 
-  public static void handleProjectileSpawned(LivingEntity entity, ProjectileEntity projectile) {
-    Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
+  public static void handleProjectileSpawned(LivingEntity entity, Projectile projectile) {
+    Map<Holder<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
     for (AfflictionInstance afflictionInstance : activeAfflictions.values()) {
       afflictionInstance.processProjectileSpawnedEffects(entity, projectile, DistantMoonsAfflictionEffectComponents.PROJECTILE_SPAWNED);
     }
   }
 
   public static void handleTick(LivingEntity entity) {
-    Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
+    Map<Holder<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
     for (AfflictionInstance afflictionInstance : activeAfflictions.values()) {
       Affliction affliction = afflictionInstance.affliction().value();
       afflictionInstance.processTickEffects(entity, DistantMoonsAfflictionEffectComponents.TICK);
       if (affliction.tickProgression().isEmpty()) continue;
       float previousProgression = afflictionInstance.progression();
-      afflictionInstance.addToProgression(affliction.tickProgression().get().getValue(afflictionInstance.stage()));
+      afflictionInstance.addToProgression(affliction.tickProgression().get().calculate(afflictionInstance.stage()));
       afflictionInstance.limitToAllowedValues();
       afflictionInstance.processProgressionThresholdEffects(entity, previousProgression, DistantMoonsAfflictionEffectComponents.PROGRESSION_THRESHOLD);
     }
-    if (entity instanceof ServerPlayerEntity player) ServerPlayNetworking.send(player, new ActiveAfflictionsPayload(activeAfflictions.values().stream().map(AfflictionPacket::fromInstance).toList()));
+    if (entity instanceof ServerPlayer player) ServerPlayNetworking.send(player, new ActiveAfflictionsPayload(activeAfflictions.values().stream().map(AfflictionPacket::fromInstance).toList()));
   }
 
   public static void handleUsedItem(LivingEntity entity, ItemStack item) {
-    Map<RegistryEntry<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
+    Map<Holder<Affliction>, AfflictionInstance> activeAfflictions = getActiveAfflictions(entity);
     for (AfflictionInstance afflictionInstance : activeAfflictions.values()) {
       afflictionInstance.processUsedItemEffects(entity, item, DistantMoonsAfflictionEffectComponents.USED_ITEM);
     }
   }
 
-  public static Map<RegistryEntry<Affliction>, AfflictionInstance> getActiveAfflictions(LivingEntity entity) {
-    return entity instanceof PlayerEntity player
+  public static Map<Holder<Affliction>, AfflictionInstance> getActiveAfflictions(LivingEntity entity) {
+    return entity instanceof Player player
         ? PersistentStateManager.getPlayerState(player).livingEntityAttachment().activeAfflictions()
         : LivingEntityAttachment.getOrCreate(entity).activeAfflictions();
   }
 
-  private static boolean isImmune(LivingEntity entity, RegistryEntry<Affliction> affliction) {
+  private static boolean isImmune(LivingEntity entity, Holder<Affliction> affliction) {
     if (affliction.value().immuneEntities().isEmpty()) return false;
-    return affliction.value().immuneEntities().get().contains(Registries.ENTITY_TYPE.getEntry(entity.getType()));
+    return affliction.value().immuneEntities().get().contains(BuiltInRegistries.ENTITY_TYPE.wrapAsHolder(entity.getType()));
   }
 }

@@ -1,15 +1,15 @@
 package syrenyx.distantmoons.content.block.oxidization;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Oxidizable;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 import java.util.function.Function;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.WeatheringCopper;
+import net.minecraft.world.level.block.state.BlockState;
 
 public record BlockOxidizationDefinition(
-    Oxidizable.OxidationLevel level,
+    WeatheringCopper.WeatherState level,
     boolean rust,
     float oxidizationChanceMultiplier,
     @Nullable Function<BlockState, BlockState> oxidizationStateTransformation,
@@ -18,7 +18,7 @@ public record BlockOxidizationDefinition(
 ) {
 
   public BlockOxidizationDefinition(
-      Oxidizable.OxidationLevel level,
+      WeatheringCopper.WeatherState level,
       boolean rust,
       float oxidizationChanceMultiplier,
       @Nullable Block oxidizedBlock,
@@ -27,14 +27,14 @@ public record BlockOxidizationDefinition(
   ) {
     this(
         level, rust, oxidizationChanceMultiplier,
-        oxidizedBlock != null ? state -> oxidizedBlock.getDefaultState() : null,
-        scrapedBlock != null ? state -> scrapedBlock.getDefaultState() : null,
-        waxedBlock != null ? state -> waxedBlock.getDefaultState() : null
+        oxidizedBlock != null ? state -> oxidizedBlock.defaultBlockState() : null,
+        scrapedBlock != null ? state -> scrapedBlock.defaultBlockState() : null,
+        waxedBlock != null ? state -> waxedBlock.defaultBlockState() : null
     );
   }
 
   public BlockOxidizationDefinition(
-      Oxidizable.OxidationLevel level,
+      WeatheringCopper.WeatherState level,
       boolean rust,
       float oxidizationChanceMultiplier,
       @Nullable BlockState oxidizedBlockState,

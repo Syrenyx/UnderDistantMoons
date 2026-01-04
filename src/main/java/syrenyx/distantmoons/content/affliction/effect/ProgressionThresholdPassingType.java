@@ -1,14 +1,14 @@
 package syrenyx.distantmoons.content.affliction.effect;
 
 import com.mojang.serialization.Codec;
-import net.minecraft.util.StringIdentifiable;
+import net.minecraft.util.StringRepresentable;
 
-public enum ProgressionThresholdPassingType implements StringIdentifiable {
+public enum ProgressionThresholdPassingType implements StringRepresentable {
   ANY("any"),
   DECREASING("decreasing"),
   INCREASING("increasing");
 
-  public static final Codec<ProgressionThresholdPassingType> CODEC = StringIdentifiable.createCodec(ProgressionThresholdPassingType::values);
+  public static final Codec<ProgressionThresholdPassingType> CODEC = StringRepresentable.fromEnum(ProgressionThresholdPassingType::values);
   private final String id;
 
   ProgressionThresholdPassingType(final String id) {
@@ -16,7 +16,7 @@ public enum ProgressionThresholdPassingType implements StringIdentifiable {
   }
 
   @Override
-  public String asString() {
+  public String getSerializedName() {
     return this.id;
   }
 }

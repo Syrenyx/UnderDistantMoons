@@ -1,8 +1,8 @@
 package syrenyx.distantmoons.content.block.block_state_enums;
 
-import net.minecraft.util.StringIdentifiable;
+import net.minecraft.util.StringRepresentable;
 
-public enum WallSlabShape implements StringIdentifiable {
+public enum WallSlabShape implements StringRepresentable {
 
   FLAT("flat"),
   INNER_LEFT("inner_left"),
@@ -17,7 +17,7 @@ public enum WallSlabShape implements StringIdentifiable {
   }
 
   @Override
-  public String asString() {
+  public String getSerializedName() {
     return this.id;
   }
 }

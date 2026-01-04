@@ -2,14 +2,15 @@ package syrenyx.distantmoons.content.affliction.effect.entity;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.entity.Entity;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.commands.functions.CommandFunction;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.server.function.CommandFunction;
-import net.minecraft.server.function.CommandFunctionManager;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.server.ServerFunctionManager;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.permissions.LevelBasedPermissionSet;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.phys.Vec3;
 import syrenyx.distantmoons.UnderDistantMoons;
 import syrenyx.distantmoons.content.command.PermissionLevel;
 
@@ -30,10 +31,10 @@ public record RunFunctionEffect(Identifier function) implements AfflictionEntity
   }
 
   @Override
-  public void apply(ServerWorld world, int stage, Entity target, Vec3d pos) {
+  public void apply(ServerLevel world, int stage, Entity target, Vec3 pos) {
     MinecraftServer minecraftServer = world.getServer();
-    CommandFunctionManager commandFunctionManager = minecraftServer.getCommandFunctionManager();
-    Optional<CommandFunction<ServerCommandSource>> function = commandFunctionManager.getFunction(this.function);
+    ServerFunctionManager commandFunctionManager = minecraftServer.getFunctions();
+    Optional<CommandFunction<CommandSourceStack>> function = commandFunctionManager.get(this.function);
     if (function.isEmpty()) {
       UnderDistantMoons.LOGGER.error("Affliction run_function effect failed for non-existent function {}", this.function);
       return;
@@ -41,13 +42,13 @@ public record RunFunctionEffect(Identifier function) implements AfflictionEntity
     commandFunctionManager.execute(
         function.get(),
         minecraftServer
-            .getCommandSource()
-            .withLevel(PermissionLevel.GAMEMASTER.get())
-            .withSilent()
+            .createCommandSourceStack()
+            .withPermission(LevelBasedPermissionSet.GAMEMASTER)
+            .withSuppressedOutput()
             .withEntity(target)
-            .withWorld(world)
+            .withLevel(world)
             .withPosition(pos)
-            .withRotation(target.getRotationClient())
+            .withRotation(target.getRotationVector())
     );
   }
 }

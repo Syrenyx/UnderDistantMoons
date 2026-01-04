@@ -1,149 +1,154 @@
 package syrenyx.distantmoons.content.item;
 
-import net.minecraft.advancement.criterion.Criteria;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.ShapeContext;
-import net.minecraft.block.ShulkerBoxBlock;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.BlockStateComponent;
-import net.minecraft.component.type.ContainerComponent;
-import net.minecraft.entity.ItemEntity;
-import net.minecraft.entity.TypedEntityData;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.*;
-import net.minecraft.resource.featuretoggle.FeatureSet;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.sound.BlockSoundGroup;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import net.minecraft.world.event.GameEvent;
+import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.permissions.Permissions;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.flag.FeatureFlagSet;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemUtils;
+import net.minecraft.world.item.component.BlockItemStateProperties;
+import net.minecraft.world.item.component.ItemContainerContents;
+import net.minecraft.world.item.component.TypedEntityData;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.ShulkerBoxBlock;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.phys.shapes.CollisionContext;
 import org.jetbrains.annotations.Nullable;
 
 public class IndependentBlockItem extends Item {
 
   private final Block block;
 
-  public IndependentBlockItem(Block block, Settings settings) {
+  public IndependentBlockItem(Block block, Properties settings) {
     super(settings);
     this.block = block;
   }
 
   @Override
-  public ActionResult useOnBlock(ItemUsageContext context) {
-    ActionResult actionResult = this.place(new ItemPlacementContext(context));
-    return !actionResult.isAccepted() && context.getStack().contains(DataComponentTypes.CONSUMABLE)
-        ? super.use(context.getWorld(), context.getPlayer(), context.getHand())
+  public InteractionResult useOn(UseOnContext context) {
+    InteractionResult actionResult = this.place(new BlockPlaceContext(context));
+    return !actionResult.consumesAction() && context.getItemInHand().has(DataComponents.CONSUMABLE)
+        ? super.use(context.getLevel(), context.getPlayer(), context.getHand())
         : actionResult;
   }
 
-  public ActionResult place(ItemPlacementContext context) {
-    if (context == null || !context.canPlace()) return ActionResult.FAIL;
+  public InteractionResult place(BlockPlaceContext context) {
+    if (context == null || !context.canPlace()) return InteractionResult.FAIL;
     BlockState blockState = this.getPlacementState(context);
-    if (blockState == null || !this.place(context, blockState)) return ActionResult.FAIL;
-    BlockPos pos = context.getBlockPos();
-    World world = context.getWorld();
-    PlayerEntity player = context.getPlayer();
-    ItemStack itemStack = context.getStack();
+    if (blockState == null || !this.place(context, blockState)) return InteractionResult.FAIL;
+    BlockPos pos = context.getClickedPos();
+    Level world = context.getLevel();
+    Player player = context.getPlayer();
+    ItemStack itemStack = context.getItemInHand();
     BlockState placedState = world.getBlockState(pos);
-    if (placedState.isOf(blockState.getBlock())) {
+    if (placedState.is(blockState.getBlock())) {
       placedState = this.placeFromNbt(pos, world, itemStack, placedState);
       this.postPlacement(pos, world, player, itemStack, placedState);
       copyComponentsToBlockEntity(world, pos, itemStack);
-      placedState.getBlock().onPlaced(world, pos, placedState, player, itemStack);
-      if (player instanceof ServerPlayerEntity) Criteria.PLACED_BLOCK.trigger((ServerPlayerEntity) player, pos, itemStack);
+      placedState.getBlock().setPlacedBy(world, pos, placedState, player, itemStack);
+      if (player instanceof ServerPlayer) CriteriaTriggers.PLACED_BLOCK.trigger((ServerPlayer) player, pos, itemStack);
     }
-    BlockSoundGroup blockSoundGroup = placedState.getSoundGroup();
+    SoundType blockSoundGroup = placedState.getSoundType();
     world.playSound(
         player,
         pos,
-        placedState.getSoundGroup().getPlaceSound(),
-        SoundCategory.BLOCKS,
+        placedState.getSoundType().getPlaceSound(),
+        SoundSource.BLOCKS,
         (blockSoundGroup.getVolume() + 1.0F) / 2.0F,
         blockSoundGroup.getPitch() * 0.8F
     );
-    world.emitGameEvent(GameEvent.BLOCK_PLACE, pos, GameEvent.Emitter.of(player, placedState));
-    itemStack.decrementUnlessCreative(1, player);
-    return ActionResult.SUCCESS;
+    world.gameEvent(GameEvent.BLOCK_PLACE, pos, GameEvent.Context.of(player, placedState));
+    itemStack.consume(1, player);
+    return InteractionResult.SUCCESS;
   }
 
-  private static void copyComponentsToBlockEntity(World world, BlockPos pos, ItemStack stack) {
+  private static void copyComponentsToBlockEntity(Level world, BlockPos pos, ItemStack stack) {
     BlockEntity blockEntity = world.getBlockEntity(pos);
     if (blockEntity == null) return;
-    blockEntity.readComponents(stack);
-    blockEntity.markDirty();
+    blockEntity.applyComponentsFromItemStack(stack);
+    blockEntity.setChanged();
   }
 
-  protected boolean postPlacement(BlockPos pos, World world, @Nullable PlayerEntity player, ItemStack stack, BlockState state) {
+  protected boolean postPlacement(BlockPos pos, Level world, @Nullable Player player, ItemStack stack, BlockState state) {
     return writeNbtToBlockEntity(world, player, pos, stack);
   }
 
   @Nullable
-  protected BlockState getPlacementState(ItemPlacementContext context) {
-    BlockState blockState = this.block.getPlacementState(context);
+  protected BlockState getPlacementState(BlockPlaceContext context) {
+    BlockState blockState = this.block.getStateForPlacement(context);
     return blockState != null && this.canPlace(context, blockState) ? blockState : null;
   }
 
-  private BlockState placeFromNbt(BlockPos pos, World world, ItemStack stack, BlockState state) {
-    BlockStateComponent blockStateComponent = stack.getOrDefault(DataComponentTypes.BLOCK_STATE, BlockStateComponent.DEFAULT);
+  private BlockState placeFromNbt(BlockPos pos, Level world, ItemStack stack, BlockState state) {
+    BlockItemStateProperties blockStateComponent = stack.getOrDefault(DataComponents.BLOCK_STATE, BlockItemStateProperties.EMPTY);
     if (blockStateComponent.isEmpty()) return state;
-    BlockState blockState = blockStateComponent.applyToState(state);
-    if (blockState != state) world.setBlockState(pos, blockState, Block.NOTIFY_LISTENERS);
+    BlockState blockState = blockStateComponent.apply(state);
+    if (blockState != state) world.setBlock(pos, blockState, Block.UPDATE_CLIENTS);
     return blockState;
   }
 
-  protected boolean canPlace(ItemPlacementContext context, BlockState state) {
-    return (!this.checkStatePlacement() || state.canPlaceAt(context.getWorld(), context.getBlockPos()))
-        && context.getWorld().canPlace(state, context.getBlockPos(), ShapeContext.ofPlacement(context.getPlayer()));
+  protected boolean canPlace(BlockPlaceContext context, BlockState state) {
+    return (!this.checkStatePlacement() || state.canSurvive(context.getLevel(), context.getClickedPos()))
+        && context.getLevel().isUnobstructed(state, context.getClickedPos(), CollisionContext.placementContext(context.getPlayer()));
   }
 
   protected boolean checkStatePlacement() {
     return true;
   }
 
-  protected boolean place(ItemPlacementContext context, BlockState state) {
-    return context.getWorld().setBlockState(context.getBlockPos(), state, Block.NOTIFY_ALL_AND_REDRAW);
+  protected boolean place(BlockPlaceContext context, BlockState state) {
+    return context.getLevel().setBlock(context.getClickedPos(), state, Block.UPDATE_ALL_IMMEDIATE);
   }
 
-  public static boolean writeNbtToBlockEntity(World world, @Nullable PlayerEntity player, BlockPos pos, ItemStack stack) {
-    if (world.isClient()) return false;
-    TypedEntityData<BlockEntityType<?>> typedEntityData = stack.get(DataComponentTypes.BLOCK_ENTITY_DATA);
+  public static boolean writeNbtToBlockEntity(Level world, @Nullable Player player, BlockPos pos, ItemStack stack) {
+    if (world.isClientSide()) return false;
+    TypedEntityData<BlockEntityType<?>> typedEntityData = stack.get(DataComponents.BLOCK_ENTITY_DATA);
     if (typedEntityData == null) return false;
     BlockEntity blockEntity = world.getBlockEntity(pos);
     if (blockEntity == null) return false;
     BlockEntityType<?> blockEntityType = blockEntity.getType();
-    if (blockEntityType != typedEntityData.getType()) return false;
-    if (!blockEntityType.canPotentiallyExecuteCommands() || player != null && player.isCreativeLevelTwoOp()) {
-      return typedEntityData.applyToBlockEntity(blockEntity, world.getRegistryManager());
+    if (blockEntityType != typedEntityData.type()) return false;
+    if (!blockEntityType.onlyOpCanSetNbt() || player != null && player.canUseGameMasterBlocks()) {
+      return typedEntityData.loadInto(blockEntity, world.registryAccess());
     }
     return false;
   }
 
   @Override
-  public boolean shouldShowOperatorBlockWarnings(ItemStack stack, @Nullable PlayerEntity player) {
-    if (player == null || player.getPermissionLevel() < 2) return false;
-    TypedEntityData<BlockEntityType<?>> typedEntityData = stack.get(DataComponentTypes.BLOCK_ENTITY_DATA);
+  public boolean shouldPrintOpWarning(ItemStack stack, @Nullable Player player) {
+    if (player == null || !player.permissions().hasPermission(Permissions.COMMANDS_GAMEMASTER)) return false;
+    TypedEntityData<BlockEntityType<?>> typedEntityData = stack.get(DataComponents.BLOCK_ENTITY_DATA);
     if (typedEntityData == null) return false;
-    return typedEntityData.getType().canPotentiallyExecuteCommands();
+    return typedEntityData.type().onlyOpCanSetNbt();
   }
 
   @Override
-  public boolean canBeNested() {
+  public boolean canFitInsideContainerItems() {
     return !(this.block instanceof ShulkerBoxBlock);
   }
 
   @Override
-  public void onItemEntityDestroyed(ItemEntity entity) {
-    ContainerComponent containerComponent = entity.getStack().set(DataComponentTypes.CONTAINER, ContainerComponent.DEFAULT);
-    if (containerComponent != null) ItemUsage.spawnItemContents(entity, containerComponent.iterateNonEmptyCopy());
+  public void onDestroyed(ItemEntity entity) {
+    ItemContainerContents containerComponent = entity.getItem().set(DataComponents.CONTAINER, ItemContainerContents.EMPTY);
+    if (containerComponent != null) ItemUtils.onContainerDestroyed(entity, containerComponent.nonEmptyItemsCopy());
   }
 
   @Override
-  public FeatureSet getRequiredFeatures() {
-    return this.block.getRequiredFeatures();
+  public FeatureFlagSet requiredFeatures() {
+    return this.block.requiredFeatures();
   }
 }

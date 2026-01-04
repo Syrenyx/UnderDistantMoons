@@ -1,7 +1,7 @@
 package syrenyx.distantmoons.initializers.client;
 
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.minecraft.registry.RegistryKey;
+import net.minecraft.resources.ResourceKey;
 import syrenyx.distantmoons.content.affliction.AfflictionInstance;
 import syrenyx.distantmoons.data.attachment.ClientPlayerAttachment;
 import syrenyx.distantmoons.data.networking.ActiveAfflictionsPayload;
@@ -20,7 +20,7 @@ public abstract class DistantMoonsNetworking {
               currentAfflictions.clear();
               currentAfflictions.addAll(payload.afflictions().stream().map(packet ->
                   new AfflictionInstance(
-                      context.player().getRegistryManager().getEntryOrThrow(RegistryKey.of(DistantMoonsRegistryKeys.AFFLICTION_REGISTRY_KEY, packet.id())),
+                      context.player().registryAccess().getOrThrow(ResourceKey.create(DistantMoonsRegistryKeys.AFFLICTION_REGISTRY_KEY, packet.id())),
                       packet.stage(),
                       packet.progression()
                   )

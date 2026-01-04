@@ -2,12 +2,12 @@ package syrenyx.distantmoons.content.affliction.effect.location_based;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.entity.Entity;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.Vec3d;
 import syrenyx.distantmoons.content.affliction.AfflictionInstance;
 
 import java.util.List;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.phys.Vec3;
 
 public record AllOfLocationBasedEffect(List<AfflictionLocationBasedEffect> effects) implements AfflictionLocationBasedEffect {
 
@@ -24,10 +24,10 @@ public record AllOfLocationBasedEffect(List<AfflictionLocationBasedEffect> effec
   }
 
   @Override
-  public void apply(ServerWorld world, int stage, Entity target, Vec3d pos, AfflictionInstance instance) {
+  public void apply(ServerLevel world, int stage, Entity target, Vec3 pos, AfflictionInstance instance) {
     this.effects.forEach(effect -> effect.apply(world, stage, target, pos, instance));
   }
 
   @Override
-  public void remove(ServerWorld world, int stage, Entity target, Vec3d pos, AfflictionInstance instance) {}
+  public void remove(ServerLevel world, int stage, Entity target, Vec3 pos, AfflictionInstance instance) {}
 }

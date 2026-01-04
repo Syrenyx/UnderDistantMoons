@@ -3,17 +3,17 @@ package syrenyx.distantmoons.initializers;
 import net.fabricmc.fabric.api.item.v1.DefaultItemComponentEvents;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistryEvents;
-import net.minecraft.block.Block;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.ConsumableComponent;
-import net.minecraft.component.type.FoodComponent;
-import net.minecraft.component.type.ToolComponent;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.item.Items;
-import net.minecraft.item.consume.ApplyEffectsConsumeEffect;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.RegistryEntryLookup;
+import net.minecraft.core.HolderGetter;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.component.Consumable;
+import net.minecraft.world.item.component.Tool;
+import net.minecraft.world.item.consume_effects.ApplyStatusEffectsConsumeEffect;
+import net.minecraft.world.level.block.Block;
 import syrenyx.distantmoons.references.tag.DistantMoonsBlockTags;
 import syrenyx.distantmoons.references.tag.DistantMoonsItemTags;
 
@@ -27,43 +27,43 @@ public abstract class DistantMoonsItemModifications {
   private static final int COAL_SMELT_TIME_FACTOR = 8;
   private static final int COKE_SMELT_TIME_FACTOR = 12;
   private static final float WOOD_SMELT_TIME_FACTOR = 0.75F;
-  private static final ConsumableComponent NETHER_FUNGUS_CONSUMABLE = ConsumableComponent.builder()
-      .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 600, 0), 0.45F))
-      .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(StatusEffects.POISON, 300, 0), 0.35F))
+  private static final Consumable NETHER_FUNGUS_CONSUMABLE = Consumable.builder()
+      .onConsume(new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(MobEffects.NAUSEA, 600, 0), 0.45F))
+      .onConsume(new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(MobEffects.POISON, 300, 0), 0.35F))
       .build();
-  private static final ConsumableComponent RED_MUSHROOM_CONSUMABLE = ConsumableComponent.builder()
-      .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(StatusEffects.POISON, 600, 1), 0.95F))
+  private static final Consumable RED_MUSHROOM_CONSUMABLE = Consumable.builder()
+      .onConsume(new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(MobEffects.POISON, 600, 1), 0.95F))
       .build();
 
   static {
 
-    final RegistryEntryLookup<Block> registryEntryLookup = Registries.createEntryLookup(Registries.BLOCK);
+    final HolderGetter<Block> registryEntryLookup = BuiltInRegistries.acquireBootstrapRegistrationLookup(BuiltInRegistries.BLOCK);
 
     //DEFAULT COMPONENTS
     DefaultItemComponentEvents.MODIFY.register(context -> {
       context.modify(Items.BROWN_MUSHROOM, component -> {
-        component.add(DataComponentTypes.CONSUMABLE, ConsumableComponent.builder().build());
-        component.add(DataComponentTypes.FOOD, new FoodComponent(1, 0.6F, false));
+        component.set(DataComponents.CONSUMABLE, Consumable.builder().build());
+        component.set(DataComponents.FOOD, new FoodProperties(1, 0.6F, false));
       });
       context.modify(Items.CRIMSON_FUNGUS, component -> {
-        component.add(DataComponentTypes.CONSUMABLE, NETHER_FUNGUS_CONSUMABLE);
-        component.add(DataComponentTypes.FOOD, new FoodComponent(1, 0.6F, false));
+        component.set(DataComponents.CONSUMABLE, NETHER_FUNGUS_CONSUMABLE);
+        component.set(DataComponents.FOOD, new FoodProperties(1, 0.6F, false));
       });
       context.modify(Items.GLISTERING_MELON_SLICE, component -> {
-        component.add(DataComponentTypes.CONSUMABLE, ConsumableComponent.builder().build());
-        component.add(DataComponentTypes.FOOD, new FoodComponent(4, 9.6F, false));
+        component.set(DataComponents.CONSUMABLE, Consumable.builder().build());
+        component.set(DataComponents.FOOD, new FoodProperties(4, 9.6F, false));
       });
       context.modify(Items.RED_MUSHROOM, component -> {
-        component.add(DataComponentTypes.CONSUMABLE, RED_MUSHROOM_CONSUMABLE);
-        component.add(DataComponentTypes.FOOD, new FoodComponent(1, 0.6F, false));
+        component.set(DataComponents.CONSUMABLE, RED_MUSHROOM_CONSUMABLE);
+        component.set(DataComponents.FOOD, new FoodProperties(1, 0.6F, false));
       });
-      context.modify(Items.SHEARS, component -> component.add(DataComponentTypes.TOOL, addRulesToToolComponent(
-          Objects.requireNonNull(Items.SHEARS.getComponents().get(DataComponentTypes.TOOL)),
-          ToolComponent.Rule.of(registryEntryLookup.getOrThrow(DistantMoonsBlockTags.DYED_PILLOW), 5.0F)
+      context.modify(Items.SHEARS, component -> component.set(DataComponents.TOOL, addRulesToToolComponent(
+          Objects.requireNonNull(Items.SHEARS.components().get(DataComponents.TOOL)),
+          Tool.Rule.overrideSpeed(registryEntryLookup.getOrThrow(DistantMoonsBlockTags.DYED_PILLOW), 5.0F)
       )));
       context.modify(Items.WARPED_FUNGUS, component -> {
-        component.add(DataComponentTypes.CONSUMABLE, NETHER_FUNGUS_CONSUMABLE);
-        component.add(DataComponentTypes.FOOD, new FoodComponent(1, 0.6F, false));
+        component.set(DataComponents.CONSUMABLE, NETHER_FUNGUS_CONSUMABLE);
+        component.set(DataComponents.FOOD, new FoodProperties(1, 0.6F, false));
       });
     });
 
@@ -84,10 +84,10 @@ public abstract class DistantMoonsItemModifications {
     });
   }
 
-  private static ToolComponent addRulesToToolComponent(ToolComponent component, ToolComponent.Rule ... rules) {
-    List<ToolComponent.Rule> rulesList = new ArrayList<>(component.rules());
+  private static Tool addRulesToToolComponent(Tool component, Tool.Rule ... rules) {
+    List<Tool.Rule> rulesList = new ArrayList<>(component.rules());
     rulesList.addAll(Arrays.asList(rules));
-    return new ToolComponent(
+    return new Tool(
         rulesList,
         component.defaultMiningSpeed(),
         component.damagePerBlock(),

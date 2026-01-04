@@ -2,27 +2,26 @@ package syrenyx.distantmoons.content.affliction.effect;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.enchantment.effect.EnchantmentEffectTarget;
-import net.minecraft.loot.condition.LootCondition;
-import net.minecraft.loot.context.LootContext;
-import net.minecraft.util.context.ContextType;
-
 import java.util.Optional;
+import net.minecraft.util.context.ContextKeySet;
+import net.minecraft.world.item.enchantment.EnchantmentTarget;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 
 public record TargetedAfflictionEffectEntry<T>(
     T effect,
-    Optional<LootCondition> requirements,
-    EnchantmentEffectTarget afflicted,
-    EnchantmentEffectTarget affected
+    Optional<LootItemCondition> requirements,
+    EnchantmentTarget afflicted,
+    EnchantmentTarget affected
 ) {
 
-  public static <T> Codec<TargetedAfflictionEffectEntry<T>> createCodec(Codec<T> effectCodec, ContextType lootContextType) {
+  public static <T> Codec<TargetedAfflictionEffectEntry<T>> createCodec(Codec<T> effectCodec, ContextKeySet lootContextType) {
     return RecordCodecBuilder.create(instance -> instance
         .group(
             effectCodec.fieldOf("effect").forGetter(TargetedAfflictionEffectEntry::effect),
             AfflictionEffectEntry.createRequirementsCodec(lootContextType).optionalFieldOf("requirements").forGetter(TargetedAfflictionEffectEntry::requirements),
-            EnchantmentEffectTarget.CODEC.fieldOf("afflicted").forGetter(TargetedAfflictionEffectEntry::afflicted),
-            EnchantmentEffectTarget.CODEC.fieldOf("affected").forGetter(TargetedAfflictionEffectEntry::affected)
+            EnchantmentTarget.CODEC.fieldOf("afflicted").forGetter(TargetedAfflictionEffectEntry::afflicted),
+            EnchantmentTarget.CODEC.fieldOf("affected").forGetter(TargetedAfflictionEffectEntry::affected)
         )
         .apply(instance, TargetedAfflictionEffectEntry::new)
     );

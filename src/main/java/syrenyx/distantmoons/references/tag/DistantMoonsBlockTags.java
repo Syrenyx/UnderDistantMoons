@@ -1,8 +1,8 @@
 package syrenyx.distantmoons.references.tag;
 
-import net.minecraft.block.Block;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.tag.TagKey;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.level.block.Block;
 import syrenyx.distantmoons.UnderDistantMoons;
 
 public abstract class DistantMoonsBlockTags {
@@ -63,6 +63,6 @@ public abstract class DistantMoonsBlockTags {
   public static final TagKey<Block> WOODEN_POLE = keyOf("wooden_pole");
 
   private static TagKey<Block> keyOf(String id) {
-    return UnderDistantMoons.tagKeyOf(id, RegistryKeys.BLOCK);
+    return UnderDistantMoons.tagKeyOf(id, Registries.BLOCK);
   }
 }

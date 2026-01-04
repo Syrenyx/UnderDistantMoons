@@ -2,11 +2,10 @@ package syrenyx.distantmoons.content.affliction.effect.entity;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.entity.Entity;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.Vec3d;
-
 import java.util.List;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.phys.Vec3;
 
 public record AllOfEntityEffect(List<AfflictionEntityEffect> effects) implements AfflictionEntityEffect {
 
@@ -23,7 +22,7 @@ public record AllOfEntityEffect(List<AfflictionEntityEffect> effects) implements
   }
 
   @Override
-  public void apply(ServerWorld world, int stage, Entity target, Vec3d pos) {
+  public void apply(ServerLevel world, int stage, Entity target, Vec3 pos) {
     this.effects.forEach(effect -> effect.apply(world, stage, target, pos));
   }
 }

@@ -2,26 +2,26 @@ package syrenyx.distantmoons.content.affliction.effect.entity;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.enchantment.EnchantmentLevelBasedValue;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.damage.DamageType;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.core.Holder;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.Mth;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageType;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.enchantment.LevelBasedValue;
+import net.minecraft.world.phys.Vec3;
 
 public record DamageEntityEffect(
-    EnchantmentLevelBasedValue minDamage,
-    EnchantmentLevelBasedValue maxDamage,
-    RegistryEntry<DamageType> damageType
+    LevelBasedValue minDamage,
+    LevelBasedValue maxDamage,
+    Holder<DamageType> damageType
 ) implements AfflictionEntityEffect {
 
   public static final MapCodec<DamageEntityEffect> CODEC = RecordCodecBuilder.mapCodec(instance -> instance
       .group(
-          EnchantmentLevelBasedValue.CODEC.fieldOf("min_damage").forGetter(DamageEntityEffect::minDamage),
-          EnchantmentLevelBasedValue.CODEC.fieldOf("max_damage").forGetter(DamageEntityEffect::maxDamage),
-          DamageType.ENTRY_CODEC.fieldOf("damage_type").forGetter(DamageEntityEffect::damageType)
+          LevelBasedValue.CODEC.fieldOf("min_damage").forGetter(DamageEntityEffect::minDamage),
+          LevelBasedValue.CODEC.fieldOf("max_damage").forGetter(DamageEntityEffect::maxDamage),
+          DamageType.CODEC.fieldOf("damage_type").forGetter(DamageEntityEffect::damageType)
       )
       .apply(instance, DamageEntityEffect::new)
   );
@@ -32,11 +32,11 @@ public record DamageEntityEffect(
   }
 
   @Override
-  public void apply(ServerWorld world, int stage, Entity target, Vec3d pos) {
-    target.damage(
+  public void apply(ServerLevel world, int stage, Entity target, Vec3 pos) {
+    target.hurtServer(
         world,
         new DamageSource(this.damageType, pos),
-        MathHelper.nextBetween(target.getRandom(), this.minDamage.getValue(stage), this.maxDamage.getValue(stage))
+        Mth.randomBetween(target.getRandom(), this.minDamage.calculate(stage), this.maxDamage.calculate(stage))
     );
   }
 }

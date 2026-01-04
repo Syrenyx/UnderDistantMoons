@@ -2,32 +2,30 @@ package syrenyx.distantmoons.datagen.loot_table;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
-import net.minecraft.block.Block;
-import net.minecraft.block.InfestedBlock;
-import net.minecraft.block.enums.SlabType;
-import net.minecraft.loot.LootPool;
-import net.minecraft.loot.LootTable;
-import net.minecraft.loot.condition.BlockStatePropertyLootCondition;
-import net.minecraft.loot.condition.ReferenceLootCondition;
-import net.minecraft.loot.entry.ItemEntry;
-import net.minecraft.loot.function.ExplosionDecayLootFunction;
-import net.minecraft.loot.function.SetCountLootFunction;
-import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
-import net.minecraft.predicate.StatePredicate;
-import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.state.property.Properties;
-import net.minecraft.util.DyeColor;
+import net.minecraft.advancements.criterion.StatePropertiesPredicate;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.InfestedBlock;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.SlabType;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.functions.ApplyExplosionDecay;
+import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
+import net.minecraft.world.level.storage.loot.predicates.ConditionReference;
+import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import syrenyx.distantmoons.content.block.WallSlabBlock;
 import syrenyx.distantmoons.content.block.block_state_enums.WallSlabShape;
 import syrenyx.distantmoons.initializers.DistantMoonsBlocks;
 import syrenyx.distantmoons.references.data.DistantMoonsPredicates;
 
-import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 public class DistantMoonsBlockLootTableProvider extends FabricBlockLootTableProvider {
 
-  public DistantMoonsBlockLootTableProvider(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
+  public DistantMoonsBlockLootTableProvider(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
     super(dataOutput, registryLookup);
   }
 
@@ -35,66 +33,66 @@ public class DistantMoonsBlockLootTableProvider extends FabricBlockLootTableProv
   public void generate() {
 
     //SIMPLE LOOT TABLES
-    this.addDrop(DistantMoonsBlocks.ACACIA_BEAM);
-    this.addDrop(DistantMoonsBlocks.ACACIA_POLE);
-    this.addDrop(DistantMoonsBlocks.BAMBOO_POLE);
-    this.addDrop(DistantMoonsBlocks.BIRCH_BEAM);
-    this.addDrop(DistantMoonsBlocks.BIRCH_POLE);
-    this.addDrop(DistantMoonsBlocks.CHARCOAL_BLOCK);
-    this.addDrop(DistantMoonsBlocks.CHERRY_BEAM);
-    this.addDrop(DistantMoonsBlocks.CHERRY_POLE);
-    this.addDrop(DistantMoonsBlocks.COKE_BLOCK);
-    this.addDrop(DistantMoonsBlocks.CRIMSON_BEAM);
-    this.addDrop(DistantMoonsBlocks.CRIMSON_POLE);
-    this.addDrop(DistantMoonsBlocks.CRUDE_DEEP_IRON_BLOCK);
-    this.addDrop(DistantMoonsBlocks.DARK_OAK_BEAM);
-    this.addDrop(DistantMoonsBlocks.DARK_OAK_POLE);
-    this.addDrop(DistantMoonsBlocks.DEEP_IRON_BARS);
-    this.addDrop(DistantMoonsBlocks.DEEP_IRON_CHAIN);
-    this.addDrop(DistantMoonsBlocks.DEEP_IRON_FENCE);
-    this.addDrop(DistantMoonsBlocks.DEEP_IRON_LADDER);
-    this.addDrop(DistantMoonsBlocks.DEEP_IRON_TRAPDOOR);
-    this.addDrop(DistantMoonsBlocks.EXPOSED_IRON_BLOCK);
-    this.addDrop(DistantMoonsBlocks.FIXED_DEEP_IRON_LADDER);
-    this.addDrop(DistantMoonsBlocks.FIXED_IRON_LADDER);
-    this.addDrop(DistantMoonsBlocks.FIXED_WROUGHT_IRON_LADDER);
-    this.addDrop(DistantMoonsBlocks.GRAY_PRISMARINE);
-    this.addDrop(DistantMoonsBlocks.GRAY_PRISMARINE_STAIRS);
-    this.addDrop(DistantMoonsBlocks.IRON_FENCE);
-    this.addDrop(DistantMoonsBlocks.IRON_LADDER);
-    this.addDrop(DistantMoonsBlocks.JUNGLE_BEAM);
-    this.addDrop(DistantMoonsBlocks.JUNGLE_POLE);
-    this.addDrop(DistantMoonsBlocks.MANGROVE_BEAM);
-    this.addDrop(DistantMoonsBlocks.MANGROVE_POLE);
-    this.addDrop(DistantMoonsBlocks.OAK_BEAM);
-    this.addDrop(DistantMoonsBlocks.OAK_POLE);
-    this.addDrop(DistantMoonsBlocks.PALE_OAK_BEAM);
-    this.addDrop(DistantMoonsBlocks.PALE_OAK_POLE);
-    this.addDrop(DistantMoonsBlocks.PALE_PRISMARINE);
-    this.addDrop(DistantMoonsBlocks.PALE_PRISMARINE_BRICK_STAIRS);
-    this.addDrop(DistantMoonsBlocks.PALE_PRISMARINE_BRICK_STAIRS);
-    this.addDrop(DistantMoonsBlocks.PALE_PRISMARINE_BRICKS);
-    this.addDrop(DistantMoonsBlocks.PALE_PRISMARINE_TILE_STAIRS);
-    this.addDrop(DistantMoonsBlocks.PALE_PRISMARINE_TILES);
-    this.addDrop(DistantMoonsBlocks.PALE_PRISMARINE_WALL);
-    this.addDrop(DistantMoonsBlocks.PRISMARINE_TILE_STAIRS);
-    this.addDrop(DistantMoonsBlocks.PRISMARINE_TILES);
-    this.addDrop(DistantMoonsBlocks.RAW_DEEP_IRON_BLOCK);
-    this.addDrop(DistantMoonsBlocks.REFINED_DEEP_IRON_BLOCK);
-    this.addDrop(DistantMoonsBlocks.ROPE_LADDER);
-    this.addDrop(DistantMoonsBlocks.RUSTED_IRON_BLOCK);
-    this.addDrop(DistantMoonsBlocks.SPRUCE_BEAM);
-    this.addDrop(DistantMoonsBlocks.SPRUCE_POLE);
-    this.addDrop(DistantMoonsBlocks.WARPED_BEAM);
-    this.addDrop(DistantMoonsBlocks.WARPED_POLE);
-    this.addDrop(DistantMoonsBlocks.WAXED_EXPOSED_IRON_BLOCK);
-    this.addDrop(DistantMoonsBlocks.WAXED_IRON_BLOCK);
-    this.addDrop(DistantMoonsBlocks.WAXED_RUSTED_IRON_BLOCK);
-    this.addDrop(DistantMoonsBlocks.WAXED_WEATHERED_IRON_BLOCK);
-    this.addDrop(DistantMoonsBlocks.WEATHERED_IRON_BLOCK);
-    this.addDrop(DistantMoonsBlocks.WROUGHT_IRON_BARS);
-    this.addDrop(DistantMoonsBlocks.WROUGHT_IRON_FENCE);
-    this.addDrop(DistantMoonsBlocks.WROUGHT_IRON_LADDER);
+    this.dropSelf(DistantMoonsBlocks.ACACIA_BEAM);
+    this.dropSelf(DistantMoonsBlocks.ACACIA_POLE);
+    this.dropSelf(DistantMoonsBlocks.BAMBOO_POLE);
+    this.dropSelf(DistantMoonsBlocks.BIRCH_BEAM);
+    this.dropSelf(DistantMoonsBlocks.BIRCH_POLE);
+    this.dropSelf(DistantMoonsBlocks.CHARCOAL_BLOCK);
+    this.dropSelf(DistantMoonsBlocks.CHERRY_BEAM);
+    this.dropSelf(DistantMoonsBlocks.CHERRY_POLE);
+    this.dropSelf(DistantMoonsBlocks.COKE_BLOCK);
+    this.dropSelf(DistantMoonsBlocks.CRIMSON_BEAM);
+    this.dropSelf(DistantMoonsBlocks.CRIMSON_POLE);
+    this.dropSelf(DistantMoonsBlocks.CRUDE_DEEP_IRON_BLOCK);
+    this.dropSelf(DistantMoonsBlocks.DARK_OAK_BEAM);
+    this.dropSelf(DistantMoonsBlocks.DARK_OAK_POLE);
+    this.dropSelf(DistantMoonsBlocks.DEEP_IRON_BARS);
+    this.dropSelf(DistantMoonsBlocks.DEEP_IRON_CHAIN);
+    this.dropSelf(DistantMoonsBlocks.DEEP_IRON_FENCE);
+    this.dropSelf(DistantMoonsBlocks.DEEP_IRON_LADDER);
+    this.dropSelf(DistantMoonsBlocks.DEEP_IRON_TRAPDOOR);
+    this.dropSelf(DistantMoonsBlocks.EXPOSED_IRON_BLOCK);
+    this.dropSelf(DistantMoonsBlocks.FIXED_DEEP_IRON_LADDER);
+    this.dropSelf(DistantMoonsBlocks.FIXED_IRON_LADDER);
+    this.dropSelf(DistantMoonsBlocks.FIXED_WROUGHT_IRON_LADDER);
+    this.dropSelf(DistantMoonsBlocks.GRAY_PRISMARINE);
+    this.dropSelf(DistantMoonsBlocks.GRAY_PRISMARINE_STAIRS);
+    this.dropSelf(DistantMoonsBlocks.IRON_FENCE);
+    this.dropSelf(DistantMoonsBlocks.IRON_LADDER);
+    this.dropSelf(DistantMoonsBlocks.JUNGLE_BEAM);
+    this.dropSelf(DistantMoonsBlocks.JUNGLE_POLE);
+    this.dropSelf(DistantMoonsBlocks.MANGROVE_BEAM);
+    this.dropSelf(DistantMoonsBlocks.MANGROVE_POLE);
+    this.dropSelf(DistantMoonsBlocks.OAK_BEAM);
+    this.dropSelf(DistantMoonsBlocks.OAK_POLE);
+    this.dropSelf(DistantMoonsBlocks.PALE_OAK_BEAM);
+    this.dropSelf(DistantMoonsBlocks.PALE_OAK_POLE);
+    this.dropSelf(DistantMoonsBlocks.PALE_PRISMARINE);
+    this.dropSelf(DistantMoonsBlocks.PALE_PRISMARINE_BRICK_STAIRS);
+    this.dropSelf(DistantMoonsBlocks.PALE_PRISMARINE_BRICK_STAIRS);
+    this.dropSelf(DistantMoonsBlocks.PALE_PRISMARINE_BRICKS);
+    this.dropSelf(DistantMoonsBlocks.PALE_PRISMARINE_TILE_STAIRS);
+    this.dropSelf(DistantMoonsBlocks.PALE_PRISMARINE_TILES);
+    this.dropSelf(DistantMoonsBlocks.PALE_PRISMARINE_WALL);
+    this.dropSelf(DistantMoonsBlocks.PRISMARINE_TILE_STAIRS);
+    this.dropSelf(DistantMoonsBlocks.PRISMARINE_TILES);
+    this.dropSelf(DistantMoonsBlocks.RAW_DEEP_IRON_BLOCK);
+    this.dropSelf(DistantMoonsBlocks.REFINED_DEEP_IRON_BLOCK);
+    this.dropSelf(DistantMoonsBlocks.ROPE_LADDER);
+    this.dropSelf(DistantMoonsBlocks.RUSTED_IRON_BLOCK);
+    this.dropSelf(DistantMoonsBlocks.SPRUCE_BEAM);
+    this.dropSelf(DistantMoonsBlocks.SPRUCE_POLE);
+    this.dropSelf(DistantMoonsBlocks.WARPED_BEAM);
+    this.dropSelf(DistantMoonsBlocks.WARPED_POLE);
+    this.dropSelf(DistantMoonsBlocks.WAXED_EXPOSED_IRON_BLOCK);
+    this.dropSelf(DistantMoonsBlocks.WAXED_IRON_BLOCK);
+    this.dropSelf(DistantMoonsBlocks.WAXED_RUSTED_IRON_BLOCK);
+    this.dropSelf(DistantMoonsBlocks.WAXED_WEATHERED_IRON_BLOCK);
+    this.dropSelf(DistantMoonsBlocks.WEATHERED_IRON_BLOCK);
+    this.dropSelf(DistantMoonsBlocks.WROUGHT_IRON_BARS);
+    this.dropSelf(DistantMoonsBlocks.WROUGHT_IRON_FENCE);
+    this.dropSelf(DistantMoonsBlocks.WROUGHT_IRON_LADDER);
 
     //INFESTED BLOCK LOOT TABLES
     this.addInfestedBlockDrop(DistantMoonsBlocks.INFESTED_CHISELED_DEEPSLATE);
@@ -239,21 +237,21 @@ public class DistantMoonsBlockLootTableProvider extends FabricBlockLootTableProv
 
   private void addInfestedBlockDrop(Block block) {
     if (!(block instanceof InfestedBlock infestedBlock)) throw new IllegalArgumentException("Cannot register Infested Block drop for non-infested block.");
-    this.addDrop(block, LootTable.builder().pool(LootPool.builder()
-        .rolls(new ConstantLootNumberProvider(1.0F))
-        .with(ItemEntry.builder(infestedBlock.getRegularBlock().asItem()))
-        .conditionally(ReferenceLootCondition.builder(DistantMoonsPredicates.SILK_TOUCH_TOOL))
+    this.add(block, LootTable.lootTable().withPool(LootPool.lootPool()
+        .setRolls(new ConstantValue(1.0F))
+        .add(LootItem.lootTableItem(infestedBlock.getHostBlock().asItem()))
+        .when(ConditionReference.conditionReference(DistantMoonsPredicates.SILK_TOUCH_TOOL))
     ));
   }
 
   private void addSlabDrop(Block block) {
-    this.addDrop(block, LootTable.builder().pool(LootPool.builder()
-        .rolls(new ConstantLootNumberProvider(1.0F))
-        .with(ItemEntry.builder(block.asItem())
-            .apply(ExplosionDecayLootFunction.builder())
-            .apply(SetCountLootFunction.builder(new ConstantLootNumberProvider(2.0F))
-                .conditionally(BlockStatePropertyLootCondition.builder(block).properties(StatePredicate.Builder.create()
-                    .exactMatch(Properties.SLAB_TYPE, SlabType.DOUBLE))
+    this.add(block, LootTable.lootTable().withPool(LootPool.lootPool()
+        .setRolls(new ConstantValue(1.0F))
+        .add(LootItem.lootTableItem(block.asItem())
+            .apply(ApplyExplosionDecay.explosionDecay())
+            .apply(SetItemCountFunction.setCount(new ConstantValue(2.0F))
+                .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties()
+                    .hasProperty(BlockStateProperties.SLAB_TYPE, SlabType.DOUBLE))
                 )
             )
         )
@@ -261,13 +259,13 @@ public class DistantMoonsBlockLootTableProvider extends FabricBlockLootTableProv
   }
 
   private void addWallSlabDrop(Block block) {
-    this.addDrop(block, LootTable.builder().pool(LootPool.builder()
-        .rolls(new ConstantLootNumberProvider(1.0F))
-        .with(ItemEntry.builder(block.asItem())
-            .apply(ExplosionDecayLootFunction.builder())
-            .apply(SetCountLootFunction.builder(new ConstantLootNumberProvider(2.0F))
-                .conditionally(BlockStatePropertyLootCondition.builder(block).properties(StatePredicate.Builder.create()
-                    .exactMatch(WallSlabBlock.SHAPE, WallSlabShape.DOUBLE))
+    this.add(block, LootTable.lootTable().withPool(LootPool.lootPool()
+        .setRolls(new ConstantValue(1.0F))
+        .add(LootItem.lootTableItem(block.asItem())
+            .apply(ApplyExplosionDecay.explosionDecay())
+            .apply(SetItemCountFunction.setCount(new ConstantValue(2.0F))
+                .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties()
+                    .hasProperty(WallSlabBlock.SHAPE, WallSlabShape.DOUBLE))
                 )
             )
         )

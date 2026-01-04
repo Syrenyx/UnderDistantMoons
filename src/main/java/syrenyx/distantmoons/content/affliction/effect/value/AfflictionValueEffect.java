@@ -2,16 +2,16 @@ package syrenyx.distantmoons.content.affliction.effect.value;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
-import net.minecraft.util.math.random.Random;
 import syrenyx.distantmoons.initializers.DistantMoonsRegistries;
 
 import java.util.function.Function;
+import net.minecraft.util.RandomSource;
 
 public interface AfflictionValueEffect {
 
-  Codec<AfflictionValueEffect> CODEC = DistantMoonsRegistries.AFFLICTION_VALUE_EFFECT_REGISTRY.getCodec().dispatch(AfflictionValueEffect::getCodec, Function.identity());
+  Codec<AfflictionValueEffect> CODEC = DistantMoonsRegistries.AFFLICTION_VALUE_EFFECT_REGISTRY.byNameCodec().dispatch(AfflictionValueEffect::getCodec, Function.identity());
 
   MapCodec<? extends AfflictionValueEffect> getCodec();
 
-  float apply(int stage, Random random, float input);
+  float apply(int stage, RandomSource random, float input);
 }

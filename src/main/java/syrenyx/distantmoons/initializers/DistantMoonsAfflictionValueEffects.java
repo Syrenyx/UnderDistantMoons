@@ -1,7 +1,7 @@
 package syrenyx.distantmoons.initializers;
 
 import com.mojang.serialization.MapCodec;
-import net.minecraft.registry.Registry;
+import net.minecraft.core.Registry;
 import syrenyx.distantmoons.UnderDistantMoons;
 import syrenyx.distantmoons.content.affliction.effect.value.*;
 

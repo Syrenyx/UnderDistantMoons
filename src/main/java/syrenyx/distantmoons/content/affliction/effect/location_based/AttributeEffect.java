@@ -3,30 +3,30 @@ package syrenyx.distantmoons.content.affliction.effect.location_based;
 import com.google.common.collect.HashMultimap;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.enchantment.EnchantmentLevelBasedValue;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.attribute.EntityAttribute;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.core.Holder;
+import net.minecraft.resources.Identifier;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.item.enchantment.LevelBasedValue;
+import net.minecraft.world.phys.Vec3;
 import syrenyx.distantmoons.content.affliction.AfflictionInstance;
 
 public record AttributeEffect(
     Identifier id,
-    RegistryEntry<EntityAttribute> attribute,
-    EnchantmentLevelBasedValue amount,
-    EntityAttributeModifier.Operation operation
+    Holder<Attribute> attribute,
+    LevelBasedValue amount,
+    AttributeModifier.Operation operation
 ) implements AfflictionLocationBasedEffect {
 
   public static final MapCodec<AttributeEffect> CODEC = RecordCodecBuilder.mapCodec(instance -> instance
       .group(
           Identifier.CODEC.fieldOf("id").forGetter(AttributeEffect::id),
-          EntityAttribute.CODEC.fieldOf("attribute").forGetter(AttributeEffect::attribute),
-          EnchantmentLevelBasedValue.CODEC.fieldOf("amount").forGetter(AttributeEffect::amount),
-          EntityAttributeModifier.Operation.CODEC.fieldOf("operation").forGetter(AttributeEffect::operation)
+          Attribute.CODEC.fieldOf("attribute").forGetter(AttributeEffect::attribute),
+          LevelBasedValue.CODEC.fieldOf("amount").forGetter(AttributeEffect::amount),
+          AttributeModifier.Operation.CODEC.fieldOf("operation").forGetter(AttributeEffect::operation)
       )
       .apply(instance, AttributeEffect::new)
   );
@@ -37,25 +37,25 @@ public record AttributeEffect(
   }
 
   @Override
-  public void apply(ServerWorld world, int stage, Entity target, Vec3d pos, AfflictionInstance instance) {
+  public void apply(ServerLevel world, int stage, Entity target, Vec3 pos, AfflictionInstance instance) {
     if (!(target instanceof LivingEntity livingEntity) || instance.activeAttributeEffects.contains(this)) return;
-    livingEntity.getAttributes().addTemporaryModifiers(this.getModifiers(stage, instance.affliction().getIdAsString()));
+    livingEntity.getAttributes().addTransientAttributeModifiers(this.getModifiers(stage, instance.affliction().getRegisteredName()));
     instance.activeAttributeEffects.add(this);
   }
 
   @Override
-  public void remove(ServerWorld world, int stage, Entity target, Vec3d pos, AfflictionInstance instance) {
+  public void remove(ServerLevel world, int stage, Entity target, Vec3 pos, AfflictionInstance instance) {
     if (target instanceof LivingEntity livingEntity) {
-      livingEntity.getAttributes().removeModifiers(this.getModifiers(stage, instance.affliction().getIdAsString()));
+      livingEntity.getAttributes().removeAttributeModifiers(this.getModifiers(stage, instance.affliction().getRegisteredName()));
       instance.activeAttributeEffects.remove(this);
     }
   }
 
-  private HashMultimap<RegistryEntry<EntityAttribute>, EntityAttributeModifier> getModifiers(int level, String afflictionId) {
-    HashMultimap<RegistryEntry<EntityAttribute>, EntityAttributeModifier> hashMultimap = HashMultimap.create();
-    EntityAttributeModifier modifier = new EntityAttributeModifier(
-        this.id.withSuffixedPath("/affliction/" + afflictionId.replace(":", "/")),
-        this.amount().getValue(level),
+  private HashMultimap<Holder<Attribute>, AttributeModifier> getModifiers(int level, String afflictionId) {
+    HashMultimap<Holder<Attribute>, AttributeModifier> hashMultimap = HashMultimap.create();
+    AttributeModifier modifier = new AttributeModifier(
+        this.id.withSuffix("/affliction/" + afflictionId.replace(":", "/")),
+        this.amount().calculate(level),
         this.operation()
     );
     hashMultimap.put(this.attribute, modifier);

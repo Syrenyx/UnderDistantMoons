@@ -1,12 +1,12 @@
 package syrenyx.distantmoons.content.block.block_state_enums;
 
-import net.minecraft.util.BlockMirror;
-import net.minecraft.util.BlockRotation;
-import net.minecraft.util.StringIdentifiable;
-import net.minecraft.util.math.Direction;
+import net.minecraft.core.Direction;
+import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
 import org.jetbrains.annotations.Nullable;
 
-public enum RopeLadderDirection implements StringIdentifiable {
+public enum RopeLadderDirection implements StringRepresentable {
   NORTH("north", false),
   EAST("east", false),
   SOUTH("south", false),
@@ -23,7 +23,7 @@ public enum RopeLadderDirection implements StringIdentifiable {
   }
 
   @Override
-  public String asString() {
+  public String getSerializedName() {
     return this.id;
   }
 
@@ -62,7 +62,7 @@ public enum RopeLadderDirection implements StringIdentifiable {
     };
   }
 
-  public RopeLadderDirection rotate(BlockRotation rotation) {
+  public RopeLadderDirection rotate(Rotation rotation) {
     return switch (rotation) {
       case NONE -> this;
       case CLOCKWISE_90 -> switch (this) {
@@ -91,7 +91,7 @@ public enum RopeLadderDirection implements StringIdentifiable {
     };
   }
 
-  public RopeLadderDirection mirror(BlockMirror mirror) {
+  public RopeLadderDirection mirror(Mirror mirror) {
     return switch (mirror) {
       case NONE -> this;
       case LEFT_RIGHT -> switch (this) {

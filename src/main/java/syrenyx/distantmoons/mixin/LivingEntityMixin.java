@@ -1,8 +1,8 @@
 package syrenyx.distantmoons.mixin;
 
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.server.world.ServerWorld;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.LivingEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -16,12 +16,12 @@ public abstract class LivingEntityMixin {
   @Inject(at = @At("HEAD"), method = "baseTick")
   public void distantMoons$baseTick(CallbackInfo callbackInfo) {
     LivingEntity entity = (LivingEntity) (Object) this;
-    if (entity.getEntityWorld() instanceof ServerWorld) AfflictionManager.handleTick(entity);
+    if (entity.level() instanceof ServerLevel) AfflictionManager.handleTick(entity);
   }
 
-  @Inject(at = @At("HEAD"), method = "onDeath")
-  public void distantMoons$onDeath(DamageSource damageSource, CallbackInfo callbackInfo) {
+  @Inject(at = @At("HEAD"), method = "die")
+  public void distantMoons$die(DamageSource damageSource, CallbackInfo callbackInfo) {
     LivingEntity entity = (LivingEntity) (Object) this;
-    if (entity.getEntityWorld() instanceof ServerWorld) AfflictionManager.handlePostDamage(entity, damageSource, DistantMoonsAfflictionEffectComponents.POST_DEATH);
+    if (entity.level() instanceof ServerLevel) AfflictionManager.handlePostDamage(entity, damageSource, DistantMoonsAfflictionEffectComponents.POST_DEATH);
   }
 }

@@ -1,71 +1,71 @@
 package syrenyx.distantmoons.content.block;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockSetType;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.DoorBlock;
-import net.minecraft.block.enums.DoorHinge;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.WorldView;
-import net.minecraft.world.tick.ScheduledTickView;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.DoorBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockSetType;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.DoorHingeSide;
 import org.jetbrains.annotations.Nullable;
 import syrenyx.distantmoons.references.tag.DistantMoonsBlockTags;
 
 public class MetalBarDoorBlock extends DoorBlock {
 
-  public static final BooleanProperty DOUBLE = BooleanProperty.of("double");
+  public static final BooleanProperty DOUBLE = BooleanProperty.create("double");
 
-  public MetalBarDoorBlock(BlockSetType type, Settings settings) {
+  public MetalBarDoorBlock(BlockSetType type, Properties settings) {
     super(type, settings);
-    this.setDefaultState(this.getDefaultState()
-        .with(DOUBLE, false)
+    this.registerDefaultState(this.defaultBlockState()
+        .setValue(DOUBLE, false)
     );
   }
 
   @Override
-  protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-    super.appendProperties(builder);
+  protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+    super.createBlockStateDefinition(builder);
     builder.add(DOUBLE);
   }
 
   @Nullable
   @Override
-  public BlockState getPlacementState(ItemPlacementContext context) {
-    BlockState state = super.getPlacementState(context);
+  public BlockState getStateForPlacement(BlockPlaceContext context) {
+    BlockState state = super.getStateForPlacement(context);
     if (state == null) return null;
-    return updateState(context.getWorld(), context.getBlockPos(), state);
+    return updateState(context.getLevel(), context.getClickedPos(), state);
   }
 
   @Override
-  protected BlockState getStateForNeighborUpdate(
+  protected BlockState updateShape(
       BlockState state,
-      WorldView world,
-      ScheduledTickView tickView,
+      LevelReader world,
+      ScheduledTickAccess tickView,
       BlockPos pos,
       Direction direction,
       BlockPos neighborPos,
       BlockState neighborState,
-      Random random
+      RandomSource random
   ) {
-    return updateState(world, pos, super.getStateForNeighborUpdate(state, world, tickView, pos, direction, neighborPos, neighborState, random));
+    return updateState(world, pos, super.updateShape(state, world, tickView, pos, direction, neighborPos, neighborState, random));
   }
 
-  private BlockState updateState(BlockView world, BlockPos pos, BlockState state) {
-    return state.getBlock() instanceof MetalBarDoorBlock ? state.with(DOUBLE, canConnectTo(world, pos, state)) : state;
+  private BlockState updateState(BlockGetter world, BlockPos pos, BlockState state) {
+    return state.getBlock() instanceof MetalBarDoorBlock ? state.setValue(DOUBLE, canConnectTo(world, pos, state)) : state;
   }
 
-  private boolean canConnectTo(BlockView world, BlockPos pos, BlockState state) {
-    Direction offset = state.get(DoorBlock.FACING).rotateClockwise(Direction.Axis.Y);
-    BlockState neighborState = world.getBlockState(pos.offset(state.get(DoorBlock.HINGE) == DoorHinge.RIGHT ? offset.getOpposite() : offset));
-    if (!(neighborState.getBlock() instanceof DoorBlock) || state.isIn(DistantMoonsBlockTags.METAL_BAR_DOOR_NEVER_CONNECTS_TO)) return false;
-    return state.get(DoorBlock.FACING) == neighborState.get(DoorBlock.FACING)
-        && state.get(DoorBlock.HALF) == neighborState.get(DoorBlock.HALF)
-        && state.get(DoorBlock.HINGE) != neighborState.get(DoorBlock.HINGE);
+  private boolean canConnectTo(BlockGetter world, BlockPos pos, BlockState state) {
+    Direction offset = state.getValue(DoorBlock.FACING).getClockWise(Direction.Axis.Y);
+    BlockState neighborState = world.getBlockState(pos.relative(state.getValue(DoorBlock.HINGE) == DoorHingeSide.RIGHT ? offset.getOpposite() : offset));
+    if (!(neighborState.getBlock() instanceof DoorBlock) || state.is(DistantMoonsBlockTags.METAL_BAR_DOOR_NEVER_CONNECTS_TO)) return false;
+    return state.getValue(DoorBlock.FACING) == neighborState.getValue(DoorBlock.FACING)
+        && state.getValue(DoorBlock.HALF) == neighborState.getValue(DoorBlock.HALF)
+        && state.getValue(DoorBlock.HINGE) != neighborState.getValue(DoorBlock.HINGE);
   }
 }

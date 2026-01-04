@@ -1,10 +1,10 @@
 package syrenyx.distantmoons.initializers;
 
 import com.mojang.serialization.MapCodec;
-import net.minecraft.loot.entry.LootPoolEntry;
-import net.minecraft.loot.entry.LootPoolEntryType;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
+import net.minecraft.world.level.storage.loot.entries.LootPoolEntryType;
 import syrenyx.distantmoons.UnderDistantMoons;
 import syrenyx.distantmoons.content.loot.entry.*;
 
@@ -20,8 +20,8 @@ public class DistantMoonsLootPoolEntryTypes {
   public static final LootPoolEntryType SPAWN_PARTICLES = register("spawn_particles", SpawnParticlesEntry.CODEC);
   public static final LootPoolEntryType SUMMON_ENTITY = register("summon_entity", SummonEntityEntry.CODEC);
 
-  private static LootPoolEntryType register(String id, MapCodec<? extends LootPoolEntry> codec) {
-    return Registry.register(Registries.LOOT_POOL_ENTRY_TYPE, UnderDistantMoons.identifierOf(id), new LootPoolEntryType(codec));
+  private static LootPoolEntryType register(String id, MapCodec<? extends LootPoolEntryContainer> codec) {
+    return Registry.register(BuiltInRegistries.LOOT_POOL_ENTRY_TYPE, UnderDistantMoons.identifierOf(id), new LootPoolEntryType(codec));
   }
 
   public static void initialize() {}

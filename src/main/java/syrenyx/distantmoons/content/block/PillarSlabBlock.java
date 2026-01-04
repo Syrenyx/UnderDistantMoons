@@ -1,89 +1,89 @@
 package syrenyx.distantmoons.content.block;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.ShapeContext;
-import net.minecraft.block.Waterloggable;
-import net.minecraft.block.enums.SlabType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.pathing.NavigationType;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.item.ItemStack;
-import net.minecraft.registry.tag.FluidTags;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.EnumProperty;
-import net.minecraft.state.property.Properties;
-import net.minecraft.util.BlockMirror;
-import net.minecraft.util.BlockRotation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.WorldAccess;
-import net.minecraft.world.WorldView;
-import net.minecraft.world.tick.ScheduledTickView;
 import org.jetbrains.annotations.Nullable;
 import syrenyx.distantmoons.utility.VoxelShapeUtil;
 
 import java.util.Map;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.block.state.properties.SlabType;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class PillarSlabBlock extends Block implements Waterloggable {
+public class PillarSlabBlock extends Block implements SimpleWaterloggedBlock {
 
-  public static final EnumProperty<Direction.Axis> AXIS = Properties.AXIS;
-  public static final EnumProperty<SlabType> TYPE = Properties.SLAB_TYPE;
-  public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
-  private static final Map<Direction.Axis, VoxelShape> BOTTOM_SHAPES_BY_AXIS = VoxelShapeUtil.createAxisShapeMap(Block.createColumnShape(16.0, 0.0, 8.0));
-  private static final Map<Direction.Axis, VoxelShape> TOP_SHAPES_BY_AXIS = VoxelShapeUtil.createAxisShapeMap(Block.createColumnShape(16.0, 8.0, 16.0));
+  public static final EnumProperty<Direction.Axis> AXIS = BlockStateProperties.AXIS;
+  public static final EnumProperty<SlabType> TYPE = BlockStateProperties.SLAB_TYPE;
+  public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+  private static final Map<Direction.Axis, VoxelShape> BOTTOM_SHAPES_BY_AXIS = VoxelShapeUtil.createAxisShapeMap(Block.column(16.0, 0.0, 8.0));
+  private static final Map<Direction.Axis, VoxelShape> TOP_SHAPES_BY_AXIS = VoxelShapeUtil.createAxisShapeMap(Block.column(16.0, 8.0, 16.0));
 
-  public PillarSlabBlock(Settings settings) {
+  public PillarSlabBlock(Properties settings) {
     super(settings);
-    this.setDefaultState(this.getDefaultState().
-        with(AXIS, Direction.Axis.Y).
-        with(TYPE, SlabType.BOTTOM).
-        with(WATERLOGGED, false)
+    this.registerDefaultState(this.defaultBlockState().
+        setValue(AXIS, Direction.Axis.Y).
+        setValue(TYPE, SlabType.BOTTOM).
+        setValue(WATERLOGGED, false)
     );
   }
 
   @Override
-  protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+  protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
     builder.add(AXIS, TYPE, WATERLOGGED);
   }
 
   @Override
   protected FluidState getFluidState(BlockState state) {
-    return state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
+    return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
   }
 
   @Override
-  public boolean canFillWithFluid(@Nullable LivingEntity filler, BlockView world, BlockPos pos, BlockState state, Fluid fluid) {
-    return state.get(TYPE) != SlabType.DOUBLE && Waterloggable.super.canFillWithFluid(filler, world, pos, state, fluid);
+  public boolean canPlaceLiquid(@Nullable LivingEntity filler, BlockGetter world, BlockPos pos, BlockState state, Fluid fluid) {
+    return state.getValue(TYPE) != SlabType.DOUBLE && SimpleWaterloggedBlock.super.canPlaceLiquid(filler, world, pos, state, fluid);
   }
 
   @Override
-  public boolean tryFillWithFluid(WorldAccess world, BlockPos pos, BlockState state, FluidState fluidState) {
-    return state.get(TYPE) != SlabType.DOUBLE && Waterloggable.super.tryFillWithFluid(world, pos, state, fluidState);
+  public boolean placeLiquid(LevelAccessor world, BlockPos pos, BlockState state, FluidState fluidState) {
+    return state.getValue(TYPE) != SlabType.DOUBLE && SimpleWaterloggedBlock.super.placeLiquid(world, pos, state, fluidState);
   }
 
   @Override
-  protected boolean canPathfindThrough(BlockState state, NavigationType type) {
-    if (type == NavigationType.WATER) return state.getFluidState().isIn(FluidTags.WATER);
+  protected boolean isPathfindable(BlockState state, PathComputationType type) {
+    if (type == PathComputationType.WATER) return state.getFluidState().is(FluidTags.WATER);
     return false;
   }
 
   @Override
-  protected boolean canReplace(BlockState state, ItemPlacementContext context) {
-    ItemStack itemStack = context.getStack();
-    SlabType slabType = state.get(TYPE);
-    if (slabType == SlabType.DOUBLE || !itemStack.isOf(this.asItem())) return false;
-    if (context.canReplaceExisting()) {
-      Direction placementDirection = context.getSide();
-      return switch (state.get(AXIS)) {
+  protected boolean canBeReplaced(BlockState state, BlockPlaceContext context) {
+    ItemStack itemStack = context.getItemInHand();
+    SlabType slabType = state.getValue(TYPE);
+    if (slabType == SlabType.DOUBLE || !itemStack.is(this.asItem())) return false;
+    if (context.replacingClickedOnBlock()) {
+      Direction placementDirection = context.getClickedFace();
+      return switch (state.getValue(AXIS)) {
         case X -> slabType == SlabType.BOTTOM ? placementDirection == Direction.EAST : placementDirection == Direction.WEST;
         case Y -> slabType == SlabType.BOTTOM ? placementDirection == Direction.UP : placementDirection == Direction.DOWN;
         case Z -> slabType == SlabType.BOTTOM ? placementDirection == Direction.NORTH : placementDirection == Direction.SOUTH;
@@ -93,65 +93,65 @@ public class PillarSlabBlock extends Block implements Waterloggable {
   }
 
   @Override
-  protected VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-    return switch (state.get(TYPE)) {
-      case TOP -> TOP_SHAPES_BY_AXIS.get(state.get(AXIS));
-      case BOTTOM -> BOTTOM_SHAPES_BY_AXIS.get(state.get(AXIS));
-      case DOUBLE -> VoxelShapes.fullCube();
+  protected VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+    return switch (state.getValue(TYPE)) {
+      case TOP -> TOP_SHAPES_BY_AXIS.get(state.getValue(AXIS));
+      case BOTTOM -> BOTTOM_SHAPES_BY_AXIS.get(state.getValue(AXIS));
+      case DOUBLE -> Shapes.block();
     };
   }
 
   @Nullable @Override
-  public BlockState getPlacementState(ItemPlacementContext context) {
-    BlockPos pos = context.getBlockPos();
-    BlockState currentState = context.getWorld().getBlockState(pos);
-    if (currentState.isOf(this)) return currentState.with(TYPE, SlabType.DOUBLE).with(WATERLOGGED, false);
-    BlockState state = this.getDefaultState().with(WATERLOGGED, context.getWorld().getFluidState(pos).getFluid() == Fluids.WATER);
-    Direction placementDirection = context.getSide();
+  public BlockState getStateForPlacement(BlockPlaceContext context) {
+    BlockPos pos = context.getClickedPos();
+    BlockState currentState = context.getLevel().getBlockState(pos);
+    if (currentState.is(this)) return currentState.setValue(TYPE, SlabType.DOUBLE).setValue(WATERLOGGED, false);
+    BlockState state = this.defaultBlockState().setValue(WATERLOGGED, context.getLevel().getFluidState(pos).getType() == Fluids.WATER);
+    Direction placementDirection = context.getClickedFace();
     return switch (placementDirection) {
-      case NORTH -> state.with(AXIS, Direction.Axis.Z).with(TYPE, SlabType.BOTTOM);
-      case EAST -> state.with(AXIS, Direction.Axis.X).with(TYPE, SlabType.BOTTOM);
-      case SOUTH -> state.with(AXIS, Direction.Axis.Z).with(TYPE, SlabType.TOP);
-      case WEST -> state.with(AXIS, Direction.Axis.X).with(TYPE, SlabType.TOP);
-      case DOWN -> state.with(TYPE, SlabType.TOP);
+      case NORTH -> state.setValue(AXIS, Direction.Axis.Z).setValue(TYPE, SlabType.BOTTOM);
+      case EAST -> state.setValue(AXIS, Direction.Axis.X).setValue(TYPE, SlabType.BOTTOM);
+      case SOUTH -> state.setValue(AXIS, Direction.Axis.Z).setValue(TYPE, SlabType.TOP);
+      case WEST -> state.setValue(AXIS, Direction.Axis.X).setValue(TYPE, SlabType.TOP);
+      case DOWN -> state.setValue(TYPE, SlabType.TOP);
       case UP -> state;
     };
   }
 
   @Override
-  protected BlockState getStateForNeighborUpdate(
+  protected BlockState updateShape(
       BlockState state,
-      WorldView world,
-      ScheduledTickView tickView,
+      LevelReader world,
+      ScheduledTickAccess tickView,
       BlockPos pos,
       Direction direction,
       BlockPos neighborPos,
       BlockState neighborState,
-      Random random
+      RandomSource random
   ) {
-    if (state.get(WATERLOGGED)) tickView.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
-    return super.getStateForNeighborUpdate(state, world, tickView, pos, direction, neighborPos, neighborState, random);
+    if (state.getValue(WATERLOGGED)) tickView.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(world));
+    return super.updateShape(state, world, tickView, pos, direction, neighborPos, neighborState, random);
   }
 
   @Override
-  protected BlockState rotate(BlockState state, BlockRotation rotation) {
-    Direction.Axis originalAxis = state.get(AXIS);
+  protected BlockState rotate(BlockState state, Rotation rotation) {
+    Direction.Axis originalAxis = state.getValue(AXIS);
     if (originalAxis == Direction.Axis.Y) return state;
-    BlockState rotatedAxisState = state.with(AXIS, getRotated(state.get(AXIS)));
+    BlockState rotatedAxisState = state.setValue(AXIS, getRotated(state.getValue(AXIS)));
     return switch (rotation) {
       case NONE -> state;
-      case CLOCKWISE_90 -> originalAxis == Direction.Axis.X ? rotatedAxisState.with(TYPE, getOpposite(state.get(TYPE))) : rotatedAxisState;
-      case CLOCKWISE_180 -> state.with(TYPE, getOpposite(state.get(TYPE)));
-      case COUNTERCLOCKWISE_90 -> originalAxis == Direction.Axis.Z ? rotatedAxisState.with(TYPE, getOpposite(state.get(TYPE))) : rotatedAxisState;
+      case CLOCKWISE_90 -> originalAxis == Direction.Axis.X ? rotatedAxisState.setValue(TYPE, getOpposite(state.getValue(TYPE))) : rotatedAxisState;
+      case CLOCKWISE_180 -> state.setValue(TYPE, getOpposite(state.getValue(TYPE)));
+      case COUNTERCLOCKWISE_90 -> originalAxis == Direction.Axis.Z ? rotatedAxisState.setValue(TYPE, getOpposite(state.getValue(TYPE))) : rotatedAxisState;
     };
   }
 
   @Override
-  protected BlockState mirror(BlockState state, BlockMirror mirror) {
-    Direction.Axis axis = state.get(AXIS);
+  protected BlockState mirror(BlockState state, Mirror mirror) {
+    Direction.Axis axis = state.getValue(AXIS);
     if (
-        mirror == BlockMirror.FRONT_BACK && axis == Direction.Axis.X || mirror == BlockMirror.LEFT_RIGHT && axis == Direction.Axis.Z
-    ) return state.with(TYPE, getOpposite(state.get(TYPE)));
+        mirror == Mirror.FRONT_BACK && axis == Direction.Axis.X || mirror == Mirror.LEFT_RIGHT && axis == Direction.Axis.Z
+    ) return state.setValue(TYPE, getOpposite(state.getValue(TYPE)));
     return state;
   }
 

@@ -1,63 +1,63 @@
 package syrenyx.distantmoons.initializers;
 
-import net.minecraft.loot.context.LootContextParameters;
-import net.minecraft.util.context.ContextType;
 import syrenyx.distantmoons.UnderDistantMoons;
-import syrenyx.distantmoons.mixin.LootContextTypesAccessor;
+import syrenyx.distantmoons.mixin.LootContextParamSetsAccessor;
 import syrenyx.distantmoons.references.DistantMoonsLootContextParameters;
 
 import java.util.function.Consumer;
+import net.minecraft.util.context.ContextKeySet;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 
 public abstract class DistantMoonsLootContextTypes {
 
-  public static final ContextType AFFLICTED_ATTACK = register("afflicted_attack", builder -> builder
-      .require(DistantMoonsLootContextParameters.AFFLICTION_PROGRESSION)
-      .require(DistantMoonsLootContextParameters.AFFLICTION_STAGE)
-      .require(LootContextParameters.DAMAGE_SOURCE)
-      .require(LootContextParameters.ORIGIN)
-      .require(LootContextParameters.THIS_ENTITY)
-      .allow(LootContextParameters.ATTACKING_ENTITY)
-      .allow(LootContextParameters.DIRECT_ATTACKING_ENTITY)
+  public static final ContextKeySet AFFLICTED_ATTACK = register("afflicted_attack", builder -> builder
+      .required(DistantMoonsLootContextParameters.AFFLICTION_PROGRESSION)
+      .required(DistantMoonsLootContextParameters.AFFLICTION_STAGE)
+      .required(LootContextParams.DAMAGE_SOURCE)
+      .required(LootContextParams.ORIGIN)
+      .required(LootContextParams.THIS_ENTITY)
+      .optional(LootContextParams.ATTACKING_ENTITY)
+      .optional(LootContextParams.DIRECT_ATTACKING_ENTITY)
   );
-  public static final ContextType AFFLICTED_BLOCK = register("afflicted_block", builder -> builder
-      .require(DistantMoonsLootContextParameters.AFFLICTION_PROGRESSION)
-      .require(DistantMoonsLootContextParameters.AFFLICTION_STAGE)
-      .require(LootContextParameters.BLOCK_STATE)
-      .require(LootContextParameters.ORIGIN)
-      .require(LootContextParameters.THIS_ENTITY)
+  public static final ContextKeySet AFFLICTED_BLOCK = register("afflicted_block", builder -> builder
+      .required(DistantMoonsLootContextParameters.AFFLICTION_PROGRESSION)
+      .required(DistantMoonsLootContextParameters.AFFLICTION_STAGE)
+      .required(LootContextParams.BLOCK_STATE)
+      .required(LootContextParams.ORIGIN)
+      .required(LootContextParams.THIS_ENTITY)
   );
-  public static final ContextType AFFLICTED_ENTITY = register("afflicted_entity", builder -> builder
-      .require(DistantMoonsLootContextParameters.AFFLICTION_PROGRESSION)
-      .require(DistantMoonsLootContextParameters.AFFLICTION_STAGE)
-      .require(LootContextParameters.ORIGIN)
-      .require(LootContextParameters.THIS_ENTITY)
+  public static final ContextKeySet AFFLICTED_ENTITY = register("afflicted_entity", builder -> builder
+      .required(DistantMoonsLootContextParameters.AFFLICTION_PROGRESSION)
+      .required(DistantMoonsLootContextParameters.AFFLICTION_STAGE)
+      .required(LootContextParams.ORIGIN)
+      .required(LootContextParams.THIS_ENTITY)
   );
-  public static final ContextType AFFLICTED_ITEM = register("afflicted_item", builder -> builder
-      .require(DistantMoonsLootContextParameters.AFFLICTION_PROGRESSION)
-      .require(DistantMoonsLootContextParameters.AFFLICTION_STAGE)
-      .require(LootContextParameters.ORIGIN)
-      .require(LootContextParameters.THIS_ENTITY)
-      .require(LootContextParameters.TOOL)
+  public static final ContextKeySet AFFLICTED_ITEM = register("afflicted_item", builder -> builder
+      .required(DistantMoonsLootContextParameters.AFFLICTION_PROGRESSION)
+      .required(DistantMoonsLootContextParameters.AFFLICTION_STAGE)
+      .required(LootContextParams.ORIGIN)
+      .required(LootContextParams.THIS_ENTITY)
+      .required(LootContextParams.TOOL)
   );
-  public static final ContextType AFFLICTED_PROJECTILE = register("afflicted_projectile", builder -> builder
-      .require(DistantMoonsLootContextParameters.AFFLICTION_PROGRESSION)
-      .require(DistantMoonsLootContextParameters.AFFLICTION_STAGE)
-      .require(DistantMoonsLootContextParameters.SPAWNED_ENTITY)
-      .require(LootContextParameters.ORIGIN)
-      .require(LootContextParameters.THIS_ENTITY)
+  public static final ContextKeySet AFFLICTED_PROJECTILE = register("afflicted_projectile", builder -> builder
+      .required(DistantMoonsLootContextParameters.AFFLICTION_PROGRESSION)
+      .required(DistantMoonsLootContextParameters.AFFLICTION_STAGE)
+      .required(DistantMoonsLootContextParameters.SPAWNED_ENTITY)
+      .required(LootContextParams.ORIGIN)
+      .required(LootContextParams.THIS_ENTITY)
   );
-  public static final ContextType ENCHANTED_ITEM = register("enchanted_item", builder -> builder
-      .require(LootContextParameters.ENCHANTMENT_LEVEL)
-      .require(LootContextParameters.ORIGIN)
-      .require(LootContextParameters.THIS_ENTITY)
-      .require(LootContextParameters.TOOL)
+  public static final ContextKeySet ENCHANTED_ITEM = register("enchanted_item", builder -> builder
+      .required(LootContextParams.ENCHANTMENT_LEVEL)
+      .required(LootContextParams.ORIGIN)
+      .required(LootContextParams.THIS_ENTITY)
+      .required(LootContextParams.TOOL)
   );
 
-  private static ContextType register(String id, Consumer<ContextType.Builder> type) {
-    ContextType.Builder builder = new ContextType.Builder();
+  private static ContextKeySet register(String id, Consumer<ContextKeySet.Builder> type) {
+    ContextKeySet.Builder builder = new ContextKeySet.Builder();
     type.accept(builder);
-    ContextType contextType = builder.build();
-    LootContextTypesAccessor.MAP().forcePut(UnderDistantMoons.identifierOf(id), contextType);
+    ContextKeySet contextType = builder.build();
+    LootContextParamSetsAccessor.REGISTRY().forcePut(UnderDistantMoons.identifierOf(id), contextType);
     return contextType;
   }
 

@@ -1,76 +1,77 @@
 package syrenyx.distantmoons.content.block;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.ShapeContext;
-import net.minecraft.entity.ai.pathing.NavigationType;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.EnumProperty;
-import net.minecraft.util.BlockMirror;
-import net.minecraft.util.BlockRotation;
-import net.minecraft.util.math.*;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldView;
-import net.minecraft.world.tick.ScheduledTickView;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import syrenyx.distantmoons.content.block.block_state_enums.RopeLadderDirection;
 import syrenyx.distantmoons.utility.VoxelShapeUtil;
-
+import com.mojang.math.OctahedralGroup;
 import java.util.Arrays;
 import java.util.Map;
 
 public class RopeLadderBlock extends Block {
 
-  public static final EnumProperty<RopeLadderDirection> DIRECTION = EnumProperty.of("direction", RopeLadderDirection.class);
-  public static final BooleanProperty BOTTOM = BooleanProperty.of("bottom");
-  public static final BooleanProperty TOP = BooleanProperty.of("top");
-  private static final VoxelShape OUTER_SHAPE = Block.createCuboidShape(0.0, 0.0, 14.0, 16.0, 16.0, 16.0);
-  private static final VoxelShape INNER_SHAPE_X = Block.createCuboidShape(7.0, 0.0, 0.0, 9.0, 16.0, 16.0);
-  private static final VoxelShape INNER_SHAPE_Z = VoxelShapes.transform(INNER_SHAPE_X, DirectionTransformation.fromRotations(AxisRotation.R0, AxisRotation.R90), VoxelShapeUtil.BLOCK_CENTER_ANCHOR);
-  private static final VoxelShape CEILING_SHAPE_X = Block.createCuboidShape(7.0, 0.0, 0.0, 9.0, 5.0, 16.0);
-  private static final VoxelShape CEILING_SHAPE_Z = VoxelShapes.transform(CEILING_SHAPE_X, DirectionTransformation.fromRotations(AxisRotation.R0, AxisRotation.R90), VoxelShapeUtil.BLOCK_CENTER_ANCHOR);
+  public static final EnumProperty<RopeLadderDirection> DIRECTION = EnumProperty.create("direction", RopeLadderDirection.class);
+  public static final BooleanProperty BOTTOM = BooleanProperty.create("bottom");
+  public static final BooleanProperty TOP = BooleanProperty.create("top");
+  private static final VoxelShape OUTER_SHAPE = Block.box(0.0, 0.0, 14.0, 16.0, 16.0, 16.0);
+  private static final VoxelShape INNER_SHAPE_X = Block.box(7.0, 0.0, 0.0, 9.0, 16.0, 16.0);
+  private static final VoxelShape INNER_SHAPE_Z = Shapes.rotate(INNER_SHAPE_X, OctahedralGroup.ROT_90_Y_POS, VoxelShapeUtil.BLOCK_CENTER_ANCHOR);
+  private static final VoxelShape CEILING_SHAPE_X = Block.box(7.0, 0.0, 0.0, 9.0, 5.0, 16.0);
+  private static final VoxelShape CEILING_SHAPE_Z = Shapes.rotate(CEILING_SHAPE_X, OctahedralGroup.ROT_90_Y_POS, VoxelShapeUtil.BLOCK_CENTER_ANCHOR);
   private static final Map<Direction, VoxelShape> OUTER_SHAPES_BY_DIRECTION = VoxelShapeUtil.createHorizontalDirectionShapeMap(OUTER_SHAPE);
 
-  public RopeLadderBlock(Settings settings) {
+  public RopeLadderBlock(Properties settings) {
     super(settings);
-    this.setDefaultState(this.getDefaultState()
-        .with(DIRECTION, RopeLadderDirection.NORTH)
-        .with(BOTTOM, true)
-        .with(TOP, true)
+    this.registerDefaultState(this.defaultBlockState()
+        .setValue(DIRECTION, RopeLadderDirection.NORTH)
+        .setValue(BOTTOM, true)
+        .setValue(TOP, true)
     );
   }
 
   @Override
-  protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+  protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
     builder.add(DIRECTION, BOTTOM, TOP);
   }
 
   @Override
-  protected boolean isTransparent(BlockState state) {
+  protected boolean propagatesSkylightDown(BlockState state) {
     return true;
   }
 
   @Override
-  protected boolean canPathfindThrough(BlockState state, NavigationType type) {
+  protected boolean isPathfindable(BlockState state, PathComputationType type) {
     return true;
   }
 
   @Override
-  protected VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-    if (state.get(DIRECTION).isCenter() && state.get(TOP)) return state.get(DIRECTION) == RopeLadderDirection.X ? CEILING_SHAPE_X : CEILING_SHAPE_Z;
-    return this.getOutlineShape(state, world, pos, context);
+  protected VoxelShape getCollisionShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+    if (state.getValue(DIRECTION).isCenter() && state.getValue(TOP)) return state.getValue(DIRECTION) == RopeLadderDirection.X ? CEILING_SHAPE_X : CEILING_SHAPE_Z;
+    return this.getShape(state, world, pos, context);
   }
 
   @Override
-  protected VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-    return switch (state.get(DIRECTION)) {
+  protected VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+    return switch (state.getValue(DIRECTION)) {
       case NORTH -> OUTER_SHAPES_BY_DIRECTION.get(Direction.NORTH);
       case EAST -> OUTER_SHAPES_BY_DIRECTION.get(Direction.EAST);
       case SOUTH -> OUTER_SHAPES_BY_DIRECTION.get(Direction.SOUTH);
@@ -81,62 +82,62 @@ public class RopeLadderBlock extends Block {
   }
 
   @Override
-  public BlockState getPlacementState(ItemPlacementContext context) {
-    World world = context.getWorld();
-    BlockPos pos = context.getBlockPos();
-    PlayerEntity player = context.getPlayer();
-    boolean sneaking = player != null && player.isSneaking();
-    BlockState top = world.getBlockState(pos.up());
-    RopeLadderDirection ropeLadderDirection = !sneaking && top.isOf(this) ? top.get(DIRECTION) : Arrays
-        .stream(context.getPlacementDirections())
+  public BlockState getStateForPlacement(BlockPlaceContext context) {
+    Level world = context.getLevel();
+    BlockPos pos = context.getClickedPos();
+    Player player = context.getPlayer();
+    boolean sneaking = player != null && player.isShiftKeyDown();
+    BlockState top = world.getBlockState(pos.above());
+    RopeLadderDirection ropeLadderDirection = !sneaking && top.is(this) ? top.getValue(DIRECTION) : Arrays
+        .stream(context.getNearestLookingDirections())
         .filter(direction -> {
-          if (direction.getAxis() != Direction.Axis.Y && world.getBlockState(pos.offset(direction)).isSideSolidFullSquare(world, pos.offset(direction), direction.getOpposite())) return true;
-          return direction == Direction.UP && (Block.sideCoversSmallSquare(world, pos.up(), Direction.DOWN) || world.getBlockState(pos.up()).isOf(this));
+          if (direction.getAxis() != Direction.Axis.Y && world.getBlockState(pos.relative(direction)).isFaceSturdy(world, pos.relative(direction), direction.getOpposite())) return true;
+          return direction == Direction.UP && (Block.canSupportCenter(world, pos.above(), Direction.DOWN) || world.getBlockState(pos.above()).is(this));
         })
         .findFirst()
         .map(direction -> direction != Direction.UP
             ? RopeLadderDirection.fromDirection(direction.getOpposite())
-            : top.isOf(this) ? top.get(DIRECTION) : RopeLadderDirection.fromAxis(context.getHorizontalPlayerFacing().getAxis())
+            : top.is(this) ? top.getValue(DIRECTION) : RopeLadderDirection.fromAxis(context.getHorizontalDirection().getAxis())
         )
         .orElse(null);
-    if (ropeLadderDirection == null) return Blocks.AIR.getDefaultState();
-    BlockState bottom = world.getBlockState(pos.down());
-    return this.getDefaultState()
-        .with(DIRECTION, ropeLadderDirection)
-        .with(BOTTOM, !bottom.isOf(this) || bottom.get(DIRECTION) != ropeLadderDirection)
-        .with(TOP, !top.isOf(this) || top.get(DIRECTION) != ropeLadderDirection);
+    if (ropeLadderDirection == null) return Blocks.AIR.defaultBlockState();
+    BlockState bottom = world.getBlockState(pos.below());
+    return this.defaultBlockState()
+        .setValue(DIRECTION, ropeLadderDirection)
+        .setValue(BOTTOM, !bottom.is(this) || bottom.getValue(DIRECTION) != ropeLadderDirection)
+        .setValue(TOP, !top.is(this) || top.getValue(DIRECTION) != ropeLadderDirection);
   }
 
   @Override
-  protected BlockState getStateForNeighborUpdate(
+  protected BlockState updateShape(
       BlockState state,
-      WorldView world,
-      ScheduledTickView tickView,
+      LevelReader world,
+      ScheduledTickAccess tickView,
       BlockPos pos,
       Direction direction,
       BlockPos neighborPos,
       BlockState neighborState,
-      Random random
+      RandomSource random
   ) {
-    BlockState top = world.getBlockState(pos.up());
-    BlockState bottom = world.getBlockState(pos.down());
-    BlockState air = Blocks.AIR.getDefaultState();
-    Direction ladderDirection = state.get(DIRECTION).getDirection();
-    boolean ceilingSupport = Block.sideCoversSmallSquare(world, pos.up(), Direction.DOWN) || (top.isOf(this) && top.get(DIRECTION) == state.get(DIRECTION));
-    boolean sideSupport = ladderDirection != null && world.getBlockState(pos.offset(ladderDirection.getOpposite())).isSideSolidFullSquare(world, pos.south(), ladderDirection);
+    BlockState top = world.getBlockState(pos.above());
+    BlockState bottom = world.getBlockState(pos.below());
+    BlockState air = Blocks.AIR.defaultBlockState();
+    Direction ladderDirection = state.getValue(DIRECTION).getDirection();
+    boolean ceilingSupport = Block.canSupportCenter(world, pos.above(), Direction.DOWN) || (top.is(this) && top.getValue(DIRECTION) == state.getValue(DIRECTION));
+    boolean sideSupport = ladderDirection != null && world.getBlockState(pos.relative(ladderDirection.getOpposite())).isFaceSturdy(world, pos.south(), ladderDirection);
     if (!ceilingSupport && !sideSupport) return air;
     return state
-        .with(BOTTOM, !bottom.isOf(this) || bottom.get(DIRECTION) != state.get(DIRECTION))
-        .with(TOP, !top.isOf(this) || top.get(DIRECTION) != state.get(DIRECTION));
+        .setValue(BOTTOM, !bottom.is(this) || bottom.getValue(DIRECTION) != state.getValue(DIRECTION))
+        .setValue(TOP, !top.is(this) || top.getValue(DIRECTION) != state.getValue(DIRECTION));
   }
 
   @Override
-  protected BlockState rotate(BlockState state, BlockRotation rotation) {
-    return state.with(DIRECTION, state.get(DIRECTION).rotate(rotation));
+  protected BlockState rotate(BlockState state, Rotation rotation) {
+    return state.setValue(DIRECTION, state.getValue(DIRECTION).rotate(rotation));
   }
 
   @Override
-  protected BlockState mirror(BlockState state, BlockMirror mirror) {
-    return state.with(DIRECTION, state.get(DIRECTION).mirror(mirror));
+  protected BlockState mirror(BlockState state, Mirror mirror) {
+    return state.setValue(DIRECTION, state.getValue(DIRECTION).mirror(mirror));
   }
 }

@@ -2,26 +2,25 @@ package syrenyx.distantmoons.content.predicate.location;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.block.CampfireBlock;
-import net.minecraft.predicate.BlockPredicate;
-import net.minecraft.predicate.FluidPredicate;
-import net.minecraft.registry.RegistryCodecs;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.entry.RegistryEntryList;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.structure.Structure;
-
 import java.util.Optional;
+import net.minecraft.advancements.criterion.BlockPredicate;
+import net.minecraft.advancements.criterion.FluidPredicate;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderSet;
+import net.minecraft.core.RegistryCodecs;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.block.CampfireBlock;
+import net.minecraft.world.level.levelgen.structure.Structure;
 
 public record LocationPredicate(
     Optional<PositionRangePredicate> position,
-    Optional<RegistryEntryList<Biome>> biomes,
-    Optional<RegistryEntryList<Structure>> structures,
-    Optional<RegistryKey<World>> dimension,
+    Optional<HolderSet<Biome>> biomes,
+    Optional<HolderSet<Structure>> structures,
+    Optional<ResourceKey<Level>> dimension,
     Optional<Boolean> smokey,
     Optional<LightPredicate> light,
     Optional<BlockPredicate> block,
@@ -32,9 +31,9 @@ public record LocationPredicate(
   public static final Codec<LocationPredicate> CODEC = RecordCodecBuilder.create(instance -> instance
       .group(
           PositionRangePredicate.CODEC.optionalFieldOf("position").forGetter(LocationPredicate::position),
-          RegistryCodecs.entryList(RegistryKeys.BIOME).optionalFieldOf("biomes").forGetter(LocationPredicate::biomes),
-          RegistryCodecs.entryList(RegistryKeys.STRUCTURE).optionalFieldOf("structures").forGetter(LocationPredicate::structures),
-          RegistryKey.createCodec(RegistryKeys.WORLD).optionalFieldOf("dimension").forGetter(LocationPredicate::dimension),
+          RegistryCodecs.homogeneousList(Registries.BIOME).optionalFieldOf("biomes").forGetter(LocationPredicate::biomes),
+          RegistryCodecs.homogeneousList(Registries.STRUCTURE).optionalFieldOf("structures").forGetter(LocationPredicate::structures),
+          ResourceKey.codec(Registries.DIMENSION).optionalFieldOf("dimension").forGetter(LocationPredicate::dimension),
           Codec.BOOL.optionalFieldOf("smokey").forGetter(LocationPredicate::smokey),
           LightPredicate.CODEC.optionalFieldOf("light").forGetter(LocationPredicate::light),
           BlockPredicate.CODEC.optionalFieldOf("block").forGetter(LocationPredicate::block),
@@ -44,17 +43,17 @@ public record LocationPredicate(
       .apply(instance, LocationPredicate::new)
   );
 
-  public boolean test(ServerWorld world, double x, double y, double z) {
-    BlockPos blockPos = BlockPos.ofFloored(x, y, z);
-    boolean positionLoaded = world.isPosLoaded(blockPos);
+  public boolean test(ServerLevel world, double x, double y, double z) {
+    BlockPos blockPos = BlockPos.containing(x, y, z);
+    boolean positionLoaded = world.isLoaded(blockPos);
     if (this.position.isPresent() && !this.position.get().test(x, y, z)) return false;
     if (this.biomes.isPresent() && (!positionLoaded || !this.biomes.get().contains(world.getBiome(blockPos)))) return false;
-    if (this.structures.isPresent() && (!positionLoaded || !world.getStructureAccessor().getStructureContaining(blockPos, this.structures.get()).hasChildren())) return false;
-    if (this.dimension.isPresent() && this.dimension.get() != world.getRegistryKey()) return false;
-    if (this.smokey.isPresent() && (!positionLoaded || this.smokey.get() != CampfireBlock.isLitCampfireInRange(world, blockPos))) return false;
+    if (this.structures.isPresent() && (!positionLoaded || !world.structureManager().getStructureWithPieceAt(blockPos, this.structures.get()).isValid())) return false;
+    if (this.dimension.isPresent() && this.dimension.get() != world.dimension()) return false;
+    if (this.smokey.isPresent() && (!positionLoaded || this.smokey.get() != CampfireBlock.isSmokeyPos(world, blockPos))) return false;
     if (this.light.isPresent() && !this.light.get().test(world, blockPos)) return false;
-    if (this.block.isPresent() && !this.block.get().test(world, blockPos)) return false;
-    if (this.fluid.isPresent() && !this.fluid.get().test(world, blockPos)) return false;
+    if (this.block.isPresent() && !this.block.get().matches(world, blockPos)) return false;
+    if (this.fluid.isPresent() && !this.fluid.get().matches(world, blockPos)) return false;
     return this.canSeeSky.orElse(true);
   }
 }

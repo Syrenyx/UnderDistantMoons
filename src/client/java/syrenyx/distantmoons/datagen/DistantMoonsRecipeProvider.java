@@ -2,20 +2,26 @@ package syrenyx.distantmoons.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.data.recipe.*;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemConvertible;
-import net.minecraft.item.Items;
-import net.minecraft.recipe.*;
-import net.minecraft.recipe.book.CraftingRecipeCategory;
-import net.minecraft.recipe.book.RecipeCategory;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.registry.tag.TagKey;
-import net.minecraft.util.DyeColor;
-import org.apache.logging.log4j.core.jackson.MapEntry;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
+import net.minecraft.data.recipes.SingleItemRecipeBuilder;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.BlastingRecipe;
+import net.minecraft.world.item.crafting.CampfireCookingRecipe;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.SmeltingRecipe;
+import net.minecraft.world.item.crafting.SmokingRecipe;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import org.jetbrains.annotations.Nullable;
 import syrenyx.distantmoons.UnderDistantMoons;
 import syrenyx.distantmoons.initializers.DistantMoonsBlocks;
@@ -31,7 +37,7 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
 
   public static final int DEFAULT_SMELTING_TIME = 200;
 
-  public DistantMoonsRecipeProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+  public DistantMoonsRecipeProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
     super(output, registriesFuture);
   }
 
@@ -41,14 +47,14 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
   }
 
   @Override
-  protected RecipeGenerator getRecipeGenerator(RegistryWrapper.WrapperLookup registryLookup, RecipeExporter recipeExporter) {
+  protected RecipeProvider createRecipeProvider(HolderLookup.Provider registryLookup, RecipeOutput recipeExporter) {
 
-    return new RecipeGenerator(registryLookup, recipeExporter) {
+    return new RecipeProvider(registryLookup, recipeExporter) {
 
       //private final RegistryWrapper.Impl<Item> itemLookup = this.registries.getOrThrow(RegistryKeys.ITEM);
 
       @Override
-      public void generate() {
+      public void buildRecipes() {
 
         //BEAM CRAFTING
         this.createBeamRecipes(Items.STRIPPED_ACACIA_LOG, DistantMoonsBlocks.ACACIA_BEAM, "wooden_beam");
@@ -292,111 +298,111 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
         this.createWaxingRecipe(DistantMoonsBlocks.RUSTED_IRON_BLOCK, DistantMoonsBlocks.WAXED_RUSTED_IRON_BLOCK);
       }
 
-      private void createBeamRecipes(ItemConvertible ingredient, ItemConvertible result, String group) {
+      private void createBeamRecipes(ItemLike ingredient, ItemLike result, String group) {
         createBeamCraftingRecipe(ingredient, result, group);
         createBeamCuttingRecipe(ingredient, result);
       }
 
-      private void createBeamCraftingRecipe(ItemConvertible ingredient, ItemConvertible result, @Nullable String group) {
-        this.createShaped(RecipeCategory.BUILDING_BLOCKS, result, 12)
+      private void createBeamCraftingRecipe(ItemLike ingredient, ItemLike result, @Nullable String group) {
+        this.shaped(RecipeCategory.BUILDING_BLOCKS, result, 12)
             .group(group)
             .pattern("0").pattern("0").pattern("0")
-            .input('0', ingredient)
-            .criterion(hasItem(ingredient), conditionsFromItem(ingredient))
-            .offerTo(this.exporter, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/crafting"));
+            .define('0', ingredient)
+            .unlockedBy(getHasName(ingredient), has(ingredient))
+            .save(this.output, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/crafting"));
       }
 
-      private void createBeamCuttingRecipe(ItemConvertible ingredient, ItemConvertible result) {
-        StonecuttingRecipeJsonBuilder.createStonecutting(Ingredient.ofItem(ingredient), RecipeCategory.MISC, result, 4)
-            .criterion(hasItem(ingredient), conditionsFromItem(ingredient))
-            .offerTo(this.exporter, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/stonecutting"));
+      private void createBeamCuttingRecipe(ItemLike ingredient, ItemLike result) {
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ingredient), RecipeCategory.MISC, result, 4)
+            .unlockedBy(getHasName(ingredient), has(ingredient))
+            .save(this.output, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/stonecutting"));
       }
 
-      private void createCookingRecipes(ItemConvertible ingredient, ItemConvertible result, float experience, int cookingTime) {
-        CookingRecipeJsonBuilder
-            .create(Ingredient.ofItem(ingredient), RecipeCategory.FOOD, result, experience, cookingTime, RecipeSerializer.SMELTING, SmeltingRecipe::new)
-            .criterion(hasItem(ingredient), this.conditionsFromItem(ingredient))
-            .offerTo(this.exporter, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/smelting_" + getItemId(ingredient)));
-        CookingRecipeJsonBuilder
-            .create(Ingredient.ofItem(ingredient), RecipeCategory.FOOD, result, experience, cookingTime / 2, RecipeSerializer.SMOKING, SmokingRecipe::new)
-            .criterion(hasItem(ingredient), this.conditionsFromItem(ingredient))
-            .offerTo(this.exporter, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/smoking_" + getItemId(ingredient)));
-        CookingRecipeJsonBuilder
-            .create(Ingredient.ofItem(ingredient), RecipeCategory.FOOD, result, experience, cookingTime * 3, RecipeSerializer.CAMPFIRE_COOKING, CampfireCookingRecipe::new)
-            .criterion(hasItem(ingredient), this.conditionsFromItem(ingredient))
-            .offerTo(this.exporter, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/campfire_cooking_" + getItemId(ingredient)));
+      private void createCookingRecipes(ItemLike ingredient, ItemLike result, float experience, int cookingTime) {
+        SimpleCookingRecipeBuilder
+            .generic(Ingredient.of(ingredient), RecipeCategory.FOOD, result, experience, cookingTime, RecipeSerializer.SMELTING_RECIPE, SmeltingRecipe::new)
+            .unlockedBy(getHasName(ingredient), this.has(ingredient))
+            .save(this.output, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/smelting_" + getItemId(ingredient)));
+        SimpleCookingRecipeBuilder
+            .generic(Ingredient.of(ingredient), RecipeCategory.FOOD, result, experience, cookingTime / 2, RecipeSerializer.SMOKING_RECIPE, SmokingRecipe::new)
+            .unlockedBy(getHasName(ingredient), this.has(ingredient))
+            .save(this.output, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/smoking_" + getItemId(ingredient)));
+        SimpleCookingRecipeBuilder
+            .generic(Ingredient.of(ingredient), RecipeCategory.FOOD, result, experience, cookingTime * 3, RecipeSerializer.CAMPFIRE_COOKING_RECIPE, CampfireCookingRecipe::new)
+            .unlockedBy(getHasName(ingredient), this.has(ingredient))
+            .save(this.output, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/campfire_cooking_" + getItemId(ingredient)));
       }
 
       private void createDyeingRecipes(Map<DyeColor, Block> blocks, TagKey<Item> ingredient, boolean single) {
         for (DyeColor dyeColor : DyeColor.values()) {
-          ItemConvertible result = blocks.get(dyeColor);
-          ItemConvertible dye = ColorUtil.getDyeItemByColor(dyeColor);
+          ItemLike result = blocks.get(dyeColor);
+          ItemLike dye = ColorUtil.getDyeItemByColor(dyeColor);
           String group = "dyed_" + getItemId(result);
           String path = UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/dyeing");
-          if (single) this.createShapeless(RecipeCategory.MISC, result)
+          if (single) this.shapeless(RecipeCategory.MISC, result)
               .group(group)
-              .input(dye)
-              .input(ingredient)
-              .criterion(hasItem(dye), this.conditionsFromItem(dye))
-              .offerTo(this.exporter, path);
-          else this.createShaped(RecipeCategory.MISC, result, 8)
+              .requires(dye)
+              .requires(ingredient)
+              .unlockedBy(getHasName(dye), this.has(dye))
+              .save(this.output, path);
+          else this.shaped(RecipeCategory.MISC, result, 8)
               .group(group)
               .pattern("000").pattern("010").pattern("000")
-              .input('0', ingredient).input('1', dye)
-              .criterion(hasItem(dye), this.conditionsFromItem(dye))
-              .offerTo(this.exporter, path);
+              .define('0', ingredient).define('1', dye)
+              .unlockedBy(getHasName(dye), this.has(dye))
+              .save(this.output, path);
         }
       }
 
-      private void createMetalSmeltingRecipes(ItemConvertible ingredient, ItemConvertible result, float experience, int cookingTime) {
-        CookingRecipeJsonBuilder
-            .create(Ingredient.ofItem(ingredient), RecipeCategory.MISC, result, experience, cookingTime, RecipeSerializer.SMELTING, SmeltingRecipe::new)
-            .criterion(hasItem(ingredient), this.conditionsFromItem(ingredient))
-            .offerTo(this.exporter, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/smelting_" + getItemId(ingredient)));
-        CookingRecipeJsonBuilder
-            .create(Ingredient.ofItem(ingredient), RecipeCategory.MISC, result, experience, cookingTime / 2, RecipeSerializer.BLASTING, BlastingRecipe::new)
-            .criterion(hasItem(ingredient), this.conditionsFromItem(ingredient))
-            .offerTo(this.exporter, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/blasting_" + getItemId(ingredient)));
+      private void createMetalSmeltingRecipes(ItemLike ingredient, ItemLike result, float experience, int cookingTime) {
+        SimpleCookingRecipeBuilder
+            .generic(Ingredient.of(ingredient), RecipeCategory.MISC, result, experience, cookingTime, RecipeSerializer.SMELTING_RECIPE, SmeltingRecipe::new)
+            .unlockedBy(getHasName(ingredient), this.has(ingredient))
+            .save(this.output, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/smelting_" + getItemId(ingredient)));
+        SimpleCookingRecipeBuilder
+            .generic(Ingredient.of(ingredient), RecipeCategory.MISC, result, experience, cookingTime / 2, RecipeSerializer.BLASTING_RECIPE, BlastingRecipe::new)
+            .unlockedBy(getHasName(ingredient), this.has(ingredient))
+            .save(this.output, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/blasting_" + getItemId(ingredient)));
       }
 
-      private void createOreSmeltingRecipes(List<ItemConvertible> ingredients, ItemConvertible result, float experience, int cookingTime) {
-        for (ItemConvertible ingredient : ingredients) {
-          CookingRecipeJsonBuilder
-              .create(Ingredient.ofItem(ingredient), RecipeCategory.MISC, result, experience, cookingTime, RecipeSerializer.SMELTING, SmeltingRecipe::new)
+      private void createOreSmeltingRecipes(List<ItemLike> ingredients, ItemLike result, float experience, int cookingTime) {
+        for (ItemLike ingredient : ingredients) {
+          SimpleCookingRecipeBuilder
+              .generic(Ingredient.of(ingredient), RecipeCategory.MISC, result, experience, cookingTime, RecipeSerializer.SMELTING_RECIPE, SmeltingRecipe::new)
               .group(getItemId(result) + "_from_ore")
-              .criterion(hasItem(ingredient), this.conditionsFromItem(ingredient))
-              .offerTo(this.exporter, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/smelting_" + getItemId(ingredient)));
-          CookingRecipeJsonBuilder
-              .create(Ingredient.ofItem(ingredient), RecipeCategory.MISC, result, experience, cookingTime / 2, RecipeSerializer.BLASTING, BlastingRecipe::new)
+              .unlockedBy(getHasName(ingredient), this.has(ingredient))
+              .save(this.output, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/smelting_" + getItemId(ingredient)));
+          SimpleCookingRecipeBuilder
+              .generic(Ingredient.of(ingredient), RecipeCategory.MISC, result, experience, cookingTime / 2, RecipeSerializer.BLASTING_RECIPE, BlastingRecipe::new)
               .group(getItemId(result) + "_from_ore")
-              .criterion(hasItem(ingredient), this.conditionsFromItem(ingredient))
-              .offerTo(this.exporter, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/blasting_" + getItemId(ingredient)));
+              .unlockedBy(getHasName(ingredient), this.has(ingredient))
+              .save(this.output, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/blasting_" + getItemId(ingredient)));
         }
       }
 
-      private void createPoleRecipes(ItemConvertible ingredient, ItemConvertible result, String group) {
+      private void createPoleRecipes(ItemLike ingredient, ItemLike result, String group) {
         createPoleCraftingRecipe(ingredient, result, group);
         createPoleCuttingRecipe(ingredient, result);
       }
 
-      private void createPoleCraftingRecipe(ItemConvertible ingredient, ItemConvertible result, @Nullable String group) {
-        this.createShaped(RecipeCategory.BUILDING_BLOCKS, result, 6)
+      private void createPoleCraftingRecipe(ItemLike ingredient, ItemLike result, @Nullable String group) {
+        this.shaped(RecipeCategory.BUILDING_BLOCKS, result, 6)
             .group(group)
             .pattern("0").pattern("0").pattern("0")
-            .input('0', ingredient)
-            .criterion(hasItem(ingredient), conditionsFromItem(ingredient))
-            .offerTo(this.exporter, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/crafting"));
+            .define('0', ingredient)
+            .unlockedBy(getHasName(ingredient), has(ingredient))
+            .save(this.output, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/crafting"));
       }
 
-      private void createPoleCuttingRecipe(ItemConvertible ingredient, ItemConvertible result) {
-        StonecuttingRecipeJsonBuilder.createStonecutting(Ingredient.ofItem(ingredient), RecipeCategory.MISC, result, 2)
-            .criterion(hasItem(ingredient), conditionsFromItem(ingredient))
-            .offerTo(this.exporter, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/stonecutting"));
+      private void createPoleCuttingRecipe(ItemLike ingredient, ItemLike result) {
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ingredient), RecipeCategory.MISC, result, 2)
+            .unlockedBy(getHasName(ingredient), has(ingredient))
+            .save(this.output, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/stonecutting"));
       }
 
-      private void createResourceCompressionRecipes(ItemConvertible... items) {
-        ItemConvertible current = null;
-        for (ItemConvertible next : items) {
+      private void createResourceCompressionRecipes(ItemLike... items) {
+        ItemLike current = null;
+        for (ItemLike next : items) {
           if (current != null) {
             this.createResourceCompressionRecipe(current, next, null);
             this.createResourceDecompressionRecipe(next, current, null);
@@ -405,117 +411,117 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
         }
       }
 
-      private void createResourceCompressionRecipe(ItemConvertible ingredient, ItemConvertible result, @Nullable String groupOverride) {
-        this.createShaped(result instanceof Block ? RecipeCategory.BUILDING_BLOCKS : RecipeCategory.MISC, result)
+      private void createResourceCompressionRecipe(ItemLike ingredient, ItemLike result, @Nullable String groupOverride) {
+        this.shaped(result instanceof Block ? RecipeCategory.BUILDING_BLOCKS : RecipeCategory.MISC, result)
             .group(groupOverride != null ? groupOverride : getItemId(result) + "_from_resource_compression")
             .pattern("000").pattern("000").pattern("000")
-            .input('0', ingredient)
-            .criterion(hasItem(ingredient), conditionsFromItem(ingredient))
-            .offerTo(this.exporter, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/compressing_" + getItemId(ingredient)));
+            .define('0', ingredient)
+            .unlockedBy(getHasName(ingredient), has(ingredient))
+            .save(this.output, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/compressing_" + getItemId(ingredient)));
       }
 
-      private void createResourceDecompressionRecipe(ItemConvertible ingredient, ItemConvertible result, @Nullable String groupOverride) {
-        this.createShapeless(result instanceof Block ? RecipeCategory.BUILDING_BLOCKS : RecipeCategory.MISC, result, 9)
+      private void createResourceDecompressionRecipe(ItemLike ingredient, ItemLike result, @Nullable String groupOverride) {
+        this.shapeless(result instanceof Block ? RecipeCategory.BUILDING_BLOCKS : RecipeCategory.MISC, result, 9)
             .group(groupOverride != null ? groupOverride : getItemId(result) + "_from_resource_compression")
-            .input(ingredient)
-            .criterion(hasItem(ingredient), conditionsFromItem(ingredient))
-            .offerTo(this.exporter, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/decompressing_" + getItemId(ingredient)));
+            .requires(ingredient)
+            .unlockedBy(getHasName(ingredient), has(ingredient))
+            .save(this.output, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/decompressing_" + getItemId(ingredient)));
       }
 
-      private void createSlabRecipes(ItemConvertible ingredient, ItemConvertible result, RecipeCategory category, @Nullable String group) {
+      private void createSlabRecipes(ItemLike ingredient, ItemLike result, RecipeCategory category, @Nullable String group) {
         this.createSlabCraftingRecipe(ingredient, result, category, group);
         this.createSlabCuttingRecipe(ingredient, result);
       }
 
-      private void createWallSlabRecipes(ItemConvertible ingredient, ItemConvertible result, @Nullable String group) {
+      private void createWallSlabRecipes(ItemLike ingredient, ItemLike result, @Nullable String group) {
         this.createWallSlabCraftingRecipe(ingredient, result, group);
         this.createSlabCuttingRecipe(ingredient, result);
       }
 
-      private void createSlabCraftingRecipe(ItemConvertible ingredient, ItemConvertible result, RecipeCategory category, @Nullable String group) {
-        this.createShaped(category, result, 6)
+      private void createSlabCraftingRecipe(ItemLike ingredient, ItemLike result, RecipeCategory category, @Nullable String group) {
+        this.shaped(category, result, 6)
             .group(group)
             .pattern("000")
-            .input('0', ingredient)
-            .criterion(hasItem(ingredient), conditionsFromItem(ingredient))
-            .offerTo(this.exporter, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/crafting"));
+            .define('0', ingredient)
+            .unlockedBy(getHasName(ingredient), has(ingredient))
+            .save(this.output, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/crafting"));
       }
 
-      private void createWallSlabCraftingRecipe(ItemConvertible ingredient, ItemConvertible result, @Nullable String group) {
-        this.createShaped(RecipeCategory.BUILDING_BLOCKS, result, 6)
+      private void createWallSlabCraftingRecipe(ItemLike ingredient, ItemLike result, @Nullable String group) {
+        this.shaped(RecipeCategory.BUILDING_BLOCKS, result, 6)
             .group(group)
             .pattern("0").pattern("0").pattern("0")
-            .input('0', ingredient)
-            .criterion(hasItem(ingredient), conditionsFromItem(ingredient))
-            .offerTo(this.exporter, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/crafting"));
+            .define('0', ingredient)
+            .unlockedBy(getHasName(ingredient), has(ingredient))
+            .save(this.output, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/crafting"));
       }
 
-      private void createSlabCuttingRecipe(ItemConvertible ingredient, ItemConvertible result) {
-        StonecuttingRecipeJsonBuilder.createStonecutting(Ingredient.ofItem(ingredient), RecipeCategory.MISC, result, 2)
-            .criterion(hasItem(ingredient), conditionsFromItem(ingredient))
-            .offerTo(this.exporter, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/stonecutting"));
+      private void createSlabCuttingRecipe(ItemLike ingredient, ItemLike result) {
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ingredient), RecipeCategory.MISC, result, 2)
+            .unlockedBy(getHasName(ingredient), has(ingredient))
+            .save(this.output, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/stonecutting"));
       }
 
-      private void createSmeltingRecipes(Map<ItemConvertible, ItemConvertible> itemMap) {
-        for (ItemConvertible ingredient : itemMap.keySet()) {
-          CookingRecipeJsonBuilder
-              .create(Ingredient.ofItem(ingredient), RecipeCategory.BUILDING_BLOCKS, itemMap.get(ingredient), 0, DEFAULT_SMELTING_TIME, RecipeSerializer.SMELTING, SmeltingRecipe::new)
-              .criterion(hasItem(ingredient), this.conditionsFromItem(ingredient))
-              .offerTo(this.exporter, UnderDistantMoons.withPrefixedNamespace(getItemId(itemMap.get(ingredient)) + "/smelting"));
+      private void createSmeltingRecipes(Map<ItemLike, ItemLike> itemMap) {
+        for (ItemLike ingredient : itemMap.keySet()) {
+          SimpleCookingRecipeBuilder
+              .generic(Ingredient.of(ingredient), RecipeCategory.BUILDING_BLOCKS, itemMap.get(ingredient), 0, DEFAULT_SMELTING_TIME, RecipeSerializer.SMELTING_RECIPE, SmeltingRecipe::new)
+              .unlockedBy(getHasName(ingredient), this.has(ingredient))
+              .save(this.output, UnderDistantMoons.withPrefixedNamespace(getItemId(itemMap.get(ingredient)) + "/smelting"));
         }
       }
 
-      private void createStairsRecipes(ItemConvertible ingredient, ItemConvertible result, @Nullable String group) {
+      private void createStairsRecipes(ItemLike ingredient, ItemLike result, @Nullable String group) {
         this.createStairsCraftingRecipe(ingredient, result, group);
         this.createStairsCuttingRecipe(ingredient, result);
       }
 
-      private void createStairsCraftingRecipe(ItemConvertible ingredient, ItemConvertible result, @Nullable String group) {
-        this.createShaped(RecipeCategory.BUILDING_BLOCKS, result, 4)
+      private void createStairsCraftingRecipe(ItemLike ingredient, ItemLike result, @Nullable String group) {
+        this.shaped(RecipeCategory.BUILDING_BLOCKS, result, 4)
             .group(group)
             .pattern("0  ").pattern("00 ").pattern("000")
-            .input('0', ingredient)
-            .criterion(hasItem(ingredient), conditionsFromItem(ingredient))
-            .offerTo(this.exporter, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/crafting"));
+            .define('0', ingredient)
+            .unlockedBy(getHasName(ingredient), has(ingredient))
+            .save(this.output, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/crafting"));
       }
 
-      private void createStairsCuttingRecipe(ItemConvertible ingredient, ItemConvertible result) {
-        StonecuttingRecipeJsonBuilder.createStonecutting(Ingredient.ofItem(ingredient), RecipeCategory.MISC, result)
-            .criterion(hasItem(ingredient), conditionsFromItem(ingredient))
-            .offerTo(this.exporter, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/stonecutting"));
+      private void createStairsCuttingRecipe(ItemLike ingredient, ItemLike result) {
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ingredient), RecipeCategory.MISC, result)
+            .unlockedBy(getHasName(ingredient), has(ingredient))
+            .save(this.output, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/stonecutting"));
       }
 
-      private void createWallRecipes(ItemConvertible ingredient, ItemConvertible result, @Nullable String group) {
+      private void createWallRecipes(ItemLike ingredient, ItemLike result, @Nullable String group) {
         this.createWallCraftingRecipe(ingredient, result, group);
         this.createWallCuttingRecipe(ingredient, result);
       }
 
-      private void createWallCraftingRecipe(ItemConvertible ingredient, ItemConvertible result, @Nullable String group) {
-        this.createShaped(RecipeCategory.MISC, result, 6)
+      private void createWallCraftingRecipe(ItemLike ingredient, ItemLike result, @Nullable String group) {
+        this.shaped(RecipeCategory.MISC, result, 6)
             .group(group)
             .pattern("000").pattern("000")
-            .input('0', ingredient)
-            .criterion(hasItem(ingredient), conditionsFromItem(ingredient))
-            .offerTo(this.exporter, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/crafting"));
+            .define('0', ingredient)
+            .unlockedBy(getHasName(ingredient), has(ingredient))
+            .save(this.output, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/crafting"));
       }
 
-      private void createWallCuttingRecipe(ItemConvertible ingredient, ItemConvertible result) {
-        StonecuttingRecipeJsonBuilder.createStonecutting(Ingredient.ofItem(ingredient), RecipeCategory.MISC, result)
-            .criterion(hasItem(ingredient), conditionsFromItem(ingredient))
-            .offerTo(this.exporter, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/stonecutting"));
+      private void createWallCuttingRecipe(ItemLike ingredient, ItemLike result) {
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ingredient), RecipeCategory.MISC, result)
+            .unlockedBy(getHasName(ingredient), has(ingredient))
+            .save(this.output, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/stonecutting"));
       }
 
-      private void createWaxingRecipe(ItemConvertible ingredient, ItemConvertible result) {
-        this.createShapeless(RecipeCategory.BUILDING_BLOCKS, result)
+      private void createWaxingRecipe(ItemLike ingredient, ItemLike result) {
+        this.shapeless(RecipeCategory.BUILDING_BLOCKS, result)
             .group(getItemId(result))
-            .input(ingredient)
-            .input(Items.HONEYCOMB)
-            .criterion(hasItem(ingredient), conditionsFromItem(ingredient))
-            .offerTo(this.exporter, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/waxing"));
+            .requires(ingredient)
+            .requires(Items.HONEYCOMB)
+            .unlockedBy(getHasName(ingredient), has(ingredient))
+            .save(this.output, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/waxing"));
       }
 
-      private static String getItemId(ItemConvertible item) {
-        return Registries.ITEM.getId(item.asItem()).toString().split(":")[1];
+      private static String getItemId(ItemLike item) {
+        return BuiltInRegistries.ITEM.getKey(item.asItem()).toString().split(":")[1];
       }
     };
   }

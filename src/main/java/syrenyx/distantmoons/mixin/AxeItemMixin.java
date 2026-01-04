@@ -1,16 +1,5 @@
 package syrenyx.distantmoons.mixin;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.AxeItem;
-import net.minecraft.particle.ParticleUtil;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.intprovider.UniformIntProvider;
-import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -23,32 +12,43 @@ import syrenyx.distantmoons.content.block.oxidization.BlockOxidizationManager;
 import syrenyx.distantmoons.initializers.DistantMoonsParticleTypes;
 
 import java.util.Optional;
+import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.ParticleUtils;
+import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.AxeItem;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 
 @Mixin(AxeItem.class)
 public abstract class AxeItemMixin {
 
   @Shadow
-  private static void strip(World world, BlockPos pos, @Nullable PlayerEntity player, BlockState state, SoundEvent sound, int worldEvent) {}
+  private static void spawnSoundAndParticle(Level world, BlockPos pos, @Nullable Player player, BlockState state, SoundEvent sound, int worldEvent) {}
 
-  @Inject(at = @At("HEAD"), cancellable = true, method = "tryStrip")
-  private void distantMoons$tryStrip(
-      World world, BlockPos pos, @Nullable PlayerEntity player, BlockState state, CallbackInfoReturnable<Optional<BlockState>> callbackInfo
+  @Inject(at = @At("HEAD"), cancellable = true, method = "evaluateNewBlockState")
+  private void distantMoons$evaluateNewBlockState(
+      Level world, BlockPos pos, @Nullable Player player, BlockState state, CallbackInfoReturnable<Optional<BlockState>> callbackInfo
   ) {
     Block block = state.getBlock();
     BlockOxidizationDefinition oxidizationRules = BlockOxidizationManager.BLOCK_OXIDIZATION_MAP.get(block);
     if (oxidizationRules != null && oxidizationRules.canBeScraped()) {
       if (oxidizationRules.rust()) distantMoons$scrapeRust(world, pos, player, state);
-      else strip(world, pos, player, state, SoundEvents.ITEM_AXE_SCRAPE, BlockOxidizationManager.SCRAPE_WORLD_EVENT);
+      else spawnSoundAndParticle(world, pos, player, state, SoundEvents.AXE_SCRAPE, BlockOxidizationManager.SCRAPE_WORLD_EVENT);
       callbackInfo.setReturnValue(oxidizationRules.getScrapedStateOf(state));
     } else if (BlockOxidizationManager.WAXED_BLOCK_SCRAPING_MAP.containsKey(block)) {
-      strip(world, pos, player, state, SoundEvents.ITEM_AXE_WAX_OFF, BlockOxidizationManager.WAX_OFF_WORLD_EVENT);
+      spawnSoundAndParticle(world, pos, player, state, SoundEvents.AXE_WAX_OFF, BlockOxidizationManager.WAX_OFF_WORLD_EVENT);
       callbackInfo.setReturnValue(Optional.of(BlockOxidizationManager.WAXED_BLOCK_SCRAPING_MAP.get(block).apply(state)));
     }
   }
 
   @Unique
-  private static void distantMoons$scrapeRust(World world, BlockPos pos, @Nullable PlayerEntity player, BlockState state) {
-    world.playSound(player, pos, SoundEvents.ITEM_AXE_SCRAPE, SoundCategory.BLOCKS, 1.0F, 1.0F);
-    ParticleUtil.spawnParticle(world, pos, DistantMoonsParticleTypes.SCRAPE_RUST, UniformIntProvider.create(3, 5));
+  private static void distantMoons$scrapeRust(Level world, BlockPos pos, @Nullable Player player, BlockState state) {
+    world.playSound(player, pos, SoundEvents.AXE_SCRAPE, SoundSource.BLOCKS, 1.0F, 1.0F);
+    ParticleUtils.spawnParticlesOnBlockFaces(world, pos, DistantMoonsParticleTypes.SCRAPE_RUST, UniformInt.of(3, 5));
   }
 }
