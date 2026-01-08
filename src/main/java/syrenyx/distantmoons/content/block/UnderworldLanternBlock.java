@@ -31,6 +31,6 @@ public class UnderworldLanternBlock extends LanternBlock{
   public BlockState getStateForPlacement(BlockPlaceContext context) {
     BlockState state = super.getStateForPlacement(context);
     if (state == null) return null;
-    return state.setValue(LIT, context.getLevel().environmentAttributes().getValue(DistantMoonsEnvironmentAttributes.UNDERWORLD, context.getClickedPos()));
+    return state.setValue(LIT, context.getLevel().environmentAttributes().getDimensionValue(DistantMoonsEnvironmentAttributes.UNDERWORLD));
   }
 }

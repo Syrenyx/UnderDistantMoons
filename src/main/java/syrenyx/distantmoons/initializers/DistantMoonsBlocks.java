@@ -1151,7 +1151,8 @@ public abstract class DistantMoonsBlocks {
       "underworld_lantern",
       UnderworldLanternBlock::new,
       BlockBehaviour.Properties.ofFullCopy(Blocks.LANTERN)
-          .lightLevel(state -> state.getValue(BlockStateProperties.LIT) ? 15 : 0),
+          .lightLevel(state -> state.getValue(BlockStateProperties.LIT) ? 15 : 0)
+          .randomTicks(),
       new Item.Properties().fireResistant()
   );
   public static final Block WARPED_BEAM = register(
