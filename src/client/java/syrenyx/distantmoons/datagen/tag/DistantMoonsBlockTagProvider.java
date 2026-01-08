@@ -389,6 +389,7 @@ public class DistantMoonsBlockTagProvider extends FabricTagProvider.BlockTagProv
             DistantMoonsBlocks.STONE_WALL_SLAB,
             DistantMoonsBlocks.TUFF_BRICK_WALL_SLAB,
             DistantMoonsBlocks.TUFF_WALL_SLAB,
+            DistantMoonsBlocks.UNDERWORLD_LANTERN,
             DistantMoonsBlocks.WROUGHT_IRON_BAR_DOOR,
             DistantMoonsBlocks.WROUGHT_IRON_BARS,
             DistantMoonsBlocks.WROUGHT_IRON_FENCE,

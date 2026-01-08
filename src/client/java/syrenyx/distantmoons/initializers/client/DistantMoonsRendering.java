@@ -24,6 +24,7 @@ public abstract class DistantMoonsRendering {
         DistantMoonsBlocks.IRON_BAR_DOOR,
         DistantMoonsBlocks.IRON_FENCE,
         DistantMoonsBlocks.ROPE_LADDER,
+        DistantMoonsBlocks.UNDERWORLD_LANTERN,
         DistantMoonsBlocks.WROUGHT_IRON_BAR_DOOR,
         DistantMoonsBlocks.WROUGHT_IRON_BARS,
         DistantMoonsBlocks.WROUGHT_IRON_FENCE

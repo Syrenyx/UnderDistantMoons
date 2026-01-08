@@ -226,6 +226,7 @@ public class en_us extends FabricLanguageProvider {
     builder.add(DistantMoonsBlocks.STRIPPED_CUT_WARPED_STEM, "Stripped Cut Warped Stem");
     builder.add(DistantMoonsBlocks.TUFF_BRICK_WALL_SLAB, "Tuff Brick Wall Slab");
     builder.add(DistantMoonsBlocks.TUFF_WALL_SLAB, "Tuff Wall Slab");
+    builder.add(DistantMoonsBlocks.UNDERWORLD_LANTERN, "Underworld Lantern");
     builder.add(DistantMoonsBlocks.WARPED_BEAM, "Warped Beam");
     builder.add(DistantMoonsBlocks.WARPED_POLE, "Warped Pole");
     builder.add(DistantMoonsBlocks.WARPED_WALL_SLAB, "Warped Wall Slab");

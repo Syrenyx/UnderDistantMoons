@@ -33,6 +33,7 @@ public class UnderDistantMoons implements ModInitializer {
     DistantMoonsEnchantmentEntityEffects.initialize();
     DistantMoonsEnchantmentLevelBasedValueTypes.initialize();
     DistantMoonsEntityTypes.initialize();
+    DistantMoonsEnvironmentAttributes.initialize();
     DistantMoonsFeatures.initialize();
     DistantMoonsItemGroups.initialize();
     DistantMoonsItemModifications.initialize();

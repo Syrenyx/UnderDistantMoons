@@ -21,6 +21,7 @@ import net.minecraft.world.level.block.TrapDoorBlock;
 import net.minecraft.world.level.block.WallBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.MapColor;
 import syrenyx.distantmoons.UnderDistantMoons;
 import syrenyx.distantmoons.content.block.*;
@@ -1145,6 +1146,13 @@ public abstract class DistantMoonsBlocks {
       WallSlabBlock::new,
       BlockBehaviour.Properties.ofFullCopy(Blocks.TUFF),
       new Item.Properties()
+  );
+  public static final Block UNDERWORLD_LANTERN = register(
+      "underworld_lantern",
+      UnderworldLanternBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(Blocks.LANTERN)
+          .lightLevel(state -> state.getValue(BlockStateProperties.LIT) ? 15 : 0),
+      new Item.Properties().fireResistant()
   );
   public static final Block WARPED_BEAM = register(
       "warped_beam",

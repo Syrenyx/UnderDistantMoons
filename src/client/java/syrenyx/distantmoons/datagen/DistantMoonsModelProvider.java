@@ -2,7 +2,6 @@ package syrenyx.distantmoons.datagen;
 
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.minecraft.client.data.*;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.MultiVariant;
@@ -28,12 +27,7 @@ import net.minecraft.world.level.block.LadderBlock;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.TrapDoorBlock;
 import net.minecraft.world.level.block.WallBlock;
-import net.minecraft.world.level.block.state.properties.DoorHingeSide;
-import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
-import net.minecraft.world.level.block.state.properties.Half;
-import net.minecraft.world.level.block.state.properties.SlabType;
-import net.minecraft.world.level.block.state.properties.StairsShape;
-import net.minecraft.world.level.block.state.properties.WallSide;
+import net.minecraft.world.level.block.state.properties.*;
 import org.jetbrains.annotations.Nullable;
 import syrenyx.distantmoons.UnderDistantMoons;
 import syrenyx.distantmoons.content.block.*;
@@ -41,7 +35,7 @@ import syrenyx.distantmoons.content.block.block_state_enums.*;
 import syrenyx.distantmoons.datagen.utility.ModelProviderUtil;
 import syrenyx.distantmoons.initializers.DistantMoonsBlocks;
 import syrenyx.distantmoons.initializers.DistantMoonsItems;
-import syrenyx.distantmoons.references.DistantMoonsTextureKeys;
+import syrenyx.distantmoons.references.DistantMoonsTextureSlot;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -65,18 +59,24 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
   );
   private static final Map<TextureSlot, String> FIXED_LADDER_TEXTURE_MAP = Map.of(
       TextureSlot.BOTTOM, UnderDistantMoons.withPrefixedNamespace("block/%/bottom"),
-      DistantMoonsTextureKeys.CENTER, UnderDistantMoons.withPrefixedNamespace("block/%/center"),
+      DistantMoonsTextureSlot.CENTER, UnderDistantMoons.withPrefixedNamespace("block/%/center"),
       TextureSlot.END, UnderDistantMoons.withPrefixedNamespace("block/%/end"),
       TextureSlot.FRONT, UnderDistantMoons.withPrefixedNamespace("block/%/front"),
       TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/%/side"),
       TextureSlot.TOP, UnderDistantMoons.withPrefixedNamespace("block/%/top"),
       TextureSlot.PARTICLE, UnderDistantMoons.withPrefixedNamespace("block/%/particle")
   );
+  private static final Map<TextureSlot, String> LIGHTABLE_BLOCK_TEXTURE_MAP = Map.of(
+      DistantMoonsTextureSlot.LIT, UnderDistantMoons.withPrefixedNamespace("block/%/lit"),
+      DistantMoonsTextureSlot.LIT_ITEM, UnderDistantMoons.withPrefixedNamespace("item/%/lit"),
+      DistantMoonsTextureSlot.UNLIT, UnderDistantMoons.withPrefixedNamespace("block/%/unlit"),
+      DistantMoonsTextureSlot.UNLIT_ITEM, UnderDistantMoons.withPrefixedNamespace("item/%/unlit")
+  );
   private static final Map<TextureSlot, String> METAL_LADDER_TEXTURE_MAP = Map.of(
       TextureSlot.BOTTOM, UnderDistantMoons.withPrefixedNamespace("block/%/bottom"),
-      DistantMoonsTextureKeys.DETAIL, UnderDistantMoons.withPrefixedNamespace("block/%/detail"),
+      DistantMoonsTextureSlot.DETAIL, UnderDistantMoons.withPrefixedNamespace("block/%/detail"),
       TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/%/side"),
-      DistantMoonsTextureKeys.SUPPORT, UnderDistantMoons.withPrefixedNamespace("block/%/support"),
+      DistantMoonsTextureSlot.SUPPORT, UnderDistantMoons.withPrefixedNamespace("block/%/support"),
       TextureSlot.TEXTURE, UnderDistantMoons.withPrefixedNamespace("item/%"),
       TextureSlot.TOP, UnderDistantMoons.withPrefixedNamespace("block/%/top")
   );
@@ -86,14 +86,14 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
   );
   private static final Map<TextureSlot, String> POLE_TEXTURE_MAP = Map.of(
       TextureSlot.END, UnderDistantMoons.withPrefixedNamespace("block/%/end"),
-      DistantMoonsTextureKeys.HORIZONTAL, UnderDistantMoons.withPrefixedNamespace("block/%/horizontal"),
-      DistantMoonsTextureKeys.VERTICAL, UnderDistantMoons.withPrefixedNamespace("block/%/vertical")
+      DistantMoonsTextureSlot.HORIZONTAL, UnderDistantMoons.withPrefixedNamespace("block/%/horizontal"),
+      DistantMoonsTextureSlot.VERTICAL, UnderDistantMoons.withPrefixedNamespace("block/%/vertical")
   );
   private static final Map<TextureSlot, String> ROPE_LADDER_TEXTURE_MAP = Map.of(
-      DistantMoonsTextureKeys.CEILING, UnderDistantMoons.withPrefixedNamespace("block/%/ropes/ceiling"),
+      DistantMoonsTextureSlot.CEILING, UnderDistantMoons.withPrefixedNamespace("block/%/ropes/ceiling"),
       TextureSlot.END, UnderDistantMoons.withPrefixedNamespace("block/%/end"),
-      DistantMoonsTextureKeys.ENDS, UnderDistantMoons.withPrefixedNamespace("block/%/ropes/ends"),
-      DistantMoonsTextureKeys.MIDDLE, UnderDistantMoons.withPrefixedNamespace("block/%/ropes/middle"),
+      DistantMoonsTextureSlot.ENDS, UnderDistantMoons.withPrefixedNamespace("block/%/ropes/ends"),
+      DistantMoonsTextureSlot.MIDDLE, UnderDistantMoons.withPrefixedNamespace("block/%/ropes/middle"),
       TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/%/side"),
       TextureSlot.TEXTURE, UnderDistantMoons.withPrefixedNamespace("item/%"),
       TextureSlot.PARTICLE, UnderDistantMoons.withPrefixedNamespace("block/%/particle")
@@ -102,7 +102,7 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
       TextureSlot.BOTTOM, UnderDistantMoons.withPrefixedNamespace("block/%/bottom"),
       TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/%/side"),
       TextureSlot.TOP, UnderDistantMoons.withPrefixedNamespace("block/%/top"),
-      DistantMoonsTextureKeys.SIDE_TOP, UnderDistantMoons.withPrefixedNamespace("block/%/side_top"),
+      DistantMoonsTextureSlot.SIDE_TOP, UnderDistantMoons.withPrefixedNamespace("block/%/side_top"),
       TextureSlot.PARTICLE, UnderDistantMoons.withPrefixedNamespace("block/%/particle")
   );
 
@@ -160,13 +160,13 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
 
     //DOORS
     registerDoorBlock(DistantMoonsBlocks.DEEP_IRON_DOOR, Map.ofEntries(
-        Map.entry(DistantMoonsTextureKeys.BOTTOM_LEFT, UnderDistantMoons.withPrefixedNamespace("block/deep_iron_door/door/bottom_left")),
-        Map.entry(DistantMoonsTextureKeys.BOTTOM_RIGHT, UnderDistantMoons.withPrefixedNamespace("block/deep_iron_door/door/bottom_right")),
+        Map.entry(DistantMoonsTextureSlot.BOTTOM_LEFT, UnderDistantMoons.withPrefixedNamespace("block/deep_iron_door/door/bottom_left")),
+        Map.entry(DistantMoonsTextureSlot.BOTTOM_RIGHT, UnderDistantMoons.withPrefixedNamespace("block/deep_iron_door/door/bottom_right")),
         Map.entry(TextureSlot.END, UnderDistantMoons.withPrefixedNamespace("block/deep_iron_door/end")),
         Map.entry(TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/deep_iron_door/side")),
         Map.entry(TextureSlot.TEXTURE, UnderDistantMoons.withPrefixedNamespace("item/deep_iron_door")),
-        Map.entry(DistantMoonsTextureKeys.TOP_LEFT, UnderDistantMoons.withPrefixedNamespace("block/deep_iron_door/door/top_left")),
-        Map.entry(DistantMoonsTextureKeys.TOP_RIGHT, UnderDistantMoons.withPrefixedNamespace("block/deep_iron_door/door/top_right"))
+        Map.entry(DistantMoonsTextureSlot.TOP_LEFT, UnderDistantMoons.withPrefixedNamespace("block/deep_iron_door/door/top_left")),
+        Map.entry(DistantMoonsTextureSlot.TOP_RIGHT, UnderDistantMoons.withPrefixedNamespace("block/deep_iron_door/door/top_right"))
     ));
 
     //FIXED LADDERS
@@ -174,47 +174,50 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     registerFixedLadderBlock(DistantMoonsBlocks.FIXED_IRON_LADDER, FIXED_LADDER_TEXTURE_MAP);
     registerFixedLadderBlock(DistantMoonsBlocks.FIXED_WROUGHT_IRON_LADDER, FIXED_LADDER_TEXTURE_MAP);
 
+    //LANTERNS
+    registerLightableLanternBlock(DistantMoonsBlocks.UNDERWORLD_LANTERN, LIGHTABLE_BLOCK_TEXTURE_MAP);
+
     //METAL BAR DOORS
     registerMetalBarDoorBlock(DistantMoonsBlocks.DEEP_IRON_BAR_DOOR, Map.ofEntries(
-        Map.entry(DistantMoonsTextureKeys.DOUBLE_BOTTOM_LEFT, UnderDistantMoons.withPrefixedNamespace("block/deep_iron_door/bar_door/double/bottom_left")),
-        Map.entry(DistantMoonsTextureKeys.DOUBLE_BOTTOM_RIGHT, UnderDistantMoons.withPrefixedNamespace("block/deep_iron_door/bar_door/double/bottom_right")),
-        Map.entry(DistantMoonsTextureKeys.DOUBLE_TOP_LEFT, UnderDistantMoons.withPrefixedNamespace("block/deep_iron_door/bar_door/double/top_left")),
-        Map.entry(DistantMoonsTextureKeys.DOUBLE_TOP_RIGHT, UnderDistantMoons.withPrefixedNamespace("block/deep_iron_door/bar_door/double/top_right")),
+        Map.entry(DistantMoonsTextureSlot.DOUBLE_BOTTOM_LEFT, UnderDistantMoons.withPrefixedNamespace("block/deep_iron_door/bar_door/double/bottom_left")),
+        Map.entry(DistantMoonsTextureSlot.DOUBLE_BOTTOM_RIGHT, UnderDistantMoons.withPrefixedNamespace("block/deep_iron_door/bar_door/double/bottom_right")),
+        Map.entry(DistantMoonsTextureSlot.DOUBLE_TOP_LEFT, UnderDistantMoons.withPrefixedNamespace("block/deep_iron_door/bar_door/double/top_left")),
+        Map.entry(DistantMoonsTextureSlot.DOUBLE_TOP_RIGHT, UnderDistantMoons.withPrefixedNamespace("block/deep_iron_door/bar_door/double/top_right")),
         Map.entry(TextureSlot.END, UnderDistantMoons.withPrefixedNamespace("block/deep_iron_door/end")),
         Map.entry(TextureSlot.INSIDE, UnderDistantMoons.withPrefixedNamespace("block/deep_iron_door/inside")),
         Map.entry(TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/deep_iron_door/side")),
-        Map.entry(DistantMoonsTextureKeys.SINGLE_BOTTOM_LEFT, UnderDistantMoons.withPrefixedNamespace("block/deep_iron_door/bar_door/single/bottom_left")),
-        Map.entry(DistantMoonsTextureKeys.SINGLE_BOTTOM_RIGHT, UnderDistantMoons.withPrefixedNamespace("block/deep_iron_door/bar_door/single/bottom_right")),
-        Map.entry(DistantMoonsTextureKeys.SINGLE_TOP_LEFT, UnderDistantMoons.withPrefixedNamespace("block/deep_iron_door/bar_door/single/top_left")),
-        Map.entry(DistantMoonsTextureKeys.SINGLE_TOP_RIGHT, UnderDistantMoons.withPrefixedNamespace("block/deep_iron_door/bar_door/single/top_right")),
+        Map.entry(DistantMoonsTextureSlot.SINGLE_BOTTOM_LEFT, UnderDistantMoons.withPrefixedNamespace("block/deep_iron_door/bar_door/single/bottom_left")),
+        Map.entry(DistantMoonsTextureSlot.SINGLE_BOTTOM_RIGHT, UnderDistantMoons.withPrefixedNamespace("block/deep_iron_door/bar_door/single/bottom_right")),
+        Map.entry(DistantMoonsTextureSlot.SINGLE_TOP_LEFT, UnderDistantMoons.withPrefixedNamespace("block/deep_iron_door/bar_door/single/top_left")),
+        Map.entry(DistantMoonsTextureSlot.SINGLE_TOP_RIGHT, UnderDistantMoons.withPrefixedNamespace("block/deep_iron_door/bar_door/single/top_right")),
         Map.entry(TextureSlot.TEXTURE, UnderDistantMoons.withPrefixedNamespace("item/deep_iron_bar_door"))
     ));
     registerMetalBarDoorBlock(DistantMoonsBlocks.IRON_BAR_DOOR, Map.ofEntries(
-        Map.entry(DistantMoonsTextureKeys.DOUBLE_BOTTOM_LEFT, UnderDistantMoons.withPrefixedNamespace("block/iron_door/bar_door/double/bottom_left")),
-        Map.entry(DistantMoonsTextureKeys.DOUBLE_BOTTOM_RIGHT, UnderDistantMoons.withPrefixedNamespace("block/iron_door/bar_door/double/bottom_right")),
-        Map.entry(DistantMoonsTextureKeys.DOUBLE_TOP_LEFT, UnderDistantMoons.withPrefixedNamespace("block/iron_door/bar_door/double/top_left")),
-        Map.entry(DistantMoonsTextureKeys.DOUBLE_TOP_RIGHT, UnderDistantMoons.withPrefixedNamespace("block/iron_door/bar_door/double/top_right")),
+        Map.entry(DistantMoonsTextureSlot.DOUBLE_BOTTOM_LEFT, UnderDistantMoons.withPrefixedNamespace("block/iron_door/bar_door/double/bottom_left")),
+        Map.entry(DistantMoonsTextureSlot.DOUBLE_BOTTOM_RIGHT, UnderDistantMoons.withPrefixedNamespace("block/iron_door/bar_door/double/bottom_right")),
+        Map.entry(DistantMoonsTextureSlot.DOUBLE_TOP_LEFT, UnderDistantMoons.withPrefixedNamespace("block/iron_door/bar_door/double/top_left")),
+        Map.entry(DistantMoonsTextureSlot.DOUBLE_TOP_RIGHT, UnderDistantMoons.withPrefixedNamespace("block/iron_door/bar_door/double/top_right")),
         Map.entry(TextureSlot.END, UnderDistantMoons.withPrefixedNamespace("block/iron_door/end")),
         Map.entry(TextureSlot.INSIDE, UnderDistantMoons.withPrefixedNamespace("block/iron_door/inside")),
         Map.entry(TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/iron_door/side")),
-        Map.entry(DistantMoonsTextureKeys.SINGLE_BOTTOM_LEFT, UnderDistantMoons.withPrefixedNamespace("block/iron_door/bar_door/single/bottom_left")),
-        Map.entry(DistantMoonsTextureKeys.SINGLE_BOTTOM_RIGHT, UnderDistantMoons.withPrefixedNamespace("block/iron_door/bar_door/single/bottom_right")),
-        Map.entry(DistantMoonsTextureKeys.SINGLE_TOP_LEFT, UnderDistantMoons.withPrefixedNamespace("block/iron_door/bar_door/single/top_left")),
-        Map.entry(DistantMoonsTextureKeys.SINGLE_TOP_RIGHT, UnderDistantMoons.withPrefixedNamespace("block/iron_door/bar_door/single/top_right")),
+        Map.entry(DistantMoonsTextureSlot.SINGLE_BOTTOM_LEFT, UnderDistantMoons.withPrefixedNamespace("block/iron_door/bar_door/single/bottom_left")),
+        Map.entry(DistantMoonsTextureSlot.SINGLE_BOTTOM_RIGHT, UnderDistantMoons.withPrefixedNamespace("block/iron_door/bar_door/single/bottom_right")),
+        Map.entry(DistantMoonsTextureSlot.SINGLE_TOP_LEFT, UnderDistantMoons.withPrefixedNamespace("block/iron_door/bar_door/single/top_left")),
+        Map.entry(DistantMoonsTextureSlot.SINGLE_TOP_RIGHT, UnderDistantMoons.withPrefixedNamespace("block/iron_door/bar_door/single/top_right")),
         Map.entry(TextureSlot.TEXTURE, UnderDistantMoons.withPrefixedNamespace("item/iron_bar_door"))
     ));
     registerMetalBarDoorBlock(DistantMoonsBlocks.WROUGHT_IRON_BAR_DOOR, Map.ofEntries(
-        Map.entry(DistantMoonsTextureKeys.DOUBLE_BOTTOM_LEFT, UnderDistantMoons.withPrefixedNamespace("block/wrought_iron_door/bar_door/double/bottom_left")),
-        Map.entry(DistantMoonsTextureKeys.DOUBLE_BOTTOM_RIGHT, UnderDistantMoons.withPrefixedNamespace("block/wrought_iron_door/bar_door/double/bottom_right")),
-        Map.entry(DistantMoonsTextureKeys.DOUBLE_TOP_LEFT, UnderDistantMoons.withPrefixedNamespace("block/wrought_iron_door/bar_door/double/top_left")),
-        Map.entry(DistantMoonsTextureKeys.DOUBLE_TOP_RIGHT, UnderDistantMoons.withPrefixedNamespace("block/wrought_iron_door/bar_door/double/top_right")),
+        Map.entry(DistantMoonsTextureSlot.DOUBLE_BOTTOM_LEFT, UnderDistantMoons.withPrefixedNamespace("block/wrought_iron_door/bar_door/double/bottom_left")),
+        Map.entry(DistantMoonsTextureSlot.DOUBLE_BOTTOM_RIGHT, UnderDistantMoons.withPrefixedNamespace("block/wrought_iron_door/bar_door/double/bottom_right")),
+        Map.entry(DistantMoonsTextureSlot.DOUBLE_TOP_LEFT, UnderDistantMoons.withPrefixedNamespace("block/wrought_iron_door/bar_door/double/top_left")),
+        Map.entry(DistantMoonsTextureSlot.DOUBLE_TOP_RIGHT, UnderDistantMoons.withPrefixedNamespace("block/wrought_iron_door/bar_door/double/top_right")),
         Map.entry(TextureSlot.END, UnderDistantMoons.withPrefixedNamespace("block/wrought_iron_door/end")),
         Map.entry(TextureSlot.INSIDE, UnderDistantMoons.withPrefixedNamespace("block/wrought_iron_door/inside")),
         Map.entry(TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/wrought_iron_door/side")),
-        Map.entry(DistantMoonsTextureKeys.SINGLE_BOTTOM_LEFT, UnderDistantMoons.withPrefixedNamespace("block/wrought_iron_door/bar_door/single/bottom_left")),
-        Map.entry(DistantMoonsTextureKeys.SINGLE_BOTTOM_RIGHT, UnderDistantMoons.withPrefixedNamespace("block/wrought_iron_door/bar_door/single/bottom_right")),
-        Map.entry(DistantMoonsTextureKeys.SINGLE_TOP_LEFT, UnderDistantMoons.withPrefixedNamespace("block/wrought_iron_door/bar_door/single/top_left")),
-        Map.entry(DistantMoonsTextureKeys.SINGLE_TOP_RIGHT, UnderDistantMoons.withPrefixedNamespace("block/wrought_iron_door/bar_door/single/top_right")),
+        Map.entry(DistantMoonsTextureSlot.SINGLE_BOTTOM_LEFT, UnderDistantMoons.withPrefixedNamespace("block/wrought_iron_door/bar_door/single/bottom_left")),
+        Map.entry(DistantMoonsTextureSlot.SINGLE_BOTTOM_RIGHT, UnderDistantMoons.withPrefixedNamespace("block/wrought_iron_door/bar_door/single/bottom_right")),
+        Map.entry(DistantMoonsTextureSlot.SINGLE_TOP_LEFT, UnderDistantMoons.withPrefixedNamespace("block/wrought_iron_door/bar_door/single/top_left")),
+        Map.entry(DistantMoonsTextureSlot.SINGLE_TOP_RIGHT, UnderDistantMoons.withPrefixedNamespace("block/wrought_iron_door/bar_door/single/top_right")),
         Map.entry(TextureSlot.TEXTURE, UnderDistantMoons.withPrefixedNamespace("item/wrought_iron_bar_door"))
     ));
 
@@ -413,15 +416,15 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
 
     //WALL SLABS - COMPLEX
     registerComplexWallSlabBlock(DistantMoonsBlocks.SMOOTH_STONE_WALL_SLAB, Map.of(
-        DistantMoonsTextureKeys.BOTTOM_LEFT, UnderDistantMoons.withPrefixedNamespace("block/smooth_stone_stairs/end/bottom_left"),
-        DistantMoonsTextureKeys.BOTTOM_RIGHT, UnderDistantMoons.withPrefixedNamespace("block/smooth_stone_stairs/end/bottom_right"),
-        DistantMoonsTextureKeys.HORIZONTAL_END, UnderDistantMoons.withPrefixedNamespace("block/smooth_stone_slab/end/horizontal"),
-        DistantMoonsTextureKeys.HORIZONTAL_SIDE, "minecraft:block/smooth_stone_slab_side",
+        DistantMoonsTextureSlot.BOTTOM_LEFT, UnderDistantMoons.withPrefixedNamespace("block/smooth_stone_stairs/end/bottom_left"),
+        DistantMoonsTextureSlot.BOTTOM_RIGHT, UnderDistantMoons.withPrefixedNamespace("block/smooth_stone_stairs/end/bottom_right"),
+        DistantMoonsTextureSlot.HORIZONTAL_END, UnderDistantMoons.withPrefixedNamespace("block/smooth_stone_slab/end/horizontal"),
+        DistantMoonsTextureSlot.HORIZONTAL_SIDE, "minecraft:block/smooth_stone_slab_side",
         TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/smooth_stone_slab/side/flat"),
-        DistantMoonsTextureKeys.TOP_LEFT, UnderDistantMoons.withPrefixedNamespace("block/smooth_stone_stairs/end/top_left"),
-        DistantMoonsTextureKeys.TOP_RIGHT, UnderDistantMoons.withPrefixedNamespace("block/smooth_stone_stairs/end/top_right"),
-        DistantMoonsTextureKeys.VERTICAL_END, UnderDistantMoons.withPrefixedNamespace("block/smooth_stone_slab/end/vertical"),
-        DistantMoonsTextureKeys.VERTICAL_SIDE, UnderDistantMoons.withPrefixedNamespace("block/smooth_stone_slab/side/vertical")
+        DistantMoonsTextureSlot.TOP_LEFT, UnderDistantMoons.withPrefixedNamespace("block/smooth_stone_stairs/end/top_left"),
+        DistantMoonsTextureSlot.TOP_RIGHT, UnderDistantMoons.withPrefixedNamespace("block/smooth_stone_stairs/end/top_right"),
+        DistantMoonsTextureSlot.VERTICAL_END, UnderDistantMoons.withPrefixedNamespace("block/smooth_stone_slab/end/vertical"),
+        DistantMoonsTextureSlot.VERTICAL_SIDE, UnderDistantMoons.withPrefixedNamespace("block/smooth_stone_slab/side/vertical")
     ));
   }
 
@@ -506,10 +509,10 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
   }
 
   private void registerDoorBlock(Block block, Map<TextureSlot, String> rawTextureMap) {
-    Map<TextureSlot, String> textureMapBottomLeft = Map.of(TextureSlot.END, rawTextureMap.get(TextureSlot.END), TextureSlot.INSIDE, rawTextureMap.get(DistantMoonsTextureKeys.BOTTOM_RIGHT), DistantMoonsTextureKeys.OUTSIDE, rawTextureMap.get(DistantMoonsTextureKeys.BOTTOM_LEFT), TextureSlot.SIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.BOTTOM_LEFT));
-    Map<TextureSlot, String> textureMapBottomRight = Map.of(TextureSlot.END, rawTextureMap.get(TextureSlot.END), TextureSlot.INSIDE, rawTextureMap.get(DistantMoonsTextureKeys.BOTTOM_LEFT), DistantMoonsTextureKeys.OUTSIDE, rawTextureMap.get(DistantMoonsTextureKeys.BOTTOM_RIGHT), TextureSlot.SIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.BOTTOM_RIGHT));
-    Map<TextureSlot, String> textureMapTopLeft = Map.of(TextureSlot.END, rawTextureMap.get(TextureSlot.END), TextureSlot.INSIDE, rawTextureMap.get(DistantMoonsTextureKeys.TOP_RIGHT), DistantMoonsTextureKeys.OUTSIDE, rawTextureMap.get(DistantMoonsTextureKeys.TOP_LEFT), TextureSlot.SIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.TOP_LEFT));
-    Map<TextureSlot, String> textureMapTopRight = Map.of(TextureSlot.END, rawTextureMap.get(TextureSlot.END), TextureSlot.INSIDE, rawTextureMap.get(DistantMoonsTextureKeys.TOP_LEFT), DistantMoonsTextureKeys.OUTSIDE, rawTextureMap.get(DistantMoonsTextureKeys.TOP_RIGHT), TextureSlot.SIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.TOP_RIGHT));
+    Map<TextureSlot, String> textureMapBottomLeft = Map.of(TextureSlot.END, rawTextureMap.get(TextureSlot.END), TextureSlot.INSIDE, rawTextureMap.get(DistantMoonsTextureSlot.BOTTOM_RIGHT), DistantMoonsTextureSlot.OUTSIDE, rawTextureMap.get(DistantMoonsTextureSlot.BOTTOM_LEFT), TextureSlot.SIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureSlot.BOTTOM_LEFT));
+    Map<TextureSlot, String> textureMapBottomRight = Map.of(TextureSlot.END, rawTextureMap.get(TextureSlot.END), TextureSlot.INSIDE, rawTextureMap.get(DistantMoonsTextureSlot.BOTTOM_LEFT), DistantMoonsTextureSlot.OUTSIDE, rawTextureMap.get(DistantMoonsTextureSlot.BOTTOM_RIGHT), TextureSlot.SIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureSlot.BOTTOM_RIGHT));
+    Map<TextureSlot, String> textureMapTopLeft = Map.of(TextureSlot.END, rawTextureMap.get(TextureSlot.END), TextureSlot.INSIDE, rawTextureMap.get(DistantMoonsTextureSlot.TOP_RIGHT), DistantMoonsTextureSlot.OUTSIDE, rawTextureMap.get(DistantMoonsTextureSlot.TOP_LEFT), TextureSlot.SIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureSlot.TOP_LEFT));
+    Map<TextureSlot, String> textureMapTopRight = Map.of(TextureSlot.END, rawTextureMap.get(TextureSlot.END), TextureSlot.INSIDE, rawTextureMap.get(DistantMoonsTextureSlot.TOP_LEFT), DistantMoonsTextureSlot.OUTSIDE, rawTextureMap.get(DistantMoonsTextureSlot.TOP_RIGHT), TextureSlot.SIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureSlot.TOP_RIGHT));
     Map<TextureSlot, String> textureMapItem = Map.of(TextureSlot.TEXTURE, rawTextureMap.get(TextureSlot.TEXTURE), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.TEXTURE));
     MultiVariant variantBottomLeft = createWeightedVariant(createObjectModel(block, "door/bottom", "/bottom_left", textureMapBottomLeft));
     MultiVariant variantBottomRight = createWeightedVariant(createObjectModel(block, "door/bottom", "/bottom_right", textureMapBottomRight));
@@ -555,7 +558,7 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
   }
 
   private void registerFixedLadderBlock(Block block, Map<TextureSlot, String> rawTextureMap) {
-    Map<TextureSlot, String> textureMapCenter = Map.of(TextureSlot.BOTTOM, rawTextureMap.get(TextureSlot.BOTTOM), TextureSlot.FRONT, rawTextureMap.get(TextureSlot.FRONT), TextureSlot.SIDE, rawTextureMap.get(DistantMoonsTextureKeys.CENTER), TextureSlot.TOP, rawTextureMap.get(TextureSlot.TOP), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE));
+    Map<TextureSlot, String> textureMapCenter = Map.of(TextureSlot.BOTTOM, rawTextureMap.get(TextureSlot.BOTTOM), TextureSlot.FRONT, rawTextureMap.get(TextureSlot.FRONT), TextureSlot.SIDE, rawTextureMap.get(DistantMoonsTextureSlot.CENTER), TextureSlot.TOP, rawTextureMap.get(TextureSlot.TOP), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE));
     Map<TextureSlot, String> textureMapCenterCaps = Map.of(TextureSlot.END, rawTextureMap.get(TextureSlot.END), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE));
     Map<TextureSlot, String> textureMapExtension = Map.of(TextureSlot.BOTTOM, rawTextureMap.get(TextureSlot.BOTTOM), TextureSlot.FRONT, rawTextureMap.get(TextureSlot.FRONT), TextureSlot.TOP, rawTextureMap.get(TextureSlot.TOP), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE));
     Map<TextureSlot, String> textureMapSide = Map.of(TextureSlot.SIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE));
@@ -588,15 +591,36 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModelUtils.plainModel(getFirstEntryOf(variantCenter)));
   }
 
+  private void registerLightableLanternBlock(Block block, Map<TextureSlot, String> rawTextureMap) {
+    Map<TextureSlot, String> textureMapLit = Map.of(TextureSlot.SIDE, rawTextureMap.get(DistantMoonsTextureSlot.LIT), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureSlot.LIT));
+    Map<TextureSlot, String> textureMapUnlit = Map.of(TextureSlot.SIDE, rawTextureMap.get(DistantMoonsTextureSlot.UNLIT), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureSlot.UNLIT));
+    Map<TextureSlot, String> textureMapLitItem = Map.of(TextureSlot.TEXTURE, rawTextureMap.get(DistantMoonsTextureSlot.LIT_ITEM), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureSlot.LIT_ITEM));
+    Map<TextureSlot, String> textureMapUnlitItem = Map.of(TextureSlot.TEXTURE, rawTextureMap.get(DistantMoonsTextureSlot.UNLIT_ITEM), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureSlot.UNLIT_ITEM));
+    MultiVariant variantGroundLit = createWeightedVariant(createObjectModel(block, "lantern/ground", "/ground/lit", textureMapLit));
+    MultiVariant variantGroundUnlit = createWeightedVariant(createObjectModel(block, "lantern/ground", "/ground/unlit", textureMapUnlit));
+    MultiVariant variantHangingLit = createWeightedVariant(createObjectModel(block, "lantern/hanging", "/hanging/lit", textureMapLit));
+    MultiVariant variantHangingUnlit = createWeightedVariant(createObjectModel(block, "lantern/hanging", "/hanging/unlit", textureMapUnlit));
+    this.blockGenerator.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(PropertyDispatch
+        .initial(BlockStateProperties.HANGING, BlockStateProperties.LIT)
+        .select(false, false, variantGroundUnlit)
+        .select(false, true, variantGroundLit)
+        .select(true, false, variantHangingUnlit)
+        .select(true, true, variantHangingLit)
+    ));
+    Identifier inventoryModelLit = createObjectModel(block, "simple_item", "/item/lit", textureMapLitItem);
+    Identifier inventoryModelUnlit = createObjectModel(block, "simple_item", "/item/unlit", textureMapUnlitItem);
+    this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModelUtils.inOverworld(ItemModelUtils.plainModel(inventoryModelUnlit), ItemModelUtils.plainModel(inventoryModelLit)));
+  }
+
   private void registerMetalBarDoorBlock(Block block, Map<TextureSlot, String> rawTextureMap) {
-    Map<TextureSlot, String> textureMapDoubleBottomLeft = Map.of(TextureSlot.END, rawTextureMap.get(TextureSlot.END), TextureSlot.BACK, rawTextureMap.get(DistantMoonsTextureKeys.DOUBLE_BOTTOM_RIGHT), TextureSlot.FRONT, rawTextureMap.get(DistantMoonsTextureKeys.DOUBLE_BOTTOM_LEFT), TextureSlot.INSIDE, rawTextureMap.get(TextureSlot.INSIDE), TextureSlot.SIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.DOUBLE_BOTTOM_LEFT));
-    Map<TextureSlot, String> textureMapDoubleBottomRight = Map.of(TextureSlot.END, rawTextureMap.get(TextureSlot.END), TextureSlot.BACK, rawTextureMap.get(DistantMoonsTextureKeys.DOUBLE_BOTTOM_LEFT), TextureSlot.FRONT, rawTextureMap.get(DistantMoonsTextureKeys.DOUBLE_BOTTOM_RIGHT), TextureSlot.INSIDE, rawTextureMap.get(TextureSlot.INSIDE), TextureSlot.SIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.DOUBLE_BOTTOM_RIGHT));
-    Map<TextureSlot, String> textureMapDoubleTopLeft = Map.of(TextureSlot.END, rawTextureMap.get(TextureSlot.END), TextureSlot.BACK, rawTextureMap.get(DistantMoonsTextureKeys.DOUBLE_TOP_RIGHT), TextureSlot.FRONT, rawTextureMap.get(DistantMoonsTextureKeys.DOUBLE_TOP_LEFT), TextureSlot.INSIDE, rawTextureMap.get(TextureSlot.INSIDE), TextureSlot.SIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.DOUBLE_TOP_LEFT));
-    Map<TextureSlot, String> textureMapDoubleTopRight = Map.of(TextureSlot.END, rawTextureMap.get(TextureSlot.END), TextureSlot.BACK, rawTextureMap.get(DistantMoonsTextureKeys.DOUBLE_TOP_LEFT), TextureSlot.FRONT, rawTextureMap.get(DistantMoonsTextureKeys.DOUBLE_TOP_RIGHT), TextureSlot.INSIDE, rawTextureMap.get(TextureSlot.INSIDE), TextureSlot.SIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.DOUBLE_TOP_RIGHT));
-    Map<TextureSlot, String> textureMapSingleBottomLeft = Map.of(TextureSlot.END, rawTextureMap.get(TextureSlot.END), TextureSlot.BACK, rawTextureMap.get(DistantMoonsTextureKeys.SINGLE_BOTTOM_RIGHT), TextureSlot.FRONT, rawTextureMap.get(DistantMoonsTextureKeys.SINGLE_BOTTOM_LEFT), TextureSlot.INSIDE, rawTextureMap.get(TextureSlot.INSIDE), TextureSlot.SIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.SINGLE_BOTTOM_LEFT));
-    Map<TextureSlot, String> textureMapSingleBottomRight = Map.of(TextureSlot.END, rawTextureMap.get(TextureSlot.END), TextureSlot.BACK, rawTextureMap.get(DistantMoonsTextureKeys.SINGLE_BOTTOM_LEFT), TextureSlot.FRONT, rawTextureMap.get(DistantMoonsTextureKeys.SINGLE_BOTTOM_RIGHT), TextureSlot.INSIDE, rawTextureMap.get(TextureSlot.INSIDE), TextureSlot.SIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.SINGLE_BOTTOM_RIGHT));
-    Map<TextureSlot, String> textureMapSingleTopLeft = Map.of(TextureSlot.END, rawTextureMap.get(TextureSlot.END), TextureSlot.BACK, rawTextureMap.get(DistantMoonsTextureKeys.SINGLE_TOP_RIGHT), TextureSlot.FRONT, rawTextureMap.get(DistantMoonsTextureKeys.SINGLE_TOP_LEFT), TextureSlot.INSIDE, rawTextureMap.get(TextureSlot.INSIDE), TextureSlot.SIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.SINGLE_TOP_LEFT));
-    Map<TextureSlot, String> textureMapSingleTopRight = Map.of(TextureSlot.END, rawTextureMap.get(TextureSlot.END), TextureSlot.BACK, rawTextureMap.get(DistantMoonsTextureKeys.SINGLE_TOP_LEFT), TextureSlot.FRONT, rawTextureMap.get(DistantMoonsTextureKeys.SINGLE_TOP_RIGHT), TextureSlot.INSIDE, rawTextureMap.get(TextureSlot.INSIDE), TextureSlot.SIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.SINGLE_TOP_RIGHT));
+    Map<TextureSlot, String> textureMapDoubleBottomLeft = Map.of(TextureSlot.END, rawTextureMap.get(TextureSlot.END), TextureSlot.BACK, rawTextureMap.get(DistantMoonsTextureSlot.DOUBLE_BOTTOM_RIGHT), TextureSlot.FRONT, rawTextureMap.get(DistantMoonsTextureSlot.DOUBLE_BOTTOM_LEFT), TextureSlot.INSIDE, rawTextureMap.get(TextureSlot.INSIDE), TextureSlot.SIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureSlot.DOUBLE_BOTTOM_LEFT));
+    Map<TextureSlot, String> textureMapDoubleBottomRight = Map.of(TextureSlot.END, rawTextureMap.get(TextureSlot.END), TextureSlot.BACK, rawTextureMap.get(DistantMoonsTextureSlot.DOUBLE_BOTTOM_LEFT), TextureSlot.FRONT, rawTextureMap.get(DistantMoonsTextureSlot.DOUBLE_BOTTOM_RIGHT), TextureSlot.INSIDE, rawTextureMap.get(TextureSlot.INSIDE), TextureSlot.SIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureSlot.DOUBLE_BOTTOM_RIGHT));
+    Map<TextureSlot, String> textureMapDoubleTopLeft = Map.of(TextureSlot.END, rawTextureMap.get(TextureSlot.END), TextureSlot.BACK, rawTextureMap.get(DistantMoonsTextureSlot.DOUBLE_TOP_RIGHT), TextureSlot.FRONT, rawTextureMap.get(DistantMoonsTextureSlot.DOUBLE_TOP_LEFT), TextureSlot.INSIDE, rawTextureMap.get(TextureSlot.INSIDE), TextureSlot.SIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureSlot.DOUBLE_TOP_LEFT));
+    Map<TextureSlot, String> textureMapDoubleTopRight = Map.of(TextureSlot.END, rawTextureMap.get(TextureSlot.END), TextureSlot.BACK, rawTextureMap.get(DistantMoonsTextureSlot.DOUBLE_TOP_LEFT), TextureSlot.FRONT, rawTextureMap.get(DistantMoonsTextureSlot.DOUBLE_TOP_RIGHT), TextureSlot.INSIDE, rawTextureMap.get(TextureSlot.INSIDE), TextureSlot.SIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureSlot.DOUBLE_TOP_RIGHT));
+    Map<TextureSlot, String> textureMapSingleBottomLeft = Map.of(TextureSlot.END, rawTextureMap.get(TextureSlot.END), TextureSlot.BACK, rawTextureMap.get(DistantMoonsTextureSlot.SINGLE_BOTTOM_RIGHT), TextureSlot.FRONT, rawTextureMap.get(DistantMoonsTextureSlot.SINGLE_BOTTOM_LEFT), TextureSlot.INSIDE, rawTextureMap.get(TextureSlot.INSIDE), TextureSlot.SIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureSlot.SINGLE_BOTTOM_LEFT));
+    Map<TextureSlot, String> textureMapSingleBottomRight = Map.of(TextureSlot.END, rawTextureMap.get(TextureSlot.END), TextureSlot.BACK, rawTextureMap.get(DistantMoonsTextureSlot.SINGLE_BOTTOM_LEFT), TextureSlot.FRONT, rawTextureMap.get(DistantMoonsTextureSlot.SINGLE_BOTTOM_RIGHT), TextureSlot.INSIDE, rawTextureMap.get(TextureSlot.INSIDE), TextureSlot.SIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureSlot.SINGLE_BOTTOM_RIGHT));
+    Map<TextureSlot, String> textureMapSingleTopLeft = Map.of(TextureSlot.END, rawTextureMap.get(TextureSlot.END), TextureSlot.BACK, rawTextureMap.get(DistantMoonsTextureSlot.SINGLE_TOP_RIGHT), TextureSlot.FRONT, rawTextureMap.get(DistantMoonsTextureSlot.SINGLE_TOP_LEFT), TextureSlot.INSIDE, rawTextureMap.get(TextureSlot.INSIDE), TextureSlot.SIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureSlot.SINGLE_TOP_LEFT));
+    Map<TextureSlot, String> textureMapSingleTopRight = Map.of(TextureSlot.END, rawTextureMap.get(TextureSlot.END), TextureSlot.BACK, rawTextureMap.get(DistantMoonsTextureSlot.SINGLE_TOP_LEFT), TextureSlot.FRONT, rawTextureMap.get(DistantMoonsTextureSlot.SINGLE_TOP_RIGHT), TextureSlot.INSIDE, rawTextureMap.get(TextureSlot.INSIDE), TextureSlot.SIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureSlot.SINGLE_TOP_RIGHT));
     Map<TextureSlot, String> textureMapItem = Map.of(TextureSlot.TEXTURE, rawTextureMap.get(TextureSlot.TEXTURE), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.TEXTURE));
     MultiVariant variantDoubleBottomLeft = createWeightedVariant(createObjectModel(block, "metal_bar_door/double/bottom_left", "/double/bottom_left", textureMapDoubleBottomLeft));
     MultiVariant variantDoubleBottomRight = createWeightedVariant(createObjectModel(block, "metal_bar_door/double/bottom_right", "/double/bottom_right", textureMapDoubleBottomRight));
@@ -678,7 +702,7 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
   }
 
   private void registerMetalLadderBlock(Block block, Map<TextureSlot, String> rawTextureMap) {
-    Map<TextureSlot, String> textureMapBlock = Map.of(TextureSlot.BOTTOM, rawTextureMap.get(TextureSlot.BOTTOM), DistantMoonsTextureKeys.DETAIL, rawTextureMap.get(DistantMoonsTextureKeys.DETAIL), TextureSlot.SIDE, rawTextureMap.get(TextureSlot.SIDE), DistantMoonsTextureKeys.SUPPORT, rawTextureMap.get(DistantMoonsTextureKeys.SUPPORT), TextureSlot.TOP, rawTextureMap.get(TextureSlot.TOP), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.SIDE));
+    Map<TextureSlot, String> textureMapBlock = Map.of(TextureSlot.BOTTOM, rawTextureMap.get(TextureSlot.BOTTOM), DistantMoonsTextureSlot.DETAIL, rawTextureMap.get(DistantMoonsTextureSlot.DETAIL), TextureSlot.SIDE, rawTextureMap.get(TextureSlot.SIDE), DistantMoonsTextureSlot.SUPPORT, rawTextureMap.get(DistantMoonsTextureSlot.SUPPORT), TextureSlot.TOP, rawTextureMap.get(TextureSlot.TOP), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.SIDE));
     Map<TextureSlot, String> textureMapItem = Map.of(TextureSlot.TEXTURE, rawTextureMap.get(TextureSlot.TEXTURE), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.TEXTURE));
     MultiVariant variant = createWeightedVariant(createObjectModel(block, "metal_ladder", "/block", textureMapBlock));
     this.blockGenerator.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(PropertyDispatch
@@ -762,9 +786,9 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
   }
 
   private void registerPoleBlock(Block block, Map<TextureSlot, String> rawTextureMap, String parentType) {
-    Map<TextureSlot, String> textureMapX = Map.of(TextureSlot.END, rawTextureMap.get(TextureSlot.END), DistantMoonsTextureKeys.HORIZONTAL, rawTextureMap.get(DistantMoonsTextureKeys.HORIZONTAL), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL));
-    Map<TextureSlot, String> textureMapY = Map.of(TextureSlot.END, rawTextureMap.get(TextureSlot.END), DistantMoonsTextureKeys.VERTICAL, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL));
-    Map<TextureSlot, String> textureMapZ = Map.of(TextureSlot.END, rawTextureMap.get(TextureSlot.END), DistantMoonsTextureKeys.HORIZONTAL, rawTextureMap.get(DistantMoonsTextureKeys.HORIZONTAL), DistantMoonsTextureKeys.VERTICAL, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL));
+    Map<TextureSlot, String> textureMapX = Map.of(TextureSlot.END, rawTextureMap.get(TextureSlot.END), DistantMoonsTextureSlot.HORIZONTAL, rawTextureMap.get(DistantMoonsTextureSlot.HORIZONTAL), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureSlot.VERTICAL));
+    Map<TextureSlot, String> textureMapY = Map.of(TextureSlot.END, rawTextureMap.get(TextureSlot.END), DistantMoonsTextureSlot.VERTICAL, rawTextureMap.get(DistantMoonsTextureSlot.VERTICAL), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureSlot.VERTICAL));
+    Map<TextureSlot, String> textureMapZ = Map.of(TextureSlot.END, rawTextureMap.get(TextureSlot.END), DistantMoonsTextureSlot.HORIZONTAL, rawTextureMap.get(DistantMoonsTextureSlot.HORIZONTAL), DistantMoonsTextureSlot.VERTICAL, rawTextureMap.get(DistantMoonsTextureSlot.VERTICAL), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureSlot.VERTICAL));
     MultiVariant variantCenterX = createWeightedVariant(createObjectModel(block, parentType + "/center_x", "/center_x", textureMapX));
     MultiVariant variantCenterY = createWeightedVariant(createObjectModel(block, parentType + "/center_y", "/center_y", textureMapY));
     MultiVariant variantCenterZ = createWeightedVariant(createObjectModel(block, parentType + "/center_z", "/center_z", textureMapZ));
@@ -786,12 +810,12 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
   }
 
   private void registerRopeLadderBlock(Block block, Map<TextureSlot, String> rawTextureMap) {
-    Map<TextureSlot, String> textureMapBottom = Map.of(TextureSlot.BOTTOM, rawTextureMap.get(DistantMoonsTextureKeys.ENDS), TextureSlot.END, rawTextureMap.get(TextureSlot.END), TextureSlot.SIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.TOP, rawTextureMap.get(DistantMoonsTextureKeys.MIDDLE), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE));
-    Map<TextureSlot, String> textureMapInnerEnds = Map.of(TextureSlot.BOTTOM, rawTextureMap.get(DistantMoonsTextureKeys.ENDS), TextureSlot.END, rawTextureMap.get(TextureSlot.END), TextureSlot.SIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.TOP, rawTextureMap.get(DistantMoonsTextureKeys.CEILING), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE));
-    Map<TextureSlot, String> textureMapInnerTop = Map.of(TextureSlot.BOTTOM, rawTextureMap.get(DistantMoonsTextureKeys.MIDDLE), TextureSlot.END, rawTextureMap.get(TextureSlot.END), TextureSlot.SIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.TOP, rawTextureMap.get(DistantMoonsTextureKeys.CEILING), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE));
-    Map<TextureSlot, String> textureMapMiddle = Map.of(TextureSlot.BOTTOM, rawTextureMap.get(DistantMoonsTextureKeys.MIDDLE), TextureSlot.END, rawTextureMap.get(TextureSlot.END), TextureSlot.SIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.TOP, rawTextureMap.get(DistantMoonsTextureKeys.MIDDLE), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE));
-    Map<TextureSlot, String> textureMapOuterEnds = Map.of(TextureSlot.BOTTOM, rawTextureMap.get(DistantMoonsTextureKeys.ENDS), TextureSlot.END, rawTextureMap.get(TextureSlot.END), TextureSlot.SIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.TOP, rawTextureMap.get(DistantMoonsTextureKeys.ENDS), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE));
-    Map<TextureSlot, String> textureMapOuterTop = Map.of(TextureSlot.BOTTOM, rawTextureMap.get(DistantMoonsTextureKeys.MIDDLE), TextureSlot.END, rawTextureMap.get(TextureSlot.END), TextureSlot.SIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.TOP, rawTextureMap.get(DistantMoonsTextureKeys.ENDS), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE));
+    Map<TextureSlot, String> textureMapBottom = Map.of(TextureSlot.BOTTOM, rawTextureMap.get(DistantMoonsTextureSlot.ENDS), TextureSlot.END, rawTextureMap.get(TextureSlot.END), TextureSlot.SIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.TOP, rawTextureMap.get(DistantMoonsTextureSlot.MIDDLE), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE));
+    Map<TextureSlot, String> textureMapInnerEnds = Map.of(TextureSlot.BOTTOM, rawTextureMap.get(DistantMoonsTextureSlot.ENDS), TextureSlot.END, rawTextureMap.get(TextureSlot.END), TextureSlot.SIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.TOP, rawTextureMap.get(DistantMoonsTextureSlot.CEILING), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE));
+    Map<TextureSlot, String> textureMapInnerTop = Map.of(TextureSlot.BOTTOM, rawTextureMap.get(DistantMoonsTextureSlot.MIDDLE), TextureSlot.END, rawTextureMap.get(TextureSlot.END), TextureSlot.SIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.TOP, rawTextureMap.get(DistantMoonsTextureSlot.CEILING), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE));
+    Map<TextureSlot, String> textureMapMiddle = Map.of(TextureSlot.BOTTOM, rawTextureMap.get(DistantMoonsTextureSlot.MIDDLE), TextureSlot.END, rawTextureMap.get(TextureSlot.END), TextureSlot.SIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.TOP, rawTextureMap.get(DistantMoonsTextureSlot.MIDDLE), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE));
+    Map<TextureSlot, String> textureMapOuterEnds = Map.of(TextureSlot.BOTTOM, rawTextureMap.get(DistantMoonsTextureSlot.ENDS), TextureSlot.END, rawTextureMap.get(TextureSlot.END), TextureSlot.SIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.TOP, rawTextureMap.get(DistantMoonsTextureSlot.ENDS), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE));
+    Map<TextureSlot, String> textureMapOuterTop = Map.of(TextureSlot.BOTTOM, rawTextureMap.get(DistantMoonsTextureSlot.MIDDLE), TextureSlot.END, rawTextureMap.get(TextureSlot.END), TextureSlot.SIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.TOP, rawTextureMap.get(DistantMoonsTextureSlot.ENDS), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE));
     Map<TextureSlot, String> textureMapItem = Map.of(TextureSlot.TEXTURE, rawTextureMap.get(TextureSlot.TEXTURE), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.TEXTURE));
     MultiVariant variantInnerBottom = createWeightedVariant(createObjectModel(block, "rope_ladder/inner", "/inner/bottom", textureMapBottom));
     MultiVariant variantInnerEnds = createWeightedVariant(createObjectModel(block, "rope_ladder/ceiling", "/inner/ends", textureMapInnerEnds));
@@ -870,9 +894,9 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
   private void registerSpikedFenceBlock(Block block, Map<TextureSlot, String> rawTextureMap) {
     Map<TextureSlot, String> textureMapPole = Map.of(TextureSlot.BOTTOM, rawTextureMap.get(TextureSlot.BOTTOM), TextureSlot.SIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.TOP, rawTextureMap.get(TextureSlot.BOTTOM), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.SIDE));
     Map<TextureSlot, String> textureMapSide = Map.of(TextureSlot.SIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.SIDE));
-    Map<TextureSlot, String> textureMapTopPole = Map.of(TextureSlot.BOTTOM, rawTextureMap.get(TextureSlot.BOTTOM), TextureSlot.SIDE, rawTextureMap.get(DistantMoonsTextureKeys.SIDE_TOP), TextureSlot.TOP, rawTextureMap.get(TextureSlot.TOP), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.SIDE_TOP));
-    Map<TextureSlot, String> textureMapTopSide = Map.of(TextureSlot.SIDE, rawTextureMap.get(DistantMoonsTextureKeys.SIDE_TOP), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.SIDE_TOP));
-    Map<TextureSlot, String> textureMapItem = Map.of(TextureSlot.BOTTOM, rawTextureMap.get(TextureSlot.BOTTOM), DistantMoonsTextureKeys.LOWER_SIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.TOP, rawTextureMap.get(TextureSlot.TOP), DistantMoonsTextureKeys.UPPER_SIDE, rawTextureMap.get(DistantMoonsTextureKeys.SIDE_TOP), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.SIDE_TOP));
+    Map<TextureSlot, String> textureMapTopPole = Map.of(TextureSlot.BOTTOM, rawTextureMap.get(TextureSlot.BOTTOM), TextureSlot.SIDE, rawTextureMap.get(DistantMoonsTextureSlot.SIDE_TOP), TextureSlot.TOP, rawTextureMap.get(TextureSlot.TOP), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureSlot.SIDE_TOP));
+    Map<TextureSlot, String> textureMapTopSide = Map.of(TextureSlot.SIDE, rawTextureMap.get(DistantMoonsTextureSlot.SIDE_TOP), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureSlot.SIDE_TOP));
+    Map<TextureSlot, String> textureMapItem = Map.of(TextureSlot.BOTTOM, rawTextureMap.get(TextureSlot.BOTTOM), DistantMoonsTextureSlot.LOWER_SIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.TOP, rawTextureMap.get(TextureSlot.TOP), DistantMoonsTextureSlot.UPPER_SIDE, rawTextureMap.get(DistantMoonsTextureSlot.SIDE_TOP), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureSlot.SIDE_TOP));
     MultiVariant variantPole = createWeightedVariant(createObjectModel(block, "spiked_fence/pole", "/pole", textureMapPole));
     MultiVariant variantSide = createWeightedVariant(createObjectModel(block, "spiked_fence/side", "/side", textureMapSide));
     MultiVariant variantTopPole = createWeightedVariant(createObjectModel(block, "spiked_fence/pole", "/top_pole", textureMapTopPole));
@@ -1091,18 +1115,18 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
   }
 
   private void registerComplexWallSlabBlock(Block block, Map<TextureSlot, String> rawTextureMap) {
-    Map<TextureSlot, String> textureMapDoubleX = Map.of(TextureSlot.END, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_END), TextureSlot.FRONT, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), TextureSlot.SIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE));
-    Map<TextureSlot, String> textureMapDoubleZ = Map.of(TextureSlot.END, rawTextureMap.get(DistantMoonsTextureKeys.HORIZONTAL_END), TextureSlot.FRONT, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.SIDE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE));
-    Map<TextureSlot, String> textureMapFlatX = Map.of(TextureSlot.END, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_END), TextureSlot.FRONT, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.SIDE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE));
-    Map<TextureSlot, String> textureMapFlatZ = Map.of(TextureSlot.END, rawTextureMap.get(DistantMoonsTextureKeys.HORIZONTAL_END), TextureSlot.FRONT, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.SIDE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE));
-    Map<TextureSlot, String> textureMapInnerBottomLeft = Map.of(TextureSlot.BOTTOM, rawTextureMap.get(DistantMoonsTextureKeys.BOTTOM_RIGHT), TextureSlot.INSIDE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), DistantMoonsTextureKeys.OUTSIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.TOP, rawTextureMap.get(DistantMoonsTextureKeys.TOP_RIGHT), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE));
-    Map<TextureSlot, String> textureMapInnerBottomRight = Map.of(TextureSlot.BOTTOM, rawTextureMap.get(DistantMoonsTextureKeys.BOTTOM_LEFT), TextureSlot.INSIDE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), DistantMoonsTextureKeys.OUTSIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.TOP, rawTextureMap.get(DistantMoonsTextureKeys.TOP_LEFT), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE));
-    Map<TextureSlot, String> textureMapInnerTopLeft = Map.of(TextureSlot.BOTTOM, rawTextureMap.get(DistantMoonsTextureKeys.TOP_RIGHT), TextureSlot.INSIDE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), DistantMoonsTextureKeys.OUTSIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.TOP, rawTextureMap.get(DistantMoonsTextureKeys.BOTTOM_RIGHT), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE));
-    Map<TextureSlot, String> textureMapInnerTopRight = Map.of(TextureSlot.BOTTOM, rawTextureMap.get(DistantMoonsTextureKeys.TOP_LEFT), TextureSlot.INSIDE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), DistantMoonsTextureKeys.OUTSIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.TOP, rawTextureMap.get(DistantMoonsTextureKeys.BOTTOM_LEFT), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE));
-    Map<TextureSlot, String> textureMapOuterBottomLeft = Map.of(TextureSlot.BOTTOM, rawTextureMap.get(DistantMoonsTextureKeys.BOTTOM_RIGHT), TextureSlot.SIDE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), TextureSlot.TOP, rawTextureMap.get(DistantMoonsTextureKeys.TOP_RIGHT), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE));
-    Map<TextureSlot, String> textureMapOuterBottomRight = Map.of(TextureSlot.BOTTOM, rawTextureMap.get(DistantMoonsTextureKeys.BOTTOM_LEFT), TextureSlot.SIDE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), TextureSlot.TOP, rawTextureMap.get(DistantMoonsTextureKeys.TOP_LEFT), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE));
-    Map<TextureSlot, String> textureMapOuterTopLeft = Map.of(TextureSlot.BOTTOM, rawTextureMap.get(DistantMoonsTextureKeys.TOP_RIGHT), TextureSlot.SIDE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), TextureSlot.TOP, rawTextureMap.get(DistantMoonsTextureKeys.BOTTOM_RIGHT), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE));
-    Map<TextureSlot, String> textureMapOuterTopRight = Map.of(TextureSlot.BOTTOM, rawTextureMap.get(DistantMoonsTextureKeys.TOP_LEFT), TextureSlot.SIDE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE), TextureSlot.TOP, rawTextureMap.get(DistantMoonsTextureKeys.BOTTOM_LEFT), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureKeys.VERTICAL_SIDE));
+    Map<TextureSlot, String> textureMapDoubleX = Map.of(TextureSlot.END, rawTextureMap.get(DistantMoonsTextureSlot.VERTICAL_END), TextureSlot.FRONT, rawTextureMap.get(DistantMoonsTextureSlot.VERTICAL_SIDE), TextureSlot.SIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureSlot.VERTICAL_SIDE));
+    Map<TextureSlot, String> textureMapDoubleZ = Map.of(TextureSlot.END, rawTextureMap.get(DistantMoonsTextureSlot.HORIZONTAL_END), TextureSlot.FRONT, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.SIDE, rawTextureMap.get(DistantMoonsTextureSlot.VERTICAL_SIDE), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureSlot.VERTICAL_SIDE));
+    Map<TextureSlot, String> textureMapFlatX = Map.of(TextureSlot.END, rawTextureMap.get(DistantMoonsTextureSlot.VERTICAL_END), TextureSlot.FRONT, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.SIDE, rawTextureMap.get(DistantMoonsTextureSlot.VERTICAL_SIDE), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureSlot.VERTICAL_SIDE));
+    Map<TextureSlot, String> textureMapFlatZ = Map.of(TextureSlot.END, rawTextureMap.get(DistantMoonsTextureSlot.HORIZONTAL_END), TextureSlot.FRONT, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.SIDE, rawTextureMap.get(DistantMoonsTextureSlot.VERTICAL_SIDE), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureSlot.VERTICAL_SIDE));
+    Map<TextureSlot, String> textureMapInnerBottomLeft = Map.of(TextureSlot.BOTTOM, rawTextureMap.get(DistantMoonsTextureSlot.BOTTOM_RIGHT), TextureSlot.INSIDE, rawTextureMap.get(DistantMoonsTextureSlot.VERTICAL_SIDE), DistantMoonsTextureSlot.OUTSIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.TOP, rawTextureMap.get(DistantMoonsTextureSlot.TOP_RIGHT), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureSlot.VERTICAL_SIDE));
+    Map<TextureSlot, String> textureMapInnerBottomRight = Map.of(TextureSlot.BOTTOM, rawTextureMap.get(DistantMoonsTextureSlot.BOTTOM_LEFT), TextureSlot.INSIDE, rawTextureMap.get(DistantMoonsTextureSlot.VERTICAL_SIDE), DistantMoonsTextureSlot.OUTSIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.TOP, rawTextureMap.get(DistantMoonsTextureSlot.TOP_LEFT), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureSlot.VERTICAL_SIDE));
+    Map<TextureSlot, String> textureMapInnerTopLeft = Map.of(TextureSlot.BOTTOM, rawTextureMap.get(DistantMoonsTextureSlot.TOP_RIGHT), TextureSlot.INSIDE, rawTextureMap.get(DistantMoonsTextureSlot.VERTICAL_SIDE), DistantMoonsTextureSlot.OUTSIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.TOP, rawTextureMap.get(DistantMoonsTextureSlot.BOTTOM_RIGHT), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureSlot.VERTICAL_SIDE));
+    Map<TextureSlot, String> textureMapInnerTopRight = Map.of(TextureSlot.BOTTOM, rawTextureMap.get(DistantMoonsTextureSlot.TOP_LEFT), TextureSlot.INSIDE, rawTextureMap.get(DistantMoonsTextureSlot.VERTICAL_SIDE), DistantMoonsTextureSlot.OUTSIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.TOP, rawTextureMap.get(DistantMoonsTextureSlot.BOTTOM_LEFT), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureSlot.VERTICAL_SIDE));
+    Map<TextureSlot, String> textureMapOuterBottomLeft = Map.of(TextureSlot.BOTTOM, rawTextureMap.get(DistantMoonsTextureSlot.BOTTOM_RIGHT), TextureSlot.SIDE, rawTextureMap.get(DistantMoonsTextureSlot.VERTICAL_SIDE), TextureSlot.TOP, rawTextureMap.get(DistantMoonsTextureSlot.TOP_RIGHT), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureSlot.VERTICAL_SIDE));
+    Map<TextureSlot, String> textureMapOuterBottomRight = Map.of(TextureSlot.BOTTOM, rawTextureMap.get(DistantMoonsTextureSlot.BOTTOM_LEFT), TextureSlot.SIDE, rawTextureMap.get(DistantMoonsTextureSlot.VERTICAL_SIDE), TextureSlot.TOP, rawTextureMap.get(DistantMoonsTextureSlot.TOP_LEFT), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureSlot.VERTICAL_SIDE));
+    Map<TextureSlot, String> textureMapOuterTopLeft = Map.of(TextureSlot.BOTTOM, rawTextureMap.get(DistantMoonsTextureSlot.TOP_RIGHT), TextureSlot.SIDE, rawTextureMap.get(DistantMoonsTextureSlot.VERTICAL_SIDE), TextureSlot.TOP, rawTextureMap.get(DistantMoonsTextureSlot.BOTTOM_RIGHT), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureSlot.VERTICAL_SIDE));
+    Map<TextureSlot, String> textureMapOuterTopRight = Map.of(TextureSlot.BOTTOM, rawTextureMap.get(DistantMoonsTextureSlot.TOP_LEFT), TextureSlot.SIDE, rawTextureMap.get(DistantMoonsTextureSlot.VERTICAL_SIDE), TextureSlot.TOP, rawTextureMap.get(DistantMoonsTextureSlot.BOTTOM_LEFT), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureSlot.VERTICAL_SIDE));
     MultiVariant variantDoubleX = createWeightedVariant(createObjectModel(block, "axis_block", "/double_x", textureMapDoubleX));
     MultiVariant variantDoubleZ = createWeightedVariant(createObjectModel(block, "axis_block", "/double_z", textureMapDoubleZ));
     MultiVariant variantFlatX = createWeightedVariant(createObjectModel(block, "wall_slab/complex/flat", "/flat_x", textureMapFlatX));

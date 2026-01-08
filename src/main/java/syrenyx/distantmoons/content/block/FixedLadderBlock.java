@@ -25,6 +25,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
 import syrenyx.distantmoons.content.block.block_state_enums.FixedLadderSideShape;
 import syrenyx.distantmoons.content.block.block_state_enums.HorizontalAxis;
 import syrenyx.distantmoons.references.tag.DistantMoonsBlockTags;
@@ -63,7 +64,7 @@ public class FixedLadderBlock extends Block {
   }
 
   @Override
-  protected FluidState getFluidState(BlockState state) {
+  protected @NonNull FluidState getFluidState(BlockState state) {
     return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
   }
 
@@ -91,15 +92,15 @@ public class FixedLadderBlock extends Block {
   }
 
   @Override
-  protected BlockState updateShape(
-      BlockState state,
-      LevelReader world,
+  protected @NonNull BlockState updateShape(
+      @NonNull BlockState state,
+      @NonNull LevelReader world,
       ScheduledTickAccess tickView,
-      BlockPos pos,
-      Direction direction,
-      BlockPos neighborPos,
-      BlockState neighborState,
-      RandomSource random
+      @NonNull BlockPos pos,
+      @NonNull Direction direction,
+      @NonNull BlockPos neighborPos,
+      @NonNull BlockState neighborState,
+      @NonNull RandomSource random
   ) {
     tickView.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(world));
     return this.updateState(world, pos, state);

@@ -262,6 +262,7 @@ public class de_de extends FabricLanguageProvider {
     builder.add(DistantMoonsBlocks.STRIPPED_CUT_WARPED_STEM, "Geschälter geschnittener Wirrstiel");
     builder.add(DistantMoonsBlocks.TUFF_BRICK_WALL_SLAB, "Gestufte Tuffziegelwand");
     builder.add(DistantMoonsBlocks.TUFF_WALL_SLAB, "Gestufte Tuffwand");
+    builder.add(DistantMoonsBlocks.UNDERWORLD_LANTERN, "Unterweltlaterne");
     builder.add(DistantMoonsBlocks.WARPED_BEAM, "Wirrbalken");
     builder.add(DistantMoonsBlocks.WARPED_POLE, "Wirrpfosten");
     builder.add(DistantMoonsBlocks.WARPED_WALL_SLAB, "Gestufte Wirrwand");
