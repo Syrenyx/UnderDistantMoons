@@ -1,5 +1,6 @@
 package syrenyx.distantmoons.data.networking;
 
+import org.jspecify.annotations.NonNull;
 import syrenyx.distantmoons.UnderDistantMoons;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public record ActiveAfflictionsPayload(List<AfflictionPacket> afflictions) imple
   );
 
   @Override
-  public Type<? extends CustomPacketPayload> type() {
+  public @NonNull Type<? extends CustomPacketPayload> type() {
     return ID;
   }
 }

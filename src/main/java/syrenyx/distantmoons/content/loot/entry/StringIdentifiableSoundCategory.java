@@ -3,6 +3,7 @@ package syrenyx.distantmoons.content.loot.entry;
 import com.mojang.serialization.Codec;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.StringRepresentable;
+import org.jspecify.annotations.NonNull;
 
 public enum StringIdentifiableSoundCategory implements StringRepresentable {
   MASTER("master", SoundSource.MASTER),
@@ -27,7 +28,7 @@ public enum StringIdentifiableSoundCategory implements StringRepresentable {
   }
 
   @Override
-  public String getSerializedName() {
+  public @NonNull String getSerializedName() {
     return this.id;
   }
 

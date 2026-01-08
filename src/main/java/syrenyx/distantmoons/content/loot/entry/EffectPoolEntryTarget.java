@@ -6,6 +6,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
 
 public enum EffectPoolEntryTarget implements StringRepresentable {
   ATTACKER("attacker"),
@@ -23,7 +24,7 @@ public enum EffectPoolEntryTarget implements StringRepresentable {
   }
 
   @Override
-  public String getSerializedName() {
+  public @NonNull String getSerializedName() {
     return this.id;
   }
 

@@ -2,6 +2,7 @@ package syrenyx.distantmoons.content.affliction.effect;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.util.StringRepresentable;
+import org.jspecify.annotations.NonNull;
 
 public enum SpawnedEntityEffectTarget implements StringRepresentable {
   ORIGINATOR("originator"),
@@ -15,7 +16,7 @@ public enum SpawnedEntityEffectTarget implements StringRepresentable {
   }
 
   @Override
-  public String getSerializedName() {
+  public @NonNull String getSerializedName() {
     return this.id;
   }
 }

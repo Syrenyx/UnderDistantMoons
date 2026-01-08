@@ -2,6 +2,7 @@ package syrenyx.distantmoons.content.affliction;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.util.StringRepresentable;
+import org.jspecify.annotations.NonNull;
 
 public enum ProgressionBarStyle implements StringRepresentable {
   DEFAULT("default"),
@@ -17,7 +18,7 @@ public enum ProgressionBarStyle implements StringRepresentable {
   }
 
   @Override
-  public String getSerializedName() {
+  public @NonNull String getSerializedName() {
     return this.id;
   }
 }

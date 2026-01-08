@@ -68,23 +68,23 @@ public class PoleBlock extends Block implements SimpleWaterloggedBlock {
   }
 
   @Override
-  public boolean canPlaceLiquid(@Nullable LivingEntity filler, BlockGetter world, BlockPos pos, BlockState state, Fluid fluid) {
+  public boolean canPlaceLiquid(@Nullable LivingEntity filler, @NonNull BlockGetter world, @NonNull BlockPos pos, @NonNull BlockState state, @NonNull Fluid fluid) {
     return SimpleWaterloggedBlock.super.canPlaceLiquid(filler, world, pos, state, fluid);
   }
 
   @Override
-  public boolean placeLiquid(LevelAccessor world, BlockPos pos, BlockState state, FluidState fluidState) {
+  public boolean placeLiquid(@NonNull LevelAccessor world, @NonNull BlockPos pos, @NonNull BlockState state, @NonNull FluidState fluidState) {
     return SimpleWaterloggedBlock.super.placeLiquid(world, pos, state, fluidState);
   }
 
   @Override
-  protected boolean isPathfindable(BlockState state, PathComputationType type) {
+  protected boolean isPathfindable(@NonNull BlockState state, @NonNull PathComputationType type) {
     if (type == PathComputationType.WATER) return state.getFluidState().is(FluidTags.WATER);
     return false;
   }
 
   @Override
-  protected @NonNull VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+  protected @NonNull VoxelShape getShape(BlockState state, @NonNull BlockGetter world, @NonNull BlockPos pos, @NonNull CollisionContext context) {
     VoxelShape shape = CENTER_SHAPES_BY_AXIS.get(state.getValue(AXIS));
     if (state.getValue(UP)) shape = Shapes.or(shape, UP_SHAPES_BY_AXIS.get(state.getValue(AXIS)));
     if (state.getValue(DOWN)) shape = Shapes.or(shape, DOWN_SHAPES_BY_AXIS.get(state.getValue(AXIS)));
@@ -100,13 +100,13 @@ public class PoleBlock extends Block implements SimpleWaterloggedBlock {
   @Override
   protected @NonNull BlockState updateShape(
       BlockState state,
-      LevelReader world,
-      ScheduledTickAccess tickView,
-      BlockPos pos,
-      Direction direction,
-      BlockPos neighborPos,
-      BlockState neighborState,
-      RandomSource random
+      @NonNull LevelReader world,
+      @NonNull ScheduledTickAccess tickView,
+      @NonNull BlockPos pos,
+      @NonNull Direction direction,
+      @NonNull BlockPos neighborPos,
+      @NonNull BlockState neighborState,
+      @NonNull RandomSource random
   ) {
     if (state.getValue(WATERLOGGED)) tickView.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(world));
     return super.updateShape(this.updateState(world, pos, state), world, tickView, pos, direction, neighborPos, neighborState, random);

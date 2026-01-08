@@ -11,6 +11,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
+import org.jspecify.annotations.NonNull;
 import syrenyx.distantmoons.references.tag.DistantMoonsBlockTags;
 
 public class SittingSpotEntity extends Entity {
@@ -21,26 +22,26 @@ public class SittingSpotEntity extends Entity {
   }
 
   @Override
-  protected void defineSynchedData(SynchedEntityData.Builder builder) {}
+  protected void defineSynchedData(SynchedEntityData.@NonNull Builder builder) {}
 
   @Override
-  public boolean hurtServer(ServerLevel world, DamageSource source, float amount) {
+  public boolean hurtServer(@NonNull ServerLevel world, @NonNull DamageSource source, float amount) {
     return false;
   }
 
   @Override
-  protected void readAdditionalSaveData(ValueInput view) {}
+  protected void readAdditionalSaveData(@NonNull ValueInput view) {}
 
   @Override
-  protected void addAdditionalSaveData(ValueOutput view) {}
+  protected void addAdditionalSaveData(@NonNull ValueOutput view) {}
 
   @Override
-  protected void removePassenger(Entity passenger) {
+  protected void removePassenger(@NonNull Entity passenger) {
     super.removePassenger(passenger);
     if (this.level() instanceof ServerLevel serverWorld) this.kill(serverWorld);
   }
 
-  public PushReaction getPistonPushReaction() {
+  public @NonNull PushReaction getPistonPushReaction() {
     return PushReaction.IGNORE;
   }
 
@@ -53,7 +54,7 @@ public class SittingSpotEntity extends Entity {
   }
 
   @Override
-  protected void positionRider(Entity passenger, MoveFunction positionUpdater) {
+  protected void positionRider(@NonNull Entity passenger, @NonNull MoveFunction positionUpdater) {
     super.positionRider(passenger, positionUpdater);
     if (passenger instanceof LivingEntity entity) entity.yBodyRot = this.getYRot();
   }

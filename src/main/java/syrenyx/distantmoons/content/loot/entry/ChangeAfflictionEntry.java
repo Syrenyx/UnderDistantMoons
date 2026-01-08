@@ -3,6 +3,7 @@ package syrenyx.distantmoons.content.loot.entry;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import org.jspecify.annotations.NonNull;
 import syrenyx.distantmoons.content.affliction.Affliction;
 import syrenyx.distantmoons.content.affliction.AfflictionInstance;
 import syrenyx.distantmoons.content.affliction.AfflictionManager;
@@ -68,12 +69,12 @@ public class ChangeAfflictionEntry extends LootPoolSingletonContainer {
   }
 
   @Override
-  public LootPoolEntryType getType() {
+  public @NonNull LootPoolEntryType getType() {
     return DistantMoonsLootPoolEntryTypes.CHANGE_AFFLICTION;
   }
 
   @Override
-  public boolean expand(LootContext context, Consumer<LootPoolEntry> consumer) {
+  public boolean expand(@NonNull LootContext context, @NonNull Consumer<LootPoolEntry> consumer) {
     if (!this.canRun(context)) return false;
     Entity target = this.target.tryGettingEntityFromContext(context);
     if (!(target instanceof LivingEntity livingEntity)) return true;
@@ -101,5 +102,5 @@ public class ChangeAfflictionEntry extends LootPoolSingletonContainer {
   }
 
   @Override
-  protected void createItemStack(Consumer<ItemStack> lootConsumer, LootContext context) {}
+  protected void createItemStack(@NonNull Consumer<ItemStack> lootConsumer, @NonNull LootContext context) {}
 }

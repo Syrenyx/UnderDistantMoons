@@ -3,6 +3,7 @@ package syrenyx.distantmoons.content.block;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.StairBlock;
+import org.jspecify.annotations.NonNull;
 
 public class SimplifiedStairsBlock extends StairBlock {
 
@@ -13,7 +14,7 @@ public class SimplifiedStairsBlock extends StairBlock {
   }
 
   @Override
-  public MapCodec<? extends StairBlock> codec() {
+  public @NonNull MapCodec<? extends StairBlock> codec() {
     return CODEC;
   }
 

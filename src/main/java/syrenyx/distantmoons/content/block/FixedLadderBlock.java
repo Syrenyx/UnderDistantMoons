@@ -59,7 +59,7 @@ public class FixedLadderBlock extends Block {
   }
 
   @Override
-  protected boolean isPathfindable(BlockState state, PathComputationType type) {
+  protected boolean isPathfindable(@NonNull BlockState state, PathComputationType type) {
     return false;
   }
 
@@ -131,7 +131,7 @@ public class FixedLadderBlock extends Block {
   }
 
   @Override
-  protected VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+  protected @NonNull VoxelShape getShape(BlockState state, @NonNull BlockGetter world, @NonNull BlockPos pos, @NonNull CollisionContext context) {
     return state.getValue(AXIS) == HorizontalAxis.X ? X_SHAPE : Z_SHAPE;
   }
 
@@ -150,7 +150,7 @@ public class FixedLadderBlock extends Block {
   }
 
   @Override
-  protected BlockState rotate(BlockState state, Rotation rotation) {
+  protected @NonNull BlockState rotate(BlockState state, Rotation rotation) {
     boolean x = state.getValue(AXIS) == HorizontalAxis.X;
     return switch (rotation) {
       case NONE -> state;
@@ -169,7 +169,7 @@ public class FixedLadderBlock extends Block {
   }
 
   @Override
-  protected BlockState mirror(BlockState state, Mirror mirror) {
+  protected @NonNull BlockState mirror(BlockState state, @NonNull Mirror mirror) {
     boolean x = state.getValue(AXIS) == HorizontalAxis.X;
     if (x && mirror == Mirror.LEFT_RIGHT || !x && mirror == Mirror.FRONT_BACK) {
       return state.setValue(LEFT_SHAPE, state.getValue(RIGHT_SHAPE)).setValue(RIGHT_SHAPE, state.getValue(LEFT_SHAPE));

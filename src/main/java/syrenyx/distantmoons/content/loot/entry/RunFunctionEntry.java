@@ -18,6 +18,7 @@ import net.minecraft.world.level.storage.loot.entries.LootPoolEntryType;
 import net.minecraft.world.level.storage.loot.entries.LootPoolSingletonContainer;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
+import org.jspecify.annotations.NonNull;
 import syrenyx.distantmoons.UnderDistantMoons;
 import syrenyx.distantmoons.initializers.DistantMoonsLootPoolEntryTypes;
 
@@ -48,12 +49,12 @@ public class RunFunctionEntry extends LootPoolSingletonContainer {
   }
 
   @Override
-  public LootPoolEntryType getType() {
+  public @NonNull LootPoolEntryType getType() {
     return DistantMoonsLootPoolEntryTypes.RUN_FUNCTION;
   }
 
   @Override
-  public boolean expand(LootContext context, Consumer<LootPoolEntry> consumer) {
+  public boolean expand(@NonNull LootContext context, @NonNull Consumer<LootPoolEntry> consumer) {
     if (!this.canRun(context)) return false;
     ServerLevel world = context.getLevel();
     MinecraftServer minecraftServer = world.getServer();
@@ -79,5 +80,5 @@ public class RunFunctionEntry extends LootPoolSingletonContainer {
   }
 
   @Override
-  protected void createItemStack(Consumer<ItemStack> lootConsumer, LootContext context) {}
+  protected void createItemStack(@NonNull Consumer<ItemStack> lootConsumer, @NonNull LootContext context) {}
 }

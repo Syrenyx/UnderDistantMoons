@@ -8,6 +8,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
 import syrenyx.distantmoons.initializers.DistantMoonsEnvironmentAttributes;
 
 public class UnderworldLanternBlock extends LanternBlock{
@@ -22,13 +23,13 @@ public class UnderworldLanternBlock extends LanternBlock{
   }
 
   @Override
-  protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+  protected void createBlockStateDefinition(StateDefinition.@NonNull Builder<Block, BlockState> builder) {
     super.createBlockStateDefinition(builder);
     builder.add(LIT);
   }
 
   @Nullable @Override
-  public BlockState getStateForPlacement(BlockPlaceContext context) {
+  public BlockState getStateForPlacement(@NonNull BlockPlaceContext context) {
     BlockState state = super.getStateForPlacement(context);
     if (state == null) return null;
     return state.setValue(LIT, context.getLevel().environmentAttributes().getDimensionValue(DistantMoonsEnvironmentAttributes.UNDERWORLD));

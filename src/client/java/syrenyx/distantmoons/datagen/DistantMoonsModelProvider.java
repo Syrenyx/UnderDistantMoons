@@ -29,6 +29,7 @@ import net.minecraft.world.level.block.TrapDoorBlock;
 import net.minecraft.world.level.block.WallBlock;
 import net.minecraft.world.level.block.state.properties.*;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
 import syrenyx.distantmoons.UnderDistantMoons;
 import syrenyx.distantmoons.content.block.*;
 import syrenyx.distantmoons.content.block.block_state_enums.*;
@@ -114,7 +115,7 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
   }
 
   @Override
-  public void generateBlockStateModels(BlockModelGenerators generator) {
+  public void generateBlockStateModels(@NonNull BlockModelGenerators generator) {
 
     this.blockGenerator = generator;
 
@@ -429,7 +430,7 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
   }
 
   @Override
-  public void generateItemModels(ItemModelGenerators generator) {
+  public void generateItemModels(@NonNull ItemModelGenerators generator) {
 
     this.itemGenerator = generator;
 

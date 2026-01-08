@@ -23,6 +23,7 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
 import syrenyx.distantmoons.UnderDistantMoons;
 import syrenyx.distantmoons.initializers.DistantMoonsBlocks;
 import syrenyx.distantmoons.initializers.DistantMoonsItems;
@@ -42,12 +43,12 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
   }
 
   @Override
-  public String getName() {
+  public @NonNull String getName() {
     return "DistantMoonsRecipeProvider";
   }
 
   @Override
-  protected RecipeProvider createRecipeProvider(HolderLookup.Provider registryLookup, RecipeOutput recipeExporter) {
+  protected @NonNull RecipeProvider createRecipeProvider(HolderLookup.@NonNull Provider registryLookup, @NonNull RecipeOutput recipeExporter) {
 
     return new RecipeProvider(registryLookup, recipeExporter) {
 

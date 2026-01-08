@@ -2,6 +2,7 @@ package syrenyx.distantmoons.content.affliction.effect;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.util.StringRepresentable;
+import org.jspecify.annotations.NonNull;
 
 public enum ProgressionThresholdPassingType implements StringRepresentable {
   ANY("any"),
@@ -16,7 +17,7 @@ public enum ProgressionThresholdPassingType implements StringRepresentable {
   }
 
   @Override
-  public String getSerializedName() {
+  public @NonNull String getSerializedName() {
     return this.id;
   }
 }

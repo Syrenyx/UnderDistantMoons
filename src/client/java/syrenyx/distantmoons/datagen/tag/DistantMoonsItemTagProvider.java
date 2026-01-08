@@ -6,9 +6,9 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
 import syrenyx.distantmoons.initializers.DistantMoonsBlocks;
 import syrenyx.distantmoons.initializers.DistantMoonsItems;
-import syrenyx.distantmoons.references.tag.DistantMoonsBlockTags;
 import syrenyx.distantmoons.references.tag.DistantMoonsItemTags;
 
 import java.util.concurrent.CompletableFuture;
@@ -20,7 +20,7 @@ public class DistantMoonsItemTagProvider extends FabricTagProvider.ItemTagProvid
   }
 
   @Override
-  protected void addTags(HolderLookup.Provider wrapperLookup) {
+  protected void addTags(HolderLookup.@NonNull Provider provider) {
 
     //DYED ITEMS
     this.valueLookupBuilder(DistantMoonsItemTags.DYED_PILLOW).addAll(

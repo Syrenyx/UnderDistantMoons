@@ -5,18 +5,19 @@ import net.minecraft.client.particle.*;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import org.jspecify.annotations.NonNull;
 
 public class SparkParticle extends SingleQuadParticle {
 
   private final SpriteSet spriteProvider;
 
   protected SparkParticle(
-      ClientLevel world,
+      ClientLevel level,
       double x, double y, double z,
       double velocityX, double velocityY, double velocityZ,
       SpriteSet spriteProvider
   ) {
-    super(world, x, y, z, velocityX, velocityY, velocityZ, spriteProvider.first());
+    super(level, x, y, z, velocityX, velocityY, velocityZ, spriteProvider.first());
     this.friction = 0.96F;
     this.speedUpWhenYMotionIsBlocked = true;
     this.spriteProvider = spriteProvider;
@@ -26,21 +27,18 @@ public class SparkParticle extends SingleQuadParticle {
   }
 
   @Override
-  public SingleQuadParticle.Layer getLayer() {
+  public SingleQuadParticle.@NonNull Layer getLayer() {
     return SingleQuadParticle.Layer.TRANSLUCENT;
   }
 
   @Override
   public int getLightColor(float tint) {
-    float f = (this.age + tint) / this.lifetime;
-    f = Mth.clamp(f, 0.0F, 1.0F);
+    float f = Mth.clamp((this.age + tint) / this.lifetime, 0.0F, 1.0F);
     int i = super.getLightColor(tint);
     int j = i & 0xFF;
     int k = i >> 16 & 0xFF;
     j += (int) (f * 15.0F * 16.0F);
-    if (j > 240) {
-      j = 240;
-    }
+    if (j > 240) j = 240;
     return j | k << 16;
   }
 
@@ -63,12 +61,12 @@ public class SparkParticle extends SingleQuadParticle {
     @Override
     public Particle createParticle(
         SimpleParticleType simpleParticleType,
-        ClientLevel clientWorld,
+        @NonNull ClientLevel clientLevel,
         double x, double y, double z,
         double velocityX, double velocityY, double velocityZ,
         RandomSource random
     ) {
-      SparkParticle particle = new SparkParticle(clientWorld, x, y, z, 0.0, 0.0, 0.0, this.spriteProvider);
+      SparkParticle particle = new SparkParticle(clientLevel, x, y, z, 0.0, 0.0, 0.0, this.spriteProvider);
       if (random.nextBoolean()) particle.setColor(0.65F, 0.16F, 0.16F);
       else particle.setColor(1.0F, 0.5F, 0.3F);
       particle.setParticleSpeed(velocityX * VELOCITY_FACTOR, velocityY * VELOCITY_FACTOR, velocityZ * VELOCITY_FACTOR);

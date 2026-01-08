@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.world.item.DyeColor;
+import org.jspecify.annotations.NonNull;
 import syrenyx.distantmoons.initializers.DistantMoonsBlocks;
 import syrenyx.distantmoons.initializers.DistantMoonsEntityTypes;
 import syrenyx.distantmoons.initializers.DistantMoonsItems;
@@ -38,7 +39,7 @@ public class en_us extends FabricLanguageProvider {
   }
 
   @Override
-  public void generateTranslations(HolderLookup.Provider wrapperLookup, TranslationBuilder builder) {
+  public void generateTranslations(HolderLookup.@NonNull Provider provider, @NonNull TranslationBuilder builder) {
 
     LangHelper helper = new LangHelper(builder);
 

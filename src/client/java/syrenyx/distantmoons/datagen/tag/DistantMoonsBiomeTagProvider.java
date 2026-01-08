@@ -6,6 +6,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
+import org.jspecify.annotations.NonNull;
 import syrenyx.distantmoons.references.tag.DistantMoonsBiomeTags;
 
 import java.util.concurrent.CompletableFuture;
@@ -17,7 +18,7 @@ public class DistantMoonsBiomeTagProvider extends FabricTagProvider<Biome> {
   }
 
   @Override
-  protected void addTags(HolderLookup.Provider wrapperLookup) {
+  protected void addTags(HolderLookup.@NonNull Provider provider) {
 
     //HAS FEATURE
     this.builder(DistantMoonsBiomeTags.HAS_DEEP_IRON_BUBBLE_FEATURE)

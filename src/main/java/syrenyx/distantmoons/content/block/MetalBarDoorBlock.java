@@ -15,6 +15,7 @@ import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DoorHingeSide;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
 import syrenyx.distantmoons.references.tag.DistantMoonsBlockTags;
 
 public class MetalBarDoorBlock extends DoorBlock {
@@ -29,29 +30,29 @@ public class MetalBarDoorBlock extends DoorBlock {
   }
 
   @Override
-  protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+  protected void createBlockStateDefinition(StateDefinition.@NonNull Builder<Block, BlockState> builder) {
     super.createBlockStateDefinition(builder);
     builder.add(DOUBLE);
   }
 
   @Nullable
   @Override
-  public BlockState getStateForPlacement(BlockPlaceContext context) {
+  public BlockState getStateForPlacement(@NonNull BlockPlaceContext context) {
     BlockState state = super.getStateForPlacement(context);
     if (state == null) return null;
     return updateState(context.getLevel(), context.getClickedPos(), state);
   }
 
   @Override
-  protected BlockState updateShape(
-      BlockState state,
-      LevelReader world,
-      ScheduledTickAccess tickView,
-      BlockPos pos,
-      Direction direction,
-      BlockPos neighborPos,
-      BlockState neighborState,
-      RandomSource random
+  protected @NonNull BlockState updateShape(
+      @NonNull BlockState state,
+      @NonNull LevelReader world,
+      @NonNull ScheduledTickAccess tickView,
+      @NonNull BlockPos pos,
+      @NonNull Direction direction,
+      @NonNull BlockPos neighborPos,
+      @NonNull BlockState neighborState,
+      @NonNull RandomSource random
   ) {
     return updateState(world, pos, super.updateShape(state, world, tickView, pos, direction, neighborPos, neighborState, random));
   }

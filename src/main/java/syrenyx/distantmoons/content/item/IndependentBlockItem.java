@@ -28,6 +28,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
 
 public class IndependentBlockItem extends Item {
 
@@ -39,7 +40,7 @@ public class IndependentBlockItem extends Item {
   }
 
   @Override
-  public InteractionResult useOn(UseOnContext context) {
+  public @NonNull InteractionResult useOn(@NonNull UseOnContext context) {
     InteractionResult actionResult = this.place(new BlockPlaceContext(context));
     return !actionResult.consumesAction() && context.getItemInHand().has(DataComponents.CONSUMABLE)
         ? super.use(context.getLevel(), context.getPlayer(), context.getHand())
@@ -129,7 +130,7 @@ public class IndependentBlockItem extends Item {
   }
 
   @Override
-  public boolean shouldPrintOpWarning(ItemStack stack, @Nullable Player player) {
+  public boolean shouldPrintOpWarning(@NonNull ItemStack stack, @Nullable Player player) {
     if (player == null || !player.permissions().hasPermission(Permissions.COMMANDS_GAMEMASTER)) return false;
     TypedEntityData<BlockEntityType<?>> typedEntityData = stack.get(DataComponents.BLOCK_ENTITY_DATA);
     if (typedEntityData == null) return false;
@@ -148,7 +149,7 @@ public class IndependentBlockItem extends Item {
   }
 
   @Override
-  public FeatureFlagSet requiredFeatures() {
+  public @NonNull FeatureFlagSet requiredFeatures() {
     return this.block.requiredFeatures();
   }
 }

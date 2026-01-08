@@ -21,6 +21,7 @@ import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jspecify.annotations.NonNull;
 import syrenyx.distantmoons.content.block.block_state_enums.RopeLadderDirection;
 import syrenyx.distantmoons.utility.VoxelShapeUtil;
 import com.mojang.math.OctahedralGroup;
@@ -54,23 +55,23 @@ public class RopeLadderBlock extends Block {
   }
 
   @Override
-  protected boolean propagatesSkylightDown(BlockState state) {
+  protected boolean propagatesSkylightDown(@NonNull BlockState state) {
     return true;
   }
 
   @Override
-  protected boolean isPathfindable(BlockState state, PathComputationType type) {
+  protected boolean isPathfindable(@NonNull BlockState state, @NonNull PathComputationType type) {
     return true;
   }
 
   @Override
-  protected VoxelShape getCollisionShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+  protected @NonNull VoxelShape getCollisionShape(BlockState state, @NonNull BlockGetter world, @NonNull BlockPos pos, @NonNull CollisionContext context) {
     if (state.getValue(DIRECTION).isCenter() && state.getValue(TOP)) return state.getValue(DIRECTION) == RopeLadderDirection.X ? CEILING_SHAPE_X : CEILING_SHAPE_Z;
     return this.getShape(state, world, pos, context);
   }
 
   @Override
-  protected VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+  protected @NonNull VoxelShape getShape(BlockState state, @NonNull BlockGetter world, @NonNull BlockPos pos, @NonNull CollisionContext context) {
     return switch (state.getValue(DIRECTION)) {
       case NORTH -> OUTER_SHAPES_BY_DIRECTION.get(Direction.NORTH);
       case EAST -> OUTER_SHAPES_BY_DIRECTION.get(Direction.EAST);
@@ -109,15 +110,15 @@ public class RopeLadderBlock extends Block {
   }
 
   @Override
-  protected BlockState updateShape(
+  protected @NonNull BlockState updateShape(
       BlockState state,
       LevelReader world,
-      ScheduledTickAccess tickView,
+      @NonNull ScheduledTickAccess tickView,
       BlockPos pos,
-      Direction direction,
-      BlockPos neighborPos,
-      BlockState neighborState,
-      RandomSource random
+      @NonNull Direction direction,
+      @NonNull BlockPos neighborPos,
+      @NonNull BlockState neighborState,
+      @NonNull RandomSource random
   ) {
     BlockState top = world.getBlockState(pos.above());
     BlockState bottom = world.getBlockState(pos.below());
@@ -132,12 +133,12 @@ public class RopeLadderBlock extends Block {
   }
 
   @Override
-  protected BlockState rotate(BlockState state, Rotation rotation) {
+  protected @NonNull BlockState rotate(BlockState state, @NonNull Rotation rotation) {
     return state.setValue(DIRECTION, state.getValue(DIRECTION).rotate(rotation));
   }
 
   @Override
-  protected BlockState mirror(BlockState state, Mirror mirror) {
+  protected @NonNull BlockState mirror(BlockState state, @NonNull Mirror mirror) {
     return state.setValue(DIRECTION, state.getValue(DIRECTION).mirror(mirror));
   }
 }

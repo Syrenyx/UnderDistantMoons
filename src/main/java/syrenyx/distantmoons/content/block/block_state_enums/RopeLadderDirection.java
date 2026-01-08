@@ -5,6 +5,7 @@ import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
 
 public enum RopeLadderDirection implements StringRepresentable {
   NORTH("north", false),
@@ -23,7 +24,7 @@ public enum RopeLadderDirection implements StringRepresentable {
   }
 
   @Override
-  public String getSerializedName() {
+  public @NonNull String getSerializedName() {
     return this.id;
   }
 

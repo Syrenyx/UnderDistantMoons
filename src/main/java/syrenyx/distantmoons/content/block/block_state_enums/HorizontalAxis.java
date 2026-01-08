@@ -3,6 +3,7 @@ package syrenyx.distantmoons.content.block.block_state_enums;
 import net.minecraft.core.Direction;
 import net.minecraft.util.StringRepresentable;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
 
 public enum HorizontalAxis implements StringRepresentable {
   X("x"),
@@ -15,7 +16,7 @@ public enum HorizontalAxis implements StringRepresentable {
   }
 
   @Override
-  public String getSerializedName() {
+  public @NonNull String getSerializedName() {
     return this.id;
   }
 
