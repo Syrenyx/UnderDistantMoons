@@ -8,7 +8,7 @@ import syrenyx.distantmoons.UnderDistantMoons;
 
 public abstract class DistantMoonsEnvironmentAttributes {
 
-  public static EnvironmentAttribute<Boolean> UNDERWORLD = register("gameplay/underworld", EnvironmentAttribute.builder(AttributeTypes.BOOLEAN).defaultValue(false));
+  public static EnvironmentAttribute<Boolean> UNDERWORLD = register("gameplay/underworld", EnvironmentAttribute.builder(AttributeTypes.BOOLEAN).defaultValue(false).syncable());
 
   private static <T> EnvironmentAttribute<T> register(String id, EnvironmentAttribute.Builder<T> builder) {
     return Registry.register(BuiltInRegistries.ENVIRONMENT_ATTRIBUTE, UnderDistantMoons.identifierOf(id), builder.build());

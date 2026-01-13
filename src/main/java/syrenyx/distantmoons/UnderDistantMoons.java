@@ -57,7 +57,7 @@ public class UnderDistantMoons implements ModInitializer {
     return Identifier.fromNamespaceAndPath(MOD_ID, string);
   }
 
-  public static <T> ResourceKey<T> registryKeyOf(String string, ResourceKey<Registry<T>> key) {
+  public static <T> ResourceKey<T> resourceKeyOf(String string, ResourceKey<Registry<T>> key) {
     return ResourceKey.create(key, identifierOf(string));
   }
 

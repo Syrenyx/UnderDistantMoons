@@ -33,6 +33,7 @@ import org.jspecify.annotations.NonNull;
 import syrenyx.distantmoons.UnderDistantMoons;
 import syrenyx.distantmoons.content.block.*;
 import syrenyx.distantmoons.content.block.block_state_enums.*;
+import syrenyx.distantmoons.content.rendering.item.properties.conditional.UnderworldDimension;
 import syrenyx.distantmoons.datagen.utility.ModelProviderUtil;
 import syrenyx.distantmoons.initializers.DistantMoonsBlocks;
 import syrenyx.distantmoons.initializers.DistantMoonsItems;
@@ -610,7 +611,7 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     ));
     Identifier inventoryModelLit = createObjectModel(block, "simple_item", "/item/lit", textureMapLitItem);
     Identifier inventoryModelUnlit = createObjectModel(block, "simple_item", "/item/unlit", textureMapUnlitItem);
-    this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModelUtils.inOverworld(ItemModelUtils.plainModel(inventoryModelUnlit), ItemModelUtils.plainModel(inventoryModelLit)));
+    this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModelUtils.conditional(new UnderworldDimension(), ItemModelUtils.plainModel(inventoryModelLit), ItemModelUtils.plainModel(inventoryModelUnlit)));
   }
 
   private void registerMetalBarDoorBlock(Block block, Map<TextureSlot, String> rawTextureMap) {

@@ -89,7 +89,7 @@ public class WallSlabBlock extends Block implements SimpleWaterloggedBlock {
     ItemStack itemStack = context.getItemInHand();
     WallSlabShape wallShape = state.getValue(SHAPE);
     if (wallShape != WallSlabShape.FLAT || !itemStack.is(this.asItem())) return false;
-    if (context.replacingClickedOnBlock()) return context.getClickedFace() == state.getValue(FACING);
+    if (context.replacingClickedOnBlock()) return context.getClickedFace() == state.getValue(FACING).getOpposite();
     return true;
   }
 
