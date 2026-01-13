@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "0": "distant-moons:refined_deep_iron_nugget",
+    "1": "distant-moons:underworld_dust"
+  },
+  "pattern": [
+    "000",
+    "010",
+    "000"
+  ],
+  "result": {
+    "id": "distant-moons:underworld_lantern"
+  }
+}

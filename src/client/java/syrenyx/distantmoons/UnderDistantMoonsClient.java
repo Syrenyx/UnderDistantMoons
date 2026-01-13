@@ -1,10 +1,7 @@
 package syrenyx.distantmoons;
 
 import net.fabricmc.api.ClientModInitializer;
-import syrenyx.distantmoons.initializers.client.DistantMoonsAttachedData;
-import syrenyx.distantmoons.initializers.client.DistantMoonsNetworking;
-import syrenyx.distantmoons.initializers.client.DistantMoonsParticles;
-import syrenyx.distantmoons.initializers.client.DistantMoonsRendering;
+import syrenyx.distantmoons.initializers.client.*;
 
 public class UnderDistantMoonsClient implements ClientModInitializer {
 	@Override
@@ -14,6 +11,7 @@ public class UnderDistantMoonsClient implements ClientModInitializer {
     DistantMoonsNetworking.initialize();
     DistantMoonsParticles.initialize();
     DistantMoonsRendering.initialize();
+    DistantMoonsItemModelProperties.initialize();
     UnderDistantMoons.LOGGER.info("Content Successfully Initialized");
 	}
 }

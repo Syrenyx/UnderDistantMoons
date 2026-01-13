@@ -31,6 +31,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
 import syrenyx.distantmoons.content.block.block_state_enums.WallSlabShape;
 import syrenyx.distantmoons.utility.VoxelShapeUtil;
 import com.mojang.math.OctahedralGroup;
@@ -63,22 +64,22 @@ public class WallSlabBlock extends Block implements SimpleWaterloggedBlock {
   }
 
   @Override
-  protected FluidState getFluidState(BlockState state) {
+  protected @NonNull FluidState getFluidState(BlockState state) {
     return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
   }
 
   @Override
-  public boolean canPlaceLiquid(@Nullable LivingEntity filler, BlockGetter world, BlockPos pos, BlockState state, Fluid fluid) {
+  public boolean canPlaceLiquid(@Nullable LivingEntity filler, @NonNull BlockGetter world, @NonNull BlockPos pos, BlockState state, @NonNull Fluid fluid) {
     return state.getValue(SHAPE) != WallSlabShape.DOUBLE && SimpleWaterloggedBlock.super.canPlaceLiquid(filler, world, pos, state, fluid);
   }
 
   @Override
-  public boolean placeLiquid(LevelAccessor world, BlockPos pos, BlockState state, FluidState fluidState) {
+  public boolean placeLiquid(@NonNull LevelAccessor world, @NonNull BlockPos pos, BlockState state, @NonNull FluidState fluidState) {
     return state.getValue(SHAPE) != WallSlabShape.DOUBLE && SimpleWaterloggedBlock.super.placeLiquid(world, pos, state, fluidState);
   }
 
   @Override
-  protected boolean isPathfindable(BlockState state, PathComputationType type) {
+  protected boolean isPathfindable(@NonNull BlockState state, @NonNull PathComputationType type) {
     if (type == PathComputationType.WATER) return state.getFluidState().is(FluidTags.WATER);
     return false;
   }
@@ -88,12 +89,12 @@ public class WallSlabBlock extends Block implements SimpleWaterloggedBlock {
     ItemStack itemStack = context.getItemInHand();
     WallSlabShape wallShape = state.getValue(SHAPE);
     if (wallShape != WallSlabShape.FLAT || !itemStack.is(this.asItem())) return false;
-    if (context.replacingClickedOnBlock()) return context.getClickedFace() == state.getValue(FACING);
+    if (context.replacingClickedOnBlock()) return context.getClickedFace() == state.getValue(FACING).getOpposite();
     return true;
   }
 
   @Override
-  protected VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+  protected @NonNull VoxelShape getShape(BlockState state, @NonNull BlockGetter world, @NonNull BlockPos pos, @NonNull CollisionContext context) {
     return switch (state.getValue(SHAPE)) {
       case FLAT -> FLAT_SHAPES_BY_DIRECTION.get(state.getValue(FACING).getOpposite());
       case INNER_LEFT -> INNER_SHAPES_BY_DIRECTION.get(state.getValue(FACING).getOpposite());
@@ -121,15 +122,15 @@ public class WallSlabBlock extends Block implements SimpleWaterloggedBlock {
   }
 
   @Override
-  protected BlockState updateShape(
+  protected @NonNull BlockState updateShape(
       BlockState state,
-      LevelReader world,
-      ScheduledTickAccess tickView,
-      BlockPos pos,
-      Direction direction,
-      BlockPos neighborPos,
-      BlockState neighborState,
-      RandomSource random
+      @NonNull LevelReader world,
+      @NonNull ScheduledTickAccess tickView,
+      @NonNull BlockPos pos,
+      @NonNull Direction direction,
+      @NonNull BlockPos neighborPos,
+      @NonNull BlockState neighborState,
+      @NonNull RandomSource random
   ) {
     if (state.getValue(WATERLOGGED)) tickView.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(world));
     return super.updateShape(updateState(world, pos, state), world, tickView, pos, direction, neighborPos, neighborState, random);
@@ -162,36 +163,12 @@ public class WallSlabBlock extends Block implements SimpleWaterloggedBlock {
   }
 
   @Override
-  protected BlockState rotate(BlockState state, Rotation rotation) {
-    Direction facing = state.getValue(FACING);
-    return state.setValue(FACING, switch (rotation) {
-      case NONE -> facing;
-      case CLOCKWISE_90 -> switch (facing) {
-        case NORTH -> Direction.EAST;
-        case EAST -> Direction.SOUTH;
-        case SOUTH -> Direction.WEST;
-        case WEST -> Direction.NORTH;
-        default -> null;
-      };
-      case CLOCKWISE_180 -> switch (facing) {
-        case NORTH -> Direction.SOUTH;
-        case EAST -> Direction.WEST;
-        case SOUTH -> Direction.NORTH;
-        case WEST -> Direction.EAST;
-        default -> null;
-      };
-      case COUNTERCLOCKWISE_90 -> switch (facing) {
-        case NORTH -> Direction.WEST;
-        case EAST -> Direction.NORTH;
-        case SOUTH -> Direction.EAST;
-        case WEST -> Direction.SOUTH;
-        default -> null;
-      };
-    });
+  protected @NonNull BlockState rotate(BlockState state, Rotation rotation) {
+    return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
   }
 
   @Override
-  protected BlockState mirror(BlockState state, Mirror mirror) {
+  protected @NonNull BlockState mirror(BlockState state, Mirror mirror) {
     Direction facing = state.getValue(FACING);
     WallSlabShape shape = state.getValue(SHAPE);
     return switch (mirror) {

@@ -2,6 +2,7 @@ package syrenyx.distantmoons.content.predicate.condition;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import org.jspecify.annotations.NonNull;
 import syrenyx.distantmoons.initializers.DistantMoonsLootConditions;
 import syrenyx.distantmoons.content.predicate.entity.EntityPredicate;
 
@@ -27,12 +28,12 @@ public record EntityPropertiesCondition(
   );
 
   @Override
-  public LootItemConditionType getType() {
+  public @NonNull LootItemConditionType getType() {
     return DistantMoonsLootConditions.ENTITY_PROPERTIES;
   }
 
   @Override
-  public Set<ContextKey<?>> getReferencedContextParams() {
+  public @NonNull Set<ContextKey<?>> getReferencedContextParams() {
     return Set.of(LootContextParams.ORIGIN, this.entity.getParameter());
   }
 

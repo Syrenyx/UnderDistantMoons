@@ -1,6 +1,7 @@
 package syrenyx.distantmoons.content.block.block_state_enums;
 
 import net.minecraft.util.StringRepresentable;
+import org.jspecify.annotations.NonNull;
 
 public enum WallSlabShape implements StringRepresentable {
 
@@ -17,7 +18,7 @@ public enum WallSlabShape implements StringRepresentable {
   }
 
   @Override
-  public String getSerializedName() {
+  public @NonNull String getSerializedName() {
     return this.id;
   }
 }

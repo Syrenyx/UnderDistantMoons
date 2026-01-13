@@ -2,6 +2,7 @@ package syrenyx.distantmoons.content.advancement.criterion;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import org.jspecify.annotations.NonNull;
 import syrenyx.distantmoons.initializers.DistantMoonsAdvancementCriteria;
 
 import java.util.Optional;
@@ -16,7 +17,7 @@ import net.minecraft.world.item.ItemStack;
 public class UsedItemCriterion extends SimpleCriterionTrigger<UsedItemCriterion.Conditions> {
 
   @Override
-  public Codec<Conditions> codec() {
+  public @NonNull Codec<Conditions> codec() {
     return Conditions.CODEC;
   }
 

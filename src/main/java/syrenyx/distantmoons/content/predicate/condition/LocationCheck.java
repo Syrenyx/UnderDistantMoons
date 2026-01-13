@@ -3,6 +3,7 @@ package syrenyx.distantmoons.content.predicate.condition;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import org.jspecify.annotations.NonNull;
 import syrenyx.distantmoons.initializers.DistantMoonsLootConditions;
 import syrenyx.distantmoons.content.predicate.location.LocationPredicate;
 
@@ -39,12 +40,12 @@ public record LocationCheck(
   );
 
   @Override
-  public LootItemConditionType getType() {
+  public @NonNull LootItemConditionType getType() {
     return DistantMoonsLootConditions.LOCATION_CHECK;
   }
 
   @Override
-  public Set<ContextKey<?>> getReferencedContextParams() {
+  public @NonNull Set<ContextKey<?>> getReferencedContextParams() {
     return Set.of(LootContextParams.ORIGIN);
   }
 

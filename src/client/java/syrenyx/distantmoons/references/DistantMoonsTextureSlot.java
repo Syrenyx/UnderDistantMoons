@@ -2,7 +2,7 @@ package syrenyx.distantmoons.references;
 
 import net.minecraft.client.data.models.model.TextureSlot;
 
-public abstract class DistantMoonsTextureKeys {
+public abstract class DistantMoonsTextureSlot {
 
   public static final TextureSlot BOTTOM_LEFT = TextureSlot.create("bottom_left");
   public static final TextureSlot BOTTOM_RIGHT = TextureSlot.create("bottom_right");
@@ -17,6 +17,8 @@ public abstract class DistantMoonsTextureKeys {
   public static final TextureSlot HORIZONTAL = TextureSlot.create("horizontal");
   public static final TextureSlot HORIZONTAL_END = TextureSlot.create("horizontal_end");
   public static final TextureSlot HORIZONTAL_SIDE = TextureSlot.create("horizontal_side");
+  public static final TextureSlot LIT = TextureSlot.create("lit");
+  public static final TextureSlot LIT_ITEM = TextureSlot.create("lit");
   public static final TextureSlot LOWER_SIDE = TextureSlot.create("lower_side");
   public static final TextureSlot MIDDLE = TextureSlot.create("middle");
   public static final TextureSlot OUTSIDE = TextureSlot.create("outside");
@@ -28,6 +30,8 @@ public abstract class DistantMoonsTextureKeys {
   public static final TextureSlot SUPPORT = TextureSlot.create("support");
   public static final TextureSlot TOP_LEFT = TextureSlot.create("bottom_left");
   public static final TextureSlot TOP_RIGHT = TextureSlot.create("bottom_right");
+  public static final TextureSlot UNLIT = TextureSlot.create("unlit");
+  public static final TextureSlot UNLIT_ITEM = TextureSlot.create("unlit");
   public static final TextureSlot UPPER_SIDE = TextureSlot.create("upper_side");
   public static final TextureSlot VERTICAL = TextureSlot.create("vertical");
   public static final TextureSlot VERTICAL_END = TextureSlot.create("vertical_end");

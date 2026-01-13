@@ -4,6 +4,7 @@ import net.minecraft.util.StringRepresentable;
 import net.minecraft.util.context.ContextKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import org.jspecify.annotations.NonNull;
 import syrenyx.distantmoons.references.DistantMoonsLootContextParameters;
 
 public enum TargetEntityType implements StringRepresentable {
@@ -24,7 +25,7 @@ public enum TargetEntityType implements StringRepresentable {
   }
 
   @Override
-  public String getSerializedName() {
+  public @NonNull String getSerializedName() {
     return this.type;
   }
 

@@ -2,6 +2,7 @@ package syrenyx.distantmoons.content.affliction;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.core.registries.Registries;
 import syrenyx.distantmoons.content.affliction.effect.*;
 import syrenyx.distantmoons.initializers.DistantMoonsRegistries;
 import syrenyx.distantmoons.references.DistantMoonsRegistryKeys;
@@ -33,7 +34,7 @@ public record Affliction(
       .group(
           ComponentSerialization.CODEC.fieldOf("description").forGetter(Affliction::description),
           AfflictionDisplay.CODEC.optionalFieldOf("display").forGetter(Affliction::display),
-          RegistryCodecs.homogeneousList(net.minecraft.core.registries.Registries.ENTITY_TYPE).optionalFieldOf("immune_entities").forGetter(Affliction::immuneEntities),
+          RegistryCodecs.homogeneousList(Registries.ENTITY_TYPE).optionalFieldOf("immune_entities").forGetter(Affliction::immuneEntities),
           ExtraCodecs.intRange(1, Affliction.MAX_STAGE).fieldOf("max_stage").forGetter(Affliction::maxStage),
           Codec.BOOL.optionalFieldOf("persistent", false).forGetter(Affliction::persistent),
           LevelBasedValue.CODEC.optionalFieldOf("tick_progression").forGetter(Affliction::tickProgression),

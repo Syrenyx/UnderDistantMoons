@@ -1,5 +1,6 @@
 package syrenyx.distantmoons.content.block;
 
+import org.jspecify.annotations.NonNull;
 import syrenyx.distantmoons.utility.VoxelShapeUtil;
 
 import java.util.Map;
@@ -22,7 +23,7 @@ public class MetalLadderBlock extends LadderBlock {
   }
 
   @Override
-  protected VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
-    return SHAPES.get(state.getValue(FACING));
+  protected @NonNull VoxelShape getShape(BlockState state, @NonNull BlockGetter world, @NonNull BlockPos pos, @NonNull CollisionContext context) {
+    return SHAPES_BY_DIRECTION.get(state.getValue(FACING));
   }
 }

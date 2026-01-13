@@ -3,7 +3,7 @@ package syrenyx.distantmoons.content.loot.entry;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import syrenyx.distantmoons.content.affliction.effect.entity.SpawnParticlesEffect;
+import org.jspecify.annotations.NonNull;
 import syrenyx.distantmoons.initializers.DistantMoonsLootPoolEntryTypes;
 
 import java.util.Collections;
@@ -72,12 +72,12 @@ public class SpawnParticlesEntry extends LootPoolSingletonContainer {
   }
 
   @Override
-  public LootPoolEntryType getType() {
+  public @NonNull LootPoolEntryType getType() {
     return DistantMoonsLootPoolEntryTypes.SPAWN_PARTICLES;
   }
 
   @Override
-  public boolean expand(LootContext context, Consumer<LootPoolEntry> consumer) {
+  public boolean expand(@NonNull LootContext context, @NonNull Consumer<LootPoolEntry> consumer) {
     if (!this.canRun(context)) return false;
     if (this.target == OptionalEffectPoolEntryTarget.NONE) spawnStaticParticles(context);
     else spawnEntityParticles(context);
@@ -123,5 +123,5 @@ public class SpawnParticlesEntry extends LootPoolSingletonContainer {
   }
 
   @Override
-  protected void createItemStack(Consumer<ItemStack> lootConsumer, LootContext context) {}
+  protected void createItemStack(@NonNull Consumer<ItemStack> lootConsumer, @NonNull LootContext context) {}
 }

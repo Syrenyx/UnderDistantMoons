@@ -2,6 +2,7 @@ package syrenyx.distantmoons.content.enchantment.effect.entity;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import org.jspecify.annotations.NonNull;
 import syrenyx.distantmoons.content.affliction.Affliction;
 import syrenyx.distantmoons.content.affliction.AfflictionInstance;
 import syrenyx.distantmoons.content.affliction.AfflictionManager;
@@ -38,12 +39,12 @@ public record ChangeAfflictionEffect(
   );
 
   @Override
-  public MapCodec<? extends EnchantmentEntityEffect> codec() {
+  public @NonNull MapCodec<? extends EnchantmentEntityEffect> codec() {
     return CODEC;
   }
 
   @Override
-  public void apply(ServerLevel world, int level, EnchantedItemInUse context, Entity target, Vec3 pos) {
+  public void apply(@NonNull ServerLevel world, int level, @NonNull EnchantedItemInUse context, @NonNull Entity target, @NonNull Vec3 pos) {
     if (!(target instanceof LivingEntity livingEntity)) return;
     Optional<Holder.Reference<Affliction>> afflictionEntry = target.registryAccess().get(ResourceKey.create(DistantMoonsRegistryKeys.AFFLICTION_REGISTRY_KEY, this.affliction));
     if (afflictionEntry.isEmpty()) return;

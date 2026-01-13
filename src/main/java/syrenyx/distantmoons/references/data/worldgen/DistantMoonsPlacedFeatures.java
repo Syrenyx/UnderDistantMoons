@@ -11,6 +11,6 @@ public abstract class DistantMoonsPlacedFeatures {
   public static final ResourceKey<PlacedFeature> DEEP_IRON_ORE = keyOf("deep_iron_ore");
 
   private static ResourceKey<PlacedFeature> keyOf(String id) {
-    return UnderDistantMoons.registryKeyOf(id, Registries.PLACED_FEATURE);
+    return UnderDistantMoons.resourceKeyOf(id, Registries.PLACED_FEATURE);
   }
 }

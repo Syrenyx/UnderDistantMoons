@@ -12,6 +12,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.SlabType;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
+import org.jspecify.annotations.NonNull;
 import syrenyx.distantmoons.content.entity.SittingSpotEntity;
 import syrenyx.distantmoons.initializers.DistantMoonsEntityTypes;
 
@@ -22,7 +23,7 @@ public class PillowBlock extends SlabBlock {
   }
 
   @Override
-  public InteractionResult useWithoutItem(BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
+  public @NonNull InteractionResult useWithoutItem(@NonNull BlockState state, @NonNull Level world, @NonNull BlockPos pos, @NonNull Player player, BlockHitResult hit) {
     if (hit.getDirection() == Direction.DOWN || player.isShiftKeyDown()) return super.useWithoutItem(state, world, pos, player, hit);
     if (world.isClientSide()) return InteractionResult.SUCCESS;
     if (!world.getEntities(DistantMoonsEntityTypes.SITTING_SPOT, new AABB(pos), sittingSpot -> true).isEmpty()) return InteractionResult.PASS;

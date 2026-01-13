@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_underworld_dust": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "distant-moons:underworld_dust"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "distant-moons:underworld_lantern"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_underworld_dust"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "distant-moons:underworld_lantern"
+    ]
+  }
+}

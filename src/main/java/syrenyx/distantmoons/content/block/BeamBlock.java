@@ -27,7 +27,7 @@ public class BeamBlock extends PoleBlock {
   }
 
   @Override
-  protected @NonNull VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+  protected @NonNull VoxelShape getShape(BlockState state, @NonNull BlockGetter world, @NonNull BlockPos pos, @NonNull CollisionContext context) {
     VoxelShape shape = CENTER_SHAPES_BY_AXIS.get(state.getValue(AXIS));
     if (state.getValue(UP)) shape = Shapes.or(shape, UP_SHAPES_BY_AXIS.get(state.getValue(AXIS)));
     if (state.getValue(DOWN)) shape = Shapes.or(shape, DOWN_SHAPES_BY_AXIS.get(state.getValue(AXIS)));

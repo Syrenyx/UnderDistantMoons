@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
+import org.jspecify.annotations.NonNull;
 import syrenyx.distantmoons.initializers.DistantMoonsBlocks;
 import syrenyx.distantmoons.references.tag.DistantMoonsBlockTags;
 
@@ -17,7 +18,7 @@ public class DistantMoonsBlockTagProvider extends FabricTagProvider.BlockTagProv
   }
 
   @Override
-  protected void addTags(HolderLookup.Provider wrapperLookup) {
+  protected void addTags(HolderLookup.@NonNull Provider provider) {
 
     //BLOCK GROUPS
     this.valueLookupBuilder(DistantMoonsBlockTags.BRICK_FENCE).add(Blocks.NETHER_BRICK_FENCE);
@@ -389,6 +390,7 @@ public class DistantMoonsBlockTagProvider extends FabricTagProvider.BlockTagProv
             DistantMoonsBlocks.STONE_WALL_SLAB,
             DistantMoonsBlocks.TUFF_BRICK_WALL_SLAB,
             DistantMoonsBlocks.TUFF_WALL_SLAB,
+            DistantMoonsBlocks.UNDERWORLD_LANTERN,
             DistantMoonsBlocks.WROUGHT_IRON_BAR_DOOR,
             DistantMoonsBlocks.WROUGHT_IRON_BARS,
             DistantMoonsBlocks.WROUGHT_IRON_FENCE,

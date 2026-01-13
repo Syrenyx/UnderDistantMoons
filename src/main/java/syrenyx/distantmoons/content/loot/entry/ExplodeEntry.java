@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
 import syrenyx.distantmoons.initializers.DistantMoonsLootPoolEntryTypes;
 
 import java.util.Collections;
@@ -104,12 +105,12 @@ public class ExplodeEntry extends LootPoolSingletonContainer {
   }
 
   @Override
-  public LootPoolEntryType getType() {
+  public @NonNull LootPoolEntryType getType() {
     return DistantMoonsLootPoolEntryTypes.EXPLODE;
   }
 
   @Override
-  public boolean expand(LootContext context, Consumer<LootPoolEntry> consumer) {
+  public boolean expand(@NonNull LootContext context, @NonNull Consumer<LootPoolEntry> consumer) {
     if (!this.canRun(context)) return false;
     Vec3 pos = context.getOptionalParameter(LootContextParams.ORIGIN);
     if (pos == null) return true;
@@ -145,5 +146,5 @@ public class ExplodeEntry extends LootPoolSingletonContainer {
   }
 
   @Override
-  protected void createItemStack(Consumer<ItemStack> lootConsumer, LootContext context) {}
+  protected void createItemStack(@NonNull Consumer<ItemStack> lootConsumer, @NonNull LootContext context) {}
 }

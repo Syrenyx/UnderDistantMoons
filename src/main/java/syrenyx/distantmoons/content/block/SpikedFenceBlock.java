@@ -27,6 +27,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
 import syrenyx.distantmoons.content.block.block_state_enums.SpikedFenceShape;
 import syrenyx.distantmoons.references.tag.DistantMoonsBlockTags;
 import syrenyx.distantmoons.utility.VoxelShapeUtil;
@@ -66,7 +67,7 @@ public class SpikedFenceBlock extends Block implements SimpleWaterloggedBlock {
   }
 
   @Override
-  public void fallOn(Level world, BlockState state, BlockPos pos, Entity entity, double fallDistance) {
+  public void fallOn(@NonNull Level world, BlockState state, @NonNull BlockPos pos, @NonNull Entity entity, double fallDistance) {
     if (
         state.getValue(NORTH) != SpikedFenceShape.NONE
             || state.getValue(EAST) != SpikedFenceShape.NONE
@@ -78,12 +79,12 @@ public class SpikedFenceBlock extends Block implements SimpleWaterloggedBlock {
   }
 
   @Override
-  protected boolean isPathfindable(BlockState state, PathComputationType type) {
+  protected boolean isPathfindable(@NonNull BlockState state, @NonNull PathComputationType type) {
     return false;
   }
 
   @Override
-  protected FluidState getFluidState(BlockState state) {
+  protected @NonNull FluidState getFluidState(BlockState state) {
     return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
   }
 
@@ -92,8 +93,7 @@ public class SpikedFenceBlock extends Block implements SimpleWaterloggedBlock {
     return !state.getValue(WATERLOGGED);
   }
 
-  @Nullable
-  @Override
+  @Nullable @Override
   public BlockState getStateForPlacement(BlockPlaceContext context) {
     Level world = context.getLevel();
     BlockPos pos = context.getClickedPos();
@@ -104,15 +104,15 @@ public class SpikedFenceBlock extends Block implements SimpleWaterloggedBlock {
   }
 
   @Override
-  protected BlockState updateShape(
-      BlockState state,
-      LevelReader world,
+  protected @NonNull BlockState updateShape(
+      @NonNull BlockState state,
+      @NonNull LevelReader world,
       ScheduledTickAccess tickView,
-      BlockPos pos,
-      Direction direction,
-      BlockPos neighborPos,
-      BlockState neighborState,
-      RandomSource random
+      @NonNull BlockPos pos,
+      @NonNull Direction direction,
+      @NonNull BlockPos neighborPos,
+      @NonNull BlockState neighborState,
+      @NonNull RandomSource random
   ) {
     tickView.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(world));
     return this.updateState(world, pos, state);
@@ -146,12 +146,12 @@ public class SpikedFenceBlock extends Block implements SimpleWaterloggedBlock {
   }
 
   @Override
-  protected VoxelShape getVisualShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+  protected @NonNull VoxelShape getVisualShape(@NonNull BlockState state, @NonNull BlockGetter world, @NonNull BlockPos pos, @NonNull CollisionContext context) {
     return Shapes.empty();
   }
 
   @Override
-  protected VoxelShape getCollisionShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+  protected @NonNull VoxelShape getCollisionShape(BlockState state, @NonNull BlockGetter world, @NonNull BlockPos pos, @NonNull CollisionContext context) {
     VoxelShape shape = TALL_CENTER_SHAPE;
     if (state.getValue(NORTH) != SpikedFenceShape.NONE) shape = Shapes.or(shape, TALL_SIDE_SHAPES_BY_DIRECTION.get(Direction.NORTH));
     if (state.getValue(EAST) != SpikedFenceShape.NONE) shape = Shapes.or(shape, TALL_SIDE_SHAPES_BY_DIRECTION.get(Direction.EAST));
@@ -161,7 +161,7 @@ public class SpikedFenceBlock extends Block implements SimpleWaterloggedBlock {
   }
 
   @Override
-  protected VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+  protected @NonNull VoxelShape getShape(BlockState state, @NonNull BlockGetter world, @NonNull BlockPos pos, @NonNull CollisionContext context) {
     VoxelShape shape = CENTER_SHAPE;
     if (state.getValue(NORTH) != SpikedFenceShape.NONE) shape = Shapes.or(shape, SIDE_SHAPES_BY_DIRECTION.get(Direction.NORTH));
     if (state.getValue(EAST) != SpikedFenceShape.NONE) shape = Shapes.or(shape, SIDE_SHAPES_BY_DIRECTION.get(Direction.EAST));
@@ -171,7 +171,7 @@ public class SpikedFenceBlock extends Block implements SimpleWaterloggedBlock {
   }
 
   @Override
-  protected BlockState rotate(BlockState state, Rotation rotation) {
+  protected @NonNull BlockState rotate(@NonNull BlockState state, Rotation rotation) {
     return switch (rotation) {
       case NONE -> state;
       case CLOCKWISE_90 -> state
@@ -193,7 +193,7 @@ public class SpikedFenceBlock extends Block implements SimpleWaterloggedBlock {
   }
 
   @Override
-  protected BlockState mirror(BlockState state, Mirror mirror) {
+  protected @NonNull BlockState mirror(@NonNull BlockState state, Mirror mirror) {
     return switch (mirror) {
       case NONE -> state;
       case LEFT_RIGHT -> state

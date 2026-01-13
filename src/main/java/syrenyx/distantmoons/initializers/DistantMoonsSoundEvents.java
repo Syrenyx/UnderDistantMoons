@@ -13,8 +13,8 @@ public abstract class DistantMoonsSoundEvents {
   //BLOCK
 
   //ENTITY
-  public static final SoundEvent BEGIN_CURING_CURSE_OF_THE_MOON = register("entity.begin_curing_curse_of_the_night");
-  public static final SoundEvent FINISH_CURING_CURSE_OF_THE_MOON = register("entity.finish_curing_curse_of_the_night");
+  public static final SoundEvent BEGIN_CURING_CURSE_OF_THE_NIGHT = register("entity.begin_curing_curse_of_the_night");
+  public static final SoundEvent FINISH_CURING_CURSE_OF_THE_NIGHT = register("entity.finish_curing_curse_of_the_night");
 
   //ITEM
 

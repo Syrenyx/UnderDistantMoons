@@ -30,6 +30,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
 import syrenyx.distantmoons.references.tag.DistantMoonsBlockTags;
 import syrenyx.distantmoons.utility.VoxelShapeUtil;
 import com.mojang.math.OctahedralGroup;
@@ -46,8 +47,8 @@ public class PoleBlock extends Block implements SimpleWaterloggedBlock {
   private static final Map<Direction.Axis, VoxelShape> UP_SHAPES_BY_AXIS = VoxelShapeUtil.createAxisShapeMap(EXTENSION_SHAPE);
   private static final Map<Direction.Axis, VoxelShape> DOWN_SHAPES_BY_AXIS = VoxelShapeUtil.createAxisShapeMap(Shapes.rotate(EXTENSION_SHAPE, OctahedralGroup.ROT_180_FACE_XY, VoxelShapeUtil.BLOCK_CENTER_ANCHOR));
 
-  public PoleBlock(Properties settings) {
-    super(settings);
+  public PoleBlock(Properties properties) {
+    super(properties);
     this.registerDefaultState(this.defaultBlockState()
         .setValue(AXIS, Direction.Axis.Y)
         .setValue(UP, false)
@@ -62,28 +63,28 @@ public class PoleBlock extends Block implements SimpleWaterloggedBlock {
   }
 
   @Override
-  protected FluidState getFluidState(BlockState state) {
+  protected @NonNull FluidState getFluidState(BlockState state) {
     return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
   }
 
   @Override
-  public boolean canPlaceLiquid(@Nullable LivingEntity filler, BlockGetter world, BlockPos pos, BlockState state, Fluid fluid) {
+  public boolean canPlaceLiquid(@Nullable LivingEntity filler, @NonNull BlockGetter world, @NonNull BlockPos pos, @NonNull BlockState state, @NonNull Fluid fluid) {
     return SimpleWaterloggedBlock.super.canPlaceLiquid(filler, world, pos, state, fluid);
   }
 
   @Override
-  public boolean placeLiquid(LevelAccessor world, BlockPos pos, BlockState state, FluidState fluidState) {
+  public boolean placeLiquid(@NonNull LevelAccessor world, @NonNull BlockPos pos, @NonNull BlockState state, @NonNull FluidState fluidState) {
     return SimpleWaterloggedBlock.super.placeLiquid(world, pos, state, fluidState);
   }
 
   @Override
-  protected boolean isPathfindable(BlockState state, PathComputationType type) {
+  protected boolean isPathfindable(@NonNull BlockState state, @NonNull PathComputationType type) {
     if (type == PathComputationType.WATER) return state.getFluidState().is(FluidTags.WATER);
     return false;
   }
 
   @Override
-  protected VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+  protected @NonNull VoxelShape getShape(BlockState state, @NonNull BlockGetter world, @NonNull BlockPos pos, @NonNull CollisionContext context) {
     VoxelShape shape = CENTER_SHAPES_BY_AXIS.get(state.getValue(AXIS));
     if (state.getValue(UP)) shape = Shapes.or(shape, UP_SHAPES_BY_AXIS.get(state.getValue(AXIS)));
     if (state.getValue(DOWN)) shape = Shapes.or(shape, DOWN_SHAPES_BY_AXIS.get(state.getValue(AXIS)));
@@ -97,15 +98,15 @@ public class PoleBlock extends Block implements SimpleWaterloggedBlock {
   }
 
   @Override
-  protected BlockState updateShape(
+  protected @NonNull BlockState updateShape(
       BlockState state,
-      LevelReader world,
-      ScheduledTickAccess tickView,
-      BlockPos pos,
-      Direction direction,
-      BlockPos neighborPos,
-      BlockState neighborState,
-      RandomSource random
+      @NonNull LevelReader world,
+      @NonNull ScheduledTickAccess tickView,
+      @NonNull BlockPos pos,
+      @NonNull Direction direction,
+      @NonNull BlockPos neighborPos,
+      @NonNull BlockState neighborState,
+      @NonNull RandomSource random
   ) {
     if (state.getValue(WATERLOGGED)) tickView.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(world));
     return super.updateShape(this.updateState(world, pos, state), world, tickView, pos, direction, neighborPos, neighborState, random);
@@ -136,7 +137,7 @@ public class PoleBlock extends Block implements SimpleWaterloggedBlock {
   }
 
   @Override
-  protected BlockState rotate(BlockState state, Rotation rotation) {
+  protected @NonNull BlockState rotate(BlockState state, @NonNull Rotation rotation) {
     return switch (state.getValue(AXIS)) {
       case X -> switch (rotation) {
         case NONE -> state;
@@ -155,7 +156,7 @@ public class PoleBlock extends Block implements SimpleWaterloggedBlock {
   }
 
   @Override
-  protected BlockState mirror(BlockState state, Mirror mirror) {
+  protected @NonNull BlockState mirror(@NonNull BlockState state, Mirror mirror) {
     return switch (mirror) {
       case NONE -> state;
       case LEFT_RIGHT -> state.getValue(AXIS) == Direction.Axis.Z ? state.setValue(UP, state.getValue(DOWN)).setValue(DOWN, state.getValue(UP)) : state;

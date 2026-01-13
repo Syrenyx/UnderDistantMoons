@@ -10,6 +10,6 @@ public abstract class DistantMoonsPredicates {
   public static final ResourceKey<LootItemCondition> SILK_TOUCH_TOOL = keyOf("silk_touch_tool");
 
   private static ResourceKey<LootItemCondition> keyOf(String id) {
-    return UnderDistantMoons.registryKeyOf(id, Registries.PREDICATE);
+    return UnderDistantMoons.resourceKeyOf(id, Registries.PREDICATE);
   }
 }

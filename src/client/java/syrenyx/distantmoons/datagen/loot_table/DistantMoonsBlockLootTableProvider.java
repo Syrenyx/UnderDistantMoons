@@ -83,6 +83,7 @@ public class DistantMoonsBlockLootTableProvider extends FabricBlockLootTableProv
     this.dropSelf(DistantMoonsBlocks.RUSTED_IRON_BLOCK);
     this.dropSelf(DistantMoonsBlocks.SPRUCE_BEAM);
     this.dropSelf(DistantMoonsBlocks.SPRUCE_POLE);
+    this.dropSelf(DistantMoonsBlocks.UNDERWORLD_LANTERN);
     this.dropSelf(DistantMoonsBlocks.WARPED_BEAM);
     this.dropSelf(DistantMoonsBlocks.WARPED_POLE);
     this.dropSelf(DistantMoonsBlocks.WAXED_EXPOSED_IRON_BLOCK);

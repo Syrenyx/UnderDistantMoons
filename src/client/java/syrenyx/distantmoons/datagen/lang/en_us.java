@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.world.item.DyeColor;
+import org.jspecify.annotations.NonNull;
 import syrenyx.distantmoons.initializers.DistantMoonsBlocks;
 import syrenyx.distantmoons.initializers.DistantMoonsEntityTypes;
 import syrenyx.distantmoons.initializers.DistantMoonsItems;
@@ -38,7 +39,7 @@ public class en_us extends FabricLanguageProvider {
   }
 
   @Override
-  public void generateTranslations(HolderLookup.Provider wrapperLookup, TranslationBuilder builder) {
+  public void generateTranslations(HolderLookup.@NonNull Provider provider, @NonNull TranslationBuilder builder) {
 
     LangHelper helper = new LangHelper(builder);
 
@@ -226,6 +227,7 @@ public class en_us extends FabricLanguageProvider {
     builder.add(DistantMoonsBlocks.STRIPPED_CUT_WARPED_STEM, "Stripped Cut Warped Stem");
     builder.add(DistantMoonsBlocks.TUFF_BRICK_WALL_SLAB, "Tuff Brick Wall Slab");
     builder.add(DistantMoonsBlocks.TUFF_WALL_SLAB, "Tuff Wall Slab");
+    builder.add(DistantMoonsBlocks.UNDERWORLD_LANTERN, "Underworld Lantern");
     builder.add(DistantMoonsBlocks.WARPED_BEAM, "Warped Beam");
     builder.add(DistantMoonsBlocks.WARPED_POLE, "Warped Pole");
     builder.add(DistantMoonsBlocks.WARPED_WALL_SLAB, "Warped Wall Slab");

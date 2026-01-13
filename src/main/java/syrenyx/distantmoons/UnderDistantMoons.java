@@ -33,6 +33,7 @@ public class UnderDistantMoons implements ModInitializer {
     DistantMoonsEnchantmentEntityEffects.initialize();
     DistantMoonsEnchantmentLevelBasedValueTypes.initialize();
     DistantMoonsEntityTypes.initialize();
+    DistantMoonsEnvironmentAttributes.initialize();
     DistantMoonsFeatures.initialize();
     DistantMoonsItemGroups.initialize();
     DistantMoonsItemModifications.initialize();
@@ -56,7 +57,7 @@ public class UnderDistantMoons implements ModInitializer {
     return Identifier.fromNamespaceAndPath(MOD_ID, string);
   }
 
-  public static <T> ResourceKey<T> registryKeyOf(String string, ResourceKey<Registry<T>> key) {
+  public static <T> ResourceKey<T> resourceKeyOf(String string, ResourceKey<Registry<T>> key) {
     return ResourceKey.create(key, identifierOf(string));
   }
 
