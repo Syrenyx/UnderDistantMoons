@@ -9,11 +9,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ScheduledTickAccess;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.FenceGateBlock;
-import net.minecraft.world.level.block.Mirror;
-import net.minecraft.world.level.block.Rotation;
-import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -30,6 +26,7 @@ import org.jetbrains.annotations.Nullable;
 import org.jspecify.annotations.NonNull;
 import syrenyx.distantmoons.content.block.block_state_enums.SpikedFenceShape;
 import syrenyx.distantmoons.references.tag.DistantMoonsBlockTags;
+import syrenyx.distantmoons.utility.BlockConnectionUtil;
 import syrenyx.distantmoons.utility.VoxelShapeUtil;
 
 import java.util.Map;
@@ -142,6 +139,8 @@ public class SpikedFenceBlock extends Block implements SimpleWaterloggedBlock {
     if (state.getBlock() instanceof FenceGateBlock) return FenceGateBlock.connectsToDirection(state, direction);
     if (state.getBlock() instanceof FixedLadderBlock) return FixedLadderBlock.canWallConnect(state, direction);
     if (state.isFaceSturdy(world, pos.relative(direction), direction.getOpposite())) return true;
+    if (state.getBlock() instanceof StairBlock) return BlockConnectionUtil.isStairBlockFacePartiallySturdy(state, direction.getOpposite());
+    if (state.getBlock() instanceof WallSlabBlock) return WallSlabBlock.isFacePartiallySturdy(state, direction.getOpposite());
     return false;
   }
 
