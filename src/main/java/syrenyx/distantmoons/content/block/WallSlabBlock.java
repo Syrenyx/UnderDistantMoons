@@ -162,6 +162,17 @@ public class WallSlabBlock extends Block implements SimpleWaterloggedBlock {
     return block instanceof StairBlock || block instanceof WallSlabBlock;
   }
 
+  public static boolean isFacePartiallySturdy(BlockState state, Direction direction) {
+    if (direction.getAxis() == Direction.Axis.Y) return true;
+    WallSlabShape shape = state.getValue(SHAPE);
+    if (shape.allSidesPartiallySturdy()) return true;
+    Direction facing = state.getValue(FACING);
+    if (shape == WallSlabShape.FLAT) return facing != direction.getOpposite();
+    if (facing == direction) return true;
+    if (shape == WallSlabShape.OUTER_LEFT) return facing == direction.getClockWise();
+    else return facing == direction.getCounterClockWise();
+  }
+
   @Override
   protected @NonNull BlockState rotate(BlockState state, Rotation rotation) {
     return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
