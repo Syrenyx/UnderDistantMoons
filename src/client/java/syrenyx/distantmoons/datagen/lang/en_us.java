@@ -61,6 +61,7 @@ public class en_us extends FabricLanguageProvider {
     builder.add(DistantMoonsBlocks.BIRCH_WALL_SLAB, "Birch Wall Slab");
     builder.add(DistantMoonsBlocks.BLACKSTONE_DEEP_IRON_ORE, "Blackstone Deep Iron Ore");
     builder.add(DistantMoonsBlocks.BLACKSTONE_WALL_SLAB, "Blackstone Wall Slab");
+    builder.add(DistantMoonsBlocks.BLAST_FURNACE, "Blast Furnace");
     builder.add(DistantMoonsBlocks.BRICK_WALL_SLAB, "Brick Wall Slab");
     builder.add(DistantMoonsBlocks.CHARCOAL_BLOCK, "Block of Charcoal");
     builder.add(DistantMoonsBlocks.CHERRY_BEAM, "Cherry Beam");
@@ -273,6 +274,8 @@ public class en_us extends FabricLanguageProvider {
     builder.add("commands.distant-moons.affliction.set.failed", "Target is immune to afflictions");
     builder.add("commands.distant-moons.affliction.set.success.multiple", "Applied affliction %s to %s targets");
     builder.add("commands.distant-moons.affliction.set.success.single", "Applied affliction %s to %s");
+
+    builder.add("container.distant-moons.blast_furnace", "Blast Furnace");
 
     builder.add(DistantMoonsEntityTypes.SITTING_SPOT, "Sitting Spot");
 

@@ -93,7 +93,7 @@ public class DistantMoonsBlockTagProvider extends FabricTagProvider.BlockTagProv
         DistantMoonsBlocks.WARPED_POLE
     );
 
-    //SYED BLOCK GROUPS
+    //DYED BLOCK GROUPS
     this.valueLookupBuilder(DistantMoonsBlockTags.DYED_PILLOW).addAll(
         DistantMoonsBlocks.DYED_PILLOWS.values()
     );
@@ -214,7 +214,8 @@ public class DistantMoonsBlockTagProvider extends FabricTagProvider.BlockTagProv
 
     //MINING TOOL GROUPS
     this.valueLookupBuilder(DistantMoonsBlockTags.MINING_TIER_DIAMOND);
-    this.valueLookupBuilder(DistantMoonsBlockTags.MINING_TIER_IRON);
+    this.valueLookupBuilder(DistantMoonsBlockTags.MINING_TIER_IRON)
+        .add(DistantMoonsBlocks.BLAST_FURNACE);
     this.valueLookupBuilder(DistantMoonsBlockTags.MINING_TIER_STONE)
         .addTag(DistantMoonsBlockTags.OXIDIZABLE_CUT_COPPER_WALL_SLAB)
         .addTag(DistantMoonsBlockTags.OXIDIZABLE_IRON_BLOCK)
@@ -296,6 +297,7 @@ public class DistantMoonsBlockTagProvider extends FabricTagProvider.BlockTagProv
             DistantMoonsBlocks.ANDESITE_WALL_SLAB,
             DistantMoonsBlocks.BLACKSTONE_DEEP_IRON_ORE,
             DistantMoonsBlocks.BLACKSTONE_WALL_SLAB,
+            DistantMoonsBlocks.BLAST_FURNACE,
             DistantMoonsBlocks.BRICK_WALL_SLAB,
             DistantMoonsBlocks.CHARCOAL_BLOCK,
             DistantMoonsBlocks.COBBLED_DEEPSLATE_WALL_SLAB,

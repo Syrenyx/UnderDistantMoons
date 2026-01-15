@@ -97,6 +97,7 @@ public class de_de extends FabricLanguageProvider {
     builder.add(DistantMoonsBlocks.BIRCH_WALL_SLAB, "Gestufte Birkenholzwand");
     builder.add(DistantMoonsBlocks.BLACKSTONE_DEEP_IRON_ORE, "Schwarzstein-Tiefeisenerz");
     builder.add(DistantMoonsBlocks.BLACKSTONE_WALL_SLAB, "Gestufte Schwarzsteinwand");
+    builder.add(DistantMoonsBlocks.BLAST_FURNACE, "Hochofen");
     builder.add(DistantMoonsBlocks.BRICK_WALL_SLAB, "Gestufte Ziegelwand");
     builder.add(DistantMoonsBlocks.CHARCOAL_BLOCK, "Holzkohleblock");
     builder.add(DistantMoonsBlocks.CHERRY_BEAM, "Kirschholzbalken");
@@ -272,7 +273,7 @@ public class de_de extends FabricLanguageProvider {
     builder.add(DistantMoonsBlocks.WROUGHT_IRON_FENCE, "Schmiedeeisenzaun");
     builder.add(DistantMoonsBlocks.WROUGHT_IRON_LADDER, "Schmiedeeisenleiter");
 
-    helper.generateDyedBlockNames(DistantMoonsBlocks.DYED_PILLOWS, "%c Polster", OBJECTIVE_COLOR_ADJECTIVES);
+    helper.generateDyedBlockNames(DistantMoonsBlocks.DYED_PILLOWS, "%c Kissen", OBJECTIVE_COLOR_ADJECTIVES);
 
     builder.add(DistantMoonsBlocks.CUT_COPPER_WALL_SLAB, "Gestufte geschnittene Kupferwand");
     builder.add(DistantMoonsBlocks.EXPOSED_CUT_COPPER_WALL_SLAB, "Angelaufene gestufte geschnittene Kupferwand");
@@ -309,6 +310,8 @@ public class de_de extends FabricLanguageProvider {
     builder.add("commands.distant-moons.affliction.set.failed", "Ziel ist resistent gegen Gebrechen");
     builder.add("commands.distant-moons.affliction.set.success.multiple", "Gebrechen %s wurde auf %s Ziele angewandt");
     builder.add("commands.distant-moons.affliction.set.success.single", "Gebrechen %s wurde auf %s angewandt");
+
+    builder.add("container.distant-moons.blast_furnace", "Hochofen");
 
     builder.add(DistantMoonsEntityTypes.SITTING_SPOT, "Sitzplatz");
 

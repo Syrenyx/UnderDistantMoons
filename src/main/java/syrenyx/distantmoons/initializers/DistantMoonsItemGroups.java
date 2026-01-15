@@ -304,6 +304,7 @@ public abstract class DistantMoonsItemGroups {
     addToGroup(CreativeModeTabs.FUNCTIONAL_BLOCKS, Items.SOUL_LANTERN, List.of(DistantMoonsBlocks.UNDERWORLD_LANTERN.asItem().getDefaultInstance()));
     addToGroup(CreativeModeTabs.FUNCTIONAL_BLOCKS, Items.IRON_CHAIN, List.of(DistantMoonsBlocks.DEEP_IRON_CHAIN.asItem().getDefaultInstance()));
     addToGroup(CreativeModeTabs.FUNCTIONAL_BLOCKS, Items.SEA_LANTERN, List.of(DistantMoonsBlocks.PALE_SEA_LANTERN.asItem().getDefaultInstance()));
+    addToGroup(CreativeModeTabs.FUNCTIONAL_BLOCKS, Items.BLAST_FURNACE, List.of(DistantMoonsBlocks.BLAST_FURNACE.asItem().getDefaultInstance()));
     addToGroup(CreativeModeTabs.FUNCTIONAL_BLOCKS, Items.LADDER, List.of(
         DistantMoonsBlocks.IRON_LADDER.asItem().getDefaultInstance(),
         DistantMoonsBlocks.WROUGHT_IRON_LADDER.asItem().getDefaultInstance(),
