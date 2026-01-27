@@ -22,9 +22,9 @@ public enum BlockCorner implements StringRepresentable {
   BOTTOM_SOUTH_WEST("bottom_south_west", false, false, false);
 
   private final String id;
-  private final boolean top;
-  private final boolean north;
-  private final boolean east;
+  public final boolean top;
+  public final boolean north;
+  public final boolean east;
 
   BlockCorner(final String id, final boolean top, final boolean north, final boolean east) {
     this.id = id;
@@ -77,8 +77,12 @@ public enum BlockCorner implements StringRepresentable {
     };
   }
 
+  public @NonNull BlockPos getTopNorthEastPos(BlockPos pos) {
+    return pos.offset(this.east ? 0 : 1, this.top ? 0 : 1, this.north ? 0 : -1);
+  }
+
   public @NonNull Map<BlockPos, BlockCorner> getCornersForPositionsInBlock(BlockPos pos) {
-    BlockPos topNorthEastPos = pos.offset(this.east ? 0 : 1, this.top ? 0 : 1, this.north ? 0 : -1);
+    BlockPos topNorthEastPos = this.getTopNorthEastPos(pos);
     Map<BlockPos, BlockCorner> positions = new HashMap<>(Map.of(topNorthEastPos, TOP_NORTH_EAST));
     positions.put(topNorthEastPos.offset(-1, 0, 0), TOP_NORTH_WEST);
     positions.put(topNorthEastPos.offset(0, 0, 1), TOP_SOUTH_EAST);

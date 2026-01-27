@@ -3,6 +3,7 @@ package syrenyx.distantmoons.content.block;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -12,7 +13,10 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -22,6 +26,8 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 import syrenyx.distantmoons.content.block.block_state_enums.BlockCorner;
+import syrenyx.distantmoons.content.block.entity.LargeBlastFurnaceBlockEntity;
+import syrenyx.distantmoons.initializers.DistantMoonsBlockEntityTypes;
 import syrenyx.distantmoons.utility.BlockUtil;
 
 import java.util.List;
@@ -34,6 +40,7 @@ public class LargeBlastFurnaceBlock extends BaseEntityBlock {
   public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
   public static final BooleanProperty MIRRORED = BooleanProperty.create("mirrored");
   public static final IntegerProperty HEAT = IntegerProperty.create("heat", 0, 3);
+  private static boolean overrideIntegrityCheck = false;
 
   public LargeBlastFurnaceBlock(Properties properties) {
     super(properties);
@@ -57,7 +64,23 @@ public class LargeBlastFurnaceBlock extends BaseEntityBlock {
 
   @Override
   public @Nullable BlockEntity newBlockEntity(@NonNull BlockPos blockPos, @NonNull BlockState blockState) {
-    return null; //new BlastFurnaceBlockEntity(blockPos, blockState);
+    return new LargeBlastFurnaceBlockEntity(blockPos, blockState);
+  }
+
+  @Override
+  public <T extends BlockEntity> @Nullable BlockEntityTicker<T> getTicker(@NonNull Level level, @NonNull BlockState blockState, @NonNull BlockEntityType<T> blockEntityType) {
+    return level instanceof ServerLevel
+        ? createTickerHelper(blockEntityType, DistantMoonsBlockEntityTypes.LARGE_BLAST_FURNACE, LargeBlastFurnaceBlockEntity::serverTick)
+        : null;
+  }
+
+  protected boolean hasAnalogOutputSignal(@NonNull BlockState blockState) {
+    return true;
+  }
+
+  protected int getAnalogOutputSignal(@NonNull BlockState blockState, Level level, @NonNull BlockPos blockPos, @NonNull Direction direction) {
+    BlockEntity blockEntity = level.getBlockEntity(blockPos);
+    return blockEntity instanceof LargeBlastFurnaceBlockEntity largeBlastFurnaceBlockEntity ? largeBlastFurnaceBlockEntity.getAnalogOutputSignal() : 0;
   }
 
   @Override
@@ -81,15 +104,19 @@ public class LargeBlastFurnaceBlock extends BaseEntityBlock {
     super.setPlacedBy(level, blockPos, blockState, livingEntity, itemStack);
     if (level.isClientSide()) return;
     Map<BlockPos, BlockCorner> corners = blockState.getValue(CORNER).getCornersForPositionsInBlock(blockPos);
-    corners.forEach((pos, corner) -> level.setBlock(pos, blockState.setValue(CORNER, corner), Block.UPDATE_ALL));
-    //shape.keySet().forEach(pos -> level.updateNeighborsAt(pos, blockState.getBlock()));
-    //shape.keySet().forEach(pos -> blockState.updateNeighbourShapes(level, pos, Block.UPDATE_ALL));
+    overrideIntegrityCheck = true;
+    corners.forEach((pos, corner) -> {
+      if (blockPos.equals(pos)) return;
+      level.destroyBlock(pos, true);
+      level.setBlock(pos, blockState.setValue(CORNER, corner), Block.UPDATE_ALL);
+    });
+    overrideIntegrityCheck = false;
   }
 
   @Override
   protected @NonNull BlockState updateShape(
       @NonNull BlockState state,
-      @NonNull LevelReader world,
+      @NonNull LevelReader level,
       @NonNull ScheduledTickAccess tickView,
       @NonNull BlockPos pos,
       @NonNull Direction direction,
@@ -97,6 +124,37 @@ public class LargeBlastFurnaceBlock extends BaseEntityBlock {
       @NonNull BlockState neighborState,
       @NonNull RandomSource random
   ) {
-    return state;
+    return shapeIntegrityCheck(level, state, pos)
+        ? super.updateShape(state, level, tickView, pos, direction, neighborPos, neighborState, random)
+        : Blocks.AIR.defaultBlockState();
+  }
+
+  public static boolean shapeIntegrityCheck(LevelReader level, BlockState state, BlockPos pos) {
+    if (overrideIntegrityCheck) return true;
+    Direction facing = state.getValue(FACING);
+    boolean mirrored = state.getValue(MIRRORED);
+    Map<BlockPos, BlockCorner> corners = state.getValue(CORNER).getCornersForPositionsInBlock(pos);
+    for (Map.Entry<BlockPos, BlockCorner> corner : corners.entrySet()) {
+      BlockState blockState = level.getBlockState(corner.getKey());
+      if (
+          !(blockState.getBlock() instanceof LargeBlastFurnaceBlock)
+              || blockState.getValue(CORNER) != corner.getValue()
+              || blockState.getValue(FACING) != facing
+              || blockState.getValue(MIRRORED) != mirrored
+      ) return false;
+    }
+    return true;
+  }
+
+  public static boolean hasFuelAccess(BlockState blockState) {
+    BlockCorner corner = blockState.getValue(CORNER);
+    boolean mirrored = blockState.getValue(MIRRORED);
+    return switch (blockState.getValue(FACING)) {
+      case NORTH -> (corner.north && mirrored) != corner.east;
+      case SOUTH -> (!corner.north && mirrored) == corner.east;
+      case WEST -> (corner.east && mirrored) != corner.north;
+      case EAST -> (!corner.east && mirrored) == corner.north;
+      default -> false;
+    };
   }
 }
