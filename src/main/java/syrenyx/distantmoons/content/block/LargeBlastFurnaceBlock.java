@@ -5,7 +5,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
@@ -23,11 +25,13 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.phys.BlockHitResult;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 import syrenyx.distantmoons.content.block.block_state_enums.BlockCorner;
 import syrenyx.distantmoons.content.block.entity.LargeBlastFurnaceBlockEntity;
 import syrenyx.distantmoons.initializers.DistantMoonsBlockEntityTypes;
+import syrenyx.distantmoons.initializers.DistantMoonsStats;
 import syrenyx.distantmoons.utility.BlockUtil;
 
 import java.util.List;
@@ -81,6 +85,16 @@ public class LargeBlastFurnaceBlock extends BaseEntityBlock {
   protected int getAnalogOutputSignal(@NonNull BlockState blockState, Level level, @NonNull BlockPos blockPos, @NonNull Direction direction) {
     BlockEntity blockEntity = level.getBlockEntity(blockPos);
     return blockEntity instanceof LargeBlastFurnaceBlockEntity largeBlastFurnaceBlockEntity ? largeBlastFurnaceBlockEntity.getAnalogOutputSignal() : 0;
+  }
+
+  @Override
+  protected @NonNull InteractionResult useWithoutItem(@NonNull BlockState blockState, @NonNull Level level, @NonNull BlockPos blockPos, @NonNull Player player, @NonNull BlockHitResult blockHitResult) {
+    if (level.isClientSide()) return InteractionResult.SUCCESS;
+    BlockEntity blockEntity = level.getBlockEntity(blockPos);
+    if (!(blockEntity instanceof LargeBlastFurnaceBlockEntity largeBlastFurnaceBlockEntity)) return InteractionResult.SUCCESS;
+    player.openMenu(largeBlastFurnaceBlockEntity);
+    player.awardStat(DistantMoonsStats.INTERACT_WITH_LARGE_BLAST_FURNACE);
+    return InteractionResult.SUCCESS;
   }
 
   @Override

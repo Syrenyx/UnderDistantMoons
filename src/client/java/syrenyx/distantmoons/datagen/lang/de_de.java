@@ -8,6 +8,7 @@ import org.jspecify.annotations.NonNull;
 import syrenyx.distantmoons.initializers.DistantMoonsBlocks;
 import syrenyx.distantmoons.initializers.DistantMoonsEntityTypes;
 import syrenyx.distantmoons.initializers.DistantMoonsItems;
+import syrenyx.distantmoons.initializers.DistantMoonsStats;
 import syrenyx.distantmoons.references.tag.DistantMoonsItemTags;
 
 import java.util.Map;
@@ -342,6 +343,8 @@ public class de_de extends FabricLanguageProvider {
 
     builder.add("subtitles.distant-moons.entity.begin_curing_curse", "Fluch schwindet");
     builder.add("subtitles.distant-moons.entity.finish_curing_curse", "Fluch vergeht");
+
+    builder.add(DistantMoonsStats.INTERACT_WITH_LARGE_BLAST_FURNACE, "Hochöfen benutzt");
 
     builder.add(DistantMoonsItemTags.DYED_PILLOW, "Gefärbter Polster");
     builder.add(DistantMoonsItemTags.REPAIRS_DEEP_IRON_EQUIPMENT, "Repariert Tiefeisenausrüstung");

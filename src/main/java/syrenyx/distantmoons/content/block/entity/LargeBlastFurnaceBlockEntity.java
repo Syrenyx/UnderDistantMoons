@@ -25,6 +25,7 @@ import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 import syrenyx.distantmoons.content.block.LargeBlastFurnaceBlock;
 import syrenyx.distantmoons.content.block.block_state_enums.BlockCorner;
+import syrenyx.distantmoons.content.menu.block.LargeBlastFurnaceMenu;
 import syrenyx.distantmoons.initializers.DistantMoonsBlockEntityTypes;
 import syrenyx.distantmoons.initializers.DistantMoonsDataComponentTypes;
 
@@ -53,7 +54,7 @@ public class LargeBlastFurnaceBlockEntity extends BaseContainerBlockEntity imple
 
   @Override
   protected @NonNull NonNullList<ItemStack> getItems() {
-    return this.controller.items;
+    return this.controller != null ? this.controller.items : NonNullList.withSize(CONTAINER_SIZE, ItemStack.EMPTY);
   }
 
   @Override
@@ -74,7 +75,7 @@ public class LargeBlastFurnaceBlockEntity extends BaseContainerBlockEntity imple
 
   @Override
   protected @NonNull AbstractContainerMenu createMenu(int i, @NonNull Inventory inventory) {
-    return null;
+    return new LargeBlastFurnaceMenu(i, inventory, this.controller.dataAccess, this.controller.mirrored);
   }
 
   @Override
@@ -141,6 +142,7 @@ public class LargeBlastFurnaceBlockEntity extends BaseContainerBlockEntity imple
   @Override
   protected void loadAdditional(@NonNull ValueInput valueInput) {
     super.loadAdditional(valueInput);
+    if (this.controller == null) return;
     this.controller.items = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
     ContainerHelper.loadAllItems(valueInput, this.controller.items);
     this.controller.fuelBurnTime = valueInput.getShortOr("fuel_burn_time", (short) 0);
@@ -151,14 +153,16 @@ public class LargeBlastFurnaceBlockEntity extends BaseContainerBlockEntity imple
   @Override
   protected void saveAdditional(@NonNull ValueOutput valueOutput) {
     super.saveAdditional(valueOutput);
+    if (this.controller == null) return;
     ContainerHelper.saveAllItems(valueOutput, this.controller.items);
     valueOutput.putShort("fuel_burn_time", (short) this.controller.fuelBurnTime);
     valueOutput.putShort("fuel_heat_value", (short) this.controller.fuelHeatValue);
     valueOutput.putShort("heat", (short) this.controller.heat);
   }
 
-  private static class Controller {
+  public static class Controller {
 
+    public static final int DATA_COUNT = 3;
     protected final ContainerData dataAccess;
     private final boolean mirrored;
     protected int fuelBurnTime = 0;
@@ -192,7 +196,7 @@ public class LargeBlastFurnaceBlockEntity extends BaseContainerBlockEntity imple
 
         @Override
         public int getCount() {
-          return 3;
+          return DATA_COUNT;
         }
       };
     }
