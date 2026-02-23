@@ -147,7 +147,7 @@ public class LargeBlastFurnaceBlockEntity extends BaseContainerBlockEntity imple
       return;
     }
     blockEntity.controller.serverTick(level, blockPos, blockState);
-    updateBlockHeat(level, blockPos, blockState, Mth.floor(blockEntity.controller.heat / 4));
+    updateBlockHeat(level, blockPos, blockState, Mth.floor(blockEntity.controller.heat / 400));
   }
 
   private void findController(ServerLevel serverLevel, BlockPos blockPos, BlockState blockState) {
@@ -192,6 +192,7 @@ public class LargeBlastFurnaceBlockEntity extends BaseContainerBlockEntity imple
     public static final int DATA_COUNT = 5;
     private static final float EXPLOSION_RADIUS = 7.0F;
     private static final int BLAST_CHARGE_INTERVAL = 100;
+    public static final int MAX_HEAT = 1600;
     protected final ContainerData dataAccess;
     private final boolean mirrored;
     private final Vec3 center;
@@ -244,11 +245,11 @@ public class LargeBlastFurnaceBlockEntity extends BaseContainerBlockEntity imple
       this.updateFuel();
       float heatDifference = this.fuelHeatValue - this.heat;
       this.heat += heatDifference / 64;
-      if (Mth.abs(heatDifference) <= 0.00001F) this.heat = this.fuelHeatValue;
+      if (Mth.abs(heatDifference) <= 0.0001F) this.heat = this.fuelHeatValue;
       else if (this.heat < 0) this.heat = 0.0F;
-      this.blastCharge += this.heat / 16;
+      this.blastCharge += this.heat / 1600F;
       if (this.blastCharge >= BLAST_CHARGE_INTERVAL) {
-        if (Math.round(this.heat) > 15) {
+        if (Math.round(this.heat) >= MAX_HEAT) {
           LargeBlastFurnaceBlock.breakBlocks(level, blockPos, blockState);
           level.explode(null, this.center.x(), this.center.y(), this.center.z(), EXPLOSION_RADIUS, Level.ExplosionInteraction.BLOCK);
           return;

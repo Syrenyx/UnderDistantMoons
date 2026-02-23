@@ -9,6 +9,8 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
 import org.jspecify.annotations.NonNull;
 import syrenyx.distantmoons.UnderDistantMoons;
+import syrenyx.distantmoons.content.block.LargeBlastFurnaceBlock;
+import syrenyx.distantmoons.content.block.entity.LargeBlastFurnaceBlockEntity;
 import syrenyx.distantmoons.content.menu.block.LargeBlastFurnaceMenu;
 
 public class LargeBlastFurnaceScreen extends AbstractContainerScreen<LargeBlastFurnaceMenu> {
@@ -16,8 +18,10 @@ public class LargeBlastFurnaceScreen extends AbstractContainerScreen<LargeBlastF
   private static final Identifier DEFAULT_TEXTURE = UnderDistantMoons.identifierOf("textures/gui/container/large_blast_furnace/default.png");
   private static final Identifier MIRRORED_TEXTURE = UnderDistantMoons.identifierOf("textures/gui/container/large_blast_furnace/mirrored.png");
   private static final Identifier FUEL_BURNING_PROGRESS_SPRITE = UnderDistantMoons.identifierOf("container/large_blast_furnace/fuel_burning_progress");
+  private static final Identifier HEAT_SPRITE = UnderDistantMoons.identifierOf("container/large_blast_furnace/heat");
   private static final int BACKGROUND_TEXTURE_SIZE = 256;
-  private static final int FUEL_BURNING_PROGRESS_SPRITE_SIZE = 14;
+  private static final int SMALL_SPRITE_SIZE = 14;
+  private static final int HEAT_SPRITE_HEIGHT = 86;
 
   public LargeBlastFurnaceScreen(LargeBlastFurnaceMenu abstractContainerMenu, Inventory inventory, Component component) {
     super(abstractContainerMenu, inventory, component);
@@ -43,14 +47,26 @@ public class LargeBlastFurnaceScreen extends AbstractContainerScreen<LargeBlastF
     );
     float fuelBurnProgress = this.menu.getFuelBurnProgress();
     if (fuelBurnProgress < 1.0F) {
-      int heightReduction = Mth.ceil(fuelBurnProgress * (FUEL_BURNING_PROGRESS_SPRITE_SIZE - 1)) + 1;
+      int heightReduction = Mth.ceil(fuelBurnProgress * (SMALL_SPRITE_SIZE - 1)) + 1;
       guiGraphics.blitSprite(
           RenderPipelines.GUI_TEXTURED,
           FUEL_BURNING_PROGRESS_SPRITE,
-          FUEL_BURNING_PROGRESS_SPRITE_SIZE, FUEL_BURNING_PROGRESS_SPRITE_SIZE,
-          0, FUEL_BURNING_PROGRESS_SPRITE_SIZE - heightReduction,
-          this.leftPos + 117, this.topPos + 110 + FUEL_BURNING_PROGRESS_SPRITE_SIZE - heightReduction,
-          FUEL_BURNING_PROGRESS_SPRITE_SIZE, heightReduction
+          SMALL_SPRITE_SIZE, SMALL_SPRITE_SIZE,
+          0, SMALL_SPRITE_SIZE - heightReduction,
+          this.leftPos + (this.menu.mirrored ? 45 : 117), this.topPos + 110 + SMALL_SPRITE_SIZE - heightReduction,
+          SMALL_SPRITE_SIZE, heightReduction
+      );
+    }
+    int heat = this.menu.getHeat();
+    if (heat > 0) {
+      int heightReduction = Mth.ceil(Mth.clamp((float) heat / LargeBlastFurnaceBlockEntity.Controller.MAX_HEAT, 0.0F, 1.0F) * (HEAT_SPRITE_HEIGHT - 1)) + 1;
+      guiGraphics.blitSprite(
+          RenderPipelines.GUI_TEXTURED,
+          HEAT_SPRITE,
+          SMALL_SPRITE_SIZE, HEAT_SPRITE_HEIGHT,
+          0, HEAT_SPRITE_HEIGHT - heightReduction,
+          this.leftPos + (this.menu.mirrored ? 27 : 135), this.topPos + 19 + HEAT_SPRITE_HEIGHT - heightReduction,
+          SMALL_SPRITE_SIZE, heightReduction
       );
     }
   }

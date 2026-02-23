@@ -9,8 +9,8 @@ public record BlastFurnaceFuelComponent(
 ) {
 
   public static final int DEFAULT_BURN_TIME = 400;
-  public static final int COKE_HEAT_VALUE = 8;
-  public static final int COAL_HEAT_VALUE = 6;
+  public static final int COKE_HEAT_VALUE = 800;
+  public static final int COAL_HEAT_VALUE = 600;
 
   public BlastFurnaceFuelComponent(int heat) {
     this(DEFAULT_BURN_TIME, heat);
