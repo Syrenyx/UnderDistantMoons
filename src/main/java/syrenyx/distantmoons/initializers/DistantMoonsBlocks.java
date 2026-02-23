@@ -27,6 +27,7 @@ import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import syrenyx.distantmoons.UnderDistantMoons;
 import syrenyx.distantmoons.content.block.*;
+import syrenyx.distantmoons.content.data_component.BlastFurnaceFuelComponent;
 import syrenyx.distantmoons.references.DistantMoonsBlockSetTypes;
 
 import java.util.HashMap;
@@ -134,6 +135,7 @@ public abstract class DistantMoonsBlocks {
       Block::new,
       BlockBehaviour.Properties.ofFullCopy(Blocks.COAL_BLOCK),
       new Item.Properties()
+          .component(DistantMoonsDataComponentTypes.BLAST_FURNACE_FUEL, new BlastFurnaceFuelComponent(BlastFurnaceFuelComponent.DEFAULT_BURN_TIME * 9, BlastFurnaceFuelComponent.COAL_HEAT_VALUE))
   );
   public static final Block CHERRY_BEAM = register(
       "cherry_beam",
@@ -170,6 +172,7 @@ public abstract class DistantMoonsBlocks {
       Block::new,
       BlockBehaviour.Properties.ofFullCopy(Blocks.COAL_BLOCK),
       new Item.Properties()
+          .component(DistantMoonsDataComponentTypes.BLAST_FURNACE_FUEL, new BlastFurnaceFuelComponent(BlastFurnaceFuelComponent.DEFAULT_BURN_TIME * 9, BlastFurnaceFuelComponent.COKE_HEAT_VALUE))
   );
   public static final Block CRIMSON_BEAM = register(
       "crimson_beam",

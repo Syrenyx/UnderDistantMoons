@@ -5,10 +5,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.world.item.DyeColor;
 import org.jspecify.annotations.NonNull;
-import syrenyx.distantmoons.initializers.DistantMoonsBlocks;
-import syrenyx.distantmoons.initializers.DistantMoonsEntityTypes;
-import syrenyx.distantmoons.initializers.DistantMoonsItems;
-import syrenyx.distantmoons.initializers.DistantMoonsStats;
+import syrenyx.distantmoons.initializers.*;
 import syrenyx.distantmoons.references.tag.DistantMoonsItemTags;
 
 import java.util.Map;
@@ -305,6 +302,7 @@ public class en_us extends FabricLanguageProvider {
     builder.add(DistantMoonsItems.UNDERWORLD_DUST, "Underworld Dust");
     builder.add(DistantMoonsItems.WROUGHT_IRON_ROD, "Wrought Iron Rod");
 
+    builder.add("subtitles.distant-moons.block.large_blast_furnace.blast", "Blast Furnace roars");
     builder.add("subtitles.distant-moons.entity.begin_curing_curse", "Curse wanes");
     builder.add("subtitles.distant-moons.entity.finish_curing_curse", "Curse lifts");
 

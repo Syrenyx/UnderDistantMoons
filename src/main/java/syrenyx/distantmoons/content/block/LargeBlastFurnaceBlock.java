@@ -26,6 +26,7 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 import syrenyx.distantmoons.content.block.block_state_enums.BlockCorner;
@@ -164,11 +165,35 @@ public class LargeBlastFurnaceBlock extends BaseEntityBlock {
     BlockCorner corner = blockState.getValue(CORNER);
     boolean mirrored = blockState.getValue(MIRRORED);
     return switch (blockState.getValue(FACING)) {
-      case NORTH -> (corner.north && mirrored) != corner.east;
-      case SOUTH -> (!corner.north && mirrored) == corner.east;
-      case WEST -> (corner.east && mirrored) != corner.north;
-      case EAST -> (!corner.east && mirrored) == corner.north;
+      case NORTH -> corner.north && (mirrored == corner.east);
+      case EAST -> corner.east && (mirrored == !corner.north);
+      case SOUTH -> !corner.north && (mirrored == !corner.east);
+      case WEST -> !corner.east && (mirrored == corner.north);
       default -> false;
     };
+  }
+
+  public static void setHeat(Level level, BlockPos pos, BlockState state, int heat) {
+    if (heat < 0) heat = 0;
+    else if (heat > 3) heat = 3;
+    level.setBlock(pos, state.setValue(HEAT, heat), Block.UPDATE_ALL);
+  }
+
+  public static Vec3 getCenter(BlockPos blockPos, BlockState blockState) {
+    BlockCorner corner = blockState.getValue(CORNER);
+    return new Vec3(
+        blockPos.getX() + (corner.east ? 0 : 1),
+        blockPos.getY() + (corner.top ? 0 : 1),
+        blockPos.getZ() + (corner.north ? 1 : 0)
+    );
+  }
+
+  public static void breakBlocks(Level level, BlockPos blockPos, BlockState blockState) {
+    Map<BlockPos, BlockCorner> corners = blockState.getValue(CORNER).getCornersForPositionsInBlock(blockPos);
+    for (Map.Entry<BlockPos, BlockCorner> corner : corners.entrySet()) {
+      if (level.getBlockState(corner.getKey()).getBlock() instanceof LargeBlastFurnaceBlock && blockState.getValue(CORNER) == corner.getValue()) {
+        level.setBlock(corner.getKey(), Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL);
+      }
+    }
   }
 }

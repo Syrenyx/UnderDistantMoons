@@ -341,6 +341,8 @@ public class de_de extends FabricLanguageProvider {
     builder.add(DistantMoonsItems.UNDERWORLD_DUST, "Unterweltstaub");
     builder.add(DistantMoonsItems.WROUGHT_IRON_ROD, "Schmiedeeisenstange");
 
+
+    builder.add("subtitles.distant-moons.block.large_blast_furnace.blast", "Hochofen brüllt");
     builder.add("subtitles.distant-moons.entity.begin_curing_curse", "Fluch schwindet");
     builder.add("subtitles.distant-moons.entity.finish_curing_curse", "Fluch vergeht");
 

@@ -15,6 +15,7 @@ import net.minecraft.world.item.component.Consumable;
 import net.minecraft.world.item.component.Consumables;
 import net.minecraft.world.item.equipment.ArmorType;
 import syrenyx.distantmoons.UnderDistantMoons;
+import syrenyx.distantmoons.content.data_component.BlastFurnaceFuelComponent;
 import syrenyx.distantmoons.content.data_component.CoiledBlockComponent;
 import syrenyx.distantmoons.content.item.CoilItem;
 import syrenyx.distantmoons.references.DistantMoonsItemMaterials;
@@ -37,6 +38,7 @@ public abstract class DistantMoonsItems {
       "coke",
       Item::new,
       new Item.Properties()
+          .component(DistantMoonsDataComponentTypes.BLAST_FURNACE_FUEL, new BlastFurnaceFuelComponent(BlastFurnaceFuelComponent.COKE_HEAT_VALUE))
   );
   public static final Item COPPER_ROD = register(
       "copper_rod",

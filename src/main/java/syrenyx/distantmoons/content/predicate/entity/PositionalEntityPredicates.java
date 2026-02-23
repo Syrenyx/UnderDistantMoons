@@ -16,7 +16,7 @@ public record PositionalEntityPredicates(
   public static final MapCodec<PositionalEntityPredicates> CODEC = RecordCodecBuilder.mapCodec(instance -> instance
       .group(
           LocationPredicate.CODEC.optionalFieldOf("location").forGetter(PositionalEntityPredicates::located),
-          LocationPredicate.CODEC.optionalFieldOf("eye_level").forGetter(PositionalEntityPredicates::located),
+          LocationPredicate.CODEC.optionalFieldOf("eye_level").forGetter(PositionalEntityPredicates::eyeLevel),
           LocationPredicate.CODEC.optionalFieldOf("stepping_on").forGetter(PositionalEntityPredicates::steppingOn),
           LocationPredicate.CODEC.optionalFieldOf("movement_affected_by").forGetter(PositionalEntityPredicates::affectsMovement)
       )
