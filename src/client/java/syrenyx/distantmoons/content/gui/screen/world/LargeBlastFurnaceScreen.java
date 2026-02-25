@@ -5,11 +5,13 @@ import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
+import net.minecraft.util.ARGB;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
 import org.jspecify.annotations.NonNull;
 import syrenyx.distantmoons.UnderDistantMoons;
-import syrenyx.distantmoons.content.block.LargeBlastFurnaceBlock;
 import syrenyx.distantmoons.content.block.entity.LargeBlastFurnaceBlockEntity;
 import syrenyx.distantmoons.content.menu.block.LargeBlastFurnaceMenu;
 
@@ -22,6 +24,7 @@ public class LargeBlastFurnaceScreen extends AbstractContainerScreen<LargeBlastF
   private static final int BACKGROUND_TEXTURE_SIZE = 256;
   private static final int SMALL_SPRITE_SIZE = 14;
   private static final int HEAT_SPRITE_HEIGHT = 86;
+  private static final int BLASTING_STEPS_BAR_WIDTH = 14;
 
   public LargeBlastFurnaceScreen(LargeBlastFurnaceMenu abstractContainerMenu, Inventory inventory, Component component) {
     super(abstractContainerMenu, inventory, component);
@@ -75,5 +78,21 @@ public class LargeBlastFurnaceScreen extends AbstractContainerScreen<LargeBlastF
   public void render(@NonNull GuiGraphics guiGraphics, int cursorX, int cursorY, float delta) {
     super.render(guiGraphics, cursorX, cursorY, delta);
     this.renderTooltip(guiGraphics, cursorX, cursorY);
+  }
+
+  @Override
+  protected void renderSlot(@NonNull GuiGraphics guiGraphics, @NonNull Slot slot, int cursorX, int cursorY) {
+    super.renderSlot(guiGraphics, slot, cursorX, cursorY);
+    int index = slot.getContainerSlot();
+    if (index > LargeBlastFurnaceBlockEntity.MATERIAL_SLOTS[LargeBlastFurnaceBlockEntity.MATERIAL_SLOTS.length - 1]) return;
+    ItemStack stack = slot.getItem();
+    if (stack.isEmpty()) return;
+    int requiredBlastingSteps = this.menu.getRequiredBlastingStepAtSlot(index);
+    if (requiredBlastingSteps == 0) return;
+    int blastingSteps = this.menu.getBlastingStepAtSlot(index);
+    int offsetX = slot.x + 1;
+    int offsetY = slot.y + 13;
+    guiGraphics.fill(RenderPipelines.GUI, offsetX, offsetY, offsetX + BLASTING_STEPS_BAR_WIDTH, offsetY + 2, -16777216);
+    guiGraphics.fill(RenderPipelines.GUI, offsetX, offsetY, offsetX + Mth.ceil((float) blastingSteps / requiredBlastingSteps * BLASTING_STEPS_BAR_WIDTH), offsetY + 1, ARGB.opaque(16728608));
   }
 }
