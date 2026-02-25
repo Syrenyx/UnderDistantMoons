@@ -118,9 +118,8 @@ public class LargeBlastFurnaceBlock extends BaseEntityBlock {
   public void setPlacedBy(@NonNull Level level, @NonNull BlockPos blockPos, @NonNull BlockState blockState, @Nullable LivingEntity livingEntity, @NonNull ItemStack itemStack) {
     super.setPlacedBy(level, blockPos, blockState, livingEntity, itemStack);
     if (level.isClientSide()) return;
-    Map<BlockPos, BlockCorner> corners = blockState.getValue(CORNER).getCornersForPositionsInBlock(blockPos);
     overrideIntegrityCheck = true;
-    corners.forEach((pos, corner) -> {
+    blockState.getValue(CORNER).getCornersForPositionsInBlock(blockPos).forEach((pos, corner) -> {
       if (blockPos.equals(pos)) return;
       level.destroyBlock(pos, true);
       level.setBlock(pos, blockState.setValue(CORNER, corner), Block.UPDATE_ALL);
@@ -189,11 +188,10 @@ public class LargeBlastFurnaceBlock extends BaseEntityBlock {
   }
 
   public static void breakBlocks(Level level, BlockPos blockPos, BlockState blockState) {
-    Map<BlockPos, BlockCorner> corners = blockState.getValue(CORNER).getCornersForPositionsInBlock(blockPos);
-    for (Map.Entry<BlockPos, BlockCorner> corner : corners.entrySet()) {
-      if (level.getBlockState(corner.getKey()).getBlock() instanceof LargeBlastFurnaceBlock && blockState.getValue(CORNER) == corner.getValue()) {
-        level.setBlock(corner.getKey(), Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL);
+    blockState.getValue(CORNER).getCornersForPositionsInBlock(blockPos).forEach((key, value) -> {
+      if (level.getBlockState(key).getBlock() instanceof LargeBlastFurnaceBlock && blockState.getValue(CORNER) == value) {
+        level.setBlock(key, Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL);
       }
-    }
+    });
   }
 }

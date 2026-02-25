@@ -9,13 +9,13 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.WorldlyContainer;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.StackedItemContents;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.RecipeCraftingHolder;
 import net.minecraft.world.inventory.StackedContentsCompatible;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeHolder;
@@ -27,6 +27,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
@@ -203,7 +204,12 @@ public class LargeBlastFurnaceBlockEntity extends BaseContainerBlockEntity imple
     public static final int DATA_COUNT = 35;
     private static final float EXPLOSION_RADIUS = 7.0F;
     private static final int BLAST_CHARGE_INTERVAL = 100;
+    public static final int DANGEROUS_HEAT = 900;
     public static final int MAX_HEAT = 1600;
+    private static final double FIRE_RADIUS = 6.0;
+    private static final double FIRE_RADIUS_SQUARED = FIRE_RADIUS * FIRE_RADIUS;
+    private static final float FIRE_CHANCE_PER_TICK = 0.1F;
+    private static final int FIRE_TICKS = 200;
     protected static final RecipeManager.CachedCheck<SingleRecipeInput, LargeBlastFurnaceRecipe> QUICK_CHECK = RecipeManager.createCheck(DistantMoonsRecipeTypes.BLASTING);
     protected static final int[] EMPTY_BLASTING_STEPS = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     protected final ContainerData dataAccess;
@@ -261,37 +267,9 @@ public class LargeBlastFurnaceBlockEntity extends BaseContainerBlockEntity imple
     private void serverTick(Level level, BlockPos blockPos, BlockState blockState) {
       if (this.previousGameTime == level.getGameTime()) return;
       this.previousGameTime = level.getGameTime();
-      for (int slot : MATERIAL_SLOTS) {
-        ItemStack itemStack = this.items.get(slot);
-        if (itemStack.isEmpty()) {
-          this.blastingSteps[slot] = 0;
-          this.requiredBlastingSteps[slot] = 0;
-          continue;
-        }
-        Optional<RecipeHolder<LargeBlastFurnaceRecipe>> recipe = QUICK_CHECK.getRecipeFor(new SingleRecipeInput(itemStack), (ServerLevel) level);
-        if (recipe.isEmpty()) {
-          this.blastingSteps[slot] = 0;
-          this.requiredBlastingSteps[slot] = 0;
-          continue;
-        }
-        this.requiredBlastingSteps[slot] = recipe.get().value().blastingSteps();
-      }
       this.updateFuel();
-      float heatDifference = this.fuelHeatValue - this.heat;
-      this.heat += heatDifference / 64;
-      if (Mth.abs(heatDifference) <= 0.0001F) this.heat = this.fuelHeatValue;
-      else if (this.heat < 0) this.heat = 0.0F;
-      this.blastCharge += this.heat / 1600F;
-      if (this.blastCharge >= BLAST_CHARGE_INTERVAL) {
-        if (Math.round(this.heat) >= MAX_HEAT) {
-          LargeBlastFurnaceBlock.breakBlocks(level, blockPos, blockState);
-          level.explode(null, this.center.x(), this.center.y(), this.center.z(), EXPLOSION_RADIUS, Level.ExplosionInteraction.BLOCK);
-          return;
-        }
-        level.playSound(null, this.center.x(), this.center.y(), this.center.z(), DistantMoonsSoundEvents.LARGE_BLAST_FURNACE_BLAST, SoundSource.BLOCKS, 2.0F, 0.6F);
-        this.processMaterials(level);
-      }
-      this.blastCharge %= BLAST_CHARGE_INTERVAL;
+      this.updateHeat(level);
+      this.updateBlastCharges(level, blockPos, blockState);
     }
 
     private void updateFuel() {
@@ -321,20 +299,65 @@ public class LargeBlastFurnaceBlockEntity extends BaseContainerBlockEntity imple
       fuelStack.setCount(0);
     }
 
-    private void processMaterials(Level level) {
+    private void updateHeat(Level level) {
+      float heatDifference = this.fuelHeatValue - this.heat;
+      this.heat += heatDifference / 64;
+      if (Mth.abs(heatDifference) <= 0.0001F) this.heat = this.fuelHeatValue;
+      else if (this.heat < 0) this.heat = 0.0F;
+      if (this.heat >= DANGEROUS_HEAT) {
+        level.getEntitiesOfClass(
+            Entity.class,
+            new AABB(new Vec3(this.center.x, this.center.y, this.center.z).add(FIRE_RADIUS), new Vec3(this.center.x, this.center.y, this.center.z).subtract(FIRE_RADIUS)),
+            entity -> !entity.fireImmune() && entity.distanceToSqr(this.center) <= FIRE_RADIUS_SQUARED
+        ).forEach(entity -> {
+          if (level.getRandom().nextFloat() <= FIRE_CHANCE_PER_TICK) entity.setRemainingFireTicks(FIRE_TICKS);
+        });
+      }
+    }
+
+    private void updateBlastCharges(Level level, BlockPos blockPos, BlockState blockState) {
+
+      //Reset Blastin Steps
       for (int slot : MATERIAL_SLOTS) {
-        if (this.requiredBlastingSteps[slot] == 0) continue;
-        SingleRecipeInput recipeInput = new SingleRecipeInput(this.items.get(slot));
-        RecipeHolder<LargeBlastFurnaceRecipe> recipe = QUICK_CHECK.getRecipeFor(recipeInput, (ServerLevel) level).orElse(null);
-        if (recipe == null) {
+        ItemStack itemStack = this.items.get(slot);
+        if (itemStack.isEmpty()) {
           this.blastingSteps[slot] = 0;
+          this.requiredBlastingSteps[slot] = 0;
           continue;
         }
-        this.blastingSteps[slot]++;
-        if (this.blastingSteps[slot] < this.requiredBlastingSteps[slot]) continue;
-        this.blastingSteps[slot] = 0;
-        this.items.set(slot, recipe.value().assemble(recipeInput, level.registryAccess()));
+        Optional<RecipeHolder<LargeBlastFurnaceRecipe>> recipe = QUICK_CHECK.getRecipeFor(new SingleRecipeInput(itemStack), (ServerLevel) level);
+        if (recipe.isEmpty()) {
+          this.blastingSteps[slot] = 0;
+          this.requiredBlastingSteps[slot] = 0;
+          continue;
+        }
+        this.requiredBlastingSteps[slot] = recipe.get().value().blastingSteps();
       }
+
+      //Process Steps and Materials
+      this.blastCharge += this.heat / 1600F;
+      if (this.blastCharge >= BLAST_CHARGE_INTERVAL) {
+        if (Math.round(this.heat) >= MAX_HEAT) {
+          LargeBlastFurnaceBlock.breakBlocks(level, blockPos, blockState);
+          level.explode(null, this.center.x(), this.center.y(), this.center.z(), EXPLOSION_RADIUS, Level.ExplosionInteraction.BLOCK);
+          return;
+        }
+        level.playSound(null, this.center.x(), this.center.y(), this.center.z(), DistantMoonsSoundEvents.LARGE_BLAST_FURNACE_BLAST, SoundSource.BLOCKS, 2.0F, 0.6F);
+        for (int slot : MATERIAL_SLOTS) {
+          if (this.requiredBlastingSteps[slot] == 0) continue;
+          SingleRecipeInput recipeInput = new SingleRecipeInput(this.items.get(slot));
+          RecipeHolder<LargeBlastFurnaceRecipe> recipe = QUICK_CHECK.getRecipeFor(recipeInput, (ServerLevel) level).orElse(null);
+          if (recipe == null) {
+            this.blastingSteps[slot] = 0;
+            continue;
+          }
+          this.blastingSteps[slot]++;
+          if (this.blastingSteps[slot] < this.requiredBlastingSteps[slot]) continue;
+          this.blastingSteps[slot] = 0;
+          this.items.set(slot, recipe.value().assemble(recipeInput, level.registryAccess()));
+        }
+      }
+      this.blastCharge %= BLAST_CHARGE_INTERVAL;
     }
   }
 }
