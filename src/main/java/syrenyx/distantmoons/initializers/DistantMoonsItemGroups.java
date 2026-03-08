@@ -8,9 +8,11 @@ import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import syrenyx.distantmoons.utility.ColorUtil;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -315,6 +317,7 @@ public abstract class DistantMoonsItemGroups {
         DistantMoonsBlocks.ROPE_LADDER.asItem().getDefaultInstance(),
         DistantMoonsItems.COILED_ROPE_LADDER.getDefaultInstance()
     ));
+    addToGroup(CreativeModeTabs.FUNCTIONAL_BLOCKS, Items.PINK_BED, DistantMoonsBlocks.DYED_PILLOWS);
     addToGroup(CreativeModeTabs.FUNCTIONAL_BLOCKS, Items.DRAGON_EGG, List.of(
         Items.SPAWNER.getDefaultInstance(),
         Items.TRIAL_SPAWNER.getDefaultInstance(),
@@ -415,7 +418,7 @@ public abstract class DistantMoonsItemGroups {
   }
 
   private static void addToGroup(ResourceKey<CreativeModeTab> groupKey, Item anchor, Map<DyeColor, Block> dyedBlocks) {
-    ColorUtil.SORTED_DYE_COLORS.forEach(color -> ItemGroupEvents.modifyEntriesEvent(groupKey).register(group -> group.addAfter(anchor, dyedBlocks.get(color))));
+    ColorUtil.SORTED_DYE_COLORS.reversed().forEach(color -> ItemGroupEvents.modifyEntriesEvent(groupKey).register(group -> group.addAfter(anchor, dyedBlocks.get(color))));
   }
 
   public static void initialize() {}

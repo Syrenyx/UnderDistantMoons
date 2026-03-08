@@ -9,11 +9,11 @@ import net.minecraft.util.ARGB;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.item.ItemStack;
 import org.jspecify.annotations.NonNull;
 import syrenyx.distantmoons.UnderDistantMoons;
 import syrenyx.distantmoons.content.block.entity.LargeBlastFurnaceBlockEntity;
 import syrenyx.distantmoons.content.menu.block.LargeBlastFurnaceMenu;
+import syrenyx.distantmoons.content.menu.block.slot.LockedSlot;
 
 public class LargeBlastFurnaceScreen extends AbstractContainerScreen<LargeBlastFurnaceMenu> {
 
@@ -21,10 +21,13 @@ public class LargeBlastFurnaceScreen extends AbstractContainerScreen<LargeBlastF
   private static final Identifier MIRRORED_TEXTURE = UnderDistantMoons.identifierOf("textures/gui/container/large_blast_furnace/mirrored.png");
   private static final Identifier FUEL_BURNING_PROGRESS_SPRITE = UnderDistantMoons.identifierOf("container/large_blast_furnace/fuel_burning_progress");
   private static final Identifier HEAT_SPRITE = UnderDistantMoons.identifierOf("container/large_blast_furnace/heat");
+  private static final String BLAST_CHARGE_DIAL_SPRITE_PATH = "container/large_blast_furnace/blast_charge_dial/";
   private static final int BACKGROUND_TEXTURE_SIZE = 256;
   private static final int SMALL_SPRITE_SIZE = 14;
   private static final int HEAT_SPRITE_HEIGHT = 86;
   private static final int BLASTING_STEPS_BAR_WIDTH = 14;
+  private static final int BLAST_CHARGE_DIAL_SPRITE_SIZE = 16;
+  private static final int BLAST_CHARGE_DIAL_POSITIONS = 16;
 
   public LargeBlastFurnaceScreen(LargeBlastFurnaceMenu abstractContainerMenu, Inventory inventory, Component component) {
     super(abstractContainerMenu, inventory, component);
@@ -72,6 +75,13 @@ public class LargeBlastFurnaceScreen extends AbstractContainerScreen<LargeBlastF
           SMALL_SPRITE_SIZE, heightReduction
       );
     }
+    int dialPosition = (this.menu.getBlastCharge() * BLAST_CHARGE_DIAL_POSITIONS / LargeBlastFurnaceBlockEntity.Controller.BLAST_CHARGE_INTERVAL) % BLAST_CHARGE_DIAL_POSITIONS;
+    guiGraphics.blitSprite(
+        RenderPipelines.GUI_TEXTURED,
+        UnderDistantMoons.identifierOf(BLAST_CHARGE_DIAL_SPRITE_PATH + dialPosition),
+        this.leftPos + (this.menu.mirrored ? 116 : 44), this.topPos + 108,
+        BLAST_CHARGE_DIAL_SPRITE_SIZE, BLAST_CHARGE_DIAL_SPRITE_SIZE
+    );
   }
 
   @Override
@@ -83,10 +93,9 @@ public class LargeBlastFurnaceScreen extends AbstractContainerScreen<LargeBlastF
   @Override
   protected void renderSlot(@NonNull GuiGraphics guiGraphics, @NonNull Slot slot, int cursorX, int cursorY) {
     super.renderSlot(guiGraphics, slot, cursorX, cursorY);
+    if (!(slot instanceof LockedSlot) || slot.getItem().isEmpty()) return;
     int index = slot.getContainerSlot();
     if (index > LargeBlastFurnaceBlockEntity.MATERIAL_SLOTS[LargeBlastFurnaceBlockEntity.MATERIAL_SLOTS.length - 1]) return;
-    ItemStack stack = slot.getItem();
-    if (stack.isEmpty()) return;
     int requiredBlastingSteps = this.menu.getRequiredBlastingStepAtSlot(index);
     if (requiredBlastingSteps == 0) return;
     int blastingSteps = this.menu.getBlastingStepAtSlot(index);

@@ -50,7 +50,7 @@ public class LargeBlastFurnaceMenu extends AbstractContainerMenu {
         this.addSlot(new LockedSlot(
             this.container,
             LargeBlastFurnaceBlockEntity.MATERIAL_SLOTS[column + row * 3],
-            (this.mirrored ? 80 : 44) + column * 18, 18 + row * 18,
+            (this.mirrored ? 98 : 26) + column * 18, 18 + row * 18,
             1
         ));
       }
@@ -63,7 +63,7 @@ public class LargeBlastFurnaceMenu extends AbstractContainerMenu {
   }
 
   @Override
-  public boolean stillValid(Player player) {
+  public boolean stillValid(@NonNull Player player) {
     return this.container.stillValid(player);
   }
 

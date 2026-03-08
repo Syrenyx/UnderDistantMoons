@@ -181,8 +181,8 @@ public class LargeBlastFurnaceBlockEntity extends BaseContainerBlockEntity imple
     this.controller.fuelHeatValue = valueInput.getIntOr("fuel_heat_value", 0);
     this.controller.heat = valueInput.getFloatOr("heat", 0.0F);
     this.controller.blastCharge = valueInput.getFloatOr("blast_charge", 0.0F);
-    this.controller.blastingSteps = valueInput.getIntArray("blasting_steps").orElse(Controller.EMPTY_BLASTING_STEPS);
-    this.controller.requiredBlastingSteps = valueInput.getIntArray("required_blasting_steps").orElse(Controller.EMPTY_BLASTING_STEPS);
+    this.controller.blastingSteps = valueInput.getIntArray("blasting_steps").orElse(Controller.EMPTY_BLASTING_STEPS.clone());
+    this.controller.requiredBlastingSteps = valueInput.getIntArray("required_blasting_steps").orElse(Controller.EMPTY_BLASTING_STEPS.clone());
   }
 
   @Override
@@ -203,7 +203,8 @@ public class LargeBlastFurnaceBlockEntity extends BaseContainerBlockEntity imple
 
     public static final int DATA_COUNT = 35;
     private static final float EXPLOSION_RADIUS = 7.0F;
-    private static final int BLAST_CHARGE_INTERVAL = 100;
+    public static final int BLAST_CHARGE_INTERVAL = 100;
+    private static final int BLAST_CHARGE_HEAT_THRESHOLD = 5;
     public static final int DANGEROUS_HEAT = 900;
     public static final int MAX_HEAT = 1600;
     private static final double FIRE_RADIUS = 6.0;
@@ -215,6 +216,7 @@ public class LargeBlastFurnaceBlockEntity extends BaseContainerBlockEntity imple
     protected final ContainerData dataAccess;
     private final boolean mirrored;
     private final Vec3 center;
+    private final AABB fire_area;
     protected int fuelBurnTime = 0;
     protected int fuelBurnTimer = 0;
     protected int fuelHeatValue = 0;
@@ -222,12 +224,13 @@ public class LargeBlastFurnaceBlockEntity extends BaseContainerBlockEntity imple
     protected float blastCharge = 0.0F;
     protected NonNullList<ItemStack> items = NonNullList.withSize(CONTAINER_SIZE, ItemStack.EMPTY);
     private long previousGameTime = 0L;
-    private int[] blastingSteps = EMPTY_BLASTING_STEPS;
-    private int[] requiredBlastingSteps = EMPTY_BLASTING_STEPS;
+    private int[] blastingSteps = EMPTY_BLASTING_STEPS.clone();
+    private int[] requiredBlastingSteps = EMPTY_BLASTING_STEPS.clone();
 
     public Controller(BlockPos blockPos, BlockState blockState) {
       this.mirrored = blockState.getValue(LargeBlastFurnaceBlock.MIRRORED);
       this.center = LargeBlastFurnaceBlock.getCenter(blockPos, blockState);
+      this.fire_area = new AABB(new Vec3(this.center.x, this.center.y, this.center.z).add(FIRE_RADIUS), new Vec3(this.center.x, this.center.y, this.center.z).subtract(FIRE_RADIUS));
       this.dataAccess = new ContainerData() {
 
         @Override
@@ -302,12 +305,12 @@ public class LargeBlastFurnaceBlockEntity extends BaseContainerBlockEntity imple
     private void updateHeat(Level level) {
       float heatDifference = this.fuelHeatValue - this.heat;
       this.heat += heatDifference / 64;
-      if (Mth.abs(heatDifference) <= 0.0001F) this.heat = this.fuelHeatValue;
+      if (Mth.abs(heatDifference) <= 0.01F) this.heat = this.fuelHeatValue;
       else if (this.heat < 0) this.heat = 0.0F;
       if (this.heat >= DANGEROUS_HEAT) {
         level.getEntitiesOfClass(
             Entity.class,
-            new AABB(new Vec3(this.center.x, this.center.y, this.center.z).add(FIRE_RADIUS), new Vec3(this.center.x, this.center.y, this.center.z).subtract(FIRE_RADIUS)),
+            this.fire_area,
             entity -> !entity.fireImmune() && entity.distanceToSqr(this.center) <= FIRE_RADIUS_SQUARED
         ).forEach(entity -> {
           if (level.getRandom().nextFloat() <= FIRE_CHANCE_PER_TICK) entity.setRemainingFireTicks(FIRE_TICKS);
@@ -334,9 +337,13 @@ public class LargeBlastFurnaceBlockEntity extends BaseContainerBlockEntity imple
         this.requiredBlastingSteps[slot] = recipe.get().value().blastingSteps();
       }
 
+      //Update Blast Charge
+      this.blastCharge += (this.heat - BLAST_CHARGE_HEAT_THRESHOLD) / (this.heat < BLAST_CHARGE_HEAT_THRESHOLD ? 16F : 1600F);
+      if (this.blastCharge < 0) this.blastCharge = 0;
+
       //Process Steps and Materials
-      this.blastCharge += this.heat / 1600F;
       if (this.blastCharge >= BLAST_CHARGE_INTERVAL) {
+        this.blastCharge %= BLAST_CHARGE_INTERVAL;
         if (Math.round(this.heat) >= MAX_HEAT) {
           LargeBlastFurnaceBlock.breakBlocks(level, blockPos, blockState);
           level.explode(null, this.center.x(), this.center.y(), this.center.z(), EXPLOSION_RADIUS, Level.ExplosionInteraction.BLOCK);
@@ -357,7 +364,6 @@ public class LargeBlastFurnaceBlockEntity extends BaseContainerBlockEntity imple
           this.items.set(slot, recipe.value().assemble(recipeInput, level.registryAccess()));
         }
       }
-      this.blastCharge %= BLAST_CHARGE_INTERVAL;
     }
   }
 }

@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -20,6 +21,11 @@ public class PillowBlock extends SlabBlock {
 
   public PillowBlock(Properties settings) {
     super(settings);
+  }
+
+  @Override
+  public void fallOn(@NonNull Level level, @NonNull BlockState blockState, @NonNull BlockPos blockPos, @NonNull Entity entity, double fallDistance) {
+    super.fallOn(level, blockState, blockPos, entity, fallDistance * 0.5D);
   }
 
   @Override
