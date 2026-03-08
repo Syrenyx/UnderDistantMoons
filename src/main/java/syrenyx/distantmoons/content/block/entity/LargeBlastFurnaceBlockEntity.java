@@ -204,7 +204,7 @@ public class LargeBlastFurnaceBlockEntity extends BaseContainerBlockEntity imple
     public static final int DATA_COUNT = 35;
     private static final float EXPLOSION_RADIUS = 7.0F;
     public static final int BLAST_CHARGE_INTERVAL = 100;
-    private static final int BLAST_CHARGE_HEAT_THRESHOLD = 5;
+    private static final int BLAST_CHARGE_HEAT_THRESHOLD = 15;
     public static final int DANGEROUS_HEAT = 900;
     public static final int MAX_HEAT = 1600;
     private static final double FIRE_RADIUS = 6.0;
