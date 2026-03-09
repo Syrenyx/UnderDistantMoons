@@ -53,6 +53,9 @@ public class DistantMoonsBlockLootTableProvider extends FabricBlockLootTableProv
     this.dropSelf(DistantMoonsBlocks.DEEP_IRON_LADDER);
     this.dropSelf(DistantMoonsBlocks.DEEP_IRON_TRAPDOOR);
     this.dropSelf(DistantMoonsBlocks.EXPOSED_IRON_BLOCK);
+    this.dropSelf(DistantMoonsBlocks.FIRE_BRICK_STAIRS);
+    this.dropSelf(DistantMoonsBlocks.FIRE_BRICK_WALL);
+    this.dropSelf(DistantMoonsBlocks.FIRE_BRICKS);
     this.dropSelf(DistantMoonsBlocks.FIXED_DEEP_IRON_LADDER);
     this.dropSelf(DistantMoonsBlocks.FIXED_IRON_LADDER);
     this.dropSelf(DistantMoonsBlocks.FIXED_WROUGHT_IRON_LADDER);
@@ -80,7 +83,9 @@ public class DistantMoonsBlockLootTableProvider extends FabricBlockLootTableProv
     this.dropSelf(DistantMoonsBlocks.RAW_DEEP_IRON_BLOCK);
     this.dropSelf(DistantMoonsBlocks.REFINED_DEEP_IRON_BLOCK);
     this.dropSelf(DistantMoonsBlocks.ROPE_LADDER);
+    this.dropSelf(DistantMoonsBlocks.RUBY_BLOCK);
     this.dropSelf(DistantMoonsBlocks.RUSTED_IRON_BLOCK);
+    this.dropSelf(DistantMoonsBlocks.SAPPHIRE_BLOCK);
     this.dropSelf(DistantMoonsBlocks.SPRUCE_BEAM);
     this.dropSelf(DistantMoonsBlocks.SPRUCE_POLE);
     this.dropSelf(DistantMoonsBlocks.UNDERWORLD_LANTERN);
@@ -135,6 +140,7 @@ public class DistantMoonsBlockLootTableProvider extends FabricBlockLootTableProv
     this.addSlabDrop(DistantMoonsBlocks.CUT_SPRUCE_WOOD);
     this.addSlabDrop(DistantMoonsBlocks.CUT_WARPED_HYPHAE);
     this.addSlabDrop(DistantMoonsBlocks.CUT_WARPED_STEM);
+    this.addSlabDrop(DistantMoonsBlocks.FIRE_BRICK_SLAB);
     this.addSlabDrop(DistantMoonsBlocks.GRAY_PRISMARINE_SLAB);
     this.addSlabDrop(DistantMoonsBlocks.PALE_PRISMARINE_BRICK_SLAB);
     this.addSlabDrop(DistantMoonsBlocks.PALE_PRISMARINE_SLAB);
@@ -189,6 +195,7 @@ public class DistantMoonsBlockLootTableProvider extends FabricBlockLootTableProv
     this.addWallSlabDrop(DistantMoonsBlocks.DIORITE_WALL_SLAB);
     this.addWallSlabDrop(DistantMoonsBlocks.END_STONE_BRICK_WALL_SLAB);
     this.addWallSlabDrop(DistantMoonsBlocks.EXPOSED_CUT_COPPER_WALL_SLAB);
+    this.addWallSlabDrop(DistantMoonsBlocks.FIRE_BRICK_WALL_SLAB);
     this.addWallSlabDrop(DistantMoonsBlocks.GRANITE_WALL_SLAB);
     this.addWallSlabDrop(DistantMoonsBlocks.GRAY_PRISMARINE_WALL_SLAB);
     this.addWallSlabDrop(DistantMoonsBlocks.JUNGLE_WALL_SLAB);

@@ -236,6 +236,13 @@ public abstract class DistantMoonsItemGroups {
     addToGroup(CreativeModeTabs.BUILDING_BLOCKS, Items.BLACKSTONE_SLAB, List.of(DistantMoonsBlocks.BLACKSTONE_WALL_SLAB.asItem().getDefaultInstance()));
     addToGroup(CreativeModeTabs.BUILDING_BLOCKS, Items.POLISHED_BLACKSTONE_SLAB, List.of(DistantMoonsBlocks.POLISHED_BLACKSTONE_WALL_SLAB.asItem().getDefaultInstance()));
     addToGroup(CreativeModeTabs.BUILDING_BLOCKS, Items.POLISHED_BLACKSTONE_BRICK_SLAB, List.of(DistantMoonsBlocks.POLISHED_BLACKSTONE_BRICK_WALL_SLAB.asItem().getDefaultInstance()));
+    addToGroup(CreativeModeTabs.BUILDING_BLOCKS, Items.POLISHED_BLACKSTONE_BRICK_WALL, List.of(
+        DistantMoonsBlocks.FIRE_BRICKS.asItem().getDefaultInstance(),
+        DistantMoonsBlocks.FIRE_BRICK_STAIRS.asItem().getDefaultInstance(),
+        DistantMoonsBlocks.FIRE_BRICK_SLAB.asItem().getDefaultInstance(),
+        DistantMoonsBlocks.FIRE_BRICK_WALL_SLAB.asItem().getDefaultInstance(),
+        DistantMoonsBlocks.FIRE_BRICK_WALL.asItem().getDefaultInstance()
+    ));
     addToGroup(CreativeModeTabs.BUILDING_BLOCKS, Items.END_STONE_BRICK_SLAB, List.of(DistantMoonsBlocks.END_STONE_BRICK_WALL_SLAB.asItem().getDefaultInstance()));
     addToGroup(CreativeModeTabs.BUILDING_BLOCKS, Items.PURPUR_PILLAR, List.of(DistantMoonsBlocks.CUT_PURPUR_PILLAR.asItem().getDefaultInstance()));
     addToGroup(CreativeModeTabs.BUILDING_BLOCKS, Items.PURPUR_SLAB, List.of(
@@ -278,6 +285,10 @@ public abstract class DistantMoonsItemGroups {
         DistantMoonsBlocks.DEEP_IRON_LADDER.asItem().getDefaultInstance(),
         DistantMoonsBlocks.FIXED_DEEP_IRON_LADDER.asItem().getDefaultInstance(),
         DistantMoonsBlocks.DEEP_IRON_CHAIN.asItem().getDefaultInstance()
+    ));
+    addToGroup(CreativeModeTabs.BUILDING_BLOCKS, Items.DIAMOND_BLOCK, List.of(
+        DistantMoonsBlocks.RUBY_BLOCK.asItem().getDefaultInstance(),
+        DistantMoonsBlocks.SAPPHIRE_BLOCK.asItem().getDefaultInstance()
     ));
     addToGroup(CreativeModeTabs.BUILDING_BLOCKS, Items.QUARTZ_SLAB, List.of(DistantMoonsBlocks.QUARTZ_WALL_SLAB.asItem().getDefaultInstance()));
     addToGroup(CreativeModeTabs.BUILDING_BLOCKS, Items.QUARTZ_PILLAR, List.of(DistantMoonsBlocks.CUT_QUARTZ_PILLAR.asItem().getDefaultInstance()));
@@ -374,9 +385,13 @@ public abstract class DistantMoonsItemGroups {
 
     //INGREDIENTS
     addToGroup(CreativeModeTabs.INGREDIENTS, Items.CHARCOAL, List.of(DistantMoonsItems.COKE.getDefaultInstance()));
-    addToGroup(CreativeModeTabs.INGREDIENTS, Items.RAW_GOLD, List.of(DistantMoonsItems.RAW_DEEP_IRON.getDefaultInstance()));
-    addToGroup(CreativeModeTabs.INGREDIENTS, Items.GOLD_NUGGET, List.of(DistantMoonsItems.REFINED_DEEP_IRON_NUGGET.getDefaultInstance()));
-    addToGroup(CreativeModeTabs.INGREDIENTS, Items.GOLD_INGOT, List.of(
+    addToGroup(CreativeModeTabs.INGREDIENTS, Items.RAW_IRON, List.of(DistantMoonsItems.RAW_DEEP_IRON.getDefaultInstance()));
+    addToGroup(CreativeModeTabs.INGREDIENTS, Items.DIAMOND, List.of(
+        DistantMoonsItems.RUBY.getDefaultInstance(),
+        DistantMoonsItems.SAPPHIRE.getDefaultInstance()
+    ));
+    addToGroup(CreativeModeTabs.INGREDIENTS, Items.IRON_NUGGET, List.of(DistantMoonsItems.REFINED_DEEP_IRON_NUGGET.getDefaultInstance()));
+    addToGroup(CreativeModeTabs.INGREDIENTS, Items.IRON_INGOT, List.of(
         DistantMoonsItems.CRUDE_DEEP_IRON_CHUNK.getDefaultInstance(),
         DistantMoonsItems.REFINED_DEEP_IRON_INGOT.getDefaultInstance()
     ));
@@ -387,6 +402,7 @@ public abstract class DistantMoonsItemGroups {
         DistantMoonsItems.REFINED_DEEP_IRON_ROD.getDefaultInstance()
     ));
     addToGroup(CreativeModeTabs.INGREDIENTS, Items.PRISMARINE_SHARD, List.of(DistantMoonsItems.PALE_PRISMARINE_SHARD.getDefaultInstance()));
+    addToGroup(CreativeModeTabs.INGREDIENTS, Items.NETHER_BRICK, List.of(DistantMoonsItems.FIRE_BRICK.getDefaultInstance()));
     addToGroup(CreativeModeTabs.INGREDIENTS, Items.BOOK, List.of(DistantMoonsItems.UNDERWORLD_DUST.getDefaultInstance()));
 
     //SPAWN EGGS

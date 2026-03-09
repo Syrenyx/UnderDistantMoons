@@ -8,17 +8,7 @@ import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.ChainBlock;
-import net.minecraft.world.level.block.DoorBlock;
-import net.minecraft.world.level.block.DropExperienceBlock;
-import net.minecraft.world.level.block.InfestedBlock;
-import net.minecraft.world.level.block.IronBarsBlock;
-import net.minecraft.world.level.block.SlabBlock;
-import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.TrapDoorBlock;
-import net.minecraft.world.level.block.WallBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -487,6 +477,41 @@ public abstract class DistantMoonsBlocks {
       WallSlabBlock::new,
       BlockBehaviour.Properties.ofFullCopy(Blocks.END_STONE_BRICKS),
       new Item.Properties()
+  );
+  public static final Block FIRE_BRICKS = register(
+      "fire_bricks",
+      Block::new,
+      BlockBehaviour.Properties.of()
+          .instrument(NoteBlockInstrument.BASEDRUM)
+          .mapColor(MapColor.QUARTZ)
+          .requiresCorrectToolForDrops()
+          .sound(SoundType.NETHER_BRICKS)
+          .strength(5.0F, 1200.0F),
+      new Item.Properties().fireResistant()
+  );
+  public static final Block FIRE_BRICK_SLAB = register(
+      "fire_brick_slab",
+      SlabBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(FIRE_BRICKS),
+      new Item.Properties().fireResistant()
+  );
+  public static final Block FIRE_BRICK_STAIRS = register(
+      "fire_brick_stairs",
+      SimplifiedStairsBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(FIRE_BRICKS),
+      new Item.Properties().fireResistant()
+  );
+  public static final Block FIRE_BRICK_WALL = register(
+      "fire_brick_wall",
+      WallBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(FIRE_BRICKS),
+      new Item.Properties().fireResistant()
+  );
+  public static final Block FIRE_BRICK_WALL_SLAB = register(
+      "fire_brick_wall_slab",
+      WallSlabBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(FIRE_BRICKS),
+      new Item.Properties().fireResistant()
   );
   public static final Block FIXED_DEEP_IRON_LADDER = register(
       "fixed_deep_iron_ladder",
@@ -969,10 +994,23 @@ public abstract class DistantMoonsBlocks {
           .strength(0.5F),
       new Item.Properties()
   );
+  public static final Block RUBY_BLOCK = register(
+      "ruby_block",
+      Block::new,
+      BlockBehaviour.Properties.ofFullCopy(Blocks.DIAMOND_BLOCK),
+      new Item.Properties()
+  );
   public static final Block SANDSTONE_WALL_SLAB = register(
       "sandstone_wall_slab",
       WallSlabBlock::new,
-      BlockBehaviour.Properties.ofFullCopy(Blocks.SANDSTONE),
+      BlockBehaviour.Properties.ofFullCopy(Blocks.SANDSTONE)
+          .mapColor(MapColor.FIRE),
+      new Item.Properties()
+  );
+  public static final Block SAPPHIRE_BLOCK = register(
+      "sapphire_block",
+      Block::new,
+      BlockBehaviour.Properties.ofFullCopy(Blocks.DIAMOND_BLOCK),
       new Item.Properties()
   );
   public static final Block SMOOTH_QUARTZ_WALL_SLAB = register(
