@@ -1,0 +1,10 @@
+{
+  "type": "distant-moons:blasting",
+  "category": "misc",
+  "ingredient": "minecraft:netherite_scrap",
+  "blasting_steps": 15,
+  "minimum_heat": 1000,
+  "result": {
+    "id": "minecraft:netherite_ingot"
+  }
+}

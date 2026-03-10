@@ -5,7 +5,7 @@
     "distant-moons:crude_deep_iron_chunk",
     "distant-moons:raw_deep_iron"
   ],
-  "blasting_steps": 3,
+  "blasting_steps": 10,
   "minimum_heat": 750,
   "result": {
     "id": "distant-moons:refined_deep_iron_ingot"

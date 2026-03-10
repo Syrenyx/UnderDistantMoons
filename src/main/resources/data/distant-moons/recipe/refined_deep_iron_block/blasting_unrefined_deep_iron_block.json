@@ -5,7 +5,7 @@
     "distant-moons:crude_deep_iron_block",
     "distant-moons:raw_deep_iron_block"
   ],
-  "blasting_steps": 12,
+  "blasting_steps": 40,
   "minimum_heat": 750,
   "result": {
     "id": "distant-moons:refined_deep_iron_block"

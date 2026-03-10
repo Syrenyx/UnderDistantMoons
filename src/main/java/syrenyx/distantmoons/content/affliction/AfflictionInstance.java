@@ -178,7 +178,7 @@ public class AfflictionInstance implements Comparable<AfflictionInstance> {
   ) {
     List<AfflictionEffectEntry<AfflictionValueEffect>> effectEntries = this.affliction().value().effects().getOrDefault(DistantMoonsAfflictionEffectComponents.ARMOR_EFFECTIVENESS, List.of());
     LootContext lootContext = getAfflictedAttackLootContext(entity, damageSource);
-    for (var effectEntry : effectEntries) {
+    for (AfflictionEffectEntry<AfflictionValueEffect> effectEntry : effectEntries) {
       if (effectEntry.test(lootContext)) armorEffectiveness = effectEntry.effect().apply(this.stage(), entity.getRandom(), armorEffectiveness);
     }
     return armorEffectiveness;
@@ -192,7 +192,7 @@ public class AfflictionInstance implements Comparable<AfflictionInstance> {
   ) {
     List<AfflictionEffectEntry<AfflictionValueEffect>> effectEntries = this.affliction().value().effects().getOrDefault(DistantMoonsAfflictionEffectComponents.DAMAGE, List.of());
     LootContext lootContext = getAfflictedAttackLootContext(victim, damageSource);
-    for (var effectEntry : effectEntries) {
+    for (AfflictionEffectEntry<AfflictionValueEffect> effectEntry : effectEntries) {
       if (effectEntry.test(lootContext)) damage = effectEntry.effect().apply(this.stage(), entity.getRandom(), damage);
     }
     return damage;
@@ -205,7 +205,7 @@ public class AfflictionInstance implements Comparable<AfflictionInstance> {
   ) {
     List<AfflictionEffectEntry<AfflictionValueEffect>> effectEntries = this.affliction().value().effects().getOrDefault(DistantMoonsAfflictionEffectComponents.FISHING_LUCK_BONUS, List.of());
     LootContext lootContext = getAfflictedAttackLootContext(entity, damageSource);
-    for (var effectEntry : effectEntries) {
+    for (AfflictionEffectEntry<AfflictionValueEffect> effectEntry : effectEntries) {
       if (effectEntry.test(lootContext)) damageProtection = effectEntry.effect().apply(this.stage(), entity.getRandom(), damageProtection);
     }
     return damageProtection;
@@ -218,7 +218,7 @@ public class AfflictionInstance implements Comparable<AfflictionInstance> {
   ) {
     List<AfflictionEffectEntry<AfflictionValueEffect>> effectEntries = this.affliction().value().effects().getOrDefault(DistantMoonsAfflictionEffectComponents.FISHING_TIME_REDUCTION, List.of());
     LootContext lootContext = getAfflictedItemLootContext(entity, stack);
-    for (var effectEntry : effectEntries) {
+    for (AfflictionEffectEntry<AfflictionValueEffect> effectEntry : effectEntries) {
       if (effectEntry.test(lootContext)) fishingLuckBonus = effectEntry.effect().apply(this.stage(), entity.getRandom(), fishingLuckBonus);
     }
     return fishingLuckBonus;
@@ -231,7 +231,7 @@ public class AfflictionInstance implements Comparable<AfflictionInstance> {
   ) {
     List<AfflictionEffectEntry<AfflictionValueEffect>> effectEntries = this.affliction().value().effects().getOrDefault(DistantMoonsAfflictionEffectComponents.KNOCKBACK, List.of());
     LootContext lootContext = getAfflictedItemLootContext(entity, stack);
-    for (var effectEntry : effectEntries) {
+    for (AfflictionEffectEntry<AfflictionValueEffect> effectEntry : effectEntries) {
       if (effectEntry.test(lootContext)) fishingTimeReduction = effectEntry.effect().apply(this.stage(), entity.getRandom(), fishingTimeReduction);
     }
     return fishingTimeReduction;
@@ -245,7 +245,7 @@ public class AfflictionInstance implements Comparable<AfflictionInstance> {
   ) {
     List<AfflictionEffectEntry<AfflictionValueEffect>> effectEntries = this.affliction().value().effects().getOrDefault(DistantMoonsAfflictionEffectComponents.KNOCKBACK, List.of());
     LootContext lootContext = getAfflictedAttackLootContext(victim, damageSource);
-    for (var effectEntry : effectEntries) {
+    for (AfflictionEffectEntry<AfflictionValueEffect> effectEntry : effectEntries) {
       if (effectEntry.test(lootContext)) knockback = effectEntry.effect().apply(this.stage(), entity.getRandom(), knockback);
     }
     return knockback;
