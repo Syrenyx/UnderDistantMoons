@@ -5,7 +5,8 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 
 public record BlastFurnaceFuelComponent(
     int burnTime,
-    int heat
+    int heat,
+    boolean soulFuel
 ) {
 
   public static final int DEFAULT_BURN_TIME = 400;
@@ -13,13 +14,22 @@ public record BlastFurnaceFuelComponent(
   public static final int COAL_HEAT_VALUE = 600;
 
   public BlastFurnaceFuelComponent(int heat) {
-    this(DEFAULT_BURN_TIME, heat);
+    this(DEFAULT_BURN_TIME, heat, false);
+  }
+
+  public BlastFurnaceFuelComponent(int burnTime, int heat) {
+    this(burnTime, heat, false);
+  }
+
+  public BlastFurnaceFuelComponent(int heat, boolean soulFuel) {
+    this(DEFAULT_BURN_TIME, heat, soulFuel);
   }
 
   public static final Codec<BlastFurnaceFuelComponent> CODEC = RecordCodecBuilder.create(instance -> instance
       .group(
           Codec.INT.fieldOf("burn_time").forGetter(BlastFurnaceFuelComponent::burnTime),
-          Codec.INT.fieldOf("heat").forGetter(BlastFurnaceFuelComponent::heat)
+          Codec.INT.fieldOf("heat").forGetter(BlastFurnaceFuelComponent::heat),
+          Codec.BOOL.fieldOf("soulFuel").forGetter(BlastFurnaceFuelComponent::soulFuel)
       )
       .apply(instance, BlastFurnaceFuelComponent::new)
   );

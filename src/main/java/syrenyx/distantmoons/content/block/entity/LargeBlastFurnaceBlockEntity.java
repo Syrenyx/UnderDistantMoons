@@ -22,6 +22,7 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -151,11 +152,11 @@ public class LargeBlastFurnaceBlockEntity extends BaseContainerBlockEntity imple
   public static void serverTick(Level level, BlockPos blockPos, BlockState blockState, LargeBlastFurnaceBlockEntity blockEntity) {
     if (blockEntity.updateController) blockEntity.findController((ServerLevel) level, blockPos, blockState);
     if (blockEntity.controller == null) {
-      updateBlockHeat(level, blockPos, blockState, 0);
+      updateBlockState(level, blockPos, blockState, 0, false);
       return;
     }
     blockEntity.controller.serverTick(level, blockPos, blockState);
-    updateBlockHeat(level, blockPos, blockState, Mth.floor(blockEntity.controller.heat / 400));
+    updateBlockState(level, blockPos, blockState, Mth.floor(blockEntity.controller.heat / 400), blockEntity.controller.soulFuel);
   }
 
   private void findController(ServerLevel serverLevel, BlockPos blockPos, BlockState blockState) {
@@ -166,8 +167,15 @@ public class LargeBlastFurnaceBlockEntity extends BaseContainerBlockEntity imple
     this.controller = largeBlastFurnaceBlockEntity.controller;
   }
 
-  private static void updateBlockHeat(Level level, BlockPos blockPos, BlockState blockState, int heat) {
-    if (blockState.getValue(LargeBlastFurnaceBlock.HEAT) != heat) LargeBlastFurnaceBlock.setHeat(level, blockPos, blockState, heat);
+  private static void updateBlockState(Level level, BlockPos blockPos, BlockState blockState, int heat, boolean soulFuel) {
+    if (blockState.getValue(LargeBlastFurnaceBlock.HEAT) == heat && blockState.getValue(LargeBlastFurnaceBlock.SOUL_FIRE) == soulFuel) return;
+    level.setBlock(
+        blockPos,
+        blockState
+            .setValue(LargeBlastFurnaceBlock.HEAT, Mth.clamp(heat, LargeBlastFurnaceBlock.MIN_HEAT, LargeBlastFurnaceBlock.MAX_HEAT))
+            .setValue(LargeBlastFurnaceBlock.SOUL_FIRE, soulFuel),
+        Block.UPDATE_ALL
+    );
   }
 
   @Override
@@ -180,6 +188,7 @@ public class LargeBlastFurnaceBlockEntity extends BaseContainerBlockEntity imple
     this.controller.fuelBurnTimer = valueInput.getIntOr("fuel_burn_timer", 0);
     this.controller.fuelHeatValue = valueInput.getIntOr("fuel_heat_value", 0);
     this.controller.heat = valueInput.getFloatOr("heat", 0.0F);
+    this.controller.soulFuel = valueInput.getBooleanOr("soul_fuel", false);
     this.controller.blastCharge = valueInput.getFloatOr("blast_charge", 0.0F);
     this.controller.blastingSteps = valueInput.getIntArray("blasting_steps").orElse(Controller.EMPTY_BLASTING_STEPS.clone());
     this.controller.requiredBlastingSteps = valueInput.getIntArray("required_blasting_steps").orElse(Controller.EMPTY_BLASTING_STEPS.clone());
@@ -194,6 +203,7 @@ public class LargeBlastFurnaceBlockEntity extends BaseContainerBlockEntity imple
     valueOutput.putInt("fuel_burn_timer", this.controller.fuelBurnTimer);
     valueOutput.putInt("fuel_heat_value", this.controller.fuelHeatValue);
     valueOutput.putFloat("heat", this.controller.heat);
+    valueOutput.putBoolean("soul_fuel", this.controller.soulFuel);
     valueOutput.putFloat("blast_charge", this.controller.blastCharge);
     valueOutput.putIntArray("blasting_steps", this.controller.blastingSteps);
     valueOutput.putIntArray("required_blasting_steps", this.controller.requiredBlastingSteps);
@@ -201,7 +211,7 @@ public class LargeBlastFurnaceBlockEntity extends BaseContainerBlockEntity imple
 
   public static class Controller {
 
-    public static final int DATA_COUNT = 35;
+    public static final int DATA_COUNT = 36;
     private static final float EXPLOSION_RADIUS = 7.0F;
     public static final int BLAST_CHARGE_INTERVAL = 100;
     private static final int BLAST_CHARGE_HEAT_THRESHOLD = 15;
@@ -220,6 +230,7 @@ public class LargeBlastFurnaceBlockEntity extends BaseContainerBlockEntity imple
     protected int fuelBurnTime = 0;
     protected int fuelBurnTimer = 0;
     protected int fuelHeatValue = 0;
+    protected boolean soulFuel = false;
     protected float heat = 0.0F;
     protected float blastCharge = 0.0F;
     protected NonNullList<ItemStack> items = NonNullList.withSize(CONTAINER_SIZE, ItemStack.EMPTY);
@@ -240,9 +251,10 @@ public class LargeBlastFurnaceBlockEntity extends BaseContainerBlockEntity imple
             case 1 -> Controller.this.fuelBurnTimer;
             case 2 -> Controller.this.fuelHeatValue;
             case 3 -> Math.round(Controller.this.heat);
-            case 4 -> Math.round(Controller.this.blastCharge);
-            case 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19 -> Controller.this.blastingSteps[index - 5];
-            case 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34 -> Controller.this.requiredBlastingSteps[index - 20];
+            case 4 -> Controller.this.soulFuel ? 1 : 0;
+            case 5 -> Math.round(Controller.this.blastCharge);
+            case 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 -> Controller.this.blastingSteps[index - 6];
+            case 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35 -> Controller.this.requiredBlastingSteps[index - 21];
             default -> 0;
           };
         }
@@ -254,9 +266,10 @@ public class LargeBlastFurnaceBlockEntity extends BaseContainerBlockEntity imple
             case 1 -> Controller.this.fuelBurnTimer = value;
             case 2 -> Controller.this.fuelHeatValue = value;
             case 3 -> Controller.this.heat = value;
-            case 4 -> Controller.this.blastCharge = value;
-            case 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19 -> Controller.this.blastingSteps[index - 5] = value;
-            case 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34 -> Controller.this.requiredBlastingSteps[index - 20] = value;
+            case 4 -> Controller.this.soulFuel = value >= 1;
+            case 5 -> Controller.this.blastCharge = value;
+            case 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 -> Controller.this.blastingSteps[index - 6] = value;
+            case 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35 -> Controller.this.requiredBlastingSteps[index - 21] = value;
           }
         }
 
@@ -292,6 +305,7 @@ public class LargeBlastFurnaceBlockEntity extends BaseContainerBlockEntity imple
       if (this.items.get(ACTIVE_FUEL_SLOT).isEmpty() || !fuelStack.has(DistantMoonsDataComponentTypes.BLAST_FURNACE_FUEL)) {
         this.fuelBurnTime = 0;
         this.fuelHeatValue = 0;
+        this.soulFuel = false;
         fuelStack.setCount(0);
         return;
       }
@@ -299,6 +313,7 @@ public class LargeBlastFurnaceBlockEntity extends BaseContainerBlockEntity imple
       this.fuelHeatValue = fuelComponent.heat();
       this.fuelBurnTime = fuelComponent.burnTime();
       this.fuelBurnTimer = fuelComponent.burnTime();
+      this.soulFuel = fuelComponent.soulFuel();
       fuelStack.setCount(0);
     }
 
@@ -358,6 +373,8 @@ public class LargeBlastFurnaceBlockEntity extends BaseContainerBlockEntity imple
             this.blastingSteps[slot] = 0;
             continue;
           }
+          Optional<Boolean> soulFuelRequirement = recipe.value().soulFuelRequirement();
+          if (soulFuelRequirement.isPresent() && soulFuelRequirement.get() != this.soulFuel) continue;
           this.blastingSteps[slot]++;
           if (this.blastingSteps[slot] < this.requiredBlastingSteps[slot]) continue;
           this.blastingSteps[slot] = 0;

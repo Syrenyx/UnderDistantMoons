@@ -17,6 +17,7 @@ import syrenyx.distantmoons.initializers.DistantMoonsRecipeBookCategories;
 import syrenyx.distantmoons.initializers.DistantMoonsRecipeSerializers;
 import syrenyx.distantmoons.initializers.DistantMoonsRecipeTypes;
 
+import java.util.Optional;
 import java.util.function.IntFunction;
 
 public class LargeBlastFurnaceRecipe extends SingleItemRecipe {
@@ -24,12 +25,14 @@ public class LargeBlastFurnaceRecipe extends SingleItemRecipe {
   private final Category category;
   private final int blastingSteps;
   private final int minimumHeat;
+  private final Optional<Boolean> soulFuelRequirement;
 
-  public LargeBlastFurnaceRecipe(String group, Category category, Ingredient input, ItemStack result, int blastingSteps, int minimumHeat) {
+  public LargeBlastFurnaceRecipe(String group, Category category, Ingredient input, ItemStack result, int blastingSteps, int minimumHeat, Optional<Boolean> soulFuelRequirement) {
     super(group, input, result);
     this.category = category;
     this.blastingSteps = blastingSteps;
     this.minimumHeat = minimumHeat;
+    this.soulFuelRequirement = soulFuelRequirement;
   }
 
   @Override
@@ -61,6 +64,10 @@ public class LargeBlastFurnaceRecipe extends SingleItemRecipe {
     return this.minimumHeat;
   }
 
+  public Optional<Boolean> soulFuelRequirement() {
+    return this.soulFuelRequirement;
+  }
+
   public enum Category implements StringRepresentable {
     MISC(0, "misc");
 
@@ -90,7 +97,8 @@ public class LargeBlastFurnaceRecipe extends SingleItemRecipe {
             Ingredient.CODEC.fieldOf("ingredient").forGetter(LargeBlastFurnaceRecipe::input),
             ItemStack.STRICT_SINGLE_ITEM_CODEC.fieldOf("result").forGetter(LargeBlastFurnaceRecipe::result),
             ExtraCodecs.POSITIVE_INT.fieldOf("blasting_steps").forGetter(LargeBlastFurnaceRecipe::blastingSteps),
-            ExtraCodecs.NON_NEGATIVE_INT.fieldOf("minimum_heat").forGetter(LargeBlastFurnaceRecipe::blastingSteps)
+            ExtraCodecs.NON_NEGATIVE_INT.fieldOf("minimum_heat").forGetter(LargeBlastFurnaceRecipe::minimumHeat),
+            Codec.BOOL.optionalFieldOf("soul_fuel_requirement").forGetter(LargeBlastFurnaceRecipe::soulFuelRequirement)
         )
         .apply(instance, LargeBlastFurnaceRecipe::new)
     );
@@ -107,6 +115,8 @@ public class LargeBlastFurnaceRecipe extends SingleItemRecipe {
         LargeBlastFurnaceRecipe::blastingSteps,
         ByteBufCodecs.INT,
         LargeBlastFurnaceRecipe::minimumHeat,
+        ByteBufCodecs.optional(ByteBufCodecs.BOOL),
+        LargeBlastFurnaceRecipe::soulFuelRequirement,
         LargeBlastFurnaceRecipe::new
     );
 

@@ -20,6 +20,7 @@ public class LargeBlastFurnaceScreen extends AbstractContainerScreen<LargeBlastF
   private static final Identifier DEFAULT_TEXTURE = UnderDistantMoons.identifierOf("textures/gui/container/large_blast_furnace/default.png");
   private static final Identifier MIRRORED_TEXTURE = UnderDistantMoons.identifierOf("textures/gui/container/large_blast_furnace/mirrored.png");
   private static final Identifier FUEL_BURNING_PROGRESS_SPRITE = UnderDistantMoons.identifierOf("container/large_blast_furnace/fuel_burning_progress");
+  private static final Identifier SOUL_FUEL_BURNING_PROGRESS_SPRITE = UnderDistantMoons.identifierOf("container/large_blast_furnace/soul_fuel_burning_progress");
   private static final Identifier HEAT_SPRITE = UnderDistantMoons.identifierOf("container/large_blast_furnace/heat");
   private static final String BLAST_CHARGE_DIAL_SPRITE_PATH = "container/large_blast_furnace/blast_charge_dial/";
   private static final int BACKGROUND_TEXTURE_SIZE = 256;
@@ -56,7 +57,7 @@ public class LargeBlastFurnaceScreen extends AbstractContainerScreen<LargeBlastF
       int heightReduction = Mth.ceil(fuelBurnProgress * (SMALL_SPRITE_SIZE - 1)) + 1;
       guiGraphics.blitSprite(
           RenderPipelines.GUI_TEXTURED,
-          FUEL_BURNING_PROGRESS_SPRITE,
+          this.menu.getSoulFuel() >= 1 ? SOUL_FUEL_BURNING_PROGRESS_SPRITE : FUEL_BURNING_PROGRESS_SPRITE,
           SMALL_SPRITE_SIZE, SMALL_SPRITE_SIZE,
           0, SMALL_SPRITE_SIZE - heightReduction,
           this.leftPos + (this.menu.mirrored ? 45 : 117), this.topPos + 110 + SMALL_SPRITE_SIZE - heightReduction,

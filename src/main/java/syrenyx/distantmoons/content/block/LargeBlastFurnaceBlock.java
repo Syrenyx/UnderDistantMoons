@@ -40,11 +40,14 @@ import java.util.Map;
 
 public class LargeBlastFurnaceBlock extends BaseEntityBlock {
 
+  public static final int MIN_HEAT = 0;
+  public static final int MAX_HEAT = 3;
   public static final MapCodec<LargeBlastFurnaceBlock> CODEC = simpleCodec(LargeBlastFurnaceBlock::new);
   public static final EnumProperty<BlockCorner> CORNER = EnumProperty.create("corner", BlockCorner.class);
   public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
   public static final BooleanProperty MIRRORED = BooleanProperty.create("mirrored");
-  public static final IntegerProperty HEAT = IntegerProperty.create("heat", 0, 3);
+  public static final IntegerProperty HEAT = IntegerProperty.create("heat", MIN_HEAT, MAX_HEAT);
+  public static final BooleanProperty SOUL_FIRE = BooleanProperty.create("soul_fire");
   private static boolean overrideIntegrityCheck = false;
 
   public LargeBlastFurnaceBlock(Properties properties) {
@@ -54,6 +57,7 @@ public class LargeBlastFurnaceBlock extends BaseEntityBlock {
         .setValue(FACING, Direction.NORTH)
         .setValue(MIRRORED, false)
         .setValue(HEAT, 0)
+        .setValue(SOUL_FIRE, false)
     );
   }
 
@@ -64,7 +68,7 @@ public class LargeBlastFurnaceBlock extends BaseEntityBlock {
 
   @Override
   protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-    builder.add(CORNER, FACING, MIRRORED, HEAT);
+    builder.add(CORNER, FACING, MIRRORED, HEAT, SOUL_FIRE);
   }
 
   @Override
@@ -172,12 +176,6 @@ public class LargeBlastFurnaceBlock extends BaseEntityBlock {
     };
   }
 
-  public static void setHeat(Level level, BlockPos pos, BlockState state, int heat) {
-    if (heat < 0) heat = 0;
-    else if (heat > 3) heat = 3;
-    level.setBlock(pos, state.setValue(HEAT, heat), Block.UPDATE_ALL);
-  }
-
   public static Vec3 getCenter(BlockPos blockPos, BlockState blockState) {
     BlockCorner corner = blockState.getValue(CORNER);
     return new Vec3(
@@ -188,10 +186,12 @@ public class LargeBlastFurnaceBlock extends BaseEntityBlock {
   }
 
   public static void breakBlocks(Level level, BlockPos blockPos, BlockState blockState) {
+    overrideIntegrityCheck = true;
     blockState.getValue(CORNER).getCornersForPositionsInBlock(blockPos).forEach((key, value) -> {
       if (level.getBlockState(key).getBlock() instanceof LargeBlastFurnaceBlock && blockState.getValue(CORNER) == value) {
         level.setBlock(key, Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL);
       }
     });
+    overrideIntegrityCheck = false;
   }
 }

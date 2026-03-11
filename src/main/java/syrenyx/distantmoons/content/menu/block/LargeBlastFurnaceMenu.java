@@ -89,15 +89,19 @@ public class LargeBlastFurnaceMenu extends AbstractContainerMenu {
     return this.containerData.get(3);
   }
 
-  public int getBlastCharge() {
+  public int getSoulFuel() {
     return this.containerData.get(4);
   }
 
+  public int getBlastCharge() {
+    return this.containerData.get(5);
+  }
+
   public int getBlastingStepAtSlot(int slot) {
-    return this.containerData.get(slot + 5);
+    return this.containerData.get(slot + 6);
   }
 
   public int getRequiredBlastingStepAtSlot(int slot) {
-    return this.containerData.get(slot + 20);
+    return this.containerData.get(slot + 21);
   }
 }
