@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import org.jetbrains.annotations.Nullable;
 import org.jspecify.annotations.NonNull;
 import syrenyx.distantmoons.initializers.DistantMoonsBlocks;
@@ -22,9 +23,45 @@ public class DistantMoonsItemTagProvider extends FabricTagProvider.ItemTagProvid
   @Override
   protected void addTags(HolderLookup.@NonNull Provider provider) {
 
+    //ITEM GROUPS
+    this.valueLookupBuilder(DistantMoonsItemTags.CORUNDUM).add(
+        DistantMoonsItems.RUBY,
+        DistantMoonsItems.SAPPHIRE
+    );
+    this.valueLookupBuilder(DistantMoonsItemTags.CORUNDUM_BLOOK).add(
+        DistantMoonsBlocks.RUBY_BLOCK.asItem(),
+        DistantMoonsBlocks.SAPPHIRE_BLOCK.asItem()
+    );
+    this.valueLookupBuilder(DistantMoonsItemTags.DEEP_IRON_BLOCK).add(
+        DistantMoonsBlocks.CRUDE_DEEP_IRON_BLOCK.asItem(),
+        DistantMoonsBlocks.REFINED_DEEP_IRON_BLOCK.asItem()
+    );
+    this.valueLookupBuilder(DistantMoonsItemTags.DEEP_IRON_INGOT).add(
+        DistantMoonsItems.CRUDE_DEEP_IRON_CHUNK,
+        DistantMoonsItems.REFINED_DEEP_IRON_INGOT
+    );
+
     //DYED ITEMS
     this.valueLookupBuilder(DistantMoonsItemTags.DYED_PILLOW).addAll(
         DistantMoonsBlocks.DYED_PILLOWS.values().stream().map(Block::asItem)
+    );
+    this.valueLookupBuilder(DistantMoonsItemTags.DYED_CONCRETE_POWDER).add(
+        Blocks.WHITE_CONCRETE_POWDER.asItem(),
+        Blocks.LIGHT_GRAY_CONCRETE_POWDER.asItem(),
+        Blocks.GRAY_CONCRETE_POWDER.asItem(),
+        Blocks.BLACK_CONCRETE_POWDER.asItem(),
+        Blocks.BROWN_CONCRETE_POWDER.asItem(),
+        Blocks.RED_CONCRETE_POWDER.asItem(),
+        Blocks.ORANGE_CONCRETE_POWDER.asItem(),
+        Blocks.YELLOW_CONCRETE_POWDER.asItem(),
+        Blocks.LIME_CONCRETE_POWDER.asItem(),
+        Blocks.GREEN_CONCRETE_POWDER.asItem(),
+        Blocks.CYAN_CONCRETE_POWDER.asItem(),
+        Blocks.LIGHT_BLUE_CONCRETE_POWDER.asItem(),
+        Blocks.BLUE_CONCRETE_POWDER.asItem(),
+        Blocks.PURPLE_CONCRETE_POWDER.asItem(),
+        Blocks.MAGENTA_CONCRETE_POWDER.asItem(),
+        Blocks.PINK_CONCRETE_POWDER.asItem()
     );
 
     //FUEL

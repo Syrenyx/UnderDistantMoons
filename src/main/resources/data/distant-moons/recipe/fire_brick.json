@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "#distant-moons:dyed/concrete_powder",
+    "#distant-moons:dyed/concrete_powder",
+    "#distant-moons:corundum",
+    "#distant-moons:deep_iron_ingot",
+    "#distant-moons:deep_iron_ingot"
+  ],
+  "result": {
+    "id": "distant-moons:fire_brick",
+    "count": 2
+  }
+}

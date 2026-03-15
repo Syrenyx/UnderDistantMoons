@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_corundum": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#distant-moons:corundum"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "distant-moons:fire_brick"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_corundum"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "distant-moons:fire_brick"
+    ]
+  }
+}

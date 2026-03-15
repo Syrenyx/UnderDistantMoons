@@ -19,6 +19,7 @@ import syrenyx.distantmoons.UnderDistantMoons;
 import syrenyx.distantmoons.content.block.*;
 import syrenyx.distantmoons.content.data_component.BlastFurnaceFuelComponent;
 import syrenyx.distantmoons.references.DistantMoonsBlockSetTypes;
+import syrenyx.distantmoons.utility.ColorUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -1402,7 +1403,7 @@ public abstract class DistantMoonsBlocks {
 
   private static Map<DyeColor, Block> registerDyedVariants(String id, Function<BlockBehaviour.Properties, Block> blockFactory, BlockBehaviour.Properties settings, Item.Properties itemSettings) {
     Map<DyeColor, Block> blocks = new HashMap<>();
-    for (DyeColor color : DyeColor.values()) blocks.put(color, register(color.getName() + "_" + id, blockFactory, settings.mapColor(color), itemSettings));
+    for (DyeColor color : ColorUtil.SORTED_DYE_COLORS) blocks.put(color, register(color.getName() + "_" + id, blockFactory, settings.mapColor(color), itemSettings));
     return blocks;
   }
 

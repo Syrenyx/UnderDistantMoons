@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.block.Rotation;
 import org.jspecify.annotations.NonNull;
 import syrenyx.distantmoons.utility.BlockUtil;
 
@@ -92,5 +93,14 @@ public enum BlockCorner implements StringRepresentable {
     positions.put(topNorthEastPos.offset(0, -1, 1), BOTTOM_SOUTH_EAST);
     positions.put(topNorthEastPos.offset(-1, -1, 1), BOTTOM_SOUTH_WEST);
     return positions;
+  }
+
+  public BlockCorner rotate(Rotation rotation) {
+    return switch (rotation) {
+      case NONE -> this;
+      case CLOCKWISE_90 -> getFrom(this.top, (this.north == this.east) == this.north, (this.north == this.east) != this.east);
+      case CLOCKWISE_180 -> getFrom(this.top, !this.north, !this.east);
+      case COUNTERCLOCKWISE_90 -> getFrom(this.top, (this.north == this.east) != this.north, (this.north == this.east) == this.east);
+    };
   }
 }
