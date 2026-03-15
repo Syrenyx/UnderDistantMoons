@@ -156,7 +156,7 @@ public class LargeBlastFurnaceBlockEntity extends BaseContainerBlockEntity imple
       return;
     }
     blockEntity.controller.serverTick(level, blockPos, blockState);
-    updateBlockState(level, blockPos, blockState, Mth.floor(blockEntity.controller.heat / 400), blockEntity.controller.soulFuel);
+    updateBlockState(level, blockPos, blockState, Mth.ceil(blockEntity.controller.heat / 400), blockEntity.controller.soulFuel);
   }
 
   private void findController(ServerLevel serverLevel, BlockPos blockPos, BlockState blockState) {
