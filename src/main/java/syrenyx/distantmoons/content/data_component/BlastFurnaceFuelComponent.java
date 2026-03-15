@@ -29,7 +29,7 @@ public record BlastFurnaceFuelComponent(
       .group(
           Codec.INT.fieldOf("burn_time").forGetter(BlastFurnaceFuelComponent::burnTime),
           Codec.INT.fieldOf("heat").forGetter(BlastFurnaceFuelComponent::heat),
-          Codec.BOOL.fieldOf("soul_fuel").forGetter(BlastFurnaceFuelComponent::soulFuel)
+          Codec.BOOL.optionalFieldOf("soul_fuel", false).forGetter(BlastFurnaceFuelComponent::soulFuel)
       )
       .apply(instance, BlastFurnaceFuelComponent::new)
   );

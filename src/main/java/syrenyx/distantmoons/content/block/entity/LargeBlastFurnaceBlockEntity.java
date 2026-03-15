@@ -66,6 +66,11 @@ public class LargeBlastFurnaceBlockEntity extends BaseContainerBlockEntity imple
   }
 
   @Override
+  public void setChanged() {
+    if (this.controller != null) this.controller.setChanged();
+  }
+
+  @Override
   protected @NonNull Component getDefaultName() {
     return DEFAULT_NAME;
   }
@@ -77,7 +82,9 @@ public class LargeBlastFurnaceBlockEntity extends BaseContainerBlockEntity imple
 
   @Override
   protected void setItems(@NonNull NonNullList<ItemStack> items) {
-    if (this.controller != null) this.controller.items = items;
+    if (this.controller == null) return;
+    this.controller.items = items;
+    this.setChanged();
   }
 
   @Override
@@ -85,6 +92,7 @@ public class LargeBlastFurnaceBlockEntity extends BaseContainerBlockEntity imple
     if (this.controller == null) return;
     itemStack.limitSize(this.getMaxStackSize());
     this.controller.items.set(slot, itemStack);
+    this.setChanged();
   }
 
   @Override
@@ -137,14 +145,15 @@ public class LargeBlastFurnaceBlockEntity extends BaseContainerBlockEntity imple
     for(ItemStack itemStack : this.controller.items) {
       stackedItemContents.accountStack(itemStack);
     }
+    this.setChanged();
   }
 
   public int getAnalogOutputSignal() {
     if (this.controller == null) return 0;
     if (this.fuelAccess) return Math.round(this.controller.heat / 100);
     int signal = 0;
-    for (ItemStack itemStack : this.controller.items) {
-      if (!itemStack.isEmpty()) signal++;
+    for (int slot : MATERIAL_SLOTS) {
+      if (!this.controller.items.get(slot).isEmpty()) signal++;
     }
     return signal;
   }
@@ -155,7 +164,7 @@ public class LargeBlastFurnaceBlockEntity extends BaseContainerBlockEntity imple
       updateBlockState(level, blockPos, blockState, 0, false);
       return;
     }
-    blockEntity.controller.serverTick(level, blockPos, blockState);
+    blockEntity.controller.serverTick(level);
     updateBlockState(level, blockPos, blockState, Mth.ceil(blockEntity.controller.heat / 400), blockEntity.controller.soulFuel);
   }
 
@@ -223,10 +232,13 @@ public class LargeBlastFurnaceBlockEntity extends BaseContainerBlockEntity imple
     private static final int FIRE_TICKS = 200;
     protected static final RecipeManager.CachedCheck<SingleRecipeInput, LargeBlastFurnaceRecipe> QUICK_CHECK = RecipeManager.createCheck(DistantMoonsRecipeTypes.BLASTING);
     protected static final int[] EMPTY_BLASTING_STEPS = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+
+    private Level level;
+    private final BlockPos setterPos;
     protected final ContainerData dataAccess;
     private final boolean mirrored;
     private final Vec3 center;
-    private final AABB fire_area;
+    private final AABB fireArea;
     protected int fuelBurnTime = 0;
     protected int fuelBurnTimer = 0;
     protected int fuelHeatValue = 0;
@@ -239,9 +251,10 @@ public class LargeBlastFurnaceBlockEntity extends BaseContainerBlockEntity imple
     private int[] requiredBlastingSteps = EMPTY_BLASTING_STEPS.clone();
 
     public Controller(BlockPos blockPos, BlockState blockState) {
+      this.setterPos = blockPos;
       this.mirrored = blockState.getValue(LargeBlastFurnaceBlock.MIRRORED);
       this.center = LargeBlastFurnaceBlock.getCenter(blockPos, blockState);
-      this.fire_area = new AABB(new Vec3(this.center.x, this.center.y, this.center.z).add(FIRE_RADIUS), new Vec3(this.center.x, this.center.y, this.center.z).subtract(FIRE_RADIUS));
+      this.fireArea = new AABB(new Vec3(this.center.x, this.center.y, this.center.z).add(FIRE_RADIUS), new Vec3(this.center.x, this.center.y, this.center.z).subtract(FIRE_RADIUS));
       this.dataAccess = new ContainerData() {
 
         @Override
@@ -280,12 +293,23 @@ public class LargeBlastFurnaceBlockEntity extends BaseContainerBlockEntity imple
       };
     }
 
-    private void serverTick(Level level, BlockPos blockPos, BlockState blockState) {
-      if (this.previousGameTime == level.getGameTime()) return;
-      this.previousGameTime = level.getGameTime();
+    private void setChanged() {
+      if (this.level == null) return;
+      BlockState blockState = this.level.getBlockState(setterPos);
+      if (!(blockState.getBlock() instanceof LargeBlastFurnaceBlock)) return;
+      for (BlockPos pos : blockState.getValue(LargeBlastFurnaceBlock.CORNER).getCornersForPositionsInBlock(this.setterPos).values()) {
+        BlockEntity blockEntity = this.level.getBlockEntity(pos);
+        if (blockEntity != null) BlockEntity.setChanged(this.level, pos, this.level.getBlockState(pos));
+      }
+    }
+
+    private void serverTick(Level level) {
+      if (this.level == null || level == null) this.level = level;
+      if (this.previousGameTime == this.level.getGameTime()) return;
+      this.previousGameTime = this.level.getGameTime();
       this.updateFuel();
-      this.updateHeat(level);
-      this.updateBlastCharges(level, blockPos, blockState);
+      this.updateHeat();
+      this.updateBlastCharges();
     }
 
     private void updateFuel() {
@@ -317,25 +341,26 @@ public class LargeBlastFurnaceBlockEntity extends BaseContainerBlockEntity imple
       fuelStack.setCount(0);
     }
 
-    private void updateHeat(Level level) {
+    private void updateHeat() {
       float heatDifference = this.fuelHeatValue - this.heat;
+      if (heatDifference != 0.0F) this.setChanged();
       this.heat += heatDifference / (this.fuelHeatValue == 0 ? 32 : 128);
       if (Mth.abs(heatDifference) <= 0.01F) this.heat = this.fuelHeatValue;
       else if (this.heat < 0) this.heat = 0.0F;
       if (this.heat >= DANGEROUS_HEAT) {
-        level.getEntitiesOfClass(
+        this.level.getEntitiesOfClass(
             Entity.class,
-            this.fire_area,
+            this.fireArea,
             entity -> !entity.fireImmune() && entity.distanceToSqr(this.center) <= FIRE_RADIUS_SQUARED
         ).forEach(entity -> {
-          if (level.getRandom().nextFloat() <= FIRE_CHANCE_PER_TICK) entity.setRemainingFireTicks(FIRE_TICKS);
+          if (this.level.getRandom().nextFloat() <= FIRE_CHANCE_PER_TICK) entity.setRemainingFireTicks(FIRE_TICKS);
         });
       }
     }
 
-    private void updateBlastCharges(Level level, BlockPos blockPos, BlockState blockState) {
+    private void updateBlastCharges() {
 
-      //Reset Blastin Steps
+      //Reset Blasting Steps
       for (int slot : MATERIAL_SLOTS) {
         ItemStack itemStack = this.items.get(slot);
         if (itemStack.isEmpty()) {
@@ -343,7 +368,7 @@ public class LargeBlastFurnaceBlockEntity extends BaseContainerBlockEntity imple
           this.requiredBlastingSteps[slot] = 0;
           continue;
         }
-        Optional<RecipeHolder<LargeBlastFurnaceRecipe>> recipe = QUICK_CHECK.getRecipeFor(new SingleRecipeInput(itemStack), (ServerLevel) level);
+        Optional<RecipeHolder<LargeBlastFurnaceRecipe>> recipe = QUICK_CHECK.getRecipeFor(new SingleRecipeInput(itemStack), (ServerLevel) this.level);
         if (recipe.isEmpty()) {
           this.blastingSteps[slot] = 0;
           this.requiredBlastingSteps[slot] = 0;
@@ -360,15 +385,15 @@ public class LargeBlastFurnaceBlockEntity extends BaseContainerBlockEntity imple
       if (this.blastCharge >= BLAST_CHARGE_INTERVAL) {
         this.blastCharge %= BLAST_CHARGE_INTERVAL;
         if (Math.round(this.heat) >= MAX_HEAT) {
-          LargeBlastFurnaceBlock.breakBlocks(level, blockPos, blockState);
-          level.explode(null, this.center.x(), this.center.y(), this.center.z(), EXPLOSION_RADIUS, Level.ExplosionInteraction.BLOCK);
+          LargeBlastFurnaceBlock.breakBlocks(this.level, this.setterPos);
+          this.level.explode(null, this.center.x(), this.center.y(), this.center.z(), EXPLOSION_RADIUS, Level.ExplosionInteraction.BLOCK);
           return;
         }
-        level.playSound(null, this.center.x(), this.center.y(), this.center.z(), DistantMoonsSoundEvents.LARGE_BLAST_FURNACE_BLAST, SoundSource.BLOCKS, 2.0F, 0.6F);
+        this.level.playSound(null, this.center.x(), this.center.y(), this.center.z(), DistantMoonsSoundEvents.LARGE_BLAST_FURNACE_BLAST, SoundSource.BLOCKS, 2.0F, 0.6F);
         for (int slot : MATERIAL_SLOTS) {
           if (this.requiredBlastingSteps[slot] == 0) continue;
           SingleRecipeInput recipeInput = new SingleRecipeInput(this.items.get(slot));
-          RecipeHolder<LargeBlastFurnaceRecipe> recipe = QUICK_CHECK.getRecipeFor(recipeInput, (ServerLevel) level).orElse(null);
+          RecipeHolder<LargeBlastFurnaceRecipe> recipe = QUICK_CHECK.getRecipeFor(recipeInput, (ServerLevel) this.level).orElse(null);
           if (recipe == null) {
             this.blastingSteps[slot] = 0;
             continue;
@@ -378,7 +403,7 @@ public class LargeBlastFurnaceBlockEntity extends BaseContainerBlockEntity imple
           this.blastingSteps[slot]++;
           if (this.blastingSteps[slot] < this.requiredBlastingSteps[slot]) continue;
           this.blastingSteps[slot] = 0;
-          this.items.set(slot, recipe.value().assemble(recipeInput, level.registryAccess()));
+          this.items.set(slot, recipe.value().assemble(recipeInput, this.level.registryAccess()));
         }
       }
     }

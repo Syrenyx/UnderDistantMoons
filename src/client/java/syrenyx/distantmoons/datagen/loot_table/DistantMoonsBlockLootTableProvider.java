@@ -16,7 +16,9 @@ import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.ConditionReference;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
+import syrenyx.distantmoons.content.block.LargeBlastFurnaceBlock;
 import syrenyx.distantmoons.content.block.WallSlabBlock;
+import syrenyx.distantmoons.content.block.block_state_enums.BlockCorner;
 import syrenyx.distantmoons.content.block.block_state_enums.WallSlabShape;
 import syrenyx.distantmoons.initializers.DistantMoonsBlocks;
 import syrenyx.distantmoons.references.data.DistantMoonsPredicates;
@@ -99,6 +101,8 @@ public class DistantMoonsBlockLootTableProvider extends FabricBlockLootTableProv
     this.dropSelf(DistantMoonsBlocks.WROUGHT_IRON_BARS);
     this.dropSelf(DistantMoonsBlocks.WROUGHT_IRON_FENCE);
     this.dropSelf(DistantMoonsBlocks.WROUGHT_IRON_LADDER);
+
+    this.addLargeBlastFurnaceDrop(DistantMoonsBlocks.BLAST_FURNACE);
 
     //INFESTED BLOCK LOOT TABLES
     this.addInfestedBlockDrop(DistantMoonsBlocks.INFESTED_CHISELED_DEEPSLATE);
@@ -241,6 +245,18 @@ public class DistantMoonsBlockLootTableProvider extends FabricBlockLootTableProv
     this.addWallSlabDrop(DistantMoonsBlocks.WAXED_OXIDIZED_CUT_COPPER_WALL_SLAB);
     this.addWallSlabDrop(DistantMoonsBlocks.WAXED_WEATHERED_CUT_COPPER_WALL_SLAB);
     this.addWallSlabDrop(DistantMoonsBlocks.WEATHERED_CUT_COPPER_WALL_SLAB);
+  }
+
+  private void addLargeBlastFurnaceDrop(Block block) {
+    this.add(block, LootTable.lootTable().withPool(LootPool.lootPool()
+        .setRolls(new ConstantValue(1.0F))
+        .add(LootItem.lootTableItem(block.asItem())
+            .apply(ApplyExplosionDecay.explosionDecay())
+        )
+        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties()
+            .hasProperty(LargeBlastFurnaceBlock.CORNER, BlockCorner.BOTTOM_NORTH_EAST)
+        ))
+    ));
   }
 
   private void addInfestedBlockDrop(Block block) {
