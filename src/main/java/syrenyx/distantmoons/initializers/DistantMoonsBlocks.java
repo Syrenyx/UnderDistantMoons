@@ -111,7 +111,8 @@ public abstract class DistantMoonsBlocks {
           .mapColor(MapColor.STONE)
           .pushReaction(PushReaction.BLOCK)
           .requiresCorrectToolForDrops()
-          .sound(SoundType.TUFF_BRICKS),
+          .sound(SoundType.TUFF_BRICKS)
+          .strength(8.0F, 1200.0F),
       new Item.Properties()
           .fireResistant()
   );

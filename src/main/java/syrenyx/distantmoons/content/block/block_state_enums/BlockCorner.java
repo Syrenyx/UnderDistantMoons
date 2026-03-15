@@ -82,16 +82,16 @@ public enum BlockCorner implements StringRepresentable {
     return pos.offset(this.east ? 0 : 1, this.top ? 0 : 1, this.north ? 0 : -1);
   }
 
-  public @NonNull Map<BlockPos, BlockCorner> getCornersForPositionsInBlock(BlockPos pos) {
+  public @NonNull Map<BlockCorner, BlockPos> getCornersForPositionsInBlock(BlockPos pos) {
     BlockPos topNorthEastPos = this.getTopNorthEastPos(pos);
-    Map<BlockPos, BlockCorner> positions = new HashMap<>(Map.of(topNorthEastPos, TOP_NORTH_EAST));
-    positions.put(topNorthEastPos.offset(-1, 0, 0), TOP_NORTH_WEST);
-    positions.put(topNorthEastPos.offset(0, 0, 1), TOP_SOUTH_EAST);
-    positions.put(topNorthEastPos.offset(-1, 0, 1), TOP_SOUTH_WEST);
-    positions.put(topNorthEastPos.offset(0, -1, 0), BOTTOM_NORTH_EAST);
-    positions.put(topNorthEastPos.offset(-1, -1, 0), BOTTOM_NORTH_WEST);
-    positions.put(topNorthEastPos.offset(0, -1, 1), BOTTOM_SOUTH_EAST);
-    positions.put(topNorthEastPos.offset(-1, -1, 1), BOTTOM_SOUTH_WEST);
+    Map<BlockCorner, BlockPos> positions = new HashMap<>(Map.of(TOP_NORTH_EAST, topNorthEastPos));
+    positions.put(TOP_NORTH_WEST, topNorthEastPos.offset(-1, 0, 0));
+    positions.put(TOP_SOUTH_EAST, topNorthEastPos.offset(0, 0, 1));
+    positions.put(TOP_SOUTH_WEST, topNorthEastPos.offset(-1, 0, 1));
+    positions.put(BOTTOM_NORTH_EAST, topNorthEastPos.offset(0, -1, 0));
+    positions.put(BOTTOM_NORTH_WEST, topNorthEastPos.offset(-1, -1, 0));
+    positions.put(BOTTOM_SOUTH_EAST, topNorthEastPos.offset(0, -1, 1));
+    positions.put(BOTTOM_SOUTH_WEST, topNorthEastPos.offset(-1, -1, 1));
     return positions;
   }
 

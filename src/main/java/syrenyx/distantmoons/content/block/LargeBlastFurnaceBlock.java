@@ -27,6 +27,7 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.CollisionContext;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 import syrenyx.distantmoons.content.block.block_state_enums.BlockCorner;
@@ -48,7 +49,7 @@ public class LargeBlastFurnaceBlock extends BaseEntityBlock {
   public static final BooleanProperty MIRRORED = BooleanProperty.create("mirrored");
   public static final IntegerProperty HEAT = IntegerProperty.create("heat", MIN_HEAT, MAX_HEAT);
   public static final BooleanProperty SOUL_FIRE = BooleanProperty.create("soul_fire");
-  private static boolean overrideIntegrityCheck = false;
+  private static boolean overrideIntegrityCheck = false; // This var worries me.
 
   public LargeBlastFurnaceBlock(Properties properties) {
     super(properties);
@@ -56,7 +57,7 @@ public class LargeBlastFurnaceBlock extends BaseEntityBlock {
         .setValue(CORNER, BlockCorner.TOP_NORTH_EAST)
         .setValue(FACING, Direction.NORTH)
         .setValue(MIRRORED, false)
-        .setValue(HEAT, 0)
+        .setValue(HEAT, MIN_HEAT)
         .setValue(SOUL_FIRE, false)
     );
   }
@@ -88,15 +89,15 @@ public class LargeBlastFurnaceBlock extends BaseEntityBlock {
   }
 
   protected int getAnalogOutputSignal(@NonNull BlockState blockState, Level level, @NonNull BlockPos blockPos, @NonNull Direction direction) {
-    BlockEntity blockEntity = level.getBlockEntity(blockPos);
-    return blockEntity instanceof LargeBlastFurnaceBlockEntity largeBlastFurnaceBlockEntity ? largeBlastFurnaceBlockEntity.getAnalogOutputSignal() : 0;
+    return level.getBlockEntity(blockPos) instanceof LargeBlastFurnaceBlockEntity largeBlastFurnaceBlockEntity
+        ? largeBlastFurnaceBlockEntity.getAnalogOutputSignal() : 0;
   }
 
   @Override
   protected @NonNull InteractionResult useWithoutItem(@NonNull BlockState blockState, @NonNull Level level, @NonNull BlockPos blockPos, @NonNull Player player, @NonNull BlockHitResult blockHitResult) {
     if (level.isClientSide()) return InteractionResult.SUCCESS;
     BlockEntity blockEntity = level.getBlockEntity(blockPos);
-    if (!(blockEntity instanceof LargeBlastFurnaceBlockEntity largeBlastFurnaceBlockEntity)) return InteractionResult.SUCCESS;
+    if (!(blockEntity instanceof LargeBlastFurnaceBlockEntity largeBlastFurnaceBlockEntity)) return InteractionResult.PASS;
     player.openMenu(largeBlastFurnaceBlockEntity);
     player.awardStat(DistantMoonsStats.INTERACT_WITH_LARGE_BLAST_FURNACE);
     return InteractionResult.SUCCESS;
@@ -108,10 +109,15 @@ public class LargeBlastFurnaceBlock extends BaseEntityBlock {
     Direction clickedFace = context.getClickedFace();
     List<Direction> closestEdges = BlockUtil.getBlockEdgesByCloseness(context.getClickLocation(), context.getClickedPos(), clickedFace.getAxis());
     BlockCorner corner = BlockCorner.getFrom(clickedFace, closestEdges);
-    for (BlockPos pos : corner.getCornersForPositionsInBlock(context.getClickedPos()).keySet()) {
-      if (level.isOutsideBuildHeight(pos) || !level.getBlockState(pos).canBeReplaced()) return null;
+    for (BlockPos pos : corner.getCornersForPositionsInBlock(context.getClickedPos()).values()) {
+      if (
+          level.isOutsideBuildHeight(pos)
+              || !level.getBlockState(pos).canBeReplaced()
+              || !level.isUnobstructed(this.defaultBlockState(), pos, CollisionContext.placementContext(context.getPlayer()))
+      ) return null;
     }
     Direction facing = context.getHorizontalDirection().getOpposite();
+    overrideIntegrityCheck = true;
     return this.defaultBlockState()
         .setValue(CORNER, corner)
         .setValue(FACING, facing)
@@ -120,10 +126,11 @@ public class LargeBlastFurnaceBlock extends BaseEntityBlock {
 
   @Override
   public void setPlacedBy(@NonNull Level level, @NonNull BlockPos blockPos, @NonNull BlockState blockState, @Nullable LivingEntity livingEntity, @NonNull ItemStack itemStack) {
+    overrideIntegrityCheck = false;
     super.setPlacedBy(level, blockPos, blockState, livingEntity, itemStack);
     if (level.isClientSide()) return;
     overrideIntegrityCheck = true;
-    blockState.getValue(CORNER).getCornersForPositionsInBlock(blockPos).forEach((pos, corner) -> {
+    blockState.getValue(CORNER).getCornersForPositionsInBlock(blockPos).forEach((corner, pos) -> {
       if (blockPos.equals(pos)) return;
       level.destroyBlock(pos, true);
       level.setBlock(pos, blockState.setValue(CORNER, corner), Block.UPDATE_ALL);
@@ -151,12 +158,12 @@ public class LargeBlastFurnaceBlock extends BaseEntityBlock {
     if (overrideIntegrityCheck) return true;
     Direction facing = state.getValue(FACING);
     boolean mirrored = state.getValue(MIRRORED);
-    Map<BlockPos, BlockCorner> corners = state.getValue(CORNER).getCornersForPositionsInBlock(pos);
-    for (Map.Entry<BlockPos, BlockCorner> corner : corners.entrySet()) {
-      BlockState blockState = level.getBlockState(corner.getKey());
+    Map<BlockCorner, BlockPos> corners = state.getValue(CORNER).getCornersForPositionsInBlock(pos);
+    for (Map.Entry<BlockCorner, BlockPos> corner : corners.entrySet()) {
+      BlockState blockState = level.getBlockState(corner.getValue());
       if (
           !(blockState.getBlock() instanceof LargeBlastFurnaceBlock)
-              || blockState.getValue(CORNER) != corner.getValue()
+              || blockState.getValue(CORNER) != corner.getKey()
               || blockState.getValue(FACING) != facing
               || blockState.getValue(MIRRORED) != mirrored
       ) return false;
@@ -186,12 +193,10 @@ public class LargeBlastFurnaceBlock extends BaseEntityBlock {
   }
 
   public static void breakBlocks(Level level, BlockPos blockPos, BlockState blockState) {
-    overrideIntegrityCheck = true;
-    blockState.getValue(CORNER).getCornersForPositionsInBlock(blockPos).forEach((key, value) -> {
-      if (level.getBlockState(key).getBlock() instanceof LargeBlastFurnaceBlock && blockState.getValue(CORNER) == value) {
-        level.setBlock(key, Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL);
+    blockState.getValue(CORNER).getCornersForPositionsInBlock(blockPos).forEach((corner, pos) -> {
+      if (level.getBlockState(pos).getBlock() instanceof LargeBlastFurnaceBlock && blockState.getValue(CORNER) == corner) {
+        level.destroyBlock(pos, true);
       }
     });
-    overrideIntegrityCheck = false;
   }
 }

@@ -319,7 +319,7 @@ public class LargeBlastFurnaceBlockEntity extends BaseContainerBlockEntity imple
 
     private void updateHeat(Level level) {
       float heatDifference = this.fuelHeatValue - this.heat;
-      this.heat += heatDifference / 128;
+      this.heat += heatDifference / (this.fuelHeatValue == 0 ? 32 : 128);
       if (Mth.abs(heatDifference) <= 0.01F) this.heat = this.fuelHeatValue;
       else if (this.heat < 0) this.heat = 0.0F;
       if (this.heat >= DANGEROUS_HEAT) {
