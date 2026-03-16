@@ -924,15 +924,15 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     MultiVariant variantExtensionY = createWeightedVariant(createObjectModel(block, parentType + "/extension_y", "/extension_y", textureMapY));
     MultiVariant variantExtensionZ = createWeightedVariant(createObjectModel(block, parentType + "/extension_z", "/extension_z", textureMapZ));
     this.blockGenerator.blockStateOutput.accept(MultiPartGenerator.multiPart(block)
-        .with(new ConditionBuilder().term(PoleBlock.AXIS, Direction.Axis.X), variantCenterX.with(ROTATE_X_90).with(ROTATE_Y_90).with(UV_LOCK))
-        .with(new ConditionBuilder().term(PoleBlock.AXIS, Direction.Axis.Y), variantCenterY)
-        .with(new ConditionBuilder().term(PoleBlock.AXIS, Direction.Axis.Z), variantCenterZ.with(ROTATE_X_90).with(UV_LOCK))
-        .with(new ConditionBuilder().term(PoleBlock.AXIS, Direction.Axis.X).term(PoleBlock.UP, true), variantExtensionX.with(ROTATE_X_90).with(ROTATE_Y_90).with(UV_LOCK))
-        .with(new ConditionBuilder().term(PoleBlock.AXIS, Direction.Axis.Y).term(PoleBlock.UP, true), variantExtensionY)
-        .with(new ConditionBuilder().term(PoleBlock.AXIS, Direction.Axis.Z).term(PoleBlock.UP, true), variantExtensionZ.with(ROTATE_X_90).with(UV_LOCK))
-        .with(new ConditionBuilder().term(PoleBlock.AXIS, Direction.Axis.X).term(PoleBlock.DOWN, true), variantExtensionX.with(ROTATE_X_270).with(ROTATE_Y_90).with(UV_LOCK))
-        .with(new ConditionBuilder().term(PoleBlock.AXIS, Direction.Axis.Y).term(PoleBlock.DOWN, true), variantExtensionY.with(ROTATE_X_180).with(UV_LOCK))
-        .with(new ConditionBuilder().term(PoleBlock.AXIS, Direction.Axis.Z).term(PoleBlock.DOWN, true), variantExtensionZ.with(ROTATE_X_270).with(UV_LOCK))
+        .with(new ConditionBuilder().term(AbstractPoleBlock.AXIS, Direction.Axis.X), variantCenterX.with(ROTATE_X_90).with(ROTATE_Y_90).with(UV_LOCK))
+        .with(new ConditionBuilder().term(AbstractPoleBlock.AXIS, Direction.Axis.Y), variantCenterY)
+        .with(new ConditionBuilder().term(AbstractPoleBlock.AXIS, Direction.Axis.Z), variantCenterZ.with(ROTATE_X_90).with(UV_LOCK))
+        .with(new ConditionBuilder().term(AbstractPoleBlock.AXIS, Direction.Axis.X).term(AbstractPoleBlock.UP, true), variantExtensionX.with(ROTATE_X_90).with(ROTATE_Y_90).with(UV_LOCK))
+        .with(new ConditionBuilder().term(AbstractPoleBlock.AXIS, Direction.Axis.Y).term(AbstractPoleBlock.UP, true), variantExtensionY)
+        .with(new ConditionBuilder().term(AbstractPoleBlock.AXIS, Direction.Axis.Z).term(AbstractPoleBlock.UP, true), variantExtensionZ.with(ROTATE_X_90).with(UV_LOCK))
+        .with(new ConditionBuilder().term(AbstractPoleBlock.AXIS, Direction.Axis.X).term(AbstractPoleBlock.DOWN, true), variantExtensionX.with(ROTATE_X_270).with(ROTATE_Y_90).with(UV_LOCK))
+        .with(new ConditionBuilder().term(AbstractPoleBlock.AXIS, Direction.Axis.Y).term(AbstractPoleBlock.DOWN, true), variantExtensionY.with(ROTATE_X_180).with(UV_LOCK))
+        .with(new ConditionBuilder().term(AbstractPoleBlock.AXIS, Direction.Axis.Z).term(AbstractPoleBlock.DOWN, true), variantExtensionZ.with(ROTATE_X_270).with(UV_LOCK))
     );
     this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModelUtils.plainModel(getFirstEntryOf(variantCenterY)));
   }
