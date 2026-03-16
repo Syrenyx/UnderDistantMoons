@@ -15,19 +15,19 @@ import syrenyx.distantmoons.utility.VoxelShapeUtil;
 import com.mojang.math.OctahedralGroup;
 import java.util.Map;
 
-public class BeamBlock extends PoleBlock {
+public class BeamBlock extends AbstractPoleBlock {
 
   public static final VoxelShape EXTENSION_SHAPE = Block.box(4.0, 16.0, 4.0, 12.0, 20.0, 12.0);
   private static final Map<Direction.Axis, VoxelShape> CENTER_SHAPES_BY_AXIS = VoxelShapeUtil.createAxisShapeMap(Block.box(4.0, 0.0, 4.0, 12.0, 16.0, 12.0));
   private static final Map<Direction.Axis, VoxelShape> UP_SHAPES_BY_AXIS = VoxelShapeUtil.createAxisShapeMap(EXTENSION_SHAPE);
   private static final Map<Direction.Axis, VoxelShape> DOWN_SHAPES_BY_AXIS = VoxelShapeUtil.createAxisShapeMap(Shapes.rotate(EXTENSION_SHAPE, OctahedralGroup.ROT_180_FACE_XY, VoxelShapeUtil.BLOCK_CENTER_ANCHOR));
 
-  public BeamBlock(Properties settings) {
-    super(settings);
+  public BeamBlock(Properties properties) {
+    super(properties);
   }
 
   @Override
-  protected @NonNull VoxelShape getShape(BlockState state, @NonNull BlockGetter world, @NonNull BlockPos pos, @NonNull CollisionContext context) {
+  protected @NonNull VoxelShape getShape(@NonNull BlockState state, @NonNull BlockGetter world, @NonNull BlockPos pos, @NonNull CollisionContext context) {
     VoxelShape shape = CENTER_SHAPES_BY_AXIS.get(state.getValue(AXIS));
     if (state.getValue(UP)) shape = Shapes.or(shape, UP_SHAPES_BY_AXIS.get(state.getValue(AXIS)));
     if (state.getValue(DOWN)) shape = Shapes.or(shape, DOWN_SHAPES_BY_AXIS.get(state.getValue(AXIS)));
