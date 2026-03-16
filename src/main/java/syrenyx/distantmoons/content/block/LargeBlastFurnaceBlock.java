@@ -3,7 +3,10 @@ package syrenyx.distantmoons.content.block;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
@@ -152,6 +155,47 @@ public class LargeBlastFurnaceBlock extends BaseEntityBlock {
     return shapeIntegrityCheck(level, state, pos)
         ? super.updateShape(state, level, tickView, pos, direction, neighborPos, neighborState, random)
         : Blocks.AIR.defaultBlockState();
+  }
+
+  @Override
+  public @NonNull BlockState playerWillDestroy(@NonNull Level level, @NonNull BlockPos blockPos, @NonNull BlockState blockState, @NonNull Player player) {
+    if (level.isClientSide() || !player.preventsBlockDrops()) return super.playerWillDestroy(level, blockPos, blockState, player);
+    BlockCorner corner = blockState.getValue(CORNER);
+    if (corner != BlockCorner.BOTTOM_NORTH_EAST) {
+      BlockPos cornerPos = corner.getTopNorthEastPos(blockPos).below();
+      level.setBlock(cornerPos, Blocks.AIR.defaultBlockState(), 35);
+      level.levelEvent(player, 2001, cornerPos, Block.getId(level.getBlockState(cornerPos)));
+    }
+    return super.playerWillDestroy(level, blockPos, blockState, player);
+  }
+
+  @Override
+  public void animateTick(@NonNull BlockState blockState, @NonNull Level level, @NonNull BlockPos blockPos, @NonNull RandomSource randomSource) {
+    if (blockState.getValue(CORNER) != BlockCorner.TOP_NORTH_EAST || blockState.getValue(HEAT) == MIN_HEAT) return;
+    Vec3 center = getCenter(blockPos, blockState);
+    if (randomSource.nextFloat() < 0.1F) level.playLocalSound(
+        center.x(), center.y(), center.z(),
+        SoundEvents.FURNACE_FIRE_CRACKLE, SoundSource.BLOCKS, 1.5F, 0.75F, false
+    );
+    Vec3 facingVector = blockState.getValue(FACING).getUnitVec3();
+    boolean mirrored = blockState.getValue(MIRRORED);
+    Vec3 particlePosition = center
+        .add(facingVector.multiply(1.04, 1.04, 1.04))
+        .add(
+            facingVector.z() * 0.2 * (mirrored ? 1 : -1) + facingVector.z() * 0.6 * randomSource.nextDouble() * (mirrored ? 1 : -1),
+            0.2 + randomSource.nextDouble() * -1.0,
+            facingVector.x() * 0.2 * (mirrored ? -1 : 1) + facingVector.x() * 0.6 * randomSource.nextDouble() * (mirrored ? -1 : 1)
+        );
+    level.addParticle(
+        ParticleTypes.SMOKE,
+        particlePosition.x(), particlePosition.y(), particlePosition.z(),
+        0.0, 0.0, 0.0
+    );
+    level.addParticle(
+        blockState.getValue(SOUL_FIRE) ? ParticleTypes.SOUL_FIRE_FLAME : ParticleTypes.FLAME,
+        particlePosition.x(), particlePosition.y(), particlePosition.z(),
+        0.0, 0.0, 0.0
+    );
   }
 
   public static boolean shapeIntegrityCheck(LevelReader level, BlockState state, BlockPos pos) {
