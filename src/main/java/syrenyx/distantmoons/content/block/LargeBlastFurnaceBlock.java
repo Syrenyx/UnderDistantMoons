@@ -235,6 +235,7 @@ public class LargeBlastFurnaceBlock extends BaseEntityBlock {
     );
   }
 
+  //TODO: Fix Bug
   public static void breakBlocks(Level level, BlockPos blockPos) {
     level.getBlockState(blockPos).getValue(CORNER).getCornersForPositionsInBlock(blockPos).forEach((corner, pos) -> {
       if (level.getBlockState(pos).getBlock() instanceof LargeBlastFurnaceBlock) {

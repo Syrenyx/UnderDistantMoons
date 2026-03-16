@@ -130,9 +130,7 @@ public class LargeBlastFurnaceBlockEntity extends BaseContainerBlockEntity imple
   }
 
   @Override
-  public void setRecipeUsed(@Nullable RecipeHolder<?> recipeHolder) {
-
-  }
+  public void setRecipeUsed(@Nullable RecipeHolder<?> recipeHolder) {}
 
   @Override
   public @Nullable RecipeHolder<?> getRecipeUsed() {
