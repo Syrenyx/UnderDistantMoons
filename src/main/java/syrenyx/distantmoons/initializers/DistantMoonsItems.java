@@ -15,6 +15,7 @@ import net.minecraft.world.item.component.Consumable;
 import net.minecraft.world.item.component.Consumables;
 import net.minecraft.world.item.equipment.ArmorType;
 import syrenyx.distantmoons.UnderDistantMoons;
+import syrenyx.distantmoons.content.data_component.BlastFurnaceFuelComponent;
 import syrenyx.distantmoons.content.data_component.CoiledBlockComponent;
 import syrenyx.distantmoons.content.item.CoilItem;
 import syrenyx.distantmoons.references.DistantMoonsItemMaterials;
@@ -37,6 +38,7 @@ public abstract class DistantMoonsItems {
       "coke",
       Item::new,
       new Item.Properties()
+          .component(DistantMoonsDataComponentTypes.BLAST_FURNACE_FUEL, new BlastFurnaceFuelComponent(BlastFurnaceFuelComponent.COKE_HEAT_VALUE))
   );
   public static final Item COPPER_ROD = register(
       "copper_rod",
@@ -98,6 +100,11 @@ public abstract class DistantMoonsItems {
       Item::new,
       new Item.Properties().fireResistant().sword(DistantMoonsItemMaterials.DEEP_IRON_TOOL, 3.0F, -2.4F)
   );
+  public static final Item FIRE_BRICK = register(
+      "fire_brick",
+      Item::new,
+      new Item.Properties().fireResistant()
+  );
   public static final Item IRON_ROD = register(
       "iron_rod",
       Item::new,
@@ -141,6 +148,16 @@ public abstract class DistantMoonsItems {
       new Item.Properties()
           .component(DataComponents.CONSUMABLE, Consumables.ROTTEN_FLESH)
           .component(DataComponents.FOOD, new FoodProperties(4, 0.1F, false))
+  );
+  public static final Item RUBY = register(
+      "ruby",
+      Item::new,
+      new Item.Properties()
+  );
+  public static final Item SAPPHIRE = register(
+      "sapphire",
+      Item::new,
+      new Item.Properties()
   );
   public static final Item UNDERWORLD_DUST = register(
       "underworld_dust",

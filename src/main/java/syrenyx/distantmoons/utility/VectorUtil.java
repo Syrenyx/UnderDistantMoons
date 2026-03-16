@@ -8,6 +8,8 @@ import net.minecraft.world.phys.Vec3;
 
 public abstract class VectorUtil {
 
+  public static final Vec3 HALF_VECTOR = new Vec3(0.5, 0.5, 0.5);
+
   public static Vec3 randomCrossProductVector(RandomSource random, Vec3 vector, double length) {
     Vec3 crossProduct = vector.cross(randomGaussianVector(random));
     if (crossProduct == Vec3.ZERO) {

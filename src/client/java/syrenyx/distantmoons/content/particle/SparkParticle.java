@@ -15,15 +15,15 @@ public class SparkParticle extends SingleQuadParticle {
       ClientLevel level,
       double x, double y, double z,
       double velocityX, double velocityY, double velocityZ,
-      SpriteSet spriteProvider
+      SpriteSet spriteSet
   ) {
-    super(level, x, y, z, velocityX, velocityY, velocityZ, spriteProvider.first());
+    super(level, x, y, z, velocityX, velocityY, velocityZ, spriteSet.first());
     this.friction = 0.96F;
     this.speedUpWhenYMotionIsBlocked = true;
-    this.spriteProvider = spriteProvider;
+    this.spriteProvider = spriteSet;
     this.quadSize *= 0.75F;
     this.hasPhysics = false;
-    this.setSpriteFromAge(spriteProvider);
+    this.setSpriteFromAge(spriteSet);
   }
 
   @Override

@@ -91,6 +91,7 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
         this.createSlabRecipes(Items.DARK_OAK_LOG, DistantMoonsBlocks.CUT_DARK_OAK_LOG, RecipeCategory.BUILDING_BLOCKS, "cut_log");
         this.createSlabRecipes(Items.DARK_OAK_WOOD, DistantMoonsBlocks.CUT_DARK_OAK_WOOD, RecipeCategory.BUILDING_BLOCKS, "cut_wood");
         this.createSlabRecipes(Items.DEEPSLATE, DistantMoonsBlocks.CUT_DEEPSLATE, RecipeCategory.BUILDING_BLOCKS, null);
+        this.createSlabRecipes(DistantMoonsBlocks.FIRE_BRICKS, DistantMoonsBlocks.FIRE_BRICK_SLAB, RecipeCategory.BUILDING_BLOCKS, null);
         this.createSlabRecipes(DistantMoonsBlocks.GRAY_PRISMARINE, DistantMoonsBlocks.GRAY_PRISMARINE_SLAB, RecipeCategory.BUILDING_BLOCKS, null);
         this.createSlabRecipes(Items.JUNGLE_LOG, DistantMoonsBlocks.CUT_JUNGLE_LOG, RecipeCategory.BUILDING_BLOCKS, "cut_log");
         this.createSlabRecipes(Items.JUNGLE_WOOD, DistantMoonsBlocks.CUT_JUNGLE_WOOD, RecipeCategory.BUILDING_BLOCKS, "cut_wood");
@@ -162,8 +163,13 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
         this.createResourceCompressionRecipes(DistantMoonsItems.CRUDE_DEEP_IRON_CHUNK, DistantMoonsBlocks.CRUDE_DEEP_IRON_BLOCK);
         this.createResourceCompressionRecipes(DistantMoonsItems.RAW_DEEP_IRON, DistantMoonsBlocks.RAW_DEEP_IRON_BLOCK);
         this.createResourceCompressionRecipes(DistantMoonsItems.REFINED_DEEP_IRON_NUGGET, DistantMoonsItems.REFINED_DEEP_IRON_INGOT, DistantMoonsBlocks.REFINED_DEEP_IRON_BLOCK);
+        this.createResourceCompressionRecipes(DistantMoonsItems.RUBY, DistantMoonsBlocks.RUBY_BLOCK);
+        this.createResourceCompressionRecipes(DistantMoonsItems.SAPPHIRE, DistantMoonsBlocks.SAPPHIRE_BLOCK);
 
         this.createResourceDecompressionRecipe(DistantMoonsBlocks.WAXED_IRON_BLOCK, Items.IRON_INGOT, "iron_ingot");
+
+        //2x2 COMPRESSION
+        this.createSmallCompressionRecipe(DistantMoonsItems.FIRE_BRICK, DistantMoonsBlocks.FIRE_BRICKS);
 
         //ORE SMELTING
         this.createOreSmeltingRecipes(
@@ -211,6 +217,7 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
         ));
 
         //STAIRS CRAFTING
+        this.createStairsRecipes(DistantMoonsBlocks.FIRE_BRICKS, DistantMoonsBlocks.FIRE_BRICK_STAIRS, null);
         this.createStairsRecipes(DistantMoonsBlocks.GRAY_PRISMARINE, DistantMoonsBlocks.GRAY_PRISMARINE_STAIRS, null);
         this.createStairsRecipes(DistantMoonsBlocks.PALE_PRISMARINE_BRICKS, DistantMoonsBlocks.PALE_PRISMARINE_BRICK_STAIRS, null);
         this.createStairsRecipes(DistantMoonsBlocks.PALE_PRISMARINE, DistantMoonsBlocks.PALE_PRISMARINE_STAIRS, null);
@@ -218,6 +225,7 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
         this.createStairsRecipes(DistantMoonsBlocks.PRISMARINE_TILES, DistantMoonsBlocks.PRISMARINE_TILE_STAIRS, null);
 
         //WALL CRAFTING
+        this.createWallRecipes(DistantMoonsBlocks.FIRE_BRICKS, DistantMoonsBlocks.FIRE_BRICK_WALL, null);
         this.createWallRecipes(DistantMoonsBlocks.PALE_PRISMARINE, DistantMoonsBlocks.PALE_PRISMARINE_WALL, null);
 
         //WALL SLAB CRAFTING
@@ -242,6 +250,7 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
         this.createWallSlabRecipes(Items.DIORITE, DistantMoonsBlocks.DIORITE_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.END_STONE_BRICKS, DistantMoonsBlocks.END_STONE_BRICK_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.EXPOSED_CUT_COPPER, DistantMoonsBlocks.EXPOSED_CUT_COPPER_WALL_SLAB, "exposed_cut_copper_wall_slab");
+        this.createWallSlabRecipes(DistantMoonsBlocks.FIRE_BRICKS, DistantMoonsBlocks.FIRE_BRICK_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.GRANITE, DistantMoonsBlocks.GRANITE_WALL_SLAB, null);
         this.createWallSlabRecipes(DistantMoonsBlocks.GRAY_PRISMARINE, DistantMoonsBlocks.GRAY_PRISMARINE_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.JUNGLE_PLANKS, DistantMoonsBlocks.JUNGLE_WALL_SLAB, "plank_wall_slab");
@@ -461,6 +470,13 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
         SingleItemRecipeBuilder.stonecutting(Ingredient.of(ingredient), RecipeCategory.MISC, result, 2)
             .unlockedBy(getHasName(ingredient), has(ingredient))
             .save(this.output, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/stonecutting"));
+      }
+
+      private void createSmallCompressionRecipe(ItemLike ingredient, ItemLike result) {
+        this.shaped(RecipeCategory.BUILDING_BLOCKS, result, 1)
+            .pattern("00").pattern("00")
+            .define('0', ingredient)
+            .unlockedBy(getHasName(ingredient), has(ingredient));
       }
 
       private void createSmeltingRecipes(Map<ItemLike, ItemLike> itemMap) {

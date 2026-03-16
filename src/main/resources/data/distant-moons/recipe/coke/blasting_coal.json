@@ -1,0 +1,13 @@
+{
+  "type": "distant-moons:blasting",
+  "category": "misc",
+  "ingredient": [
+    "minecraft:charcoal",
+    "minecraft:coal"
+  ],
+  "blasting_steps": 3,
+  "minimum_heat": 500,
+  "result": {
+    "id": "distant-moons:coke"
+  }
+}

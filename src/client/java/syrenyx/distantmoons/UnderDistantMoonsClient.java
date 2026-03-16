@@ -12,6 +12,7 @@ public class UnderDistantMoonsClient implements ClientModInitializer {
     DistantMoonsParticles.initialize();
     DistantMoonsRendering.initialize();
     DistantMoonsItemModelProperties.initialize();
+    DistantMoonsScreens.initialize();
     UnderDistantMoons.LOGGER.info("Content Successfully Initialized");
 	}
 }

@@ -16,7 +16,9 @@ import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.ConditionReference;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
+import syrenyx.distantmoons.content.block.LargeBlastFurnaceBlock;
 import syrenyx.distantmoons.content.block.WallSlabBlock;
+import syrenyx.distantmoons.content.block.block_state_enums.BlockCorner;
 import syrenyx.distantmoons.content.block.block_state_enums.WallSlabShape;
 import syrenyx.distantmoons.initializers.DistantMoonsBlocks;
 import syrenyx.distantmoons.references.data.DistantMoonsPredicates;
@@ -53,6 +55,9 @@ public class DistantMoonsBlockLootTableProvider extends FabricBlockLootTableProv
     this.dropSelf(DistantMoonsBlocks.DEEP_IRON_LADDER);
     this.dropSelf(DistantMoonsBlocks.DEEP_IRON_TRAPDOOR);
     this.dropSelf(DistantMoonsBlocks.EXPOSED_IRON_BLOCK);
+    this.dropSelf(DistantMoonsBlocks.FIRE_BRICK_STAIRS);
+    this.dropSelf(DistantMoonsBlocks.FIRE_BRICK_WALL);
+    this.dropSelf(DistantMoonsBlocks.FIRE_BRICKS);
     this.dropSelf(DistantMoonsBlocks.FIXED_DEEP_IRON_LADDER);
     this.dropSelf(DistantMoonsBlocks.FIXED_IRON_LADDER);
     this.dropSelf(DistantMoonsBlocks.FIXED_WROUGHT_IRON_LADDER);
@@ -80,7 +85,9 @@ public class DistantMoonsBlockLootTableProvider extends FabricBlockLootTableProv
     this.dropSelf(DistantMoonsBlocks.RAW_DEEP_IRON_BLOCK);
     this.dropSelf(DistantMoonsBlocks.REFINED_DEEP_IRON_BLOCK);
     this.dropSelf(DistantMoonsBlocks.ROPE_LADDER);
+    this.dropSelf(DistantMoonsBlocks.RUBY_BLOCK);
     this.dropSelf(DistantMoonsBlocks.RUSTED_IRON_BLOCK);
+    this.dropSelf(DistantMoonsBlocks.SAPPHIRE_BLOCK);
     this.dropSelf(DistantMoonsBlocks.SPRUCE_BEAM);
     this.dropSelf(DistantMoonsBlocks.SPRUCE_POLE);
     this.dropSelf(DistantMoonsBlocks.UNDERWORLD_LANTERN);
@@ -94,6 +101,8 @@ public class DistantMoonsBlockLootTableProvider extends FabricBlockLootTableProv
     this.dropSelf(DistantMoonsBlocks.WROUGHT_IRON_BARS);
     this.dropSelf(DistantMoonsBlocks.WROUGHT_IRON_FENCE);
     this.dropSelf(DistantMoonsBlocks.WROUGHT_IRON_LADDER);
+
+    this.addLargeBlastFurnaceDrop(DistantMoonsBlocks.BLAST_FURNACE);
 
     //INFESTED BLOCK LOOT TABLES
     this.addInfestedBlockDrop(DistantMoonsBlocks.INFESTED_CHISELED_DEEPSLATE);
@@ -135,6 +144,7 @@ public class DistantMoonsBlockLootTableProvider extends FabricBlockLootTableProv
     this.addSlabDrop(DistantMoonsBlocks.CUT_SPRUCE_WOOD);
     this.addSlabDrop(DistantMoonsBlocks.CUT_WARPED_HYPHAE);
     this.addSlabDrop(DistantMoonsBlocks.CUT_WARPED_STEM);
+    this.addSlabDrop(DistantMoonsBlocks.FIRE_BRICK_SLAB);
     this.addSlabDrop(DistantMoonsBlocks.GRAY_PRISMARINE_SLAB);
     this.addSlabDrop(DistantMoonsBlocks.PALE_PRISMARINE_BRICK_SLAB);
     this.addSlabDrop(DistantMoonsBlocks.PALE_PRISMARINE_SLAB);
@@ -189,6 +199,7 @@ public class DistantMoonsBlockLootTableProvider extends FabricBlockLootTableProv
     this.addWallSlabDrop(DistantMoonsBlocks.DIORITE_WALL_SLAB);
     this.addWallSlabDrop(DistantMoonsBlocks.END_STONE_BRICK_WALL_SLAB);
     this.addWallSlabDrop(DistantMoonsBlocks.EXPOSED_CUT_COPPER_WALL_SLAB);
+    this.addWallSlabDrop(DistantMoonsBlocks.FIRE_BRICK_WALL_SLAB);
     this.addWallSlabDrop(DistantMoonsBlocks.GRANITE_WALL_SLAB);
     this.addWallSlabDrop(DistantMoonsBlocks.GRAY_PRISMARINE_WALL_SLAB);
     this.addWallSlabDrop(DistantMoonsBlocks.JUNGLE_WALL_SLAB);
@@ -234,6 +245,18 @@ public class DistantMoonsBlockLootTableProvider extends FabricBlockLootTableProv
     this.addWallSlabDrop(DistantMoonsBlocks.WAXED_OXIDIZED_CUT_COPPER_WALL_SLAB);
     this.addWallSlabDrop(DistantMoonsBlocks.WAXED_WEATHERED_CUT_COPPER_WALL_SLAB);
     this.addWallSlabDrop(DistantMoonsBlocks.WEATHERED_CUT_COPPER_WALL_SLAB);
+  }
+
+  private void addLargeBlastFurnaceDrop(Block block) {
+    this.add(block, LootTable.lootTable().withPool(LootPool.lootPool()
+        .setRolls(new ConstantValue(1.0F))
+        .add(LootItem.lootTableItem(block.asItem())
+            .apply(ApplyExplosionDecay.explosionDecay())
+        )
+        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties()
+            .hasProperty(LargeBlastFurnaceBlock.CORNER, BlockCorner.dropCorner())
+        ))
+    ));
   }
 
   private void addInfestedBlockDrop(Block block) {

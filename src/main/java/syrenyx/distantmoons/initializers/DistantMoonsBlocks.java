@@ -8,24 +8,18 @@ import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.ChainBlock;
-import net.minecraft.world.level.block.DoorBlock;
-import net.minecraft.world.level.block.DropExperienceBlock;
-import net.minecraft.world.level.block.InfestedBlock;
-import net.minecraft.world.level.block.IronBarsBlock;
-import net.minecraft.world.level.block.SlabBlock;
-import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.TrapDoorBlock;
-import net.minecraft.world.level.block.WallBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.PushReaction;
 import syrenyx.distantmoons.UnderDistantMoons;
 import syrenyx.distantmoons.content.block.*;
+import syrenyx.distantmoons.content.data_component.BlastFurnaceFuelComponent;
 import syrenyx.distantmoons.references.DistantMoonsBlockSetTypes;
+import syrenyx.distantmoons.utility.ColorUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -99,13 +93,29 @@ public abstract class DistantMoonsBlocks {
       settings -> new DropExperienceBlock(ConstantInt.of(0), settings),
       BlockBehaviour.Properties.ofFullCopy(Blocks.BLACKSTONE)
           .strength(3.0F, 3.0F),
-      new Item.Properties().fireResistant()
+      new Item.Properties()
+          .fireResistant()
   );
   public static final Block BLACKSTONE_WALL_SLAB = register(
       "blackstone_wall_slab",
       WallSlabBlock::new,
       BlockBehaviour.Properties.ofFullCopy(Blocks.BLACKSTONE),
       new Item.Properties()
+  );
+  public static final Block BLAST_FURNACE = register(
+      "blast_furnace",
+      LargeBlastFurnaceBlock::new,
+      BlockBehaviour.Properties.of()
+          .instrument(NoteBlockInstrument.BASEDRUM)
+          .lightLevel(state -> state.getValue(LargeBlastFurnaceBlock.HEAT) * 5)
+          .mapColor(MapColor.STONE)
+          .pushReaction(PushReaction.BLOCK)
+          .requiresCorrectToolForDrops()
+          .sound(SoundType.TUFF_BRICKS)
+          .strength(8.0F, 1200.0F),
+      new Item.Properties()
+          .fireResistant()
+          .stacksTo(16)
   );
   public static final Block BRICK_WALL_SLAB = register(
       "brick_wall_slab",
@@ -118,6 +128,7 @@ public abstract class DistantMoonsBlocks {
       Block::new,
       BlockBehaviour.Properties.ofFullCopy(Blocks.COAL_BLOCK),
       new Item.Properties()
+          .component(DistantMoonsDataComponentTypes.BLAST_FURNACE_FUEL, new BlastFurnaceFuelComponent(BlastFurnaceFuelComponent.DEFAULT_BURN_TIME * 9, BlastFurnaceFuelComponent.COAL_HEAT_VALUE))
   );
   public static final Block CHERRY_BEAM = register(
       "cherry_beam",
@@ -154,6 +165,7 @@ public abstract class DistantMoonsBlocks {
       Block::new,
       BlockBehaviour.Properties.ofFullCopy(Blocks.COAL_BLOCK),
       new Item.Properties()
+          .component(DistantMoonsDataComponentTypes.BLAST_FURNACE_FUEL, new BlastFurnaceFuelComponent(BlastFurnaceFuelComponent.DEFAULT_BURN_TIME * 9, BlastFurnaceFuelComponent.COKE_HEAT_VALUE))
   );
   public static final Block CRIMSON_BEAM = register(
       "crimson_beam",
@@ -178,7 +190,8 @@ public abstract class DistantMoonsBlocks {
       Block::new,
       BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)
           .mapColor(MapColor.TERRACOTTA_WHITE),
-      new Item.Properties().fireResistant()
+      new Item.Properties()
+          .fireResistant()
   );
   public static final Block CUT_ACACIA_LOG = register(
       "cut_acacia_log",
@@ -389,45 +402,52 @@ public abstract class DistantMoonsBlocks {
       settings -> new MetalBarDoorBlock(BlockSetType.IRON, settings),
       BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_DOOR)
           .mapColor(MapColor.TERRACOTTA_WHITE),
-      new Item.Properties().fireResistant()
+      new Item.Properties()
+          .fireResistant()
   );
   public static final Block DEEP_IRON_BARS = register(
       "deep_iron_bars",
       IronBarsBlock::new,
       BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BARS),
-      new Item.Properties().fireResistant()
+      new Item.Properties()
+          .fireResistant()
   );
   public static final Block DEEP_IRON_CHAIN = register(
       "deep_iron_chain",
       ChainBlock::new,
       BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_CHAIN),
-      new Item.Properties().fireResistant()
+      new Item.Properties()
+          .fireResistant()
   );
   public static final Block DEEP_IRON_DOOR = register(
       "deep_iron_door",
       settings -> new DoorBlock(BlockSetType.IRON, settings),
       BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_DOOR)
           .mapColor(MapColor.TERRACOTTA_WHITE),
-      new Item.Properties().fireResistant()
+      new Item.Properties()
+          .fireResistant()
   );
   public static final Block DEEP_IRON_FENCE = register(
       "deep_iron_fence",
       SpikedFenceBlock::new,
       BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BARS),
-      new Item.Properties().fireResistant()
+      new Item.Properties()
+          .fireResistant()
   );
   public static final Block DEEP_IRON_LADDER = register(
       "deep_iron_ladder",
       MetalLadderBlock::new,
       BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BARS),
-      new Item.Properties().fireResistant()
+      new Item.Properties()
+          .fireResistant()
   );
   public static final Block DEEP_IRON_TRAPDOOR = register(
       "deep_iron_trapdoor",
       settings -> new TrapDoorBlock(BlockSetType.IRON, settings),
       BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_TRAPDOOR)
           .mapColor(MapColor.TERRACOTTA_WHITE),
-      new Item.Properties().fireResistant()
+      new Item.Properties()
+          .fireResistant()
   );
   public static final Block DEEPSLATE_BRICK_WALL_SLAB = register(
       "deepslate_brick_wall_slab",
@@ -440,7 +460,8 @@ public abstract class DistantMoonsBlocks {
       settings -> new DropExperienceBlock(ConstantInt.of(0), settings),
       BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE)
           .strength(4.5F, 3.0F),
-      new Item.Properties().fireResistant()
+      new Item.Properties()
+          .fireResistant()
   );
   public static final Block DEEPSLATE_TILE_WALL_SLAB = register(
       "deepslate_tile_wall_slab",
@@ -460,11 +481,47 @@ public abstract class DistantMoonsBlocks {
       BlockBehaviour.Properties.ofFullCopy(Blocks.END_STONE_BRICKS),
       new Item.Properties()
   );
+  public static final Block FIRE_BRICKS = register(
+      "fire_bricks",
+      Block::new,
+      BlockBehaviour.Properties.of()
+          .instrument(NoteBlockInstrument.BASEDRUM)
+          .mapColor(MapColor.QUARTZ)
+          .requiresCorrectToolForDrops()
+          .sound(SoundType.NETHER_BRICKS)
+          .strength(5.0F, 1200.0F),
+      new Item.Properties().fireResistant()
+  );
+  public static final Block FIRE_BRICK_SLAB = register(
+      "fire_brick_slab",
+      SlabBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(FIRE_BRICKS),
+      new Item.Properties().fireResistant()
+  );
+  public static final Block FIRE_BRICK_STAIRS = register(
+      "fire_brick_stairs",
+      SimplifiedStairsBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(FIRE_BRICKS),
+      new Item.Properties().fireResistant()
+  );
+  public static final Block FIRE_BRICK_WALL = register(
+      "fire_brick_wall",
+      WallBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(FIRE_BRICKS),
+      new Item.Properties().fireResistant()
+  );
+  public static final Block FIRE_BRICK_WALL_SLAB = register(
+      "fire_brick_wall_slab",
+      WallSlabBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(FIRE_BRICKS),
+      new Item.Properties().fireResistant()
+  );
   public static final Block FIXED_DEEP_IRON_LADDER = register(
       "fixed_deep_iron_ladder",
       FixedLadderBlock::new,
       BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BARS),
-      new Item.Properties().fireResistant()
+      new Item.Properties()
+          .fireResistant()
   );
   public static final Block FIXED_IRON_LADDER = register(
       "fixed_iron_ladder",
@@ -665,7 +722,8 @@ public abstract class DistantMoonsBlocks {
       settings -> new DropExperienceBlock(ConstantInt.of(0), settings),
       BlockBehaviour.Properties.ofFullCopy(Blocks.NETHERRACK)
           .strength(3.0F, 3.0F),
-      new Item.Properties().fireResistant()
+      new Item.Properties()
+          .fireResistant()
   );
   public static final Block OAK_BEAM = register(
       "oak_beam",
@@ -902,7 +960,8 @@ public abstract class DistantMoonsBlocks {
       Block::new,
       BlockBehaviour.Properties.ofFullCopy(Blocks.RAW_IRON_BLOCK)
           .mapColor(MapColor.TERRACOTTA_MAGENTA),
-      new Item.Properties().fireResistant()
+      new Item.Properties()
+          .fireResistant()
   );
   public static final Block RED_NETHER_BRICK_WALL_SLAB = register(
       "red_nether_brick_wall_slab",
@@ -921,7 +980,8 @@ public abstract class DistantMoonsBlocks {
       Block::new,
       BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)
           .mapColor(MapColor.TERRACOTTA_WHITE),
-      new Item.Properties().fireResistant()
+      new Item.Properties()
+          .fireResistant()
   );
   public static final Block RESIN_BRICK_WALL_SLAB = register(
       "resin_brick_wall_slab",
@@ -937,10 +997,23 @@ public abstract class DistantMoonsBlocks {
           .strength(0.5F),
       new Item.Properties()
   );
+  public static final Block RUBY_BLOCK = register(
+      "ruby_block",
+      Block::new,
+      BlockBehaviour.Properties.ofFullCopy(Blocks.DIAMOND_BLOCK),
+      new Item.Properties()
+  );
   public static final Block SANDSTONE_WALL_SLAB = register(
       "sandstone_wall_slab",
       WallSlabBlock::new,
-      BlockBehaviour.Properties.ofFullCopy(Blocks.SANDSTONE),
+      BlockBehaviour.Properties.ofFullCopy(Blocks.SANDSTONE)
+          .mapColor(MapColor.FIRE),
+      new Item.Properties()
+  );
+  public static final Block SAPPHIRE_BLOCK = register(
+      "sapphire_block",
+      Block::new,
+      BlockBehaviour.Properties.ofFullCopy(Blocks.DIAMOND_BLOCK),
       new Item.Properties()
   );
   public static final Block SMOOTH_QUARTZ_WALL_SLAB = register(
@@ -1153,7 +1226,8 @@ public abstract class DistantMoonsBlocks {
       BlockBehaviour.Properties.ofFullCopy(Blocks.LANTERN)
           .lightLevel(state -> state.getValue(BlockStateProperties.LIT) ? 15 : 0)
           .randomTicks(),
-      new Item.Properties().fireResistant()
+      new Item.Properties()
+          .fireResistant()
   );
   public static final Block WARPED_BEAM = register(
       "warped_beam",
@@ -1331,7 +1405,7 @@ public abstract class DistantMoonsBlocks {
 
   private static Map<DyeColor, Block> registerDyedVariants(String id, Function<BlockBehaviour.Properties, Block> blockFactory, BlockBehaviour.Properties settings, Item.Properties itemSettings) {
     Map<DyeColor, Block> blocks = new HashMap<>();
-    for (DyeColor color : DyeColor.values()) blocks.put(color, register(color.getName() + "_" + id, blockFactory, settings.mapColor(color), itemSettings));
+    for (DyeColor color : ColorUtil.SORTED_DYE_COLORS) blocks.put(color, register(color.getName() + "_" + id, blockFactory, settings.mapColor(color), itemSettings));
     return blocks;
   }
 

@@ -64,9 +64,9 @@ public record ExplodeEffect(
   }
 
   @Override
-  public void apply(ServerLevel world, int stage, Entity target, Vec3 pos) {
+  public void apply(ServerLevel level, int stage, Entity target, Vec3 pos) {
     Vec3 offsetPosition = pos.add(this.offset);
-    world.explode(
+    level.explode(
         this.attributeToUser ? target : null,
         this.getDamageSource(target, offsetPosition),
         new SimpleExplosionDamageCalculator(

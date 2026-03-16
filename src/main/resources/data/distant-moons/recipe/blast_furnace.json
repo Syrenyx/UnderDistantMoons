@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "0": "distant-moons:fire_bricks",
+    "1": "distant-moons:crude_deep_iron_block",
+    "2": "minecraft:polished_blackstone",
+    "3": "minecraft:furnace"
+  },
+  "pattern": [
+    "001",
+    "0 1",
+    "223"
+  ],
+  "result": {
+    "id": "distant-moons:blast_furnace"
+  }
+}

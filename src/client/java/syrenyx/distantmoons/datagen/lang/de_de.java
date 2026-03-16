@@ -8,6 +8,7 @@ import org.jspecify.annotations.NonNull;
 import syrenyx.distantmoons.initializers.DistantMoonsBlocks;
 import syrenyx.distantmoons.initializers.DistantMoonsEntityTypes;
 import syrenyx.distantmoons.initializers.DistantMoonsItems;
+import syrenyx.distantmoons.initializers.DistantMoonsStats;
 import syrenyx.distantmoons.references.tag.DistantMoonsItemTags;
 
 import java.util.Map;
@@ -97,6 +98,7 @@ public class de_de extends FabricLanguageProvider {
     builder.add(DistantMoonsBlocks.BIRCH_WALL_SLAB, "Gestufte Birkenholzwand");
     builder.add(DistantMoonsBlocks.BLACKSTONE_DEEP_IRON_ORE, "Schwarzstein-Tiefeisenerz");
     builder.add(DistantMoonsBlocks.BLACKSTONE_WALL_SLAB, "Gestufte Schwarzsteinwand");
+    builder.add(DistantMoonsBlocks.BLAST_FURNACE, "Hochofen");
     builder.add(DistantMoonsBlocks.BRICK_WALL_SLAB, "Gestufte Ziegelwand");
     builder.add(DistantMoonsBlocks.CHARCOAL_BLOCK, "Holzkohleblock");
     builder.add(DistantMoonsBlocks.CHERRY_BEAM, "Kirschholzbalken");
@@ -155,6 +157,11 @@ public class de_de extends FabricLanguageProvider {
     builder.add(DistantMoonsBlocks.DEEPSLATE_TILE_WALL_SLAB, "Gestufte Tiefenschieferfliesenwand");
     builder.add(DistantMoonsBlocks.DIORITE_WALL_SLAB, "Gestufte Dioritwand");
     builder.add(DistantMoonsBlocks.END_STONE_BRICK_WALL_SLAB, "Gestufte Endsteinziegelwand");
+    builder.add(DistantMoonsBlocks.FIRE_BRICK_SLAB, "Feuerfestziegelstufe");
+    builder.add(DistantMoonsBlocks.FIRE_BRICK_STAIRS, "Feuerfestziegeltreppe");
+    builder.add(DistantMoonsBlocks.FIRE_BRICK_WALL, "Feuerfestziegelwand");
+    builder.add(DistantMoonsBlocks.FIRE_BRICK_WALL_SLAB, "Gestufte Feuerfestziegelwand");
+    builder.add(DistantMoonsBlocks.FIRE_BRICKS, "Feuerfestziegel");
     builder.add(DistantMoonsBlocks.FIXED_DEEP_IRON_LADDER, "Feste Tiefeisenleiter");
     builder.add(DistantMoonsBlocks.FIXED_IRON_LADDER, "Feste Eisenleiter");
     builder.add(DistantMoonsBlocks.FIXED_WROUGHT_IRON_LADDER, "Feste Schmiedeeisenleiter");
@@ -228,7 +235,9 @@ public class de_de extends FabricLanguageProvider {
     builder.add(DistantMoonsBlocks.REFINED_DEEP_IRON_BLOCK, "Feiner Tiefeisenblock");
     builder.add(DistantMoonsBlocks.RESIN_BRICK_WALL_SLAB, "Gestufte Harzziegelwand");
     builder.add(DistantMoonsBlocks.ROPE_LADDER, "Strickleiter");
+    builder.add(DistantMoonsBlocks.RUBY_BLOCK, "Rubinblock");
     builder.add(DistantMoonsBlocks.SANDSTONE_WALL_SLAB, "Gestufte Sandsteinwand");
+    builder.add(DistantMoonsBlocks.SAPPHIRE_BLOCK, "Saphirblock");
     builder.add(DistantMoonsBlocks.SMOOTH_QUARTZ_WALL_SLAB, "Gestufte glatte Quarzwand");
     builder.add(DistantMoonsBlocks.SMOOTH_RED_SANDSTONE_WALL_SLAB, "Gestufte glatte rote Sandsteinwand");
     builder.add(DistantMoonsBlocks.SMOOTH_SANDSTONE_WALL_SLAB, "Gestufte glatte Sandsteinwand");
@@ -272,7 +281,7 @@ public class de_de extends FabricLanguageProvider {
     builder.add(DistantMoonsBlocks.WROUGHT_IRON_FENCE, "Schmiedeeisenzaun");
     builder.add(DistantMoonsBlocks.WROUGHT_IRON_LADDER, "Schmiedeeisenleiter");
 
-    helper.generateDyedBlockNames(DistantMoonsBlocks.DYED_PILLOWS, "%c Polster", OBJECTIVE_COLOR_ADJECTIVES);
+    helper.generateDyedBlockNames(DistantMoonsBlocks.DYED_PILLOWS, "%c Kissen", OBJECTIVE_COLOR_ADJECTIVES);
 
     builder.add(DistantMoonsBlocks.CUT_COPPER_WALL_SLAB, "Gestufte geschnittene Kupferwand");
     builder.add(DistantMoonsBlocks.EXPOSED_CUT_COPPER_WALL_SLAB, "Angelaufene gestufte geschnittene Kupferwand");
@@ -310,6 +319,8 @@ public class de_de extends FabricLanguageProvider {
     builder.add("commands.distant-moons.affliction.set.success.multiple", "Gebrechen %s wurde auf %s Ziele angewandt");
     builder.add("commands.distant-moons.affliction.set.success.single", "Gebrechen %s wurde auf %s angewandt");
 
+    builder.add("container.distant-moons.blast_furnace", "Hochofen");
+
     builder.add(DistantMoonsEntityTypes.SITTING_SPOT, "Sitzplatz");
 
     builder.add(DistantMoonsItems.COILED_ROPE_LADDER, "Aufgerollte Strickleiter");
@@ -326,6 +337,7 @@ public class de_de extends FabricLanguageProvider {
     builder.add(DistantMoonsItems.DEEP_IRON_PICKAXE, "Tiefeisenspitzhacke");
     builder.add(DistantMoonsItems.DEEP_IRON_SHOVEL, "Tiefeisenschaufel");
     builder.add(DistantMoonsItems.DEEP_IRON_SWORD, "Tiefeisenschwert");
+    builder.add(DistantMoonsItems.FIRE_BRICK, "Feuerfestziegel");
     builder.add(DistantMoonsItems.IRON_ROD, "Eisenstange");
     builder.add(DistantMoonsItems.PALE_PRISMARINE_SHARD, "Bleiche Prismarinscherbe");
     builder.add(DistantMoonsItems.RAW_DEEP_IRON, "Rohtiefeisen");
@@ -334,11 +346,17 @@ public class de_de extends FabricLanguageProvider {
     builder.add(DistantMoonsItems.REFINED_DEEP_IRON_ROD, "Feine Tiefeisenstange");
     builder.add(DistantMoonsItems.ROASTED_BROWN_MUSHROOM, "Gerösteter brauner Pilz");
     builder.add(DistantMoonsItems.ROTTEN_FISH, "Verrotteter Fisch");
+    builder.add(DistantMoonsItems.RUBY, "Rubin");
+    builder.add(DistantMoonsItems.SAPPHIRE, "Saphir");
     builder.add(DistantMoonsItems.UNDERWORLD_DUST, "Unterweltstaub");
     builder.add(DistantMoonsItems.WROUGHT_IRON_ROD, "Schmiedeeisenstange");
 
+
+    builder.add("subtitles.distant-moons.block.large_blast_furnace.blast", "Hochofen brüllt");
     builder.add("subtitles.distant-moons.entity.begin_curing_curse", "Fluch schwindet");
     builder.add("subtitles.distant-moons.entity.finish_curing_curse", "Fluch vergeht");
+
+    builder.add(DistantMoonsStats.INTERACT_WITH_LARGE_BLAST_FURNACE, "Hochöfen benutzt");
 
     builder.add(DistantMoonsItemTags.DYED_PILLOW, "Gefärbter Polster");
     builder.add(DistantMoonsItemTags.REPAIRS_DEEP_IRON_EQUIPMENT, "Repariert Tiefeisenausrüstung");

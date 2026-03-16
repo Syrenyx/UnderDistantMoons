@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_fire_bricks": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "distant-moons:fire_bricks"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "distant-moons:blast_furnace"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_fire_bricks"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "distant-moons:blast_furnace"
+    ]
+  }
+}

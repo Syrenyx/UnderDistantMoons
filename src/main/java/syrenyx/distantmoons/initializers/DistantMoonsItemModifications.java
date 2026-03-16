@@ -14,6 +14,7 @@ import net.minecraft.world.item.component.Consumable;
 import net.minecraft.world.item.component.Tool;
 import net.minecraft.world.item.consume_effects.ApplyStatusEffectsConsumeEffect;
 import net.minecraft.world.level.block.Block;
+import syrenyx.distantmoons.content.data_component.BlastFurnaceFuelComponent;
 import syrenyx.distantmoons.references.tag.DistantMoonsBlockTags;
 import syrenyx.distantmoons.references.tag.DistantMoonsItemTags;
 
@@ -44,6 +45,15 @@ public abstract class DistantMoonsItemModifications {
       context.modify(Items.BROWN_MUSHROOM, component -> {
         component.set(DataComponents.CONSUMABLE, Consumable.builder().build());
         component.set(DataComponents.FOOD, new FoodProperties(1, 0.6F, false));
+      });
+      context.modify(Items.CHARCOAL, component -> {
+        component.set(DistantMoonsDataComponentTypes.BLAST_FURNACE_FUEL, new BlastFurnaceFuelComponent(BlastFurnaceFuelComponent.COAL_HEAT_VALUE));
+      });
+      context.modify(Items.COAL, component -> {
+        component.set(DistantMoonsDataComponentTypes.BLAST_FURNACE_FUEL, new BlastFurnaceFuelComponent(BlastFurnaceFuelComponent.COAL_HEAT_VALUE));
+      });
+      context.modify(Items.COAL_BLOCK, component -> {
+        component.set(DistantMoonsDataComponentTypes.BLAST_FURNACE_FUEL, new BlastFurnaceFuelComponent(BlastFurnaceFuelComponent.DEFAULT_BURN_TIME * 9, BlastFurnaceFuelComponent.COAL_HEAT_VALUE));
       });
       context.modify(Items.CRIMSON_FUNGUS, component -> {
         component.set(DataComponents.CONSUMABLE, NETHER_FUNGUS_CONSUMABLE);

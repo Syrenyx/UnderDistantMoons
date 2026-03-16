@@ -10,7 +10,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 public abstract class VoxelShapeUtil {
 
-  public static final Vec3 BLOCK_CENTER_ANCHOR = new Vec3(0.5, 0.5, 0.5);
+  public static final Vec3 BLOCK_CENTER_ANCHOR = VectorUtil.HALF_VECTOR;
 
   public static Map<Direction.Axis, VoxelShape> createAxisShapeMap(VoxelShape shape) {
     return Maps.newEnumMap(Map.of(

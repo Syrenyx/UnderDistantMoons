@@ -17,7 +17,7 @@ import syrenyx.distantmoons.content.block.FixedLadderBlock;
 import syrenyx.distantmoons.content.block.SpikedFenceBlock;
 import syrenyx.distantmoons.content.block.WallSlabBlock;
 import syrenyx.distantmoons.references.tag.DistantMoonsBlockTags;
-import syrenyx.distantmoons.utility.BlockConnectionUtil;
+import syrenyx.distantmoons.utility.BlockUtil;
 
 @Mixin(IronBarsBlock.class)
 public abstract class IronBarsBlockMixin {
@@ -39,7 +39,7 @@ public abstract class IronBarsBlockMixin {
       if (connectedState.is(DistantMoonsBlockTags.GLASS_PANE_ALWAYS_CONNECTS_TO)) return true;
     }
     if (connectedState.getBlock() instanceof FixedLadderBlock) return FixedLadderBlock.canWallConnect(connectedState, direction);
-    if (connectedState.getBlock() instanceof StairBlock) return BlockConnectionUtil.isStairBlockFacePartiallySturdy(connectedState, direction);
+    if (connectedState.getBlock() instanceof StairBlock) return BlockUtil.isStairBlockFacePartiallySturdy(connectedState, direction);
     if (connectedState.getBlock() instanceof WallSlabBlock) return WallSlabBlock.isFacePartiallySturdy(connectedState, direction);
     return wrappedCall.call(state, blockView, blockPos, direction);
   }

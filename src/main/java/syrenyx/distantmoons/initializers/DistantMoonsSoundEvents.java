@@ -11,6 +11,7 @@ public abstract class DistantMoonsSoundEvents {
   //AMBIENT
 
   //BLOCK
+  public static final SoundEvent LARGE_BLAST_FURNACE_BLAST = register("block.large_blast_furnace.blast");
 
   //ENTITY
   public static final SoundEvent BEGIN_CURING_CURSE_OF_THE_NIGHT = register("entity.begin_curing_curse_of_the_night");

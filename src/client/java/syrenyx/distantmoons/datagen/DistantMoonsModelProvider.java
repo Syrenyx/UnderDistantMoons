@@ -20,13 +20,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.random.WeightedList;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.ChainBlock;
-import net.minecraft.world.level.block.DoorBlock;
-import net.minecraft.world.level.block.LadderBlock;
-import net.minecraft.world.level.block.SlabBlock;
-import net.minecraft.world.level.block.TrapDoorBlock;
-import net.minecraft.world.level.block.WallBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.properties.*;
 import org.jetbrains.annotations.Nullable;
 import org.jspecify.annotations.NonNull;
@@ -38,6 +32,8 @@ import syrenyx.distantmoons.datagen.utility.ModelProviderUtil;
 import syrenyx.distantmoons.initializers.DistantMoonsBlocks;
 import syrenyx.distantmoons.initializers.DistantMoonsItems;
 import syrenyx.distantmoons.references.DistantMoonsTextureSlot;
+
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -55,6 +51,23 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
 
   private static final Map<TextureSlot, String> SIMPLE_BLOCK_TEXTURE_MAP = Map.of(TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/%"));
   private static final Map<TextureSlot, String> SIMPLE_ITEM_TEXTURE_MAP = Map.of(TextureSlot.TEXTURE, UnderDistantMoons.withPrefixedNamespace("item/%"));
+  private static final Map<TextureSlot, String> BLAST_FURNACE_TEXTURE_MAP = Map.ofEntries(
+      Map.entry(TextureSlot.BOTTOM, UnderDistantMoons.withPrefixedNamespace("block/%/bottom")),
+      Map.entry(DistantMoonsTextureSlot.FRONT_LEFT_LIT, UnderDistantMoons.withPrefixedNamespace("block/%/front/mirrored/lit")),
+      Map.entry(DistantMoonsTextureSlot.FRONT_LEFT_SOUL_FIRE, UnderDistantMoons.withPrefixedNamespace("block/%/front/mirrored/soul_fire")),
+      Map.entry(DistantMoonsTextureSlot.FRONT_LEFT_UNLIT, UnderDistantMoons.withPrefixedNamespace("block/%/front/mirrored/unlit")),
+      Map.entry(DistantMoonsTextureSlot.FRONT_RIGHT_LIT, UnderDistantMoons.withPrefixedNamespace("block/%/front/default/lit")),
+      Map.entry(DistantMoonsTextureSlot.FRONT_RIGHT_SOUL_FIRE, UnderDistantMoons.withPrefixedNamespace("block/%/front/default/soul_fire")),
+      Map.entry(DistantMoonsTextureSlot.FRONT_RIGHT_UNLIT, UnderDistantMoons.withPrefixedNamespace("block/%/front/default/unlit")),
+      Map.entry(TextureSlot.INSIDE, UnderDistantMoons.withPrefixedNamespace("block/%/inside")),
+      Map.entry(TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/%/side/default")),
+      Map.entry(DistantMoonsTextureSlot.SIDE_LEFT, UnderDistantMoons.withPrefixedNamespace("block/%/side/left")),
+      Map.entry(DistantMoonsTextureSlot.SIDE_RIGHT, UnderDistantMoons.withPrefixedNamespace("block/%/side/right")),
+      Map.entry(TextureSlot.TOP, UnderDistantMoons.withPrefixedNamespace("block/%/top")),
+      Map.entry(DistantMoonsTextureSlot.TOP_ITEM, UnderDistantMoons.withPrefixedNamespace("block/%/item_top")),
+      Map.entry(DistantMoonsTextureSlot.TOP_SPECIAL, UnderDistantMoons.withPrefixedNamespace("block/%/fuel_tank_top")),
+      Map.entry(TextureSlot.PARTICLE, UnderDistantMoons.withPrefixedNamespace("block/%/particle"))
+  );
   private static final Map<TextureSlot, String> CHAIN_TEXTURE_MAP = Map.of(
       TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/%"),
       TextureSlot.TEXTURE, UnderDistantMoons.withPrefixedNamespace("item/%")
@@ -126,6 +139,7 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     registerSimpleBlock(DistantMoonsBlocks.COKE_BLOCK, SIMPLE_BLOCK_TEXTURE_MAP);
     registerSimpleBlock(DistantMoonsBlocks.CRUDE_DEEP_IRON_BLOCK, SIMPLE_BLOCK_TEXTURE_MAP);
     registerSimpleBlock(DistantMoonsBlocks.DEEPSLATE_DEEP_IRON_ORE, SIMPLE_BLOCK_TEXTURE_MAP);
+    registerSimpleBlock(DistantMoonsBlocks.FIRE_BRICKS, SIMPLE_BLOCK_TEXTURE_MAP);
     registerSimpleBlock(DistantMoonsBlocks.GRAY_PRISMARINE, SIMPLE_BLOCK_TEXTURE_MAP);
     registerSimpleBlock(DistantMoonsBlocks.INFESTED_CHISELED_DEEPSLATE, Map.of(TextureSlot.SIDE, "minecraft:block/chiseled_deepslate"));
     registerSimpleBlock(DistantMoonsBlocks.INFESTED_COBBLED_DEEPSLATE, Map.of(TextureSlot.SIDE, "minecraft:block/cobbled_deepslate"));
@@ -144,6 +158,8 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     registerSimpleBlock(DistantMoonsBlocks.PRISMARINE_TILES, SIMPLE_BLOCK_TEXTURE_MAP);
     registerSimpleBlock(DistantMoonsBlocks.RAW_DEEP_IRON_BLOCK, SIMPLE_BLOCK_TEXTURE_MAP);
     registerSimpleBlock(DistantMoonsBlocks.REFINED_DEEP_IRON_BLOCK, SIMPLE_BLOCK_TEXTURE_MAP);
+    registerSimpleBlock(DistantMoonsBlocks.RUBY_BLOCK, SIMPLE_BLOCK_TEXTURE_MAP);
+    registerSimpleBlock(DistantMoonsBlocks.SAPPHIRE_BLOCK, SIMPLE_BLOCK_TEXTURE_MAP);
 
     registerSimpleBlock(DistantMoonsBlocks.EXPOSED_IRON_BLOCK, SIMPLE_BLOCK_TEXTURE_MAP);
     registerSimpleBlock(DistantMoonsBlocks.WEATHERED_IRON_BLOCK, SIMPLE_BLOCK_TEXTURE_MAP);
@@ -156,6 +172,9 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     //BARS
     registerBarsBlock(DistantMoonsBlocks.DEEP_IRON_BARS, false, PILLAR_TEXTURE_MAP);
     registerBarsBlock(DistantMoonsBlocks.WROUGHT_IRON_BARS, false, PILLAR_TEXTURE_MAP);
+
+    //BLAST FURNACES
+    registerBlastFurnaceBlock(DistantMoonsBlocks.BLAST_FURNACE, BLAST_FURNACE_TEXTURE_MAP);
 
     //CHAINS
     registerChainBlock(DistantMoonsBlocks.DEEP_IRON_CHAIN, CHAIN_TEXTURE_MAP);
@@ -317,6 +336,7 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     registerRopeLadderBlock(DistantMoonsBlocks.ROPE_LADDER, ROPE_LADDER_TEXTURE_MAP);
 
     //SLABS
+    registerSimpleSlabBlock(DistantMoonsBlocks.FIRE_BRICK_SLAB, Map.of(TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/fire_bricks")));
     registerSimpleSlabBlock(DistantMoonsBlocks.GRAY_PRISMARINE_SLAB, Map.of(TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/gray_prismarine")));
     registerSimpleSlabBlock(DistantMoonsBlocks.PALE_PRISMARINE_BRICK_SLAB, Map.of(TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/pale_prismarine_bricks")));
     registerSimpleSlabBlock(DistantMoonsBlocks.PALE_PRISMARINE_SLAB, Map.of(TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/pale_prismarine")));
@@ -330,6 +350,7 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     registerSpikedFenceBlock(DistantMoonsBlocks.WROUGHT_IRON_FENCE, SPIKED_FENCE_TEXTURE_MAP);
 
     //STAIRS
+    registerSimpleStairsBlock(DistantMoonsBlocks.FIRE_BRICK_STAIRS, Map.of(TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/fire_bricks")));
     registerSimpleStairsBlock(DistantMoonsBlocks.GRAY_PRISMARINE_STAIRS, Map.of(TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/gray_prismarine")));
     registerSimpleStairsBlock(DistantMoonsBlocks.PALE_PRISMARINE_BRICK_STAIRS, Map.of(TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/pale_prismarine_bricks")));
     registerSimpleStairsBlock(DistantMoonsBlocks.PALE_PRISMARINE_STAIRS, Map.of(TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/pale_prismarine")));
@@ -343,6 +364,7 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     ));
 
     //WALLS
+    registerSimpleWallBlock(DistantMoonsBlocks.FIRE_BRICK_WALL, Map.of(TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/fire_bricks")));
     registerSimpleWallBlock(DistantMoonsBlocks.PALE_PRISMARINE_WALL, Map.of(TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/pale_prismarine")));
 
     //WALL SLABS - SIMPLE
@@ -364,6 +386,7 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     registerSimpleWallSlabBlock(DistantMoonsBlocks.DIORITE_WALL_SLAB, Map.of(TextureSlot.SIDE, "minecraft:block/diorite"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.END_STONE_BRICK_WALL_SLAB, Map.of(TextureSlot.SIDE, "minecraft:block/end_stone_bricks"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.EXPOSED_CUT_COPPER_WALL_SLAB, Map.of(TextureSlot.SIDE, "minecraft:block/exposed_cut_copper"));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.FIRE_BRICK_WALL_SLAB, Map.of(TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/fire_bricks")));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.GRANITE_WALL_SLAB, Map.of(TextureSlot.SIDE, "minecraft:block/granite"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.GRAY_PRISMARINE_WALL_SLAB, Map.of(TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/gray_prismarine")));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.JUNGLE_WALL_SLAB, Map.of(TextureSlot.SIDE, "minecraft:block/jungle_planks"));
@@ -450,6 +473,7 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     registerSimpleItem(DistantMoonsItems.DEEP_IRON_PICKAXE, "pickaxe", SIMPLE_ITEM_TEXTURE_MAP);
     registerSimpleItem(DistantMoonsItems.DEEP_IRON_SHOVEL, "shovel", SIMPLE_ITEM_TEXTURE_MAP);
     registerSimpleItem(DistantMoonsItems.DEEP_IRON_SWORD, "sword", SIMPLE_ITEM_TEXTURE_MAP);
+    registerSimpleItem(DistantMoonsItems.FIRE_BRICK, "simple_item", SIMPLE_ITEM_TEXTURE_MAP);
     registerSimpleItem(DistantMoonsItems.IRON_ROD, "stick", SIMPLE_ITEM_TEXTURE_MAP);
     registerSimpleItem(DistantMoonsItems.PALE_PRISMARINE_SHARD, "simple_item", SIMPLE_ITEM_TEXTURE_MAP);
     registerSimpleItem(DistantMoonsItems.RAW_DEEP_IRON, "simple_item", SIMPLE_ITEM_TEXTURE_MAP);
@@ -458,6 +482,8 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     registerSimpleItem(DistantMoonsItems.REFINED_DEEP_IRON_ROD, "stick", SIMPLE_ITEM_TEXTURE_MAP);
     registerSimpleItem(DistantMoonsItems.ROASTED_BROWN_MUSHROOM, "simple_item", SIMPLE_ITEM_TEXTURE_MAP);
     registerSimpleItem(DistantMoonsItems.ROTTEN_FISH, "simple_item", SIMPLE_ITEM_TEXTURE_MAP);
+    registerSimpleItem(DistantMoonsItems.RUBY, "simple_item", SIMPLE_ITEM_TEXTURE_MAP);
+    registerSimpleItem(DistantMoonsItems.SAPPHIRE, "simple_item", SIMPLE_ITEM_TEXTURE_MAP);
     registerSimpleItem(DistantMoonsItems.UNDERWORLD_DUST, "simple_item", SIMPLE_ITEM_TEXTURE_MAP);
     registerSimpleItem(DistantMoonsItems.WROUGHT_IRON_ROD, "stick", SIMPLE_ITEM_TEXTURE_MAP);
   }
@@ -493,6 +519,117 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
         .with(ModelProviderUtil.directionalMultipartCondition(null, null, null, true), (mirrored ? variantSideRight : variantSide).with(ROTATE_Y_270).with(UV_LOCK))
     );
     Identifier inventoryModel = createObjectModel(block, "simple_item", "/item", textureMapItem);
+    this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModelUtils.plainModel(inventoryModel));
+  }
+
+  private void registerBlastFurnaceBlock(Block block, Map<TextureSlot, String> rawTextureMap) {
+
+    Map<TextureSlot, String> textureMapBackBottomLeft = Map.of(TextureSlot.EAST, rawTextureMap.get(DistantMoonsTextureSlot.SIDE_RIGHT), TextureSlot.INSIDE, rawTextureMap.get(TextureSlot.INSIDE), TextureSlot.NORTH, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.TOP, rawTextureMap.get(TextureSlot.BOTTOM), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE));
+    Map<TextureSlot, String> textureMapBackBottomRight = Map.of(TextureSlot.EAST, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.INSIDE, rawTextureMap.get(TextureSlot.INSIDE), TextureSlot.NORTH, rawTextureMap.get(DistantMoonsTextureSlot.SIDE_LEFT), TextureSlot.TOP, rawTextureMap.get(TextureSlot.BOTTOM), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE));
+    Map<TextureSlot, String> textureMapBackTopLeft = Map.of(TextureSlot.EAST, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.INSIDE, rawTextureMap.get(TextureSlot.INSIDE), TextureSlot.NORTH, rawTextureMap.get(DistantMoonsTextureSlot.SIDE_RIGHT), TextureSlot.TOP, rawTextureMap.get(TextureSlot.TOP), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE));
+    Map<TextureSlot, String> textureMapBackTopRight = Map.of(TextureSlot.EAST, rawTextureMap.get(DistantMoonsTextureSlot.SIDE_LEFT), TextureSlot.INSIDE, rawTextureMap.get(TextureSlot.INSIDE), TextureSlot.NORTH, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.TOP, rawTextureMap.get(TextureSlot.TOP), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE));
+    Map<TextureSlot, String> textureMapBottomCorner = Map.of(TextureSlot.EAST, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.INSIDE, rawTextureMap.get(TextureSlot.INSIDE), TextureSlot.NORTH, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.TOP, rawTextureMap.get(TextureSlot.BOTTOM), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE));
+    Map<TextureSlot, String> textureMapTopCorner = Map.of(TextureSlot.EAST, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.INSIDE, rawTextureMap.get(TextureSlot.INSIDE), TextureSlot.NORTH, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.TOP, rawTextureMap.get(TextureSlot.TOP), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE));
+    Map<TextureSlot, String> textureMapItem = Map.of(TextureSlot.DOWN, rawTextureMap.get(TextureSlot.BOTTOM), TextureSlot.EAST, rawTextureMap.get(DistantMoonsTextureSlot.SIDE_LEFT), TextureSlot.NORTH, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.SOUTH, rawTextureMap.get(DistantMoonsTextureSlot.FRONT_RIGHT_UNLIT), TextureSlot.UP, rawTextureMap.get(DistantMoonsTextureSlot.TOP_ITEM), TextureSlot.WEST, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE));
+
+    MultiVariant variantBackBottomLeft = createWeightedVariant(createObjectModel(block, "large_block_corner", "/mirrored/back_bottom", textureMapBackBottomLeft));
+    MultiVariant variantBackBottomRight = createWeightedVariant(createObjectModel(block, "large_block_corner", "/default/back_bottom", textureMapBackBottomRight));
+    MultiVariant variantBackTopLeft = createWeightedVariant(createObjectModel(block, "large_block_corner", "/mirrored/back_top", textureMapBackTopLeft));
+    MultiVariant variantBackTopRight = createWeightedVariant(createObjectModel(block, "large_block_corner", "/default/back_top", textureMapBackTopRight));
+    MultiVariant variantBottomCorner = createWeightedVariant(createObjectModel(block, "large_block_corner", "/bottom_corner", textureMapBottomCorner));
+    MultiVariant variantTopCorner = createWeightedVariant(createObjectModel(block, "large_block_corner", "/top_corner", textureMapTopCorner));
+
+    Map<BlockCorner, MultiVariant> defaultBaseVariants = Map.of(
+        BlockCorner.TOP_SOUTH_EAST, variantTopCorner,
+        BlockCorner.TOP_SOUTH_WEST, variantBackTopRight,
+        BlockCorner.BOTTOM_SOUTH_EAST, variantBottomCorner,
+        BlockCorner.BOTTOM_SOUTH_WEST, variantBackBottomRight
+    );
+    Map<BlockCorner, MultiVariant> defaultLitVariants = new HashMap<>(defaultBaseVariants);
+    defaultLitVariants.putAll(Map.of(
+        BlockCorner.TOP_NORTH_EAST, createWeightedVariant(createObjectModel(block, "large_block_corner", "/default/lit/top_left", Map.of(TextureSlot.EAST, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.INSIDE, rawTextureMap.get(TextureSlot.INSIDE), TextureSlot.NORTH, rawTextureMap.get(DistantMoonsTextureSlot.FRONT_RIGHT_LIT), TextureSlot.TOP, rawTextureMap.get(TextureSlot.TOP), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE)))),
+        BlockCorner.TOP_NORTH_WEST, createWeightedVariant(createObjectModel(block, "blast_furnace_fuel_tank_top", "/default/lit/top_right", Map.of(TextureSlot.EAST, rawTextureMap.get(DistantMoonsTextureSlot.FRONT_RIGHT_LIT), TextureSlot.INSIDE, rawTextureMap.get(TextureSlot.INSIDE), TextureSlot.NORTH, rawTextureMap.get(DistantMoonsTextureSlot.SIDE_LEFT), TextureSlot.TOP, rawTextureMap.get(DistantMoonsTextureSlot.TOP_SPECIAL), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE)))),
+        BlockCorner.BOTTOM_NORTH_EAST, createWeightedVariant(createObjectModel(block, "large_block_corner", "/default/lit/bottom_left", Map.of(TextureSlot.EAST, rawTextureMap.get(DistantMoonsTextureSlot.FRONT_RIGHT_LIT), TextureSlot.INSIDE, rawTextureMap.get(TextureSlot.INSIDE), TextureSlot.NORTH, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.TOP, rawTextureMap.get(TextureSlot.BOTTOM), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE)))),
+        BlockCorner.BOTTOM_NORTH_WEST, createWeightedVariant(createObjectModel(block, "large_block_corner", "/default/lit/bottom_right", Map.of(TextureSlot.EAST, rawTextureMap.get(DistantMoonsTextureSlot.SIDE_LEFT), TextureSlot.INSIDE, rawTextureMap.get(TextureSlot.INSIDE), TextureSlot.NORTH, rawTextureMap.get(DistantMoonsTextureSlot.FRONT_RIGHT_LIT), TextureSlot.TOP, rawTextureMap.get(TextureSlot.BOTTOM), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE))))
+    ));
+    Map<BlockCorner, MultiVariant> defaultSoulFireVariants = new HashMap<>(defaultBaseVariants);
+    defaultSoulFireVariants.putAll(Map.of(
+        BlockCorner.TOP_NORTH_EAST, createWeightedVariant(createObjectModel(block, "large_block_corner", "/default/soul_fire/top_left", Map.of(TextureSlot.EAST, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.INSIDE, rawTextureMap.get(TextureSlot.INSIDE), TextureSlot.NORTH, rawTextureMap.get(DistantMoonsTextureSlot.FRONT_RIGHT_SOUL_FIRE), TextureSlot.TOP, rawTextureMap.get(TextureSlot.TOP), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE)))),
+        BlockCorner.TOP_NORTH_WEST, createWeightedVariant(createObjectModel(block, "blast_furnace_fuel_tank_top", "/default/soul_fire/top_right", Map.of(TextureSlot.EAST, rawTextureMap.get(DistantMoonsTextureSlot.FRONT_RIGHT_SOUL_FIRE), TextureSlot.INSIDE, rawTextureMap.get(TextureSlot.INSIDE), TextureSlot.NORTH, rawTextureMap.get(DistantMoonsTextureSlot.SIDE_LEFT), TextureSlot.TOP, rawTextureMap.get(DistantMoonsTextureSlot.TOP_SPECIAL), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE)))),
+        BlockCorner.BOTTOM_NORTH_EAST, createWeightedVariant(createObjectModel(block, "large_block_corner", "/default/soul_fire/bottom_left", Map.of(TextureSlot.EAST, rawTextureMap.get(DistantMoonsTextureSlot.FRONT_RIGHT_SOUL_FIRE), TextureSlot.INSIDE, rawTextureMap.get(TextureSlot.INSIDE), TextureSlot.NORTH, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.TOP, rawTextureMap.get(TextureSlot.BOTTOM), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE)))),
+        BlockCorner.BOTTOM_NORTH_WEST, createWeightedVariant(createObjectModel(block, "large_block_corner", "/default/soul_fire/bottom_right", Map.of(TextureSlot.EAST, rawTextureMap.get(DistantMoonsTextureSlot.SIDE_LEFT), TextureSlot.INSIDE, rawTextureMap.get(TextureSlot.INSIDE), TextureSlot.NORTH, rawTextureMap.get(DistantMoonsTextureSlot.FRONT_RIGHT_SOUL_FIRE), TextureSlot.TOP, rawTextureMap.get(TextureSlot.BOTTOM), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE))))
+    ));
+    Map<BlockCorner, MultiVariant> defaultUnlitVariants = new HashMap<>(defaultBaseVariants);
+    defaultUnlitVariants.putAll(Map.of(
+        BlockCorner.TOP_NORTH_EAST, createWeightedVariant(createObjectModel(block, "large_block_corner", "/default/unlit/top_left", Map.of(TextureSlot.EAST, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.INSIDE, rawTextureMap.get(TextureSlot.INSIDE), TextureSlot.NORTH, rawTextureMap.get(DistantMoonsTextureSlot.FRONT_RIGHT_UNLIT), TextureSlot.TOP, rawTextureMap.get(TextureSlot.TOP), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE)))),
+        BlockCorner.TOP_NORTH_WEST, createWeightedVariant(createObjectModel(block, "blast_furnace_fuel_tank_top", "/default/unlit/top_right", Map.of(TextureSlot.EAST, rawTextureMap.get(DistantMoonsTextureSlot.FRONT_RIGHT_UNLIT), TextureSlot.INSIDE, rawTextureMap.get(TextureSlot.INSIDE), TextureSlot.NORTH, rawTextureMap.get(DistantMoonsTextureSlot.SIDE_LEFT), TextureSlot.TOP, rawTextureMap.get(DistantMoonsTextureSlot.TOP_SPECIAL), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE)))),
+        BlockCorner.BOTTOM_NORTH_EAST, createWeightedVariant(createObjectModel(block, "large_block_corner", "/default/unlit/bottom_left", Map.of(TextureSlot.EAST, rawTextureMap.get(DistantMoonsTextureSlot.FRONT_RIGHT_UNLIT), TextureSlot.INSIDE, rawTextureMap.get(TextureSlot.INSIDE), TextureSlot.NORTH, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.TOP, rawTextureMap.get(TextureSlot.BOTTOM), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE)))),
+        BlockCorner.BOTTOM_NORTH_WEST, createWeightedVariant(createObjectModel(block, "large_block_corner", "/default/unlit/bottom_right", Map.of(TextureSlot.EAST, rawTextureMap.get(DistantMoonsTextureSlot.SIDE_LEFT), TextureSlot.INSIDE, rawTextureMap.get(TextureSlot.INSIDE), TextureSlot.NORTH, rawTextureMap.get(DistantMoonsTextureSlot.FRONT_RIGHT_UNLIT), TextureSlot.TOP, rawTextureMap.get(TextureSlot.BOTTOM), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE))))
+    ));
+    Map<BlockCorner, MultiVariant> mirroredBaseVariants = Map.of(
+        BlockCorner.TOP_SOUTH_EAST, variantBackTopLeft,
+        BlockCorner.TOP_SOUTH_WEST, variantTopCorner,
+        BlockCorner.BOTTOM_SOUTH_EAST, variantBackBottomLeft,
+        BlockCorner.BOTTOM_SOUTH_WEST, variantBottomCorner
+    );
+    Map<BlockCorner, MultiVariant> mirroredLitVariants = new HashMap<>(mirroredBaseVariants);
+    mirroredLitVariants.putAll(Map.of(
+        BlockCorner.TOP_NORTH_EAST, createWeightedVariant(createObjectModel(block, "blast_furnace_fuel_tank_top", "/mirrored/lit/top_left", Map.of(TextureSlot.EAST, rawTextureMap.get(DistantMoonsTextureSlot.SIDE_RIGHT), TextureSlot.INSIDE, rawTextureMap.get(TextureSlot.INSIDE), TextureSlot.NORTH, rawTextureMap.get(DistantMoonsTextureSlot.FRONT_LEFT_LIT), TextureSlot.TOP, rawTextureMap.get(DistantMoonsTextureSlot.TOP_SPECIAL), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE)))),
+        BlockCorner.TOP_NORTH_WEST, createWeightedVariant(createObjectModel(block, "large_block_corner", "/mirrored/lit/top_right", Map.of(TextureSlot.EAST, rawTextureMap.get(DistantMoonsTextureSlot.FRONT_LEFT_LIT), TextureSlot.INSIDE, rawTextureMap.get(TextureSlot.INSIDE), TextureSlot.NORTH, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.TOP, rawTextureMap.get(TextureSlot.TOP), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE)))),
+        BlockCorner.BOTTOM_NORTH_EAST, createWeightedVariant(createObjectModel(block, "large_block_corner", "/mirrored/lit/bottom_left", Map.of(TextureSlot.EAST, rawTextureMap.get(DistantMoonsTextureSlot.FRONT_LEFT_LIT), TextureSlot.INSIDE, rawTextureMap.get(TextureSlot.INSIDE), TextureSlot.NORTH, rawTextureMap.get(DistantMoonsTextureSlot.SIDE_RIGHT), TextureSlot.TOP, rawTextureMap.get(TextureSlot.BOTTOM), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE)))),
+        BlockCorner.BOTTOM_NORTH_WEST, createWeightedVariant(createObjectModel(block, "large_block_corner", "/mirrored/lit/bottom_right", Map.of(TextureSlot.EAST, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.INSIDE, rawTextureMap.get(TextureSlot.INSIDE), TextureSlot.NORTH, rawTextureMap.get(DistantMoonsTextureSlot.FRONT_LEFT_LIT), TextureSlot.TOP, rawTextureMap.get(TextureSlot.BOTTOM), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE))))
+    ));
+    Map<BlockCorner, MultiVariant> mirroredSoulFireVariants = new HashMap<>(mirroredBaseVariants);
+    mirroredSoulFireVariants.putAll(Map.of(
+        BlockCorner.TOP_NORTH_EAST, createWeightedVariant(createObjectModel(block, "blast_furnace_fuel_tank_top", "/mirrored/soul_fire/top_left", Map.of(TextureSlot.EAST, rawTextureMap.get(DistantMoonsTextureSlot.SIDE_RIGHT), TextureSlot.INSIDE, rawTextureMap.get(TextureSlot.INSIDE), TextureSlot.NORTH, rawTextureMap.get(DistantMoonsTextureSlot.FRONT_LEFT_SOUL_FIRE), TextureSlot.TOP, rawTextureMap.get(DistantMoonsTextureSlot.TOP_SPECIAL), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE)))),
+        BlockCorner.TOP_NORTH_WEST, createWeightedVariant(createObjectModel(block, "large_block_corner", "/mirrored/soul_fire/top_right", Map.of(TextureSlot.EAST, rawTextureMap.get(DistantMoonsTextureSlot.FRONT_LEFT_SOUL_FIRE), TextureSlot.INSIDE, rawTextureMap.get(TextureSlot.INSIDE), TextureSlot.NORTH, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.TOP, rawTextureMap.get(TextureSlot.TOP), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE)))),
+        BlockCorner.BOTTOM_NORTH_EAST, createWeightedVariant(createObjectModel(block, "large_block_corner", "/mirrored/soul_fire/bottom_left", Map.of(TextureSlot.EAST, rawTextureMap.get(DistantMoonsTextureSlot.FRONT_LEFT_SOUL_FIRE), TextureSlot.INSIDE, rawTextureMap.get(TextureSlot.INSIDE), TextureSlot.NORTH, rawTextureMap.get(DistantMoonsTextureSlot.SIDE_RIGHT), TextureSlot.TOP, rawTextureMap.get(TextureSlot.BOTTOM), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE)))),
+        BlockCorner.BOTTOM_NORTH_WEST, createWeightedVariant(createObjectModel(block, "large_block_corner", "/mirrored/soul_fire/bottom_right", Map.of(TextureSlot.EAST, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.INSIDE, rawTextureMap.get(TextureSlot.INSIDE), TextureSlot.NORTH, rawTextureMap.get(DistantMoonsTextureSlot.FRONT_LEFT_SOUL_FIRE), TextureSlot.TOP, rawTextureMap.get(TextureSlot.BOTTOM), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE))))
+    ));
+    Map<BlockCorner, MultiVariant> mirroredUnlitVariants = new HashMap<>(mirroredBaseVariants);
+    mirroredUnlitVariants.putAll(Map.of(
+        BlockCorner.TOP_NORTH_EAST, createWeightedVariant(createObjectModel(block, "blast_furnace_fuel_tank_top", "/mirrored/unlit/top_left", Map.of(TextureSlot.EAST, rawTextureMap.get(DistantMoonsTextureSlot.SIDE_RIGHT), TextureSlot.INSIDE, rawTextureMap.get(TextureSlot.INSIDE), TextureSlot.NORTH, rawTextureMap.get(DistantMoonsTextureSlot.FRONT_LEFT_UNLIT), TextureSlot.TOP, rawTextureMap.get(DistantMoonsTextureSlot.TOP_SPECIAL), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE)))),
+        BlockCorner.TOP_NORTH_WEST, createWeightedVariant(createObjectModel(block, "large_block_corner", "/mirrored/unlit/top_right", Map.of(TextureSlot.EAST, rawTextureMap.get(DistantMoonsTextureSlot.FRONT_LEFT_UNLIT), TextureSlot.INSIDE, rawTextureMap.get(TextureSlot.INSIDE), TextureSlot.NORTH, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.TOP, rawTextureMap.get(TextureSlot.TOP), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE)))),
+        BlockCorner.BOTTOM_NORTH_EAST, createWeightedVariant(createObjectModel(block, "large_block_corner", "/mirrored/unlit/bottom_left", Map.of(TextureSlot.EAST, rawTextureMap.get(DistantMoonsTextureSlot.FRONT_LEFT_UNLIT), TextureSlot.INSIDE, rawTextureMap.get(TextureSlot.INSIDE), TextureSlot.NORTH, rawTextureMap.get(DistantMoonsTextureSlot.SIDE_RIGHT), TextureSlot.TOP, rawTextureMap.get(TextureSlot.BOTTOM), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE)))),
+        BlockCorner.BOTTOM_NORTH_WEST, createWeightedVariant(createObjectModel(block, "large_block_corner", "/mirrored/unlit/bottom_right", Map.of(TextureSlot.EAST, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.INSIDE, rawTextureMap.get(TextureSlot.INSIDE), TextureSlot.NORTH, rawTextureMap.get(DistantMoonsTextureSlot.FRONT_LEFT_UNLIT), TextureSlot.TOP, rawTextureMap.get(TextureSlot.BOTTOM), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE))))
+    ));
+
+    PropertyDispatch.C5<MultiVariant, Integer, Boolean, Boolean, Direction, BlockCorner> propertyDispatch = PropertyDispatch
+        .initial(LargeBlastFurnaceBlock.HEAT, LargeBlastFurnaceBlock.SOUL_FIRE, LargeBlastFurnaceBlock.MIRRORED, LargeBlastFurnaceBlock.FACING, LargeBlastFurnaceBlock.CORNER);
+
+    for (Direction direction : Direction.values()) {
+      if (direction.getAxis() == Direction.Axis.Y) continue;
+      for (BlockCorner corner : BlockCorner.values()) {
+        for (int properties = 0; properties < 16; properties++) {
+          int heat = properties % 4;
+          boolean soulFire = properties % 8 > 3;
+          boolean mirrored = properties > 7;
+          propertyDispatch.select(heat, soulFire, mirrored, direction, corner,
+              (mirrored
+                  ? heat == 0 ? mirroredUnlitVariants : soulFire ? mirroredSoulFireVariants : mirroredLitVariants
+                  : heat == 0 ? defaultUnlitVariants : soulFire ? defaultSoulFireVariants : defaultLitVariants
+              )
+                  .get(corner.rotate(switch (direction) {
+                    case EAST -> Rotation.CLOCKWISE_90;
+                    case SOUTH -> Rotation.CLOCKWISE_180;
+                    case WEST -> Rotation.COUNTERCLOCKWISE_90;
+                    default -> Rotation.NONE;
+                  }))
+                  .with(corner.top ? NO_OP : ROTATE_X_180)
+                  .with(switch (corner) {
+                    case TOP_NORTH_WEST, BOTTOM_NORTH_EAST -> ROTATE_Y_270;
+                    case TOP_SOUTH_EAST, BOTTOM_SOUTH_WEST -> ROTATE_Y_90;
+                    case TOP_SOUTH_WEST, BOTTOM_NORTH_WEST -> ROTATE_Y_180;
+                    default -> NO_OP;
+                  })
+                  .with(UV_LOCK)
+          );
+        }
+      }
+    }
+
+    this.blockGenerator.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(propertyDispatch));
+    Identifier inventoryModel = createObjectModel(block, "large_facing_block", "/item", textureMapItem);
     this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModelUtils.plainModel(inventoryModel));
   }
 

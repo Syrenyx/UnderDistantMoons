@@ -5,9 +5,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.world.item.DyeColor;
 import org.jspecify.annotations.NonNull;
-import syrenyx.distantmoons.initializers.DistantMoonsBlocks;
-import syrenyx.distantmoons.initializers.DistantMoonsEntityTypes;
-import syrenyx.distantmoons.initializers.DistantMoonsItems;
+import syrenyx.distantmoons.initializers.*;
 import syrenyx.distantmoons.references.tag.DistantMoonsItemTags;
 
 import java.util.Map;
@@ -61,6 +59,7 @@ public class en_us extends FabricLanguageProvider {
     builder.add(DistantMoonsBlocks.BIRCH_WALL_SLAB, "Birch Wall Slab");
     builder.add(DistantMoonsBlocks.BLACKSTONE_DEEP_IRON_ORE, "Blackstone Deep Iron Ore");
     builder.add(DistantMoonsBlocks.BLACKSTONE_WALL_SLAB, "Blackstone Wall Slab");
+    builder.add(DistantMoonsBlocks.BLAST_FURNACE, "Blast Furnace");
     builder.add(DistantMoonsBlocks.BRICK_WALL_SLAB, "Brick Wall Slab");
     builder.add(DistantMoonsBlocks.CHARCOAL_BLOCK, "Block of Charcoal");
     builder.add(DistantMoonsBlocks.CHERRY_BEAM, "Cherry Beam");
@@ -119,6 +118,11 @@ public class en_us extends FabricLanguageProvider {
     builder.add(DistantMoonsBlocks.DEEPSLATE_TILE_WALL_SLAB, "Deepslate Tile Wall Slab");
     builder.add(DistantMoonsBlocks.DIORITE_WALL_SLAB, "Diorite Wall Slab");
     builder.add(DistantMoonsBlocks.END_STONE_BRICK_WALL_SLAB, "End Stone Brick Wall Slab");
+    builder.add(DistantMoonsBlocks.FIRE_BRICK_SLAB, "Fire Brick Slab");
+    builder.add(DistantMoonsBlocks.FIRE_BRICK_STAIRS, "Fire Brick Stairs");
+    builder.add(DistantMoonsBlocks.FIRE_BRICK_WALL, "Fire Brick Wall");
+    builder.add(DistantMoonsBlocks.FIRE_BRICK_WALL_SLAB, "Fire Brick Wall Slab");
+    builder.add(DistantMoonsBlocks.FIRE_BRICKS, "Fire Bricks");
     builder.add(DistantMoonsBlocks.FIXED_DEEP_IRON_LADDER, "Fixed Deep Iron Ladder");
     builder.add(DistantMoonsBlocks.FIXED_IRON_LADDER, "Fixed Iron Ladder");
     builder.add(DistantMoonsBlocks.FIXED_WROUGHT_IRON_LADDER, "Fixed Wrought Iron Ladder");
@@ -192,7 +196,9 @@ public class en_us extends FabricLanguageProvider {
     builder.add(DistantMoonsBlocks.REFINED_DEEP_IRON_BLOCK, "Block of Refined Deep Iron");
     builder.add(DistantMoonsBlocks.RESIN_BRICK_WALL_SLAB, "Resin Brick Wall Slab");
     builder.add(DistantMoonsBlocks.ROPE_LADDER, "Rope Ladder");
+    builder.add(DistantMoonsBlocks.RUBY_BLOCK, "Block of Ruby");
     builder.add(DistantMoonsBlocks.SANDSTONE_WALL_SLAB, "Sandstone Wall Slab");
+    builder.add(DistantMoonsBlocks.SAPPHIRE_BLOCK, "Block of Sapphire");
     builder.add(DistantMoonsBlocks.SMOOTH_QUARTZ_WALL_SLAB, "Smooth Quartz Wall Slab");
     builder.add(DistantMoonsBlocks.SMOOTH_RED_SANDSTONE_WALL_SLAB, "Smooth Red Sandstone Wall Slab");
     builder.add(DistantMoonsBlocks.SMOOTH_SANDSTONE_WALL_SLAB, "Smooth Sandstone Wall Slab");
@@ -274,6 +280,8 @@ public class en_us extends FabricLanguageProvider {
     builder.add("commands.distant-moons.affliction.set.success.multiple", "Applied affliction %s to %s targets");
     builder.add("commands.distant-moons.affliction.set.success.single", "Applied affliction %s to %s");
 
+    builder.add("container.distant-moons.blast_furnace", "Blast Furnace");
+
     builder.add(DistantMoonsEntityTypes.SITTING_SPOT, "Sitting Spot");
 
     builder.add(DistantMoonsItems.COILED_ROPE_LADDER, "Coiled Rope Ladder");
@@ -290,6 +298,7 @@ public class en_us extends FabricLanguageProvider {
     builder.add(DistantMoonsItems.DEEP_IRON_PICKAXE, "Deep Iron Pickaxe");
     builder.add(DistantMoonsItems.DEEP_IRON_SHOVEL, "Deep Iron Shovel");
     builder.add(DistantMoonsItems.DEEP_IRON_SWORD, "Deep Iron Sword");
+    builder.add(DistantMoonsItems.FIRE_BRICK, "Fire Brick");
     builder.add(DistantMoonsItems.IRON_ROD, "Iron Rod");
     builder.add(DistantMoonsItems.PALE_PRISMARINE_SHARD, "Pale Prismarine Shard");
     builder.add(DistantMoonsItems.RAW_DEEP_IRON, "Raw Deep Iron");
@@ -298,11 +307,16 @@ public class en_us extends FabricLanguageProvider {
     builder.add(DistantMoonsItems.REFINED_DEEP_IRON_ROD, "Refined Deep Iron Rod");
     builder.add(DistantMoonsItems.ROASTED_BROWN_MUSHROOM, "Roasted Brown Mushroom");
     builder.add(DistantMoonsItems.ROTTEN_FISH, "Rotten Fish");
+    builder.add(DistantMoonsItems.RUBY, "Ruby");
+    builder.add(DistantMoonsItems.SAPPHIRE, "Sapphire");
     builder.add(DistantMoonsItems.UNDERWORLD_DUST, "Underworld Dust");
     builder.add(DistantMoonsItems.WROUGHT_IRON_ROD, "Wrought Iron Rod");
 
+    builder.add("subtitles.distant-moons.block.large_blast_furnace.blast", "Blast Furnace roars");
     builder.add("subtitles.distant-moons.entity.begin_curing_curse", "Curse wanes");
     builder.add("subtitles.distant-moons.entity.finish_curing_curse", "Curse lifts");
+
+    builder.add(DistantMoonsStats.INTERACT_WITH_LARGE_BLAST_FURNACE, "Interactions with Blast Furnace");
 
     builder.add(DistantMoonsItemTags.DYED_PILLOW, "Dyed Pillow");
     builder.add(DistantMoonsItemTags.REPAIRS_DEEP_IRON_EQUIPMENT, "Repairs Deep Iron Equipment");
