@@ -28,10 +28,7 @@ public abstract class DistantMoonsItems {
       "coiled_rope_ladder",
       settings -> new CoilItem(DistantMoonsBlocks.ROPE_LADDER, settings),
       new Item.Properties()
-          .component(
-              DistantMoonsDataComponentTypes.COILED_BLOCK,
-              new CoiledBlockComponent.Builder().amount(9).build()
-          )
+          .component(DistantMoonsDataComponentTypes.COILED_BLOCK, new CoiledBlockComponent.Builder().amount(9).build())
           .stacksTo(16)
   );
   public static final Item COKE = register(
@@ -48,62 +45,95 @@ public abstract class DistantMoonsItems {
   public static final Item CRUDE_DEEP_IRON_CHUNK = register(
       "crude_deep_iron_chunk",
       Item::new,
-      new Item.Properties().fireResistant()
+      new Item.Properties()
+          .fireResistant()
   );
   public static final Item DEEP_IRON_AXE = register(
       "deep_iron_axe",
       settings -> new AxeItem(ToolMaterial.IRON, 6.0F, -3.1F, settings),
-      new Item.Properties().fireResistant()
+      new Item.Properties()
+          .fireResistant()
   );
   public static final Item DEEP_IRON_BOOTS = register(
       "deep_iron_boots",
       Item::new,
-      new Item.Properties().humanoidArmor(DistantMoonsItemMaterials.DEEP_IRON_ARMOR, ArmorType.BOOTS).fireResistant()
+      new Item.Properties()
+          .fireResistant()
+          .humanoidArmor(DistantMoonsItemMaterials.DEEP_IRON_ARMOR, ArmorType.BOOTS)
   );
   public static final Item DEEP_IRON_CHESTPLATE = register(
       "deep_iron_chestplate",
       Item::new,
-      new Item.Properties().humanoidArmor(DistantMoonsItemMaterials.DEEP_IRON_ARMOR, ArmorType.CHESTPLATE).fireResistant()
+      new Item.Properties()
+          .fireResistant()
+          .humanoidArmor(DistantMoonsItemMaterials.DEEP_IRON_ARMOR, ArmorType.CHESTPLATE)
   );
   public static final Item DEEP_IRON_HELMET = register(
       "deep_iron_helmet",
       Item::new,
-      new Item.Properties().humanoidArmor(DistantMoonsItemMaterials.DEEP_IRON_ARMOR, ArmorType.HELMET).fireResistant()
+      new Item.Properties()
+          .fireResistant()
+          .humanoidArmor(DistantMoonsItemMaterials.DEEP_IRON_ARMOR, ArmorType.HELMET)
   );
   public static final Item DEEP_IRON_HOE = register(
       "deep_iron_hoe",
-      settings -> new HoeItem(ToolMaterial.IRON, -2.0F, -1.0F, settings),
-      new Item.Properties().fireResistant()
+      settings -> new HoeItem(DistantMoonsItemMaterials.DEEP_IRON_TOOL, -2.0F, -1.0F, settings),
+      new Item.Properties()
+          .fireResistant()
   );
   public static final Item DEEP_IRON_HORSE_ARMOR = register(
       "deep_iron_horse_armor",
       Item::new,
-      new Item.Properties().horseArmor(DistantMoonsItemMaterials.DEEP_IRON_ARMOR).fireResistant()
+      new Item.Properties()
+          .fireResistant()
+          .horseArmor(DistantMoonsItemMaterials.DEEP_IRON_ARMOR)
   );
   public static final Item DEEP_IRON_LEGGINGS = register(
       "deep_iron_leggings",
       Item::new,
-      new Item.Properties().humanoidArmor(DistantMoonsItemMaterials.DEEP_IRON_ARMOR, ArmorType.LEGGINGS).fireResistant()
+      new Item.Properties()
+          .fireResistant()
+          .humanoidArmor(DistantMoonsItemMaterials.DEEP_IRON_ARMOR, ArmorType.LEGGINGS)
+  );
+  public static final Item DEEP_IRON_NAUTILUS_ARMOR = register(
+      "deep_iron_nautilus_armor",
+      Item::new,
+      new Item.Properties()
+          .fireResistant()
+          .nautilusArmor(DistantMoonsItemMaterials.DEEP_IRON_ARMOR)
   );
   public static final Item DEEP_IRON_PICKAXE = register(
       "deep_iron_pickaxe",
       Item::new,
-      new Item.Properties().fireResistant().pickaxe(DistantMoonsItemMaterials.DEEP_IRON_TOOL, 1.0F, -2.8F)
+      new Item.Properties()
+          .fireResistant()
+          .pickaxe(DistantMoonsItemMaterials.DEEP_IRON_TOOL, 1.0F, -2.8F)
   );
   public static final Item DEEP_IRON_SHOVEL = register(
       "deep_iron_shovel",
-      settings -> new ShovelItem(ToolMaterial.IRON, 1.5F, -3.0F, settings),
-      new Item.Properties().fireResistant()
+      settings -> new ShovelItem(DistantMoonsItemMaterials.DEEP_IRON_TOOL, 1.5F, -3.0F, settings),
+      new Item.Properties()
+          .fireResistant()
+  );
+  public static final Item DEEP_IRON_SPEAR = register(
+      "deep_iron_spear",
+      Item::new,
+      new Item.Properties()
+          .fireResistant()
+          .spear(DistantMoonsItemMaterials.DEEP_IRON_TOOL, 0.95F, 0.95F, 0.6F, 2.5F, 8.0F, 6.75F, 5.1F, 11.25F, 4.6F)
   );
   public static final Item DEEP_IRON_SWORD = register(
       "deep_iron_sword",
       Item::new,
-      new Item.Properties().fireResistant().sword(DistantMoonsItemMaterials.DEEP_IRON_TOOL, 3.0F, -2.4F)
+      new Item.Properties()
+          .fireResistant()
+          .sword(DistantMoonsItemMaterials.DEEP_IRON_TOOL, 3.0F, -2.4F)
   );
   public static final Item FIRE_BRICK = register(
       "fire_brick",
       Item::new,
-      new Item.Properties().fireResistant()
+      new Item.Properties()
+          .fireResistant()
   );
   public static final Item IRON_ROD = register(
       "iron_rod",
@@ -118,22 +148,26 @@ public abstract class DistantMoonsItems {
   public static final Item RAW_DEEP_IRON = register(
       "raw_deep_iron",
       Item::new,
-      new Item.Properties().fireResistant()
+      new Item.Properties()
+          .fireResistant()
   );
   public static final Item REFINED_DEEP_IRON_INGOT = register(
       "refined_deep_iron_ingot",
       Item::new,
-      new Item.Properties().fireResistant()
+      new Item.Properties()
+          .fireResistant()
   );
   public static final Item REFINED_DEEP_IRON_NUGGET = register(
       "refined_deep_iron_nugget",
       Item::new,
-      new Item.Properties().fireResistant()
+      new Item.Properties()
+          .fireResistant()
   );
   public static final Item REFINED_DEEP_IRON_ROD = register(
       "refined_deep_iron_rod",
       Item::new,
-      new Item.Properties().fireResistant()
+      new Item.Properties()
+          .fireResistant()
   );
   public static final Item ROASTED_BROWN_MUSHROOM = register(
       "roasted_brown_mushroom",

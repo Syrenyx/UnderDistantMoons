@@ -231,6 +231,9 @@ public class en_us extends FabricLanguageProvider {
     builder.add(DistantMoonsBlocks.STRIPPED_CUT_SPRUCE_WOOD, "Stripped Cut Spruce Wood");
     builder.add(DistantMoonsBlocks.STRIPPED_CUT_WARPED_HYPHAE, "Stripped Cut Warped Hyphae");
     builder.add(DistantMoonsBlocks.STRIPPED_CUT_WARPED_STEM, "Stripped Cut Warped Stem");
+    builder.add(DistantMoonsBlocks.TERRACOTTA_SLAB, "Terracotta Slab");
+    builder.add(DistantMoonsBlocks.TERRACOTTA_STAIRS, "Terracotta Stairs");
+    builder.add(DistantMoonsBlocks.TERRACOTTA_WALL_SLAB, "Terracotta Wall Slab");
     builder.add(DistantMoonsBlocks.TUFF_BRICK_WALL_SLAB, "Tuff Brick Wall Slab");
     builder.add(DistantMoonsBlocks.TUFF_WALL_SLAB, "Tuff Wall Slab");
     builder.add(DistantMoonsBlocks.UNDERWORLD_LANTERN, "Underworld Lantern");
@@ -242,7 +245,13 @@ public class en_us extends FabricLanguageProvider {
     builder.add(DistantMoonsBlocks.WROUGHT_IRON_FENCE, "Wrought Iron Fence");
     builder.add(DistantMoonsBlocks.WROUGHT_IRON_LADDER, "Wrought Iron Ladder");
 
+    helper.generateDyedBlockNames(DistantMoonsBlocks.DYED_CONCRETE_SLABS, "%c Concrete Slab", COLOR_NAMES);
+    helper.generateDyedBlockNames(DistantMoonsBlocks.DYED_CONCRETE_STAIRS, "%c Concrete Stairs", COLOR_NAMES);
+    helper.generateDyedBlockNames(DistantMoonsBlocks.DYED_CONCRETE_WALL_SLABS, "%c Concrete Wall Slab", COLOR_NAMES);
     helper.generateDyedBlockNames(DistantMoonsBlocks.DYED_PILLOWS, "%c Pillow", COLOR_NAMES);
+    helper.generateDyedBlockNames(DistantMoonsBlocks.DYED_TERRACOTTA_SLABS, "%c Terracotta Slab", COLOR_NAMES);
+    helper.generateDyedBlockNames(DistantMoonsBlocks.DYED_TERRACOTTA_STAIRS, "%c Terracotta Stairs", COLOR_NAMES);
+    helper.generateDyedBlockNames(DistantMoonsBlocks.DYED_TERRACOTTA_WALL_SLABS, "%c Terracotta Wall Slab", COLOR_NAMES);
 
     builder.add(DistantMoonsBlocks.CUT_COPPER_WALL_SLAB, "Cut Copper Wall Slab");
     builder.add(DistantMoonsBlocks.EXPOSED_CUT_COPPER_WALL_SLAB, "Exposed Cut Copper Wall Slab");
@@ -295,8 +304,10 @@ public class en_us extends FabricLanguageProvider {
     builder.add(DistantMoonsItems.DEEP_IRON_HOE, "Deep Iron Hoe");
     builder.add(DistantMoonsItems.DEEP_IRON_HORSE_ARMOR, "Deep Iron Horse Armor");
     builder.add(DistantMoonsItems.DEEP_IRON_LEGGINGS, "Deep Iron Leggings");
+    builder.add(DistantMoonsItems.DEEP_IRON_NAUTILUS_ARMOR, "Deep Iron Nautilus Armor");
     builder.add(DistantMoonsItems.DEEP_IRON_PICKAXE, "Deep Iron Pickaxe");
     builder.add(DistantMoonsItems.DEEP_IRON_SHOVEL, "Deep Iron Shovel");
+    builder.add(DistantMoonsItems.DEEP_IRON_SPEAR, "Deep Iron Spear");
     builder.add(DistantMoonsItems.DEEP_IRON_SWORD, "Deep Iron Sword");
     builder.add(DistantMoonsItems.FIRE_BRICK, "Fire Brick");
     builder.add(DistantMoonsItems.IRON_ROD, "Iron Rod");
@@ -318,7 +329,17 @@ public class en_us extends FabricLanguageProvider {
 
     builder.add(DistantMoonsStats.INTERACT_WITH_LARGE_BLAST_FURNACE, "Interactions with Blast Furnace");
 
+    builder.add(DistantMoonsItemTags.CORUNDUM, "Corundum");
+    builder.add(DistantMoonsItemTags.CORUNDUM_BLOCK, "Corundum Block");
+    builder.add(DistantMoonsItemTags.DEEP_IRON_BLOCK, "Deep Iron Block");
+    builder.add(DistantMoonsItemTags.DEEP_IRON_INGOT, "Deep Iron Ingot");
+    builder.add(DistantMoonsItemTags.DYED_CONCRETE_SLAB, "Dyed Concrete Slab");
+    builder.add(DistantMoonsItemTags.DYED_CONCRETE_STAIRS, "Dyed Concrete Stairs");
+    builder.add(DistantMoonsItemTags.DYED_CONCRETE_WALL_SLAB, "Dyed Concrete Wall Slab");
     builder.add(DistantMoonsItemTags.DYED_PILLOW, "Dyed Pillow");
+    builder.add(DistantMoonsItemTags.DYED_TERRACOTTA_SLAB, "Dyed Terracotta Slab");
+    builder.add(DistantMoonsItemTags.DYED_TERRACOTTA_STAIRS, "Dyed Terracotta Stairs");
+    builder.add(DistantMoonsItemTags.DYED_TERRACOTTA_WALL_SLAB, "Dyed Terracotta Wall Slab");
     builder.add(DistantMoonsItemTags.REPAIRS_DEEP_IRON_EQUIPMENT, "Repairs Deep Iron Equipment");
     builder.add(DistantMoonsItemTags.SMELTING_FUEL_WOOD_BLOCK, "Wooden Block Fuel");
     builder.add(DistantMoonsItemTags.SMELTING_FUEL_WOOD_HALF_BLOCK, "Wooden Slab Fuel");

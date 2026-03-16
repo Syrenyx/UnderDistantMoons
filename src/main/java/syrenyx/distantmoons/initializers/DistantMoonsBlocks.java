@@ -1208,6 +1208,24 @@ public abstract class DistantMoonsBlocks {
       BlockBehaviour.Properties.ofFullCopy(Blocks.WARPED_STEM),
       new Item.Properties()
   );
+  public static final Block TERRACOTTA_SLAB = register(
+      "terracotta_slab",
+      SlabBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(Blocks.TERRACOTTA),
+      new Item.Properties()
+  );
+  public static final Block TERRACOTTA_STAIRS = register(
+      "terracotta_stairs",
+      SimplifiedStairsBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(Blocks.TERRACOTTA),
+      new Item.Properties()
+  );
+  public static final Block TERRACOTTA_WALL_SLAB = register(
+      "terracotta_wall_slab",
+      WallSlabBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(Blocks.TERRACOTTA),
+      new Item.Properties()
+  );
   public static final Block TUFF_BRICK_WALL_SLAB = register(
       "tuff_brick_wall_slab",
       WallSlabBlock::new,
@@ -1274,11 +1292,50 @@ public abstract class DistantMoonsBlocks {
   );
 
   //DYED BLOCKS
+  public static final Map<DyeColor, Block> DYED_CONCRETE_SLABS = registerDyedVariants(
+      "concrete_slab",
+      SlabBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(Blocks.WHITE_CONCRETE),
+      new Item.Properties()
+  );
+  public static final Map<DyeColor, Block> DYED_CONCRETE_STAIRS = registerDyedVariants(
+      "concrete_stairs",
+      SimplifiedStairsBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(Blocks.WHITE_CONCRETE),
+      new Item.Properties()
+  );
+  public static final Map<DyeColor, Block> DYED_CONCRETE_WALL_SLABS = registerDyedVariants(
+      "concrete_wall_slab",
+      WallSlabBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(Blocks.WHITE_CONCRETE),
+      new Item.Properties()
+  );
   public static final Map<DyeColor, Block> DYED_PILLOWS = registerDyedVariants(
       "pillow",
       PillowBlock::new,
       BlockBehaviour.Properties.ofFullCopy(Blocks.WHITE_WOOL),
       new Item.Properties()
+  );
+  public static final Map<DyeColor, Block> DYED_TERRACOTTA_SLABS = registerDyedVariants(
+      "terracotta_slab",
+      SlabBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(Blocks.WHITE_TERRACOTTA),
+      new Item.Properties(),
+      ColorUtil.TERRACOTTA_MAP_COLORS
+  );
+  public static final Map<DyeColor, Block> DYED_TERRACOTTA_STAIRS = registerDyedVariants(
+      "terracotta_stairs",
+      SimplifiedStairsBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(Blocks.WHITE_TERRACOTTA),
+      new Item.Properties(),
+      ColorUtil.TERRACOTTA_MAP_COLORS
+  );
+  public static final Map<DyeColor, Block> DYED_TERRACOTTA_WALL_SLABS = registerDyedVariants(
+      "terracotta_wall_slab",
+      WallSlabBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(Blocks.WHITE_TERRACOTTA),
+      new Item.Properties(),
+      ColorUtil.TERRACOTTA_MAP_COLORS
   );
 
   //OXIDIZABLE BLOCKS
@@ -1388,24 +1445,28 @@ public abstract class DistantMoonsBlocks {
   );
 
   private static Block register(
-      String id, Function<BlockBehaviour.Properties, Block> blockFactory, BlockBehaviour.Properties settings
+      String id, Function<BlockBehaviour.Properties, Block> blockFactory, BlockBehaviour.Properties properties
   ) {
     ResourceKey<Block> key = ResourceKey.create(Registries.BLOCK, UnderDistantMoons.identifierOf(id));
-    return Registry.register(BuiltInRegistries.BLOCK, key, blockFactory.apply(settings.setId(key)));
+    return Registry.register(BuiltInRegistries.BLOCK, key, blockFactory.apply(properties.setId(key)));
   }
 
   private static Block register(
-      String id, Function<BlockBehaviour.Properties, Block> blockFactory, BlockBehaviour.Properties blockSettings, Item.Properties itemSettings
+      String id, Function<BlockBehaviour.Properties, Block> blockFactory, BlockBehaviour.Properties blockProperties, Item.Properties itemProperties
   ) {
-    Block block = register(id, blockFactory, blockSettings);
+    Block block = register(id, blockFactory, blockProperties);
     ResourceKey<Item> key = ResourceKey.create(Registries.ITEM, UnderDistantMoons.identifierOf(id));
-    Registry.register(BuiltInRegistries.ITEM, key, new BlockItem(block, itemSettings.setId(key).useBlockDescriptionPrefix()));
+    Registry.register(BuiltInRegistries.ITEM, key, new BlockItem(block, itemProperties.setId(key).useBlockDescriptionPrefix()));
     return block;
   }
 
-  private static Map<DyeColor, Block> registerDyedVariants(String id, Function<BlockBehaviour.Properties, Block> blockFactory, BlockBehaviour.Properties settings, Item.Properties itemSettings) {
+  private static Map<DyeColor, Block> registerDyedVariants(String id, Function<BlockBehaviour.Properties, Block> blockFactory, BlockBehaviour.Properties properties, Item.Properties itemSettings) {
+    return registerDyedVariants(id, blockFactory, properties, itemSettings, ColorUtil.DEFAULT_MAP_COLORS);
+  }
+
+  private static Map<DyeColor, Block> registerDyedVariants(String id, Function<BlockBehaviour.Properties, Block> blockFactory, BlockBehaviour.Properties properties, Item.Properties itemSettings, Map<DyeColor, MapColor> mapColors) {
     Map<DyeColor, Block> blocks = new HashMap<>();
-    for (DyeColor color : ColorUtil.SORTED_DYE_COLORS) blocks.put(color, register(color.getName() + "_" + id, blockFactory, settings.mapColor(color), itemSettings));
+    for (DyeColor color : ColorUtil.SORTED_DYE_COLORS) blocks.put(color, register(color.getName() + "_" + id, blockFactory, properties.mapColor(mapColors.get(color)), itemSettings));
     return blocks;
   }
 

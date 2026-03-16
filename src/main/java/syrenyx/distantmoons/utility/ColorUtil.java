@@ -1,9 +1,14 @@
 package syrenyx.distantmoons.utility;
 
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.material.MapColor;
 
 public abstract class ColorUtil {
 
@@ -13,6 +18,31 @@ public abstract class ColorUtil {
       DyeColor.LIME, DyeColor.GREEN, DyeColor.CYAN, DyeColor.LIGHT_BLUE,
       DyeColor.BLUE, DyeColor.PURPLE, DyeColor.MAGENTA, DyeColor.PINK
   );
+  public static final Map<DyeColor, MapColor> DEFAULT_MAP_COLORS;
+  public static final Map<DyeColor, MapColor> TERRACOTTA_MAP_COLORS = Map.ofEntries(
+      Map.entry(DyeColor.WHITE, MapColor.TERRACOTTA_WHITE),
+      Map.entry(DyeColor.LIGHT_GRAY, MapColor.TERRACOTTA_LIGHT_GRAY),
+      Map.entry(DyeColor.GRAY, MapColor.TERRACOTTA_GRAY),
+      Map.entry(DyeColor.BLACK, MapColor.TERRACOTTA_BLACK),
+      Map.entry(DyeColor.BROWN, MapColor.TERRACOTTA_BROWN),
+      Map.entry(DyeColor.RED, MapColor.TERRACOTTA_RED),
+      Map.entry(DyeColor.ORANGE, MapColor.TERRACOTTA_ORANGE),
+      Map.entry(DyeColor.YELLOW, MapColor.TERRACOTTA_YELLOW),
+      Map.entry(DyeColor.LIME, MapColor.TERRACOTTA_LIGHT_GREEN),
+      Map.entry(DyeColor.GREEN, MapColor.TERRACOTTA_GREEN),
+      Map.entry(DyeColor.CYAN, MapColor.TERRACOTTA_CYAN),
+      Map.entry(DyeColor.LIGHT_BLUE, MapColor.TERRACOTTA_LIGHT_BLUE),
+      Map.entry(DyeColor.BLUE, MapColor.TERRACOTTA_BLUE),
+      Map.entry(DyeColor.PURPLE, MapColor.TERRACOTTA_PURPLE),
+      Map.entry(DyeColor.MAGENTA, MapColor.TERRACOTTA_MAGENTA),
+      Map.entry(DyeColor.PINK, MapColor.TERRACOTTA_PINK)
+  );
+
+  static {
+    final Map<DyeColor, MapColor> colors = new HashMap<>();
+    SORTED_DYE_COLORS.forEach(dyeColor -> colors.put(dyeColor, dyeColor.getMapColor()));
+    DEFAULT_MAP_COLORS = Collections.unmodifiableMap(colors);
+  }
 
   public static Item getDyeItemByColor(DyeColor color) {
     return switch (color) {

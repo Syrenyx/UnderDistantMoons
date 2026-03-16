@@ -304,6 +304,15 @@ public abstract class DistantMoonsItemGroups {
 
     //COLORED BLOCKS
     addToGroup(CreativeModeTabs.COLORED_BLOCKS, Items.PINK_BED, DistantMoonsBlocks.DYED_PILLOWS);
+    addToGroup(CreativeModeTabs.COLORED_BLOCKS, Items.PINK_TERRACOTTA, DistantMoonsBlocks.DYED_TERRACOTTA_WALL_SLABS);
+    addToGroup(CreativeModeTabs.COLORED_BLOCKS, Items.PINK_TERRACOTTA, List.of(DistantMoonsBlocks.TERRACOTTA_WALL_SLAB.asItem().getDefaultInstance()));
+    addToGroup(CreativeModeTabs.COLORED_BLOCKS, Items.PINK_TERRACOTTA, DistantMoonsBlocks.DYED_TERRACOTTA_SLABS);
+    addToGroup(CreativeModeTabs.COLORED_BLOCKS, Items.PINK_TERRACOTTA, List.of(DistantMoonsBlocks.TERRACOTTA_SLAB.asItem().getDefaultInstance()));
+    addToGroup(CreativeModeTabs.COLORED_BLOCKS, Items.PINK_TERRACOTTA, DistantMoonsBlocks.DYED_TERRACOTTA_STAIRS);
+    addToGroup(CreativeModeTabs.COLORED_BLOCKS, Items.PINK_TERRACOTTA, List.of(DistantMoonsBlocks.TERRACOTTA_STAIRS.asItem().getDefaultInstance()));
+    addToGroup(CreativeModeTabs.COLORED_BLOCKS, Items.PINK_CONCRETE, DistantMoonsBlocks.DYED_CONCRETE_WALL_SLABS);
+    addToGroup(CreativeModeTabs.COLORED_BLOCKS, Items.PINK_CONCRETE, DistantMoonsBlocks.DYED_CONCRETE_SLABS);
+    addToGroup(CreativeModeTabs.COLORED_BLOCKS, Items.PINK_CONCRETE, DistantMoonsBlocks.DYED_CONCRETE_STAIRS);
 
     //NATURAL
     addToGroup(CreativeModeTabs.NATURAL_BLOCKS, Items.NETHER_QUARTZ_ORE, List.of(
@@ -361,9 +370,8 @@ public abstract class DistantMoonsItemGroups {
 
     //COMBAT
     addToGroup(CreativeModeTabs.COMBAT, Items.IRON_SWORD, List.of(DistantMoonsItems.DEEP_IRON_SWORD.getDefaultInstance()));
-    addToGroup(CreativeModeTabs.COMBAT, Items.IRON_AXE, List.of(
-        DistantMoonsItems.DEEP_IRON_AXE.getDefaultInstance()
-    ));
+    addToGroup(CreativeModeTabs.COMBAT, Items.IRON_SPEAR, List.of(DistantMoonsItems.DEEP_IRON_SPEAR.getDefaultInstance()));
+    addToGroup(CreativeModeTabs.COMBAT, Items.IRON_AXE, List.of(DistantMoonsItems.DEEP_IRON_AXE.getDefaultInstance()));
     addToGroup(CreativeModeTabs.COMBAT, Items.IRON_BOOTS, List.of(
         DistantMoonsItems.DEEP_IRON_HELMET.getDefaultInstance(),
         DistantMoonsItems.DEEP_IRON_CHESTPLATE.getDefaultInstance(),
@@ -371,6 +379,7 @@ public abstract class DistantMoonsItemGroups {
         DistantMoonsItems.DEEP_IRON_BOOTS.getDefaultInstance()
     ));
     addToGroup(CreativeModeTabs.COMBAT, Items.IRON_HORSE_ARMOR, List.of(DistantMoonsItems.DEEP_IRON_HORSE_ARMOR.getDefaultInstance()));
+    addToGroup(CreativeModeTabs.COMBAT, Items.IRON_NAUTILUS_ARMOR, List.of(DistantMoonsItems.DEEP_IRON_NAUTILUS_ARMOR.getDefaultInstance()));
 
     //FOOD AND DRINK
     addToGroup(CreativeModeTabs.FOOD_AND_DRINKS, Items.MELON_SLICE, List.of(Items.GLISTERING_MELON_SLICE.getDefaultInstance()));

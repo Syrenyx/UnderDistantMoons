@@ -29,10 +29,10 @@ public class DistantMoonsBlockTagProvider extends FabricTagProvider.BlockTagProv
         DistantMoonsBlocks.FIXED_WROUGHT_IRON_LADDER
     );
     this.valueLookupBuilder(DistantMoonsBlockTags.GLASS)
-        .addTag(DistantMoonsBlockTags.COLORED_STAINED_GLASS)
+        .addTag(DistantMoonsBlockTags.DYED_STAINED_GLASS)
         .add(Blocks.GLASS, Blocks.TINTED_GLASS);
     this.valueLookupBuilder(DistantMoonsBlockTags.GLASS_PANE)
-        .addTag(DistantMoonsBlockTags.COLORED_STAINED_GLASS_PANE)
+        .addTag(DistantMoonsBlockTags.DYED_STAINED_GLASS_PANE)
         .add(Blocks.GLASS_PANE);
     this.valueLookupBuilder(DistantMoonsBlockTags.METAL_BAR_DOOR).add(
         DistantMoonsBlocks.DEEP_IRON_BAR_DOOR,
@@ -95,20 +95,38 @@ public class DistantMoonsBlockTagProvider extends FabricTagProvider.BlockTagProv
     );
 
     //DYED BLOCK GROUPS
+    this.valueLookupBuilder(DistantMoonsBlockTags.DYED_CONCRETE_SLAB).addAll(
+        DistantMoonsBlocks.DYED_CONCRETE_SLABS.values()
+    );
+    this.valueLookupBuilder(DistantMoonsBlockTags.DYED_CONCRETE_STAIRS).addAll(
+        DistantMoonsBlocks.DYED_CONCRETE_STAIRS.values()
+    );
+    this.valueLookupBuilder(DistantMoonsBlockTags.DYED_CONCRETE_WALL_SLAB).addAll(
+        DistantMoonsBlocks.DYED_CONCRETE_WALL_SLABS.values()
+    );
     this.valueLookupBuilder(DistantMoonsBlockTags.DYED_PILLOW).addAll(
         DistantMoonsBlocks.DYED_PILLOWS.values()
     );
-    this.valueLookupBuilder(DistantMoonsBlockTags.COLORED_STAINED_GLASS).add(
+    this.valueLookupBuilder(DistantMoonsBlockTags.DYED_STAINED_GLASS).add(
         Blocks.BLACK_STAINED_GLASS, Blocks.BLUE_STAINED_GLASS, Blocks.BROWN_STAINED_GLASS, Blocks.CYAN_STAINED_GLASS,
         Blocks.GRAY_STAINED_GLASS, Blocks.GREEN_STAINED_GLASS, Blocks.LIGHT_BLUE_STAINED_GLASS, Blocks.LIGHT_GRAY_STAINED_GLASS,
         Blocks.LIME_STAINED_GLASS, Blocks.MAGENTA_STAINED_GLASS, Blocks.ORANGE_STAINED_GLASS, Blocks.PINK_STAINED_GLASS,
         Blocks.PURPLE_STAINED_GLASS, Blocks.RED_STAINED_GLASS, Blocks.WHITE_STAINED_GLASS, Blocks.YELLOW_STAINED_GLASS
     );
-    this.valueLookupBuilder(DistantMoonsBlockTags.COLORED_STAINED_GLASS_PANE).add(
+    this.valueLookupBuilder(DistantMoonsBlockTags.DYED_STAINED_GLASS_PANE).add(
         Blocks.BLACK_STAINED_GLASS_PANE, Blocks.BLUE_STAINED_GLASS_PANE, Blocks.BROWN_STAINED_GLASS_PANE, Blocks.CYAN_STAINED_GLASS_PANE,
         Blocks.GRAY_STAINED_GLASS_PANE, Blocks.GREEN_STAINED_GLASS_PANE, Blocks.LIGHT_BLUE_STAINED_GLASS_PANE, Blocks.LIGHT_GRAY_STAINED_GLASS_PANE,
         Blocks.LIME_STAINED_GLASS_PANE, Blocks.MAGENTA_STAINED_GLASS_PANE, Blocks.ORANGE_STAINED_GLASS_PANE, Blocks.PINK_STAINED_GLASS_PANE,
         Blocks.PURPLE_STAINED_GLASS_PANE, Blocks.RED_STAINED_GLASS_PANE, Blocks.WHITE_STAINED_GLASS_PANE, Blocks.YELLOW_STAINED_GLASS_PANE
+    );
+    this.valueLookupBuilder(DistantMoonsBlockTags.DYED_TERRACOTTA_SLAB).addAll(
+        DistantMoonsBlocks.DYED_TERRACOTTA_SLABS.values()
+    );
+    this.valueLookupBuilder(DistantMoonsBlockTags.DYED_TERRACOTTA_STAIRS).addAll(
+        DistantMoonsBlocks.DYED_TERRACOTTA_STAIRS.values()
+    );
+    this.valueLookupBuilder(DistantMoonsBlockTags.DYED_TERRACOTTA_WALL_SLAB).addAll(
+        DistantMoonsBlocks.DYED_TERRACOTTA_WALL_SLABS.values()
     );
 
     //OXIDIZABLE BLOCK GROUPS
@@ -132,7 +150,7 @@ public class DistantMoonsBlockTagProvider extends FabricTagProvider.BlockTagProv
         .forceAddTag(BlockTags.BARS)
         .forceAddTag(BlockTags.WALLS);
     this.valueLookupBuilder(DistantMoonsBlockTags.BARS_NEVER_CONNECTS_TO)
-        .addTag(DistantMoonsBlockTags.COLORED_STAINED_GLASS)
+        .addTag(DistantMoonsBlockTags.DYED_STAINED_GLASS)
         .addTag(DistantMoonsBlockTags.METAL_BAR_DOOR)
         .addTag(DistantMoonsBlockTags.NEVER_CONNECT_TO);
 
@@ -143,7 +161,7 @@ public class DistantMoonsBlockTagProvider extends FabricTagProvider.BlockTagProv
     this.valueLookupBuilder(DistantMoonsBlockTags.BRICK_FENCE_ALWAYS_CONNECTS_TO)
         .addTag(DistantMoonsBlockTags.BRICK_FENCE);
     this.valueLookupBuilder(DistantMoonsBlockTags.BRICK_FENCE_NEVER_CONNECTS_TO)
-        .addTag(DistantMoonsBlockTags.COLORED_STAINED_GLASS)
+        .addTag(DistantMoonsBlockTags.DYED_STAINED_GLASS)
         .addTag(DistantMoonsBlockTags.FIXED_LADDER)
         .addTag(DistantMoonsBlockTags.METAL_BAR_DOOR)
         .addTag(DistantMoonsBlockTags.NEVER_CONNECT_TO);
@@ -181,7 +199,7 @@ public class DistantMoonsBlockTagProvider extends FabricTagProvider.BlockTagProv
         .forceAddTag(BlockTags.BARS)
         .forceAddTag(BlockTags.WALLS);
     this.valueLookupBuilder(DistantMoonsBlockTags.SPIKED_FENCE_NEVER_CONNECTS_TO)
-        .addTag(DistantMoonsBlockTags.COLORED_STAINED_GLASS)
+        .addTag(DistantMoonsBlockTags.DYED_STAINED_GLASS)
         .addTag(DistantMoonsBlockTags.METAL_BAR_DOOR)
         .addTag(DistantMoonsBlockTags.NEVER_CONNECT_TO);
     this.valueLookupBuilder(DistantMoonsBlockTags.SPIKED_FENCE_NOT_BLOCKED_BY)
@@ -197,14 +215,14 @@ public class DistantMoonsBlockTagProvider extends FabricTagProvider.BlockTagProv
         .forceAddTag(BlockTags.BARS)
         .forceAddTag(BlockTags.WALLS);
     this.valueLookupBuilder(DistantMoonsBlockTags.WALL_NEVER_CONNECTS_TO)
-        .addTag(DistantMoonsBlockTags.COLORED_STAINED_GLASS)
+        .addTag(DistantMoonsBlockTags.DYED_STAINED_GLASS)
         .addTag(DistantMoonsBlockTags.METAL_BAR_DOOR)
         .addTag(DistantMoonsBlockTags.NEVER_CONNECT_TO);
 
     this.valueLookupBuilder(DistantMoonsBlockTags.WOODEN_FENCE_ALWAYS_CONNECTS_TO)
         .addTag(DistantMoonsBlockTags.WOODEN_FENCE);
     this.valueLookupBuilder(DistantMoonsBlockTags.WOODEN_FENCE_NEVER_CONNECTS_TO)
-        .addTag(DistantMoonsBlockTags.COLORED_STAINED_GLASS)
+        .addTag(DistantMoonsBlockTags.DYED_STAINED_GLASS)
         .addTag(DistantMoonsBlockTags.FIXED_LADDER)
         .addTag(DistantMoonsBlockTags.METAL_BAR_DOOR)
         .addTag(DistantMoonsBlockTags.NEVER_CONNECT_TO);

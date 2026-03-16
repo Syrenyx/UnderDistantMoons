@@ -102,6 +102,10 @@ public class DistantMoonsBlockLootTableProvider extends FabricBlockLootTableProv
     this.dropSelf(DistantMoonsBlocks.WROUGHT_IRON_FENCE);
     this.dropSelf(DistantMoonsBlocks.WROUGHT_IRON_LADDER);
 
+    DistantMoonsBlocks.DYED_CONCRETE_STAIRS.values().forEach(this::dropSelf);
+    DistantMoonsBlocks.DYED_TERRACOTTA_STAIRS.values().forEach(this::dropSelf);
+
+    //LARGE BLAST FURNACE LOOT TABLES
     this.addLargeBlastFurnaceDrop(DistantMoonsBlocks.BLAST_FURNACE);
 
     //INFESTED BLOCK LOOT TABLES
@@ -175,7 +179,9 @@ public class DistantMoonsBlockLootTableProvider extends FabricBlockLootTableProv
     this.addSlabDrop(DistantMoonsBlocks.STRIPPED_CUT_WARPED_HYPHAE);
     this.addSlabDrop(DistantMoonsBlocks.STRIPPED_CUT_WARPED_STEM);
 
+    DistantMoonsBlocks.DYED_CONCRETE_SLABS.values().forEach(this::addSlabDrop);
     DistantMoonsBlocks.DYED_PILLOWS.values().forEach(this::addSlabDrop);
+    DistantMoonsBlocks.DYED_TERRACOTTA_SLABS.values().forEach(this::addSlabDrop);
 
     //WALL SLAB LOOT TABLES
     this.addWallSlabDrop(DistantMoonsBlocks.ACACIA_WALL_SLAB);
@@ -245,6 +251,9 @@ public class DistantMoonsBlockLootTableProvider extends FabricBlockLootTableProv
     this.addWallSlabDrop(DistantMoonsBlocks.WAXED_OXIDIZED_CUT_COPPER_WALL_SLAB);
     this.addWallSlabDrop(DistantMoonsBlocks.WAXED_WEATHERED_CUT_COPPER_WALL_SLAB);
     this.addWallSlabDrop(DistantMoonsBlocks.WEATHERED_CUT_COPPER_WALL_SLAB);
+
+    DistantMoonsBlocks.DYED_CONCRETE_WALL_SLABS.values().forEach(this::addWallSlabDrop);
+    DistantMoonsBlocks.DYED_TERRACOTTA_WALL_SLABS.values().forEach(this::addWallSlabDrop);
   }
 
   private void addLargeBlastFurnaceDrop(Block block) {

@@ -18,9 +18,15 @@ public abstract class DistantMoonsBlockTags {
   public static final TagKey<Block> CHAIN = keyOf("chain");
   public static final TagKey<Block> CLIMBABLE = keyOf("misc/climbable");
   public static final TagKey<Block> DAMPENS_VIBRATIONS = keyOf("misc/dampens_vibrations");
+  public static final TagKey<Block> DYED_CONCRETE_SLAB = keyOf("dyed/concrete_slab");
+  public static final TagKey<Block> DYED_CONCRETE_STAIRS = keyOf("dyed/concrete_stairs");
+  public static final TagKey<Block> DYED_CONCRETE_WALL_SLAB = keyOf("dyed/concrete_wall_slab");
   public static final TagKey<Block> DYED_PILLOW = keyOf("dyed/pillow");
-  public static final TagKey<Block> COLORED_STAINED_GLASS = keyOf("colored/stained_glass");
-  public static final TagKey<Block> COLORED_STAINED_GLASS_PANE = keyOf("colored/stained_glass_pane");
+  public static final TagKey<Block> DYED_STAINED_GLASS = keyOf("dyed/stained_glass");
+  public static final TagKey<Block> DYED_STAINED_GLASS_PANE = keyOf("dyed/stained_glass_pane");
+  public static final TagKey<Block> DYED_TERRACOTTA_SLAB = keyOf("dyed/terracotta_slab");
+  public static final TagKey<Block> DYED_TERRACOTTA_STAIRS = keyOf("dyed/terracotta_stairs");
+  public static final TagKey<Block> DYED_TERRACOTTA_WALL_SLAB = keyOf("dyed/terracotta_wall_slab");
   public static final TagKey<Block> FIXED_LADDER = keyOf("fixed_ladder");
   public static final TagKey<Block> FIXED_LADDER_ALWAYS_CONNECTS_TO = keyOf("connection_target/fixed_ladder/always");
   public static final TagKey<Block> FIXED_LADDER_ATTACHES_TO = keyOf("connection_target/fixed_ladder/attached");
