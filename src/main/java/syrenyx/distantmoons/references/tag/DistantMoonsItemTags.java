@@ -8,7 +8,7 @@ import syrenyx.distantmoons.UnderDistantMoons;
 public abstract class DistantMoonsItemTags {
 
   public static final TagKey<Item> CORUNDUM = keyOf("corundum");
-  public static final TagKey<Item> CORUNDUM_BLOOK = keyOf("corundum_block");
+  public static final TagKey<Item> CORUNDUM_BLOCK = keyOf("corundum_block");
   public static final TagKey<Item> DEEP_IRON_BLOCK = keyOf("deep_iron_block");
   public static final TagKey<Item> DEEP_IRON_INGOT = keyOf("deep_iron_ingot");
   public static final TagKey<Item> DYED_CONCRETE_POWDER = keyOf("dyed/concrete_powder");

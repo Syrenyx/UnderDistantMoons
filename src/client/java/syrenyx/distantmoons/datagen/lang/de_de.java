@@ -334,8 +334,10 @@ public class de_de extends FabricLanguageProvider {
     builder.add(DistantMoonsItems.DEEP_IRON_HOE, "Tiefeisenhacke");
     builder.add(DistantMoonsItems.DEEP_IRON_HORSE_ARMOR, "Tiefeisener Rossharnisch");
     builder.add(DistantMoonsItems.DEEP_IRON_LEGGINGS, "Tiefeisenbeinschutz");
+    builder.add(DistantMoonsItems.DEEP_IRON_NAUTILUS_ARMOR, "Tiefeisener Nautiluspanzer");
     builder.add(DistantMoonsItems.DEEP_IRON_PICKAXE, "Tiefeisenspitzhacke");
     builder.add(DistantMoonsItems.DEEP_IRON_SHOVEL, "Tiefeisenschaufel");
+    builder.add(DistantMoonsItems.DEEP_IRON_SPEAR, "Tiefeisenspeer");
     builder.add(DistantMoonsItems.DEEP_IRON_SWORD, "Tiefeisenschwert");
     builder.add(DistantMoonsItems.FIRE_BRICK, "Feuerfestziegel");
     builder.add(DistantMoonsItems.IRON_ROD, "Eisenstange");
@@ -358,6 +360,10 @@ public class de_de extends FabricLanguageProvider {
 
     builder.add(DistantMoonsStats.INTERACT_WITH_LARGE_BLAST_FURNACE, "Hochöfen benutzt");
 
+    builder.add(DistantMoonsItemTags.CORUNDUM, "Korund");
+    builder.add(DistantMoonsItemTags.CORUNDUM_BLOCK, "Korundblock");
+    builder.add(DistantMoonsItemTags.DEEP_IRON_BLOCK, "Tiefeisenblock");
+    builder.add(DistantMoonsItemTags.DEEP_IRON_INGOT, "Tiefeisenbarren");
     builder.add(DistantMoonsItemTags.DYED_PILLOW, "Gefärbter Polster");
     builder.add(DistantMoonsItemTags.REPAIRS_DEEP_IRON_EQUIPMENT, "Repariert Tiefeisenausrüstung");
     builder.add(DistantMoonsItemTags.SMELTING_FUEL_WOOD_BLOCK, "Holzblock Brennstoff");

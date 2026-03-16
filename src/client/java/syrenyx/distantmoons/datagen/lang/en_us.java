@@ -295,8 +295,10 @@ public class en_us extends FabricLanguageProvider {
     builder.add(DistantMoonsItems.DEEP_IRON_HOE, "Deep Iron Hoe");
     builder.add(DistantMoonsItems.DEEP_IRON_HORSE_ARMOR, "Deep Iron Horse Armor");
     builder.add(DistantMoonsItems.DEEP_IRON_LEGGINGS, "Deep Iron Leggings");
+    builder.add(DistantMoonsItems.DEEP_IRON_NAUTILUS_ARMOR, "Deep Iron Nautilus Armor");
     builder.add(DistantMoonsItems.DEEP_IRON_PICKAXE, "Deep Iron Pickaxe");
     builder.add(DistantMoonsItems.DEEP_IRON_SHOVEL, "Deep Iron Shovel");
+    builder.add(DistantMoonsItems.DEEP_IRON_SPEAR, "Deep Iron Spear");
     builder.add(DistantMoonsItems.DEEP_IRON_SWORD, "Deep Iron Sword");
     builder.add(DistantMoonsItems.FIRE_BRICK, "Fire Brick");
     builder.add(DistantMoonsItems.IRON_ROD, "Iron Rod");
@@ -318,6 +320,10 @@ public class en_us extends FabricLanguageProvider {
 
     builder.add(DistantMoonsStats.INTERACT_WITH_LARGE_BLAST_FURNACE, "Interactions with Blast Furnace");
 
+    builder.add(DistantMoonsItemTags.CORUNDUM, "Corundum");
+    builder.add(DistantMoonsItemTags.CORUNDUM_BLOCK, "Corundum Block");
+    builder.add(DistantMoonsItemTags.DEEP_IRON_BLOCK, "Deep Iron Block");
+    builder.add(DistantMoonsItemTags.DEEP_IRON_INGOT, "Deep Iron Ingot");
     builder.add(DistantMoonsItemTags.DYED_PILLOW, "Dyed Pillow");
     builder.add(DistantMoonsItemTags.REPAIRS_DEEP_IRON_EQUIPMENT, "Repairs Deep Iron Equipment");
     builder.add(DistantMoonsItemTags.SMELTING_FUEL_WOOD_BLOCK, "Wooden Block Fuel");

@@ -16,6 +16,7 @@ import net.minecraft.client.data.models.model.TextureSlot;
 import net.minecraft.client.renderer.block.model.Variant;
 import net.minecraft.client.renderer.block.model.VariantMutator;
 import net.minecraft.client.renderer.block.model.multipart.CombinedCondition;
+import net.minecraft.client.renderer.item.properties.select.SelectItemModelProperties;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.random.WeightedList;
@@ -50,7 +51,6 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
   private static final VariantMutator ROTATE_Y_270 = BlockModelGenerators.Y_ROT_270;
 
   private static final Map<TextureSlot, String> SIMPLE_BLOCK_TEXTURE_MAP = Map.of(TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/%"));
-  private static final Map<TextureSlot, String> SIMPLE_ITEM_TEXTURE_MAP = Map.of(TextureSlot.TEXTURE, UnderDistantMoons.withPrefixedNamespace("item/%"));
   private static final Map<TextureSlot, String> BLAST_FURNACE_TEXTURE_MAP = Map.ofEntries(
       Map.entry(TextureSlot.BOTTOM, UnderDistantMoons.withPrefixedNamespace("block/%/bottom")),
       Map.entry(DistantMoonsTextureSlot.FRONT_LEFT_LIT, UnderDistantMoons.withPrefixedNamespace("block/%/front/mirrored/lit")),
@@ -119,6 +119,12 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
       TextureSlot.TOP, UnderDistantMoons.withPrefixedNamespace("block/%/top"),
       DistantMoonsTextureSlot.SIDE_TOP, UnderDistantMoons.withPrefixedNamespace("block/%/side_top"),
       TextureSlot.PARTICLE, UnderDistantMoons.withPrefixedNamespace("block/%/particle")
+  );
+
+  private static final Map<TextureSlot, String> SIMPLE_ITEM_TEXTURE_MAP = Map.of(TextureSlot.TEXTURE, UnderDistantMoons.withPrefixedNamespace("item/%"));
+  private static final Map<TextureSlot, String> SPEAR_ITEM_TEXTURE_MAP = Map.of(
+      DistantMoonsTextureSlot.HELD_TEXTURE, UnderDistantMoons.withPrefixedNamespace("item/%/held"),
+      TextureSlot.TEXTURE, UnderDistantMoons.withPrefixedNamespace("item/%/item")
   );
 
   private BlockModelGenerators blockGenerator;
@@ -196,7 +202,7 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     registerFixedLadderBlock(DistantMoonsBlocks.FIXED_WROUGHT_IRON_LADDER, FIXED_LADDER_TEXTURE_MAP);
 
     //LANTERNS
-    registerLightableLanternBlock(DistantMoonsBlocks.UNDERWORLD_LANTERN, LIGHTABLE_BLOCK_TEXTURE_MAP);
+    registerUnderworldLanternBlock(DistantMoonsBlocks.UNDERWORLD_LANTERN, LIGHTABLE_BLOCK_TEXTURE_MAP);
 
     //METAL BAR DOORS
     registerMetalBarDoorBlock(DistantMoonsBlocks.DEEP_IRON_BAR_DOOR, Map.ofEntries(
@@ -470,6 +476,7 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     registerSimpleItem(DistantMoonsItems.DEEP_IRON_HOE, "hoe", SIMPLE_ITEM_TEXTURE_MAP);
     registerSimpleItem(DistantMoonsItems.DEEP_IRON_HORSE_ARMOR, "simple_item", SIMPLE_ITEM_TEXTURE_MAP);
     registerSimpleItem(DistantMoonsItems.DEEP_IRON_LEGGINGS, "simple_item", SIMPLE_ITEM_TEXTURE_MAP);
+    registerSimpleItem(DistantMoonsItems.DEEP_IRON_NAUTILUS_ARMOR, "simple_item", SIMPLE_ITEM_TEXTURE_MAP);
     registerSimpleItem(DistantMoonsItems.DEEP_IRON_PICKAXE, "pickaxe", SIMPLE_ITEM_TEXTURE_MAP);
     registerSimpleItem(DistantMoonsItems.DEEP_IRON_SHOVEL, "shovel", SIMPLE_ITEM_TEXTURE_MAP);
     registerSimpleItem(DistantMoonsItems.DEEP_IRON_SWORD, "sword", SIMPLE_ITEM_TEXTURE_MAP);
@@ -486,6 +493,9 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     registerSimpleItem(DistantMoonsItems.SAPPHIRE, "simple_item", SIMPLE_ITEM_TEXTURE_MAP);
     registerSimpleItem(DistantMoonsItems.UNDERWORLD_DUST, "simple_item", SIMPLE_ITEM_TEXTURE_MAP);
     registerSimpleItem(DistantMoonsItems.WROUGHT_IRON_ROD, "stick", SIMPLE_ITEM_TEXTURE_MAP);
+
+    //SPEAR ITEMS
+    registerSpearItem(DistantMoonsItems.DEEP_IRON_SPEAR, SPEAR_ITEM_TEXTURE_MAP);
   }
 
   private void registerSimpleBlock(Block block, Map<TextureSlot, String> rawTextureMap) {
@@ -728,27 +738,6 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
         ), variantCenterCaps)
     );
     this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModelUtils.plainModel(getFirstEntryOf(variantCenter)));
-  }
-
-  private void registerLightableLanternBlock(Block block, Map<TextureSlot, String> rawTextureMap) {
-    Map<TextureSlot, String> textureMapLit = Map.of(TextureSlot.SIDE, rawTextureMap.get(DistantMoonsTextureSlot.LIT), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureSlot.LIT));
-    Map<TextureSlot, String> textureMapUnlit = Map.of(TextureSlot.SIDE, rawTextureMap.get(DistantMoonsTextureSlot.UNLIT), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureSlot.UNLIT));
-    Map<TextureSlot, String> textureMapLitItem = Map.of(TextureSlot.TEXTURE, rawTextureMap.get(DistantMoonsTextureSlot.LIT_ITEM), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureSlot.LIT_ITEM));
-    Map<TextureSlot, String> textureMapUnlitItem = Map.of(TextureSlot.TEXTURE, rawTextureMap.get(DistantMoonsTextureSlot.UNLIT_ITEM), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureSlot.UNLIT_ITEM));
-    MultiVariant variantGroundLit = createWeightedVariant(createObjectModel(block, "lantern/ground", "/ground/lit", textureMapLit));
-    MultiVariant variantGroundUnlit = createWeightedVariant(createObjectModel(block, "lantern/ground", "/ground/unlit", textureMapUnlit));
-    MultiVariant variantHangingLit = createWeightedVariant(createObjectModel(block, "lantern/hanging", "/hanging/lit", textureMapLit));
-    MultiVariant variantHangingUnlit = createWeightedVariant(createObjectModel(block, "lantern/hanging", "/hanging/unlit", textureMapUnlit));
-    this.blockGenerator.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(PropertyDispatch
-        .initial(BlockStateProperties.HANGING, BlockStateProperties.LIT)
-        .select(false, false, variantGroundUnlit)
-        .select(false, true, variantGroundLit)
-        .select(true, false, variantHangingUnlit)
-        .select(true, true, variantHangingLit)
-    ));
-    Identifier inventoryModelLit = createObjectModel(block, "simple_item", "/item/lit", textureMapLitItem);
-    Identifier inventoryModelUnlit = createObjectModel(block, "simple_item", "/item/unlit", textureMapUnlitItem);
-    this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModelUtils.conditional(new UnderworldDimension(), ItemModelUtils.plainModel(inventoryModelLit), ItemModelUtils.plainModel(inventoryModelUnlit)));
   }
 
   private void registerMetalBarDoorBlock(Block block, Map<TextureSlot, String> rawTextureMap) {
@@ -1147,6 +1136,27 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModelUtils.plainModel(getFirstEntryOf(variantBottom)));
   }
 
+  private void registerUnderworldLanternBlock(Block block, Map<TextureSlot, String> rawTextureMap) {
+    Map<TextureSlot, String> textureMapLit = Map.of(TextureSlot.SIDE, rawTextureMap.get(DistantMoonsTextureSlot.LIT), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureSlot.LIT));
+    Map<TextureSlot, String> textureMapUnlit = Map.of(TextureSlot.SIDE, rawTextureMap.get(DistantMoonsTextureSlot.UNLIT), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureSlot.UNLIT));
+    Map<TextureSlot, String> textureMapLitItem = Map.of(TextureSlot.TEXTURE, rawTextureMap.get(DistantMoonsTextureSlot.LIT_ITEM), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureSlot.LIT_ITEM));
+    Map<TextureSlot, String> textureMapUnlitItem = Map.of(TextureSlot.TEXTURE, rawTextureMap.get(DistantMoonsTextureSlot.UNLIT_ITEM), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureSlot.UNLIT_ITEM));
+    MultiVariant variantGroundLit = createWeightedVariant(createObjectModel(block, "lantern/ground", "/ground/lit", textureMapLit));
+    MultiVariant variantGroundUnlit = createWeightedVariant(createObjectModel(block, "lantern/ground", "/ground/unlit", textureMapUnlit));
+    MultiVariant variantHangingLit = createWeightedVariant(createObjectModel(block, "lantern/hanging", "/hanging/lit", textureMapLit));
+    MultiVariant variantHangingUnlit = createWeightedVariant(createObjectModel(block, "lantern/hanging", "/hanging/unlit", textureMapUnlit));
+    this.blockGenerator.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(PropertyDispatch
+        .initial(BlockStateProperties.HANGING, BlockStateProperties.LIT)
+        .select(false, false, variantGroundUnlit)
+        .select(false, true, variantGroundLit)
+        .select(true, false, variantHangingUnlit)
+        .select(true, true, variantHangingLit)
+    ));
+    Identifier inventoryModelLit = createObjectModel(block, "simple_item", "/item/lit", textureMapLitItem);
+    Identifier inventoryModelUnlit = createObjectModel(block, "simple_item", "/item/unlit", textureMapUnlitItem);
+    this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModelUtils.conditional(new UnderworldDimension(), ItemModelUtils.plainModel(inventoryModelLit), ItemModelUtils.plainModel(inventoryModelUnlit)));
+  }
+
   private void registerSimpleWallBlock(Block block, Map<TextureSlot, String> rawTextureMap) {
     Map<TextureSlot, String> textureMap = Map.of(TextureSlot.SIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.SIDE));
     registerWallBlock(
@@ -1312,6 +1322,15 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
   private void registerSimpleItem(Item item, String parent, Map<TextureSlot, String> rawTextureMap) {
     Map<TextureSlot, String> textureMap = Map.of(TextureSlot.TEXTURE, rawTextureMap.get(TextureSlot.TEXTURE), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.TEXTURE));
     this.itemGenerator.itemModelOutput.accept(item, ItemModelUtils.plainModel(createObjectModel(item, parent, null, textureMap)));
+  }
+
+  private void registerSpearItem(Item item, Map<TextureSlot, String> rawTextureMap) {
+    Map<TextureSlot, String> textureMapItem = Map.of(TextureSlot.TEXTURE, rawTextureMap.get(TextureSlot.TEXTURE), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.TEXTURE));
+    Map<TextureSlot, String> textureMapHeld = Map.of(TextureSlot.TEXTURE, rawTextureMap.get(DistantMoonsTextureSlot.HELD_TEXTURE), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureSlot.HELD_TEXTURE));
+    this.itemGenerator.itemModelOutput.accept(item, ItemModelGenerators.createFlatModelDispatch(
+        ItemModelUtils.plainModel(createObjectModel(item, "simple_item", "/item", textureMapItem)),
+        ItemModelUtils.plainModel(createObjectModel(item, "spear", "/held", textureMapHeld))
+    ));
   }
 
   private static Identifier getObjectModelPath(Block block, String suffix) {

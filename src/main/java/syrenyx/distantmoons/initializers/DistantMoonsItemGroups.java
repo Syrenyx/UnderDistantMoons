@@ -361,9 +361,8 @@ public abstract class DistantMoonsItemGroups {
 
     //COMBAT
     addToGroup(CreativeModeTabs.COMBAT, Items.IRON_SWORD, List.of(DistantMoonsItems.DEEP_IRON_SWORD.getDefaultInstance()));
-    addToGroup(CreativeModeTabs.COMBAT, Items.IRON_AXE, List.of(
-        DistantMoonsItems.DEEP_IRON_AXE.getDefaultInstance()
-    ));
+    addToGroup(CreativeModeTabs.COMBAT, Items.IRON_SPEAR, List.of(DistantMoonsItems.DEEP_IRON_SPEAR.getDefaultInstance()));
+    addToGroup(CreativeModeTabs.COMBAT, Items.IRON_AXE, List.of(DistantMoonsItems.DEEP_IRON_AXE.getDefaultInstance()));
     addToGroup(CreativeModeTabs.COMBAT, Items.IRON_BOOTS, List.of(
         DistantMoonsItems.DEEP_IRON_HELMET.getDefaultInstance(),
         DistantMoonsItems.DEEP_IRON_CHESTPLATE.getDefaultInstance(),
@@ -371,6 +370,7 @@ public abstract class DistantMoonsItemGroups {
         DistantMoonsItems.DEEP_IRON_BOOTS.getDefaultInstance()
     ));
     addToGroup(CreativeModeTabs.COMBAT, Items.IRON_HORSE_ARMOR, List.of(DistantMoonsItems.DEEP_IRON_HORSE_ARMOR.getDefaultInstance()));
+    addToGroup(CreativeModeTabs.COMBAT, Items.IRON_NAUTILUS_ARMOR, List.of(DistantMoonsItems.DEEP_IRON_NAUTILUS_ARMOR.getDefaultInstance()));
 
     //FOOD AND DRINK
     addToGroup(CreativeModeTabs.FOOD_AND_DRINKS, Items.MELON_SLICE, List.of(Items.GLISTERING_MELON_SLICE.getDefaultInstance()));

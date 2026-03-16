@@ -28,7 +28,7 @@ public class DistantMoonsItemTagProvider extends FabricTagProvider.ItemTagProvid
         DistantMoonsItems.RUBY,
         DistantMoonsItems.SAPPHIRE
     );
-    this.valueLookupBuilder(DistantMoonsItemTags.CORUNDUM_BLOOK).add(
+    this.valueLookupBuilder(DistantMoonsItemTags.CORUNDUM_BLOCK).add(
         DistantMoonsBlocks.RUBY_BLOCK.asItem(),
         DistantMoonsBlocks.SAPPHIRE_BLOCK.asItem()
     );

@@ -14,6 +14,11 @@
       {
         "texture": "distant-moons:deep_iron"
       }
+    ],
+    "nautilus_body": [
+      {
+        "texture": "distant-moons:deep_iron"
+      }
     ]
   }
 }
