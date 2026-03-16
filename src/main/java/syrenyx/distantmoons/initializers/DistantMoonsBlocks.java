@@ -115,6 +115,7 @@ public abstract class DistantMoonsBlocks {
           .strength(8.0F, 1200.0F),
       new Item.Properties()
           .fireResistant()
+          .stacksTo(16)
   );
   public static final Block BRICK_WALL_SLAB = register(
       "brick_wall_slab",

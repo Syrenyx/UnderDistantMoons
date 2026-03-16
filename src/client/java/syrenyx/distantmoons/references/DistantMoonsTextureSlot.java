@@ -36,6 +36,7 @@ public abstract class DistantMoonsTextureSlot {
   public static final TextureSlot SINGLE_TOP_LEFT = TextureSlot.create("single_top_left");
   public static final TextureSlot SINGLE_TOP_RIGHT = TextureSlot.create("single_top_right");
   public static final TextureSlot SUPPORT = TextureSlot.create("support");
+  public static final TextureSlot TOP_ITEM = TextureSlot.create("top_item");
   public static final TextureSlot TOP_LEFT = TextureSlot.create("top_left");
   public static final TextureSlot TOP_RIGHT = TextureSlot.create("top_right");
   public static final TextureSlot TOP_SPECIAL = TextureSlot.create("top_special");

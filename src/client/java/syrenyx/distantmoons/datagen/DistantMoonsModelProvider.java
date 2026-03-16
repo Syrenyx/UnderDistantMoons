@@ -64,6 +64,7 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
       Map.entry(DistantMoonsTextureSlot.SIDE_LEFT, UnderDistantMoons.withPrefixedNamespace("block/%/side/left")),
       Map.entry(DistantMoonsTextureSlot.SIDE_RIGHT, UnderDistantMoons.withPrefixedNamespace("block/%/side/right")),
       Map.entry(TextureSlot.TOP, UnderDistantMoons.withPrefixedNamespace("block/%/top")),
+      Map.entry(DistantMoonsTextureSlot.TOP_ITEM, UnderDistantMoons.withPrefixedNamespace("block/%/item_top")),
       Map.entry(DistantMoonsTextureSlot.TOP_SPECIAL, UnderDistantMoons.withPrefixedNamespace("block/%/fuel_tank_top")),
       Map.entry(TextureSlot.PARTICLE, UnderDistantMoons.withPrefixedNamespace("block/%/particle"))
   );
@@ -523,19 +524,20 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
 
   private void registerBlastFurnaceBlock(Block block, Map<TextureSlot, String> rawTextureMap) {
 
-    Map<TextureSlot, String> backBottomLeftTextureMap = Map.of(TextureSlot.EAST, rawTextureMap.get(DistantMoonsTextureSlot.SIDE_RIGHT), TextureSlot.INSIDE, rawTextureMap.get(TextureSlot.INSIDE), TextureSlot.NORTH, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.TOP, rawTextureMap.get(TextureSlot.BOTTOM), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE));
-    Map<TextureSlot, String> backBottomRightTextureMap = Map.of(TextureSlot.EAST, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.INSIDE, rawTextureMap.get(TextureSlot.INSIDE), TextureSlot.NORTH, rawTextureMap.get(DistantMoonsTextureSlot.SIDE_LEFT), TextureSlot.TOP, rawTextureMap.get(TextureSlot.BOTTOM), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE));
-    Map<TextureSlot, String> backTopLeftTextureMap = Map.of(TextureSlot.EAST, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.INSIDE, rawTextureMap.get(TextureSlot.INSIDE), TextureSlot.NORTH, rawTextureMap.get(DistantMoonsTextureSlot.SIDE_RIGHT), TextureSlot.TOP, rawTextureMap.get(TextureSlot.TOP), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE));
-    Map<TextureSlot, String> backTopRightTextureMap = Map.of(TextureSlot.EAST, rawTextureMap.get(DistantMoonsTextureSlot.SIDE_LEFT), TextureSlot.INSIDE, rawTextureMap.get(TextureSlot.INSIDE), TextureSlot.NORTH, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.TOP, rawTextureMap.get(TextureSlot.TOP), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE));
-    Map<TextureSlot, String> bottomCornerTextureMap = Map.of(TextureSlot.EAST, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.INSIDE, rawTextureMap.get(TextureSlot.INSIDE), TextureSlot.NORTH, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.TOP, rawTextureMap.get(TextureSlot.BOTTOM), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE));
-    Map<TextureSlot, String> topCornerTextureMap = Map.of(TextureSlot.EAST, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.INSIDE, rawTextureMap.get(TextureSlot.INSIDE), TextureSlot.NORTH, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.TOP, rawTextureMap.get(TextureSlot.TOP), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE));
+    Map<TextureSlot, String> textureMapBackBottomLeft = Map.of(TextureSlot.EAST, rawTextureMap.get(DistantMoonsTextureSlot.SIDE_RIGHT), TextureSlot.INSIDE, rawTextureMap.get(TextureSlot.INSIDE), TextureSlot.NORTH, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.TOP, rawTextureMap.get(TextureSlot.BOTTOM), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE));
+    Map<TextureSlot, String> textureMapBackBottomRight = Map.of(TextureSlot.EAST, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.INSIDE, rawTextureMap.get(TextureSlot.INSIDE), TextureSlot.NORTH, rawTextureMap.get(DistantMoonsTextureSlot.SIDE_LEFT), TextureSlot.TOP, rawTextureMap.get(TextureSlot.BOTTOM), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE));
+    Map<TextureSlot, String> textureMapBackTopLeft = Map.of(TextureSlot.EAST, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.INSIDE, rawTextureMap.get(TextureSlot.INSIDE), TextureSlot.NORTH, rawTextureMap.get(DistantMoonsTextureSlot.SIDE_RIGHT), TextureSlot.TOP, rawTextureMap.get(TextureSlot.TOP), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE));
+    Map<TextureSlot, String> textureMapBackTopRight = Map.of(TextureSlot.EAST, rawTextureMap.get(DistantMoonsTextureSlot.SIDE_LEFT), TextureSlot.INSIDE, rawTextureMap.get(TextureSlot.INSIDE), TextureSlot.NORTH, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.TOP, rawTextureMap.get(TextureSlot.TOP), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE));
+    Map<TextureSlot, String> textureMapBottomCorner = Map.of(TextureSlot.EAST, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.INSIDE, rawTextureMap.get(TextureSlot.INSIDE), TextureSlot.NORTH, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.TOP, rawTextureMap.get(TextureSlot.BOTTOM), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE));
+    Map<TextureSlot, String> textureMapTopCorner = Map.of(TextureSlot.EAST, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.INSIDE, rawTextureMap.get(TextureSlot.INSIDE), TextureSlot.NORTH, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.TOP, rawTextureMap.get(TextureSlot.TOP), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE));
+    Map<TextureSlot, String> textureMapItem = Map.of(TextureSlot.DOWN, rawTextureMap.get(TextureSlot.BOTTOM), TextureSlot.EAST, rawTextureMap.get(DistantMoonsTextureSlot.SIDE_LEFT), TextureSlot.NORTH, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.SOUTH, rawTextureMap.get(DistantMoonsTextureSlot.FRONT_RIGHT_UNLIT), TextureSlot.UP, rawTextureMap.get(DistantMoonsTextureSlot.TOP_ITEM), TextureSlot.WEST, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE));
 
-    MultiVariant variantBackBottomLeft = createWeightedVariant(createObjectModel(block, "large_block_corner", "/mirrored/back_bottom", backBottomLeftTextureMap));
-    MultiVariant variantBackBottomRight = createWeightedVariant(createObjectModel(block, "large_block_corner", "/default/back_bottom", backBottomRightTextureMap));
-    MultiVariant variantBackTopLeft = createWeightedVariant(createObjectModel(block, "large_block_corner", "/mirrored/back_top", backTopLeftTextureMap));
-    MultiVariant variantBackTopRight = createWeightedVariant(createObjectModel(block, "large_block_corner", "/default/back_top", backTopRightTextureMap));
-    MultiVariant variantBottomCorner = createWeightedVariant(createObjectModel(block, "large_block_corner", "/bottom_corner", bottomCornerTextureMap));
-    MultiVariant variantTopCorner = createWeightedVariant(createObjectModel(block, "large_block_corner", "/top_corner", topCornerTextureMap));
+    MultiVariant variantBackBottomLeft = createWeightedVariant(createObjectModel(block, "large_block_corner", "/mirrored/back_bottom", textureMapBackBottomLeft));
+    MultiVariant variantBackBottomRight = createWeightedVariant(createObjectModel(block, "large_block_corner", "/default/back_bottom", textureMapBackBottomRight));
+    MultiVariant variantBackTopLeft = createWeightedVariant(createObjectModel(block, "large_block_corner", "/mirrored/back_top", textureMapBackTopLeft));
+    MultiVariant variantBackTopRight = createWeightedVariant(createObjectModel(block, "large_block_corner", "/default/back_top", textureMapBackTopRight));
+    MultiVariant variantBottomCorner = createWeightedVariant(createObjectModel(block, "large_block_corner", "/bottom_corner", textureMapBottomCorner));
+    MultiVariant variantTopCorner = createWeightedVariant(createObjectModel(block, "large_block_corner", "/top_corner", textureMapTopCorner));
 
     Map<BlockCorner, MultiVariant> defaultBaseVariants = Map.of(
         BlockCorner.TOP_SOUTH_EAST, variantTopCorner,
@@ -627,6 +629,8 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     }
 
     this.blockGenerator.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(propertyDispatch));
+    Identifier inventoryModel = createObjectModel(block, "large_facing_block", "/item", textureMapItem);
+    this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModelUtils.plainModel(inventoryModel));
   }
 
   private void registerChainBlock(Block block, Map<TextureSlot, String> rawTextureMap) {

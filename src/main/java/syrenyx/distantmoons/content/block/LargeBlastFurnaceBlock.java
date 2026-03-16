@@ -161,11 +161,10 @@ public class LargeBlastFurnaceBlock extends BaseEntityBlock {
   public @NonNull BlockState playerWillDestroy(@NonNull Level level, @NonNull BlockPos blockPos, @NonNull BlockState blockState, @NonNull Player player) {
     if (level.isClientSide() || !player.preventsBlockDrops()) return super.playerWillDestroy(level, blockPos, blockState, player);
     BlockCorner corner = blockState.getValue(CORNER);
-    if (corner != BlockCorner.BOTTOM_NORTH_EAST) {
-      BlockPos cornerPos = corner.getTopNorthEastPos(blockPos).below();
-      level.setBlock(cornerPos, Blocks.AIR.defaultBlockState(), 35);
-      level.levelEvent(player, 2001, cornerPos, Block.getId(level.getBlockState(cornerPos)));
-    }
+    if (corner == BlockCorner.BOTTOM_NORTH_EAST) return super.playerWillDestroy(level, blockPos, blockState, player);
+    BlockPos cornerPos = corner.getTopNorthEastPos(blockPos).below();
+    level.setBlock(cornerPos, Blocks.AIR.defaultBlockState(), 35);
+    level.levelEvent(player, 2001, cornerPos, Block.getId(level.getBlockState(cornerPos)));
     return super.playerWillDestroy(level, blockPos, blockState, player);
   }
 
@@ -183,7 +182,7 @@ public class LargeBlastFurnaceBlock extends BaseEntityBlock {
         .add(facingVector.multiply(1.04, 1.04, 1.04))
         .add(
             facingVector.z() * 0.2 * (mirrored ? 1 : -1) + facingVector.z() * 0.6 * randomSource.nextDouble() * (mirrored ? 1 : -1),
-            0.2 + randomSource.nextDouble() * -1.0,
+            0.2 + randomSource.nextDouble() * -0.9,
             facingVector.x() * 0.2 * (mirrored ? -1 : 1) + facingVector.x() * 0.6 * randomSource.nextDouble() * (mirrored ? -1 : 1)
         );
     level.addParticle(
