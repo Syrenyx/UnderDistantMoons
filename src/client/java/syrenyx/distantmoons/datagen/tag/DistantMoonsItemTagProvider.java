@@ -42,9 +42,6 @@ public class DistantMoonsItemTagProvider extends FabricTagProvider.ItemTagProvid
     );
 
     //DYED ITEMS
-    this.valueLookupBuilder(DistantMoonsItemTags.DYED_PILLOW).addAll(
-        DistantMoonsBlocks.DYED_PILLOWS.values().stream().map(Block::asItem)
-    );
     this.valueLookupBuilder(DistantMoonsItemTags.DYED_CONCRETE_POWDER).add(
         Blocks.WHITE_CONCRETE_POWDER.asItem(),
         Blocks.LIGHT_GRAY_CONCRETE_POWDER.asItem(),
@@ -62,6 +59,27 @@ public class DistantMoonsItemTagProvider extends FabricTagProvider.ItemTagProvid
         Blocks.PURPLE_CONCRETE_POWDER.asItem(),
         Blocks.MAGENTA_CONCRETE_POWDER.asItem(),
         Blocks.PINK_CONCRETE_POWDER.asItem()
+    );
+    this.valueLookupBuilder(DistantMoonsItemTags.DYED_CONCRETE_SLAB).addAll(
+        DistantMoonsBlocks.DYED_CONCRETE_SLABS.values().stream().map(Block::asItem)
+    );
+    this.valueLookupBuilder(DistantMoonsItemTags.DYED_CONCRETE_STAIRS).addAll(
+        DistantMoonsBlocks.DYED_CONCRETE_STAIRS.values().stream().map(Block::asItem)
+    );
+    this.valueLookupBuilder(DistantMoonsItemTags.DYED_CONCRETE_WALL_SLAB).addAll(
+        DistantMoonsBlocks.DYED_CONCRETE_WALL_SLABS.values().stream().map(Block::asItem)
+    );
+    this.valueLookupBuilder(DistantMoonsItemTags.DYED_PILLOW).addAll(
+        DistantMoonsBlocks.DYED_PILLOWS.values().stream().map(Block::asItem)
+    );
+    this.valueLookupBuilder(DistantMoonsItemTags.DYED_TERRACOTTA_SLAB).addAll(
+        DistantMoonsBlocks.DYED_TERRACOTTA_SLABS.values().stream().map(Block::asItem)
+    );
+    this.valueLookupBuilder(DistantMoonsItemTags.DYED_TERRACOTTA_STAIRS).addAll(
+        DistantMoonsBlocks.DYED_TERRACOTTA_STAIRS.values().stream().map(Block::asItem)
+    );
+    this.valueLookupBuilder(DistantMoonsItemTags.DYED_TERRACOTTA_WALL_SLAB).addAll(
+        DistantMoonsBlocks.DYED_TERRACOTTA_WALL_SLABS.values().stream().map(Block::asItem)
     );
 
     //FUEL

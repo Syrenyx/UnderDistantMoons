@@ -270,6 +270,9 @@ public class de_de extends FabricLanguageProvider {
     builder.add(DistantMoonsBlocks.STRIPPED_CUT_SPRUCE_WOOD, "Entrindetes geschnittenes Fichtenholz");
     builder.add(DistantMoonsBlocks.STRIPPED_CUT_WARPED_HYPHAE, "Geschälte geschnittene Wirrhyphen");
     builder.add(DistantMoonsBlocks.STRIPPED_CUT_WARPED_STEM, "Geschälter geschnittener Wirrstiel");
+    builder.add(DistantMoonsBlocks.TERRACOTTA_SLAB, "Keramikstufe");
+    builder.add(DistantMoonsBlocks.TERRACOTTA_STAIRS, "Keramiktreppe");
+    builder.add(DistantMoonsBlocks.TERRACOTTA_WALL_SLAB, "Gestufte Keramikwand");
     builder.add(DistantMoonsBlocks.TUFF_BRICK_WALL_SLAB, "Gestufte Tuffziegelwand");
     builder.add(DistantMoonsBlocks.TUFF_WALL_SLAB, "Gestufte Tuffwand");
     builder.add(DistantMoonsBlocks.UNDERWORLD_LANTERN, "Unterweltlaterne");
@@ -281,7 +284,13 @@ public class de_de extends FabricLanguageProvider {
     builder.add(DistantMoonsBlocks.WROUGHT_IRON_FENCE, "Schmiedeeisenzaun");
     builder.add(DistantMoonsBlocks.WROUGHT_IRON_LADDER, "Schmiedeeisenleiter");
 
+    helper.generateDyedBlockNames(DistantMoonsBlocks.DYED_CONCRETE_SLABS, "%c Betonstufe", FEMININE_COLOR_ADJECTIVES);
+    helper.generateDyedBlockNames(DistantMoonsBlocks.DYED_CONCRETE_STAIRS, "%c Betontreppe", FEMININE_COLOR_ADJECTIVES);
+    helper.generateDyedBlockNames(DistantMoonsBlocks.DYED_CONCRETE_WALL_SLABS, "%c Gestufte Betonwand", FEMININE_COLOR_ADJECTIVES);
     helper.generateDyedBlockNames(DistantMoonsBlocks.DYED_PILLOWS, "%c Kissen", OBJECTIVE_COLOR_ADJECTIVES);
+    helper.generateDyedBlockNames(DistantMoonsBlocks.DYED_TERRACOTTA_SLABS, "%c Keramikstufe", FEMININE_COLOR_ADJECTIVES);
+    helper.generateDyedBlockNames(DistantMoonsBlocks.DYED_TERRACOTTA_STAIRS, "%c Keramiktreppe", FEMININE_COLOR_ADJECTIVES);
+    helper.generateDyedBlockNames(DistantMoonsBlocks.DYED_TERRACOTTA_WALL_SLABS, "%c Gestufte Keramikwand", FEMININE_COLOR_ADJECTIVES);
 
     builder.add(DistantMoonsBlocks.CUT_COPPER_WALL_SLAB, "Gestufte geschnittene Kupferwand");
     builder.add(DistantMoonsBlocks.EXPOSED_CUT_COPPER_WALL_SLAB, "Angelaufene gestufte geschnittene Kupferwand");
@@ -364,7 +373,13 @@ public class de_de extends FabricLanguageProvider {
     builder.add(DistantMoonsItemTags.CORUNDUM_BLOCK, "Korundblock");
     builder.add(DistantMoonsItemTags.DEEP_IRON_BLOCK, "Tiefeisenblock");
     builder.add(DistantMoonsItemTags.DEEP_IRON_INGOT, "Tiefeisenbarren");
+    builder.add(DistantMoonsItemTags.DYED_CONCRETE_SLAB, "Gefärbte Betonstufe");
+    builder.add(DistantMoonsItemTags.DYED_CONCRETE_STAIRS, "Gefärbte Betontreppe");
+    builder.add(DistantMoonsItemTags.DYED_CONCRETE_WALL_SLAB, "Gefärbte Gestufte Betonwand");
     builder.add(DistantMoonsItemTags.DYED_PILLOW, "Gefärbter Polster");
+    builder.add(DistantMoonsItemTags.DYED_TERRACOTTA_SLAB, "Gefärbte Keramikstufe");
+    builder.add(DistantMoonsItemTags.DYED_TERRACOTTA_STAIRS, "Gefärbte Keramiktreppe");
+    builder.add(DistantMoonsItemTags.DYED_TERRACOTTA_WALL_SLAB, "Gefärbte Gestufte Keramikwand");
     builder.add(DistantMoonsItemTags.REPAIRS_DEEP_IRON_EQUIPMENT, "Repariert Tiefeisenausrüstung");
     builder.add(DistantMoonsItemTags.SMELTING_FUEL_WOOD_BLOCK, "Holzblock Brennstoff");
     builder.add(DistantMoonsItemTags.SMELTING_FUEL_WOOD_HALF_BLOCK, "Halber Holzblock Brennstoff");

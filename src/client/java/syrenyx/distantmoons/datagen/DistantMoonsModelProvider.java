@@ -348,7 +348,10 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     registerSimpleSlabBlock(DistantMoonsBlocks.PALE_PRISMARINE_SLAB, Map.of(TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/pale_prismarine")));
     registerSimpleSlabBlock(DistantMoonsBlocks.PALE_PRISMARINE_TILE_SLAB, Map.of(TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/pale_prismarine_tiles")));
     registerSimpleSlabBlock(DistantMoonsBlocks.PRISMARINE_TILE_SLAB, Map.of(TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/prismarine_tiles")));
+    registerSimpleSlabBlock(DistantMoonsBlocks.TERRACOTTA_SLAB, Map.of(TextureSlot.SIDE, "minecraft:block/terracotta"));
+    DistantMoonsBlocks.DYED_CONCRETE_SLABS.forEach((color, block) -> registerSimpleSlabBlock(block, Map.of(TextureSlot.SIDE, "minecraft:block/" + color.getName() + "_concrete")));
     DistantMoonsBlocks.DYED_PILLOWS.values().forEach(block -> registerPillarSlabBlock(block, PILLAR_TEXTURE_MAP));
+    DistantMoonsBlocks.DYED_TERRACOTTA_SLABS.forEach((color, block) -> registerSimpleSlabBlock(block, Map.of(TextureSlot.SIDE, "minecraft:block/" + color.getName() + "_terracotta")));
 
     //SPIKED FENCES
     registerSpikedFenceBlock(DistantMoonsBlocks.DEEP_IRON_FENCE, SPIKED_FENCE_TEXTURE_MAP);
@@ -362,6 +365,9 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     registerSimpleStairsBlock(DistantMoonsBlocks.PALE_PRISMARINE_STAIRS, Map.of(TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/pale_prismarine")));
     registerSimpleStairsBlock(DistantMoonsBlocks.PALE_PRISMARINE_TILE_STAIRS, Map.of(TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/pale_prismarine_tiles")));
     registerSimpleStairsBlock(DistantMoonsBlocks.PRISMARINE_TILE_STAIRS, Map.of(TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/prismarine_tiles")));
+    registerSimpleStairsBlock(DistantMoonsBlocks.TERRACOTTA_STAIRS, Map.of(TextureSlot.SIDE, "minecraft:block/terracotta"));
+    DistantMoonsBlocks.DYED_CONCRETE_STAIRS.forEach((color, block) -> registerSimpleStairsBlock(block, Map.of(TextureSlot.SIDE, "minecraft:block/" + color.getName() + "_concrete")));
+    DistantMoonsBlocks.DYED_TERRACOTTA_STAIRS.forEach((color, block) -> registerSimpleStairsBlock(block, Map.of(TextureSlot.SIDE, "minecraft:block/" + color.getName() + "_terracotta")));
 
     //TRAPDOORS
     registerTrapdoorBlock(DistantMoonsBlocks.DEEP_IRON_TRAPDOOR, false, Map.of(
@@ -426,6 +432,7 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     registerSimpleWallSlabBlock(DistantMoonsBlocks.SPRUCE_WALL_SLAB, Map.of(TextureSlot.SIDE, "minecraft:block/spruce_planks"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.STONE_BRICK_WALL_SLAB, Map.of(TextureSlot.SIDE, "minecraft:block/stone_bricks"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.STONE_WALL_SLAB, Map.of(TextureSlot.SIDE, "minecraft:block/stone"));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.TERRACOTTA_WALL_SLAB, Map.of(TextureSlot.SIDE, "minecraft:block/terracotta"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.TUFF_BRICK_WALL_SLAB, Map.of(TextureSlot.SIDE, "minecraft:block/tuff_bricks"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.TUFF_WALL_SLAB, Map.of(TextureSlot.SIDE, "minecraft:block/tuff"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.WARPED_WALL_SLAB, Map.of(TextureSlot.SIDE, "minecraft:block/warped_planks"));
@@ -434,6 +441,8 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     registerSimpleWallSlabBlock(DistantMoonsBlocks.WAXED_OXIDIZED_CUT_COPPER_WALL_SLAB, Map.of(TextureSlot.SIDE, "minecraft:block/oxidized_cut_copper"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.WAXED_WEATHERED_CUT_COPPER_WALL_SLAB, Map.of(TextureSlot.SIDE, "minecraft:block/weathered_cut_copper"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.WEATHERED_CUT_COPPER_WALL_SLAB, Map.of(TextureSlot.SIDE, "minecraft:block/weathered_cut_copper"));
+    DistantMoonsBlocks.DYED_CONCRETE_WALL_SLABS.forEach((color, block) -> registerSimpleWallSlabBlock(block, Map.of(TextureSlot.SIDE, "minecraft:block/" + color.getName() + "_concrete")));
+    DistantMoonsBlocks.DYED_TERRACOTTA_WALL_SLABS.forEach((color, block) -> registerSimpleWallSlabBlock(block, Map.of(TextureSlot.SIDE, "minecraft:block/" + color.getName() + "_terracotta")));
 
     //WALL SLABS - PILLAR
     registerPillarWallSlabBlock(DistantMoonsBlocks.BLACKSTONE_WALL_SLAB, Map.of(TextureSlot.END, "minecraft:block/blackstone_top", TextureSlot.SIDE, "minecraft:block/blackstone"));

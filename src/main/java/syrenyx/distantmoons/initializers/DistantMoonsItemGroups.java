@@ -304,6 +304,15 @@ public abstract class DistantMoonsItemGroups {
 
     //COLORED BLOCKS
     addToGroup(CreativeModeTabs.COLORED_BLOCKS, Items.PINK_BED, DistantMoonsBlocks.DYED_PILLOWS);
+    addToGroup(CreativeModeTabs.COLORED_BLOCKS, Items.PINK_TERRACOTTA, DistantMoonsBlocks.DYED_TERRACOTTA_WALL_SLABS);
+    addToGroup(CreativeModeTabs.COLORED_BLOCKS, Items.PINK_TERRACOTTA, List.of(DistantMoonsBlocks.TERRACOTTA_WALL_SLAB.asItem().getDefaultInstance()));
+    addToGroup(CreativeModeTabs.COLORED_BLOCKS, Items.PINK_TERRACOTTA, DistantMoonsBlocks.DYED_TERRACOTTA_SLABS);
+    addToGroup(CreativeModeTabs.COLORED_BLOCKS, Items.PINK_TERRACOTTA, List.of(DistantMoonsBlocks.TERRACOTTA_SLAB.asItem().getDefaultInstance()));
+    addToGroup(CreativeModeTabs.COLORED_BLOCKS, Items.PINK_TERRACOTTA, DistantMoonsBlocks.DYED_TERRACOTTA_STAIRS);
+    addToGroup(CreativeModeTabs.COLORED_BLOCKS, Items.PINK_TERRACOTTA, List.of(DistantMoonsBlocks.TERRACOTTA_STAIRS.asItem().getDefaultInstance()));
+    addToGroup(CreativeModeTabs.COLORED_BLOCKS, Items.PINK_CONCRETE, DistantMoonsBlocks.DYED_CONCRETE_WALL_SLABS);
+    addToGroup(CreativeModeTabs.COLORED_BLOCKS, Items.PINK_CONCRETE, DistantMoonsBlocks.DYED_CONCRETE_SLABS);
+    addToGroup(CreativeModeTabs.COLORED_BLOCKS, Items.PINK_CONCRETE, DistantMoonsBlocks.DYED_CONCRETE_STAIRS);
 
     //NATURAL
     addToGroup(CreativeModeTabs.NATURAL_BLOCKS, Items.NETHER_QUARTZ_ORE, List.of(

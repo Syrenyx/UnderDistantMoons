@@ -75,6 +75,9 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
 
         //DYEING
         this.createDyeingRecipes(DistantMoonsBlocks.DYED_PILLOWS, DistantMoonsItemTags.DYED_PILLOW, true);
+        this.createDyeingRecipes(DistantMoonsBlocks.DYED_TERRACOTTA_SLABS, DistantMoonsBlocks.TERRACOTTA_SLAB, false);
+        this.createDyeingRecipes(DistantMoonsBlocks.DYED_TERRACOTTA_STAIRS, DistantMoonsBlocks.TERRACOTTA_STAIRS, false);
+        this.createDyeingRecipes(DistantMoonsBlocks.DYED_TERRACOTTA_WALL_SLABS, DistantMoonsBlocks.TERRACOTTA_WALL_SLAB, false);
 
         //SLAB CRAFTING
         this.createSlabRecipes(Items.ACACIA_LOG, DistantMoonsBlocks.CUT_ACACIA_LOG, RecipeCategory.BUILDING_BLOCKS, "cut_log");
@@ -135,6 +138,24 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
         this.createSlabRecipes(Items.STRIPPED_SPRUCE_WOOD, DistantMoonsBlocks.STRIPPED_CUT_SPRUCE_WOOD, RecipeCategory.BUILDING_BLOCKS, "stripped_cut_wood");
         this.createSlabRecipes(Items.STRIPPED_WARPED_HYPHAE, DistantMoonsBlocks.STRIPPED_CUT_WARPED_HYPHAE, RecipeCategory.BUILDING_BLOCKS, "stripped_cut_wood");
         this.createSlabRecipes(Items.STRIPPED_WARPED_STEM, DistantMoonsBlocks.STRIPPED_CUT_WARPED_STEM, RecipeCategory.BUILDING_BLOCKS, "stripped_cut_log");
+        this.createSlabRecipes(Items.TERRACOTTA, DistantMoonsBlocks.TERRACOTTA_SLAB, RecipeCategory.BUILDING_BLOCKS, null);
+
+        this.createSlabRecipes(Items.WHITE_CONCRETE, DistantMoonsBlocks.DYED_CONCRETE_SLABS.get(DyeColor.WHITE), RecipeCategory.BUILDING_BLOCKS, "concrete_slab");
+        this.createSlabRecipes(Items.LIGHT_GRAY_CONCRETE, DistantMoonsBlocks.DYED_CONCRETE_SLABS.get(DyeColor.LIGHT_GRAY), RecipeCategory.BUILDING_BLOCKS, "concrete_slab");
+        this.createSlabRecipes(Items.GRAY_CONCRETE, DistantMoonsBlocks.DYED_CONCRETE_SLABS.get(DyeColor.GRAY), RecipeCategory.BUILDING_BLOCKS, "concrete_slab");
+        this.createSlabRecipes(Items.BLACK_CONCRETE, DistantMoonsBlocks.DYED_CONCRETE_SLABS.get(DyeColor.BLACK), RecipeCategory.BUILDING_BLOCKS, "concrete_slab");
+        this.createSlabRecipes(Items.BROWN_CONCRETE, DistantMoonsBlocks.DYED_CONCRETE_SLABS.get(DyeColor.BROWN), RecipeCategory.BUILDING_BLOCKS, "concrete_slab");
+        this.createSlabRecipes(Items.RED_CONCRETE, DistantMoonsBlocks.DYED_CONCRETE_SLABS.get(DyeColor.RED), RecipeCategory.BUILDING_BLOCKS, "concrete_slab");
+        this.createSlabRecipes(Items.ORANGE_CONCRETE, DistantMoonsBlocks.DYED_CONCRETE_SLABS.get(DyeColor.ORANGE), RecipeCategory.BUILDING_BLOCKS, "concrete_slab");
+        this.createSlabRecipes(Items.YELLOW_CONCRETE, DistantMoonsBlocks.DYED_CONCRETE_SLABS.get(DyeColor.YELLOW), RecipeCategory.BUILDING_BLOCKS, "concrete_slab");
+        this.createSlabRecipes(Items.LIME_CONCRETE, DistantMoonsBlocks.DYED_CONCRETE_SLABS.get(DyeColor.LIME), RecipeCategory.BUILDING_BLOCKS, "concrete_slab");
+        this.createSlabRecipes(Items.GREEN_CONCRETE, DistantMoonsBlocks.DYED_CONCRETE_SLABS.get(DyeColor.GREEN), RecipeCategory.BUILDING_BLOCKS, "concrete_slab");
+        this.createSlabRecipes(Items.CYAN_CONCRETE, DistantMoonsBlocks.DYED_CONCRETE_SLABS.get(DyeColor.CYAN), RecipeCategory.BUILDING_BLOCKS, "concrete_slab");
+        this.createSlabRecipes(Items.LIGHT_BLUE_CONCRETE, DistantMoonsBlocks.DYED_CONCRETE_SLABS.get(DyeColor.LIGHT_BLUE), RecipeCategory.BUILDING_BLOCKS, "concrete_slab");
+        this.createSlabRecipes(Items.BLUE_CONCRETE, DistantMoonsBlocks.DYED_CONCRETE_SLABS.get(DyeColor.BLUE), RecipeCategory.BUILDING_BLOCKS, "concrete_slab");
+        this.createSlabRecipes(Items.PURPLE_CONCRETE, DistantMoonsBlocks.DYED_CONCRETE_SLABS.get(DyeColor.PURPLE), RecipeCategory.BUILDING_BLOCKS, "concrete_slab");
+        this.createSlabRecipes(Items.MAGENTA_CONCRETE, DistantMoonsBlocks.DYED_CONCRETE_SLABS.get(DyeColor.MAGENTA), RecipeCategory.BUILDING_BLOCKS, "concrete_slab");
+        this.createSlabRecipes(Items.PINK_CONCRETE, DistantMoonsBlocks.DYED_CONCRETE_SLABS.get(DyeColor.PINK), RecipeCategory.BUILDING_BLOCKS, "concrete_slab");
 
         this.createSlabRecipes(Items.WHITE_WOOL, DistantMoonsBlocks.DYED_PILLOWS.get(DyeColor.WHITE), RecipeCategory.MISC, "pillow");
         this.createSlabRecipes(Items.LIGHT_GRAY_WOOL, DistantMoonsBlocks.DYED_PILLOWS.get(DyeColor.LIGHT_GRAY), RecipeCategory.MISC, "pillow");
@@ -152,6 +173,23 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
         this.createSlabRecipes(Items.PURPLE_WOOL, DistantMoonsBlocks.DYED_PILLOWS.get(DyeColor.PURPLE), RecipeCategory.MISC, "pillow");
         this.createSlabRecipes(Items.MAGENTA_WOOL, DistantMoonsBlocks.DYED_PILLOWS.get(DyeColor.MAGENTA), RecipeCategory.MISC, "pillow");
         this.createSlabRecipes(Items.PINK_WOOL, DistantMoonsBlocks.DYED_PILLOWS.get(DyeColor.PINK), RecipeCategory.MISC, "pillow");
+
+        this.createSlabRecipes(Items.WHITE_TERRACOTTA, DistantMoonsBlocks.DYED_TERRACOTTA_SLABS.get(DyeColor.WHITE), RecipeCategory.BUILDING_BLOCKS, "terracotta_slab");
+        this.createSlabRecipes(Items.LIGHT_GRAY_TERRACOTTA, DistantMoonsBlocks.DYED_TERRACOTTA_SLABS.get(DyeColor.LIGHT_GRAY), RecipeCategory.BUILDING_BLOCKS, "terracotta_slab");
+        this.createSlabRecipes(Items.GRAY_TERRACOTTA, DistantMoonsBlocks.DYED_TERRACOTTA_SLABS.get(DyeColor.GRAY), RecipeCategory.BUILDING_BLOCKS, "terracotta_slab");
+        this.createSlabRecipes(Items.BLACK_TERRACOTTA, DistantMoonsBlocks.DYED_TERRACOTTA_SLABS.get(DyeColor.BLACK), RecipeCategory.BUILDING_BLOCKS, "terracotta_slab");
+        this.createSlabRecipes(Items.BROWN_TERRACOTTA, DistantMoonsBlocks.DYED_TERRACOTTA_SLABS.get(DyeColor.BROWN), RecipeCategory.BUILDING_BLOCKS, "terracotta_slab");
+        this.createSlabRecipes(Items.RED_TERRACOTTA, DistantMoonsBlocks.DYED_TERRACOTTA_SLABS.get(DyeColor.RED), RecipeCategory.BUILDING_BLOCKS, "terracotta_slab");
+        this.createSlabRecipes(Items.ORANGE_TERRACOTTA, DistantMoonsBlocks.DYED_TERRACOTTA_SLABS.get(DyeColor.ORANGE), RecipeCategory.BUILDING_BLOCKS, "terracotta_slab");
+        this.createSlabRecipes(Items.YELLOW_TERRACOTTA, DistantMoonsBlocks.DYED_TERRACOTTA_SLABS.get(DyeColor.YELLOW), RecipeCategory.BUILDING_BLOCKS, "terracotta_slab");
+        this.createSlabRecipes(Items.LIME_TERRACOTTA, DistantMoonsBlocks.DYED_TERRACOTTA_SLABS.get(DyeColor.LIME), RecipeCategory.BUILDING_BLOCKS, "terracotta_slab");
+        this.createSlabRecipes(Items.GREEN_TERRACOTTA, DistantMoonsBlocks.DYED_TERRACOTTA_SLABS.get(DyeColor.GREEN), RecipeCategory.BUILDING_BLOCKS, "terracotta_slab");
+        this.createSlabRecipes(Items.CYAN_TERRACOTTA, DistantMoonsBlocks.DYED_TERRACOTTA_SLABS.get(DyeColor.CYAN), RecipeCategory.BUILDING_BLOCKS, "terracotta_slab");
+        this.createSlabRecipes(Items.LIGHT_BLUE_TERRACOTTA, DistantMoonsBlocks.DYED_TERRACOTTA_SLABS.get(DyeColor.LIGHT_BLUE), RecipeCategory.BUILDING_BLOCKS, "terracotta_slab");
+        this.createSlabRecipes(Items.BLUE_TERRACOTTA, DistantMoonsBlocks.DYED_TERRACOTTA_SLABS.get(DyeColor.BLUE), RecipeCategory.BUILDING_BLOCKS, "terracotta_slab");
+        this.createSlabRecipes(Items.PURPLE_TERRACOTTA, DistantMoonsBlocks.DYED_TERRACOTTA_SLABS.get(DyeColor.PURPLE), RecipeCategory.BUILDING_BLOCKS, "terracotta_slab");
+        this.createSlabRecipes(Items.MAGENTA_TERRACOTTA, DistantMoonsBlocks.DYED_TERRACOTTA_SLABS.get(DyeColor.MAGENTA), RecipeCategory.BUILDING_BLOCKS, "terracotta_slab");
+        this.createSlabRecipes(Items.PINK_TERRACOTTA, DistantMoonsBlocks.DYED_TERRACOTTA_SLABS.get(DyeColor.PINK), RecipeCategory.BUILDING_BLOCKS, "terracotta_slab");
 
 
         //MISCELLANEOUS SMELTING
@@ -223,6 +261,41 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
         this.createStairsRecipes(DistantMoonsBlocks.PALE_PRISMARINE, DistantMoonsBlocks.PALE_PRISMARINE_STAIRS, null);
         this.createStairsRecipes(DistantMoonsBlocks.PALE_PRISMARINE_TILES, DistantMoonsBlocks.PALE_PRISMARINE_TILE_STAIRS, null);
         this.createStairsRecipes(DistantMoonsBlocks.PRISMARINE_TILES, DistantMoonsBlocks.PRISMARINE_TILE_STAIRS, null);
+        this.createStairsRecipes(Items.TERRACOTTA, DistantMoonsBlocks.TERRACOTTA_STAIRS, null);
+
+        this.createStairsRecipes(Items.WHITE_CONCRETE, DistantMoonsBlocks.DYED_CONCRETE_STAIRS.get(DyeColor.WHITE), "concrete_stairs");
+        this.createStairsRecipes(Items.LIGHT_GRAY_CONCRETE, DistantMoonsBlocks.DYED_CONCRETE_STAIRS.get(DyeColor.LIGHT_GRAY), "concrete_stairs");
+        this.createStairsRecipes(Items.GRAY_CONCRETE, DistantMoonsBlocks.DYED_CONCRETE_STAIRS.get(DyeColor.GRAY), "concrete_stairs");
+        this.createStairsRecipes(Items.BLACK_CONCRETE, DistantMoonsBlocks.DYED_CONCRETE_STAIRS.get(DyeColor.BLACK), "concrete_stairs");
+        this.createStairsRecipes(Items.BROWN_CONCRETE, DistantMoonsBlocks.DYED_CONCRETE_STAIRS.get(DyeColor.BROWN), "concrete_stairs");
+        this.createStairsRecipes(Items.RED_CONCRETE, DistantMoonsBlocks.DYED_CONCRETE_STAIRS.get(DyeColor.RED), "concrete_stairs");
+        this.createStairsRecipes(Items.ORANGE_CONCRETE, DistantMoonsBlocks.DYED_CONCRETE_STAIRS.get(DyeColor.ORANGE), "concrete_stairs");
+        this.createStairsRecipes(Items.YELLOW_CONCRETE, DistantMoonsBlocks.DYED_CONCRETE_STAIRS.get(DyeColor.YELLOW), "concrete_stairs");
+        this.createStairsRecipes(Items.LIME_CONCRETE, DistantMoonsBlocks.DYED_CONCRETE_STAIRS.get(DyeColor.LIME), "concrete_stairs");
+        this.createStairsRecipes(Items.GREEN_CONCRETE, DistantMoonsBlocks.DYED_CONCRETE_STAIRS.get(DyeColor.GREEN), "concrete_stairs");
+        this.createStairsRecipes(Items.CYAN_CONCRETE, DistantMoonsBlocks.DYED_CONCRETE_STAIRS.get(DyeColor.CYAN), "concrete_stairs");
+        this.createStairsRecipes(Items.LIGHT_BLUE_CONCRETE, DistantMoonsBlocks.DYED_CONCRETE_STAIRS.get(DyeColor.LIGHT_BLUE), "concrete_stairs");
+        this.createStairsRecipes(Items.BLUE_CONCRETE, DistantMoonsBlocks.DYED_CONCRETE_STAIRS.get(DyeColor.BLUE), "concrete_stairs");
+        this.createStairsRecipes(Items.PURPLE_CONCRETE, DistantMoonsBlocks.DYED_CONCRETE_STAIRS.get(DyeColor.PURPLE), "concrete_stairs");
+        this.createStairsRecipes(Items.MAGENTA_CONCRETE, DistantMoonsBlocks.DYED_CONCRETE_STAIRS.get(DyeColor.MAGENTA), "concrete_stairs");
+        this.createStairsRecipes(Items.PINK_CONCRETE, DistantMoonsBlocks.DYED_CONCRETE_STAIRS.get(DyeColor.PINK), "concrete_stairs");
+
+        this.createStairsRecipes(Items.WHITE_TERRACOTTA, DistantMoonsBlocks.DYED_TERRACOTTA_STAIRS.get(DyeColor.WHITE), "terracotta_stairs");
+        this.createStairsRecipes(Items.LIGHT_GRAY_TERRACOTTA, DistantMoonsBlocks.DYED_TERRACOTTA_STAIRS.get(DyeColor.LIGHT_GRAY), "terracotta_stairs");
+        this.createStairsRecipes(Items.GRAY_TERRACOTTA, DistantMoonsBlocks.DYED_TERRACOTTA_STAIRS.get(DyeColor.GRAY), "terracotta_stairs");
+        this.createStairsRecipes(Items.BLACK_TERRACOTTA, DistantMoonsBlocks.DYED_TERRACOTTA_STAIRS.get(DyeColor.BLACK), "terracotta_stairs");
+        this.createStairsRecipes(Items.BROWN_TERRACOTTA, DistantMoonsBlocks.DYED_TERRACOTTA_STAIRS.get(DyeColor.BROWN), "terracotta_stairs");
+        this.createStairsRecipes(Items.RED_TERRACOTTA, DistantMoonsBlocks.DYED_TERRACOTTA_STAIRS.get(DyeColor.RED), "terracotta_stairs");
+        this.createStairsRecipes(Items.ORANGE_TERRACOTTA, DistantMoonsBlocks.DYED_TERRACOTTA_STAIRS.get(DyeColor.ORANGE), "terracotta_stairs");
+        this.createStairsRecipes(Items.YELLOW_TERRACOTTA, DistantMoonsBlocks.DYED_TERRACOTTA_STAIRS.get(DyeColor.YELLOW), "terracotta_stairs");
+        this.createStairsRecipes(Items.LIME_TERRACOTTA, DistantMoonsBlocks.DYED_TERRACOTTA_STAIRS.get(DyeColor.LIME), "terracotta_stairs");
+        this.createStairsRecipes(Items.GREEN_TERRACOTTA, DistantMoonsBlocks.DYED_TERRACOTTA_STAIRS.get(DyeColor.GREEN), "terracotta_stairs");
+        this.createStairsRecipes(Items.CYAN_TERRACOTTA, DistantMoonsBlocks.DYED_TERRACOTTA_STAIRS.get(DyeColor.CYAN), "terracotta_stairs");
+        this.createStairsRecipes(Items.LIGHT_BLUE_TERRACOTTA, DistantMoonsBlocks.DYED_TERRACOTTA_STAIRS.get(DyeColor.LIGHT_BLUE), "terracotta_stairs");
+        this.createStairsRecipes(Items.BLUE_TERRACOTTA, DistantMoonsBlocks.DYED_TERRACOTTA_STAIRS.get(DyeColor.BLUE), "terracotta_stairs");
+        this.createStairsRecipes(Items.PURPLE_TERRACOTTA, DistantMoonsBlocks.DYED_TERRACOTTA_STAIRS.get(DyeColor.PURPLE), "terracotta_stairs");
+        this.createStairsRecipes(Items.MAGENTA_TERRACOTTA, DistantMoonsBlocks.DYED_TERRACOTTA_STAIRS.get(DyeColor.MAGENTA), "terracotta_stairs");
+        this.createStairsRecipes(Items.PINK_TERRACOTTA, DistantMoonsBlocks.DYED_TERRACOTTA_STAIRS.get(DyeColor.PINK), "terracotta_stairs");
 
         //WALL CRAFTING
         this.createWallRecipes(DistantMoonsBlocks.FIRE_BRICKS, DistantMoonsBlocks.FIRE_BRICK_WALL, null);
@@ -288,6 +361,7 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
         this.createWallSlabRecipes(Items.SPRUCE_PLANKS, DistantMoonsBlocks.SPRUCE_WALL_SLAB, "plank_wall_slab");
         this.createWallSlabRecipes(Items.STONE_BRICKS, DistantMoonsBlocks.STONE_BRICK_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.STONE, DistantMoonsBlocks.STONE_WALL_SLAB, null);
+        this.createWallSlabRecipes(Items.TERRACOTTA, DistantMoonsBlocks.TERRACOTTA_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.TUFF_BRICKS, DistantMoonsBlocks.TUFF_BRICK_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.TUFF, DistantMoonsBlocks.TUFF_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.WARPED_PLANKS, DistantMoonsBlocks.WARPED_WALL_SLAB, "plank_wall_slab");
@@ -296,6 +370,40 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
         this.createWallSlabRecipes(Items.WAXED_OXIDIZED_CUT_COPPER, DistantMoonsBlocks.WAXED_OXIDIZED_CUT_COPPER_WALL_SLAB, "waxed_oxidized_cut_copper_wall_slab");
         this.createWallSlabRecipes(Items.WAXED_WEATHERED_CUT_COPPER, DistantMoonsBlocks.WAXED_WEATHERED_CUT_COPPER_WALL_SLAB, "waxed_weathered_cut_copper_wall_slab");
         this.createWallSlabRecipes(Items.WEATHERED_CUT_COPPER, DistantMoonsBlocks.WEATHERED_CUT_COPPER_WALL_SLAB, "weathered_cut_copper_wall_slab");
+
+        this.createWallSlabRecipes(Items.WHITE_CONCRETE, DistantMoonsBlocks.DYED_CONCRETE_WALL_SLABS.get(DyeColor.WHITE), "concrete_wall_slab");
+        this.createWallSlabRecipes(Items.LIGHT_GRAY_CONCRETE, DistantMoonsBlocks.DYED_CONCRETE_WALL_SLABS.get(DyeColor.LIGHT_GRAY), "concrete_wall_slab");
+        this.createWallSlabRecipes(Items.GRAY_CONCRETE, DistantMoonsBlocks.DYED_CONCRETE_WALL_SLABS.get(DyeColor.GRAY), "concrete_wall_slab");
+        this.createWallSlabRecipes(Items.BLACK_CONCRETE, DistantMoonsBlocks.DYED_CONCRETE_WALL_SLABS.get(DyeColor.BLACK), "concrete_wall_slab");
+        this.createWallSlabRecipes(Items.BROWN_CONCRETE, DistantMoonsBlocks.DYED_CONCRETE_WALL_SLABS.get(DyeColor.BROWN), "concrete_wall_slab");
+        this.createWallSlabRecipes(Items.RED_CONCRETE, DistantMoonsBlocks.DYED_CONCRETE_WALL_SLABS.get(DyeColor.RED), "concrete_wall_slab");
+        this.createWallSlabRecipes(Items.ORANGE_CONCRETE, DistantMoonsBlocks.DYED_CONCRETE_WALL_SLABS.get(DyeColor.ORANGE), "concrete_wall_slab");
+        this.createWallSlabRecipes(Items.YELLOW_CONCRETE, DistantMoonsBlocks.DYED_CONCRETE_WALL_SLABS.get(DyeColor.YELLOW), "concrete_wall_slab");
+        this.createWallSlabRecipes(Items.LIME_CONCRETE, DistantMoonsBlocks.DYED_CONCRETE_WALL_SLABS.get(DyeColor.LIME), "concrete_wall_slab");
+        this.createWallSlabRecipes(Items.GREEN_CONCRETE, DistantMoonsBlocks.DYED_CONCRETE_WALL_SLABS.get(DyeColor.GREEN), "concrete_wall_slab");
+        this.createWallSlabRecipes(Items.CYAN_CONCRETE, DistantMoonsBlocks.DYED_CONCRETE_WALL_SLABS.get(DyeColor.CYAN), "concrete_wall_slab");
+        this.createWallSlabRecipes(Items.LIGHT_BLUE_CONCRETE, DistantMoonsBlocks.DYED_CONCRETE_WALL_SLABS.get(DyeColor.LIGHT_BLUE), "concrete_wall_slab");
+        this.createWallSlabRecipes(Items.BLUE_CONCRETE, DistantMoonsBlocks.DYED_CONCRETE_WALL_SLABS.get(DyeColor.BLUE), "concrete_wall_slab");
+        this.createWallSlabRecipes(Items.PURPLE_CONCRETE, DistantMoonsBlocks.DYED_CONCRETE_WALL_SLABS.get(DyeColor.PURPLE), "concrete_wall_slab");
+        this.createWallSlabRecipes(Items.MAGENTA_CONCRETE, DistantMoonsBlocks.DYED_CONCRETE_WALL_SLABS.get(DyeColor.MAGENTA), "concrete_wall_slab");
+        this.createWallSlabRecipes(Items.PINK_CONCRETE, DistantMoonsBlocks.DYED_CONCRETE_WALL_SLABS.get(DyeColor.PINK), "concrete_wall_slab");
+
+        this.createWallSlabRecipes(Items.WHITE_TERRACOTTA, DistantMoonsBlocks.DYED_TERRACOTTA_WALL_SLABS.get(DyeColor.WHITE), "terracotta_wall_slab");
+        this.createWallSlabRecipes(Items.LIGHT_GRAY_TERRACOTTA, DistantMoonsBlocks.DYED_TERRACOTTA_WALL_SLABS.get(DyeColor.LIGHT_GRAY), "terracotta_wall_slab");
+        this.createWallSlabRecipes(Items.GRAY_TERRACOTTA, DistantMoonsBlocks.DYED_TERRACOTTA_WALL_SLABS.get(DyeColor.GRAY), "terracotta_wall_slab");
+        this.createWallSlabRecipes(Items.BLACK_TERRACOTTA, DistantMoonsBlocks.DYED_TERRACOTTA_WALL_SLABS.get(DyeColor.BLACK), "terracotta_wall_slab");
+        this.createWallSlabRecipes(Items.BROWN_TERRACOTTA, DistantMoonsBlocks.DYED_TERRACOTTA_WALL_SLABS.get(DyeColor.BROWN), "terracotta_wall_slab");
+        this.createWallSlabRecipes(Items.RED_TERRACOTTA, DistantMoonsBlocks.DYED_TERRACOTTA_WALL_SLABS.get(DyeColor.RED), "terracotta_wall_slab");
+        this.createWallSlabRecipes(Items.ORANGE_TERRACOTTA, DistantMoonsBlocks.DYED_TERRACOTTA_WALL_SLABS.get(DyeColor.ORANGE), "terracotta_wall_slab");
+        this.createWallSlabRecipes(Items.YELLOW_TERRACOTTA, DistantMoonsBlocks.DYED_TERRACOTTA_WALL_SLABS.get(DyeColor.YELLOW), "terracotta_wall_slab");
+        this.createWallSlabRecipes(Items.LIME_TERRACOTTA, DistantMoonsBlocks.DYED_TERRACOTTA_WALL_SLABS.get(DyeColor.LIME), "terracotta_wall_slab");
+        this.createWallSlabRecipes(Items.GREEN_TERRACOTTA, DistantMoonsBlocks.DYED_TERRACOTTA_WALL_SLABS.get(DyeColor.GREEN), "terracotta_wall_slab");
+        this.createWallSlabRecipes(Items.CYAN_TERRACOTTA, DistantMoonsBlocks.DYED_TERRACOTTA_WALL_SLABS.get(DyeColor.CYAN), "terracotta_wall_slab");
+        this.createWallSlabRecipes(Items.LIGHT_BLUE_TERRACOTTA, DistantMoonsBlocks.DYED_TERRACOTTA_WALL_SLABS.get(DyeColor.LIGHT_BLUE), "terracotta_wall_slab");
+        this.createWallSlabRecipes(Items.BLUE_TERRACOTTA, DistantMoonsBlocks.DYED_TERRACOTTA_WALL_SLABS.get(DyeColor.BLUE), "terracotta_wall_slab");
+        this.createWallSlabRecipes(Items.PURPLE_TERRACOTTA, DistantMoonsBlocks.DYED_TERRACOTTA_WALL_SLABS.get(DyeColor.PURPLE), "terracotta_wall_slab");
+        this.createWallSlabRecipes(Items.MAGENTA_TERRACOTTA, DistantMoonsBlocks.DYED_TERRACOTTA_WALL_SLABS.get(DyeColor.MAGENTA), "terracotta_wall_slab");
+        this.createWallSlabRecipes(Items.PINK_TERRACOTTA, DistantMoonsBlocks.DYED_TERRACOTTA_WALL_SLABS.get(DyeColor.PINK), "terracotta_wall_slab");
 
         //WAXING RECIPES
         this.createWaxingRecipe(DistantMoonsBlocks.CUT_COPPER_WALL_SLAB, DistantMoonsBlocks.WAXED_CUT_COPPER_WALL_SLAB);
@@ -341,6 +449,27 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
             .generic(Ingredient.of(ingredient), RecipeCategory.FOOD, result, experience, cookingTime * 3, RecipeSerializer.CAMPFIRE_COOKING_RECIPE, CampfireCookingRecipe::new)
             .unlockedBy(getHasName(ingredient), this.has(ingredient))
             .save(this.output, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/campfire_cooking_" + getItemId(ingredient)));
+      }
+
+      private void createDyeingRecipes(Map<DyeColor, Block> blocks, ItemLike ingredient, boolean single) {
+        for (DyeColor dyeColor : DyeColor.values()) {
+          ItemLike result = blocks.get(dyeColor);
+          ItemLike dye = ColorUtil.getDyeItemByColor(dyeColor);
+          String group = "dyed_" + getItemId(result);
+          String path = UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/dyeing");
+          if (single) this.shapeless(RecipeCategory.MISC, result)
+              .group(group)
+              .requires(dye)
+              .requires(ingredient)
+              .unlockedBy(getHasName(dye), this.has(dye))
+              .save(this.output, path);
+          else this.shaped(RecipeCategory.MISC, result, 8)
+              .group(group)
+              .pattern("000").pattern("010").pattern("000")
+              .define('0', ingredient).define('1', dye)
+              .unlockedBy(getHasName(dye), this.has(dye))
+              .save(this.output, path);
+        }
       }
 
       private void createDyeingRecipes(Map<DyeColor, Block> blocks, TagKey<Item> ingredient, boolean single) {
