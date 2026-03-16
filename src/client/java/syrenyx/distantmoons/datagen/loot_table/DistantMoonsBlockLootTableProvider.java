@@ -254,7 +254,7 @@ public class DistantMoonsBlockLootTableProvider extends FabricBlockLootTableProv
             .apply(ApplyExplosionDecay.explosionDecay())
         )
         .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties()
-            .hasProperty(LargeBlastFurnaceBlock.CORNER, BlockCorner.BOTTOM_NORTH_EAST)
+            .hasProperty(LargeBlastFurnaceBlock.CORNER, BlockCorner.dropCorner())
         ))
     ));
   }

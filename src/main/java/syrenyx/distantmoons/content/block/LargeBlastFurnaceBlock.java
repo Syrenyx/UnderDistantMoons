@@ -161,7 +161,7 @@ public class LargeBlastFurnaceBlock extends BaseEntityBlock {
   public @NonNull BlockState playerWillDestroy(@NonNull Level level, @NonNull BlockPos blockPos, @NonNull BlockState blockState, @NonNull Player player) {
     if (level.isClientSide() || !player.preventsBlockDrops()) return super.playerWillDestroy(level, blockPos, blockState, player);
     BlockCorner corner = blockState.getValue(CORNER);
-    if (corner == BlockCorner.BOTTOM_NORTH_EAST) return super.playerWillDestroy(level, blockPos, blockState, player);
+    if (corner == BlockCorner.dropCorner()) return super.playerWillDestroy(level, blockPos, blockState, player);
     BlockPos cornerPos = corner.getTopNorthEastPos(blockPos).below();
     level.setBlock(cornerPos, Blocks.AIR.defaultBlockState(), 35);
     level.levelEvent(player, 2001, cornerPos, Block.getId(level.getBlockState(cornerPos)));

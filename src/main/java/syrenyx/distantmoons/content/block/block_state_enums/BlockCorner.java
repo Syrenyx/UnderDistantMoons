@@ -103,4 +103,8 @@ public enum BlockCorner implements StringRepresentable {
       case COUNTERCLOCKWISE_90 -> getFrom(this.top, (this.north == this.east) != this.north, (this.north == this.east) == this.east);
     };
   }
+
+  public static BlockCorner dropCorner() {
+    return BOTTOM_NORTH_EAST;
+  }
 }
