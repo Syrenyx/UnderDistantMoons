@@ -59,6 +59,7 @@ public abstract class DistantMoonsBlockTags {
   public static final TagKey<Block> SPIKED_FENCE_NEVER_CONNECTS_TO = keyOf("connection_target/spiked_fence/never");
   public static final TagKey<Block> SPIKED_FENCE_NOT_BLOCKED_BY = keyOf("connection_target/spiked_fence/not_blocked_by");
   public static final TagKey<Block> SUPPORT_BLOCK_FOR_SITTING_SPOT = keyOf("support_block/sitting_spot");
+  public static final TagKey<Block> UNDERWORLD_COMPASS_TARGET = keyOf("underworld_compass_target");
   public static final TagKey<Block> WALL = keyOf("wall");
   public static final TagKey<Block> WALL_ALWAYS_CONNECTS_TO = keyOf("connection_target/wall/always");
   public static final TagKey<Block> WALL_NEVER_CONNECTS_TO = keyOf("connection_target/wall/never");

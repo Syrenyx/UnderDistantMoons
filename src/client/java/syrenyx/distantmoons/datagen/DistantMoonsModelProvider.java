@@ -16,8 +16,12 @@ import net.minecraft.client.data.models.model.TextureSlot;
 import net.minecraft.client.renderer.block.model.Variant;
 import net.minecraft.client.renderer.block.model.VariantMutator;
 import net.minecraft.client.renderer.block.model.multipart.CombinedCondition;
-import net.minecraft.client.renderer.item.properties.select.SelectItemModelProperties;
+import net.minecraft.client.renderer.item.ItemModel;
+import net.minecraft.client.renderer.item.RangeSelectItemModel;
+import net.minecraft.client.renderer.item.properties.numeric.CompassAngle;
+import net.minecraft.client.renderer.item.properties.numeric.CompassAngleState;
 import net.minecraft.core.Direction;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.random.WeightedList;
 import net.minecraft.world.item.Item;
@@ -34,12 +38,11 @@ import syrenyx.distantmoons.initializers.DistantMoonsBlocks;
 import syrenyx.distantmoons.initializers.DistantMoonsItems;
 import syrenyx.distantmoons.references.DistantMoonsTextureSlot;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 public class DistantMoonsModelProvider extends FabricModelProvider {
+
+  private static final int COMPASS_NEEDLE_DIRECTIONS = 32;
 
   private static final VariantMutator NO_OP = BlockModelGenerators.NOP;
   private static final VariantMutator UV_LOCK = BlockModelGenerators.UV_LOCK;
@@ -126,6 +129,11 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
       DistantMoonsTextureSlot.HELD_TEXTURE, UnderDistantMoons.withPrefixedNamespace("item/%/held"),
       TextureSlot.TEXTURE, UnderDistantMoons.withPrefixedNamespace("item/%/item")
   );
+  private static final Map<TextureSlot, String> SIMPLE_UNDERWORLD_ITEM_TEXTURE_MAP = Map.of(
+      DistantMoonsTextureSlot.LIT, UnderDistantMoons.withPrefixedNamespace("item/%/lit"),
+      DistantMoonsTextureSlot.NEEDLE, UnderDistantMoons.withPrefixedNamespace("item/%/needle/"),
+      DistantMoonsTextureSlot.UNLIT, UnderDistantMoons.withPrefixedNamespace("item/%/unlit")
+  );
 
   private BlockModelGenerators blockGenerator;
   private ItemModelGenerators itemGenerator;
@@ -200,9 +208,6 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     registerFixedLadderBlock(DistantMoonsBlocks.FIXED_DEEP_IRON_LADDER, FIXED_LADDER_TEXTURE_MAP);
     registerFixedLadderBlock(DistantMoonsBlocks.FIXED_IRON_LADDER, FIXED_LADDER_TEXTURE_MAP);
     registerFixedLadderBlock(DistantMoonsBlocks.FIXED_WROUGHT_IRON_LADDER, FIXED_LADDER_TEXTURE_MAP);
-
-    //LANTERNS
-    registerUnderworldLanternBlock(DistantMoonsBlocks.UNDERWORLD_LANTERN, LIGHTABLE_BLOCK_TEXTURE_MAP);
 
     //METAL BAR DOORS
     registerMetalBarDoorBlock(DistantMoonsBlocks.DEEP_IRON_BAR_DOOR, Map.ofEntries(
@@ -466,6 +471,9 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
         DistantMoonsTextureSlot.VERTICAL_END, UnderDistantMoons.withPrefixedNamespace("block/smooth_stone_slab/end/vertical"),
         DistantMoonsTextureSlot.VERTICAL_SIDE, UnderDistantMoons.withPrefixedNamespace("block/smooth_stone_slab/side/vertical")
     ));
+
+    //UNDERWORLD LANTERNS
+    registerUnderworldLanternBlock(DistantMoonsBlocks.UNDERWORLD_LANTERN, LIGHTABLE_BLOCK_TEXTURE_MAP);
   }
 
   @Override
@@ -500,11 +508,17 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     registerSimpleItem(DistantMoonsItems.ROTTEN_FISH, "simple_item", SIMPLE_ITEM_TEXTURE_MAP);
     registerSimpleItem(DistantMoonsItems.RUBY, "simple_item", SIMPLE_ITEM_TEXTURE_MAP);
     registerSimpleItem(DistantMoonsItems.SAPPHIRE, "simple_item", SIMPLE_ITEM_TEXTURE_MAP);
-    registerSimpleItem(DistantMoonsItems.UNDERWORLD_DUST, "simple_item", SIMPLE_ITEM_TEXTURE_MAP);
     registerSimpleItem(DistantMoonsItems.WROUGHT_IRON_ROD, "stick", SIMPLE_ITEM_TEXTURE_MAP);
 
     //SPEAR ITEMS
     registerSpearItem(DistantMoonsItems.DEEP_IRON_SPEAR, SPEAR_ITEM_TEXTURE_MAP);
+
+    //SIMPLE UNDERWORLD ITEMS
+    registerSimpleUnderworldItem(DistantMoonsItems.UNDERWORLD_DUST, "simple_item", SIMPLE_UNDERWORLD_ITEM_TEXTURE_MAP);
+    registerSimpleUnderworldItem(DistantMoonsItems.UNDERWORLD_PEARL, "simple_item", SIMPLE_UNDERWORLD_ITEM_TEXTURE_MAP);
+
+    //UNDERWORLD COMPASSES
+    registerUnderworldCompassItem(DistantMoonsItems.UNDERWORLD_COMPASS, SIMPLE_UNDERWORLD_ITEM_TEXTURE_MAP);
   }
 
   private void registerSimpleBlock(Block block, Map<TextureSlot, String> rawTextureMap) {
@@ -1340,6 +1354,43 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
         ItemModelUtils.plainModel(createObjectModel(item, "simple_item", "/item", textureMapItem)),
         ItemModelUtils.plainModel(createObjectModel(item, "spear", "/held", textureMapHeld))
     ));
+  }
+
+  private void registerSimpleUnderworldItem(Item item, String parent, Map<TextureSlot, String> rawTextureMap) {
+    Map<TextureSlot, String> textureMapLit = Map.of(TextureSlot.TEXTURE, rawTextureMap.get(DistantMoonsTextureSlot.LIT), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureSlot.LIT));
+    Map<TextureSlot, String> textureMapUnlit = Map.of(TextureSlot.TEXTURE, rawTextureMap.get(DistantMoonsTextureSlot.UNLIT), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureSlot.UNLIT));
+    this.blockGenerator.itemModelOutput.accept(item.asItem(), ItemModelUtils.conditional(
+        new UnderworldDimension(),
+        ItemModelUtils.plainModel(createObjectModel(item, parent, "/lit", textureMapLit)),
+        ItemModelUtils.plainModel(createObjectModel(item, parent, "/unlit", textureMapUnlit)))
+    );
+  }
+
+  private void registerUnderworldCompassItem(Item item, Map<TextureSlot, String> rawTextureMap) {
+    Map<TextureSlot, String> textureMapUnlit = Map.of(TextureSlot.TEXTURE, rawTextureMap.get(DistantMoonsTextureSlot.UNLIT), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureSlot.UNLIT));
+    Map<TextureSlot, String> textureMapLit0 = Map.of(DistantMoonsTextureSlot.BASE, rawTextureMap.get(DistantMoonsTextureSlot.LIT), DistantMoonsTextureSlot.NEEDLE, rawTextureMap.get(DistantMoonsTextureSlot.NEEDLE) + "0", TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureSlot.LIT));
+    Identifier modelUnlit = createObjectModel(item, "simple_item", "/unlit", textureMapUnlit);
+    Identifier modelLit0 = createObjectModel(item, "compass", "/lit/0", textureMapLit0);
+    List<RangeSelectItemModel.Entry> litModels = new ArrayList<>();
+    litModels.add(ItemModelUtils.override(ItemModelUtils.plainModel(modelLit0), 0.0F));
+    for (int needle = 1; needle < COMPASS_NEEDLE_DIRECTIONS; needle++) {
+      litModels.add(ItemModelUtils.override(ItemModelUtils.plainModel(createObjectModel(
+          item,
+          "compass",
+          "/lit/" + needle,
+          Map.of(DistantMoonsTextureSlot.BASE, rawTextureMap.get(DistantMoonsTextureSlot.LIT), DistantMoonsTextureSlot.NEEDLE, rawTextureMap.get(DistantMoonsTextureSlot.NEEDLE) + needle, TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureSlot.LIT))
+      )), needle - 0.5F));
+    }
+    litModels.add(ItemModelUtils.override(ItemModelUtils.plainModel(modelLit0), 31.5F));
+    this.blockGenerator.itemModelOutput.accept(item.asItem(), ItemModelUtils.conditional(
+        new UnderworldDimension(),
+        ItemModelUtils.conditional(
+            ItemModelUtils.hasComponent(DataComponents.LODESTONE_TRACKER),
+            ItemModelUtils.rangeSelect(new CompassAngle(true, CompassAngleState.CompassTarget.LODESTONE), COMPASS_NEEDLE_DIRECTIONS, litModels),
+            ItemModelUtils.rangeSelect(new CompassAngle(true, CompassAngleState.CompassTarget.NONE), COMPASS_NEEDLE_DIRECTIONS, litModels)
+        ),
+        ItemModelUtils.plainModel(modelUnlit))
+    );
   }
 
   private static Identifier getObjectModelPath(Block block, String suffix) {

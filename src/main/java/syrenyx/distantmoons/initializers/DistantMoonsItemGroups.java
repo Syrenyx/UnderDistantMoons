@@ -366,6 +366,7 @@ public abstract class DistantMoonsItemGroups {
         DistantMoonsItems.DEEP_IRON_AXE.getDefaultInstance(),
         DistantMoonsItems.DEEP_IRON_HOE.getDefaultInstance()
     ));
+    addToGroup(CreativeModeTabs.TOOLS_AND_UTILITIES, Items.RECOVERY_COMPASS, List.of(DistantMoonsItems.UNDERWORLD_COMPASS.getDefaultInstance()));
     addToGroup(CreativeModeTabs.TOOLS_AND_UTILITIES, Items.TNT_MINECART, List.of(DistantMoonsItems.COILED_ROPE_LADDER.getDefaultInstance()));
 
     //COMBAT
@@ -412,7 +413,10 @@ public abstract class DistantMoonsItemGroups {
     ));
     addToGroup(CreativeModeTabs.INGREDIENTS, Items.PRISMARINE_SHARD, List.of(DistantMoonsItems.PALE_PRISMARINE_SHARD.getDefaultInstance()));
     addToGroup(CreativeModeTabs.INGREDIENTS, Items.NETHER_BRICK, List.of(DistantMoonsItems.FIRE_BRICK.getDefaultInstance()));
-    addToGroup(CreativeModeTabs.INGREDIENTS, Items.BOOK, List.of(DistantMoonsItems.UNDERWORLD_DUST.getDefaultInstance()));
+    addToGroup(CreativeModeTabs.INGREDIENTS, Items.BOOK, List.of(
+        DistantMoonsItems.UNDERWORLD_DUST.getDefaultInstance(),
+        DistantMoonsItems.UNDERWORLD_PEARL.getDefaultInstance()
+    ));
 
     //SPAWN EGGS
     addToGroup(CreativeModeTabs.SPAWN_EGGS, Items.CREAKING_HEART, List.of(

@@ -18,6 +18,7 @@ import syrenyx.distantmoons.UnderDistantMoons;
 import syrenyx.distantmoons.content.data_component.BlastFurnaceFuelComponent;
 import syrenyx.distantmoons.content.data_component.CoiledBlockComponent;
 import syrenyx.distantmoons.content.item.CoilItem;
+import syrenyx.distantmoons.content.item.UnderworldCompassItem;
 import syrenyx.distantmoons.references.DistantMoonsItemMaterials;
 
 import java.util.function.Function;
@@ -193,8 +194,19 @@ public abstract class DistantMoonsItems {
       Item::new,
       new Item.Properties()
   );
+  public static final Item UNDERWORLD_COMPASS = register(
+      "underworld_compass",
+      UnderworldCompassItem::new,
+      new Item.Properties()
+          .fireResistant()
+  );
   public static final Item UNDERWORLD_DUST = register(
       "underworld_dust",
+      Item::new,
+      new Item.Properties()
+  );
+  public static final Item UNDERWORLD_PEARL = register(
+      "underworld_pearl",
       Item::new,
       new Item.Properties()
   );

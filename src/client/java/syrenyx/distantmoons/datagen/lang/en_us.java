@@ -320,7 +320,10 @@ public class en_us extends FabricLanguageProvider {
     builder.add(DistantMoonsItems.ROTTEN_FISH, "Rotten Fish");
     builder.add(DistantMoonsItems.RUBY, "Ruby");
     builder.add(DistantMoonsItems.SAPPHIRE, "Sapphire");
+    builder.add(DistantMoonsItems.UNDERWORLD_COMPASS, "Underworld Compass");
+    builder.add("item.distant-moons.underworld_compass.sealed", "Sealed Underworld Compass");
     builder.add(DistantMoonsItems.UNDERWORLD_DUST, "Underworld Dust");
+    builder.add(DistantMoonsItems.UNDERWORLD_PEARL, "Underworld Pearl");
     builder.add(DistantMoonsItems.WROUGHT_IRON_ROD, "Wrought Iron Rod");
 
     builder.add("subtitles.distant-moons.block.large_blast_furnace.blast", "Blast Furnace roars");
@@ -333,6 +336,7 @@ public class en_us extends FabricLanguageProvider {
     builder.add(DistantMoonsItemTags.CORUNDUM_BLOCK, "Corundum Block");
     builder.add(DistantMoonsItemTags.DEEP_IRON_BLOCK, "Deep Iron Block");
     builder.add(DistantMoonsItemTags.DEEP_IRON_INGOT, "Deep Iron Ingot");
+    builder.add(DistantMoonsItemTags.DYED_CONCRETE_POWDER, "Dyed Concrete Powder");
     builder.add(DistantMoonsItemTags.DYED_CONCRETE_SLAB, "Dyed Concrete Slab");
     builder.add(DistantMoonsItemTags.DYED_CONCRETE_STAIRS, "Dyed Concrete Stairs");
     builder.add(DistantMoonsItemTags.DYED_CONCRETE_WALL_SLAB, "Dyed Concrete Wall Slab");

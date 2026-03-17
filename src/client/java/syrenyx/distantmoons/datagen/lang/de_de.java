@@ -359,7 +359,10 @@ public class de_de extends FabricLanguageProvider {
     builder.add(DistantMoonsItems.ROTTEN_FISH, "Verrotteter Fisch");
     builder.add(DistantMoonsItems.RUBY, "Rubin");
     builder.add(DistantMoonsItems.SAPPHIRE, "Saphir");
+    builder.add(DistantMoonsItems.UNDERWORLD_COMPASS, "Unterweltkompass");
+    builder.add("item.distant-moons.underworld_compass.sealed", "Versiegelter Unterweltkompass");
     builder.add(DistantMoonsItems.UNDERWORLD_DUST, "Unterweltstaub");
+    builder.add(DistantMoonsItems.UNDERWORLD_PEARL, "Unterweltperle");
     builder.add(DistantMoonsItems.WROUGHT_IRON_ROD, "Schmiedeeisenstange");
 
 
@@ -373,6 +376,7 @@ public class de_de extends FabricLanguageProvider {
     builder.add(DistantMoonsItemTags.CORUNDUM_BLOCK, "Korundblock");
     builder.add(DistantMoonsItemTags.DEEP_IRON_BLOCK, "Tiefeisenblock");
     builder.add(DistantMoonsItemTags.DEEP_IRON_INGOT, "Tiefeisenbarren");
+    builder.add(DistantMoonsItemTags.DYED_CONCRETE_POWDER, "Gefärbter Trockenbeton");
     builder.add(DistantMoonsItemTags.DYED_CONCRETE_SLAB, "Gefärbte Betonstufe");
     builder.add(DistantMoonsItemTags.DYED_CONCRETE_STAIRS, "Gefärbte Betontreppe");
     builder.add(DistantMoonsItemTags.DYED_CONCRETE_WALL_SLAB, "Gefärbte Gestufte Betonwand");

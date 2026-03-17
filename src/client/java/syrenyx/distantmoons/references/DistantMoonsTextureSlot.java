@@ -4,6 +4,7 @@ import net.minecraft.client.data.models.model.TextureSlot;
 
 public abstract class DistantMoonsTextureSlot {
 
+  public static final TextureSlot BASE = TextureSlot.create("base");
   public static final TextureSlot BOTTOM_LEFT = TextureSlot.create("bottom_left");
   public static final TextureSlot BOTTOM_RIGHT = TextureSlot.create("bottom_right");
   public static final TextureSlot CEILING = TextureSlot.create("ceiling");
@@ -28,6 +29,7 @@ public abstract class DistantMoonsTextureSlot {
   public static final TextureSlot LIT_ITEM = TextureSlot.create("lit");
   public static final TextureSlot LOWER_SIDE = TextureSlot.create("lower_side");
   public static final TextureSlot MIDDLE = TextureSlot.create("middle");
+  public static final TextureSlot NEEDLE = TextureSlot.create("needle");
   public static final TextureSlot OUTSIDE = TextureSlot.create("outside");
   public static final TextureSlot SIDE_LEFT = TextureSlot.create("side_left");
   public static final TextureSlot SIDE_RIGHT = TextureSlot.create("side_right");
