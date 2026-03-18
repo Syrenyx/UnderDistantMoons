@@ -39,6 +39,7 @@ public class PillarSlabBlock extends Block implements SimpleWaterloggedBlock {
   public static final EnumProperty<Direction.Axis> AXIS = BlockStateProperties.AXIS;
   public static final EnumProperty<SlabType> TYPE = BlockStateProperties.SLAB_TYPE;
   public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+
   private static final Map<Direction.Axis, VoxelShape> BOTTOM_SHAPES_BY_AXIS = VoxelShapeUtil.createAxisShapeMap(Block.column(16.0, 0.0, 8.0));
   private static final Map<Direction.Axis, VoxelShape> TOP_SHAPES_BY_AXIS = VoxelShapeUtil.createAxisShapeMap(Block.column(16.0, 8.0, 16.0));
 

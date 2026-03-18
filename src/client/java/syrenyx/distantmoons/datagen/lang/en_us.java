@@ -61,6 +61,7 @@ public class en_us extends FabricLanguageProvider {
     builder.add(DistantMoonsBlocks.BLACKSTONE_WALL_SLAB, "Blackstone Wall Slab");
     builder.add(DistantMoonsBlocks.BLAST_FURNACE, "Blast Furnace");
     builder.add(DistantMoonsBlocks.BRICK_WALL_SLAB, "Brick Wall Slab");
+    builder.add(DistantMoonsBlocks.BROKEN_UNDERWORLD_ANCHOR, "Broken Underworld Anchor");
     builder.add(DistantMoonsBlocks.CHARCOAL_BLOCK, "Block of Charcoal");
     builder.add(DistantMoonsBlocks.CHERRY_BEAM, "Cherry Beam");
     builder.add(DistantMoonsBlocks.CHERRY_POLE, "Cherry Pole");
@@ -236,6 +237,8 @@ public class en_us extends FabricLanguageProvider {
     builder.add(DistantMoonsBlocks.TERRACOTTA_WALL_SLAB, "Terracotta Wall Slab");
     builder.add(DistantMoonsBlocks.TUFF_BRICK_WALL_SLAB, "Tuff Brick Wall Slab");
     builder.add(DistantMoonsBlocks.TUFF_WALL_SLAB, "Tuff Wall Slab");
+    builder.add(DistantMoonsBlocks.UNDERWORLD_ANCHOR, "Underworld Anchor");
+    builder.add(DistantMoonsBlocks.UNDERWORLD_CONFLUX, "Underworld Conflux");
     builder.add(DistantMoonsBlocks.UNDERWORLD_LANTERN, "Underworld Lantern");
     builder.add(DistantMoonsBlocks.WARPED_BEAM, "Warped Beam");
     builder.add(DistantMoonsBlocks.WARPED_POLE, "Warped Pole");
@@ -293,6 +296,7 @@ public class en_us extends FabricLanguageProvider {
 
     builder.add(DistantMoonsEntityTypes.SITTING_SPOT, "Sitting Spot");
 
+    builder.add(DistantMoonsItems.ABYSS_KEYSTONE, "Abyss Keystone");
     builder.add(DistantMoonsItems.COILED_ROPE_LADDER, "Coiled Rope Ladder");
     builder.add(DistantMoonsItems.COKE, "Coke");
     builder.add(DistantMoonsItems.COPPER_ROD, "Copper Rod");
@@ -311,6 +315,7 @@ public class en_us extends FabricLanguageProvider {
     builder.add(DistantMoonsItems.DEEP_IRON_SWORD, "Deep Iron Sword");
     builder.add(DistantMoonsItems.FIRE_BRICK, "Fire Brick");
     builder.add(DistantMoonsItems.IRON_ROD, "Iron Rod");
+    builder.add(DistantMoonsItems.NETHER_KEYSTONE, "Nether Keystone");
     builder.add(DistantMoonsItems.PALE_PRISMARINE_SHARD, "Pale Prismarine Shard");
     builder.add(DistantMoonsItems.RAW_DEEP_IRON, "Raw Deep Iron");
     builder.add(DistantMoonsItems.REFINED_DEEP_IRON_INGOT, "Refined Deep Iron Ingot");

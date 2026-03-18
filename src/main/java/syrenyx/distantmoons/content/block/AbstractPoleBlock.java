@@ -28,8 +28,8 @@ import org.jspecify.annotations.NonNull;
 public abstract class AbstractPoleBlock extends Block implements SimpleWaterloggedBlock {
 
   public static final EnumProperty<Direction.Axis> AXIS = BlockStateProperties.AXIS;
-  public static final BooleanProperty UP = PipeBlock.UP;
-  public static final BooleanProperty DOWN = PipeBlock.DOWN;
+  public static final BooleanProperty UP = BlockStateProperties.UP;
+  public static final BooleanProperty DOWN = BlockStateProperties.DOWN;
   public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
   public AbstractPoleBlock(Properties properties) {

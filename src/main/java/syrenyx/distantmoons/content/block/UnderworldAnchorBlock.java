@@ -5,7 +5,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.LanternBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -13,11 +12,11 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import org.jetbrains.annotations.Nullable;
 import org.jspecify.annotations.NonNull;
 
-public class UnderworldLanternBlock extends LanternBlock implements UnderworldBlock {
+public class UnderworldAnchorBlock extends Block implements UnderworldBlock {
 
-  public static BooleanProperty LIT = BlockStateProperties.LIT;
+  public static final BooleanProperty LIT = BlockStateProperties.LIT;
 
-  public UnderworldLanternBlock(Properties properties) {
+  public UnderworldAnchorBlock(Properties properties) {
     super(properties);
     this.registerDefaultState(this.defaultBlockState()
         .setValue(LIT, true)

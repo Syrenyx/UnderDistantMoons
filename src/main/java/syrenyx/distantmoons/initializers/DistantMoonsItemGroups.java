@@ -343,6 +343,11 @@ public abstract class DistantMoonsItemGroups {
         Items.TRIAL_SPAWNER.getDefaultInstance(),
         Items.CREAKING_HEART.getDefaultInstance()
     ));
+    addToGroup(CreativeModeTabs.FUNCTIONAL_BLOCKS, Items.END_PORTAL_FRAME, List.of(
+        DistantMoonsBlocks.UNDERWORLD_CONFLUX.asItem().getDefaultInstance(),
+        DistantMoonsBlocks.UNDERWORLD_ANCHOR.asItem().getDefaultInstance(),
+        DistantMoonsBlocks.BROKEN_UNDERWORLD_ANCHOR.asItem().getDefaultInstance()
+    ));
     addToGroup(CreativeModeTabs.FUNCTIONAL_BLOCKS, Items.INFESTED_COBBLESTONE, List.of(
         DistantMoonsBlocks.INFESTED_MOSSY_COBBLESTONE.asItem().getDefaultInstance(),
         DistantMoonsBlocks.INFESTED_SMOOTH_STONE.asItem().getDefaultInstance()

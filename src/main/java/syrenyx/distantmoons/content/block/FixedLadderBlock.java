@@ -27,24 +27,25 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 import org.jspecify.annotations.NonNull;
 import syrenyx.distantmoons.content.block.block_state_enums.FixedLadderSideShape;
-import syrenyx.distantmoons.content.block.block_state_enums.HorizontalAxis;
+import syrenyx.distantmoons.references.DistantMoonsBlockStateProperties;
 import syrenyx.distantmoons.references.tag.DistantMoonsBlockTags;
 
 public class FixedLadderBlock extends Block {
 
-  public static final EnumProperty<HorizontalAxis> AXIS = EnumProperty.create("axis", HorizontalAxis.class);
-  public static final EnumProperty<FixedLadderSideShape> LEFT_SHAPE = EnumProperty.create("left_shape", FixedLadderSideShape.class);
-  public static final EnumProperty<FixedLadderSideShape> RIGHT_SHAPE = EnumProperty.create("right_shape", FixedLadderSideShape.class);
-  public static final BooleanProperty LEFT_CAPPED = BooleanProperty.create("left_capped");
-  public static final BooleanProperty RIGHT_CAPPED = BooleanProperty.create("right_capped");
+  public static final EnumProperty<Direction.Axis> AXIS = BlockStateProperties.HORIZONTAL_AXIS;
+  public static final EnumProperty<FixedLadderSideShape> LEFT_SHAPE = DistantMoonsBlockStateProperties.FIXED_LADDER_LEFT_SHAPE;
+  public static final EnumProperty<FixedLadderSideShape> RIGHT_SHAPE = DistantMoonsBlockStateProperties.FIXED_LADDER_RIGHT_SHAPE;
+  public static final BooleanProperty LEFT_CAPPED = DistantMoonsBlockStateProperties.LEFT_CAPPED;
+  public static final BooleanProperty RIGHT_CAPPED = DistantMoonsBlockStateProperties.RIGHT_CAPPED;
   public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+
   private static final VoxelShape X_SHAPE = Block.box(7.0, 0.0, 0.0, 9.0, 16.0, 16.0);
   private static final VoxelShape Z_SHAPE = Shapes.rotate(X_SHAPE, OctahedralGroup.ROT_90_Y_POS, new Vec3(0.5, 0.5, 0.5));
 
   public FixedLadderBlock(Properties settings) {
     super(settings);
     this.registerDefaultState(this.defaultBlockState()
-        .setValue(AXIS, HorizontalAxis.X)
+        .setValue(AXIS, Direction.Axis.X)
         .setValue(LEFT_SHAPE, FixedLadderSideShape.NONE)
         .setValue(RIGHT_SHAPE, FixedLadderSideShape.NONE)
         .setValue(LEFT_CAPPED, false)
@@ -75,19 +76,20 @@ public class FixedLadderBlock extends Block {
 
   @Nullable
   @Override
-  @SuppressWarnings("DataFlowIssue")
   public BlockState getStateForPlacement(BlockPlaceContext context) {
     Level world = context.getLevel();
     BlockPos pos = context.getClickedPos();
     Direction.Axis horizontalFacingAxis = context.getHorizontalDirection().getAxis();
     Direction.Axis sideAxis = context.getClickedFace().getAxis();
-    HorizontalAxis blockAxis = HorizontalAxis.fromDirectionAxis(horizontalFacingAxis);
-    if (sideAxis != Direction.Axis.Y && getConnectionType(world, pos, context.getClickedFace().getOpposite()) != FixedLadderSideShape.NONE) {
-      blockAxis = HorizontalAxis.fromDirectionAxis(sideAxis).opposite();
-    }
     return this.updateState(
         world, pos,
-        this.defaultBlockState().setValue(AXIS, blockAxis).setValue(WATERLOGGED, world.getFluidState(pos).getType() == Fluids.WATER)
+        this.defaultBlockState()
+            .setValue(
+                AXIS,
+                sideAxis != Direction.Axis.Y && getConnectionType(world, pos, context.getClickedFace().getOpposite()) != FixedLadderSideShape.NONE
+                    ? rotateY(sideAxis) : horizontalFacingAxis
+            )
+            .setValue(WATERLOGGED, world.getFluidState(pos).getType() == Fluids.WATER)
     );
   }
 
@@ -107,7 +109,7 @@ public class FixedLadderBlock extends Block {
   }
 
   private BlockState updateState(BlockGetter world, BlockPos pos, BlockState state) {
-    boolean x = state.getValue(AXIS) == HorizontalAxis.X;
+    boolean x = state.getValue(AXIS) == Direction.Axis.X;
     Direction leftDirection = x ? Direction.SOUTH : Direction.EAST;
     Direction rightDirection = x ? Direction.NORTH : Direction.WEST;
     FixedLadderSideShape leftShape = this.getConnectionType(world, pos, leftDirection);
@@ -124,7 +126,7 @@ public class FixedLadderBlock extends Block {
     if (state.is(DistantMoonsBlockTags.FIXED_LADDER_ALWAYS_CONNECTS_TO)) return state.is(DistantMoonsBlockTags.FIXED_LADDER_ATTACHES_TO)
         ? FixedLadderSideShape.ATTACHED : FixedLadderSideShape.CONNECTED;
     if (state.getBlock() instanceof FixedLadderBlock) {
-      return (state.getValue(AXIS) != HorizontalAxis.fromDirectionAxis(direction.getAxis()))
+      return (state.getValue(AXIS) != direction.getAxis())
           ? FixedLadderSideShape.ATTACHED : FixedLadderSideShape.NONE;
     }
     return FixedLadderSideShape.NONE;
@@ -132,37 +134,37 @@ public class FixedLadderBlock extends Block {
 
   @Override
   protected @NonNull VoxelShape getShape(BlockState state, @NonNull BlockGetter world, @NonNull BlockPos pos, @NonNull CollisionContext context) {
-    return state.getValue(AXIS) == HorizontalAxis.X ? X_SHAPE : Z_SHAPE;
+    return state.getValue(AXIS) == Direction.Axis.X ? X_SHAPE : Z_SHAPE;
   }
 
   public static boolean canWallConnect(BlockState state, Direction direction) {
-    return state.getValue(AXIS) != HorizontalAxis.fromDirectionAxis(direction.getAxis());
+    return state.getValue(AXIS) != direction.getAxis();
   }
 
   public static boolean blocksTop(BlockState state, Direction direction) {
     return switch (direction) {
-      case NORTH -> state.getValue(FixedLadderBlock.AXIS) == HorizontalAxis.X && state.getValue(FixedLadderBlock.RIGHT_SHAPE) != FixedLadderSideShape.NONE;
-      case EAST -> state.getValue(FixedLadderBlock.AXIS) == HorizontalAxis.Z && state.getValue(FixedLadderBlock.LEFT_SHAPE) != FixedLadderSideShape.NONE;
-      case SOUTH -> state.getValue(FixedLadderBlock.AXIS) == HorizontalAxis.X && state.getValue(FixedLadderBlock.LEFT_SHAPE) != FixedLadderSideShape.NONE;
-      case WEST -> state.getValue(FixedLadderBlock.AXIS) == HorizontalAxis.Z && state.getValue(FixedLadderBlock.RIGHT_SHAPE) != FixedLadderSideShape.NONE;
+      case NORTH -> state.getValue(FixedLadderBlock.AXIS) == Direction.Axis.X && state.getValue(FixedLadderBlock.RIGHT_SHAPE) != FixedLadderSideShape.NONE;
+      case EAST -> state.getValue(FixedLadderBlock.AXIS) == Direction.Axis.Z && state.getValue(FixedLadderBlock.LEFT_SHAPE) != FixedLadderSideShape.NONE;
+      case SOUTH -> state.getValue(FixedLadderBlock.AXIS) == Direction.Axis.X && state.getValue(FixedLadderBlock.LEFT_SHAPE) != FixedLadderSideShape.NONE;
+      case WEST -> state.getValue(FixedLadderBlock.AXIS) == Direction.Axis.Z && state.getValue(FixedLadderBlock.RIGHT_SHAPE) != FixedLadderSideShape.NONE;
       default -> true;
     };
   }
 
   @Override
   protected @NonNull BlockState rotate(BlockState state, Rotation rotation) {
-    boolean x = state.getValue(AXIS) == HorizontalAxis.X;
+    boolean x = state.getValue(AXIS) == Direction.Axis.X;
     return switch (rotation) {
       case NONE -> state;
       case CLOCKWISE_90 -> state
-          .setValue(AXIS, state.getValue(AXIS).opposite())
+          .setValue(AXIS, rotateY(state.getValue(AXIS)))
           .setValue(LEFT_SHAPE, state.getValue(x ? LEFT_SHAPE : RIGHT_SHAPE))
           .setValue(RIGHT_SHAPE, state.getValue(x ? RIGHT_SHAPE : LEFT_SHAPE));
       case CLOCKWISE_180 -> state
           .setValue(LEFT_SHAPE, state.getValue(RIGHT_SHAPE))
           .setValue(RIGHT_SHAPE, state.getValue(LEFT_SHAPE));
       case COUNTERCLOCKWISE_90 -> state
-          .setValue(AXIS, state.getValue(AXIS).opposite())
+          .setValue(AXIS, rotateY(state.getValue(AXIS)))
           .setValue(LEFT_SHAPE, state.getValue(x ? RIGHT_SHAPE : LEFT_SHAPE))
           .setValue(RIGHT_SHAPE, state.getValue(x ? LEFT_SHAPE : RIGHT_SHAPE));
     };
@@ -170,10 +172,18 @@ public class FixedLadderBlock extends Block {
 
   @Override
   protected @NonNull BlockState mirror(BlockState state, @NonNull Mirror mirror) {
-    boolean x = state.getValue(AXIS) == HorizontalAxis.X;
+    boolean x = state.getValue(AXIS) == Direction.Axis.X;
     if (x && mirror == Mirror.LEFT_RIGHT || !x && mirror == Mirror.FRONT_BACK) {
       return state.setValue(LEFT_SHAPE, state.getValue(RIGHT_SHAPE)).setValue(RIGHT_SHAPE, state.getValue(LEFT_SHAPE));
     }
     return state;
+  }
+
+  private static Direction.Axis rotateY(Direction.Axis axis) {
+    return switch (axis) {
+      case X -> Direction.Axis.Z;
+      case Y -> Direction.Axis.Y;
+      case Z -> Direction.Axis.X;
+    };
   }
 }

@@ -37,6 +37,7 @@ import syrenyx.distantmoons.content.block.block_state_enums.BlockCorner;
 import syrenyx.distantmoons.content.block.entity.LargeBlastFurnaceBlockEntity;
 import syrenyx.distantmoons.initializers.DistantMoonsBlockEntityTypes;
 import syrenyx.distantmoons.initializers.DistantMoonsStats;
+import syrenyx.distantmoons.references.DistantMoonsBlockStateProperties;
 import syrenyx.distantmoons.utility.BlockUtil;
 
 import java.util.List;
@@ -47,11 +48,13 @@ public class LargeBlastFurnaceBlock extends BaseEntityBlock {
   public static final int MIN_HEAT = 0;
   public static final int MAX_HEAT = 3;
   public static final MapCodec<LargeBlastFurnaceBlock> CODEC = simpleCodec(LargeBlastFurnaceBlock::new);
-  public static final EnumProperty<BlockCorner> CORNER = EnumProperty.create("corner", BlockCorner.class);
+
+  public static final EnumProperty<BlockCorner> CORNER = DistantMoonsBlockStateProperties.CORNER;
   public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
-  public static final BooleanProperty MIRRORED = BooleanProperty.create("mirrored");
-  public static final IntegerProperty HEAT = IntegerProperty.create("heat", MIN_HEAT, MAX_HEAT);
-  public static final BooleanProperty SOUL_FIRE = BooleanProperty.create("soul_fire");
+  public static final BooleanProperty MIRRORED = DistantMoonsBlockStateProperties.MIRRORED;
+  public static final IntegerProperty HEAT = DistantMoonsBlockStateProperties.HEAT_3;
+  public static final BooleanProperty SOUL_FIRE = DistantMoonsBlockStateProperties.SOUL_FIRE;
+
   private static boolean overrideIntegrityCheck = false; // This var worries me.
 
   public LargeBlastFurnaceBlock(Properties properties) {

@@ -123,6 +123,12 @@ public abstract class DistantMoonsBlocks {
       BlockBehaviour.Properties.ofFullCopy(Blocks.BRICKS),
       new Item.Properties()
   );
+  public static final Block BROKEN_UNDERWORLD_ANCHOR = register(
+      "broken_underworld_anchor",
+      Block::new,
+      BlockBehaviour.Properties.of(),
+      new Item.Properties()
+  );
   public static final Block CHARCOAL_BLOCK = register(
       "charcoal_block",
       Block::new,
@@ -1237,6 +1243,21 @@ public abstract class DistantMoonsBlocks {
       WallSlabBlock::new,
       BlockBehaviour.Properties.ofFullCopy(Blocks.TUFF),
       new Item.Properties()
+  );
+  public static final Block UNDERWORLD_ANCHOR = register(
+      "underworld_anchor",
+      UnderworldAnchorBlock::new,
+      BlockBehaviour.Properties.of()
+          .randomTicks(),
+      new Item.Properties()
+          .fireResistant()
+  );
+  public static final Block UNDERWORLD_CONFLUX = register(
+      "underworld_conflux",
+      UnderworldConfluxBlock::new,
+      BlockBehaviour.Properties.of(),
+      new Item.Properties()
+          .fireResistant()
   );
   public static final Block UNDERWORLD_LANTERN = register(
       "underworld_lantern",

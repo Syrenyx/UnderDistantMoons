@@ -16,7 +16,6 @@ import net.minecraft.client.data.models.model.TextureSlot;
 import net.minecraft.client.renderer.block.model.Variant;
 import net.minecraft.client.renderer.block.model.VariantMutator;
 import net.minecraft.client.renderer.block.model.multipart.CombinedCondition;
-import net.minecraft.client.renderer.item.ItemModel;
 import net.minecraft.client.renderer.item.RangeSelectItemModel;
 import net.minecraft.client.renderer.item.properties.numeric.CompassAngle;
 import net.minecraft.client.renderer.item.properties.numeric.CompassAngleState;
@@ -86,6 +85,10 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
   );
   private static final Map<TextureSlot, String> LIGHTABLE_BLOCK_TEXTURE_MAP = Map.of(
       DistantMoonsTextureSlot.LIT, UnderDistantMoons.withPrefixedNamespace("block/%/lit"),
+      DistantMoonsTextureSlot.UNLIT, UnderDistantMoons.withPrefixedNamespace("block/%/unlit")
+  );
+  private static final Map<TextureSlot, String> LIGHTABLE_LANTERN_TEXTURE_MAP = Map.of(
+      DistantMoonsTextureSlot.LIT, UnderDistantMoons.withPrefixedNamespace("block/%/lit"),
       DistantMoonsTextureSlot.LIT_ITEM, UnderDistantMoons.withPrefixedNamespace("item/%/lit"),
       DistantMoonsTextureSlot.UNLIT, UnderDistantMoons.withPrefixedNamespace("block/%/unlit"),
       DistantMoonsTextureSlot.UNLIT_ITEM, UnderDistantMoons.withPrefixedNamespace("item/%/unlit")
@@ -149,6 +152,7 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
 
     //SIMPLE BLOCKS
     registerSimpleBlock(DistantMoonsBlocks.BLACKSTONE_DEEP_IRON_ORE, SIMPLE_BLOCK_TEXTURE_MAP);
+    registerSimpleBlock(DistantMoonsBlocks.BROKEN_UNDERWORLD_ANCHOR, SIMPLE_BLOCK_TEXTURE_MAP);
     registerSimpleBlock(DistantMoonsBlocks.CHARCOAL_BLOCK, SIMPLE_BLOCK_TEXTURE_MAP);
     registerSimpleBlock(DistantMoonsBlocks.COKE_BLOCK, SIMPLE_BLOCK_TEXTURE_MAP);
     registerSimpleBlock(DistantMoonsBlocks.CRUDE_DEEP_IRON_BLOCK, SIMPLE_BLOCK_TEXTURE_MAP);
@@ -380,6 +384,12 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
         TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/deep_iron_door/end")
     ));
 
+    //SIMPLE UNDERWORLD BLOCKS
+    registerSimpleUnderworldBlock(DistantMoonsBlocks.UNDERWORLD_ANCHOR, LIGHTABLE_BLOCK_TEXTURE_MAP);
+
+    //UNDERWORLD LANTERNS
+    registerUnderworldLanternBlock(DistantMoonsBlocks.UNDERWORLD_LANTERN, LIGHTABLE_LANTERN_TEXTURE_MAP);
+
     //WALLS
     registerSimpleWallBlock(DistantMoonsBlocks.FIRE_BRICK_WALL, Map.of(TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/fire_bricks")));
     registerSimpleWallBlock(DistantMoonsBlocks.PALE_PRISMARINE_WALL, Map.of(TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/pale_prismarine")));
@@ -471,9 +481,6 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
         DistantMoonsTextureSlot.VERTICAL_END, UnderDistantMoons.withPrefixedNamespace("block/smooth_stone_slab/end/vertical"),
         DistantMoonsTextureSlot.VERTICAL_SIDE, UnderDistantMoons.withPrefixedNamespace("block/smooth_stone_slab/side/vertical")
     ));
-
-    //UNDERWORLD LANTERNS
-    registerUnderworldLanternBlock(DistantMoonsBlocks.UNDERWORLD_LANTERN, LIGHTABLE_BLOCK_TEXTURE_MAP);
   }
 
   @Override
@@ -482,6 +489,7 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     this.itemGenerator = generator;
 
     //SIMPLE ITEMS
+    registerSimpleItem(DistantMoonsItems.ABYSS_KEYSTONE, "simple_item", SIMPLE_ITEM_TEXTURE_MAP);
     registerSimpleItem(DistantMoonsItems.COILED_ROPE_LADDER, "simple_item", SIMPLE_ITEM_TEXTURE_MAP);
     registerSimpleItem(DistantMoonsItems.COKE, "simple_item", SIMPLE_ITEM_TEXTURE_MAP);
     registerSimpleItem(DistantMoonsItems.COPPER_ROD, "stick", SIMPLE_ITEM_TEXTURE_MAP);
@@ -499,6 +507,7 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     registerSimpleItem(DistantMoonsItems.DEEP_IRON_SWORD, "sword", SIMPLE_ITEM_TEXTURE_MAP);
     registerSimpleItem(DistantMoonsItems.FIRE_BRICK, "simple_item", SIMPLE_ITEM_TEXTURE_MAP);
     registerSimpleItem(DistantMoonsItems.IRON_ROD, "stick", SIMPLE_ITEM_TEXTURE_MAP);
+    registerSimpleItem(DistantMoonsItems.NETHER_KEYSTONE, "simple_item", SIMPLE_ITEM_TEXTURE_MAP);
     registerSimpleItem(DistantMoonsItems.PALE_PRISMARINE_SHARD, "simple_item", SIMPLE_ITEM_TEXTURE_MAP);
     registerSimpleItem(DistantMoonsItems.RAW_DEEP_IRON, "simple_item", SIMPLE_ITEM_TEXTURE_MAP);
     registerSimpleItem(DistantMoonsItems.REFINED_DEEP_IRON_INGOT, "simple_item", SIMPLE_ITEM_TEXTURE_MAP);
@@ -741,20 +750,20 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     MultiVariant variantSide = createWeightedVariant(createObjectModel(block, "fixed_ladder/side", "/side", textureMapSide));
     MultiVariant variantSideCaps = createWeightedVariant(createObjectModel(block, "fixed_ladder/caps/side", "/caps/side", textureMapSideCaps));
     this.blockGenerator.blockStateOutput.accept(MultiPartGenerator.multiPart(block)
-        .with(new ConditionBuilder().term(FixedLadderBlock.AXIS, HorizontalAxis.X), variantCenter.with(ROTATE_Y_90))
-        .with(new ConditionBuilder().term(FixedLadderBlock.AXIS, HorizontalAxis.Z), variantCenter)
-        .with(new ConditionBuilder().term(FixedLadderBlock.AXIS, HorizontalAxis.X).term(FixedLadderBlock.LEFT_SHAPE, FixedLadderSideShape.ATTACHED, FixedLadderSideShape.CONNECTED), variantSide.with(ROTATE_Y_180))
-        .with(new ConditionBuilder().term(FixedLadderBlock.AXIS, HorizontalAxis.X).term(FixedLadderBlock.RIGHT_SHAPE, FixedLadderSideShape.ATTACHED, FixedLadderSideShape.CONNECTED), variantSide)
-        .with(new ConditionBuilder().term(FixedLadderBlock.AXIS, HorizontalAxis.Z).term(FixedLadderBlock.LEFT_SHAPE, FixedLadderSideShape.ATTACHED, FixedLadderSideShape.CONNECTED), variantSide.with(ROTATE_Y_90))
-        .with(new ConditionBuilder().term(FixedLadderBlock.AXIS, HorizontalAxis.Z).term(FixedLadderBlock.RIGHT_SHAPE, FixedLadderSideShape.ATTACHED, FixedLadderSideShape.CONNECTED), variantSide.with(ROTATE_Y_270))
-        .with(new ConditionBuilder().term(FixedLadderBlock.AXIS, HorizontalAxis.X).term(FixedLadderBlock.LEFT_SHAPE, FixedLadderSideShape.ATTACHED), variantExtension.with(ROTATE_Y_180))
-        .with(new ConditionBuilder().term(FixedLadderBlock.AXIS, HorizontalAxis.X).term(FixedLadderBlock.RIGHT_SHAPE, FixedLadderSideShape.ATTACHED), variantExtension)
-        .with(new ConditionBuilder().term(FixedLadderBlock.AXIS, HorizontalAxis.Z).term(FixedLadderBlock.LEFT_SHAPE, FixedLadderSideShape.ATTACHED), variantExtension.with(ROTATE_Y_90))
-        .with(new ConditionBuilder().term(FixedLadderBlock.AXIS, HorizontalAxis.Z).term(FixedLadderBlock.RIGHT_SHAPE, FixedLadderSideShape.ATTACHED), variantExtension.with(ROTATE_Y_270))
-        .with(new ConditionBuilder().term(FixedLadderBlock.AXIS, HorizontalAxis.X).term(FixedLadderBlock.LEFT_CAPPED, true), variantSideCaps.with(ROTATE_Y_180).with(UV_LOCK))
-        .with(new ConditionBuilder().term(FixedLadderBlock.AXIS, HorizontalAxis.X).term(FixedLadderBlock.RIGHT_CAPPED, true), variantSideCaps.with(UV_LOCK))
-        .with(new ConditionBuilder().term(FixedLadderBlock.AXIS, HorizontalAxis.Z).term(FixedLadderBlock.LEFT_CAPPED, true), variantSideCaps.with(ROTATE_Y_90).with(UV_LOCK))
-        .with(new ConditionBuilder().term(FixedLadderBlock.AXIS, HorizontalAxis.Z).term(FixedLadderBlock.RIGHT_CAPPED, true), variantSideCaps.with(ROTATE_Y_270).with(UV_LOCK))
+        .with(new ConditionBuilder().term(FixedLadderBlock.AXIS, Direction.Axis.X), variantCenter.with(ROTATE_Y_90))
+        .with(new ConditionBuilder().term(FixedLadderBlock.AXIS, Direction.Axis.Z), variantCenter)
+        .with(new ConditionBuilder().term(FixedLadderBlock.AXIS, Direction.Axis.X).term(FixedLadderBlock.LEFT_SHAPE, FixedLadderSideShape.ATTACHED, FixedLadderSideShape.CONNECTED), variantSide.with(ROTATE_Y_180))
+        .with(new ConditionBuilder().term(FixedLadderBlock.AXIS, Direction.Axis.X).term(FixedLadderBlock.RIGHT_SHAPE, FixedLadderSideShape.ATTACHED, FixedLadderSideShape.CONNECTED), variantSide)
+        .with(new ConditionBuilder().term(FixedLadderBlock.AXIS, Direction.Axis.Z).term(FixedLadderBlock.LEFT_SHAPE, FixedLadderSideShape.ATTACHED, FixedLadderSideShape.CONNECTED), variantSide.with(ROTATE_Y_90))
+        .with(new ConditionBuilder().term(FixedLadderBlock.AXIS, Direction.Axis.Z).term(FixedLadderBlock.RIGHT_SHAPE, FixedLadderSideShape.ATTACHED, FixedLadderSideShape.CONNECTED), variantSide.with(ROTATE_Y_270))
+        .with(new ConditionBuilder().term(FixedLadderBlock.AXIS, Direction.Axis.X).term(FixedLadderBlock.LEFT_SHAPE, FixedLadderSideShape.ATTACHED), variantExtension.with(ROTATE_Y_180))
+        .with(new ConditionBuilder().term(FixedLadderBlock.AXIS, Direction.Axis.X).term(FixedLadderBlock.RIGHT_SHAPE, FixedLadderSideShape.ATTACHED), variantExtension)
+        .with(new ConditionBuilder().term(FixedLadderBlock.AXIS, Direction.Axis.Z).term(FixedLadderBlock.LEFT_SHAPE, FixedLadderSideShape.ATTACHED), variantExtension.with(ROTATE_Y_90))
+        .with(new ConditionBuilder().term(FixedLadderBlock.AXIS, Direction.Axis.Z).term(FixedLadderBlock.RIGHT_SHAPE, FixedLadderSideShape.ATTACHED), variantExtension.with(ROTATE_Y_270))
+        .with(new ConditionBuilder().term(FixedLadderBlock.AXIS, Direction.Axis.X).term(FixedLadderBlock.LEFT_CAPPED, true), variantSideCaps.with(ROTATE_Y_180).with(UV_LOCK))
+        .with(new ConditionBuilder().term(FixedLadderBlock.AXIS, Direction.Axis.X).term(FixedLadderBlock.RIGHT_CAPPED, true), variantSideCaps.with(UV_LOCK))
+        .with(new ConditionBuilder().term(FixedLadderBlock.AXIS, Direction.Axis.Z).term(FixedLadderBlock.LEFT_CAPPED, true), variantSideCaps.with(ROTATE_Y_90).with(UV_LOCK))
+        .with(new ConditionBuilder().term(FixedLadderBlock.AXIS, Direction.Axis.Z).term(FixedLadderBlock.RIGHT_CAPPED, true), variantSideCaps.with(ROTATE_Y_270).with(UV_LOCK))
         .with(new CombinedCondition(CombinedCondition.Operation.OR, List.of(
             new ConditionBuilder().term(FixedLadderBlock.LEFT_CAPPED, true).build(),
             new ConditionBuilder().term(FixedLadderBlock.RIGHT_CAPPED, true).build())
@@ -1157,6 +1166,19 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
         .select(Half.TOP, Direction.WEST, true, variantOpen.with(orientable ? ROTATE_X_180 : NO_OP).with(orientable ? ROTATE_Y_90 : ROTATE_Y_270).with(orientable ? UV_LOCK : NO_OP))
     ));
     this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModelUtils.plainModel(getFirstEntryOf(variantBottom)));
+  }
+
+  private void registerSimpleUnderworldBlock(Block block, Map<TextureSlot, String> rawTextureMap) {
+    Map<TextureSlot, String> textureMapLit = Map.of(TextureSlot.SIDE, rawTextureMap.get(DistantMoonsTextureSlot.LIT), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureSlot.LIT));
+    Map<TextureSlot, String> textureMapUnlit = Map.of(TextureSlot.SIDE, rawTextureMap.get(DistantMoonsTextureSlot.UNLIT), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureSlot.UNLIT));
+    MultiVariant variantLit = createWeightedVariant(createObjectModel(block, "simple_block", "/lit", textureMapLit));
+    MultiVariant variantUnlit = createWeightedVariant(createObjectModel(block, "simple_block", "/unlit", textureMapUnlit));
+    this.blockGenerator.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(PropertyDispatch
+        .initial(BlockStateProperties.LIT)
+        .select(false, variantUnlit)
+        .select(true, variantLit)
+    ));
+    this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModelUtils.conditional(new UnderworldDimension(), ItemModelUtils.plainModel(getFirstEntryOf(variantLit)), ItemModelUtils.plainModel(getFirstEntryOf(variantUnlit))));
   }
 
   private void registerUnderworldLanternBlock(Block block, Map<TextureSlot, String> rawTextureMap) {

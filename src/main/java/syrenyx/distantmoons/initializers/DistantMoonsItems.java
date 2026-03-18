@@ -25,6 +25,12 @@ import java.util.function.Function;
 
 public abstract class DistantMoonsItems {
 
+  public static final Item ABYSS_KEYSTONE = register(
+      "abyss_keystone",
+      Item::new,
+      new Item.Properties()
+          .fireResistant()
+  );
   public static final Item COILED_ROPE_LADDER = register(
       "coiled_rope_ladder",
       settings -> new CoilItem(DistantMoonsBlocks.ROPE_LADDER, settings),
@@ -140,6 +146,12 @@ public abstract class DistantMoonsItems {
       "iron_rod",
       Item::new,
       new Item.Properties()
+  );
+  public static final Item NETHER_KEYSTONE = register(
+      "nether_keystone",
+      Item::new,
+      new Item.Properties()
+          .fireResistant()
   );
   public static final Item PALE_PRISMARINE_SHARD = register(
       "pale_prismarine_shard",
