@@ -18,7 +18,7 @@ public abstract class DistantMoonsItemMaterials {
 
   //ARMOR MATERIALS
   public static final ArmorMaterial DEEP_IRON_ARMOR = new ArmorMaterial(
-      30, createDefenseMap(2, 5, 6, 2, 5), 9, SoundEvents.ARMOR_EQUIP_IRON, 0.0F, 0.0F, DistantMoonsItemTags.REPAIRS_DEEP_IRON_EQUIPMENT, armorAssetRegistryKeyOf("deep_iron")
+      30, createDefenseMap(2, 5, 6, 2, 5), 9, SoundEvents.ARMOR_EQUIP_IRON, 0.0F, 0.0F, DistantMoonsItemTags.REPAIRS_DEEP_IRON_EQUIPMENT, armorAssetResourceKeyOf("deep_iron")
   );
 
   //TOOL MATERIALS
@@ -38,7 +38,7 @@ public abstract class DistantMoonsItemMaterials {
     );
   }
 
-  private static ResourceKey<EquipmentAsset> armorAssetRegistryKeyOf(String id) {
+  private static ResourceKey<EquipmentAsset> armorAssetResourceKeyOf(String id) {
     return ResourceKey.create(EquipmentAssets.ROOT_ID, UnderDistantMoons.identifierOf(id));
   }
 }

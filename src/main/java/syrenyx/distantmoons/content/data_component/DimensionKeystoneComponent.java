@@ -4,15 +4,18 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.ExtraCodecs;
+import syrenyx.distantmoons.content.block.UnderworldBlock;
 
-public record DimensionKeystoneComponent(Identifier dimension, int color) {
+public record DimensionKeystoneComponent(Identifier dimension, int color, Identifier slottedItemModel) {
 
-  public static final int DEFAULT_COLOR = 16761661;
+  public static final int ABYSS_COLOR = 2512895;
+  public static final int NETHER_COLOR = 16728870;
 
   public static final Codec<DimensionKeystoneComponent> CODEC = RecordCodecBuilder.create(instance -> instance
       .group(
           Identifier.CODEC.fieldOf("dimension").forGetter(DimensionKeystoneComponent::dimension),
-          ExtraCodecs.RGB_COLOR_CODEC.optionalFieldOf("color", DEFAULT_COLOR).forGetter(DimensionKeystoneComponent::color)
+          ExtraCodecs.RGB_COLOR_CODEC.optionalFieldOf("color", UnderworldBlock.DEFAULT_COLOR).forGetter(DimensionKeystoneComponent::color),
+          Identifier.CODEC.fieldOf("slotted_item_model").forGetter(DimensionKeystoneComponent::dimension)
       )
       .apply(instance, DimensionKeystoneComponent::new)
   );

@@ -152,31 +152,31 @@ public class FixedLadderBlock extends Block {
   }
 
   @Override
-  protected @NonNull BlockState rotate(BlockState state, Rotation rotation) {
-    boolean x = state.getValue(AXIS) == Direction.Axis.X;
+  protected @NonNull BlockState rotate(BlockState blockState, Rotation rotation) {
+    boolean x = blockState.getValue(AXIS) == Direction.Axis.X;
     return switch (rotation) {
-      case NONE -> state;
-      case CLOCKWISE_90 -> state
-          .setValue(AXIS, rotateY(state.getValue(AXIS)))
-          .setValue(LEFT_SHAPE, state.getValue(x ? LEFT_SHAPE : RIGHT_SHAPE))
-          .setValue(RIGHT_SHAPE, state.getValue(x ? RIGHT_SHAPE : LEFT_SHAPE));
-      case CLOCKWISE_180 -> state
-          .setValue(LEFT_SHAPE, state.getValue(RIGHT_SHAPE))
-          .setValue(RIGHT_SHAPE, state.getValue(LEFT_SHAPE));
-      case COUNTERCLOCKWISE_90 -> state
-          .setValue(AXIS, rotateY(state.getValue(AXIS)))
-          .setValue(LEFT_SHAPE, state.getValue(x ? RIGHT_SHAPE : LEFT_SHAPE))
-          .setValue(RIGHT_SHAPE, state.getValue(x ? LEFT_SHAPE : RIGHT_SHAPE));
+      case NONE -> blockState;
+      case CLOCKWISE_90 -> blockState
+          .setValue(AXIS, rotateY(blockState.getValue(AXIS)))
+          .setValue(LEFT_SHAPE, blockState.getValue(x ? LEFT_SHAPE : RIGHT_SHAPE))
+          .setValue(RIGHT_SHAPE, blockState.getValue(x ? RIGHT_SHAPE : LEFT_SHAPE));
+      case CLOCKWISE_180 -> blockState
+          .setValue(LEFT_SHAPE, blockState.getValue(RIGHT_SHAPE))
+          .setValue(RIGHT_SHAPE, blockState.getValue(LEFT_SHAPE));
+      case COUNTERCLOCKWISE_90 -> blockState
+          .setValue(AXIS, rotateY(blockState.getValue(AXIS)))
+          .setValue(LEFT_SHAPE, blockState.getValue(x ? RIGHT_SHAPE : LEFT_SHAPE))
+          .setValue(RIGHT_SHAPE, blockState.getValue(x ? LEFT_SHAPE : RIGHT_SHAPE));
     };
   }
 
   @Override
-  protected @NonNull BlockState mirror(BlockState state, @NonNull Mirror mirror) {
-    boolean x = state.getValue(AXIS) == Direction.Axis.X;
+  protected @NonNull BlockState mirror(BlockState blockState, @NonNull Mirror mirror) {
+    boolean x = blockState.getValue(AXIS) == Direction.Axis.X;
     if (x && mirror == Mirror.LEFT_RIGHT || !x && mirror == Mirror.FRONT_BACK) {
-      return state.setValue(LEFT_SHAPE, state.getValue(RIGHT_SHAPE)).setValue(RIGHT_SHAPE, state.getValue(LEFT_SHAPE));
+      return blockState.setValue(LEFT_SHAPE, blockState.getValue(RIGHT_SHAPE)).setValue(RIGHT_SHAPE, blockState.getValue(LEFT_SHAPE));
     }
-    return state;
+    return blockState;
   }
 
   private static Direction.Axis rotateY(Direction.Axis axis) {

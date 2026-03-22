@@ -128,13 +128,21 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
   );
 
   private static final Map<TextureSlot, String> SIMPLE_ITEM_TEXTURE_MAP = Map.of(TextureSlot.TEXTURE, UnderDistantMoons.withPrefixedNamespace("item/%"));
+  private static final Map<TextureSlot, String> DIMENSION_KEYSTONE_TEXTURE_MAP = Map.of(
+      TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("item/%/side"),
+      TextureSlot.TEXTURE, UnderDistantMoons.withPrefixedNamespace("item/%/item")
+  );
   private static final Map<TextureSlot, String> SPEAR_ITEM_TEXTURE_MAP = Map.of(
       DistantMoonsTextureSlot.HELD_TEXTURE, UnderDistantMoons.withPrefixedNamespace("item/%/held"),
       TextureSlot.TEXTURE, UnderDistantMoons.withPrefixedNamespace("item/%/item")
   );
   private static final Map<TextureSlot, String> SIMPLE_UNDERWORLD_ITEM_TEXTURE_MAP = Map.of(
       DistantMoonsTextureSlot.LIT, UnderDistantMoons.withPrefixedNamespace("item/%/lit"),
-      DistantMoonsTextureSlot.NEEDLE, UnderDistantMoons.withPrefixedNamespace("item/%/needle/"),
+      DistantMoonsTextureSlot.UNLIT, UnderDistantMoons.withPrefixedNamespace("item/%/unlit")
+  );
+  private static final Map<TextureSlot, String> UNDERWORLD_COMPASS_ITEM_TEXTURE_MAP = Map.of(
+      DistantMoonsTextureSlot.LIT, UnderDistantMoons.withPrefixedNamespace("item/%/lit"),
+      TextureSlot.TOP, UnderDistantMoons.withPrefixedNamespace("item/%/needle/"),
       DistantMoonsTextureSlot.UNLIT, UnderDistantMoons.withPrefixedNamespace("item/%/unlit")
   );
 
@@ -527,7 +535,7 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     registerSimpleUnderworldItem(DistantMoonsItems.UNDERWORLD_PEARL, "simple_item", SIMPLE_UNDERWORLD_ITEM_TEXTURE_MAP);
 
     //UNDERWORLD COMPASSES
-    registerUnderworldCompassItem(DistantMoonsItems.UNDERWORLD_COMPASS, SIMPLE_UNDERWORLD_ITEM_TEXTURE_MAP);
+    registerUnderworldCompassItem(DistantMoonsItems.UNDERWORLD_COMPASS, UNDERWORLD_COMPASS_ITEM_TEXTURE_MAP);
   }
 
   private void registerSimpleBlock(Block block, Map<TextureSlot, String> rawTextureMap) {
@@ -1364,6 +1372,7 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModelUtils.plainModel(inventoryModel));
   }
 
+  //ITEMS
   private void registerSimpleItem(Item item, String parent, Map<TextureSlot, String> rawTextureMap) {
     Map<TextureSlot, String> textureMap = Map.of(TextureSlot.TEXTURE, rawTextureMap.get(TextureSlot.TEXTURE), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.TEXTURE));
     this.itemGenerator.itemModelOutput.accept(item, ItemModelUtils.plainModel(createObjectModel(item, parent, null, textureMap)));
@@ -1390,17 +1399,17 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
 
   private void registerUnderworldCompassItem(Item item, Map<TextureSlot, String> rawTextureMap) {
     Map<TextureSlot, String> textureMapUnlit = Map.of(TextureSlot.TEXTURE, rawTextureMap.get(DistantMoonsTextureSlot.UNLIT), TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureSlot.UNLIT));
-    Map<TextureSlot, String> textureMapLit0 = Map.of(DistantMoonsTextureSlot.BASE, rawTextureMap.get(DistantMoonsTextureSlot.LIT), DistantMoonsTextureSlot.NEEDLE, rawTextureMap.get(DistantMoonsTextureSlot.NEEDLE) + "0", TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureSlot.LIT));
+    Map<TextureSlot, String> textureMapLit0 = Map.of(TextureSlot.BOTTOM, rawTextureMap.get(DistantMoonsTextureSlot.LIT), TextureSlot.TOP, rawTextureMap.get(TextureSlot.TOP) + "0", TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureSlot.LIT));
     Identifier modelUnlit = createObjectModel(item, "simple_item", "/unlit", textureMapUnlit);
-    Identifier modelLit0 = createObjectModel(item, "compass", "/lit/0", textureMapLit0);
+    Identifier modelLit0 = createObjectModel(item, "simple_layered_item/2", "/lit/0", textureMapLit0);
     List<RangeSelectItemModel.Entry> litModels = new ArrayList<>();
     litModels.add(ItemModelUtils.override(ItemModelUtils.plainModel(modelLit0), 0.0F));
     for (int needle = 1; needle < COMPASS_NEEDLE_DIRECTIONS; needle++) {
       litModels.add(ItemModelUtils.override(ItemModelUtils.plainModel(createObjectModel(
           item,
-          "compass",
+          "simple_layered_item/2",
           "/lit/" + needle,
-          Map.of(DistantMoonsTextureSlot.BASE, rawTextureMap.get(DistantMoonsTextureSlot.LIT), DistantMoonsTextureSlot.NEEDLE, rawTextureMap.get(DistantMoonsTextureSlot.NEEDLE) + needle, TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureSlot.LIT))
+          Map.of(TextureSlot.BOTTOM, rawTextureMap.get(DistantMoonsTextureSlot.LIT), TextureSlot.TOP, rawTextureMap.get(TextureSlot.TOP) + needle, TextureSlot.PARTICLE, rawTextureMap.get(DistantMoonsTextureSlot.LIT))
       )), needle - 0.5F));
     }
     litModels.add(ItemModelUtils.override(ItemModelUtils.plainModel(modelLit0), 31.5F));

@@ -13,13 +13,14 @@ import net.minecraft.world.item.ShovelItem;
 import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.world.item.component.Consumable;
 import net.minecraft.world.item.component.Consumables;
+import net.minecraft.world.item.component.DamageResistant;
 import net.minecraft.world.item.equipment.ArmorType;
+import net.minecraft.world.level.Level;
 import syrenyx.distantmoons.UnderDistantMoons;
-import syrenyx.distantmoons.content.data_component.BlastFurnaceFuelComponent;
-import syrenyx.distantmoons.content.data_component.CoiledBlockComponent;
-import syrenyx.distantmoons.content.item.CoilItem;
-import syrenyx.distantmoons.content.item.UnderworldCompassItem;
+import syrenyx.distantmoons.content.data_component.*;
+import syrenyx.distantmoons.content.item.*;
 import syrenyx.distantmoons.references.DistantMoonsItemMaterials;
+import syrenyx.distantmoons.references.tag.DistantMoonsDamageTypeTags;
 
 import java.util.function.Function;
 
@@ -29,6 +30,7 @@ public abstract class DistantMoonsItems {
       "abyss_keystone",
       Item::new,
       new Item.Properties()
+          .component(DistantMoonsDataComponentTypes.DIMENSION_KEYSTONE, new DimensionKeystoneComponent(Level.NETHER.identifier(), DimensionKeystoneComponent.ABYSS_COLOR, UnderDistantMoons.identifierOf("underworld_conflux_keystone/abyss")))
           .fireResistant()
   );
   public static final Item COILED_ROPE_LADDER = register(
@@ -140,7 +142,7 @@ public abstract class DistantMoonsItems {
       "fire_brick",
       Item::new,
       new Item.Properties()
-          .fireResistant()
+          .component(DataComponents.DAMAGE_RESISTANT, new DamageResistant(DistantMoonsDamageTypeTags.IS_EXPLOSION_OR_FIRE))
   );
   public static final Item IRON_ROD = register(
       "iron_rod",
@@ -151,6 +153,7 @@ public abstract class DistantMoonsItems {
       "nether_keystone",
       Item::new,
       new Item.Properties()
+          .component(DistantMoonsDataComponentTypes.DIMENSION_KEYSTONE, new DimensionKeystoneComponent(Level.NETHER.identifier(), DimensionKeystoneComponent.NETHER_COLOR, UnderDistantMoons.identifierOf("underworld_conflux_keystone/nether")))
           .fireResistant()
   );
   public static final Item PALE_PRISMARINE_SHARD = register(

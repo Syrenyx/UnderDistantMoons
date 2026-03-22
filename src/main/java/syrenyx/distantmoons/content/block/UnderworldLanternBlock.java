@@ -39,4 +39,8 @@ public class UnderworldLanternBlock extends LanternBlock implements UnderworldBl
   protected void randomTick(@NonNull BlockState blockState, @NonNull ServerLevel serverLevel, @NonNull BlockPos blockPos, @NonNull RandomSource randomSource) {
     UnderworldBlock.randomTick(blockState, serverLevel, blockPos);
   }
+
+  public static int lightLevel(BlockState blockState) {
+    return blockState.getValue(UnderworldAnchorBlock.LIT) ? 15 : 0;
+  }
 }

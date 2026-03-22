@@ -1,12 +1,10 @@
 package syrenyx.distantmoons.content.particle;
 
-import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.SingleQuadParticle;
 import net.minecraft.client.particle.SpriteSet;
-import net.minecraft.client.renderer.state.QuadParticleRenderState;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.phys.Vec3;
 import org.jspecify.annotations.NonNull;
@@ -40,7 +38,7 @@ public class UnderworldParticle extends SingleQuadParticle {
     this.rCol = (float) (color >> 16 & 255) / 255.0F;
     this.gCol = (float) (color >> 8 & 255) / 255.0F;
     this.bCol = (float) (color & 255) / 255.0F;
-    this.setSprite(spriteSet.first());
+    this.setSprite(spriteSet.get(this.random));
   }
 
   @Override
@@ -54,7 +52,7 @@ public class UnderworldParticle extends SingleQuadParticle {
   }
 
   @Override
-  public void extract(@NonNull QuadParticleRenderState quadParticleRenderState, @NonNull Camera camera, float tickProgress) {
+  public void tick() {
 
     //SPAWN FADING TRAIL
     if (this.age % 4 == 0 && this.alpha >= 0.5F) {
@@ -74,23 +72,25 @@ public class UnderworldParticle extends SingleQuadParticle {
       }
     } else if (this.alpha <= 1.0F) {
       this.alpha += 0.02F;
-      if (this.alpha > 1.0F) this.alpha = 1F;
+      if (this.alpha > 1.0F) this.alpha = 1.0F;
     }
 
     //DETERMINE NEXT POSITION
     Vec3 currentPosition = new Vec3(this.x, this.y, this.z);
-    Vec3 nextPosition = (
-        this.initiatedMomentum
-            ? VectorUtil
-            .mirrorVec3dAlongAxis(new Vec3(this.xo, this.yo, this.zo).subtract(this.anchor), currentPosition.subtract(this.anchor))
-            : currentPosition
-            .subtract(this.anchor)
-            .add(VectorUtil.randomCrossProductVector(this.random, currentPosition.subtract(this.anchor), INITIAL_MOMENTUM))
-            .normalize()
-            .multiply(this.radius, this.radius, this.radius)
-        )
-        .add(this.anchor);
-    if (!this.initiatedMomentum) this.initiatedMomentum = true;
+    Vec3 nextPosition;
+    if (this.initiatedMomentum) {
+      nextPosition = VectorUtil
+          .mirrorVec3AlongAxis(new Vec3(this.xo, this.yo, this.zo).subtract(this.anchor), currentPosition.subtract(this.anchor))
+          .add(this.anchor);
+    } else {
+      this.initiatedMomentum = true;
+      nextPosition = currentPosition
+          .subtract(this.anchor)
+          .add(VectorUtil.randomCrossProductVector(this.random, currentPosition.subtract(this.anchor), INITIAL_MOMENTUM))
+          .normalize()
+          .scale(this.radius)
+          .add(this.anchor);
+    }
 
     //MOVE
     this.xo = this.x;

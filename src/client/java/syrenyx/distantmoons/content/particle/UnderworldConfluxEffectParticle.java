@@ -45,7 +45,7 @@ public class UnderworldConfluxEffectParticle extends SimpleAnimatedParticle {
   public void tick() {
     Vec3 position = new Vec3(this.x, this.y, this.z);
     double speed = position.distanceTo(this.target) / 10;
-    Vec3 velocity = (this.hasPhysics ? this.target.subtract(position).normalize() : this.direction).multiply(speed, speed, speed);
+    Vec3 velocity = (this.hasPhysics ? this.target.subtract(position).normalize() : this.direction).scale(speed);
     this.xd = velocity.x();
     this.yd = velocity.y();
     this.zd = velocity.z();

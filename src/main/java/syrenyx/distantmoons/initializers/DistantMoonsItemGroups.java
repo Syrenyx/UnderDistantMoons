@@ -348,6 +348,10 @@ public abstract class DistantMoonsItemGroups {
         DistantMoonsBlocks.UNDERWORLD_ANCHOR.asItem().getDefaultInstance(),
         DistantMoonsBlocks.BROKEN_UNDERWORLD_ANCHOR.asItem().getDefaultInstance()
     ));
+    addToGroup(CreativeModeTabs.FUNCTIONAL_BLOCKS, Items.ENDER_EYE, List.of(
+        DistantMoonsItems.ABYSS_KEYSTONE.getDefaultInstance(),
+        DistantMoonsItems.NETHER_KEYSTONE.getDefaultInstance()
+    ));
     addToGroup(CreativeModeTabs.FUNCTIONAL_BLOCKS, Items.INFESTED_COBBLESTONE, List.of(
         DistantMoonsBlocks.INFESTED_MOSSY_COBBLESTONE.asItem().getDefaultInstance(),
         DistantMoonsBlocks.INFESTED_SMOOTH_STONE.asItem().getDefaultInstance()
@@ -372,6 +376,10 @@ public abstract class DistantMoonsItemGroups {
         DistantMoonsItems.DEEP_IRON_HOE.getDefaultInstance()
     ));
     addToGroup(CreativeModeTabs.TOOLS_AND_UTILITIES, Items.RECOVERY_COMPASS, List.of(DistantMoonsItems.UNDERWORLD_COMPASS.getDefaultInstance()));
+    addToGroup(CreativeModeTabs.TOOLS_AND_UTILITIES, Items.ENDER_EYE, List.of(
+        DistantMoonsItems.ABYSS_KEYSTONE.getDefaultInstance(),
+        DistantMoonsItems.NETHER_KEYSTONE.getDefaultInstance()
+    ));
     addToGroup(CreativeModeTabs.TOOLS_AND_UTILITIES, Items.TNT_MINECART, List.of(DistantMoonsItems.COILED_ROPE_LADDER.getDefaultInstance()));
 
     //COMBAT
