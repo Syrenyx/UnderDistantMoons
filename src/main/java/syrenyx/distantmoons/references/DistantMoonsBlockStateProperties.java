@@ -24,6 +24,7 @@ public abstract class DistantMoonsBlockStateProperties {
   public static final EnumProperty<SpikedFenceShape> SPIKED_FENCE_SHAPE_EAST = EnumProperty.create("east", SpikedFenceShape.class);
   public static final EnumProperty<SpikedFenceShape> SPIKED_FENCE_SHAPE_SOUTH = EnumProperty.create("south", SpikedFenceShape.class);
   public static final EnumProperty<SpikedFenceShape> SPIKED_FENCE_SHAPE_WEST = EnumProperty.create("west", SpikedFenceShape.class);
+  public static final EnumProperty<UnderworldConfluxState> UNDERWORLD_CONFLUX_STATE = EnumProperty.create("state", UnderworldConfluxState.class);
   public static final EnumProperty<WallSlabShape> WALL_SLAB_SHAPE = EnumProperty.create("shape", WallSlabShape.class);
 
   //INTEGER PROPERTIES

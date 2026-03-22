@@ -70,13 +70,13 @@ public class LargeBlastFurnaceBlock extends BaseEntityBlock {
   }
 
   @Override
-  protected @NonNull MapCodec<? extends BaseEntityBlock> codec() {
-    return CODEC;
+  protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+    builder.add(CORNER, FACING, MIRRORED, HEAT, SOUL_FIRE);
   }
 
   @Override
-  protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-    builder.add(CORNER, FACING, MIRRORED, HEAT, SOUL_FIRE);
+  protected @NonNull MapCodec<? extends BaseEntityBlock> codec() {
+    return CODEC;
   }
 
   @Override

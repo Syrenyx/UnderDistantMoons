@@ -126,19 +126,24 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
       DistantMoonsTextureSlot.SIDE_TOP, UnderDistantMoons.withPrefixedNamespace("block/%/side_top"),
       TextureSlot.PARTICLE, UnderDistantMoons.withPrefixedNamespace("block/%/particle")
   );
+  private static final Map<TextureSlot, String> UNDERWORLD_CONFLUX_TEXTURE_MAP = Map.of(
+      DistantMoonsTextureSlot.CENTER, UnderDistantMoons.withPrefixedNamespace("block/%/center"),
+      DistantMoonsTextureSlot.HIGHLIGHTS_INSIDE, UnderDistantMoons.withPrefixedNamespace("block/%/inside/highlights"),
+      DistantMoonsTextureSlot.HIGHLIGHTS_OUTSIDE, UnderDistantMoons.withPrefixedNamespace("block/%/outside/highlights"),
+      TextureSlot.INSIDE, UnderDistantMoons.withPrefixedNamespace("block/%/inside/side"),
+      DistantMoonsTextureSlot.OUTSIDE, UnderDistantMoons.withPrefixedNamespace("block/%/outside/side"),
+      TextureSlot.PARTICLE, UnderDistantMoons.withPrefixedNamespace("block/%/particle")
+  );
 
   private static final Map<TextureSlot, String> SIMPLE_ITEM_TEXTURE_MAP = Map.of(TextureSlot.TEXTURE, UnderDistantMoons.withPrefixedNamespace("item/%"));
-  private static final Map<TextureSlot, String> DIMENSION_KEYSTONE_TEXTURE_MAP = Map.of(
-      TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("item/%/side"),
-      TextureSlot.TEXTURE, UnderDistantMoons.withPrefixedNamespace("item/%/item")
+  private static final Map<TextureSlot, String> DIMENSION_KEYSTONE_TEXTURE_MAP = Map.of(TextureSlot.TEXTURE, UnderDistantMoons.withPrefixedNamespace("item/%/item"));
+  private static final Map<TextureSlot, String> LIGHTABLE_ITEM_TEXTURE_MAP = Map.of(
+      DistantMoonsTextureSlot.LIT, UnderDistantMoons.withPrefixedNamespace("item/%/lit"),
+      DistantMoonsTextureSlot.UNLIT, UnderDistantMoons.withPrefixedNamespace("item/%/unlit")
   );
   private static final Map<TextureSlot, String> SPEAR_ITEM_TEXTURE_MAP = Map.of(
       DistantMoonsTextureSlot.HELD_TEXTURE, UnderDistantMoons.withPrefixedNamespace("item/%/held"),
       TextureSlot.TEXTURE, UnderDistantMoons.withPrefixedNamespace("item/%/item")
-  );
-  private static final Map<TextureSlot, String> SIMPLE_UNDERWORLD_ITEM_TEXTURE_MAP = Map.of(
-      DistantMoonsTextureSlot.LIT, UnderDistantMoons.withPrefixedNamespace("item/%/lit"),
-      DistantMoonsTextureSlot.UNLIT, UnderDistantMoons.withPrefixedNamespace("item/%/unlit")
   );
   private static final Map<TextureSlot, String> UNDERWORLD_COMPASS_ITEM_TEXTURE_MAP = Map.of(
       DistantMoonsTextureSlot.LIT, UnderDistantMoons.withPrefixedNamespace("item/%/lit"),
@@ -395,6 +400,9 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     //SIMPLE UNDERWORLD BLOCKS
     registerSimpleUnderworldBlock(DistantMoonsBlocks.UNDERWORLD_ANCHOR, LIGHTABLE_BLOCK_TEXTURE_MAP);
 
+    //UNDERWORLD CONFLUX BLOCKS
+    registerUnderworldConfluxBlock(DistantMoonsBlocks.UNDERWORLD_CONFLUX, UNDERWORLD_CONFLUX_TEXTURE_MAP);
+
     //UNDERWORLD LANTERNS
     registerUnderworldLanternBlock(DistantMoonsBlocks.UNDERWORLD_LANTERN, LIGHTABLE_LANTERN_TEXTURE_MAP);
 
@@ -497,7 +505,7 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     this.itemGenerator = generator;
 
     //SIMPLE ITEMS
-    registerSimpleItem(DistantMoonsItems.ABYSS_KEYSTONE, "simple_item", SIMPLE_ITEM_TEXTURE_MAP);
+    registerSimpleItem(DistantMoonsItems.ABYSS_KEYSTONE, "simple_item", DIMENSION_KEYSTONE_TEXTURE_MAP);
     registerSimpleItem(DistantMoonsItems.COILED_ROPE_LADDER, "simple_item", SIMPLE_ITEM_TEXTURE_MAP);
     registerSimpleItem(DistantMoonsItems.COKE, "simple_item", SIMPLE_ITEM_TEXTURE_MAP);
     registerSimpleItem(DistantMoonsItems.COPPER_ROD, "stick", SIMPLE_ITEM_TEXTURE_MAP);
@@ -515,7 +523,7 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     registerSimpleItem(DistantMoonsItems.DEEP_IRON_SWORD, "sword", SIMPLE_ITEM_TEXTURE_MAP);
     registerSimpleItem(DistantMoonsItems.FIRE_BRICK, "simple_item", SIMPLE_ITEM_TEXTURE_MAP);
     registerSimpleItem(DistantMoonsItems.IRON_ROD, "stick", SIMPLE_ITEM_TEXTURE_MAP);
-    registerSimpleItem(DistantMoonsItems.NETHER_KEYSTONE, "simple_item", SIMPLE_ITEM_TEXTURE_MAP);
+    registerSimpleItem(DistantMoonsItems.NETHER_KEYSTONE, "simple_item", DIMENSION_KEYSTONE_TEXTURE_MAP);
     registerSimpleItem(DistantMoonsItems.PALE_PRISMARINE_SHARD, "simple_item", SIMPLE_ITEM_TEXTURE_MAP);
     registerSimpleItem(DistantMoonsItems.RAW_DEEP_IRON, "simple_item", SIMPLE_ITEM_TEXTURE_MAP);
     registerSimpleItem(DistantMoonsItems.REFINED_DEEP_IRON_INGOT, "simple_item", SIMPLE_ITEM_TEXTURE_MAP);
@@ -531,8 +539,8 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     registerSpearItem(DistantMoonsItems.DEEP_IRON_SPEAR, SPEAR_ITEM_TEXTURE_MAP);
 
     //SIMPLE UNDERWORLD ITEMS
-    registerSimpleUnderworldItem(DistantMoonsItems.UNDERWORLD_DUST, "simple_item", SIMPLE_UNDERWORLD_ITEM_TEXTURE_MAP);
-    registerSimpleUnderworldItem(DistantMoonsItems.UNDERWORLD_PEARL, "simple_item", SIMPLE_UNDERWORLD_ITEM_TEXTURE_MAP);
+    registerSimpleUnderworldItem(DistantMoonsItems.UNDERWORLD_DUST, "simple_item", LIGHTABLE_ITEM_TEXTURE_MAP);
+    registerSimpleUnderworldItem(DistantMoonsItems.UNDERWORLD_PEARL, "simple_item", LIGHTABLE_ITEM_TEXTURE_MAP);
 
     //UNDERWORLD COMPASSES
     registerUnderworldCompassItem(DistantMoonsItems.UNDERWORLD_COMPASS, UNDERWORLD_COMPASS_ITEM_TEXTURE_MAP);
@@ -1187,6 +1195,13 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
         .select(true, variantLit)
     ));
     this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModelUtils.conditional(new UnderworldDimension(), ItemModelUtils.plainModel(getFirstEntryOf(variantLit)), ItemModelUtils.plainModel(getFirstEntryOf(variantUnlit))));
+  }
+
+  private void registerUnderworldConfluxBlock(Block block, Map<TextureSlot, String> rawTextureMap) {
+    Map<TextureSlot, String> textureMap = Map.of(DistantMoonsTextureSlot.CENTER, rawTextureMap.get(DistantMoonsTextureSlot.CENTER), DistantMoonsTextureSlot.HIGHLIGHTS_INSIDE, rawTextureMap.get(DistantMoonsTextureSlot.HIGHLIGHTS_INSIDE), DistantMoonsTextureSlot.HIGHLIGHTS_OUTSIDE, rawTextureMap.get(DistantMoonsTextureSlot.HIGHLIGHTS_OUTSIDE), TextureSlot.INSIDE, rawTextureMap.get(TextureSlot.INSIDE), DistantMoonsTextureSlot.OUTSIDE, rawTextureMap.get(DistantMoonsTextureSlot.OUTSIDE), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE));
+    MultiVariant variant = createWeightedVariant(createObjectModel(block, "underworld_conflux/block", null, textureMap));
+    this.blockGenerator.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, variant));
+    this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModelUtils.plainModel(getFirstEntryOf(variant)));
   }
 
   private void registerUnderworldLanternBlock(Block block, Map<TextureSlot, String> rawTextureMap) {

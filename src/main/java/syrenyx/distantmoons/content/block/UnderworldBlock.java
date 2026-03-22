@@ -12,6 +12,7 @@ import syrenyx.distantmoons.initializers.DistantMoonsEnvironmentAttributes;
 public interface UnderworldBlock {
 
   int DEFAULT_COLOR = 16761661;
+  int UNLIT_COLOR = 2236962;
 
   static boolean inUnderworld(Level level, BlockPos blockPos) {
     return level.environmentAttributes().getValue(DistantMoonsEnvironmentAttributes.UNDERWORLD, blockPos);

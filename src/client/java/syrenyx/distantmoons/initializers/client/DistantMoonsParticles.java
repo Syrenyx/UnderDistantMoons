@@ -7,7 +7,7 @@ import syrenyx.distantmoons.content.particle.UnderworldParticle;
 import syrenyx.distantmoons.initializers.DistantMoonsParticleTypes;
 import syrenyx.distantmoons.content.particle.SparkParticle;
 
-public class DistantMoonsParticles {
+public abstract class DistantMoonsParticles {
 
   private static final ParticleFactoryRegistry REGISTRY = ParticleFactoryRegistry.getInstance();
 

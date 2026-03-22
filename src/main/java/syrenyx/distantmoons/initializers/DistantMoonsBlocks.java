@@ -138,6 +138,7 @@ public abstract class DistantMoonsBlocks {
           .instrument(NoteBlockInstrument.BASEDRUM)
           .isValidSpawn(Blocks::never)
           .mapColor(MapColor.COLOR_BLACK)
+          .pushReaction(PushReaction.BLOCK)
           .requiresCorrectToolForDrops()
           .sound(SoundType.GILDED_BLACKSTONE)
           .strength(20.0F),
@@ -1271,6 +1272,7 @@ public abstract class DistantMoonsBlocks {
           .isValidSpawn(Blocks::never)
           .lightLevel(UnderworldAnchorBlock::lightLevel)
           .mapColor(UnderworldAnchorBlock::mapColor)
+          .pushReaction(PushReaction.BLOCK)
           .randomTicks()
           .requiresCorrectToolForDrops()
           .sound(SoundType.GILDED_BLACKSTONE)
@@ -1283,9 +1285,15 @@ public abstract class DistantMoonsBlocks {
       UnderworldConfluxBlock::new,
       BlockBehaviour.Properties.of()
           .instrument(NoteBlockInstrument.BASEDRUM)
+          .isRedstoneConductor(Blocks::never)
+          .isSuffocating(Blocks::never)
           .isValidSpawn(Blocks::never)
-          .mapColor(MapColor.COLOR_ORANGE)
+          .isViewBlocking(Blocks::never)
+          .lightLevel(UnderworldConfluxBlock::lightLevel)
+          .mapColor(UnderworldConfluxBlock::mapColor)
           .noLootTable()
+          .noOcclusion()
+          .pushReaction(PushReaction.BLOCK)
           .randomTicks()
           .sound(SoundType.GILDED_BLACKSTONE)
           .strength(-1.0F, 3600000.0F),
