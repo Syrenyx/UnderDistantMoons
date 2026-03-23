@@ -1,6 +1,9 @@
 package syrenyx.distantmoons.content.block.entity;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.ItemOwner;
 import net.minecraft.world.entity.player.Player;
@@ -14,12 +17,16 @@ import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
+import syrenyx.distantmoons.content.block.UnderworldConfluxBlock;
+import syrenyx.distantmoons.content.data_component.DimensionKeystoneComponent;
 import syrenyx.distantmoons.initializers.DistantMoonsBlockEntityTypes;
 import syrenyx.distantmoons.initializers.DistantMoonsDataComponentTypes;
 
 public class UnderworldConfluxBlockEntity extends BlockEntity implements Container, ItemOwner {
 
-  private ItemStack keystoneStack = Items.AIR.getDefaultInstance();
+  private static final String KEYSTONE_DATA_KEY = "keystone";
+
+  private ItemStack keystoneStack = ItemStack.EMPTY;
 
   public UnderworldConfluxBlockEntity(BlockPos blockPos, BlockState blockState) {
     super(DistantMoonsBlockEntityTypes.UNDERWORLD_CONFLUX, blockPos, blockState);
@@ -65,8 +72,9 @@ public class UnderworldConfluxBlockEntity extends BlockEntity implements Contain
 
   @Override
   public @NonNull ItemStack removeItem(int slot, int amount) {
-    if (amount == 0) return Items.AIR.getDefaultInstance();
+    if (amount == 0) return ItemStack.EMPTY;
     this.setChanged();
+    UnderworldConfluxBlock.onKeystoneChanged(this.level, this.worldPosition);
     return this.keystoneStack.copyAndClear();
   }
 
@@ -82,12 +90,16 @@ public class UnderworldConfluxBlockEntity extends BlockEntity implements Contain
   @Override
   public void setItem(int i, @NonNull ItemStack itemStack) {
     itemStack.limitSize(1);
+    this.setChanged();
+    UnderworldConfluxBlock.onKeystoneChanged(this.level, this.worldPosition);
     this.keystoneStack = itemStack;
   }
 
   @Override
   public void clearContent() {
-    this.keystoneStack = Items.AIR.getDefaultInstance();
+    this.keystoneStack = ItemStack.EMPTY;
+    this.setChanged();
+    UnderworldConfluxBlock.onKeystoneChanged(this.level, this.worldPosition);
   }
 
   @Override
@@ -107,18 +119,31 @@ public class UnderworldConfluxBlockEntity extends BlockEntity implements Contain
 
   @Override
   public @Nullable Object getRenderData() {
-    return this.keystoneStack.get(DistantMoonsDataComponentTypes.DIMENSION_KEYSTONE);
+    return (this.keystoneStack.get(DistantMoonsDataComponentTypes.DIMENSION_KEYSTONE) instanceof DimensionKeystoneComponent component) ? component.color() : null;
+  }
+
+  @Override
+  public ClientboundBlockEntityDataPacket getUpdatePacket() {
+    return ClientboundBlockEntityDataPacket.create(this);
+  }
+
+  @Override
+  public @NonNull CompoundTag getUpdateTag(HolderLookup.@NonNull Provider provider) {
+    CompoundTag compoundTag = super.getUpdateTag(provider);
+    compoundTag.store(KEYSTONE_DATA_KEY, ItemStack.SINGLE_ITEM_CODEC, this.keystoneStack);
+    return compoundTag;
   }
 
   @Override
   protected void loadAdditional(@NonNull ValueInput valueInput) {
     super.loadAdditional(valueInput);
-    this.keystoneStack = valueInput.read("keystone", ItemStack.SINGLE_ITEM_CODEC).orElse(Items.AIR.getDefaultInstance());
+    this.keystoneStack = valueInput.read(KEYSTONE_DATA_KEY, ItemStack.SINGLE_ITEM_CODEC).orElse(Items.AIR.getDefaultInstance());
+    if (this.level != null) UnderworldConfluxBlock.onKeystoneChanged(this.level, this.worldPosition);
   }
 
   @Override
   protected void saveAdditional(@NonNull ValueOutput valueOutput) {
     super.saveAdditional(valueOutput);
-    if (!this.keystoneStack.isEmpty()) valueOutput.store("keystone", ItemStack.SINGLE_ITEM_CODEC, this.keystoneStack);
+    if (!this.keystoneStack.isEmpty()) valueOutput.store(KEYSTONE_DATA_KEY, ItemStack.SINGLE_ITEM_CODEC, this.keystoneStack);
   }
 }

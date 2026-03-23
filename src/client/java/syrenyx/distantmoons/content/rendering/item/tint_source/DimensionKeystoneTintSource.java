@@ -4,12 +4,17 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.client.color.item.ItemTintSource;
 import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.nbt.Tag;
 import net.minecraft.util.ARGB;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.TypedEntityData;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
+import syrenyx.distantmoons.content.block.entity.UnderworldConfluxBlockEntity;
 import syrenyx.distantmoons.content.data_component.DimensionKeystoneComponent;
 import syrenyx.distantmoons.initializers.DistantMoonsDataComponentTypes;
 

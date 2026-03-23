@@ -43,14 +43,7 @@ public abstract class DistantMoonsRendering {
         DistantMoonsBlocks.WROUGHT_IRON_FENCE
     );
 
-    ColorProviderRegistry.BLOCK.register(
-        ((blockState, level, blockPos, tintIndex) -> {
-          if (tintIndex != 0 || level == null || blockPos == null) return -1;
-          if (blockState.getValue(UnderworldConfluxBlock.STATE) == UnderworldConfluxState.UNLIT) return UnderworldBlock.UNLIT_COLOR;
-          return level.getBlockEntityRenderData(blockPos) instanceof DimensionKeystoneComponent component ? component.color() : UnderworldBlock.DEFAULT_COLOR;
-        }),
-        DistantMoonsBlocks.UNDERWORLD_CONFLUX
-    );
+    ColorProviderRegistry.BLOCK.register(UnderworldConfluxBlock::tintColor, DistantMoonsBlocks.UNDERWORLD_CONFLUX);
   }
 
   public static void initialize() {}

@@ -22,6 +22,8 @@ public record UnderworldDimension() implements ConditionalItemModelProperty {
 
   @Override
   public boolean get(@NonNull ItemStack itemStack, @Nullable ClientLevel clientLevel, @Nullable LivingEntity livingEntity, int i, @NonNull ItemDisplayContext itemDisplayContext) {
-    return clientLevel != null && livingEntity != null && clientLevel.environmentAttributes().getValue(DistantMoonsEnvironmentAttributes.UNDERWORLD, livingEntity.position());
+    if (clientLevel == null) return false;
+    if (livingEntity != null) return clientLevel.environmentAttributes().getValue(DistantMoonsEnvironmentAttributes.UNDERWORLD, livingEntity.position());
+    return clientLevel.environmentAttributes().getDimensionValue(DistantMoonsEnvironmentAttributes.UNDERWORLD);
   }
 }

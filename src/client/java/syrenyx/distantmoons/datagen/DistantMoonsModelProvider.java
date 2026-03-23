@@ -2,6 +2,7 @@ package syrenyx.distantmoons.datagen;
 
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.minecraft.client.color.item.Constant;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.MultiVariant;
@@ -32,6 +33,7 @@ import syrenyx.distantmoons.UnderDistantMoons;
 import syrenyx.distantmoons.content.block.*;
 import syrenyx.distantmoons.content.block.block_state_enums.*;
 import syrenyx.distantmoons.content.rendering.item.properties.conditional.UnderworldDimension;
+import syrenyx.distantmoons.content.rendering.item.tint_source.DimensionKeystoneTintSource;
 import syrenyx.distantmoons.datagen.utility.ModelProviderUtil;
 import syrenyx.distantmoons.initializers.DistantMoonsBlocks;
 import syrenyx.distantmoons.initializers.DistantMoonsItems;
@@ -1201,7 +1203,11 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     Map<TextureSlot, String> textureMap = Map.of(DistantMoonsTextureSlot.CENTER, rawTextureMap.get(DistantMoonsTextureSlot.CENTER), DistantMoonsTextureSlot.HIGHLIGHTS_INSIDE, rawTextureMap.get(DistantMoonsTextureSlot.HIGHLIGHTS_INSIDE), DistantMoonsTextureSlot.HIGHLIGHTS_OUTSIDE, rawTextureMap.get(DistantMoonsTextureSlot.HIGHLIGHTS_OUTSIDE), TextureSlot.INSIDE, rawTextureMap.get(TextureSlot.INSIDE), DistantMoonsTextureSlot.OUTSIDE, rawTextureMap.get(DistantMoonsTextureSlot.OUTSIDE), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE));
     MultiVariant variant = createWeightedVariant(createObjectModel(block, "underworld_conflux/block", null, textureMap));
     this.blockGenerator.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, variant));
-    this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModelUtils.plainModel(getFirstEntryOf(variant)));
+    this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModelUtils.conditional(
+        new UnderworldDimension(),
+        ItemModelUtils.tintedModel(getFirstEntryOf(variant), new Constant(-1), new Constant(UnderworldBlock.DEFAULT_COLOR)),
+        ItemModelUtils.tintedModel(getFirstEntryOf(variant), new Constant(-1), new Constant(UnderworldBlock.UNLIT_COLOR))
+    ));
   }
 
   private void registerUnderworldLanternBlock(Block block, Map<TextureSlot, String> rawTextureMap) {

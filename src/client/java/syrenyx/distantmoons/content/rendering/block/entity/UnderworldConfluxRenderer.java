@@ -29,6 +29,11 @@ public class UnderworldConfluxRenderer implements BlockEntityRenderer<Underworld
   }
 
   @Override
+  public RenderState createRenderState() {
+    return new RenderState();
+  }
+
+  @Override
   public void extractRenderState(
       UnderworldConfluxBlockEntity blockEntity,
       UnderworldConfluxRenderer.RenderState renderState,
@@ -41,21 +46,21 @@ public class UnderworldConfluxRenderer implements BlockEntityRenderer<Underworld
     if (itemStack.isEmpty()) return;
     DimensionKeystoneComponent component = itemStack.get(DistantMoonsDataComponentTypes.DIMENSION_KEYSTONE);
     if (component != null) itemStack.set(DataComponents.ITEM_MODEL, component.slottedItemModel());
-    this.itemModelResolver.updateForTopItem(new ItemStackRenderState(), itemStack, ItemDisplayContext.FIXED, blockEntity.level(), null, HashCommon.long2int(blockEntity.getBlockPos().asLong()));
-  }
-
-  @Override
-  public RenderState createRenderState() {
-    return new RenderState();
+    ItemStackRenderState itemStackRenderState = new ItemStackRenderState();
+    this.itemModelResolver.updateForTopItem(itemStackRenderState, itemStack, ItemDisplayContext.NONE, blockEntity.level(), null, (int) blockEntity.getBlockPos().asLong());
+    renderState.item = itemStackRenderState;
   }
 
   @Override
   public void submit(RenderState renderState, @NonNull PoseStack poseStack, @NonNull SubmitNodeCollector submitNodeCollector, @NonNull CameraRenderState cameraRenderState) {
+    poseStack.pushPose();
+    poseStack.translate(0.5F, 0.5F, 0.5F);
     renderState.item.submit(poseStack, submitNodeCollector, 0, 0, 0);
+    poseStack.popPose();
   }
 
   public static class RenderState extends BlockEntityRenderState {
 
-    public ItemStackRenderState item = new ItemStackRenderState();
+    public ItemStackRenderState item = null;
   }
 }
