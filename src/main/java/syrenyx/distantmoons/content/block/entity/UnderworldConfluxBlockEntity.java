@@ -130,7 +130,7 @@ public class UnderworldConfluxBlockEntity extends BlockEntity implements Contain
   @Override
   public @NonNull CompoundTag getUpdateTag(HolderLookup.@NonNull Provider provider) {
     CompoundTag compoundTag = super.getUpdateTag(provider);
-    compoundTag.store(KEYSTONE_DATA_KEY, ItemStack.SINGLE_ITEM_CODEC, this.keystoneStack);
+    if (!this.keystoneStack.isEmpty()) compoundTag.store(KEYSTONE_DATA_KEY, ItemStack.SINGLE_ITEM_CODEC, this.keystoneStack);
     return compoundTag;
   }
 

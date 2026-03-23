@@ -3,7 +3,9 @@ package syrenyx.distantmoons.content.block;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.Level;
@@ -14,11 +16,16 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.phys.Vec3;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 import syrenyx.distantmoons.content.block.block_state_enums.UnderworldConfluxState;
 import syrenyx.distantmoons.content.block.entity.UnderworldConfluxBlockEntity;
+import syrenyx.distantmoons.content.particle.UnderworldConfluxEffectOptions;
+import syrenyx.distantmoons.content.particle.UnderworldParticleOptions;
+import syrenyx.distantmoons.initializers.DistantMoonsDataComponentTypes;
 import syrenyx.distantmoons.references.DistantMoonsBlockStateProperties;
+import syrenyx.distantmoons.utility.VectorUtil;
 
 public class UnderworldConfluxBlock extends BaseEntityBlock implements UnderworldBlock {
 
@@ -60,6 +67,46 @@ public class UnderworldConfluxBlock extends BaseEntityBlock implements Underworl
     boolean inUnderworld = UnderworldBlock.inUnderworld(serverLevel, blockPos);
     if (inUnderworld == blockState.getValue(STATE).lit()) return;
     serverLevel.setBlock(blockPos, blockState.setValue(STATE, inUnderworld ? UnderworldConfluxState.LIT : UnderworldConfluxState.UNLIT), Block.UPDATE_ALL);
+  }
+
+  @Override
+  public void animateTick(@NonNull BlockState state, @NonNull Level level, @NonNull BlockPos blockPos, @NonNull RandomSource randomSource) {
+    if (!state.getValue(STATE).lit()) return;
+    Vec3 anchor = blockPos.getCenter();
+    int color = getKeystoneColor(level, blockPos);
+    spawnUnderworldConfluxParticles(level, anchor, color, randomSource.nextInt(1, 3), false, randomSource);
+    if (randomSource.nextInt(10) != 0) return;
+    Vec3 particlePosition = anchor.add(VectorUtil.randomPointOnSphere(randomSource, ((float) randomSource.nextInt(2, 4) / 5) + 1));
+    level.addParticle(
+        new UnderworldParticleOptions(anchor, color),
+        particlePosition.x(), particlePosition.y(), particlePosition.z(),
+        0.0F, 0.0F, 0.0F
+    );
+  }
+
+  private static void spawnUnderworldConfluxParticles(Level level, Vec3 center, int color, int amount, boolean inverted, RandomSource randomSource) {
+    for (int i = 0; i < amount; i++) {
+      Vec3 outerPosition = center.add(VectorUtil.randomPointOnSphere(randomSource, 5));
+      level.addParticle(
+          new UnderworldConfluxEffectOptions(
+              Mth.HALF_PI * randomSource.nextInt(0, 4),
+              !inverted,
+              color,
+              inverted ? center : outerPosition
+          ),
+          inverted ? outerPosition.x() : center.x(),
+          inverted ? outerPosition.y() : center.y(),
+          inverted ? outerPosition.z() : center.z(),
+          0.0F, 0.0F, 0.0F
+      );
+    }
+  }
+
+  private static int getKeystoneColor(@NonNull Level level, @NonNull BlockPos blockPos) {
+    if (!(level.getBlockEntity(blockPos) instanceof UnderworldConfluxBlockEntity blockEntity)) return UnderworldBlock.DEFAULT_COLOR;
+    ItemStack itemStack = blockEntity.getItem();
+    if (itemStack.isEmpty() || !itemStack.has(DistantMoonsDataComponentTypes.DIMENSION_KEYSTONE)) return UnderworldBlock.DEFAULT_COLOR;
+    return itemStack.get(DistantMoonsDataComponentTypes.DIMENSION_KEYSTONE).color();
   }
 
   public static void onKeystoneChanged(Level level, BlockPos blockPos) {

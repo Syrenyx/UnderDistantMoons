@@ -4,7 +4,7 @@
     {
       "from": [12, 4, 4],
       "to": [4, 12, 12],
-      "light_emission": 10,
+      "light_emission": 15,
       "shade": false,
       "faces": {
         "north": {"uv": [4, 4, 12, 12], "texture": "#center", "tintindex": 1},
@@ -114,7 +114,7 @@
     {
       "from": [0, 10, 0],
       "to": [6, 16, 6],
-      "light_emission": 10,
+      "light_emission": 15,
       "shade": false,
       "faces": {
         "north": {"uv": [10, 0, 16, 6], "texture": "#highlights_outside", "cullface": "north", "tintindex": 1},
@@ -128,7 +128,7 @@
     {
       "from": [10, 10, 0],
       "to": [16, 16, 6],
-      "light_emission": 10,
+      "light_emission": 15,
       "shade": false,
       "faces": {
         "north": {"uv": [0, 0, 6, 6], "texture": "#highlights_outside", "cullface": "north", "tintindex": 1},
@@ -142,7 +142,7 @@
     {
       "from": [10, 10, 10],
       "to": [16, 16, 16],
-      "light_emission": 10,
+      "light_emission": 15,
       "shade": false,
       "faces": {
         "north": {"uv": [0, 0, 6, 6], "texture": "#highlights_inside", "tintindex": 1},
@@ -156,7 +156,7 @@
     {
       "from": [0, 10, 10],
       "to": [6, 16, 16],
-      "light_emission": 10,
+      "light_emission": 15,
       "shade": false,
       "faces": {
         "north": {"uv": [10, 0, 16, 6], "texture": "#highlights_inside", "tintindex": 1},
@@ -170,7 +170,7 @@
     {
       "from": [0, 0, 0],
       "to": [6, 6, 6],
-      "light_emission": 10,
+      "light_emission": 15,
       "shade": false,
       "faces": {
         "north": {"uv": [10, 10, 16, 16], "texture": "#highlights_outside", "cullface": "north", "tintindex": 1},
@@ -184,7 +184,7 @@
     {
       "from": [10, 0, 0],
       "to": [16, 6, 6],
-      "light_emission": 10,
+      "light_emission": 15,
       "shade": false,
       "faces": {
         "north": {"uv": [0, 10, 6, 16], "texture": "#highlights_outside", "cullface": "north", "tintindex": 1},
@@ -198,7 +198,7 @@
     {
       "from": [10, 0, 10],
       "to": [16, 6, 16],
-      "light_emission": 10,
+      "light_emission": 15,
       "shade": false,
       "faces": {
         "north": {"uv": [0, 10, 6, 16], "texture": "#highlights_inside", "tintindex": 1},
@@ -212,7 +212,7 @@
     {
       "from": [0, 0, 10],
       "to": [6, 6, 16],
-      "light_emission": 10,
+      "light_emission": 15,
       "shade": false,
       "faces": {
         "north": {"uv": [10, 10, 16, 16], "texture": "#highlights_inside", "tintindex": 1},

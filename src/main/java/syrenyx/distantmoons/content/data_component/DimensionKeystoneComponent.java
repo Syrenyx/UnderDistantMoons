@@ -8,8 +8,8 @@ import syrenyx.distantmoons.content.block.UnderworldBlock;
 
 public record DimensionKeystoneComponent(Identifier dimension, int color, Identifier slottedItemModel) {
 
-  public static final int ABYSS_COLOR = 2512895;
-  public static final int NETHER_COLOR = 16728870;
+  public static final int ABYSS_COLOR = 4101631;
+  public static final int NETHER_COLOR = 16738622;
 
   public static final Codec<DimensionKeystoneComponent> CODEC = RecordCodecBuilder.create(instance -> instance
       .group(

@@ -53,6 +53,7 @@ public class UnderworldConfluxRenderer implements BlockEntityRenderer<Underworld
 
   @Override
   public void submit(RenderState renderState, @NonNull PoseStack poseStack, @NonNull SubmitNodeCollector submitNodeCollector, @NonNull CameraRenderState cameraRenderState) {
+    if (renderState.item == null) return;
     poseStack.pushPose();
     poseStack.translate(0.5F, 0.5F, 0.5F);
     renderState.item.submit(poseStack, submitNodeCollector, 0, 0, 0);
