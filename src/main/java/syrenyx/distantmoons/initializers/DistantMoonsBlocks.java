@@ -25,6 +25,8 @@ import syrenyx.distantmoons.UnderDistantMoons;
 import syrenyx.distantmoons.content.block.*;
 import syrenyx.distantmoons.content.data_component.BlastFurnaceFuelComponent;
 import syrenyx.distantmoons.references.DistantMoonsBlockSetTypes;
+import syrenyx.distantmoons.references.data.worldgen.DistantMoonsConfiguredFeatures;
+import syrenyx.distantmoons.references.data.worldgen.DistantMoonsPlacedFeatures;
 import syrenyx.distantmoons.references.tag.DistantMoonsDamageTypeTags;
 import syrenyx.distantmoons.utility.ColorUtil;
 
@@ -1282,7 +1284,7 @@ public abstract class DistantMoonsBlocks {
   );
   public static final Block UNDERWORLD_CONFLUX = register(
       "underworld_conflux",
-      UnderworldConfluxBlock::new,
+      properties -> new UnderworldConfluxBlock(properties, DistantMoonsConfiguredFeatures.UNDERWORLD_ANCHOR_CHAMBER),
       BlockBehaviour.Properties.of()
           .instrument(NoteBlockInstrument.BASEDRUM)
           .isRedstoneConductor(Blocks::never)

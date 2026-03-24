@@ -32,6 +32,7 @@ public abstract class DistantMoonsItems {
       new Item.Properties()
           .component(DistantMoonsDataComponentTypes.DIMENSION_KEYSTONE, new DimensionKeystoneComponent(Level.NETHER.identifier(), DimensionKeystoneComponent.ABYSS_COLOR, UnderDistantMoons.identifierOf("underworld_conflux_keystone/abyss")))
           .fireResistant()
+          .stacksTo(1)
   );
   public static final Item COILED_ROPE_LADDER = register(
       "coiled_rope_ladder",
@@ -155,6 +156,7 @@ public abstract class DistantMoonsItems {
       new Item.Properties()
           .component(DistantMoonsDataComponentTypes.DIMENSION_KEYSTONE, new DimensionKeystoneComponent(Level.NETHER.identifier(), DimensionKeystoneComponent.NETHER_COLOR, UnderDistantMoons.identifierOf("underworld_conflux_keystone/nether")))
           .fireResistant()
+          .stacksTo(1)
   );
   public static final Item PALE_PRISMARINE_SHARD = register(
       "pale_prismarine_shard",

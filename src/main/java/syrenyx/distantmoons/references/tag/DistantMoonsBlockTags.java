@@ -68,6 +68,8 @@ public abstract class DistantMoonsBlockTags {
   public static final TagKey<Block> WOODEN_FENCE_ALWAYS_CONNECTS_TO = keyOf("connection_target/wooden_fence/always");
   public static final TagKey<Block> WOODEN_FENCE_NEVER_CONNECTS_TO = keyOf("connection_target/wooden_fence/never");
   public static final TagKey<Block> WOODEN_POLE = keyOf("wooden_pole");
+  public static final TagKey<Block> WORLDGEN_ANCHOR_CHAMBER_IGNORES = keyOf("worldgen/anchor_chamber_ignores");
+  public static final TagKey<Block> WORLDGEN_IRREPLACEABLE = keyOf("worldgen/irreplaceable");
 
   private static TagKey<Block> keyOf(String id) {
     return UnderDistantMoons.tagKeyOf(id, Registries.BLOCK);

@@ -7,6 +7,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
@@ -74,7 +75,7 @@ public class UnderworldCompassItem extends Item {
   public @NonNull InteractionResult use(@NonNull Level level, @NonNull Player player, @NonNull InteractionHand interactionHand) {
     ItemStack itemStack = player.getItemInHand(interactionHand);
     LodestoneTracker dataComponent = itemStack.get(DataComponents.LODESTONE_TRACKER);
-    if (dataComponent != null && dataComponent.tracked() || !(level instanceof ServerLevel serverLevel)) return InteractionResult.CONSUME;
+    if ((dataComponent != null && dataComponent.tracked()) || !(level instanceof ServerLevel serverLevel)) return InteractionResult.CONSUME;
     BlockPos target = serverLevel.findNearestMapStructure(
         DistantMoonsStructureTags.UNDERWORLD_COMPASS_TARGET,
         player.blockPosition(),
@@ -83,6 +84,7 @@ public class UnderworldCompassItem extends Item {
     );
     if (target != null) this.setTarget(level, player, itemStack, target, false);
     else UnderDistantMoons.LOGGER.info(DistantMoonsLoggerMessages.UNDERWORLD_COMPASS_UNABLE_TO_LOCATE_TARGET);
+    player.awardStat(Stats.ITEM_USED.get(this));
     return InteractionResult.SUCCESS;
   }
 
@@ -94,6 +96,7 @@ public class UnderworldCompassItem extends Item {
     Level level = useOnContext.getLevel();
     if (!level.getBlockState(blockPos).is(DistantMoonsBlockTags.UNDERWORLD_COMPASS_TARGET)) return super.useOn(useOnContext);
     this.setTarget(level, player, useOnContext.getItemInHand(), blockPos, true);
+    player.awardStat(Stats.ITEM_USED.get(this));
     return InteractionResult.SUCCESS;
   }
 

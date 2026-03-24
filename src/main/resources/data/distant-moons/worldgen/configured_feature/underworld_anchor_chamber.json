@@ -1,0 +1,49 @@
+{
+  "type": "distant-moons:anchor_chamber",
+  "config": {
+    "anchor": [
+      {
+        "state": {
+          "Name": "distant-moons:blackstone_deep_iron_ore"
+        },
+        "target": {
+          "predicate_type": "minecraft:block_match",
+          "block": "minecraft:blackstone"
+        }
+      }
+    ],
+    "corner": [
+      {
+        "state": {
+          "Name": "distant-moons:blackstone_deep_iron_ore"
+        },
+        "target": {
+          "predicate_type": "minecraft:block_match",
+          "block": "minecraft:blackstone"
+        }
+      }
+    ],
+    "edge": [
+      {
+        "state": {
+          "Name": "distant-moons:blackstone_deep_iron_ore"
+        },
+        "target": {
+          "predicate_type": "minecraft:block_match",
+          "block": "minecraft:blackstone"
+        }
+      }
+    ],
+    "wall": [
+      {
+        "state": {
+          "Name": "distant-moons:blackstone_deep_iron_ore"
+        },
+        "target": {
+          "predicate_type": "minecraft:block_match",
+          "block": "minecraft:blackstone"
+        }
+      }
+    ]
+  }
+}
