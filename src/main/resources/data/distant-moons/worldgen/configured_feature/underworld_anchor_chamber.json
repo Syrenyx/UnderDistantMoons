@@ -1,49 +1,29 @@
 {
   "type": "distant-moons:anchor_chamber",
   "config": {
-    "anchor": [
-      {
-        "state": {
-          "Name": "distant-moons:blackstone_deep_iron_ore"
-        },
-        "target": {
-          "predicate_type": "minecraft:block_match",
-          "block": "minecraft:blackstone"
-        }
+    "anchor": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "distant-moons:underworld_anchor"
       }
-    ],
-    "corner": [
-      {
-        "state": {
-          "Name": "distant-moons:blackstone_deep_iron_ore"
-        },
-        "target": {
-          "predicate_type": "minecraft:block_match",
-          "block": "minecraft:blackstone"
-        }
+    },
+    "corner": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "minecraft:chiseled_polished_blackstone"
       }
-    ],
-    "edge": [
-      {
-        "state": {
-          "Name": "distant-moons:blackstone_deep_iron_ore"
-        },
-        "target": {
-          "predicate_type": "minecraft:block_match",
-          "block": "minecraft:blackstone"
-        }
+    },
+    "edge": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "minecraft:polished_blackstone"
       }
-    ],
-    "wall": [
-      {
-        "state": {
-          "Name": "distant-moons:blackstone_deep_iron_ore"
-        },
-        "target": {
-          "predicate_type": "minecraft:block_match",
-          "block": "minecraft:blackstone"
-        }
+    },
+    "wall": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "minecraft:tinted_glass"
       }
-    ]
+    }
   }
 }
