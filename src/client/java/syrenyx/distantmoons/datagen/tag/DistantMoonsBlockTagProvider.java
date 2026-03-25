@@ -426,6 +426,10 @@ public class DistantMoonsBlockTagProvider extends FabricTagProvider.BlockTagProv
         );
     this.valueLookupBuilder(DistantMoonsBlockTags.MINING_TYPE_SHOVEL);
 
+    //SUPPORT BLOCKS
+    this.valueLookupBuilder(DistantMoonsBlockTags.SUPPORT_BLOCK_FOR_SITTING_SPOT)
+        .addTag(DistantMoonsBlockTags.DYED_PILLOW);
+
     //MISCELLANEOUS
     this.valueLookupBuilder(DistantMoonsBlockTags.CLIMBABLE)
         .forceAddTag(BlockTags.CHAINS)
@@ -444,10 +448,8 @@ public class DistantMoonsBlockTagProvider extends FabricTagProvider.BlockTagProv
         .add(Blocks.SPRUCE_LEAVES);
     this.valueLookupBuilder(DistantMoonsBlockTags.OCCLUDES_VIBRATIONS)
         .addTag(DistantMoonsBlockTags.DYED_PILLOW);
-
-    //SUPPORT BLOCKS
-    this.valueLookupBuilder(DistantMoonsBlockTags.SUPPORT_BLOCK_FOR_SITTING_SPOT)
-        .addTag(DistantMoonsBlockTags.DYED_PILLOW);
+    this.valueLookupBuilder(DistantMoonsBlockTags.UNDERWORLD_COMPASS_TARGET)
+        .add(DistantMoonsBlocks.UNDERWORLD_CONFLUX);
 
     //VANILLA TAG REDIRECTS
     this.valueLookupBuilder(BlockTags.MINEABLE_WITH_AXE).addTag(DistantMoonsBlockTags.MINING_TYPE_AXE);

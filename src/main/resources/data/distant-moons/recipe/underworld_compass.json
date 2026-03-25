@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "0": "#distant-moons:deep_iron_ingot",
+    "1": "distant-moons:underworld_dust"
+  },
+  "pattern": [
+    " 0 ",
+    "010",
+    " 0 "
+  ],
+  "result": {
+    "id": "distant-moons:underworld_compass"
+  }
+}

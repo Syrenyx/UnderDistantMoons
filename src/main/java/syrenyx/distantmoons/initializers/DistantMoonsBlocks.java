@@ -1,17 +1,23 @@
 package syrenyx.distantmoons.initializers;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.valueproviders.ConstantInt;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.component.DamageResistant;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
@@ -19,6 +25,9 @@ import syrenyx.distantmoons.UnderDistantMoons;
 import syrenyx.distantmoons.content.block.*;
 import syrenyx.distantmoons.content.data_component.BlastFurnaceFuelComponent;
 import syrenyx.distantmoons.references.DistantMoonsBlockSetTypes;
+import syrenyx.distantmoons.references.data.worldgen.DistantMoonsConfiguredFeatures;
+import syrenyx.distantmoons.references.data.worldgen.DistantMoonsPlacedFeatures;
+import syrenyx.distantmoons.references.tag.DistantMoonsDamageTypeTags;
 import syrenyx.distantmoons.utility.ColorUtil;
 
 import java.util.HashMap;
@@ -107,20 +116,34 @@ public abstract class DistantMoonsBlocks {
       LargeBlastFurnaceBlock::new,
       BlockBehaviour.Properties.of()
           .instrument(NoteBlockInstrument.BASEDRUM)
-          .lightLevel(state -> state.getValue(LargeBlastFurnaceBlock.HEAT) * 5)
-          .mapColor(MapColor.STONE)
+          .isValidSpawn(LargeBlastFurnaceBlock::isValidSpawn)
+          .lightLevel(LargeBlastFurnaceBlock::lightLevel)
+          .mapColor(LargeBlastFurnaceBlock::mapColor)
           .pushReaction(PushReaction.BLOCK)
           .requiresCorrectToolForDrops()
           .sound(SoundType.TUFF_BRICKS)
           .strength(8.0F, 1200.0F),
       new Item.Properties()
-          .fireResistant()
+          .component(DataComponents.DAMAGE_RESISTANT, new DamageResistant(DistantMoonsDamageTypeTags.IS_EXPLOSION_OR_FIRE))
           .stacksTo(16)
   );
   public static final Block BRICK_WALL_SLAB = register(
       "brick_wall_slab",
       WallSlabBlock::new,
       BlockBehaviour.Properties.ofFullCopy(Blocks.BRICKS),
+      new Item.Properties()
+  );
+  public static final Block BROKEN_UNDERWORLD_ANCHOR = register(
+      "broken_underworld_anchor",
+      Block::new,
+      BlockBehaviour.Properties.of()
+          .instrument(NoteBlockInstrument.BASEDRUM)
+          .isValidSpawn(Blocks::never)
+          .mapColor(MapColor.COLOR_BLACK)
+          .pushReaction(PushReaction.BLOCK)
+          .requiresCorrectToolForDrops()
+          .sound(SoundType.GILDED_BLACKSTONE)
+          .strength(20.0F),
       new Item.Properties()
   );
   public static final Block CHARCOAL_BLOCK = register(
@@ -490,31 +513,36 @@ public abstract class DistantMoonsBlocks {
           .requiresCorrectToolForDrops()
           .sound(SoundType.NETHER_BRICKS)
           .strength(5.0F, 1200.0F),
-      new Item.Properties().fireResistant()
+      new Item.Properties()
+          .component(DataComponents.DAMAGE_RESISTANT, new DamageResistant(DistantMoonsDamageTypeTags.IS_EXPLOSION_OR_FIRE))
   );
   public static final Block FIRE_BRICK_SLAB = register(
       "fire_brick_slab",
       SlabBlock::new,
       BlockBehaviour.Properties.ofFullCopy(FIRE_BRICKS),
-      new Item.Properties().fireResistant()
+      new Item.Properties()
+          .component(DataComponents.DAMAGE_RESISTANT, new DamageResistant(DistantMoonsDamageTypeTags.IS_EXPLOSION_OR_FIRE))
   );
   public static final Block FIRE_BRICK_STAIRS = register(
       "fire_brick_stairs",
       SimplifiedStairsBlock::new,
       BlockBehaviour.Properties.ofFullCopy(FIRE_BRICKS),
-      new Item.Properties().fireResistant()
+      new Item.Properties()
+          .component(DataComponents.DAMAGE_RESISTANT, new DamageResistant(DistantMoonsDamageTypeTags.IS_EXPLOSION_OR_FIRE))
   );
   public static final Block FIRE_BRICK_WALL = register(
       "fire_brick_wall",
       WallBlock::new,
       BlockBehaviour.Properties.ofFullCopy(FIRE_BRICKS),
-      new Item.Properties().fireResistant()
+      new Item.Properties()
+          .component(DataComponents.DAMAGE_RESISTANT, new DamageResistant(DistantMoonsDamageTypeTags.IS_EXPLOSION_OR_FIRE))
   );
   public static final Block FIRE_BRICK_WALL_SLAB = register(
       "fire_brick_wall_slab",
       WallSlabBlock::new,
       BlockBehaviour.Properties.ofFullCopy(FIRE_BRICKS),
-      new Item.Properties().fireResistant()
+      new Item.Properties()
+          .component(DataComponents.DAMAGE_RESISTANT, new DamageResistant(DistantMoonsDamageTypeTags.IS_EXPLOSION_OR_FIRE))
   );
   public static final Block FIXED_DEEP_IRON_LADDER = register(
       "fixed_deep_iron_ladder",
@@ -856,7 +884,7 @@ public abstract class DistantMoonsBlocks {
       "pale_sea_lantern",
       Block::new,
       BlockBehaviour.Properties.ofFullCopy(Blocks.SEA_LANTERN)
-          .lightLevel(state -> 10),
+          .lightLevel(blockState -> 10),
       new Item.Properties()
   );
   public static final Block POLISHED_ANDESITE_WALL_SLAB = register(
@@ -1238,11 +1266,48 @@ public abstract class DistantMoonsBlocks {
       BlockBehaviour.Properties.ofFullCopy(Blocks.TUFF),
       new Item.Properties()
   );
+  public static final Block UNDERWORLD_ANCHOR = register(
+      "underworld_anchor",
+      UnderworldAnchorBlock::new,
+      BlockBehaviour.Properties.of()
+          .instrument(NoteBlockInstrument.BASEDRUM)
+          .isValidSpawn(Blocks::never)
+          .lightLevel(UnderworldAnchorBlock::lightLevel)
+          .mapColor(UnderworldAnchorBlock::mapColor)
+          .pushReaction(PushReaction.BLOCK)
+          .randomTicks()
+          .requiresCorrectToolForDrops()
+          .sound(SoundType.GILDED_BLACKSTONE)
+          .strength(20.0F, 1200.0F),
+      new Item.Properties()
+          .fireResistant()
+  );
+  public static final Block UNDERWORLD_CONFLUX = register(
+      "underworld_conflux",
+      properties -> new UnderworldConfluxBlock(properties, DistantMoonsConfiguredFeatures.UNDERWORLD_ANCHOR_CHAMBER),
+      BlockBehaviour.Properties.of()
+          .instrument(NoteBlockInstrument.BASEDRUM)
+          .isRedstoneConductor(Blocks::never)
+          .isSuffocating(Blocks::never)
+          .isValidSpawn(Blocks::never)
+          .isViewBlocking(Blocks::never)
+          .lightLevel(UnderworldConfluxBlock::lightLevel)
+          .mapColor(UnderworldConfluxBlock::mapColor)
+          .noLootTable()
+          .noOcclusion()
+          .pushReaction(PushReaction.BLOCK)
+          .randomTicks()
+          .sound(SoundType.GILDED_BLACKSTONE)
+          .strength(-1.0F, 3600000.0F),
+      new Item.Properties()
+          .fireResistant()
+  );
   public static final Block UNDERWORLD_LANTERN = register(
       "underworld_lantern",
       UnderworldLanternBlock::new,
       BlockBehaviour.Properties.ofFullCopy(Blocks.LANTERN)
-          .lightLevel(state -> state.getValue(BlockStateProperties.LIT) ? 15 : 0)
+          .lightLevel(UnderworldLanternBlock::lightLevel)
+          .mapColor(MapColor.TERRACOTTA_WHITE)
           .randomTicks(),
       new Item.Properties()
           .fireResistant()
@@ -1466,13 +1531,18 @@ public abstract class DistantMoonsBlocks {
 
   private static Map<DyeColor, Block> registerDyedVariants(String id, Function<BlockBehaviour.Properties, Block> blockFactory, BlockBehaviour.Properties properties, Item.Properties itemSettings, Map<DyeColor, MapColor> mapColors) {
     Map<DyeColor, Block> blocks = new HashMap<>();
-    for (DyeColor color : ColorUtil.SORTED_DYE_COLORS) blocks.put(color, register(color.getName() + "_" + id, blockFactory, properties.mapColor(mapColors.get(color)), itemSettings));
+    for (DyeColor color : ColorUtil.SORTED_DYE_COLORS)
+      blocks.put(color, register(color.getName() + "_" + id, blockFactory, properties.mapColor(mapColors.get(color)), itemSettings));
     return blocks;
   }
 
   public static String getStringIdOf(Block block) {
     return BuiltInRegistries.BLOCK.wrapAsHolder(block).getRegisteredName().split(":")[1];
   }
+
+  private static boolean defaultIsValidSpawn(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, EntityType<?> entityType) {
+    return blockState.isFaceSturdy(blockGetter,blockPos,Direction.UP) && blockState.getLightEmission() < 14;
+}
 
   public static void initialize() {}
 }

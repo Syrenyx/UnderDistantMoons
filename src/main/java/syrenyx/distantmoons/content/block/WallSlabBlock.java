@@ -13,7 +13,6 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
@@ -33,15 +32,17 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 import org.jspecify.annotations.NonNull;
 import syrenyx.distantmoons.content.block.block_state_enums.WallSlabShape;
+import syrenyx.distantmoons.references.DistantMoonsBlockStateProperties;
 import syrenyx.distantmoons.utility.VoxelShapeUtil;
 import com.mojang.math.OctahedralGroup;
 import java.util.Map;
 
 public class WallSlabBlock extends Block implements SimpleWaterloggedBlock {
 
-  public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
-  public static final EnumProperty<WallSlabShape> SHAPE = EnumProperty.create("shape", WallSlabShape.class);
+  public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
+  public static final EnumProperty<WallSlabShape> SHAPE = DistantMoonsBlockStateProperties.WALL_SLAB_SHAPE;
   public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+
   private static final VoxelShape FLAT_SHAPE = Block.box(0.0, 0.0, 8.0, 16.0, 16.0, 16.0);
   private static final VoxelShape OUTER_SHAPE = Block.box(8.0, 0.0, 8.0, 16.0, 16.0, 16.0);
   private static final VoxelShape INNER_SHAPE = Shapes.or(FLAT_SHAPE, Shapes.rotate(OUTER_SHAPE, OctahedralGroup.ROT_90_Y_POS));

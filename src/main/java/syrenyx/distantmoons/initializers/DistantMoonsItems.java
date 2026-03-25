@@ -13,17 +13,27 @@ import net.minecraft.world.item.ShovelItem;
 import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.world.item.component.Consumable;
 import net.minecraft.world.item.component.Consumables;
+import net.minecraft.world.item.component.DamageResistant;
 import net.minecraft.world.item.equipment.ArmorType;
+import net.minecraft.world.level.Level;
 import syrenyx.distantmoons.UnderDistantMoons;
-import syrenyx.distantmoons.content.data_component.BlastFurnaceFuelComponent;
-import syrenyx.distantmoons.content.data_component.CoiledBlockComponent;
-import syrenyx.distantmoons.content.item.CoilItem;
+import syrenyx.distantmoons.content.data_component.*;
+import syrenyx.distantmoons.content.item.*;
 import syrenyx.distantmoons.references.DistantMoonsItemMaterials;
+import syrenyx.distantmoons.references.tag.DistantMoonsDamageTypeTags;
 
 import java.util.function.Function;
 
 public abstract class DistantMoonsItems {
 
+  public static final Item ABYSS_KEYSTONE = register(
+      "abyss_keystone",
+      Item::new,
+      new Item.Properties()
+          .component(DistantMoonsDataComponentTypes.DIMENSION_KEYSTONE, new DimensionKeystoneComponent(Level.NETHER.identifier(), DimensionKeystoneComponent.ABYSS_COLOR, UnderDistantMoons.identifierOf("underworld_conflux_keystone/abyss")))
+          .fireResistant()
+          .stacksTo(1)
+  );
   public static final Item COILED_ROPE_LADDER = register(
       "coiled_rope_ladder",
       settings -> new CoilItem(DistantMoonsBlocks.ROPE_LADDER, settings),
@@ -133,12 +143,20 @@ public abstract class DistantMoonsItems {
       "fire_brick",
       Item::new,
       new Item.Properties()
-          .fireResistant()
+          .component(DataComponents.DAMAGE_RESISTANT, new DamageResistant(DistantMoonsDamageTypeTags.IS_EXPLOSION_OR_FIRE))
   );
   public static final Item IRON_ROD = register(
       "iron_rod",
       Item::new,
       new Item.Properties()
+  );
+  public static final Item NETHER_KEYSTONE = register(
+      "nether_keystone",
+      Item::new,
+      new Item.Properties()
+          .component(DistantMoonsDataComponentTypes.DIMENSION_KEYSTONE, new DimensionKeystoneComponent(Level.NETHER.identifier(), DimensionKeystoneComponent.NETHER_COLOR, UnderDistantMoons.identifierOf("underworld_conflux_keystone/nether")))
+          .fireResistant()
+          .stacksTo(1)
   );
   public static final Item PALE_PRISMARINE_SHARD = register(
       "pale_prismarine_shard",
@@ -193,8 +211,19 @@ public abstract class DistantMoonsItems {
       Item::new,
       new Item.Properties()
   );
+  public static final Item UNDERWORLD_COMPASS = register(
+      "underworld_compass",
+      UnderworldCompassItem::new,
+      new Item.Properties()
+          .fireResistant()
+  );
   public static final Item UNDERWORLD_DUST = register(
       "underworld_dust",
+      Item::new,
+      new Item.Properties()
+  );
+  public static final Item UNDERWORLD_PEARL = register(
+      "underworld_pearl",
       Item::new,
       new Item.Properties()
   );

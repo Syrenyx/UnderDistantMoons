@@ -46,6 +46,7 @@ public class UnderDistantMoons implements ModInitializer {
     DistantMoonsMenuTypes.initialize();
     DistantMoonsNetworking.initialize();
     DistantMoonsParticleTypes.initialize();
+    DistantMoonsPointOfInterestTypes.initialize();
     DistantMoonsRecipeSerializers.initialize();
     DistantMoonsRecipeTypes.initialize();
     DistantMoonsRegistries.initialize();

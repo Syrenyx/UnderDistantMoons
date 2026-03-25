@@ -16,11 +16,12 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DoorHingeSide;
 import org.jetbrains.annotations.Nullable;
 import org.jspecify.annotations.NonNull;
+import syrenyx.distantmoons.references.DistantMoonsBlockStateProperties;
 import syrenyx.distantmoons.references.tag.DistantMoonsBlockTags;
 
 public class MetalBarDoorBlock extends DoorBlock {
 
-  public static final BooleanProperty DOUBLE = BooleanProperty.create("double");
+  public static final BooleanProperty DOUBLE = DistantMoonsBlockStateProperties.DOUBLE;
 
   public MetalBarDoorBlock(BlockSetType type, Properties settings) {
     super(type, settings);

@@ -15,6 +15,7 @@ import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.pathfinder.PathComputationType;
@@ -23,6 +24,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jspecify.annotations.NonNull;
 import syrenyx.distantmoons.content.block.block_state_enums.RopeLadderDirection;
+import syrenyx.distantmoons.references.DistantMoonsBlockStateProperties;
 import syrenyx.distantmoons.utility.VoxelShapeUtil;
 import com.mojang.math.OctahedralGroup;
 import java.util.Arrays;
@@ -30,9 +32,10 @@ import java.util.Map;
 
 public class RopeLadderBlock extends Block {
 
-  public static final EnumProperty<RopeLadderDirection> DIRECTION = EnumProperty.create("direction", RopeLadderDirection.class);
-  public static final BooleanProperty BOTTOM = BooleanProperty.create("bottom");
-  public static final BooleanProperty TOP = BooleanProperty.create("top");
+  public static final EnumProperty<RopeLadderDirection> DIRECTION = DistantMoonsBlockStateProperties.ROPE_LADDER_DIRECTION;
+  public static final BooleanProperty BOTTOM = BlockStateProperties.BOTTOM;
+  public static final BooleanProperty TOP = DistantMoonsBlockStateProperties.TOP;
+
   private static final VoxelShape OUTER_SHAPE = Block.box(0.0, 0.0, 14.0, 16.0, 16.0, 16.0);
   private static final VoxelShape INNER_SHAPE_X = Block.box(7.0, 0.0, 0.0, 9.0, 16.0, 16.0);
   private static final VoxelShape INNER_SHAPE_Z = Shapes.rotate(INNER_SHAPE_X, OctahedralGroup.ROT_90_Y_POS, VoxelShapeUtil.BLOCK_CENTER_ANCHOR);

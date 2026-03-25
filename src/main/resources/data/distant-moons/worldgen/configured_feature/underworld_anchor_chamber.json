@@ -1,0 +1,29 @@
+{
+  "type": "distant-moons:anchor_chamber",
+  "config": {
+    "anchor": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "distant-moons:underworld_anchor"
+      }
+    },
+    "corner": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "minecraft:chiseled_polished_blackstone"
+      }
+    },
+    "edge": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "minecraft:polished_blackstone"
+      }
+    },
+    "wall": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "minecraft:tinted_glass"
+      }
+    }
+  }
+}

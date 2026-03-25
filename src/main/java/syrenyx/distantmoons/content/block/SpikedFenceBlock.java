@@ -25,6 +25,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 import org.jspecify.annotations.NonNull;
 import syrenyx.distantmoons.content.block.block_state_enums.SpikedFenceShape;
+import syrenyx.distantmoons.references.DistantMoonsBlockStateProperties;
 import syrenyx.distantmoons.references.tag.DistantMoonsBlockTags;
 import syrenyx.distantmoons.utility.BlockUtil;
 import syrenyx.distantmoons.utility.VoxelShapeUtil;
@@ -33,12 +34,13 @@ import java.util.Map;
 
 public class SpikedFenceBlock extends Block implements SimpleWaterloggedBlock {
 
-  public static final BooleanProperty TOP = BooleanProperty.create("top");
-  public static final EnumProperty<SpikedFenceShape> NORTH = EnumProperty.create("north", SpikedFenceShape.class);
-  public static final EnumProperty<SpikedFenceShape> EAST = EnumProperty.create("east", SpikedFenceShape.class);
-  public static final EnumProperty<SpikedFenceShape> SOUTH = EnumProperty.create("south", SpikedFenceShape.class);
-  public static final EnumProperty<SpikedFenceShape> WEST = EnumProperty.create("west", SpikedFenceShape.class);
+  public static final BooleanProperty TOP = DistantMoonsBlockStateProperties.TOP;
+  public static final EnumProperty<SpikedFenceShape> NORTH = DistantMoonsBlockStateProperties.SPIKED_FENCE_SHAPE_NORTH;
+  public static final EnumProperty<SpikedFenceShape> EAST = DistantMoonsBlockStateProperties.SPIKED_FENCE_SHAPE_EAST;
+  public static final EnumProperty<SpikedFenceShape> SOUTH = DistantMoonsBlockStateProperties.SPIKED_FENCE_SHAPE_SOUTH;
+  public static final EnumProperty<SpikedFenceShape> WEST = DistantMoonsBlockStateProperties.SPIKED_FENCE_SHAPE_WEST;
   public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+
   private static final VoxelShape CENTER_SHAPE = Block.box(7.0, 0.0, 7.0, 9.0, 16.0, 9.0);
   private static final VoxelShape SIDE_SHAPE = Block.box(7.0, 0.0, 0.0, 9.0, 16.0, 7.0);
   private static final Map<Direction, VoxelShape> SIDE_SHAPES_BY_DIRECTION = VoxelShapeUtil.createHorizontalDirectionShapeMap(SIDE_SHAPE);

@@ -21,6 +21,8 @@ public abstract class DistantMoonsTextureSlot {
   public static final TextureSlot FRONT_RIGHT_SOUL_FIRE = TextureSlot.create("front_right_soul_fire");
   public static final TextureSlot FRONT_RIGHT_UNLIT = TextureSlot.create("front_right_unlit");
   public static final TextureSlot HELD_TEXTURE = TextureSlot.create("held_texture");
+  public static final TextureSlot HIGHLIGHTS_INSIDE = TextureSlot.create("highlights_inside");
+  public static final TextureSlot HIGHLIGHTS_OUTSIDE = TextureSlot.create("highlights_outside");
   public static final TextureSlot HORIZONTAL = TextureSlot.create("horizontal");
   public static final TextureSlot HORIZONTAL_END = TextureSlot.create("horizontal_end");
   public static final TextureSlot HORIZONTAL_SIDE = TextureSlot.create("horizontal_side");

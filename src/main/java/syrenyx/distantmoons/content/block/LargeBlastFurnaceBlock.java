@@ -9,16 +9,16 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ScheduledTickAccess;
-import net.minecraft.world.level.block.BaseEntityBlock;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -28,6 +28,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -37,6 +38,7 @@ import syrenyx.distantmoons.content.block.block_state_enums.BlockCorner;
 import syrenyx.distantmoons.content.block.entity.LargeBlastFurnaceBlockEntity;
 import syrenyx.distantmoons.initializers.DistantMoonsBlockEntityTypes;
 import syrenyx.distantmoons.initializers.DistantMoonsStats;
+import syrenyx.distantmoons.references.DistantMoonsBlockStateProperties;
 import syrenyx.distantmoons.utility.BlockUtil;
 
 import java.util.List;
@@ -47,11 +49,13 @@ public class LargeBlastFurnaceBlock extends BaseEntityBlock {
   public static final int MIN_HEAT = 0;
   public static final int MAX_HEAT = 3;
   public static final MapCodec<LargeBlastFurnaceBlock> CODEC = simpleCodec(LargeBlastFurnaceBlock::new);
-  public static final EnumProperty<BlockCorner> CORNER = EnumProperty.create("corner", BlockCorner.class);
+
+  public static final EnumProperty<BlockCorner> CORNER = DistantMoonsBlockStateProperties.CORNER;
   public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
-  public static final BooleanProperty MIRRORED = BooleanProperty.create("mirrored");
-  public static final IntegerProperty HEAT = IntegerProperty.create("heat", MIN_HEAT, MAX_HEAT);
-  public static final BooleanProperty SOUL_FIRE = BooleanProperty.create("soul_fire");
+  public static final BooleanProperty MIRRORED = DistantMoonsBlockStateProperties.MIRRORED;
+  public static final IntegerProperty HEAT = DistantMoonsBlockStateProperties.HEAT_3;
+  public static final BooleanProperty SOUL_FIRE = DistantMoonsBlockStateProperties.SOUL_FIRE;
+
   private static boolean overrideIntegrityCheck = false; // This var worries me.
 
   public LargeBlastFurnaceBlock(Properties properties) {
@@ -66,13 +70,13 @@ public class LargeBlastFurnaceBlock extends BaseEntityBlock {
   }
 
   @Override
-  protected @NonNull MapCodec<? extends BaseEntityBlock> codec() {
-    return CODEC;
+  protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+    builder.add(CORNER, FACING, MIRRORED, HEAT, SOUL_FIRE);
   }
 
   @Override
-  protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-    builder.add(CORNER, FACING, MIRRORED, HEAT, SOUL_FIRE);
+  protected @NonNull MapCodec<? extends BaseEntityBlock> codec() {
+    return CODEC;
   }
 
   @Override
@@ -161,7 +165,7 @@ public class LargeBlastFurnaceBlock extends BaseEntityBlock {
   public @NonNull BlockState playerWillDestroy(@NonNull Level level, @NonNull BlockPos blockPos, @NonNull BlockState blockState, @NonNull Player player) {
     if (level.isClientSide() || !player.preventsBlockDrops()) return super.playerWillDestroy(level, blockPos, blockState, player);
     BlockCorner corner = blockState.getValue(CORNER);
-    if (corner == BlockCorner.dropCorner()) return super.playerWillDestroy(level, blockPos, blockState, player);
+    if (corner == BlockCorner.resourceDropCorner()) return super.playerWillDestroy(level, blockPos, blockState, player);
     BlockPos cornerPos = corner.getTopNorthEastPos(blockPos).below();
     level.setBlock(cornerPos, Blocks.AIR.defaultBlockState(), 35);
     level.levelEvent(player, 2001, cornerPos, Block.getId(level.getBlockState(cornerPos)));
@@ -242,5 +246,33 @@ public class LargeBlastFurnaceBlock extends BaseEntityBlock {
         level.destroyBlock(pos, true);
       }
     });
+  }
+
+  public static boolean isValidSpawn(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, EntityType<?> entityType) {
+    return blockState.getValue(HEAT) < 2 || entityType.fireImmune();
+  }
+
+  public static int lightLevel(BlockState blockState) {
+    return blockState.getValue(HEAT) * (blockState.getValue(SOUL_FIRE) ? 3 : 5);
+  }
+
+  public static MapColor mapColor(BlockState blockState) {
+    return blockState.getValue(CORNER).top && hasFuelAccess(blockState) ? MapColor.TERRACOTTA_WHITE : MapColor.STONE;
+  }
+
+  @Override
+  protected @NonNull BlockState rotate(@NonNull BlockState blockState, @NonNull Rotation rotation) {
+    return blockState
+        .setValue(CORNER, blockState.getValue(CORNER).rotate(rotation))
+        .setValue(FACING, rotation.rotate(blockState.getValue(FACING)));
+  }
+
+  @Override
+  protected @NonNull BlockState mirror(@NonNull BlockState blockState, @NonNull Mirror mirror) {
+    if (mirror == Mirror.NONE) return blockState;
+    return blockState
+        .setValue(CORNER, blockState.getValue(CORNER).mirror(mirror))
+        .setValue(FACING, mirror.mirror(blockState.getValue(FACING)))
+        .setValue(MIRRORED, !blockState.getValue(MIRRORED));
   }
 }

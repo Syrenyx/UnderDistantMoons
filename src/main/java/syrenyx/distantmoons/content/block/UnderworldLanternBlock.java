@@ -12,9 +12,8 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import org.jetbrains.annotations.Nullable;
 import org.jspecify.annotations.NonNull;
-import syrenyx.distantmoons.initializers.DistantMoonsEnvironmentAttributes;
 
-public class UnderworldLanternBlock extends LanternBlock {
+public class UnderworldLanternBlock extends LanternBlock implements UnderworldBlock {
 
   public static BooleanProperty LIT = BlockStateProperties.LIT;
 
@@ -33,15 +32,15 @@ public class UnderworldLanternBlock extends LanternBlock {
 
   @Nullable @Override
   public BlockState getStateForPlacement(@NonNull BlockPlaceContext context) {
-    BlockState state = super.getStateForPlacement(context);
-    if (state == null) return null;
-    return state.setValue(LIT, context.getLevel().environmentAttributes().getValue(DistantMoonsEnvironmentAttributes.UNDERWORLD, context.getClickedPos()));
+    return UnderworldBlock.getStateForPlacement(super.getStateForPlacement(context), context.getLevel(), context.getClickedPos());
   }
 
   @Override
   protected void randomTick(@NonNull BlockState blockState, @NonNull ServerLevel serverLevel, @NonNull BlockPos blockPos, @NonNull RandomSource randomSource) {
-    boolean inUnderworld = serverLevel.environmentAttributes().getValue(DistantMoonsEnvironmentAttributes.UNDERWORLD, blockPos);
-    if (inUnderworld == blockState.getValue(LIT)) return;
-    serverLevel.setBlock(blockPos, blockState.setValue(LIT, inUnderworld), Block.UPDATE_ALL);
+    UnderworldBlock.randomTick(blockState, serverLevel, blockPos);
+  }
+
+  public static int lightLevel(BlockState blockState) {
+    return blockState.getValue(UnderworldAnchorBlock.LIT) ? 15 : 0;
   }
 }

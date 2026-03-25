@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
 import org.jspecify.annotations.NonNull;
 import syrenyx.distantmoons.utility.BlockUtil;
@@ -104,7 +105,15 @@ public enum BlockCorner implements StringRepresentable {
     };
   }
 
-  public static BlockCorner dropCorner() {
+  public BlockCorner mirror(Mirror mirror) {
+    return switch (mirror) {
+      case NONE -> this;
+      case LEFT_RIGHT -> getFrom(this.top, this.north, !this.east);
+      case FRONT_BACK -> getFrom(this.top, !this.north, this.east);
+    };
+  }
+
+  public static BlockCorner resourceDropCorner() {
     return BOTTOM_NORTH_EAST;
   }
 }

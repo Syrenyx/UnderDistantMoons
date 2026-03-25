@@ -28,7 +28,7 @@ public class SparkParticle extends SingleQuadParticle {
 
   @Override
   public SingleQuadParticle.@NonNull Layer getLayer() {
-    return SingleQuadParticle.Layer.TRANSLUCENT;
+    return Layer.TRANSLUCENT;
   }
 
   @Override
@@ -49,9 +49,11 @@ public class SparkParticle extends SingleQuadParticle {
   }
 
   public static class ScrapeRustFactory implements ParticleProvider<SimpleParticleType> {
+
     private static final double VELOCITY_FACTOR = 0.01;
     private static final int MIN_AGE = 10;
     private static final int MAX_AGE = 40;
+
     private final SpriteSet spriteProvider;
 
     public ScrapeRustFactory(SpriteSet spriteProvider) {

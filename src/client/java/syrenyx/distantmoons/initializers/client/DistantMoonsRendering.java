@@ -1,15 +1,27 @@
 package syrenyx.distantmoons.initializers.client;
 
 import net.fabricmc.fabric.api.client.rendering.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import syrenyx.distantmoons.content.block.UnderworldBlock;
+import syrenyx.distantmoons.content.block.UnderworldConfluxBlock;
+import syrenyx.distantmoons.content.block.block_state_enums.UnderworldConfluxState;
+import syrenyx.distantmoons.content.data_component.DimensionKeystoneComponent;
 import syrenyx.distantmoons.content.entity.SittingSpotRenderer;
+import syrenyx.distantmoons.content.rendering.block.entity.UnderworldConfluxRenderer;
+import syrenyx.distantmoons.initializers.DistantMoonsBlockEntityTypes;
 import syrenyx.distantmoons.initializers.DistantMoonsBlocks;
 import syrenyx.distantmoons.initializers.DistantMoonsEntityTypes;
 
 public abstract class DistantMoonsRendering {
 
   static {
+    BlockEntityRenderers.register(DistantMoonsBlockEntityTypes.UNDERWORLD_CONFLUX, UnderworldConfluxRenderer::new);
+
+    EntityRenderers.register(DistantMoonsEntityTypes.SITTING_SPOT, SittingSpotRenderer::new);
+
     BlockRenderLayerMap.putBlocks(
         ChunkSectionLayer.CUTOUT,
         DistantMoonsBlocks.DEEP_IRON_BAR_DOOR,
@@ -24,13 +36,14 @@ public abstract class DistantMoonsRendering {
         DistantMoonsBlocks.IRON_BAR_DOOR,
         DistantMoonsBlocks.IRON_FENCE,
         DistantMoonsBlocks.ROPE_LADDER,
+        DistantMoonsBlocks.UNDERWORLD_CONFLUX,
         DistantMoonsBlocks.UNDERWORLD_LANTERN,
         DistantMoonsBlocks.WROUGHT_IRON_BAR_DOOR,
         DistantMoonsBlocks.WROUGHT_IRON_BARS,
         DistantMoonsBlocks.WROUGHT_IRON_FENCE
     );
 
-    EntityRenderers.register(DistantMoonsEntityTypes.SITTING_SPOT, SittingSpotRenderer::new);
+    ColorProviderRegistry.BLOCK.register(UnderworldConfluxBlock::tintColor, DistantMoonsBlocks.UNDERWORLD_CONFLUX);
   }
 
   public static void initialize() {}

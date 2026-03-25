@@ -5,11 +5,13 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import syrenyx.distantmoons.UnderDistantMoons;
+import syrenyx.distantmoons.content.worldgen.feature.AnchorChamberFeature;
 import syrenyx.distantmoons.content.worldgen.feature.BranchingOreVeinFeature;
 import syrenyx.distantmoons.content.worldgen.feature.OreGeodeFeature;
 
 public abstract class DistantMoonsFeatures {
 
+  public static final Feature<AnchorChamberFeature.Config> ANCHOR_CHAMBER = register("anchor_chamber", new AnchorChamberFeature(AnchorChamberFeature.Config.CODEC));
   public static final Feature<BranchingOreVeinFeature.Config> BRANCHING_ORE_VEIN = register("branching_ore_vein", new BranchingOreVeinFeature(BranchingOreVeinFeature.Config.CODEC));
   public static final Feature<OreGeodeFeature.Config> ORE_GEODE = register("ore_geode", new OreGeodeFeature(OreGeodeFeature.Config.CODEC));
 

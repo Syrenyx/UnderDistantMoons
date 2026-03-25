@@ -7,9 +7,7 @@ import syrenyx.distantmoons.datagen.DistantMoonsRecipeProvider;
 import syrenyx.distantmoons.datagen.lang.de_de;
 import syrenyx.distantmoons.datagen.lang.en_us;
 import syrenyx.distantmoons.datagen.loot_table.DistantMoonsBlockLootTableProvider;
-import syrenyx.distantmoons.datagen.tag.DistantMoonsBiomeTagProvider;
-import syrenyx.distantmoons.datagen.tag.DistantMoonsBlockTagProvider;
-import syrenyx.distantmoons.datagen.tag.DistantMoonsItemTagProvider;
+import syrenyx.distantmoons.datagen.tag.*;
 
 public class UnderDistantMoonsDataGenerator implements DataGeneratorEntrypoint {
 	@Override
@@ -24,6 +22,8 @@ public class UnderDistantMoonsDataGenerator implements DataGeneratorEntrypoint {
     //TAGS
     pack.addProvider(DistantMoonsBiomeTagProvider::new);
     pack.addProvider(DistantMoonsBlockTagProvider::new);
+    pack.addProvider(DistantMoonsDamageTypeTagProvider::new);
+    pack.addProvider(DistantMoonsEntityTypeTagProvider::new);
     pack.addProvider((output, registriesFuture) -> new DistantMoonsItemTagProvider(output, registriesFuture, null));
 
     //LANGUAGES

@@ -1,0 +1,7 @@
+{
+  "parent": "distant-moons:template/underworld_conflux/keystone",
+  "textures": {
+    "side": "distant-moons:item/nether_keystone/side",
+    "particle": "distant-moons:item/nether_keystone/side"
+  }
+}

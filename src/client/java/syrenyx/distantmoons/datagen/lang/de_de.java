@@ -100,6 +100,7 @@ public class de_de extends FabricLanguageProvider {
     builder.add(DistantMoonsBlocks.BLACKSTONE_WALL_SLAB, "Gestufte Schwarzsteinwand");
     builder.add(DistantMoonsBlocks.BLAST_FURNACE, "Hochofen");
     builder.add(DistantMoonsBlocks.BRICK_WALL_SLAB, "Gestufte Ziegelwand");
+    builder.add(DistantMoonsBlocks.BROKEN_UNDERWORLD_ANCHOR, "Kaputter Unterweltanker");
     builder.add(DistantMoonsBlocks.CHARCOAL_BLOCK, "Holzkohleblock");
     builder.add(DistantMoonsBlocks.CHERRY_BEAM, "Kirschholzbalken");
     builder.add(DistantMoonsBlocks.CHERRY_POLE, "Kirschholzpfosten");
@@ -275,6 +276,8 @@ public class de_de extends FabricLanguageProvider {
     builder.add(DistantMoonsBlocks.TERRACOTTA_WALL_SLAB, "Gestufte Keramikwand");
     builder.add(DistantMoonsBlocks.TUFF_BRICK_WALL_SLAB, "Gestufte Tuffziegelwand");
     builder.add(DistantMoonsBlocks.TUFF_WALL_SLAB, "Gestufte Tuffwand");
+    builder.add(DistantMoonsBlocks.UNDERWORLD_ANCHOR, "Unterweltanker");
+    builder.add(DistantMoonsBlocks.UNDERWORLD_CONFLUX, "Underworldkonflux");
     builder.add(DistantMoonsBlocks.UNDERWORLD_LANTERN, "Unterweltlaterne");
     builder.add(DistantMoonsBlocks.WARPED_BEAM, "Wirrbalken");
     builder.add(DistantMoonsBlocks.WARPED_POLE, "Wirrpfosten");
@@ -332,6 +335,7 @@ public class de_de extends FabricLanguageProvider {
 
     builder.add(DistantMoonsEntityTypes.SITTING_SPOT, "Sitzplatz");
 
+    builder.add(DistantMoonsItems.ABYSS_KEYSTONE, "Abgrund-Schlüsselstein");
     builder.add(DistantMoonsItems.COILED_ROPE_LADDER, "Aufgerollte Strickleiter");
     builder.add(DistantMoonsItems.COKE, "Koks");
     builder.add(DistantMoonsItems.COPPER_ROD, "Kupferstange");
@@ -350,6 +354,7 @@ public class de_de extends FabricLanguageProvider {
     builder.add(DistantMoonsItems.DEEP_IRON_SWORD, "Tiefeisenschwert");
     builder.add(DistantMoonsItems.FIRE_BRICK, "Feuerfestziegel");
     builder.add(DistantMoonsItems.IRON_ROD, "Eisenstange");
+    builder.add(DistantMoonsItems.NETHER_KEYSTONE, "Nether-Schlüsselstein");
     builder.add(DistantMoonsItems.PALE_PRISMARINE_SHARD, "Bleiche Prismarinscherbe");
     builder.add(DistantMoonsItems.RAW_DEEP_IRON, "Rohtiefeisen");
     builder.add(DistantMoonsItems.REFINED_DEEP_IRON_INGOT, "Feiner Tiefeisenbarren");
@@ -359,7 +364,10 @@ public class de_de extends FabricLanguageProvider {
     builder.add(DistantMoonsItems.ROTTEN_FISH, "Verrotteter Fisch");
     builder.add(DistantMoonsItems.RUBY, "Rubin");
     builder.add(DistantMoonsItems.SAPPHIRE, "Saphir");
+    builder.add(DistantMoonsItems.UNDERWORLD_COMPASS, "Unterweltkompass");
+    builder.add("item.distant-moons.underworld_compass.sealed", "Versiegelter Unterweltkompass");
     builder.add(DistantMoonsItems.UNDERWORLD_DUST, "Unterweltstaub");
+    builder.add(DistantMoonsItems.UNDERWORLD_PEARL, "Unterweltperle");
     builder.add(DistantMoonsItems.WROUGHT_IRON_ROD, "Schmiedeeisenstange");
 
 
@@ -373,6 +381,7 @@ public class de_de extends FabricLanguageProvider {
     builder.add(DistantMoonsItemTags.CORUNDUM_BLOCK, "Korundblock");
     builder.add(DistantMoonsItemTags.DEEP_IRON_BLOCK, "Tiefeisenblock");
     builder.add(DistantMoonsItemTags.DEEP_IRON_INGOT, "Tiefeisenbarren");
+    builder.add(DistantMoonsItemTags.DYED_CONCRETE_POWDER, "Gefärbter Trockenbeton");
     builder.add(DistantMoonsItemTags.DYED_CONCRETE_SLAB, "Gefärbte Betonstufe");
     builder.add(DistantMoonsItemTags.DYED_CONCRETE_STAIRS, "Gefärbte Betontreppe");
     builder.add(DistantMoonsItemTags.DYED_CONCRETE_WALL_SLAB, "Gefärbte Gestufte Betonwand");

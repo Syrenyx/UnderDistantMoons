@@ -28,8 +28,8 @@ import org.jspecify.annotations.NonNull;
 public abstract class AbstractPoleBlock extends Block implements SimpleWaterloggedBlock {
 
   public static final EnumProperty<Direction.Axis> AXIS = BlockStateProperties.AXIS;
-  public static final BooleanProperty UP = PipeBlock.UP;
-  public static final BooleanProperty DOWN = PipeBlock.DOWN;
+  public static final BooleanProperty UP = BlockStateProperties.UP;
+  public static final BooleanProperty DOWN = BlockStateProperties.DOWN;
   public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
   public AbstractPoleBlock(Properties properties) {
@@ -109,30 +109,30 @@ public abstract class AbstractPoleBlock extends Block implements SimpleWaterlogg
   protected abstract boolean canConnectTo(BlockGetter world, BlockPos pos, Direction direction);
 
   @Override
-  protected @NonNull BlockState rotate(BlockState state, @NonNull Rotation rotation) {
-    return switch (state.getValue(AXIS)) {
+  protected @NonNull BlockState rotate(@NonNull BlockState blockState, @NonNull Rotation rotation) {
+    return switch (blockState.getValue(AXIS)) {
       case X -> switch (rotation) {
-        case NONE -> state;
-        case CLOCKWISE_90 -> state.setValue(AXIS, Direction.Axis.Z).setValue(UP, state.getValue(DOWN)).setValue(DOWN, state.getValue(UP));
-        case CLOCKWISE_180 -> state.setValue(UP, state.getValue(DOWN)).setValue(DOWN, state.getValue(UP));
-        case COUNTERCLOCKWISE_90 -> state.setValue(AXIS, Direction.Axis.Z);
+        case NONE -> blockState;
+        case CLOCKWISE_90 -> blockState.setValue(AXIS, Direction.Axis.Z).setValue(UP, blockState.getValue(DOWN)).setValue(DOWN, blockState.getValue(UP));
+        case CLOCKWISE_180 -> blockState.setValue(UP, blockState.getValue(DOWN)).setValue(DOWN, blockState.getValue(UP));
+        case COUNTERCLOCKWISE_90 -> blockState.setValue(AXIS, Direction.Axis.Z);
       };
-      case Y -> state;
+      case Y -> blockState;
       case Z -> switch (rotation) {
-        case NONE -> state;
-        case CLOCKWISE_90 -> state.setValue(AXIS, Direction.Axis.X);
-        case CLOCKWISE_180 -> state.setValue(UP, state.getValue(DOWN)).setValue(DOWN, state.getValue(UP));
-        case COUNTERCLOCKWISE_90 -> state.setValue(AXIS, Direction.Axis.X).setValue(UP, state.getValue(DOWN)).setValue(DOWN, state.getValue(UP));
+        case NONE -> blockState;
+        case CLOCKWISE_90 -> blockState.setValue(AXIS, Direction.Axis.X);
+        case CLOCKWISE_180 -> blockState.setValue(UP, blockState.getValue(DOWN)).setValue(DOWN, blockState.getValue(UP));
+        case COUNTERCLOCKWISE_90 -> blockState.setValue(AXIS, Direction.Axis.X).setValue(UP, blockState.getValue(DOWN)).setValue(DOWN, blockState.getValue(UP));
       };
     };
   }
 
   @Override
-  protected @NonNull BlockState mirror(@NonNull BlockState state, Mirror mirror) {
+  protected @NonNull BlockState mirror(@NonNull BlockState blockState, Mirror mirror) {
     return switch (mirror) {
-      case NONE -> state;
-      case LEFT_RIGHT -> state.getValue(AXIS) == Direction.Axis.Z ? state.setValue(UP, state.getValue(DOWN)).setValue(DOWN, state.getValue(UP)) : state;
-      case FRONT_BACK -> state.getValue(AXIS) == Direction.Axis.X ? state.setValue(UP, state.getValue(DOWN)).setValue(DOWN, state.getValue(UP)) : state;
+      case NONE -> blockState;
+      case LEFT_RIGHT -> blockState.getValue(AXIS) == Direction.Axis.Z ? blockState.setValue(UP, blockState.getValue(DOWN)).setValue(DOWN, blockState.getValue(UP)) : blockState;
+      case FRONT_BACK -> blockState.getValue(AXIS) == Direction.Axis.X ? blockState.setValue(UP, blockState.getValue(DOWN)).setValue(DOWN, blockState.getValue(UP)) : blockState;
     };
   }
 }
