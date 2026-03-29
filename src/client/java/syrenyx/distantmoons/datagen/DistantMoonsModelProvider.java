@@ -393,7 +393,11 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     DistantMoonsBlocks.DYED_TERRACOTTA_STAIRS.forEach((color, block) -> registerSimpleStairsBlock(block, Map.of(TextureSlot.SIDE, "minecraft:block/" + color.getName() + "_terracotta")));
 
     //THIN BALUSTRADES - SIMPLE
+    registerSimpleThinBalustradeBlock(DistantMoonsBlocks.ANDESITE_BALUSTRADE, Map.of(TextureSlot.SIDE, "minecraft:block/andesite"));
+    registerSimpleThinBalustradeBlock(DistantMoonsBlocks.DIORITE_BALUSTRADE, Map.of(TextureSlot.SIDE, "minecraft:block/diorite"));
+    registerSimpleThinBalustradeBlock(DistantMoonsBlocks.GRANITE_BALUSTRADE, Map.of(TextureSlot.SIDE, "minecraft:block/granite"));
     registerSimpleThinBalustradeBlock(DistantMoonsBlocks.STONE_BALUSTRADE, Map.of(TextureSlot.SIDE, "minecraft:block/stone"));
+    registerSimpleThinBalustradeBlock(DistantMoonsBlocks.TUFF_BALUSTRADE, Map.of(TextureSlot.SIDE, "minecraft:block/tuff"));
 
     //TRAPDOORS
     registerTrapdoorBlock(DistantMoonsBlocks.DEEP_IRON_TRAPDOOR, false, Map.of(
@@ -503,6 +507,7 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     ));
 
     //WIDE BALUSTRADES - SIMPLE
+    registerSimpleWideBalustradeBlock(DistantMoonsBlocks.SMOOTH_RED_SANDSTONE_BALUSTRADE, Map.of(TextureSlot.SIDE, "minecraft:block/red_sandstone_top"));
     registerSimpleWideBalustradeBlock(DistantMoonsBlocks.SMOOTH_SANDSTONE_BALUSTRADE, Map.of(TextureSlot.SIDE, "minecraft:block/sandstone_top"));
   }
 
