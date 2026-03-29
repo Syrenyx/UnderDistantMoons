@@ -26,7 +26,6 @@ import syrenyx.distantmoons.content.block.*;
 import syrenyx.distantmoons.content.data_component.BlastFurnaceFuelComponent;
 import syrenyx.distantmoons.references.DistantMoonsBlockSetTypes;
 import syrenyx.distantmoons.references.data.worldgen.DistantMoonsConfiguredFeatures;
-import syrenyx.distantmoons.references.data.worldgen.DistantMoonsPlacedFeatures;
 import syrenyx.distantmoons.references.tag.DistantMoonsDamageTypeTags;
 import syrenyx.distantmoons.utility.ColorUtil;
 
@@ -37,6 +36,12 @@ import java.util.function.Function;
 public abstract class DistantMoonsBlocks {
 
   //SIMPLE BLOCKS
+  public static final Block ACACIA_BALUSTRADE = register(
+      "acacia_balustrade",
+      ThinBalustradeBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(Blocks.ACACIA_PLANKS),
+      new Item.Properties()
+  );
   public static final Block ACACIA_BEAM = register(
       "acacia_beam",
       BeamBlock::new,
@@ -53,6 +58,12 @@ public abstract class DistantMoonsBlocks {
       "acacia_wall_slab",
       WallSlabBlock::new,
       BlockBehaviour.Properties.ofFullCopy(Blocks.ACACIA_PLANKS),
+      new Item.Properties()
+  );
+  public static final Block ANDESITE_BALUSTRADE = register(
+      "andesite_balustrade",
+      ThinBalustradeBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(Blocks.ANDESITE),
       new Item.Properties()
   );
   public static final Block ANDESITE_WALL_SLAB = register(
@@ -492,6 +503,12 @@ public abstract class DistantMoonsBlocks {
       BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE_TILES),
       new Item.Properties()
   );
+  public static final Block DIORITE_BALUSTRADE = register(
+      "diorite_balustrade",
+      ThinBalustradeBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(Blocks.DIORITE),
+      new Item.Properties()
+  );
   public static final Block DIORITE_WALL_SLAB = register(
       "diorite_wall_slab",
       WallSlabBlock::new,
@@ -561,6 +578,12 @@ public abstract class DistantMoonsBlocks {
       "fixed_wrought_iron_ladder",
       FixedLadderBlock::new,
       BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BARS),
+      new Item.Properties()
+  );
+  public static final Block GRANITE_BALUSTRADE = register(
+      "granite_balustrade",
+      ThinBalustradeBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE),
       new Item.Properties()
   );
   public static final Block GRANITE_WALL_SLAB = register(
@@ -1050,10 +1073,22 @@ public abstract class DistantMoonsBlocks {
       BlockBehaviour.Properties.ofFullCopy(Blocks.SMOOTH_QUARTZ),
       new Item.Properties()
   );
+  public static final Block SMOOTH_RED_SANDSTONE_BALUSTRADE = register(
+      "smooth_red_sandstone_balustrade",
+      WideBalustradeBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(Blocks.SMOOTH_RED_SANDSTONE),
+      new Item.Properties()
+  );
   public static final Block SMOOTH_RED_SANDSTONE_WALL_SLAB = register(
       "smooth_red_sandstone_wall_slab",
       WallSlabBlock::new,
       BlockBehaviour.Properties.ofFullCopy(Blocks.SMOOTH_RED_SANDSTONE),
+      new Item.Properties()
+  );
+  public static final Block SMOOTH_SANDSTONE_BALUSTRADE = register(
+      "smooth_sandstone_balustrade",
+      WideBalustradeBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(Blocks.SMOOTH_SANDSTONE),
       new Item.Properties()
   );
   public static final Block SMOOTH_SANDSTONE_WALL_SLAB = register(
@@ -1084,6 +1119,12 @@ public abstract class DistantMoonsBlocks {
       "spruce_wall_slab",
       WallSlabBlock::new,
       BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_PLANKS),
+      new Item.Properties()
+  );
+  public static final Block STONE_BALUSTRADE = register(
+      "stone_balustrade",
+      ThinBalustradeBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(Blocks.STONE),
       new Item.Properties()
   );
   public static final Block STONE_BRICK_WALL_SLAB = register(
@@ -1252,6 +1293,12 @@ public abstract class DistantMoonsBlocks {
       "terracotta_wall_slab",
       WallSlabBlock::new,
       BlockBehaviour.Properties.ofFullCopy(Blocks.TERRACOTTA),
+      new Item.Properties()
+  );
+  public static final Block TUFF_BALUSTRADE = register(
+      "tuff_balustrade",
+      ThinBalustradeBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(Blocks.TUFF),
       new Item.Properties()
   );
   public static final Block TUFF_BRICK_WALL_SLAB = register(

@@ -47,9 +47,11 @@ public class en_us extends FabricLanguageProvider {
 
     builder.add("affliction.progression_tooltip", "%s / %s");
 
+    builder.add(DistantMoonsBlocks.ACACIA_BALUSTRADE, "Acacia Balustrade");
     builder.add(DistantMoonsBlocks.ACACIA_BEAM, "Acacia Beam");
     builder.add(DistantMoonsBlocks.ACACIA_POLE, "Acacia Pole");
     builder.add(DistantMoonsBlocks.ACACIA_WALL_SLAB, "Acacia Wall Slab");
+    builder.add(DistantMoonsBlocks.ANDESITE_BALUSTRADE, "Andesite Balustrade");
     builder.add(DistantMoonsBlocks.ANDESITE_WALL_SLAB, "Andesite Wall Slab");
     builder.add(DistantMoonsBlocks.BAMBOO_POLE, "Bamboo Pole");
     builder.add(DistantMoonsBlocks.BAMBOO_MOSAIC_WALL_SLAB, "Bamboo Mosaic Wall Slab");
@@ -117,6 +119,7 @@ public class en_us extends FabricLanguageProvider {
     builder.add(DistantMoonsBlocks.DEEPSLATE_BRICK_WALL_SLAB, "Deepslate Brick Wall Slab");
     builder.add(DistantMoonsBlocks.DEEPSLATE_DEEP_IRON_ORE, "Deepslate Deep Iron Ore");
     builder.add(DistantMoonsBlocks.DEEPSLATE_TILE_WALL_SLAB, "Deepslate Tile Wall Slab");
+    builder.add(DistantMoonsBlocks.DIORITE_BALUSTRADE, "Diorite Balustrade");
     builder.add(DistantMoonsBlocks.DIORITE_WALL_SLAB, "Diorite Wall Slab");
     builder.add(DistantMoonsBlocks.END_STONE_BRICK_WALL_SLAB, "End Stone Brick Wall Slab");
     builder.add(DistantMoonsBlocks.FIRE_BRICK_SLAB, "Fire Brick Slab");
@@ -127,6 +130,7 @@ public class en_us extends FabricLanguageProvider {
     builder.add(DistantMoonsBlocks.FIXED_DEEP_IRON_LADDER, "Fixed Deep Iron Ladder");
     builder.add(DistantMoonsBlocks.FIXED_IRON_LADDER, "Fixed Iron Ladder");
     builder.add(DistantMoonsBlocks.FIXED_WROUGHT_IRON_LADDER, "Fixed Wrought Iron Ladder");
+    builder.add(DistantMoonsBlocks.GRANITE_BALUSTRADE, "Granite Balustrade");
     builder.add(DistantMoonsBlocks.GRANITE_WALL_SLAB, "Granite Wall Slab");
     builder.add(DistantMoonsBlocks.GRAY_PRISMARINE, "Gray Prismarine");
     builder.add(DistantMoonsBlocks.GRAY_PRISMARINE_SLAB, "Gray Prismarine Slab");
@@ -201,12 +205,15 @@ public class en_us extends FabricLanguageProvider {
     builder.add(DistantMoonsBlocks.SANDSTONE_WALL_SLAB, "Sandstone Wall Slab");
     builder.add(DistantMoonsBlocks.SAPPHIRE_BLOCK, "Block of Sapphire");
     builder.add(DistantMoonsBlocks.SMOOTH_QUARTZ_WALL_SLAB, "Smooth Quartz Wall Slab");
+    builder.add(DistantMoonsBlocks.SMOOTH_RED_SANDSTONE_BALUSTRADE, "Smooth Red Sandstone Balustrade");
     builder.add(DistantMoonsBlocks.SMOOTH_RED_SANDSTONE_WALL_SLAB, "Smooth Red Sandstone Wall Slab");
+    builder.add(DistantMoonsBlocks.SMOOTH_SANDSTONE_BALUSTRADE, "Smooth Sandstone Balustrade");
     builder.add(DistantMoonsBlocks.SMOOTH_SANDSTONE_WALL_SLAB, "Smooth Sandstone Wall Slab");
     builder.add(DistantMoonsBlocks.SMOOTH_STONE_WALL_SLAB, "Smooth Stone Wall Slab");
     builder.add(DistantMoonsBlocks.SPRUCE_BEAM, "Spruce Beam");
     builder.add(DistantMoonsBlocks.SPRUCE_POLE, "Spruce Pole");
     builder.add(DistantMoonsBlocks.SPRUCE_WALL_SLAB, "Spruce Wall Slab");
+    builder.add(DistantMoonsBlocks.STONE_BALUSTRADE, "Stone Balustrade");
     builder.add(DistantMoonsBlocks.STONE_BRICK_WALL_SLAB, "Stone Brick Wall Slab");
     builder.add(DistantMoonsBlocks.STONE_WALL_SLAB, "Stone Wall Slab");
     builder.add(DistantMoonsBlocks.STRIPPED_CUT_ACACIA_LOG, "Stripped Cut Acacia Log");
@@ -235,6 +242,7 @@ public class en_us extends FabricLanguageProvider {
     builder.add(DistantMoonsBlocks.TERRACOTTA_SLAB, "Terracotta Slab");
     builder.add(DistantMoonsBlocks.TERRACOTTA_STAIRS, "Terracotta Stairs");
     builder.add(DistantMoonsBlocks.TERRACOTTA_WALL_SLAB, "Terracotta Wall Slab");
+    builder.add(DistantMoonsBlocks.TUFF_BALUSTRADE, "Tuff Balustrade");
     builder.add(DistantMoonsBlocks.TUFF_BRICK_WALL_SLAB, "Tuff Brick Wall Slab");
     builder.add(DistantMoonsBlocks.TUFF_WALL_SLAB, "Tuff Wall Slab");
     builder.add(DistantMoonsBlocks.UNDERWORLD_ANCHOR, "Underworld Anchor");

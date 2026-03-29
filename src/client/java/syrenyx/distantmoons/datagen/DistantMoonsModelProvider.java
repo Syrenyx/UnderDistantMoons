@@ -33,7 +33,6 @@ import syrenyx.distantmoons.UnderDistantMoons;
 import syrenyx.distantmoons.content.block.*;
 import syrenyx.distantmoons.content.block.block_state_enums.*;
 import syrenyx.distantmoons.content.rendering.item.properties.conditional.UnderworldDimension;
-import syrenyx.distantmoons.content.rendering.item.tint_source.DimensionKeystoneTintSource;
 import syrenyx.distantmoons.datagen.utility.ModelProviderUtil;
 import syrenyx.distantmoons.initializers.DistantMoonsBlocks;
 import syrenyx.distantmoons.initializers.DistantMoonsItems;
@@ -393,6 +392,9 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     DistantMoonsBlocks.DYED_CONCRETE_STAIRS.forEach((color, block) -> registerSimpleStairsBlock(block, Map.of(TextureSlot.SIDE, "minecraft:block/" + color.getName() + "_concrete")));
     DistantMoonsBlocks.DYED_TERRACOTTA_STAIRS.forEach((color, block) -> registerSimpleStairsBlock(block, Map.of(TextureSlot.SIDE, "minecraft:block/" + color.getName() + "_terracotta")));
 
+    //THIN BALUSTRADES - SIMPLE
+    registerSimpleThinBalustradeBlock(DistantMoonsBlocks.STONE_BALUSTRADE, Map.of(TextureSlot.SIDE, "minecraft:block/stone"));
+
     //TRAPDOORS
     registerTrapdoorBlock(DistantMoonsBlocks.DEEP_IRON_TRAPDOOR, false, Map.of(
         TextureSlot.END, UnderDistantMoons.withPrefixedNamespace("block/deep_iron_door/trapdoor"),
@@ -499,6 +501,9 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
         DistantMoonsTextureSlot.VERTICAL_END, UnderDistantMoons.withPrefixedNamespace("block/smooth_stone_slab/end/vertical"),
         DistantMoonsTextureSlot.VERTICAL_SIDE, UnderDistantMoons.withPrefixedNamespace("block/smooth_stone_slab/side/vertical")
     ));
+
+    //WIDE BALUSTRADES - SIMPLE
+    registerSimpleWideBalustradeBlock(DistantMoonsBlocks.SMOOTH_SANDSTONE_BALUSTRADE, Map.of(TextureSlot.SIDE, "minecraft:block/sandstone_top"));
   }
 
   @Override
@@ -1159,6 +1164,45 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModelUtils.plainModel(inventoryModel));
   }
 
+  private void registerSimpleThinBalustradeBlock(Block block, Map<TextureSlot, String> rawTextureMap) {
+    Map<TextureSlot, String> textureMap = Map.of(TextureSlot.SIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.SIDE));
+    MultiVariant variantCenterBaluster = createWeightedVariant(createObjectModel(block, "thin_balustrade/simple/center/baluster", "/center/baluster", textureMap));
+    MultiVariant variantCenterCapped = createWeightedVariant(createObjectModel(block, "thin_balustrade/simple/center/capped", "/center/capped", textureMap));
+    MultiVariant variantCenterUncapped = createWeightedVariant(createObjectModel(block, "thin_balustrade/simple/center/uncapped", "/center/uncapped", textureMap));
+    MultiVariant variantSideBaluster = createWeightedVariant(createObjectModel(block, "thin_balustrade/simple/side/baluster", "/side/baluster", textureMap));
+    MultiVariant variantSideCapped = createWeightedVariant(createObjectModel(block, "thin_balustrade/simple/side/capped", "/side/capped", textureMap));
+    MultiVariant variantSideUncapped = createWeightedVariant(createObjectModel(block, "thin_balustrade/simple/side/uncapped", "/side/uncapped", textureMap));
+    this.blockGenerator.blockStateOutput.accept(MultiPartGenerator.multiPart(block)
+        .with(variantCenterBaluster)
+        .with(new ConditionBuilder().term(AbstractBalustradeBlock.CENTER_SHAPE, EndCappedState.BOTTOM_CAPPED, EndCappedState.DOUBLE_CAPPED), variantCenterCapped)
+        .with(new ConditionBuilder().term(AbstractBalustradeBlock.CENTER_SHAPE, EndCappedState.BOTTOM_CAPPED, EndCappedState.UNCAPPED), variantCenterUncapped.with(ROTATE_X_180).with(UV_LOCK))
+        .with(new ConditionBuilder().term(AbstractBalustradeBlock.CENTER_SHAPE, EndCappedState.DOUBLE_CAPPED, EndCappedState.TOP_CAPPED), variantCenterCapped.with(ROTATE_X_180).with(UV_LOCK))
+        .with(new ConditionBuilder().term(AbstractBalustradeBlock.CENTER_SHAPE, EndCappedState.TOP_CAPPED, EndCappedState.UNCAPPED), variantCenterUncapped)
+        .with(new ConditionBuilder().negatedTerm(AbstractBalustradeBlock.NORTH_SHAPE, BalustradeSideState.NONE), variantSideBaluster)
+        .with(new ConditionBuilder().term(AbstractBalustradeBlock.NORTH_SHAPE, BalustradeSideState.BOTTOM_CAPPED, BalustradeSideState.DOUBLE_CAPPED), variantSideCapped)
+        .with(new ConditionBuilder().term(AbstractBalustradeBlock.NORTH_SHAPE, BalustradeSideState.BOTTOM_CAPPED, BalustradeSideState.UNCAPPED), variantSideUncapped.with(ROTATE_X_180).with(ROTATE_Y_180).with(UV_LOCK))
+        .with(new ConditionBuilder().term(AbstractBalustradeBlock.NORTH_SHAPE, BalustradeSideState.DOUBLE_CAPPED, BalustradeSideState.TOP_CAPPED), variantSideCapped.with(ROTATE_X_180).with(ROTATE_Y_180).with(UV_LOCK))
+        .with(new ConditionBuilder().term(AbstractBalustradeBlock.NORTH_SHAPE, BalustradeSideState.TOP_CAPPED, BalustradeSideState.UNCAPPED), variantSideUncapped)
+        .with(new ConditionBuilder().negatedTerm(AbstractBalustradeBlock.EAST_SHAPE, BalustradeSideState.NONE), variantSideBaluster.with(ROTATE_Y_90).with(UV_LOCK))
+        .with(new ConditionBuilder().term(AbstractBalustradeBlock.EAST_SHAPE, BalustradeSideState.BOTTOM_CAPPED, BalustradeSideState.DOUBLE_CAPPED), variantSideCapped.with(ROTATE_Y_90).with(UV_LOCK))
+        .with(new ConditionBuilder().term(AbstractBalustradeBlock.EAST_SHAPE, BalustradeSideState.BOTTOM_CAPPED, BalustradeSideState.UNCAPPED), variantSideUncapped.with(ROTATE_X_180).with(ROTATE_Y_270).with(UV_LOCK))
+        .with(new ConditionBuilder().term(AbstractBalustradeBlock.EAST_SHAPE, BalustradeSideState.DOUBLE_CAPPED, BalustradeSideState.TOP_CAPPED), variantSideCapped.with(ROTATE_X_180).with(ROTATE_Y_270).with(UV_LOCK))
+        .with(new ConditionBuilder().term(AbstractBalustradeBlock.EAST_SHAPE, BalustradeSideState.TOP_CAPPED, BalustradeSideState.UNCAPPED), variantSideUncapped.with(ROTATE_Y_90).with(UV_LOCK))
+        .with(new ConditionBuilder().negatedTerm(AbstractBalustradeBlock.SOUTH_SHAPE, BalustradeSideState.NONE), variantSideBaluster.with(ROTATE_Y_180).with(UV_LOCK))
+        .with(new ConditionBuilder().term(AbstractBalustradeBlock.SOUTH_SHAPE, BalustradeSideState.BOTTOM_CAPPED, BalustradeSideState.DOUBLE_CAPPED), variantSideCapped.with(ROTATE_Y_180).with(UV_LOCK))
+        .with(new ConditionBuilder().term(AbstractBalustradeBlock.SOUTH_SHAPE, BalustradeSideState.BOTTOM_CAPPED, BalustradeSideState.UNCAPPED), variantSideUncapped.with(ROTATE_X_180).with(UV_LOCK))
+        .with(new ConditionBuilder().term(AbstractBalustradeBlock.SOUTH_SHAPE, BalustradeSideState.DOUBLE_CAPPED, BalustradeSideState.TOP_CAPPED), variantSideCapped.with(ROTATE_X_180).with(UV_LOCK))
+        .with(new ConditionBuilder().term(AbstractBalustradeBlock.SOUTH_SHAPE, BalustradeSideState.TOP_CAPPED, BalustradeSideState.UNCAPPED), variantSideUncapped.with(ROTATE_Y_180).with(UV_LOCK))
+        .with(new ConditionBuilder().negatedTerm(AbstractBalustradeBlock.WEST_SHAPE, BalustradeSideState.NONE), variantSideBaluster.with(ROTATE_Y_270).with(UV_LOCK))
+        .with(new ConditionBuilder().term(AbstractBalustradeBlock.WEST_SHAPE, BalustradeSideState.BOTTOM_CAPPED, BalustradeSideState.DOUBLE_CAPPED), variantSideCapped.with(ROTATE_Y_270).with(UV_LOCK))
+        .with(new ConditionBuilder().term(AbstractBalustradeBlock.WEST_SHAPE, BalustradeSideState.BOTTOM_CAPPED, BalustradeSideState.UNCAPPED), variantSideUncapped.with(ROTATE_X_180).with(ROTATE_Y_90).with(UV_LOCK))
+        .with(new ConditionBuilder().term(AbstractBalustradeBlock.WEST_SHAPE, BalustradeSideState.DOUBLE_CAPPED, BalustradeSideState.TOP_CAPPED), variantSideCapped.with(ROTATE_X_180).with(ROTATE_Y_90).with(UV_LOCK))
+        .with(new ConditionBuilder().term(AbstractBalustradeBlock.WEST_SHAPE, BalustradeSideState.TOP_CAPPED, BalustradeSideState.UNCAPPED), variantSideUncapped.with(ROTATE_Y_270).with(UV_LOCK))
+    );
+    Identifier inventoryModel = createObjectModel(block, "thin_balustrade/simple/item", "/item", textureMap);
+    this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModelUtils.plainModel(inventoryModel));
+  }
+
   private void registerTrapdoorBlock(Block block, boolean orientable, Map<TextureSlot, String> rawTextureMap) {
     Map<TextureSlot, String> textureMap = Map.of(TextureSlot.END, rawTextureMap.get(TextureSlot.END), TextureSlot.SIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.END));
     MultiVariant variantBottom = createWeightedVariant(createObjectModel(block, "trapdoor/bottom", "/bottom", textureMap));
@@ -1390,6 +1434,25 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
         .select(WallSlabShape.OUTER_RIGHT, Direction.WEST, variantOuterBottomRight)
     ));
     Identifier inventoryModel = createObjectModel(block, "wall_slab/complex/item", "/item", textureMapFlatZ);
+    this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModelUtils.plainModel(inventoryModel));
+  }
+
+  private void registerSimpleWideBalustradeBlock(Block block, Map<TextureSlot, String> rawTextureMap) {
+    Map<TextureSlot, String> textureMap = Map.of(TextureSlot.SIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.SIDE));
+    MultiVariant variantBaluster = createWeightedVariant(createObjectModel(block, "wide_balustrade/simple/baluster", "/baluster", textureMap));
+    MultiVariant variantCap = createWeightedVariant(createObjectModel(block, "wide_balustrade/simple/cap", "/cap", textureMap));
+    this.blockGenerator.blockStateOutput.accept(MultiPartGenerator.multiPart(block)
+        .with(variantBaluster)
+        .with(new ConditionBuilder().term(AbstractBalustradeBlock.NORTH_SHAPE, BalustradeSideState.BOTTOM_CAPPED, BalustradeSideState.DOUBLE_CAPPED), variantCap)
+        .with(new ConditionBuilder().term(AbstractBalustradeBlock.NORTH_SHAPE, BalustradeSideState.DOUBLE_CAPPED, BalustradeSideState.TOP_CAPPED), variantCap.with(ROTATE_X_180).with(ROTATE_Y_180).with(UV_LOCK))
+        .with(new ConditionBuilder().term(AbstractBalustradeBlock.EAST_SHAPE, BalustradeSideState.BOTTOM_CAPPED, BalustradeSideState.DOUBLE_CAPPED), variantCap.with(ROTATE_Y_90).with(UV_LOCK))
+        .with(new ConditionBuilder().term(AbstractBalustradeBlock.EAST_SHAPE, BalustradeSideState.DOUBLE_CAPPED, BalustradeSideState.TOP_CAPPED), variantCap.with(ROTATE_X_180).with(ROTATE_Y_270).with(UV_LOCK))
+        .with(new ConditionBuilder().term(AbstractBalustradeBlock.SOUTH_SHAPE, BalustradeSideState.BOTTOM_CAPPED, BalustradeSideState.DOUBLE_CAPPED), variantCap.with(ROTATE_Y_180).with(UV_LOCK))
+        .with(new ConditionBuilder().term(AbstractBalustradeBlock.SOUTH_SHAPE, BalustradeSideState.DOUBLE_CAPPED, BalustradeSideState.TOP_CAPPED), variantCap.with(ROTATE_X_180).with(UV_LOCK))
+        .with(new ConditionBuilder().term(AbstractBalustradeBlock.WEST_SHAPE, BalustradeSideState.BOTTOM_CAPPED, BalustradeSideState.DOUBLE_CAPPED), variantCap.with(ROTATE_Y_270).with(UV_LOCK))
+        .with(new ConditionBuilder().term(AbstractBalustradeBlock.WEST_SHAPE, BalustradeSideState.DOUBLE_CAPPED, BalustradeSideState.TOP_CAPPED), variantCap.with(ROTATE_X_180).with(ROTATE_Y_90).with(UV_LOCK))
+    );
+    Identifier inventoryModel = createObjectModel(block, "wide_balustrade/simple/item", "/item", textureMap);
     this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModelUtils.plainModel(inventoryModel));
   }
 

@@ -35,8 +35,10 @@ public class DistantMoonsBlockLootTableProvider extends FabricBlockLootTableProv
   public void generate() {
 
     //SIMPLE LOOT TABLES
+    this.dropSelf(DistantMoonsBlocks.ACACIA_BALUSTRADE);
     this.dropSelf(DistantMoonsBlocks.ACACIA_BEAM);
     this.dropSelf(DistantMoonsBlocks.ACACIA_POLE);
+    this.dropSelf(DistantMoonsBlocks.ANDESITE_BALUSTRADE);
     this.dropSelf(DistantMoonsBlocks.BAMBOO_POLE);
     this.dropSelf(DistantMoonsBlocks.BIRCH_BEAM);
     this.dropSelf(DistantMoonsBlocks.BIRCH_POLE);
@@ -54,6 +56,7 @@ public class DistantMoonsBlockLootTableProvider extends FabricBlockLootTableProv
     this.dropSelf(DistantMoonsBlocks.DEEP_IRON_FENCE);
     this.dropSelf(DistantMoonsBlocks.DEEP_IRON_LADDER);
     this.dropSelf(DistantMoonsBlocks.DEEP_IRON_TRAPDOOR);
+    this.dropSelf(DistantMoonsBlocks.DIORITE_BALUSTRADE);
     this.dropSelf(DistantMoonsBlocks.EXPOSED_IRON_BLOCK);
     this.dropSelf(DistantMoonsBlocks.FIRE_BRICK_STAIRS);
     this.dropSelf(DistantMoonsBlocks.FIRE_BRICK_WALL);
@@ -61,6 +64,7 @@ public class DistantMoonsBlockLootTableProvider extends FabricBlockLootTableProv
     this.dropSelf(DistantMoonsBlocks.FIXED_DEEP_IRON_LADDER);
     this.dropSelf(DistantMoonsBlocks.FIXED_IRON_LADDER);
     this.dropSelf(DistantMoonsBlocks.FIXED_WROUGHT_IRON_LADDER);
+    this.dropSelf(DistantMoonsBlocks.GRANITE_BALUSTRADE);
     this.dropSelf(DistantMoonsBlocks.GRAY_PRISMARINE);
     this.dropSelf(DistantMoonsBlocks.GRAY_PRISMARINE_STAIRS);
     this.dropSelf(DistantMoonsBlocks.IRON_FENCE);
@@ -88,8 +92,12 @@ public class DistantMoonsBlockLootTableProvider extends FabricBlockLootTableProv
     this.dropSelf(DistantMoonsBlocks.RUBY_BLOCK);
     this.dropSelf(DistantMoonsBlocks.RUSTED_IRON_BLOCK);
     this.dropSelf(DistantMoonsBlocks.SAPPHIRE_BLOCK);
+    this.dropSelf(DistantMoonsBlocks.SMOOTH_RED_SANDSTONE_BALUSTRADE);
+    this.dropSelf(DistantMoonsBlocks.SMOOTH_SANDSTONE_BALUSTRADE);
     this.dropSelf(DistantMoonsBlocks.SPRUCE_BEAM);
     this.dropSelf(DistantMoonsBlocks.SPRUCE_POLE);
+    this.dropSelf(DistantMoonsBlocks.STONE_BALUSTRADE);
+    this.dropSelf(DistantMoonsBlocks.TUFF_BALUSTRADE);
     this.dropSelf(DistantMoonsBlocks.UNDERWORLD_LANTERN);
     this.dropSelf(DistantMoonsBlocks.WARPED_BEAM);
     this.dropSelf(DistantMoonsBlocks.WARPED_POLE);

@@ -25,6 +25,16 @@ public enum WallSlabShape implements StringRepresentable {
   }
 
   public boolean allSidesPartiallySturdy() {
-    return allSidesPartiallySturdy;
+    return this.allSidesPartiallySturdy;
+  }
+
+  public WallSlabShape mirror() {
+    return switch (this) {
+      case INNER_LEFT -> INNER_RIGHT;
+      case INNER_RIGHT -> INNER_LEFT;
+      case OUTER_LEFT -> OUTER_RIGHT;
+      case OUTER_RIGHT -> OUTER_LEFT;
+      default -> this;
+    };
   }
 }

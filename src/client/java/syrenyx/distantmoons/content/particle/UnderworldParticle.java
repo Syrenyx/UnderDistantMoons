@@ -65,13 +65,13 @@ public class UnderworldParticle extends SingleQuadParticle {
 
     //CHANGE ALPHA
     if (this.age++ >= this.lifetime) {
-      this.alpha -= 0.02F;
+      this.alpha -= 0.05F;
       if (this.alpha <= 0.0F) {
         this.remove();
         return;
       }
     } else if (this.alpha <= 1.0F) {
-      this.alpha += 0.02F;
+      this.alpha += 0.05F;
       if (this.alpha > 1.0F) this.alpha = 1.0F;
     }
 

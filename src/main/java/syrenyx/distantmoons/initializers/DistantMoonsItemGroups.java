@@ -84,7 +84,8 @@ public abstract class DistantMoonsItemGroups {
     addToGroup(CreativeModeTabs.BUILDING_BLOCKS, Items.ACACIA_SLAB, List.of(
         DistantMoonsBlocks.ACACIA_WALL_SLAB.asItem().getDefaultInstance(),
         DistantMoonsBlocks.ACACIA_BEAM.asItem().getDefaultInstance(),
-        DistantMoonsBlocks.ACACIA_POLE.asItem().getDefaultInstance()
+        DistantMoonsBlocks.ACACIA_POLE.asItem().getDefaultInstance(),
+        DistantMoonsBlocks.ACACIA_BALUSTRADE.asItem().getDefaultInstance()
     ));
     addToGroup(CreativeModeTabs.BUILDING_BLOCKS, Items.DARK_OAK_WOOD, List.of(
         DistantMoonsBlocks.CUT_DARK_OAK_LOG.asItem().getDefaultInstance(),
@@ -171,17 +172,23 @@ public abstract class DistantMoonsItemGroups {
         DistantMoonsBlocks.WARPED_BEAM.asItem().getDefaultInstance(),
         DistantMoonsBlocks.WARPED_POLE.asItem().getDefaultInstance()
     ));
-    addToGroup(CreativeModeTabs.BUILDING_BLOCKS, Items.STONE_SLAB, List.of(DistantMoonsBlocks.STONE_WALL_SLAB.asItem().getDefaultInstance()));
+    addToGroup(CreativeModeTabs.BUILDING_BLOCKS, Items.STONE_SLAB, List.of(
+        DistantMoonsBlocks.STONE_WALL_SLAB.asItem().getDefaultInstance(),
+        DistantMoonsBlocks.STONE_BALUSTRADE.asItem().getDefaultInstance()
+    ));
     addToGroup(CreativeModeTabs.BUILDING_BLOCKS, Items.COBBLESTONE_SLAB, List.of(DistantMoonsBlocks.COBBLESTONE_WALL_SLAB.asItem().getDefaultInstance()));
     addToGroup(CreativeModeTabs.BUILDING_BLOCKS, Items.MOSSY_COBBLESTONE_SLAB, List.of(DistantMoonsBlocks.MOSSY_COBBLESTONE_WALL_SLAB.asItem().getDefaultInstance()));
     addToGroup(CreativeModeTabs.BUILDING_BLOCKS, Items.SMOOTH_STONE_SLAB, List.of(DistantMoonsBlocks.SMOOTH_STONE_WALL_SLAB.asItem().getDefaultInstance()));
     addToGroup(CreativeModeTabs.BUILDING_BLOCKS, Items.STONE_BRICK_SLAB, List.of(DistantMoonsBlocks.STONE_BRICK_WALL_SLAB.asItem().getDefaultInstance()));
     addToGroup(CreativeModeTabs.BUILDING_BLOCKS, Items.MOSSY_STONE_BRICK_SLAB, List.of(DistantMoonsBlocks.MOSSY_STONE_BRICK_WALL_SLAB.asItem().getDefaultInstance()));
     addToGroup(CreativeModeTabs.BUILDING_BLOCKS, Items.GRANITE_SLAB, List.of(DistantMoonsBlocks.GRANITE_WALL_SLAB.asItem().getDefaultInstance()));
+    addToGroup(CreativeModeTabs.BUILDING_BLOCKS, Items.GRANITE_WALL, List.of(DistantMoonsBlocks.GRANITE_BALUSTRADE.asItem().getDefaultInstance()));
     addToGroup(CreativeModeTabs.BUILDING_BLOCKS, Items.POLISHED_GRANITE_SLAB, List.of(DistantMoonsBlocks.POLISHED_GRANITE_WALL_SLAB.asItem().getDefaultInstance()));
     addToGroup(CreativeModeTabs.BUILDING_BLOCKS, Items.DIORITE_SLAB, List.of(DistantMoonsBlocks.DIORITE_WALL_SLAB.asItem().getDefaultInstance()));
+    addToGroup(CreativeModeTabs.BUILDING_BLOCKS, Items.DIORITE_WALL, List.of(DistantMoonsBlocks.DIORITE_BALUSTRADE.asItem().getDefaultInstance()));
     addToGroup(CreativeModeTabs.BUILDING_BLOCKS, Items.POLISHED_DIORITE_SLAB, List.of(DistantMoonsBlocks.POLISHED_DIORITE_WALL_SLAB.asItem().getDefaultInstance()));
     addToGroup(CreativeModeTabs.BUILDING_BLOCKS, Items.ANDESITE_SLAB, List.of(DistantMoonsBlocks.ANDESITE_WALL_SLAB.asItem().getDefaultInstance()));
+    addToGroup(CreativeModeTabs.BUILDING_BLOCKS, Items.ANDESITE_WALL, List.of(DistantMoonsBlocks.ANDESITE_BALUSTRADE.asItem().getDefaultInstance()));
     addToGroup(CreativeModeTabs.BUILDING_BLOCKS, Items.POLISHED_ANDESITE_SLAB, List.of(DistantMoonsBlocks.POLISHED_ANDESITE_WALL_SLAB.asItem().getDefaultInstance()));
     addToGroup(CreativeModeTabs.BUILDING_BLOCKS, Items.DEEPSLATE, List.of(DistantMoonsBlocks.CUT_DEEPSLATE.asItem().getDefaultInstance()));
     addToGroup(CreativeModeTabs.BUILDING_BLOCKS, Items.COBBLED_DEEPSLATE_SLAB, List.of(DistantMoonsBlocks.COBBLED_DEEPSLATE_WALL_SLAB.asItem().getDefaultInstance()));
@@ -189,16 +196,23 @@ public abstract class DistantMoonsItemGroups {
     addToGroup(CreativeModeTabs.BUILDING_BLOCKS, Items.DEEPSLATE_BRICK_SLAB, List.of(DistantMoonsBlocks.DEEPSLATE_BRICK_WALL_SLAB.asItem().getDefaultInstance()));
     addToGroup(CreativeModeTabs.BUILDING_BLOCKS, Items.DEEPSLATE_TILE_SLAB, List.of(DistantMoonsBlocks.DEEPSLATE_TILE_WALL_SLAB.asItem().getDefaultInstance()));
     addToGroup(CreativeModeTabs.BUILDING_BLOCKS, Items.TUFF_SLAB, List.of(DistantMoonsBlocks.TUFF_WALL_SLAB.asItem().getDefaultInstance()));
+    addToGroup(CreativeModeTabs.BUILDING_BLOCKS, Items.TUFF_WALL, List.of(DistantMoonsBlocks.TUFF_BALUSTRADE.asItem().getDefaultInstance()));
     addToGroup(CreativeModeTabs.BUILDING_BLOCKS, Items.POLISHED_TUFF_SLAB, List.of(DistantMoonsBlocks.POLISHED_TUFF_WALL_SLAB.asItem().getDefaultInstance()));
     addToGroup(CreativeModeTabs.BUILDING_BLOCKS, Items.TUFF_BRICK_SLAB, List.of(DistantMoonsBlocks.TUFF_BRICK_WALL_SLAB.asItem().getDefaultInstance()));
     addToGroup(CreativeModeTabs.BUILDING_BLOCKS, Items.BRICK_SLAB, List.of(DistantMoonsBlocks.BRICK_WALL_SLAB.asItem().getDefaultInstance()));
     addToGroup(CreativeModeTabs.BUILDING_BLOCKS, Items.MUD_BRICK_SLAB, List.of(DistantMoonsBlocks.MUD_BRICK_WALL_SLAB.asItem().getDefaultInstance()));
     addToGroup(CreativeModeTabs.BUILDING_BLOCKS, Items.RESIN_BRICK_SLAB, List.of(DistantMoonsBlocks.RESIN_BRICK_WALL_SLAB.asItem().getDefaultInstance()));
     addToGroup(CreativeModeTabs.BUILDING_BLOCKS, Items.SANDSTONE_SLAB, List.of(DistantMoonsBlocks.SANDSTONE_WALL_SLAB.asItem().getDefaultInstance()));
-    addToGroup(CreativeModeTabs.BUILDING_BLOCKS, Items.SMOOTH_SANDSTONE_SLAB, List.of(DistantMoonsBlocks.SMOOTH_SANDSTONE_WALL_SLAB.asItem().getDefaultInstance()));
+    addToGroup(CreativeModeTabs.BUILDING_BLOCKS, Items.SMOOTH_SANDSTONE_SLAB, List.of(
+        DistantMoonsBlocks.SMOOTH_SANDSTONE_WALL_SLAB.asItem().getDefaultInstance(),
+        DistantMoonsBlocks.SMOOTH_SANDSTONE_BALUSTRADE.asItem().getDefaultInstance()
+    ));
     addToGroup(CreativeModeTabs.BUILDING_BLOCKS, Items.CUT_STANDSTONE_SLAB, List.of(DistantMoonsBlocks.CUT_SANDSTONE_WALL_SLAB.asItem().getDefaultInstance()));
     addToGroup(CreativeModeTabs.BUILDING_BLOCKS, Items.RED_SANDSTONE_SLAB, List.of(DistantMoonsBlocks.RED_SANDSTONE_WALL_SLAB.asItem().getDefaultInstance()));
-    addToGroup(CreativeModeTabs.BUILDING_BLOCKS, Items.SMOOTH_RED_SANDSTONE_SLAB, List.of(DistantMoonsBlocks.SMOOTH_RED_SANDSTONE_WALL_SLAB.asItem().getDefaultInstance()));
+    addToGroup(CreativeModeTabs.BUILDING_BLOCKS, Items.SMOOTH_RED_SANDSTONE_SLAB, List.of(
+        DistantMoonsBlocks.SMOOTH_RED_SANDSTONE_WALL_SLAB.asItem().getDefaultInstance(),
+        DistantMoonsBlocks.SMOOTH_RED_SANDSTONE_BALUSTRADE.asItem().getDefaultInstance()
+    ));
     addToGroup(CreativeModeTabs.BUILDING_BLOCKS, Items.CUT_RED_SANDSTONE_SLAB, List.of(DistantMoonsBlocks.CUT_RED_SANDSTONE_WALL_SLAB.asItem().getDefaultInstance()));
     addToGroup(CreativeModeTabs.BUILDING_BLOCKS, Items.PRISMARINE_SLAB, List.of(DistantMoonsBlocks.PRISMARINE_WALL_SLAB.asItem().getDefaultInstance()));
     addToGroup(CreativeModeTabs.BUILDING_BLOCKS, Items.PRISMARINE_BRICK_SLAB, List.of(
