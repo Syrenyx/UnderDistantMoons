@@ -12,7 +12,6 @@ import net.minecraft.server.permissions.LevelBasedPermissionSet;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.Vec3;
 import syrenyx.distantmoons.UnderDistantMoons;
-import syrenyx.distantmoons.content.command.PermissionLevel;
 
 import java.util.Optional;
 

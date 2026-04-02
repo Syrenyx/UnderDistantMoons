@@ -6,7 +6,7 @@ import syrenyx.distantmoons.data.networking.ActiveAfflictionsPayload;
 public abstract class DistantMoonsNetworking {
 
   static {
-    PayloadTypeRegistry.playS2C().register(ActiveAfflictionsPayload.ID, ActiveAfflictionsPayload.CODEC);
+    PayloadTypeRegistry.clientboundPlay().register(ActiveAfflictionsPayload.ID, ActiveAfflictionsPayload.CODEC);
   }
 
   public static void initialize() {}

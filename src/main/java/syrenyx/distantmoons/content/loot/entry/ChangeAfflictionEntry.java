@@ -8,7 +8,6 @@ import syrenyx.distantmoons.content.affliction.Affliction;
 import syrenyx.distantmoons.content.affliction.AfflictionInstance;
 import syrenyx.distantmoons.content.affliction.AfflictionManager;
 import syrenyx.distantmoons.content.affliction.ChangeAfflictionOperation;
-import syrenyx.distantmoons.initializers.DistantMoonsLootPoolEntryTypes;
 import syrenyx.distantmoons.references.DistantMoonsRegistryKeys;
 
 import java.util.Collections;
@@ -23,7 +22,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntry;
-import net.minecraft.world.level.storage.loot.entries.LootPoolEntryType;
 import net.minecraft.world.level.storage.loot.entries.LootPoolSingletonContainer;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.providers.number.NumberProvider;
@@ -69,11 +67,6 @@ public class ChangeAfflictionEntry extends LootPoolSingletonContainer {
   }
 
   @Override
-  public @NonNull LootPoolEntryType getType() {
-    return DistantMoonsLootPoolEntryTypes.CHANGE_AFFLICTION;
-  }
-
-  @Override
   public boolean expand(@NonNull LootContext context, @NonNull Consumer<LootPoolEntry> consumer) {
     if (!this.canRun(context)) return false;
     Entity target = this.target.tryGettingEntityFromContext(context);
@@ -99,6 +92,11 @@ public class ChangeAfflictionEntry extends LootPoolSingletonContainer {
       ));
     }
     return true;
+  }
+
+  @Override
+  public @NonNull MapCodec<? extends LootPoolSingletonContainer> codec() {
+    return CODEC;
   }
 
   @Override

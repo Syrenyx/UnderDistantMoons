@@ -3,7 +3,6 @@ package syrenyx.distantmoons.content.predicate.condition;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import org.jspecify.annotations.NonNull;
-import syrenyx.distantmoons.initializers.DistantMoonsLootConditions;
 import syrenyx.distantmoons.content.predicate.entity.EntityPredicate;
 
 import java.util.Optional;
@@ -12,7 +11,6 @@ import net.minecraft.util.context.ContextKey;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
-import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 
 public record EntityPropertiesCondition(
     Optional<EntityPredicate> predicate,
@@ -28,11 +26,6 @@ public record EntityPropertiesCondition(
   );
 
   @Override
-  public @NonNull LootItemConditionType getType() {
-    return DistantMoonsLootConditions.ENTITY_PROPERTIES;
-  }
-
-  @Override
   public @NonNull Set<ContextKey<?>> getReferencedContextParams() {
     return Set.of(LootContextParams.ORIGIN, this.entity.getParameter());
   }
@@ -40,5 +33,10 @@ public record EntityPropertiesCondition(
   @Override
   public boolean test(LootContext context) {
     return this.predicate.isEmpty() || this.predicate.get().test(context.getLevel(), context.getOptionalParameter(LootContextParams.ORIGIN), context.getOptionalParameter(this.entity.getParameter()));
+  }
+
+  @Override
+  public @NonNull MapCodec<? extends LootItemCondition> codec() {
+    return CODEC;
   }
 }

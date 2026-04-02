@@ -12,6 +12,7 @@ import net.minecraft.world.level.material.MapColor;
 
 public abstract class ColorUtil {
 
+  public static final int UNTINTED = -1;
   public static final List<DyeColor> SORTED_DYE_COLORS = List.of(
       DyeColor.WHITE, DyeColor.LIGHT_GRAY, DyeColor.GRAY, DyeColor.BLACK,
       DyeColor.BROWN, DyeColor.RED, DyeColor.ORANGE, DyeColor.YELLOW,

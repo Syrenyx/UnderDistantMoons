@@ -5,7 +5,6 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import org.jetbrains.annotations.Nullable;
 import org.jspecify.annotations.NonNull;
-import syrenyx.distantmoons.initializers.DistantMoonsLootPoolEntryTypes;
 
 import java.util.Collections;
 import java.util.List;
@@ -29,7 +28,6 @@ import net.minecraft.world.level.SimpleExplosionDamageCalculator;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntry;
-import net.minecraft.world.level.storage.loot.entries.LootPoolEntryType;
 import net.minecraft.world.level.storage.loot.entries.LootPoolSingletonContainer;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
@@ -105,11 +103,6 @@ public class ExplodeEntry extends LootPoolSingletonContainer {
   }
 
   @Override
-  public @NonNull LootPoolEntryType getType() {
-    return DistantMoonsLootPoolEntryTypes.EXPLODE;
-  }
-
-  @Override
   public boolean expand(@NonNull LootContext context, @NonNull Consumer<LootPoolEntry> consumer) {
     if (!this.canRun(context)) return false;
     Vec3 pos = context.getOptionalParameter(LootContextParams.ORIGIN);
@@ -143,6 +136,11 @@ public class ExplodeEntry extends LootPoolSingletonContainer {
         ? new DamageSource(damageTypeRegistryEntry, user)
         : new DamageSource(damageTypeRegistryEntry, pos)
     ).orElse(null);
+  }
+
+  @Override
+  public @NonNull MapCodec<? extends LootPoolSingletonContainer> codec() {
+    return CODEC;
   }
 
   @Override

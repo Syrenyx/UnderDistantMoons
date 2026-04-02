@@ -4,7 +4,6 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import org.jspecify.annotations.NonNull;
-import syrenyx.distantmoons.initializers.DistantMoonsLootPoolEntryTypes;
 
 import java.util.Collections;
 import java.util.List;
@@ -13,7 +12,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntry;
-import net.minecraft.world.level.storage.loot.entries.LootPoolEntryType;
 import net.minecraft.world.level.storage.loot.entries.LootPoolSingletonContainer;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.providers.number.NumberProvider;
@@ -47,17 +45,17 @@ public class IgniteEntry extends LootPoolSingletonContainer {
   }
 
   @Override
-  public @NonNull LootPoolEntryType getType() {
-    return DistantMoonsLootPoolEntryTypes.IGNITE;
-  }
-
-  @Override
   public boolean expand(@NonNull LootContext context, @NonNull Consumer<LootPoolEntry> consumer) {
     if (!this.canRun(context)) return false;
     Entity target = this.target.tryGettingEntityFromContext(context);
     if (target == null) return true;
     target.igniteForSeconds(this.duration.getFloat(context));
     return true;
+  }
+
+  @Override
+  public @NonNull MapCodec<? extends LootPoolSingletonContainer> codec() {
+    return CODEC;
   }
 
   @Override

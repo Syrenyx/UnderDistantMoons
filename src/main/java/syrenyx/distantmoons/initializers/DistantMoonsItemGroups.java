@@ -1,6 +1,6 @@
 package syrenyx.distantmoons.initializers;
 
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -8,11 +8,9 @@ import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import syrenyx.distantmoons.utility.ColorUtil;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -470,11 +468,11 @@ public abstract class DistantMoonsItemGroups {
   }
 
   private static void addToGroup(ResourceKey<CreativeModeTab> groupKey, Item anchor, List<ItemStack> itemStacks) {
-    ItemGroupEvents.modifyEntriesEvent(groupKey).register(group -> group.addAfter(anchor, itemStacks));
+    CreativeModeTabEvents.modifyOutputEvent(groupKey).register(group -> group.insertAfter(anchor, itemStacks));
   }
 
   private static void addToGroup(ResourceKey<CreativeModeTab> groupKey, Item anchor, Map<DyeColor, Block> dyedBlocks) {
-    ColorUtil.SORTED_DYE_COLORS.reversed().forEach(color -> ItemGroupEvents.modifyEntriesEvent(groupKey).register(group -> group.addAfter(anchor, dyedBlocks.get(color))));
+    ColorUtil.SORTED_DYE_COLORS.reversed().forEach(color -> CreativeModeTabEvents.modifyOutputEvent(groupKey).register(group -> group.insertAfter(anchor, dyedBlocks.get(color))));
   }
 
   public static void initialize() {}

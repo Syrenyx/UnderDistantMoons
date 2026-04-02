@@ -11,7 +11,6 @@ import java.util.Map;
 import net.minecraft.core.Holder;
 import net.minecraft.world.entity.LivingEntity;
 
-@SuppressWarnings("UnstableApiUsage")
 public record LivingEntityAttachment(Map<Holder<Affliction>, AfflictionInstance> activeAfflictions) {
 
   public static final Codec<LivingEntityAttachment> CODEC = RecordCodecBuilder.create(instance -> instance

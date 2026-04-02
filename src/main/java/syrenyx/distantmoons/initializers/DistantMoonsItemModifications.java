@@ -1,8 +1,8 @@
 package syrenyx.distantmoons.initializers;
 
 import net.fabricmc.fabric.api.item.v1.DefaultItemComponentEvents;
-import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
-import net.fabricmc.fabric.api.registry.FuelRegistryEvents;
+import net.fabricmc.fabric.api.registry.CompostableRegistry;
+import net.fabricmc.fabric.api.registry.FuelValueEvents;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -78,10 +78,10 @@ public abstract class DistantMoonsItemModifications {
     });
 
     //COMPOSTING CHANCES
-    CompostingChanceRegistry.INSTANCE.add(DistantMoonsItems.ROASTED_BROWN_MUSHROOM, 8.5F);
+    CompostableRegistry.INSTANCE.add(DistantMoonsItems.ROASTED_BROWN_MUSHROOM, 8.5F);
 
     //FUEL
-    FuelRegistryEvents.BUILD.register((builder, context) -> {
+    FuelValueEvents.BUILD.register((builder, context) -> {
 
       //ITEMS
       builder.add(DistantMoonsBlocks.CHARCOAL_BLOCK.asItem(), context.baseSmeltTime() * COAL_SMELT_TIME_FACTOR * 9);

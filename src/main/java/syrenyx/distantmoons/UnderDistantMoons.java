@@ -24,7 +24,6 @@ public class UnderDistantMoons implements ModInitializer {
     DistantMoonsAfflictionLocationBasedEffects.initialize();
     DistantMoonsAfflictionValueEffects.initialize();
     DistantMoonsAttachedData.initialize();
-    DistantMoonsBiomeModifications.initialize();
     DistantMoonsBlockEntityTypes.initialize();
     DistantMoonsBlockModifications.initialize();
     DistantMoonsBlocks.initialize();
@@ -35,6 +34,7 @@ public class UnderDistantMoons implements ModInitializer {
     DistantMoonsEnchantmentLevelBasedValueTypes.initialize();
     DistantMoonsEntityTypes.initialize();
     DistantMoonsEnvironmentAttributes.initialize();
+    DistantMoonsEnvironmentModifications.initialize();
     DistantMoonsFeatures.initialize();
     DistantMoonsItemGroups.initialize();
     DistantMoonsItemModifications.initialize();
@@ -42,9 +42,9 @@ public class UnderDistantMoons implements ModInitializer {
     DistantMoonsLootConditions.initialize();
     DistantMoonsLootContextTypes.initialize();
     DistantMoonsLootPoolEntryTypes.initialize();
-    DistantMoonsLootNumberProviders.initialize();
     DistantMoonsMenuTypes.initialize();
     DistantMoonsNetworking.initialize();
+    DistantMoonsNumberProviders.initialize();
     DistantMoonsParticleTypes.initialize();
     DistantMoonsPointOfInterestTypes.initialize();
     DistantMoonsRecipeSerializers.initialize();

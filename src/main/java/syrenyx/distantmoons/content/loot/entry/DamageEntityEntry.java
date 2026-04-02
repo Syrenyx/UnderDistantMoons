@@ -4,7 +4,6 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import org.jspecify.annotations.NonNull;
-import syrenyx.distantmoons.initializers.DistantMoonsLootPoolEntryTypes;
 
 import java.util.Collections;
 import java.util.List;
@@ -17,7 +16,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntry;
-import net.minecraft.world.level.storage.loot.entries.LootPoolEntryType;
 import net.minecraft.world.level.storage.loot.entries.LootPoolSingletonContainer;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
@@ -64,11 +62,6 @@ public class DamageEntityEntry extends LootPoolSingletonContainer {
   }
 
   @Override
-  public @NonNull LootPoolEntryType getType() {
-    return DistantMoonsLootPoolEntryTypes.DAMAGE_ENTITY;
-  }
-
-  @Override
   public boolean expand(@NonNull LootContext context, @NonNull Consumer<LootPoolEntry> consumer) {
     if (!this.canRun(context)) return false;
     Entity target = this.target.tryGettingEntityFromContext(context);
@@ -82,6 +75,11 @@ public class DamageEntityEntry extends LootPoolSingletonContainer {
         Mth.randomBetween(target.getRandom(), this.minDamage.getFloat(context), this.maxDamage.getFloat(context))
     );
     return true;
+  }
+
+  @Override
+  public @NonNull MapCodec<? extends LootPoolSingletonContainer> codec() {
+    return CODEC;
   }
 
   @Override

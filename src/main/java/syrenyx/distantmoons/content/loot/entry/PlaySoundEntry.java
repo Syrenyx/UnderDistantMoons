@@ -4,7 +4,6 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import org.jspecify.annotations.NonNull;
-import syrenyx.distantmoons.initializers.DistantMoonsLootPoolEntryTypes;
 
 import java.util.Collections;
 import java.util.List;
@@ -17,7 +16,6 @@ import net.minecraft.util.valueproviders.FloatProvider;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntry;
-import net.minecraft.world.level.storage.loot.entries.LootPoolEntryType;
 import net.minecraft.world.level.storage.loot.entries.LootPoolSingletonContainer;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
@@ -63,11 +61,6 @@ public class PlaySoundEntry extends LootPoolSingletonContainer {
   }
 
   @Override
-  public @NonNull LootPoolEntryType getType() {
-    return DistantMoonsLootPoolEntryTypes.PLAY_SOUND;
-  }
-
-  @Override
   public boolean expand(@NonNull LootContext context, @NonNull Consumer<LootPoolEntry> consumer) {
     if (!this.canRun(context)) return false;
     Vec3 pos = context.getOptionalParameter(LootContextParams.ORIGIN);
@@ -75,6 +68,11 @@ public class PlaySoundEntry extends LootPoolSingletonContainer {
     RandomSource random = context.getRandom();
     context.getLevel().playSound(this.source.tryGettingEntityFromContext(context), pos.x(), pos.y(), pos.z(), this.soundEvent, this.category, this.volume.sample(random), this.pitch.sample(random));
     return true;
+  }
+
+  @Override
+  public @NonNull MapCodec<? extends LootPoolSingletonContainer> codec() {
+    return CODEC;
   }
 
   @Override

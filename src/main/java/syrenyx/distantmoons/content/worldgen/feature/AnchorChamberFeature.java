@@ -39,13 +39,13 @@ public class AnchorChamberFeature extends Feature<AnchorChamberFeature.Config> {
       if (Math.abs(pos.getY()) == CHAMBER_RADIUS) edges++;
       if (Math.abs(pos.getZ()) == CHAMBER_RADIUS) edges++;
       level.setBlock(pos, switch (edges) {
-        case 1 -> config.wall().getState(randomSource, pos);
-        case 2 -> config.edge().getState(randomSource, pos);
-        case 3 -> config.corner().getState(randomSource, pos);
+        case 1 -> config.wall().getState(level, randomSource, pos);
+        case 2 -> config.edge().getState(level, randomSource, pos);
+        case 3 -> config.corner().getState(level, randomSource, pos);
         default -> Blocks.AIR.defaultBlockState();
       }, Block.UPDATE_SUPPRESS_DROPS);
     }
-    level.setBlock(blockPos, config.anchor().getState(randomSource, blockPos), Block.UPDATE_SUPPRESS_DROPS);
+    level.setBlock(blockPos, config.anchor().getState(level, randomSource, blockPos), Block.UPDATE_SUPPRESS_DROPS);
     return true;
   }
 

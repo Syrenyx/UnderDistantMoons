@@ -1,7 +1,7 @@
 package syrenyx.distantmoons.datagen;
 
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.minecraft.client.color.item.Constant;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
@@ -14,12 +14,13 @@ import net.minecraft.client.data.models.model.ItemModelUtils;
 import net.minecraft.client.data.models.model.ModelTemplate;
 import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TextureSlot;
-import net.minecraft.client.renderer.block.model.Variant;
-import net.minecraft.client.renderer.block.model.VariantMutator;
-import net.minecraft.client.renderer.block.model.multipart.CombinedCondition;
+import net.minecraft.client.renderer.block.dispatch.Variant;
+import net.minecraft.client.renderer.block.dispatch.VariantMutator;
+import net.minecraft.client.renderer.block.dispatch.multipart.CombinedCondition;
 import net.minecraft.client.renderer.item.RangeSelectItemModel;
 import net.minecraft.client.renderer.item.properties.numeric.CompassAngle;
 import net.minecraft.client.renderer.item.properties.numeric.CompassAngleState;
+import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.Identifier;
@@ -155,7 +156,7 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
   private BlockModelGenerators blockGenerator;
   private ItemModelGenerators itemGenerator;
 
-  public DistantMoonsModelProvider(FabricDataOutput output) {
+  public DistantMoonsModelProvider(FabricPackOutput output) {
     super(output);
   }
 
@@ -1254,8 +1255,8 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     this.blockGenerator.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, variant));
     this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModelUtils.conditional(
         new UnderworldDimension(),
-        ItemModelUtils.tintedModel(getFirstEntryOf(variant), new Constant(-1), new Constant(UnderworldBlock.DEFAULT_COLOR)),
-        ItemModelUtils.tintedModel(getFirstEntryOf(variant), new Constant(-1), new Constant(UnderworldBlock.UNLIT_COLOR))
+        ItemModelUtils.tintedModel(getFirstEntryOf(variant), new Constant(UnderworldBlock.DEFAULT_COLOR)),
+        ItemModelUtils.tintedModel(getFirstEntryOf(variant), new Constant(UnderworldBlock.UNLIT_COLOR))
     ));
   }
 
@@ -1554,7 +1555,7 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
   private static TextureMapping createTextureMapWithKeys(Block block, Map<TextureSlot, String> rawTextureMap) {
     final TextureMapping textureMap = new TextureMapping();
     for (TextureSlot key : rawTextureMap.keySet()) {
-      textureMap.put(key, Identifier.parse(rawTextureMap.get(key).replace("%", DistantMoonsBlocks.getStringIdOf(block))));
+      textureMap.put(key, new Material(Identifier.parse(rawTextureMap.get(key).replace("%", DistantMoonsBlocks.getStringIdOf(block)))));
     }
     return textureMap;
   }
@@ -1562,7 +1563,7 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
   private static TextureMapping createTextureMapWithKeys(Item item, Map<TextureSlot, String> rawTextureMap) {
     final TextureMapping textureMap = new TextureMapping();
     for (TextureSlot key : rawTextureMap.keySet()) {
-      textureMap.put(key, Identifier.parse(rawTextureMap.get(key).replace("%", DistantMoonsItems.getStringIdOf(item))));
+      textureMap.put(key, new Material(Identifier.parse(rawTextureMap.get(key).replace("%", DistantMoonsItems.getStringIdOf(item)))));
     }
     return textureMap;
   }

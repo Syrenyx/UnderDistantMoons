@@ -4,10 +4,8 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.world.item.enchantment.LevelBasedValue;
 import net.minecraft.world.level.storage.loot.LootContext;
-import net.minecraft.world.level.storage.loot.providers.number.LootNumberProviderType;
 import net.minecraft.world.level.storage.loot.providers.number.NumberProvider;
 import org.jspecify.annotations.NonNull;
-import syrenyx.distantmoons.initializers.DistantMoonsLootNumberProviders;
 import syrenyx.distantmoons.references.DistantMoonsLootContextParameters;
 
 public record AfflictionStage(
@@ -22,12 +20,12 @@ public record AfflictionStage(
   );
 
   @Override
-  public @NonNull LootNumberProviderType getType() {
-    return DistantMoonsLootNumberProviders.AFFLICTION_STAGE;
+  public float getFloat(LootContext context) {
+    return stageValue.calculate(context.getParameter(DistantMoonsLootContextParameters.AFFLICTION_STAGE));
   }
 
   @Override
-  public float getFloat(LootContext context) {
-    return stageValue.calculate(context.getParameter(DistantMoonsLootContextParameters.AFFLICTION_STAGE));
+  public @NonNull MapCodec<? extends NumberProvider> codec() {
+    return CODEC;
   }
 }

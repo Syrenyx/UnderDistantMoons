@@ -135,7 +135,7 @@ public abstract class DistantMoonsBlocks {
           .sound(SoundType.TUFF_BRICKS)
           .strength(8.0F, 1200.0F),
       new Item.Properties()
-          .component(DataComponents.DAMAGE_RESISTANT, new DamageResistant(DistantMoonsDamageTypeTags.IS_EXPLOSION_OR_FIRE))
+          .delayedComponent(DataComponents.DAMAGE_RESISTANT, context -> new DamageResistant(context.getOrThrow(DistantMoonsDamageTypeTags.IS_EXPLOSION_OR_FIRE)))
           .stacksTo(16)
   );
   public static final Block BRICK_WALL_SLAB = register(
@@ -531,35 +531,35 @@ public abstract class DistantMoonsBlocks {
           .sound(SoundType.NETHER_BRICKS)
           .strength(5.0F, 1200.0F),
       new Item.Properties()
-          .component(DataComponents.DAMAGE_RESISTANT, new DamageResistant(DistantMoonsDamageTypeTags.IS_EXPLOSION_OR_FIRE))
+          .delayedComponent(DataComponents.DAMAGE_RESISTANT, context -> new DamageResistant(context.getOrThrow(DistantMoonsDamageTypeTags.IS_EXPLOSION_OR_FIRE)))
   );
   public static final Block FIRE_BRICK_SLAB = register(
       "fire_brick_slab",
       SlabBlock::new,
       BlockBehaviour.Properties.ofFullCopy(FIRE_BRICKS),
       new Item.Properties()
-          .component(DataComponents.DAMAGE_RESISTANT, new DamageResistant(DistantMoonsDamageTypeTags.IS_EXPLOSION_OR_FIRE))
+          .delayedComponent(DataComponents.DAMAGE_RESISTANT, context -> new DamageResistant(context.getOrThrow(DistantMoonsDamageTypeTags.IS_EXPLOSION_OR_FIRE)))
   );
   public static final Block FIRE_BRICK_STAIRS = register(
       "fire_brick_stairs",
       SimplifiedStairsBlock::new,
       BlockBehaviour.Properties.ofFullCopy(FIRE_BRICKS),
       new Item.Properties()
-          .component(DataComponents.DAMAGE_RESISTANT, new DamageResistant(DistantMoonsDamageTypeTags.IS_EXPLOSION_OR_FIRE))
+          .delayedComponent(DataComponents.DAMAGE_RESISTANT, context -> new DamageResistant(context.getOrThrow(DistantMoonsDamageTypeTags.IS_EXPLOSION_OR_FIRE)))
   );
   public static final Block FIRE_BRICK_WALL = register(
       "fire_brick_wall",
       WallBlock::new,
       BlockBehaviour.Properties.ofFullCopy(FIRE_BRICKS),
       new Item.Properties()
-          .component(DataComponents.DAMAGE_RESISTANT, new DamageResistant(DistantMoonsDamageTypeTags.IS_EXPLOSION_OR_FIRE))
+          .delayedComponent(DataComponents.DAMAGE_RESISTANT, context -> new DamageResistant(context.getOrThrow(DistantMoonsDamageTypeTags.IS_EXPLOSION_OR_FIRE)))
   );
   public static final Block FIRE_BRICK_WALL_SLAB = register(
       "fire_brick_wall_slab",
       WallSlabBlock::new,
       BlockBehaviour.Properties.ofFullCopy(FIRE_BRICKS),
       new Item.Properties()
-          .component(DataComponents.DAMAGE_RESISTANT, new DamageResistant(DistantMoonsDamageTypeTags.IS_EXPLOSION_OR_FIRE))
+          .delayedComponent(DataComponents.DAMAGE_RESISTANT, context -> new DamageResistant(context.getOrThrow(DistantMoonsDamageTypeTags.IS_EXPLOSION_OR_FIRE)))
   );
   public static final Block FIXED_DEEP_IRON_LADDER = register(
       "fixed_deep_iron_ladder",

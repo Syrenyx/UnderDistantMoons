@@ -3,7 +3,6 @@ package syrenyx.distantmoons.content.affliction;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.registries.Registries;
-import syrenyx.distantmoons.content.affliction.effect.*;
 import syrenyx.distantmoons.initializers.DistantMoonsRegistries;
 import syrenyx.distantmoons.references.DistantMoonsRegistryKeys;
 
