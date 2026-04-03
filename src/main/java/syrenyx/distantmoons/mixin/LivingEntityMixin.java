@@ -20,8 +20,8 @@ public abstract class LivingEntityMixin {
   }
 
   @Inject(at = @At("HEAD"), method = "die")
-  public void distantMoons$die(DamageSource damageSource, CallbackInfo callbackInfo) {
+  public void distantMoons$die(DamageSource source, CallbackInfo callbackInfo) {
     LivingEntity entity = (LivingEntity) (Object) this;
-    if (entity.level() instanceof ServerLevel) AfflictionManager.handlePostDamage(entity, damageSource, DistantMoonsAfflictionEffectComponents.POST_DEATH);
+    if (entity.level() instanceof ServerLevel) AfflictionManager.handlePostDamage(entity, source, DistantMoonsAfflictionEffectComponents.POST_DEATH);
   }
 }

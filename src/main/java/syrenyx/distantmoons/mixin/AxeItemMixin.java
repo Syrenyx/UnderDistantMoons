@@ -28,21 +28,21 @@ import net.minecraft.world.level.block.state.BlockState;
 public abstract class AxeItemMixin {
 
   @Shadow
-  private static void spawnSoundAndParticle(Level world, BlockPos pos, @Nullable Player player, BlockState state, SoundEvent sound, int worldEvent) {}
+  private static void spawnSoundAndParticle(Level level, BlockPos pos, @Nullable Player player, BlockState oldState, SoundEvent soundEvent, int particle) {}
 
   @Inject(at = @At("HEAD"), cancellable = true, method = "evaluateNewBlockState")
   private void distantMoons$evaluateNewBlockState(
-      Level world, BlockPos pos, @Nullable Player player, BlockState state, CallbackInfoReturnable<Optional<BlockState>> callbackInfo
+      Level level, BlockPos pos, @Nullable Player player, BlockState oldState, CallbackInfoReturnable<Optional<BlockState>> callbackInfo
   ) {
-    Block block = state.getBlock();
+    Block block = oldState.getBlock();
     BlockOxidizationDefinition oxidizationRules = BlockOxidizationManager.BLOCK_OXIDIZATION_MAP.get(block);
     if (oxidizationRules != null && oxidizationRules.canBeScraped()) {
-      if (oxidizationRules.rust()) distantMoons$scrapeRust(world, pos, player, state);
-      else spawnSoundAndParticle(world, pos, player, state, SoundEvents.AXE_SCRAPE, BlockOxidizationManager.SCRAPE_WORLD_EVENT);
-      callbackInfo.setReturnValue(oxidizationRules.getScrapedStateOf(state));
+      if (oxidizationRules.rust()) distantMoons$scrapeRust(level, pos, player, oldState);
+      else spawnSoundAndParticle(level, pos, player, oldState, SoundEvents.AXE_SCRAPE, BlockOxidizationManager.SCRAPE_WORLD_EVENT);
+      callbackInfo.setReturnValue(oxidizationRules.getScrapedStateOf(oldState));
     } else if (BlockOxidizationManager.WAXED_BLOCK_SCRAPING_MAP.containsKey(block)) {
-      spawnSoundAndParticle(world, pos, player, state, SoundEvents.AXE_WAX_OFF, BlockOxidizationManager.WAX_OFF_WORLD_EVENT);
-      callbackInfo.setReturnValue(Optional.of(BlockOxidizationManager.WAXED_BLOCK_SCRAPING_MAP.get(block).apply(state)));
+      spawnSoundAndParticle(level, pos, player, oldState, SoundEvents.AXE_WAX_OFF, BlockOxidizationManager.WAX_OFF_WORLD_EVENT);
+      callbackInfo.setReturnValue(Optional.of(BlockOxidizationManager.WAXED_BLOCK_SCRAPING_MAP.get(block).apply(oldState)));
     }
   }
 

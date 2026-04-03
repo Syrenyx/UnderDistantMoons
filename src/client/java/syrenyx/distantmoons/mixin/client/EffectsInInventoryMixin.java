@@ -60,8 +60,8 @@ public abstract class EffectsInInventoryMixin {
   @Unique private MobEffectInstance hoveredStatusEffect;
   @Unique private AfflictionInstance hoveredAffliction;
 
-  @Inject(at = @At("HEAD"), cancellable = true, method = "renderEffects")
-  public void distantMoons$drawStatusEffects(GuiGraphicsExtractor context, Collection<MobEffectInstance> effects, int x, int height, int mouseX, int mouseY, int width, CallbackInfo callbackInfo) {
+  @Inject(at = @At("HEAD"), cancellable = true, method = "extractEffects")
+  public void distantMoons$drawStatusEffects(GuiGraphicsExtractor graphics, Collection<MobEffectInstance> activeEffects, int x0, int yStep, int mouseX, int mouseY, int maxWidth, CallbackInfo callbackInfo) {
     callbackInfo.cancel();
     if (this.minecraft.player == null) return;
     HandledScreenAccessor parentAccessor = (HandledScreenAccessor) this.screen;
@@ -71,45 +71,45 @@ public abstract class EffectsInInventoryMixin {
     //int height = parent.width - horizontalPosition;
     Collection<AfflictionInstance> activeAfflictions = ClientPlayerAttachment.getOrCreate(this.minecraft.player).activeAfflictions().stream().filter(AfflictionInstance::isVisible).toList();
     Collection<MobEffectInstance> statusEffects = this.minecraft.player.getActiveEffects();
-    if (height < MIN_SIZE || statusEffects.isEmpty() && activeAfflictions.isEmpty()) return;
-    boolean wide = height >= FULL_SIZE && activeAfflictions.size() + statusEffects.size() < 6;
+    if (yStep < MIN_SIZE || statusEffects.isEmpty() && activeAfflictions.isEmpty()) return;
+    boolean wide = yStep >= FULL_SIZE && activeAfflictions.size() + statusEffects.size() < 6;
     Iterable<AfflictionInstance> iterableAfflictions = Ordering.natural().sortedCopy(activeAfflictions);
     Iterable<MobEffectInstance> iterableEffects = Ordering.natural().sortedCopy(statusEffects);
     //int x = horizontalPosition;
     int y = parentAccessor.y();
     for (AfflictionInstance affliction : iterableAfflictions) {
-      distantMoons$drawAfflictionWidget(context, x, y, wide, affliction, this.screen.getFont());
+      distantMoons$drawAfflictionWidget(graphics, x0, y, wide, affliction, this.screen.getFont());
       y += WIDGET_SPACING;
       if (y - parentAccessor.y() > WIDGET_SPACING * 4) {
         y = parentAccessor.y();
-        x += WIDGET_SPACING;
+        x0 += WIDGET_SPACING;
       }
     }
     for (var statusEffect : iterableEffects) {
       assert this.minecraft.level != null;
-      distantMoons$drawStatusEffectWidget(context, x, y, wide, statusEffect, this.screen.getFont(), this.minecraft.level.tickRateManager());
+      distantMoons$drawStatusEffectWidget(graphics, x0, y, wide, statusEffect, this.screen.getFont(), this.minecraft.level.tickRateManager());
       y += WIDGET_SPACING;
       if (y - parentAccessor.y() > WIDGET_SPACING * 4) {
         y = parentAccessor.y();
-        x += WIDGET_SPACING;
+        x0 += WIDGET_SPACING;
       }
     }
-    x = horizontalPosition;
+    x0 = horizontalPosition;
     y = parentAccessor.y();
     for (AfflictionInstance afflictionInstance : iterableAfflictions) {
-      if (mouseY >= y && mouseY <= y + MIN_SIZE - 1 && mouseX >= x && mouseX <= x + (wide ? FULL_SIZE : MIN_SIZE) - 1) this.hoveredAffliction = afflictionInstance;
+      if (mouseY >= y && mouseY <= y + MIN_SIZE - 1 && mouseX >= x0 && mouseX <= x0 + (wide ? FULL_SIZE : MIN_SIZE) - 1) this.hoveredAffliction = afflictionInstance;
       y += WIDGET_SPACING;
       if (y - parentAccessor.y() > WIDGET_SPACING * 4) {
         y = parentAccessor.y();
-        x += WIDGET_SPACING;
+        x0 += WIDGET_SPACING;
       }
     }
     for (MobEffectInstance statusEffectInstance : iterableEffects) {
-      if (mouseY >= y && mouseY <= y + MIN_SIZE - 1 && mouseX >= x && mouseX <= x + (wide ? FULL_SIZE : MIN_SIZE) - 1) this.hoveredStatusEffect = statusEffectInstance;
+      if (mouseY >= y && mouseY <= y + MIN_SIZE - 1 && mouseX >= x0 && mouseX <= x0 + (wide ? FULL_SIZE : MIN_SIZE) - 1) this.hoveredStatusEffect = statusEffectInstance;
       y += WIDGET_SPACING;
       if (y - parentAccessor.y() > WIDGET_SPACING * 4) {
         y = parentAccessor.y();
-        x += WIDGET_SPACING;
+        x0 += WIDGET_SPACING;
       }
     }
   }

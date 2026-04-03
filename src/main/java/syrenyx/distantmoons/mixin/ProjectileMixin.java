@@ -20,7 +20,7 @@ public abstract class ProjectileMixin {
   @Nullable @Shadow protected EntityReference<Entity> owner;
 
   @Inject(at = @At("HEAD"), method = "applyOnProjectileSpawned")
-  public void distantMoons$applyOnProjectileSpawned(ServerLevel world, ItemStack projectileStack, CallbackInfo callbackInfo) {
+  public void distantMoons$applyOnProjectileSpawned(ServerLevel serverLevel, ItemStack pickupItemStack, CallbackInfo callbackInfo) {
     Projectile thisProjectile = (Projectile) (Object) this;
     Entity entity = thisProjectile.getOwner();
     if (!(entity instanceof LivingEntity ownerEntity)) return;

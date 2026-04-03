@@ -15,7 +15,7 @@ import syrenyx.distantmoons.references.tag.DistantMoonsBlockTags;
 public class LeavesBlockMixin {
 
   @Inject(at = @At("HEAD"), cancellable = true, method = "makeFallingLeavesParticles(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/util/RandomSource;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/core/BlockPos;)V")
-  private void distantMoons$makeFallingLeavesParticles(Level world, BlockPos pos, RandomSource random, BlockState state, BlockPos posBelow, CallbackInfo callbackInfo) {
-    if (world.getBlockState(pos).is(DistantMoonsBlockTags.LEAVES_WITHOUT_LEAF_PARTICLES)) callbackInfo.cancel();
+  private void distantMoons$makeFallingLeavesParticles(Level level, BlockPos pos, RandomSource random, BlockState belowState, BlockPos below, CallbackInfo callbackInfo) {
+    if (level.getBlockState(pos).is(DistantMoonsBlockTags.LEAVES_WITHOUT_LEAF_PARTICLES)) callbackInfo.cancel();
   }
 }

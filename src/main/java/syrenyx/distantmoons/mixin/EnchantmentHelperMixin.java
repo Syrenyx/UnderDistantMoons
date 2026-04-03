@@ -28,172 +28,172 @@ public abstract class EnchantmentHelperMixin {
 
   @Inject(at = @At("HEAD"), method = "runLocationChangedEffects(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;)V")
   private static void distantMoons$runLocationChangedEffects(
-      ServerLevel world,
-      LivingEntity user,
+      ServerLevel serverLevel,
+      LivingEntity entity,
       CallbackInfo callbackInfo
   ) {
-    AfflictionManager.handleLocationChanged(user, false);
+    AfflictionManager.handleLocationChanged(entity, false);
   }
 
   @Inject(at = @At("HEAD"), method = "runLocationChangedEffects(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/entity/EquipmentSlot;)V")
   private static void distantMoons$runLocationChangedEffects(
-      ServerLevel world,
+      ServerLevel serverLevel,
       ItemStack stack,
-      LivingEntity user,
+      LivingEntity entity,
       EquipmentSlot slot,
       CallbackInfo callbackInfo
   ) {
-    AfflictionManager.handleLocationChanged(user, false);
+    AfflictionManager.handleLocationChanged(entity, false);
   }
 
   @Inject(at = @At("RETURN"), cancellable = true, method = "processAmmoUse")
   private static void distantMoons$processAmmoUse(
-      ServerLevel world, ItemStack rangedWeaponStack, ItemStack projectileStack, int baseAmmoUse, CallbackInfoReturnable<Integer> callbackInfo
+      ServerLevel serverLevel, ItemStack weapon, ItemStack ammo, int amount, CallbackInfoReturnable<Integer> callbackInfo
   ) {
     MutableFloat mutableFloat = new MutableFloat(callbackInfo.getReturnValue());
-    EnchantmentHelper.runIterationOnItem(projectileStack, (enchantment, level) -> enchantment.value().modifyAmmoCount(world, level, projectileStack, mutableFloat));
+    EnchantmentHelper.runIterationOnItem(ammo, (enchantment, level) -> enchantment.value().modifyAmmoCount(serverLevel, level, ammo, mutableFloat));
     callbackInfo.setReturnValue(mutableFloat.intValue());
   }
 
   @Inject(at = @At("HEAD"), cancellable = true, method = "modifyArmorEffectiveness")
   private static void distantMoons$modifyArmorEffectiveness(
-      ServerLevel world,
-      ItemStack stack,
-      Entity user,
+      ServerLevel serverLevel,
+      ItemStack itemStack,
+      Entity victim,
       DamageSource damageSource,
-      float baseArmorEffectiveness,
+      float armorFraction,
       CallbackInfoReturnable<Float> callbackInfo
   ) {
-    if (!(user instanceof LivingEntity livingEntity)) return;
-    float armorEffectiveness = AfflictionManager.getArmorEffectiveness(livingEntity, damageSource, baseArmorEffectiveness);
-    if (armorEffectiveness == baseArmorEffectiveness) return;
-    callbackInfo.setReturnValue(EnchantmentManager.getArmorEffectiveness(user, stack, damageSource, armorEffectiveness));
+    if (!(victim instanceof LivingEntity livingEntity)) return;
+    float armorEffectiveness = AfflictionManager.getArmorEffectiveness(livingEntity, damageSource, armorFraction);
+    if (armorEffectiveness == armorFraction) return;
+    callbackInfo.setReturnValue(EnchantmentManager.getArmorEffectiveness(victim, itemStack, damageSource, armorEffectiveness));
   }
 
   @Inject(at = @At("HEAD"), cancellable = true, method = "modifyDamage")
   private static void distantMoons$modifyDamage(
-      ServerLevel world,
-      ItemStack stack,
-      Entity target,
+      ServerLevel serverLevel,
+      ItemStack itemStack,
+      Entity victim,
       DamageSource damageSource,
-      float baseDamage,
+      float damage,
       CallbackInfoReturnable<Float> callbackInfo
   ) {
     if (!(damageSource.getEntity() instanceof LivingEntity livingEntity)) return;
-    float damage = AfflictionManager.getDamage(livingEntity, target, damageSource, baseDamage);
-    if (damage == baseDamage) return;
-    callbackInfo.setReturnValue(EnchantmentManager.getDamage(target, stack, damageSource, damage));
+    float resultingDamage = AfflictionManager.getDamage(livingEntity, victim, damageSource, damage);
+    if (resultingDamage == damage) return;
+    callbackInfo.setReturnValue(EnchantmentManager.getDamage(victim, itemStack, damageSource, damage));
   }
 
   @Inject(at = @At("HEAD"), cancellable = true, method = "getFishingLuckBonus")
   private static void distantMoons$getFishingLuckBonus(
-      ServerLevel world,
-      ItemStack stack,
-      Entity user,
+      ServerLevel serverLevel,
+      ItemStack rod,
+      Entity fisher,
       CallbackInfoReturnable<Integer> callbackInfo
   ) {
-    if (!(user instanceof LivingEntity livingEntity)) return;
-    float fishingLuckBonus = AfflictionManager.getFishingLuckBonus(livingEntity, stack);
+    if (!(fisher instanceof LivingEntity livingEntity)) return;
+    float fishingLuckBonus = AfflictionManager.getFishingLuckBonus(livingEntity, rod);
     if (fishingLuckBonus == 0.0F) return;
-    callbackInfo.setReturnValue((int) EnchantmentManager.getFishingLuckBonus(user, stack, fishingLuckBonus));
+    callbackInfo.setReturnValue((int) EnchantmentManager.getFishingLuckBonus(fisher, rod, fishingLuckBonus));
   }
 
   @Inject(at = @At("HEAD"), cancellable = true, method = "getFishingTimeReduction")
   private static void distantMoons$getFishingTimeReduction(
-      ServerLevel world,
-      ItemStack stack,
-      Entity user,
+      ServerLevel serverLevel,
+      ItemStack rod,
+      Entity fisher,
       CallbackInfoReturnable<Integer> callbackInfo
   ) {
-    if (!(user instanceof LivingEntity livingEntity)) return;
-    float fishingTimeReduction = AfflictionManager.getFishingTimeReduction(livingEntity, stack);
+    if (!(fisher instanceof LivingEntity livingEntity)) return;
+    float fishingTimeReduction = AfflictionManager.getFishingTimeReduction(livingEntity, rod);
     if (fishingTimeReduction == 0.0F) return;
-    callbackInfo.setReturnValue((int) EnchantmentManager.getFishingTimeReduction(user, stack, fishingTimeReduction));
+    callbackInfo.setReturnValue((int) EnchantmentManager.getFishingTimeReduction(fisher, rod, fishingTimeReduction));
   }
 
   @Inject(at = @At("HEAD"), cancellable = true, method = "getDamageProtection")
   private static void distantMoons$getDamageProtection(
-      ServerLevel world,
-      LivingEntity user,
-      DamageSource damageSource,
+      ServerLevel serverLevel,
+      LivingEntity victim,
+      DamageSource source,
       CallbackInfoReturnable<Float> callbackInfo
   ) {
-    if (!(user instanceof LivingEntity livingEntity)) return;
-    float damageProtection = AfflictionManager.getDamageProtection(livingEntity, damageSource);
+    if (!(victim instanceof LivingEntity livingEntity)) return;
+    float damageProtection = AfflictionManager.getDamageProtection(livingEntity, source);
     if (damageProtection == 0.0F) return;
-    callbackInfo.setReturnValue(EnchantmentManager.getDamageProtection(user, damageSource, damageProtection));
+    callbackInfo.setReturnValue(EnchantmentManager.getDamageProtection(victim, source, damageProtection));
   }
 
   @Inject(at = @At("HEAD"), cancellable = true, method = "modifyKnockback")
   private static void distantMoons$modifyKnockback(
-      ServerLevel world,
-      ItemStack stack,
-      Entity target,
+      ServerLevel serverLevel,
+      ItemStack itemStack,
+      Entity victim,
       DamageSource damageSource,
-      float baseKnockback,
+      float knockback,
       CallbackInfoReturnable<Float> callbackInfo
   ) {
     Entity user = damageSource.getEntity();
     if (!(damageSource.getEntity() instanceof LivingEntity livingEntity) || user == null) return;
-    float knockback = AfflictionManager.getKnockback(livingEntity, user, damageSource, baseKnockback);
-    if (knockback == baseKnockback) return;
-    callbackInfo.setReturnValue(EnchantmentManager.getKnockback(user, stack, damageSource, knockback));
+    float resultingKnockback = AfflictionManager.getKnockback(livingEntity, user, damageSource, knockback);
+    if (resultingKnockback == knockback) return;
+    callbackInfo.setReturnValue(EnchantmentManager.getKnockback(user, itemStack, damageSource, resultingKnockback));
   }
 
   @Inject(at = @At("HEAD"), cancellable = true, method = "isImmuneToDamage")
   private static void distantMoons$isImmuneToDamage(
-      ServerLevel world,
-      LivingEntity user,
-      DamageSource damageSource,
+      ServerLevel serverLevel,
+      LivingEntity victim,
+      DamageSource source,
       CallbackInfoReturnable<Boolean> callbackInfo
   ) {
-    if (AfflictionManager.handleDamageImmunity(user, damageSource)) {
+    if (AfflictionManager.handleDamageImmunity(victim, source)) {
       callbackInfo.setReturnValue(true);
     }
   }
 
   @Inject(at = @At("HEAD"), method = "onHitBlock")
   private static void distantMoons$onHitBlock(
-      ServerLevel world,
-      ItemStack stack,
-      @Nullable LivingEntity user,
-      Entity enchantedEntity,
+      ServerLevel serverLevel,
+      ItemStack weapon,
+      @Nullable LivingEntity owner,
+      Entity entity,
       @Nullable EquipmentSlot slot,
-      Vec3 pos,
-      BlockState state,
+      Vec3 hitLocation,
+      BlockState hitBlock,
       Consumer<Item> onBreak,
       CallbackInfo callbackInfo
   ) {
-    AfflictionManager.handleHitBlock(user, pos);
+    AfflictionManager.handleHitBlock(owner, hitLocation);
   }
 
   @Inject(at = @At("HEAD"), method = "doPostAttackEffectsWithItemSourceOnBreak(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/damagesource/DamageSource;Lnet/minecraft/world/item/ItemStack;Ljava/util/function/Consumer;)V")
   private static void distantMoons$doPostAttackEffectsWithItemSourceOnBreak(
-      ServerLevel world,
-      Entity target,
+      ServerLevel serverLevel,
+      Entity victim,
       DamageSource damageSource,
-      @Nullable ItemStack weapon,
-      Consumer<Item> breakCallback,
+      @Nullable ItemStack source,
+      Consumer<Item> attackerlessOnBreak,
       CallbackInfo callbackInfo
   ) {
-    if (target instanceof LivingEntity livingEntity) AfflictionManager.handlePostDamage(livingEntity, damageSource, DistantMoonsAfflictionEffectComponents.POST_ATTACK);
+    if (victim instanceof LivingEntity livingEntity) AfflictionManager.handlePostDamage(livingEntity, damageSource, DistantMoonsAfflictionEffectComponents.POST_ATTACK);
   }
 
   @Inject(at = @At("HEAD"), method = "stopLocationBasedEffects(Lnet/minecraft/world/entity/LivingEntity;)V")
   private static void distantMoons$stopLocationBasedEffects(
-      LivingEntity user,
+      LivingEntity entity,
       CallbackInfo callbackInfo
   ) {
-    AfflictionManager.handleLocationChanged(user, true);
+    AfflictionManager.handleLocationChanged(entity, true);
   }
 
   @Inject(at = @At("HEAD"), method = "stopLocationBasedEffects(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/entity/EquipmentSlot;)V")
   private static void distantMoons$stopLocationBasedEffects(
       ItemStack stack,
-      LivingEntity user,
+      LivingEntity entity,
       EquipmentSlot slot,
       CallbackInfo callbackInfo
   ) {
-    AfflictionManager.handleLocationChanged(user, true);
+    AfflictionManager.handleLocationChanged(entity, true);
   }
 }

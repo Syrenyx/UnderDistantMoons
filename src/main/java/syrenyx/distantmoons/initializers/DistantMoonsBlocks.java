@@ -1588,7 +1588,7 @@ public abstract class DistantMoonsBlocks {
   }
 
   private static boolean defaultIsValidSpawn(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, EntityType<?> entityType) {
-    return blockState.isFaceSturdy(blockGetter,blockPos,Direction.UP) && blockState.getLightEmission() < 14;
+    return blockState.isFaceSturdy(blockGetter, blockPos, Direction.UP) && blockState.getLightEmission() < 14;
 }
 
   public static void initialize() {}

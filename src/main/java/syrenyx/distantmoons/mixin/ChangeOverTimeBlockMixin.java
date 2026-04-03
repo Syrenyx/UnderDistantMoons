@@ -20,10 +20,10 @@ public interface ChangeOverTimeBlockMixin {
 
   @Inject(at = @At(value = "HEAD"), cancellable = true, method = "getNextState")
   private void distantMoons$getNextState(
-      BlockState state, ServerLevel world, BlockPos pos, RandomSource random, CallbackInfoReturnable<Optional<BlockState>> callbackInfo
+      BlockState state, ServerLevel level, BlockPos pos, RandomSource random, CallbackInfoReturnable<Optional<BlockState>> callbackInfo
   ) {
     Block thisBlock = (Block) this;
     if (!(thisBlock instanceof ChangeOverTimeBlock<?> degradableBlock) || degradableBlock.getAge().getClass() != WeatheringCopper.WeatherState.class) return;
-    callbackInfo.setReturnValue(BlockOxidizationManager.tryToOxidize(thisBlock, state, world, pos, random));
+    callbackInfo.setReturnValue(BlockOxidizationManager.tryToOxidize(thisBlock, state, level, pos, random));
   }
 }

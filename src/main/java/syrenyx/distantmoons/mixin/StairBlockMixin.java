@@ -26,15 +26,15 @@ public abstract class StairBlockMixin {
 
   @Inject(at = @At(value = "HEAD"), cancellable = true, method = "getStairsShape")
   private static void distantMoons$getStairShape(
-      BlockState state, BlockGetter world, BlockPos pos, CallbackInfoReturnable<StairsShape> callbackInfo
+      BlockState state, BlockGetter level, BlockPos pos, CallbackInfoReturnable<StairsShape> callbackInfo
   ) {
     Direction direction = state.getValue(HorizontalDirectionalBlock.FACING);
-    BlockState leftState = world.getBlockState(pos.relative(direction.getCounterClockWise()));
+    BlockState leftState = level.getBlockState(pos.relative(direction.getCounterClockWise()));
     boolean leftLocked = distantMoons$canConnectTo(state, leftState) && leftState.getValue(HorizontalDirectionalBlock.FACING) == direction;
-    BlockState rightState = world.getBlockState(pos.relative(direction.getClockWise()));
+    BlockState rightState = level.getBlockState(pos.relative(direction.getClockWise()));
     boolean rightLocked = distantMoons$canConnectTo(state, rightState) && rightState.getValue(HorizontalDirectionalBlock.FACING) == direction;
-    BlockState backState = world.getBlockState(pos.relative(direction));
-    BlockState frontState = world.getBlockState(pos.relative(direction.getOpposite()));
+    BlockState backState = level.getBlockState(pos.relative(direction));
+    BlockState frontState = level.getBlockState(pos.relative(direction.getOpposite()));
     if (distantMoons$canConnectTo(state, frontState)) {
       Direction facing = frontState.getValue(HorizontalDirectionalBlock.FACING);
       if (direction.getCounterClockWise() == facing && !leftLocked) callbackInfo.setReturnValue(StairsShape.INNER_LEFT);

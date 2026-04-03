@@ -12,7 +12,7 @@ import syrenyx.distantmoons.content.affliction.AfflictionManager;
 public abstract class ServerPlayerMixin {
 
   @Inject(at = @At("HEAD"), method = "die")
-  public void distantMoons$die(DamageSource damageSource, CallbackInfo callbackInfo) {
-    AfflictionManager.handlePlayerDeath((ServerPlayer) (Object) this, damageSource);
+  public void distantMoons$die(DamageSource source, CallbackInfo callbackInfo) {
+    AfflictionManager.handlePlayerDeath((ServerPlayer) (Object) this, source);
   }
 }

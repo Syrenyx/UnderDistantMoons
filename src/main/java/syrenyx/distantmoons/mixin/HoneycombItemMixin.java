@@ -15,9 +15,9 @@ import net.minecraft.world.level.block.state.BlockState;
 public abstract class HoneycombItemMixin {
 
   @Inject(at = @At("HEAD"), cancellable = true, method = "getWaxed")
-  private static void distantMoons$getWaxed(BlockState state, CallbackInfoReturnable<Optional<BlockState>> callbackInfo) {
-    BlockOxidizationDefinition oxidizationRules = BlockOxidizationManager.BLOCK_OXIDIZATION_MAP.get(state.getBlock());
+  private static void distantMoons$getWaxed(BlockState oldState, CallbackInfoReturnable<Optional<BlockState>> callbackInfo) {
+    BlockOxidizationDefinition oxidizationRules = BlockOxidizationManager.BLOCK_OXIDIZATION_MAP.get(oldState.getBlock());
     if (oxidizationRules == null || !oxidizationRules.canBeWaxed()) return;
-    callbackInfo.setReturnValue(oxidizationRules.getWaxedStateOf(state));
+    callbackInfo.setReturnValue(oxidizationRules.getWaxedStateOf(oldState));
   }
 }
