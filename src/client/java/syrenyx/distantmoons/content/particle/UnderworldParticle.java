@@ -47,8 +47,8 @@ public class UnderworldParticle extends SingleQuadParticle {
   }
 
   @Override
-  protected int getLightColor(float tint) {
-    return Math.max(MAX_LIGHT_COLOR, super.getLightColor(tint));
+  protected int getLightCoords(final float tint) {
+    return Math.max(MAX_LIGHT_COLOR, super.getLightCoords(tint));
   }
 
   @Override

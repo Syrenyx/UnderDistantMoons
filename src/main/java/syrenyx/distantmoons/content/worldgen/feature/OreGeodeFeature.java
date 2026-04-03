@@ -10,8 +10,8 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.IntProvider;
+import net.minecraft.util.valueproviders.IntProviders;
 import net.minecraft.util.valueproviders.UniformInt;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -89,9 +89,9 @@ public class OreGeodeFeature extends Feature<OreGeodeFeature.Config> {
     public static final Codec<Config> CODEC = RecordCodecBuilder.create(instance -> instance
         .group(
             LayerConfig.CODEC.fieldOf("layers").forGetter(Config::layerConfig),
-            IntProvider.codec(1, 20).optionalFieldOf("outer_wall_distance", UniformInt.of(4, 5)).forGetter(config -> config.outerWallDistance),
-            IntProvider.codec(1, 20).optionalFieldOf("distribution_points", UniformInt.of(3, 4)).forGetter(config -> config.distributionPoints),
-            IntProvider.codec(0, 10).optionalFieldOf("point_offset", UniformInt.of(1, 2)).forGetter(config -> config.pointOffset),
+            IntProviders.codec(1, 20).optionalFieldOf("outer_wall_distance", UniformInt.of(4, 5)).forGetter(config -> config.outerWallDistance),
+            IntProviders.codec(1, 20).optionalFieldOf("distribution_points", UniformInt.of(3, 4)).forGetter(config -> config.distributionPoints),
+            IntProviders.codec(0, 10).optionalFieldOf("point_offset", UniformInt.of(1, 2)).forGetter(config -> config.pointOffset),
             Codec.INT.optionalFieldOf("min_gen_offset", -16).forGetter(config -> config.minGenOffset),
             Codec.INT.optionalFieldOf("max_gen_offset", 16).forGetter(config -> config.maxGenOffset),
             Codec.doubleRange(0.0, 1.0).optionalFieldOf("noise_multiplier", 0.05).forGetter(config -> config.noiseMultiplier),

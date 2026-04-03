@@ -32,9 +32,9 @@ public class SparkParticle extends SingleQuadParticle {
   }
 
   @Override
-  public int getLightColor(float tint) {
+  public int getLightCoords(final float tint) {
     float f = Mth.clamp((this.age + tint) / this.lifetime, 0.0F, 1.0F);
-    int i = super.getLightColor(tint);
+    int i = super.getLightCoords(tint);
     int j = i & 0xFF;
     int k = i >> 16 & 0xFF;
     j += (int) (f * 15.0F * 16.0F);

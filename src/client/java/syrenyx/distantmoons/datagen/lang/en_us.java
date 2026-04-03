@@ -1,6 +1,6 @@
 package syrenyx.distantmoons.datagen.lang;
 
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.world.item.DyeColor;
@@ -32,7 +32,7 @@ public class en_us extends FabricLanguageProvider {
       Map.entry(DyeColor.PINK, "Pink")
   );
 
-  public en_us(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
+  public en_us(FabricPackOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
     super(dataOutput, "en_us", registryLookup);
   }
 

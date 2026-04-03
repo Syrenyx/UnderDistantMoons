@@ -36,11 +36,11 @@ public record ReplaceBlockEffect(
   }
 
   @Override
-  public void apply(ServerLevel world, int stage, Entity target, Vec3 pos) {
+  public void apply(ServerLevel level, int stage, Entity target, Vec3 pos) {
     BlockPos blockPos = BlockPos.containing(pos).offset(this.offset);
     if (
-        this.predicate.map(predicate -> predicate.test(world, blockPos)).orElse(true)
-            && world.setBlockAndUpdate(blockPos, this.blockState.getState(target.getRandom(), blockPos))
-    ) this.triggerGameEvent.ifPresent(gameEvent -> world.gameEvent(target, gameEvent, blockPos));
+        this.predicate.map(predicate -> predicate.test(level, blockPos)).orElse(true)
+            && level.setBlockAndUpdate(blockPos, this.blockState.getState(level, target.getRandom(), blockPos))
+    ) this.triggerGameEvent.ifPresent(gameEvent -> level.gameEvent(target, gameEvent, blockPos));
   }
 }

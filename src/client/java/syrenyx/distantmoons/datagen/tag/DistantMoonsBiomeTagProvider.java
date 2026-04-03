@@ -1,7 +1,7 @@
 package syrenyx.distantmoons.datagen.tag;
 
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.biome.Biome;
@@ -11,9 +11,9 @@ import syrenyx.distantmoons.references.tag.DistantMoonsBiomeTags;
 
 import java.util.concurrent.CompletableFuture;
 
-public class DistantMoonsBiomeTagProvider extends FabricTagProvider<Biome> {
+public class DistantMoonsBiomeTagProvider extends FabricTagsProvider<Biome> {
 
-  public DistantMoonsBiomeTagProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+  public DistantMoonsBiomeTagProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
     super(output, Registries.BIOME, registriesFuture);
   }
 

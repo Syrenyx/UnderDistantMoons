@@ -4,7 +4,7 @@ import com.google.common.collect.Ordering;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.screens.inventory.EffectsInInventory;
 import net.minecraft.client.renderer.RenderPipelines;
@@ -61,7 +61,7 @@ public abstract class EffectsInInventoryMixin {
   @Unique private AfflictionInstance hoveredAffliction;
 
   @Inject(at = @At("HEAD"), cancellable = true, method = "renderEffects")
-  public void distantMoons$drawStatusEffects(GuiGraphics context, Collection<MobEffectInstance> effects, int x, int height, int mouseX, int mouseY, int width, CallbackInfo callbackInfo) {
+  public void distantMoons$drawStatusEffects(GuiGraphicsExtractor context, Collection<MobEffectInstance> effects, int x, int height, int mouseX, int mouseY, int width, CallbackInfo callbackInfo) {
     callbackInfo.cancel();
     if (this.minecraft.player == null) return;
     HandledScreenAccessor parentAccessor = (HandledScreenAccessor) this.screen;
@@ -135,7 +135,7 @@ public abstract class EffectsInInventoryMixin {
    */
 
   @Unique
-  private static void distantMoons$drawAfflictionWidget(GuiGraphics context, int x, int y, boolean wide, AfflictionInstance afflictionInstance, Font textRenderer) {
+  private static void distantMoons$drawAfflictionWidget(GuiGraphicsExtractor context, int x, int y, boolean wide, AfflictionInstance afflictionInstance, Font textRenderer) {
     Affliction affliction = afflictionInstance.affliction().value();
     Identifier texture = affliction.persistent()
         ? (wide ? LARGE_PERSISTENT_AFFLICTION_BACKGROUND_TEXTURE : SMALL_PERSISTENT_AFFLICTION_BACKGROUND_TEXTURE)
@@ -143,7 +143,7 @@ public abstract class EffectsInInventoryMixin {
     context.blitSprite(RenderPipelines.GUI_TEXTURED, texture, x, y, wide ? FULL_SIZE : MIN_SIZE, MIN_SIZE);
     context.blitSprite(RenderPipelines.GUI_TEXTURED, distantMoons$getIcon(afflictionInstance), x + (wide ? 6 : 7), y + 7, 18, 18);
     if (!wide) return;
-    context.drawString(textRenderer, afflictionInstance.getDescription(), x + 28, y + 6, CommonColors.WHITE);
+    context.text(textRenderer, afflictionInstance.getDescription(), x + 28, y + 6, CommonColors.WHITE);
     switch (afflictionInstance.getProgressionBarStyle()) {
       case DEFAULT -> {
         context.blitSprite(
@@ -180,12 +180,12 @@ public abstract class EffectsInInventoryMixin {
   }
 
   @Unique
-  private static void distantMoons$drawStatusEffectWidget(GuiGraphics context, int x, int y, boolean wide, MobEffectInstance statusEffect, Font textRenderer, TickRateManager tickManager) {
+  private static void distantMoons$drawStatusEffectWidget(GuiGraphicsExtractor context, int x, int y, boolean wide, MobEffectInstance statusEffect, Font textRenderer, TickRateManager tickManager) {
     context.blitSprite(RenderPipelines.GUI_TEXTURED, wide ? LARGE_EFFECT_BACKGROUND_TEXTURE : SMALL_EFFECT_BACKGROUND_TEXTURE, x, y, wide ? FULL_SIZE : MIN_SIZE, MIN_SIZE);
     context.blitSprite(RenderPipelines.GUI_TEXTURED, Gui.getMobEffectSprite(statusEffect.getEffect()), x + (wide ? 6 : 7), y + 7, 18, 18);
     if (wide) {
-      context.drawString(textRenderer, distantMoons$getDescription(statusEffect), x + 28, y + 6, CommonColors.WHITE);
-      context.drawString(textRenderer, MobEffectUtil.formatDuration(statusEffect, 1.0F, tickManager.tickrate()), x + 28, y + 16, -8421505);
+      context.text(textRenderer, distantMoons$getDescription(statusEffect), x + 28, y + 6, CommonColors.WHITE);
+      context.text(textRenderer, MobEffectUtil.formatDuration(statusEffect, 1.0F, tickManager.tickrate()), x + 28, y + 16, -8421505);
     }
   }
 

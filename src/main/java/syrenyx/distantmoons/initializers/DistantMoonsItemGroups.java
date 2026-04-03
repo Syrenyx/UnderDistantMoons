@@ -2,12 +2,7 @@ package syrenyx.distantmoons.initializers;
 
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
 import syrenyx.distantmoons.utility.ColorUtil;
 
@@ -20,7 +15,7 @@ public abstract class DistantMoonsItemGroups {
 
     //BUILDING BLOCKS
     addToGroup(CreativeModeTabs.BUILDING_BLOCKS, Items.OAK_WOOD, List.of(
-        DistantMoonsBlocks.CUT_OAK_LOG.asItem().getDefaultInstance(),
+        new ItemStack(DistantMoonsBlocks.CUT_OAK_LOG.asItem()),
         DistantMoonsBlocks.CUT_OAK_WOOD.asItem().getDefaultInstance()
     ));
     addToGroup(CreativeModeTabs.BUILDING_BLOCKS, Items.STRIPPED_OAK_WOOD, List.of(

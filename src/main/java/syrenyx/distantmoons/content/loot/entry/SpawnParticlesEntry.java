@@ -3,6 +3,7 @@ package syrenyx.distantmoons.content.loot.entry;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.util.valueproviders.FloatProviders;
 import org.jspecify.annotations.NonNull;
 
 import java.util.Collections;
@@ -31,7 +32,7 @@ public class SpawnParticlesEntry extends LootPoolSingletonContainer {
           net.minecraft.world.item.enchantment.effects.SpawnParticlesEffect.PositionSource.CODEC.fieldOf("vertical_position").forGetter(entry -> entry.verticalPosition),
           net.minecraft.world.item.enchantment.effects.SpawnParticlesEffect.VelocitySource.CODEC.fieldOf("horizontal_velocity").forGetter(entry -> entry.horizontalVelocity),
           net.minecraft.world.item.enchantment.effects.SpawnParticlesEffect.VelocitySource.CODEC.fieldOf("vertical_velocity").forGetter(entry -> entry.verticalVelocity),
-          FloatProvider.CODEC.optionalFieldOf("speed", ConstantFloat.ZERO).forGetter(entry -> entry.speed),
+          FloatProviders.CODEC.optionalFieldOf("speed", ConstantFloat.ZERO).forGetter(entry -> entry.speed),
           OptionalEffectPoolEntryTarget.CODEC.optionalFieldOf("target", OptionalEffectPoolEntryTarget.NONE).forGetter(entry -> entry.target),
           Codec.INT.optionalFieldOf("weight", LootPoolSingletonContainer.DEFAULT_WEIGHT).forGetter(entry -> entry.weight),
           Codec.INT.optionalFieldOf("quality", LootPoolSingletonContainer.DEFAULT_QUALITY).forGetter(entry -> entry.quality),

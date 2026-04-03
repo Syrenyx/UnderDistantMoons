@@ -3,6 +3,7 @@ package syrenyx.distantmoons.content.loot.entry;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.util.valueproviders.FloatProviders;
 import org.jspecify.annotations.NonNull;
 
 import java.util.Collections;
@@ -27,8 +28,8 @@ public class PlaySoundEntry extends LootPoolSingletonContainer {
       .group(
           SoundEvent.CODEC.fieldOf("sound").forGetter(entry -> entry.soundEvent),
           StringIdentifiableSoundCategory.CODEC.fieldOf("category").xmap(stringCategory -> stringCategory.category, StringIdentifiableSoundCategory::get).forGetter(entry -> entry.category),
-          FloatProvider.codec(0.00001F, 10.0F).fieldOf("volume").forGetter(entry -> entry.volume),
-          FloatProvider.codec(0.00001F, 2.0F).fieldOf("pitch").forGetter(entry -> entry.pitch),
+          FloatProviders.codec(0.00001F, 10.0F).fieldOf("volume").forGetter(entry -> entry.volume),
+          FloatProviders.codec(0.00001F, 2.0F).fieldOf("pitch").forGetter(entry -> entry.pitch),
           OptionalEffectPoolEntryTarget.CODEC.optionalFieldOf("source", OptionalEffectPoolEntryTarget.NONE).forGetter(entry -> entry.source),
           Codec.INT.optionalFieldOf("weight", LootPoolSingletonContainer.DEFAULT_WEIGHT).forGetter(entry -> entry.weight),
           Codec.INT.optionalFieldOf("quality", LootPoolSingletonContainer.DEFAULT_QUALITY).forGetter(entry -> entry.quality),

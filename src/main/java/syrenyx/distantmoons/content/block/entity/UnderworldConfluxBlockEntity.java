@@ -130,20 +130,20 @@ public class UnderworldConfluxBlockEntity extends BlockEntity implements Contain
   @Override
   public @NonNull CompoundTag getUpdateTag(HolderLookup.@NonNull Provider provider) {
     CompoundTag compoundTag = super.getUpdateTag(provider);
-    if (!this.keystoneStack.isEmpty()) compoundTag.store(KEYSTONE_DATA_KEY, ItemStack.SINGLE_ITEM_CODEC, this.keystoneStack);
+    if (!this.keystoneStack.isEmpty()) compoundTag.store(KEYSTONE_DATA_KEY, ItemStack.CODEC, this.keystoneStack);
     return compoundTag;
   }
 
   @Override
   protected void loadAdditional(@NonNull ValueInput valueInput) {
     super.loadAdditional(valueInput);
-    this.keystoneStack = valueInput.read(KEYSTONE_DATA_KEY, ItemStack.SINGLE_ITEM_CODEC).orElse(Items.AIR.getDefaultInstance());
+    this.keystoneStack = valueInput.read(KEYSTONE_DATA_KEY, ItemStack.CODEC).orElse(Items.AIR.getDefaultInstance());
     if (this.level != null) UnderworldConfluxBlock.onKeystoneChanged(this.level, this.worldPosition);
   }
 
   @Override
   protected void saveAdditional(@NonNull ValueOutput valueOutput) {
     super.saveAdditional(valueOutput);
-    if (!this.keystoneStack.isEmpty()) valueOutput.store(KEYSTONE_DATA_KEY, ItemStack.SINGLE_ITEM_CODEC, this.keystoneStack);
+    if (!this.keystoneStack.isEmpty()) valueOutput.store(KEYSTONE_DATA_KEY, ItemStack.CODEC, this.keystoneStack);
   }
 }

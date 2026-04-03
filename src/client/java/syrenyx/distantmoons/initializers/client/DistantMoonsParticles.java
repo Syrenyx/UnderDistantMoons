@@ -1,6 +1,6 @@
 package syrenyx.distantmoons.initializers.client;
 
-import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
+import net.fabricmc.fabric.api.client.particle.v1.ParticleProviderRegistry;
 import syrenyx.distantmoons.content.particle.FadingTrailParticle;
 import syrenyx.distantmoons.content.particle.UnderworldConfluxEffectParticle;
 import syrenyx.distantmoons.content.particle.UnderworldParticle;
@@ -9,7 +9,7 @@ import syrenyx.distantmoons.content.particle.SparkParticle;
 
 public abstract class DistantMoonsParticles {
 
-  private static final ParticleFactoryRegistry REGISTRY = ParticleFactoryRegistry.getInstance();
+  private static final ParticleProviderRegistry REGISTRY = ParticleProviderRegistry.getInstance();
 
   static {
     REGISTRY.register(DistantMoonsParticleTypes.FADING_TRAIL, FadingTrailParticle.Factory::new);

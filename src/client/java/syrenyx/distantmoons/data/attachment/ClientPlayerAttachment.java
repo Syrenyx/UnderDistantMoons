@@ -9,7 +9,6 @@ import syrenyx.distantmoons.initializers.client.DistantMoonsAttachedData;
 import java.util.ArrayList;
 import java.util.List;
 
-@SuppressWarnings("UnstableApiUsage")
 public record ClientPlayerAttachment(List<AfflictionInstance> activeAfflictions) {
 
   public static Codec<ClientPlayerAttachment> CODEC = RecordCodecBuilder.create(instance -> instance

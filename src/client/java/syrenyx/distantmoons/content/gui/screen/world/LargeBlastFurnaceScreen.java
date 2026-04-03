@@ -1,6 +1,6 @@
 package syrenyx.distantmoons.content.gui.screen.world;
 
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
@@ -23,6 +23,7 @@ public class LargeBlastFurnaceScreen extends AbstractContainerScreen<LargeBlastF
   private static final Identifier SOUL_FUEL_BURNING_PROGRESS_SPRITE = UnderDistantMoons.identifierOf("container/large_blast_furnace/soul_fuel_burning_progress");
   private static final Identifier HEAT_SPRITE = UnderDistantMoons.identifierOf("container/large_blast_furnace/heat");
   private static final String BLAST_CHARGE_DIAL_SPRITE_PATH = "container/large_blast_furnace/blast_charge_dial/";
+  private static final int IMAGE_HEIGHT = 231;
   private static final int BACKGROUND_TEXTURE_SIZE = 256;
   private static final int SMALL_SPRITE_SIZE = 14;
   private static final int HEAT_SPRITE_HEIGHT = 86;
@@ -31,8 +32,7 @@ public class LargeBlastFurnaceScreen extends AbstractContainerScreen<LargeBlastF
   private static final int BLAST_CHARGE_DIAL_POSITIONS = 16;
 
   public LargeBlastFurnaceScreen(LargeBlastFurnaceMenu abstractContainerMenu, Inventory inventory, Component component) {
-    super(abstractContainerMenu, inventory, component);
-    this.imageHeight += 65;
+    super(abstractContainerMenu, inventory, component, IMAGE_HEIGHT, DEFAULT_IMAGE_WIDTH);
     this.inventoryLabelY = this.imageHeight - 94;
   }
 
@@ -43,7 +43,7 @@ public class LargeBlastFurnaceScreen extends AbstractContainerScreen<LargeBlastF
   }
 
   @Override
-  protected void renderBg(@NonNull GuiGraphics guiGraphics, float delta, int cursorX, int cursorY) {
+  public void extractBackground(@NonNull GuiGraphicsExtractor guiGraphics, final int cursorX, final int cursorY, final float delta) {
     guiGraphics.blit(
         RenderPipelines.GUI_TEXTURED,
         this.menu.mirrored ? MIRRORED_TEXTURE : DEFAULT_TEXTURE,
@@ -86,14 +86,14 @@ public class LargeBlastFurnaceScreen extends AbstractContainerScreen<LargeBlastF
   }
 
   @Override
-  public void render(@NonNull GuiGraphics guiGraphics, int cursorX, int cursorY, float delta) {
-    super.render(guiGraphics, cursorX, cursorY, delta);
-    this.renderTooltip(guiGraphics, cursorX, cursorY);
+  public void extractRenderState(@NonNull GuiGraphicsExtractor guiGraphics, int cursorX, int cursorY, float delta) {
+    super.extractRenderState(guiGraphics, cursorX, cursorY, delta);
+    this.extractTooltip(guiGraphics, cursorX, cursorY);
   }
 
   @Override
-  protected void renderSlot(@NonNull GuiGraphics guiGraphics, @NonNull Slot slot, int cursorX, int cursorY) {
-    super.renderSlot(guiGraphics, slot, cursorX, cursorY);
+  protected void extractSlot(@NonNull GuiGraphicsExtractor guiGraphics, @NonNull Slot slot, int cursorX, int cursorY) {
+    super.extractSlot(guiGraphics, slot, cursorX, cursorY);
     if (!(slot instanceof LockedSlot) || slot.getItem().isEmpty()) return;
     int index = slot.getContainerSlot();
     if (index > LargeBlastFurnaceBlockEntity.MATERIAL_SLOTS[LargeBlastFurnaceBlockEntity.MATERIAL_SLOTS.length - 1]) return;

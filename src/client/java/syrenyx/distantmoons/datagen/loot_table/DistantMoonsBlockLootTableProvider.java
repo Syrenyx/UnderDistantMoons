@@ -1,7 +1,7 @@
 package syrenyx.distantmoons.datagen.loot_table;
 
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootSubProvider;
 import net.minecraft.advancements.criterion.StatePropertiesPredicate;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.world.level.block.Block;
@@ -25,9 +25,9 @@ import syrenyx.distantmoons.references.data.DistantMoonsPredicates;
 
 import java.util.concurrent.CompletableFuture;
 
-public class DistantMoonsBlockLootTableProvider extends FabricBlockLootTableProvider {
+public class DistantMoonsBlockLootTableProvider extends FabricBlockLootSubProvider {
 
-  public DistantMoonsBlockLootTableProvider(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
+  public DistantMoonsBlockLootTableProvider(FabricPackOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
     super(dataOutput, registryLookup);
   }
 

@@ -1,6 +1,6 @@
 package syrenyx.distantmoons.datagen;
 
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -13,12 +13,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.BlastingRecipe;
-import net.minecraft.world.item.crafting.CampfireCookingRecipe;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.SmeltingRecipe;
-import net.minecraft.world.item.crafting.SmokingRecipe;
+import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -38,7 +33,7 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
 
   public static final int DEFAULT_SMELTING_TIME = 200;
 
-  public DistantMoonsRecipeProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+  public DistantMoonsRecipeProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
     super(output, registriesFuture);
   }
 
@@ -438,15 +433,15 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
 
       private void createCookingRecipes(ItemLike ingredient, ItemLike result, float experience, int cookingTime) {
         SimpleCookingRecipeBuilder
-            .generic(Ingredient.of(ingredient), RecipeCategory.FOOD, result, experience, cookingTime, RecipeSerializer.SMELTING_RECIPE, SmeltingRecipe::new)
+            .smelting(Ingredient.of(ingredient), RecipeCategory.FOOD, CookingBookCategory.MISC, result, experience, cookingTime)
             .unlockedBy(getHasName(ingredient), this.has(ingredient))
             .save(this.output, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/smelting_" + getItemId(ingredient)));
         SimpleCookingRecipeBuilder
-            .generic(Ingredient.of(ingredient), RecipeCategory.FOOD, result, experience, cookingTime / 2, RecipeSerializer.SMOKING_RECIPE, SmokingRecipe::new)
+            .smoking(Ingredient.of(ingredient), RecipeCategory.FOOD, result, experience, cookingTime / 2)
             .unlockedBy(getHasName(ingredient), this.has(ingredient))
             .save(this.output, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/smoking_" + getItemId(ingredient)));
         SimpleCookingRecipeBuilder
-            .generic(Ingredient.of(ingredient), RecipeCategory.FOOD, result, experience, cookingTime * 3, RecipeSerializer.CAMPFIRE_COOKING_RECIPE, CampfireCookingRecipe::new)
+            .campfireCooking(Ingredient.of(ingredient), RecipeCategory.FOOD, result, experience, cookingTime * 3)
             .unlockedBy(getHasName(ingredient), this.has(ingredient))
             .save(this.output, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/campfire_cooking_" + getItemId(ingredient)));
       }
@@ -495,11 +490,11 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
 
       private void createMetalSmeltingRecipes(ItemLike ingredient, ItemLike result, float experience, int cookingTime) {
         SimpleCookingRecipeBuilder
-            .generic(Ingredient.of(ingredient), RecipeCategory.MISC, result, experience, cookingTime, RecipeSerializer.SMELTING_RECIPE, SmeltingRecipe::new)
+            .smelting(Ingredient.of(ingredient), RecipeCategory.MISC, CookingBookCategory.MISC, result, experience, cookingTime)
             .unlockedBy(getHasName(ingredient), this.has(ingredient))
             .save(this.output, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/smelting_" + getItemId(ingredient)));
         SimpleCookingRecipeBuilder
-            .generic(Ingredient.of(ingredient), RecipeCategory.MISC, result, experience, cookingTime / 2, RecipeSerializer.BLASTING_RECIPE, BlastingRecipe::new)
+            .blasting(Ingredient.of(ingredient), RecipeCategory.MISC, CookingBookCategory.MISC, result, experience, cookingTime / 2)
             .unlockedBy(getHasName(ingredient), this.has(ingredient))
             .save(this.output, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/blasting_" + getItemId(ingredient)));
       }
@@ -507,12 +502,12 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
       private void createOreSmeltingRecipes(List<ItemLike> ingredients, ItemLike result, float experience, int cookingTime) {
         for (ItemLike ingredient : ingredients) {
           SimpleCookingRecipeBuilder
-              .generic(Ingredient.of(ingredient), RecipeCategory.MISC, result, experience, cookingTime, RecipeSerializer.SMELTING_RECIPE, SmeltingRecipe::new)
+              .smelting(Ingredient.of(ingredient), RecipeCategory.MISC, CookingBookCategory.MISC, result, experience, cookingTime)
               .group(getItemId(result) + "_from_ore")
               .unlockedBy(getHasName(ingredient), this.has(ingredient))
               .save(this.output, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/smelting_" + getItemId(ingredient)));
           SimpleCookingRecipeBuilder
-              .generic(Ingredient.of(ingredient), RecipeCategory.MISC, result, experience, cookingTime / 2, RecipeSerializer.BLASTING_RECIPE, BlastingRecipe::new)
+              .blasting(Ingredient.of(ingredient), RecipeCategory.MISC, CookingBookCategory.MISC, result, experience, cookingTime / 2)
               .group(getItemId(result) + "_from_ore")
               .unlockedBy(getHasName(ingredient), this.has(ingredient))
               .save(this.output, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/blasting_" + getItemId(ingredient)));
@@ -611,7 +606,7 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
       private void createSmeltingRecipes(Map<ItemLike, ItemLike> itemMap) {
         for (ItemLike ingredient : itemMap.keySet()) {
           SimpleCookingRecipeBuilder
-              .generic(Ingredient.of(ingredient), RecipeCategory.BUILDING_BLOCKS, itemMap.get(ingredient), 0, DEFAULT_SMELTING_TIME, RecipeSerializer.SMELTING_RECIPE, SmeltingRecipe::new)
+              .smelting(Ingredient.of(ingredient), RecipeCategory.BUILDING_BLOCKS, CookingBookCategory.MISC, itemMap.get(ingredient), 0, DEFAULT_SMELTING_TIME)
               .unlockedBy(getHasName(ingredient), this.has(ingredient))
               .save(this.output, UnderDistantMoons.withPrefixedNamespace(getItemId(itemMap.get(ingredient)) + "/smelting"));
         }
@@ -632,7 +627,7 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
       }
 
       private void createStairsCuttingRecipe(ItemLike ingredient, ItemLike result) {
-        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ingredient), RecipeCategory.MISC, result)
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ingredient), RecipeCategory.MISC, result, 1)
             .unlockedBy(getHasName(ingredient), has(ingredient))
             .save(this.output, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/stonecutting"));
       }
@@ -652,7 +647,7 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
       }
 
       private void createWallCuttingRecipe(ItemLike ingredient, ItemLike result) {
-        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ingredient), RecipeCategory.MISC, result)
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ingredient), RecipeCategory.MISC, result, 1)
             .unlockedBy(getHasName(ingredient), has(ingredient))
             .save(this.output, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/stonecutting"));
       }
