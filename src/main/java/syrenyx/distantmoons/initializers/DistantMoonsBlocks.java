@@ -90,6 +90,12 @@ public abstract class DistantMoonsBlocks {
       BlockBehaviour.Properties.ofFullCopy(Blocks.BAMBOO_PLANKS),
       new Item.Properties()
   );
+  public static final Block BIRCH_BALUSTRADE = register(
+      "birch_balustrade",
+      ThinBalustradeBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(Blocks.BIRCH_PLANKS),
+      new Item.Properties()
+  );
   public static final Block BIRCH_BEAM = register(
       "birch_beam",
       BeamBlock::new,
@@ -157,12 +163,36 @@ public abstract class DistantMoonsBlocks {
           .strength(20.0F),
       new Item.Properties()
   );
+  public static final Block CALCITE_SLAB = register(
+      "calcite_slab",
+      SlabBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE),
+      new Item.Properties()
+  );
+  public static final Block CALCITE_STAIRS = register(
+      "calcite_stairs",
+      SimplifiedStairsBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE),
+      new Item.Properties()
+  );
+  public static final Block CALCITE_WALL_SLAB = register(
+      "calcite_wall_slab",
+      WallSlabBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE),
+      new Item.Properties()
+  );
   public static final Block CHARCOAL_BLOCK = register(
       "charcoal_block",
       Block::new,
       BlockBehaviour.Properties.ofFullCopy(Blocks.COAL_BLOCK),
       new Item.Properties()
           .component(DistantMoonsDataComponentTypes.BLAST_FURNACE_FUEL, new BlastFurnaceFuelComponent(BlastFurnaceFuelComponent.DEFAULT_BURN_TIME * 9, BlastFurnaceFuelComponent.COAL_HEAT_VALUE))
+  );
+  public static final Block CHERRY_BALUSTRADE = register(
+      "cherry_balustrade",
+      ThinBalustradeBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(Blocks.CHERRY_PLANKS),
+      new Item.Properties()
   );
   public static final Block CHERRY_BEAM = register(
       "cherry_beam",
@@ -200,6 +230,12 @@ public abstract class DistantMoonsBlocks {
       BlockBehaviour.Properties.ofFullCopy(Blocks.COAL_BLOCK),
       new Item.Properties()
           .component(DistantMoonsDataComponentTypes.BLAST_FURNACE_FUEL, new BlastFurnaceFuelComponent(BlastFurnaceFuelComponent.DEFAULT_BURN_TIME * 9, BlastFurnaceFuelComponent.COKE_HEAT_VALUE))
+  );
+  public static final Block CRIMSON_BALUSTRADE = register(
+      "crimson_balustrade",
+      ThinBalustradeBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(Blocks.CRIMSON_PLANKS),
+      new Item.Properties()
   );
   public static final Block CRIMSON_BEAM = register(
       "crimson_beam",
@@ -407,6 +443,12 @@ public abstract class DistantMoonsBlocks {
       BlockBehaviour.Properties.ofFullCopy(Blocks.WARPED_STEM),
       new Item.Properties()
   );
+  public static final Block DARK_OAK_BALUSTRADE = register(
+      "dark_oak_balustrade",
+      ThinBalustradeBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_OAK_PLANKS),
+      new Item.Properties()
+  );
   public static final Block DARK_OAK_BEAM = register(
       "dark_oak_beam",
       BeamBlock::new,
@@ -519,6 +561,24 @@ public abstract class DistantMoonsBlocks {
       "end_stone_brick_wall_slab",
       WallSlabBlock::new,
       BlockBehaviour.Properties.ofFullCopy(Blocks.END_STONE_BRICKS),
+      new Item.Properties()
+  );
+  public static final Block END_STONE_SLAB = register(
+      "end_stone_slab",
+      SlabBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(Blocks.END_STONE),
+      new Item.Properties()
+  );
+  public static final Block END_STONE_STAIRS = register(
+      "end_stone_stairs",
+      SimplifiedStairsBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(Blocks.END_STONE),
+      new Item.Properties()
+  );
+  public static final Block END_STONE_WALL_SLAB = register(
+      "end_stone_wall_slab",
+      WallSlabBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(Blocks.END_STONE),
       new Item.Properties()
   );
   public static final Block FIRE_BRICKS = register(
@@ -708,6 +768,12 @@ public abstract class DistantMoonsBlocks {
       BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BARS),
       new Item.Properties()
   );
+  public static final Block JUNGLE_BALUSTRADE = register(
+      "jungle_balustrade",
+      ThinBalustradeBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_PLANKS),
+      new Item.Properties()
+  );
   public static final Block JUNGLE_BEAM = register(
       "jungle_beam",
       BeamBlock::new,
@@ -724,6 +790,12 @@ public abstract class DistantMoonsBlocks {
       "jungle_wall_slab",
       WallSlabBlock::new,
       BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_PLANKS),
+      new Item.Properties()
+  );
+  public static final Block MANGROVE_BALUSTRADE = register(
+      "mangrove_balustrade",
+      ThinBalustradeBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(Blocks.MANGROVE_PLANKS),
       new Item.Properties()
   );
   public static final Block MANGROVE_BEAM = register(
@@ -776,6 +848,30 @@ public abstract class DistantMoonsBlocks {
       new Item.Properties()
           .fireResistant()
   );
+  public static final Block NETHERRACK_SLAB = register(
+      "netherrack_slab",
+      SlabBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(Blocks.NETHERRACK),
+      new Item.Properties()
+  );
+  public static final Block NETHERRACK_STAIRS = register(
+      "netherrack_stairs",
+      SimplifiedStairsBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(Blocks.NETHERRACK),
+      new Item.Properties()
+  );
+  public static final Block NETHERRACK_WALL_SLAB = register(
+      "netherrack_wall_slab",
+      WallSlabBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(Blocks.NETHERRACK),
+      new Item.Properties()
+  );
+  public static final Block OAK_BALUSTRADE = register(
+      "oak_balustrade",
+      ThinBalustradeBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS),
+      new Item.Properties()
+  );
   public static final Block OAK_BEAM = register(
       "oak_beam",
       BeamBlock::new,
@@ -792,6 +888,12 @@ public abstract class DistantMoonsBlocks {
       "oak_wall_slab",
       WallSlabBlock::new,
       BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS),
+      new Item.Properties()
+  );
+  public static final Block PALE_OAK_BALUSTRADE = register(
+      "pale_oak_balustrade",
+      ThinBalustradeBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(Blocks.PALE_OAK_PLANKS),
       new Item.Properties()
   );
   public static final Block PALE_OAK_BEAM = register(
@@ -1000,6 +1102,24 @@ public abstract class DistantMoonsBlocks {
       BlockBehaviour.Properties.ofFullCopy(Blocks.PURPUR_BLOCK),
       new Item.Properties()
   );
+  public static final Block QUARTZ_BRICK_SLAB = register(
+      "quartz_brick_slab",
+      SlabBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(Blocks.QUARTZ_BRICKS),
+      new Item.Properties()
+  );
+  public static final Block QUARTZ_BRICK_STAIRS = register(
+      "quartz_brick_stairs",
+      SimplifiedStairsBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(Blocks.QUARTZ_BRICKS),
+      new Item.Properties()
+  );
+  public static final Block QUARTZ_BRICK_WALL_SLAB = register(
+      "quartz_brick_wall_slab",
+      WallSlabBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(Blocks.QUARTZ_BRICKS),
+      new Item.Properties()
+  );
   public static final Block QUARTZ_WALL_SLAB = register(
       "quartz_wall_slab",
       WallSlabBlock::new,
@@ -1067,6 +1187,24 @@ public abstract class DistantMoonsBlocks {
       BlockBehaviour.Properties.ofFullCopy(Blocks.DIAMOND_BLOCK),
       new Item.Properties()
   );
+  public static final Block SMOOTH_BASALT_SLAB = register(
+      "smooth_basalt_slab",
+      SlabBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(Blocks.SMOOTH_BASALT),
+      new Item.Properties()
+  );
+  public static final Block SMOOTH_BASALT_STAIRS = register(
+      "smooth_basalt_stairs",
+      SimplifiedStairsBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(Blocks.SMOOTH_BASALT),
+      new Item.Properties()
+  );
+  public static final Block SMOOTH_BASALT_WALL_SLAB = register(
+      "smooth_basalt_wall_slab",
+      WallSlabBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(Blocks.SMOOTH_BASALT),
+      new Item.Properties()
+  );
   public static final Block SMOOTH_QUARTZ_WALL_SLAB = register(
       "smooth_quartz_wall_slab",
       WallSlabBlock::new,
@@ -1101,6 +1239,12 @@ public abstract class DistantMoonsBlocks {
       "smooth_stone_wall_slab",
       WallSlabBlock::new,
       BlockBehaviour.Properties.ofFullCopy(Blocks.SMOOTH_STONE),
+      new Item.Properties()
+  );
+  public static final Block SPRUCE_BALUSTRADE = register(
+      "spruce_balustrade",
+      ThinBalustradeBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_PLANKS),
       new Item.Properties()
   );
   public static final Block SPRUCE_BEAM = register(
@@ -1358,6 +1502,12 @@ public abstract class DistantMoonsBlocks {
           .randomTicks(),
       new Item.Properties()
           .fireResistant()
+  );
+  public static final Block WARPED_BALUSTRADE = register(
+      "warped_balustrade",
+      ThinBalustradeBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(Blocks.WARPED_PLANKS),
+      new Item.Properties()
   );
   public static final Block WARPED_BEAM = register(
       "warped_beam",

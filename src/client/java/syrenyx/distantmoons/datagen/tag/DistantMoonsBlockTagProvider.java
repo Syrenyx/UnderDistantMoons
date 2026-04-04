@@ -51,10 +51,20 @@ public class DistantMoonsBlockTagProvider extends FabricTagsProvider.BlockTagsPr
     this.valueLookupBuilder(DistantMoonsBlockTags.THIN_BALUSTRADE).add(
         DistantMoonsBlocks.ACACIA_BALUSTRADE,
         DistantMoonsBlocks.ANDESITE_BALUSTRADE,
+        DistantMoonsBlocks.BIRCH_BALUSTRADE,
+        DistantMoonsBlocks.CHERRY_BALUSTRADE,
+        DistantMoonsBlocks.CRIMSON_BALUSTRADE,
+        DistantMoonsBlocks.DARK_OAK_BALUSTRADE,
         DistantMoonsBlocks.DIORITE_BALUSTRADE,
         DistantMoonsBlocks.GRANITE_BALUSTRADE,
+        DistantMoonsBlocks.JUNGLE_BALUSTRADE,
+        DistantMoonsBlocks.MANGROVE_BALUSTRADE,
+        DistantMoonsBlocks.OAK_BALUSTRADE,
+        DistantMoonsBlocks.PALE_OAK_BALUSTRADE,
+        DistantMoonsBlocks.SPRUCE_BALUSTRADE,
         DistantMoonsBlocks.STONE_BALUSTRADE,
-        DistantMoonsBlocks.TUFF_BALUSTRADE
+        DistantMoonsBlocks.TUFF_BALUSTRADE,
+        DistantMoonsBlocks.WARPED_BALUSTRADE
     );
     this.valueLookupBuilder(DistantMoonsBlockTags.WALL).add(
         DistantMoonsBlocks.FIRE_BRICK_WALL,
@@ -160,6 +170,7 @@ public class DistantMoonsBlockTagProvider extends FabricTagsProvider.BlockTagsPr
             Blocks.CARVED_PUMPKIN,
             Blocks.JACK_O_LANTERN,
             Blocks.MELON,
+            Blocks.POWDER_SNOW,
             Blocks.PUMPKIN,
             DistantMoonsBlocks.UNDERWORLD_ANCHOR,
             DistantMoonsBlocks.UNDERWORLD_CONFLUX
@@ -303,12 +314,15 @@ public class DistantMoonsBlockTagProvider extends FabricTagsProvider.BlockTagsPr
         DistantMoonsBlocks.BAMBOO_MOSAIC_WALL_SLAB,
         DistantMoonsBlocks.BAMBOO_POLE,
         DistantMoonsBlocks.BAMBOO_WALL_SLAB,
+        DistantMoonsBlocks.BIRCH_BALUSTRADE,
         DistantMoonsBlocks.BIRCH_BEAM,
         DistantMoonsBlocks.BIRCH_POLE,
         DistantMoonsBlocks.BIRCH_WALL_SLAB,
+        DistantMoonsBlocks.CHERRY_BALUSTRADE,
         DistantMoonsBlocks.CHERRY_BEAM,
         DistantMoonsBlocks.CHERRY_POLE,
         DistantMoonsBlocks.CHERRY_WALL_SLAB,
+        DistantMoonsBlocks.CRIMSON_BALUSTRADE,
         DistantMoonsBlocks.CRIMSON_BEAM,
         DistantMoonsBlocks.CRIMSON_POLE,
         DistantMoonsBlocks.CRIMSON_WALL_SLAB,
@@ -335,22 +349,28 @@ public class DistantMoonsBlockTagProvider extends FabricTagsProvider.BlockTagsPr
         DistantMoonsBlocks.CUT_SPRUCE_WOOD,
         DistantMoonsBlocks.CUT_WARPED_HYPHAE,
         DistantMoonsBlocks.CUT_WARPED_STEM,
+        DistantMoonsBlocks.DARK_OAK_BALUSTRADE,
         DistantMoonsBlocks.DARK_OAK_BEAM,
         DistantMoonsBlocks.DARK_OAK_POLE,
         DistantMoonsBlocks.DARK_OAK_WALL_SLAB,
+        DistantMoonsBlocks.JUNGLE_BALUSTRADE,
         DistantMoonsBlocks.JUNGLE_BEAM,
         DistantMoonsBlocks.JUNGLE_POLE,
         DistantMoonsBlocks.JUNGLE_WALL_SLAB,
+        DistantMoonsBlocks.MANGROVE_BALUSTRADE,
         DistantMoonsBlocks.MANGROVE_BEAM,
         DistantMoonsBlocks.MANGROVE_POLE,
         DistantMoonsBlocks.MANGROVE_WALL_SLAB,
+        DistantMoonsBlocks.OAK_BALUSTRADE,
         DistantMoonsBlocks.OAK_BEAM,
         DistantMoonsBlocks.OAK_POLE,
         DistantMoonsBlocks.OAK_WALL_SLAB,
+        DistantMoonsBlocks.PALE_OAK_BALUSTRADE,
         DistantMoonsBlocks.PALE_OAK_BEAM,
         DistantMoonsBlocks.PALE_OAK_POLE,
         DistantMoonsBlocks.PALE_OAK_WALL_SLAB,
         DistantMoonsBlocks.ROPE_LADDER,
+        DistantMoonsBlocks.SPRUCE_BALUSTRADE,
         DistantMoonsBlocks.SPRUCE_BEAM,
         DistantMoonsBlocks.SPRUCE_POLE,
         DistantMoonsBlocks.SPRUCE_WALL_SLAB,
@@ -377,6 +397,7 @@ public class DistantMoonsBlockTagProvider extends FabricTagsProvider.BlockTagsPr
         DistantMoonsBlocks.STRIPPED_CUT_SPRUCE_WOOD,
         DistantMoonsBlocks.STRIPPED_CUT_WARPED_HYPHAE,
         DistantMoonsBlocks.STRIPPED_CUT_WARPED_STEM,
+        DistantMoonsBlocks.WARPED_BALUSTRADE,
         DistantMoonsBlocks.WARPED_BEAM,
         DistantMoonsBlocks.WARPED_POLE,
         DistantMoonsBlocks.WARPED_WALL_SLAB
@@ -534,17 +555,17 @@ public class DistantMoonsBlockTagProvider extends FabricTagsProvider.BlockTagsPr
         .add(DistantMoonsBlocks.UNDERWORLD_CONFLUX);
 
     //VANILLA TAG REDIRECTS
-    this.valueLookupBuilder(BlockTags.MINEABLE_WITH_AXE).addTag(DistantMoonsBlockTags.MINING_TYPE_AXE);
     this.valueLookupBuilder(BlockTags.BARS).addTag(DistantMoonsBlockTags.BARS);
     this.valueLookupBuilder(BlockTags.CHAINS).addTag(DistantMoonsBlockTags.CHAIN);
     this.valueLookupBuilder(BlockTags.CLIMBABLE).addTag(DistantMoonsBlockTags.CLIMBABLE);
     this.valueLookupBuilder(BlockTags.DRAGON_IMMUNE).addTag(DistantMoonsBlockTags.IMMUNE_TO_DRAGON);
+    this.valueLookupBuilder(BlockTags.MINEABLE_WITH_AXE).addTag(DistantMoonsBlockTags.MINING_TYPE_AXE);
     this.valueLookupBuilder(BlockTags.MINEABLE_WITH_HOE).addTag(DistantMoonsBlockTags.MINING_TYPE_HOE);
+    this.valueLookupBuilder(BlockTags.MINEABLE_WITH_PICKAXE).addTag(DistantMoonsBlockTags.MINING_TYPE_PICKAXE);
+    this.valueLookupBuilder(BlockTags.MINEABLE_WITH_SHOVEL).addTag(DistantMoonsBlockTags.MINING_TYPE_SHOVEL);
     this.valueLookupBuilder(BlockTags.NEEDS_DIAMOND_TOOL).addTag(DistantMoonsBlockTags.MINING_TIER_DIAMOND);
     this.valueLookupBuilder(BlockTags.NEEDS_IRON_TOOL).addTag(DistantMoonsBlockTags.MINING_TIER_IRON);
     this.valueLookupBuilder(BlockTags.NEEDS_STONE_TOOL).addTag(DistantMoonsBlockTags.MINING_TIER_STONE);
-    this.valueLookupBuilder(BlockTags.MINEABLE_WITH_PICKAXE).addTag(DistantMoonsBlockTags.MINING_TYPE_PICKAXE);
-    this.valueLookupBuilder(BlockTags.MINEABLE_WITH_SHOVEL).addTag(DistantMoonsBlockTags.MINING_TYPE_SHOVEL);
     this.valueLookupBuilder(BlockTags.WITHER_IMMUNE).addTag(DistantMoonsBlockTags.IMMUNE_TO_WITHER);
     this.valueLookupBuilder(BlockTags.WALLS).addTag(DistantMoonsBlockTags.WALL);
   }

@@ -365,13 +365,18 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     //ROPE LADDERS
     registerRopeLadderBlock(DistantMoonsBlocks.ROPE_LADDER, ROPE_LADDER_TEXTURE_MAP);
 
-    //SLABS
+    //SLABS - SIMPLE
+    registerSimpleSlabBlock(DistantMoonsBlocks.CALCITE_SLAB, Map.of(TextureSlot.SIDE, "minecraft:block/calcite"));
+    registerSimpleSlabBlock(DistantMoonsBlocks.END_STONE_SLAB, Map.of(TextureSlot.SIDE, "minecraft:block/end_stone"));
     registerSimpleSlabBlock(DistantMoonsBlocks.FIRE_BRICK_SLAB, Map.of(TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/fire_bricks")));
     registerSimpleSlabBlock(DistantMoonsBlocks.GRAY_PRISMARINE_SLAB, Map.of(TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/gray_prismarine")));
+    registerSimpleSlabBlock(DistantMoonsBlocks.NETHERRACK_SLAB, Map.of(TextureSlot.SIDE, "minecraft:block/netherrack"));
     registerSimpleSlabBlock(DistantMoonsBlocks.PALE_PRISMARINE_BRICK_SLAB, Map.of(TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/pale_prismarine_bricks")));
     registerSimpleSlabBlock(DistantMoonsBlocks.PALE_PRISMARINE_SLAB, Map.of(TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/pale_prismarine")));
     registerSimpleSlabBlock(DistantMoonsBlocks.PALE_PRISMARINE_TILE_SLAB, Map.of(TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/pale_prismarine_tiles")));
     registerSimpleSlabBlock(DistantMoonsBlocks.PRISMARINE_TILE_SLAB, Map.of(TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/prismarine_tiles")));
+    registerSimpleSlabBlock(DistantMoonsBlocks.QUARTZ_BRICK_SLAB, Map.of(TextureSlot.SIDE, "minecraft:block/quartz_bricks"));
+    registerSimpleSlabBlock(DistantMoonsBlocks.SMOOTH_BASALT_SLAB, Map.of(TextureSlot.SIDE, "minecraft:block/smooth_basalt"));
     registerSimpleSlabBlock(DistantMoonsBlocks.TERRACOTTA_SLAB, Map.of(TextureSlot.SIDE, "minecraft:block/terracotta"));
     DistantMoonsBlocks.DYED_CONCRETE_SLABS.forEach((color, block) -> registerSimpleSlabBlock(block, Map.of(TextureSlot.SIDE, "minecraft:block/" + color.getName() + "_concrete")));
     DistantMoonsBlocks.DYED_PILLOWS.values().forEach(block -> registerPillarSlabBlock(block, PILLAR_TEXTURE_MAP));
@@ -382,13 +387,18 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     registerSpikedFenceBlock(DistantMoonsBlocks.IRON_FENCE, SPIKED_FENCE_TEXTURE_MAP);
     registerSpikedFenceBlock(DistantMoonsBlocks.WROUGHT_IRON_FENCE, SPIKED_FENCE_TEXTURE_MAP);
 
-    //STAIRS
+    //STAIRS - SIMPLE
+    registerSimpleStairsBlock(DistantMoonsBlocks.CALCITE_STAIRS, Map.of(TextureSlot.SIDE, "minecraft:block/calcite"));
+    registerSimpleStairsBlock(DistantMoonsBlocks.END_STONE_STAIRS, Map.of(TextureSlot.SIDE, "minecraft:block/end_stone"));
     registerSimpleStairsBlock(DistantMoonsBlocks.FIRE_BRICK_STAIRS, Map.of(TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/fire_bricks")));
     registerSimpleStairsBlock(DistantMoonsBlocks.GRAY_PRISMARINE_STAIRS, Map.of(TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/gray_prismarine")));
+    registerSimpleStairsBlock(DistantMoonsBlocks.NETHERRACK_STAIRS, Map.of(TextureSlot.SIDE, "minecraft:block/netherrack"));
     registerSimpleStairsBlock(DistantMoonsBlocks.PALE_PRISMARINE_BRICK_STAIRS, Map.of(TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/pale_prismarine_bricks")));
     registerSimpleStairsBlock(DistantMoonsBlocks.PALE_PRISMARINE_STAIRS, Map.of(TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/pale_prismarine")));
     registerSimpleStairsBlock(DistantMoonsBlocks.PALE_PRISMARINE_TILE_STAIRS, Map.of(TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/pale_prismarine_tiles")));
     registerSimpleStairsBlock(DistantMoonsBlocks.PRISMARINE_TILE_STAIRS, Map.of(TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/prismarine_tiles")));
+    registerSimpleStairsBlock(DistantMoonsBlocks.QUARTZ_BRICK_STAIRS, Map.of(TextureSlot.SIDE, "minecraft:block/quartz_bricks"));
+    registerSimpleStairsBlock(DistantMoonsBlocks.SMOOTH_BASALT_STAIRS, Map.of(TextureSlot.SIDE, "minecraft:block/smooth_basalt"));
     registerSimpleStairsBlock(DistantMoonsBlocks.TERRACOTTA_STAIRS, Map.of(TextureSlot.SIDE, "minecraft:block/terracotta"));
     DistantMoonsBlocks.DYED_CONCRETE_STAIRS.forEach((color, block) -> registerSimpleStairsBlock(block, Map.of(TextureSlot.SIDE, "minecraft:block/" + color.getName() + "_concrete")));
     DistantMoonsBlocks.DYED_TERRACOTTA_STAIRS.forEach((color, block) -> registerSimpleStairsBlock(block, Map.of(TextureSlot.SIDE, "minecraft:block/" + color.getName() + "_terracotta")));
@@ -426,6 +436,7 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     registerSimpleWallSlabBlock(DistantMoonsBlocks.BAMBOO_WALL_SLAB, Map.of(TextureSlot.SIDE, "minecraft:block/bamboo_planks"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.BIRCH_WALL_SLAB, Map.of(TextureSlot.SIDE, "minecraft:block/birch_planks"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.BRICK_WALL_SLAB, Map.of(TextureSlot.SIDE, "minecraft:block/bricks"));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.CALCITE_WALL_SLAB, Map.of(TextureSlot.SIDE, "minecraft:block/calcite"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.CHERRY_WALL_SLAB, Map.of(TextureSlot.SIDE, "minecraft:block/cherry_planks"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.COBBLED_DEEPSLATE_WALL_SLAB, Map.of(TextureSlot.SIDE, "minecraft:block/cobbled_deepslate"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.COBBLESTONE_WALL_SLAB, Map.of(TextureSlot.SIDE, "minecraft:block/cobblestone"));
@@ -437,6 +448,7 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     registerSimpleWallSlabBlock(DistantMoonsBlocks.DEEPSLATE_TILE_WALL_SLAB, Map.of(TextureSlot.SIDE, "minecraft:block/deepslate_tiles"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.DIORITE_WALL_SLAB, Map.of(TextureSlot.SIDE, "minecraft:block/diorite"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.END_STONE_BRICK_WALL_SLAB, Map.of(TextureSlot.SIDE, "minecraft:block/end_stone_bricks"));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.END_STONE_WALL_SLAB, Map.of(TextureSlot.SIDE, "minecraft:block/end_stone"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.EXPOSED_CUT_COPPER_WALL_SLAB, Map.of(TextureSlot.SIDE, "minecraft:block/exposed_cut_copper"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.FIRE_BRICK_WALL_SLAB, Map.of(TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/fire_bricks")));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.GRANITE_WALL_SLAB, Map.of(TextureSlot.SIDE, "minecraft:block/granite"));
@@ -447,6 +459,7 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     registerSimpleWallSlabBlock(DistantMoonsBlocks.MOSSY_STONE_BRICK_WALL_SLAB, Map.of(TextureSlot.SIDE, "minecraft:block/mossy_stone_bricks"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.MUD_BRICK_WALL_SLAB, Map.of(TextureSlot.SIDE, "minecraft:block/mud_bricks"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.NETHER_BRICK_WALL_SLAB, Map.of(TextureSlot.SIDE, "minecraft:block/nether_bricks"));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.NETHERRACK_WALL_SLAB, Map.of(TextureSlot.SIDE, "minecraft:block/netherrack"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.OAK_WALL_SLAB, Map.of(TextureSlot.SIDE, "minecraft:block/oak_planks"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.OXIDIZED_CUT_COPPER_WALL_SLAB, Map.of(TextureSlot.SIDE, "minecraft:block/oxidized_cut_copper"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.PALE_OAK_WALL_SLAB, Map.of(TextureSlot.SIDE, "minecraft:block/pale_oak_planks"));
@@ -464,8 +477,10 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     registerSimpleWallSlabBlock(DistantMoonsBlocks.PRISMARINE_TILE_WALL_SLAB, Map.of(TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/prismarine_tiles")));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.PRISMARINE_WALL_SLAB, Map.of(TextureSlot.SIDE, "minecraft:block/prismarine"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.PURPUR_WALL_SLAB, Map.of(TextureSlot.SIDE, "minecraft:block/purpur_block"));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.QUARTZ_BRICK_WALL_SLAB, Map.of(TextureSlot.SIDE, "minecraft:block/quartz_bricks"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.RED_NETHER_BRICK_WALL_SLAB, Map.of(TextureSlot.SIDE, "minecraft:block/red_nether_bricks"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.RESIN_BRICK_WALL_SLAB, Map.of(TextureSlot.SIDE, "minecraft:block/resin_bricks"));
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.SMOOTH_BASALT_WALL_SLAB, Map.of(TextureSlot.SIDE, "minecraft:block/smooth_basalt"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.SMOOTH_QUARTZ_WALL_SLAB, Map.of(TextureSlot.SIDE, "minecraft:block/quartz_block_bottom"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.SMOOTH_RED_SANDSTONE_WALL_SLAB, Map.of(TextureSlot.SIDE, "minecraft:block/red_sandstone_top"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.SMOOTH_SANDSTONE_WALL_SLAB, Map.of(TextureSlot.SIDE, "minecraft:block/sandstone_top"));
@@ -1150,22 +1165,22 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
         .select(Half.TOP, StairsShape.STRAIGHT, Direction.EAST, variantStraight.with(ROTATE_X_180).with(ROTATE_Y_270).with(UV_LOCK))
         .select(Half.TOP, StairsShape.STRAIGHT, Direction.SOUTH, variantStraight.with(ROTATE_X_180).with(UV_LOCK))
         .select(Half.TOP, StairsShape.STRAIGHT, Direction.WEST, variantStraight.with(ROTATE_X_180).with(ROTATE_Y_90).with(UV_LOCK))
-        .select(Half.TOP, StairsShape.INNER_LEFT, Direction.NORTH, variantInner.with(ROTATE_X_180).with(UV_LOCK))
-        .select(Half.TOP, StairsShape.INNER_LEFT, Direction.EAST, variantInner.with(ROTATE_X_180).with(ROTATE_Y_270).with(UV_LOCK))
-        .select(Half.TOP, StairsShape.INNER_LEFT, Direction.SOUTH, variantInner.with(ROTATE_X_180).with(UV_LOCK))
-        .select(Half.TOP, StairsShape.INNER_LEFT, Direction.WEST, variantInner.with(ROTATE_X_180).with(ROTATE_Y_90).with(UV_LOCK))
-        .select(Half.TOP, StairsShape.INNER_RIGHT, Direction.NORTH, variantInner.with(ROTATE_X_180).with(ROTATE_Y_270).with(UV_LOCK))
-        .select(Half.TOP, StairsShape.INNER_RIGHT, Direction.EAST, variantInner.with(ROTATE_X_180).with(UV_LOCK))
-        .select(Half.TOP, StairsShape.INNER_RIGHT, Direction.SOUTH, variantInner.with(ROTATE_X_180).with(ROTATE_Y_90).with(UV_LOCK))
-        .select(Half.TOP, StairsShape.INNER_RIGHT, Direction.WEST, variantInner.with(ROTATE_X_180).with(ROTATE_Y_180))
-        .select(Half.TOP, StairsShape.OUTER_LEFT, Direction.NORTH, variantOuter.with(ROTATE_X_180).with(ROTATE_Y_180).with(UV_LOCK))
-        .select(Half.TOP, StairsShape.OUTER_LEFT, Direction.EAST, variantOuter.with(ROTATE_X_180).with(ROTATE_Y_270).with(UV_LOCK))
-        .select(Half.TOP, StairsShape.OUTER_LEFT, Direction.SOUTH, variantOuter.with(ROTATE_X_180).with(UV_LOCK))
-        .select(Half.TOP, StairsShape.OUTER_LEFT, Direction.WEST, variantOuter.with(ROTATE_X_180).with(ROTATE_Y_90).with(UV_LOCK))
-        .select(Half.TOP, StairsShape.OUTER_RIGHT, Direction.NORTH, variantOuter.with(ROTATE_X_180).with(ROTATE_Y_270).with(UV_LOCK))
-        .select(Half.TOP, StairsShape.OUTER_RIGHT, Direction.EAST, variantOuter.with(ROTATE_X_180).with(UV_LOCK))
-        .select(Half.TOP, StairsShape.OUTER_RIGHT, Direction.SOUTH, variantOuter.with(ROTATE_X_180).with(ROTATE_Y_90).with(UV_LOCK))
-        .select(Half.TOP, StairsShape.OUTER_RIGHT, Direction.WEST, variantOuter.with(ROTATE_X_180).with(ROTATE_Y_180).with(UV_LOCK))
+        .select(Half.TOP, StairsShape.INNER_LEFT, Direction.NORTH, variantInner.with(ROTATE_X_180).with(ROTATE_Y_90).with(UV_LOCK))
+        .select(Half.TOP, StairsShape.INNER_LEFT, Direction.EAST, variantInner.with(ROTATE_X_180).with(ROTATE_Y_180).with(UV_LOCK))
+        .select(Half.TOP, StairsShape.INNER_LEFT, Direction.SOUTH, variantInner.with(ROTATE_X_180).with(ROTATE_Y_270).with(UV_LOCK))
+        .select(Half.TOP, StairsShape.INNER_LEFT, Direction.WEST, variantInner.with(ROTATE_X_180).with(UV_LOCK))
+        .select(Half.TOP, StairsShape.INNER_RIGHT, Direction.NORTH, variantInner.with(ROTATE_X_180).with(ROTATE_Y_180).with(UV_LOCK))
+        .select(Half.TOP, StairsShape.INNER_RIGHT, Direction.EAST, variantInner.with(ROTATE_X_180).with(ROTATE_Y_270).with(UV_LOCK))
+        .select(Half.TOP, StairsShape.INNER_RIGHT, Direction.SOUTH, variantInner.with(ROTATE_X_180).with(UV_LOCK))
+        .select(Half.TOP, StairsShape.INNER_RIGHT, Direction.WEST, variantInner.with(ROTATE_X_180).with(ROTATE_Y_90))
+        .select(Half.TOP, StairsShape.OUTER_LEFT, Direction.NORTH, variantOuter.with(ROTATE_X_180).with(ROTATE_Y_90).with(UV_LOCK))
+        .select(Half.TOP, StairsShape.OUTER_LEFT, Direction.EAST, variantOuter.with(ROTATE_X_180).with(ROTATE_Y_180).with(UV_LOCK))
+        .select(Half.TOP, StairsShape.OUTER_LEFT, Direction.SOUTH, variantOuter.with(ROTATE_X_180).with(ROTATE_Y_270).with(UV_LOCK))
+        .select(Half.TOP, StairsShape.OUTER_LEFT, Direction.WEST, variantOuter.with(ROTATE_X_180).with(UV_LOCK))
+        .select(Half.TOP, StairsShape.OUTER_RIGHT, Direction.NORTH, variantOuter.with(ROTATE_X_180).with(ROTATE_Y_180).with(UV_LOCK))
+        .select(Half.TOP, StairsShape.OUTER_RIGHT, Direction.EAST, variantOuter.with(ROTATE_X_180).with(ROTATE_Y_270).with(UV_LOCK))
+        .select(Half.TOP, StairsShape.OUTER_RIGHT, Direction.SOUTH, variantOuter.with(ROTATE_X_180).with(UV_LOCK))
+        .select(Half.TOP, StairsShape.OUTER_RIGHT, Direction.WEST, variantOuter.with(ROTATE_X_180).with(ROTATE_Y_90).with(UV_LOCK))
     ));
     this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModelUtils.plainModel(inventoryModel));
   }

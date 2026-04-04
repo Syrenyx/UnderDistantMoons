@@ -25,7 +25,8 @@ public abstract class DistantMoonsItemGroups {
     addToTab(CreativeModeTabs.BUILDING_BLOCKS, Items.OAK_SLAB, List.of(
         new ItemStackTemplate(DistantMoonsBlocks.OAK_WALL_SLAB.asItem()),
         new ItemStackTemplate(DistantMoonsBlocks.OAK_BEAM.asItem()),
-        new ItemStackTemplate(DistantMoonsBlocks.OAK_POLE.asItem())
+        new ItemStackTemplate(DistantMoonsBlocks.OAK_POLE.asItem()),
+        new ItemStackTemplate(DistantMoonsBlocks.OAK_BALUSTRADE.asItem())
     ));
     addToTab(CreativeModeTabs.BUILDING_BLOCKS, Items.SPRUCE_WOOD, List.of(
         new ItemStackTemplate(DistantMoonsBlocks.CUT_SPRUCE_LOG.asItem()),
@@ -38,7 +39,8 @@ public abstract class DistantMoonsItemGroups {
     addToTab(CreativeModeTabs.BUILDING_BLOCKS, Items.SPRUCE_SLAB, List.of(
         new ItemStackTemplate(DistantMoonsBlocks.SPRUCE_WALL_SLAB.asItem()),
         new ItemStackTemplate(DistantMoonsBlocks.SPRUCE_BEAM.asItem()),
-        new ItemStackTemplate(DistantMoonsBlocks.SPRUCE_POLE.asItem())
+        new ItemStackTemplate(DistantMoonsBlocks.SPRUCE_POLE.asItem()),
+        new ItemStackTemplate(DistantMoonsBlocks.SPRUCE_BALUSTRADE.asItem())
     ));
     addToTab(CreativeModeTabs.BUILDING_BLOCKS, Items.BIRCH_WOOD, List.of(
         new ItemStackTemplate(DistantMoonsBlocks.CUT_BIRCH_LOG.asItem()),
@@ -51,7 +53,8 @@ public abstract class DistantMoonsItemGroups {
     addToTab(CreativeModeTabs.BUILDING_BLOCKS, Items.BIRCH_SLAB, List.of(
         new ItemStackTemplate(DistantMoonsBlocks.BIRCH_WALL_SLAB.asItem()),
         new ItemStackTemplate(DistantMoonsBlocks.BIRCH_BEAM.asItem()),
-        new ItemStackTemplate(DistantMoonsBlocks.BIRCH_POLE.asItem())
+        new ItemStackTemplate(DistantMoonsBlocks.BIRCH_POLE.asItem()),
+        new ItemStackTemplate(DistantMoonsBlocks.BIRCH_BALUSTRADE.asItem())
     ));
     addToTab(CreativeModeTabs.BUILDING_BLOCKS, Items.JUNGLE_WOOD, List.of(
         new ItemStackTemplate(DistantMoonsBlocks.CUT_JUNGLE_LOG.asItem()),
@@ -64,7 +67,8 @@ public abstract class DistantMoonsItemGroups {
     addToTab(CreativeModeTabs.BUILDING_BLOCKS, Items.JUNGLE_SLAB, List.of(
         new ItemStackTemplate(DistantMoonsBlocks.JUNGLE_WALL_SLAB.asItem()),
         new ItemStackTemplate(DistantMoonsBlocks.JUNGLE_BEAM.asItem()),
-        new ItemStackTemplate(DistantMoonsBlocks.JUNGLE_POLE.asItem())
+        new ItemStackTemplate(DistantMoonsBlocks.JUNGLE_POLE.asItem()),
+        new ItemStackTemplate(DistantMoonsBlocks.JUNGLE_BALUSTRADE.asItem())
     ));
     addToTab(CreativeModeTabs.BUILDING_BLOCKS, Items.ACACIA_WOOD, List.of(
         new ItemStackTemplate(DistantMoonsBlocks.CUT_ACACIA_LOG.asItem()),
@@ -91,7 +95,8 @@ public abstract class DistantMoonsItemGroups {
     addToTab(CreativeModeTabs.BUILDING_BLOCKS, Items.DARK_OAK_SLAB, List.of(
         new ItemStackTemplate(DistantMoonsBlocks.DARK_OAK_WALL_SLAB.asItem()),
         new ItemStackTemplate(DistantMoonsBlocks.DARK_OAK_BEAM.asItem()),
-        new ItemStackTemplate(DistantMoonsBlocks.DARK_OAK_POLE.asItem())
+        new ItemStackTemplate(DistantMoonsBlocks.DARK_OAK_POLE.asItem()),
+        new ItemStackTemplate(DistantMoonsBlocks.DARK_OAK_BALUSTRADE.asItem())
     ));
     addToTab(CreativeModeTabs.BUILDING_BLOCKS, Items.MANGROVE_WOOD, List.of(
         new ItemStackTemplate(DistantMoonsBlocks.CUT_MANGROVE_LOG.asItem()),
@@ -104,7 +109,8 @@ public abstract class DistantMoonsItemGroups {
     addToTab(CreativeModeTabs.BUILDING_BLOCKS, Items.MANGROVE_SLAB, List.of(
         new ItemStackTemplate(DistantMoonsBlocks.MANGROVE_WALL_SLAB.asItem()),
         new ItemStackTemplate(DistantMoonsBlocks.MANGROVE_BEAM.asItem()),
-        new ItemStackTemplate(DistantMoonsBlocks.MANGROVE_POLE.asItem())
+        new ItemStackTemplate(DistantMoonsBlocks.MANGROVE_POLE.asItem()),
+        new ItemStackTemplate(DistantMoonsBlocks.MANGROVE_BALUSTRADE.asItem())
     ));
     addToTab(CreativeModeTabs.BUILDING_BLOCKS, Items.CHERRY_WOOD, List.of(
         new ItemStackTemplate(DistantMoonsBlocks.CUT_CHERRY_LOG.asItem()),
@@ -117,7 +123,8 @@ public abstract class DistantMoonsItemGroups {
     addToTab(CreativeModeTabs.BUILDING_BLOCKS, Items.CHERRY_SLAB, List.of(
         new ItemStackTemplate(DistantMoonsBlocks.CHERRY_WALL_SLAB.asItem()),
         new ItemStackTemplate(DistantMoonsBlocks.CHERRY_BEAM.asItem()),
-        new ItemStackTemplate(DistantMoonsBlocks.CHERRY_POLE.asItem())
+        new ItemStackTemplate(DistantMoonsBlocks.CHERRY_POLE.asItem()),
+        new ItemStackTemplate(DistantMoonsBlocks.CHERRY_BALUSTRADE.asItem())
     ));
     addToTab(CreativeModeTabs.BUILDING_BLOCKS, Items.PALE_OAK_WOOD, List.of(
         new ItemStackTemplate(DistantMoonsBlocks.CUT_PALE_OAK_LOG.asItem()),
@@ -130,7 +137,8 @@ public abstract class DistantMoonsItemGroups {
     addToTab(CreativeModeTabs.BUILDING_BLOCKS, Items.PALE_OAK_SLAB, List.of(
         new ItemStackTemplate(DistantMoonsBlocks.PALE_OAK_WALL_SLAB.asItem()),
         new ItemStackTemplate(DistantMoonsBlocks.PALE_OAK_BEAM.asItem()),
-        new ItemStackTemplate(DistantMoonsBlocks.PALE_OAK_POLE.asItem())
+        new ItemStackTemplate(DistantMoonsBlocks.PALE_OAK_POLE.asItem()),
+        new ItemStackTemplate(DistantMoonsBlocks.PALE_OAK_BALUSTRADE.asItem())
     ));
     addToTab(CreativeModeTabs.BUILDING_BLOCKS, Items.BAMBOO_BLOCK, List.of(
         new ItemStackTemplate(DistantMoonsBlocks.CUT_BAMBOO_BLOCK.asItem())
@@ -154,7 +162,8 @@ public abstract class DistantMoonsItemGroups {
     addToTab(CreativeModeTabs.BUILDING_BLOCKS, Items.CRIMSON_SLAB, List.of(
         new ItemStackTemplate(DistantMoonsBlocks.CRIMSON_WALL_SLAB.asItem()),
         new ItemStackTemplate(DistantMoonsBlocks.CRIMSON_BEAM.asItem()),
-        new ItemStackTemplate(DistantMoonsBlocks.CRIMSON_POLE.asItem())
+        new ItemStackTemplate(DistantMoonsBlocks.CRIMSON_POLE.asItem()),
+        new ItemStackTemplate(DistantMoonsBlocks.CRIMSON_BALUSTRADE.asItem())
     ));
     addToTab(CreativeModeTabs.BUILDING_BLOCKS, Items.WARPED_HYPHAE, List.of(
         new ItemStackTemplate(DistantMoonsBlocks.CUT_WARPED_STEM.asItem()),
@@ -167,7 +176,8 @@ public abstract class DistantMoonsItemGroups {
     addToTab(CreativeModeTabs.BUILDING_BLOCKS, Items.WARPED_SLAB, List.of(
         new ItemStackTemplate(DistantMoonsBlocks.WARPED_WALL_SLAB.asItem()),
         new ItemStackTemplate(DistantMoonsBlocks.WARPED_BEAM.asItem()),
-        new ItemStackTemplate(DistantMoonsBlocks.WARPED_POLE.asItem())
+        new ItemStackTemplate(DistantMoonsBlocks.WARPED_POLE.asItem()),
+        new ItemStackTemplate(DistantMoonsBlocks.WARPED_BALUSTRADE.asItem())
     ));
     addToTab(CreativeModeTabs.BUILDING_BLOCKS, Items.STONE_SLAB, List.of(
         new ItemStackTemplate(DistantMoonsBlocks.STONE_WALL_SLAB.asItem()),
@@ -230,11 +240,18 @@ public abstract class DistantMoonsItemGroups {
     addToTab(CreativeModeTabs.BUILDING_BLOCKS, Items.DEEPSLATE_TILE_SLAB, List.of(
         new ItemStackTemplate(DistantMoonsBlocks.DEEPSLATE_TILE_WALL_SLAB.asItem())
     ));
+    addToTab(CreativeModeTabs.BUILDING_BLOCKS, Items.REINFORCED_DEEPSLATE, List.of(
+        new ItemStackTemplate(Items.CALCITE),
+        new ItemStackTemplate(DistantMoonsBlocks.CALCITE_STAIRS.asItem()),
+        new ItemStackTemplate(DistantMoonsBlocks.CALCITE_SLAB.asItem()),
+        new ItemStackTemplate(DistantMoonsBlocks.CALCITE_WALL_SLAB.asItem())
+    ));
     addToTab(CreativeModeTabs.BUILDING_BLOCKS, Items.TUFF_SLAB, List.of(
         new ItemStackTemplate(DistantMoonsBlocks.TUFF_WALL_SLAB.asItem())
     ));
     addToTab(CreativeModeTabs.BUILDING_BLOCKS, Items.TUFF_WALL, List.of(
-        new ItemStackTemplate(DistantMoonsBlocks.TUFF_BALUSTRADE.asItem())
+        new ItemStackTemplate(DistantMoonsBlocks.TUFF_BALUSTRADE.asItem()),
+        new ItemStackTemplate(Items.DRIPSTONE_BLOCK)
     ));
     addToTab(CreativeModeTabs.BUILDING_BLOCKS, Items.POLISHED_TUFF_SLAB, List.of(
         new ItemStackTemplate(DistantMoonsBlocks.POLISHED_TUFF_WALL_SLAB.asItem())
@@ -302,6 +319,11 @@ public abstract class DistantMoonsItemGroups {
         new ItemStackTemplate(DistantMoonsBlocks.GRAY_PRISMARINE_SLAB.asItem()),
         new ItemStackTemplate(DistantMoonsBlocks.GRAY_PRISMARINE_WALL_SLAB.asItem())
     ));
+    addToTab(CreativeModeTabs.BUILDING_BLOCKS, Items.NETHERRACK, List.of(
+        new ItemStackTemplate(DistantMoonsBlocks.NETHERRACK_STAIRS.asItem()),
+        new ItemStackTemplate(DistantMoonsBlocks.NETHERRACK_SLAB.asItem()),
+        new ItemStackTemplate(DistantMoonsBlocks.NETHERRACK_WALL_SLAB.asItem())
+    ));
     addToTab(CreativeModeTabs.BUILDING_BLOCKS, Items.NETHER_BRICK_SLAB, List.of(
         new ItemStackTemplate(DistantMoonsBlocks.NETHER_BRICK_WALL_SLAB.asItem())
     ));
@@ -310,6 +332,11 @@ public abstract class DistantMoonsItemGroups {
     ));
     addToTab(CreativeModeTabs.BUILDING_BLOCKS, Items.BASALT, List.of(
         new ItemStackTemplate(DistantMoonsBlocks.CUT_BASALT.asItem())
+    ));
+    addToTab(CreativeModeTabs.BUILDING_BLOCKS, Items.SMOOTH_BASALT, List.of(
+        new ItemStackTemplate(DistantMoonsBlocks.SMOOTH_BASALT_STAIRS.asItem()),
+        new ItemStackTemplate(DistantMoonsBlocks.SMOOTH_BASALT_SLAB.asItem()),
+        new ItemStackTemplate(DistantMoonsBlocks.SMOOTH_BASALT_WALL_SLAB.asItem())
     ));
     addToTab(CreativeModeTabs.BUILDING_BLOCKS, Items.POLISHED_BASALT, List.of(
         new ItemStackTemplate(DistantMoonsBlocks.POLISHED_CUT_BASALT.asItem())
@@ -329,6 +356,11 @@ public abstract class DistantMoonsItemGroups {
         new ItemStackTemplate(DistantMoonsBlocks.FIRE_BRICK_SLAB.asItem()),
         new ItemStackTemplate(DistantMoonsBlocks.FIRE_BRICK_WALL_SLAB.asItem()),
         new ItemStackTemplate(DistantMoonsBlocks.FIRE_BRICK_WALL.asItem())
+    ));
+    addToTab(CreativeModeTabs.BUILDING_BLOCKS, Items.END_STONE, List.of(
+        new ItemStackTemplate(DistantMoonsBlocks.END_STONE_STAIRS.asItem()),
+        new ItemStackTemplate(DistantMoonsBlocks.END_STONE_SLAB.asItem()),
+        new ItemStackTemplate(DistantMoonsBlocks.END_STONE_WALL_SLAB.asItem())
     ));
     addToTab(CreativeModeTabs.BUILDING_BLOCKS, Items.END_STONE_BRICK_SLAB, List.of(
         new ItemStackTemplate(DistantMoonsBlocks.END_STONE_BRICK_WALL_SLAB.asItem())
@@ -387,6 +419,11 @@ public abstract class DistantMoonsItemGroups {
     ));
     addToTab(CreativeModeTabs.BUILDING_BLOCKS, Items.QUARTZ_SLAB, List.of(
         new ItemStackTemplate(DistantMoonsBlocks.QUARTZ_WALL_SLAB.asItem())
+    ));
+    addToTab(CreativeModeTabs.BUILDING_BLOCKS, Items.QUARTZ_BRICKS, List.of(
+        new ItemStackTemplate(DistantMoonsBlocks.QUARTZ_BRICK_STAIRS.asItem()),
+        new ItemStackTemplate(DistantMoonsBlocks.QUARTZ_BRICK_SLAB.asItem()),
+        new ItemStackTemplate(DistantMoonsBlocks.QUARTZ_BRICK_WALL_SLAB.asItem())
     ));
     addToTab(CreativeModeTabs.BUILDING_BLOCKS, Items.QUARTZ_PILLAR, List.of(
         new ItemStackTemplate(DistantMoonsBlocks.CUT_QUARTZ_PILLAR.asItem())
