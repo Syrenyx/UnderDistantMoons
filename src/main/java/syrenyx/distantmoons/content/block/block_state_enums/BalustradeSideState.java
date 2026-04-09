@@ -32,4 +32,8 @@ public enum BalustradeSideState implements StringRepresentable {
   public boolean topCapped() {
     return this.topCapped;
   }
+
+  public boolean capped(boolean bottom) {
+    return bottom ? this.bottomCapped : this.topCapped;
+  }
 }

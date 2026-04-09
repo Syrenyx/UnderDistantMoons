@@ -32,7 +32,7 @@ public class LargeBlastFurnaceScreen extends AbstractContainerScreen<LargeBlastF
   private static final int BLAST_CHARGE_DIAL_POSITIONS = 16;
 
   public LargeBlastFurnaceScreen(LargeBlastFurnaceMenu abstractContainerMenu, Inventory inventory, Component component) {
-    super(abstractContainerMenu, inventory, component, IMAGE_HEIGHT, DEFAULT_IMAGE_WIDTH);
+    super(abstractContainerMenu, inventory, component, DEFAULT_IMAGE_WIDTH, IMAGE_HEIGHT);
     this.inventoryLabelY = this.imageHeight - 94;
   }
 

@@ -580,8 +580,16 @@ public class DistantMoonsBlockTagProvider extends FabricTagsProvider.BlockTagsPr
     this.valueLookupBuilder(DistantMoonsBlockTags.MINING_TYPE_SHOVEL);
 
     //SUPPORT BLOCKS
+    this.valueLookupBuilder(DistantMoonsBlockTags.SUPPORT_BLOCK_FOR_BIG_DRIPLEAF)
+        .add(DistantMoonsBlocks.MOSS_SLAB)
+        .add(DistantMoonsBlocks.MOSS_STAIRS)
+        .add(DistantMoonsBlocks.MOSS_WALL_SLAB);
     this.valueLookupBuilder(DistantMoonsBlockTags.SUPPORT_BLOCK_FOR_SITTING_SPOT)
         .addTag(DistantMoonsBlockTags.DYED_PILLOW);
+    this.valueLookupBuilder(DistantMoonsBlockTags.SUPPORT_BLOCK_FOR_SMALL_DRIPLEAF)
+        .add(DistantMoonsBlocks.MOSS_SLAB)
+        .add(DistantMoonsBlocks.MOSS_STAIRS)
+        .add(DistantMoonsBlocks.MOSS_WALL_SLAB);
 
     //MISCELLANEOUS
     this.valueLookupBuilder(DistantMoonsBlockTags.CLIMBABLE)
@@ -601,14 +609,33 @@ public class DistantMoonsBlockTagProvider extends FabricTagsProvider.BlockTagsPr
         .add(Blocks.SPRUCE_LEAVES);
     this.valueLookupBuilder(DistantMoonsBlockTags.OCCLUDES_VIBRATIONS)
         .addTag(DistantMoonsBlockTags.DYED_PILLOW);
+    this.valueLookupBuilder(DistantMoonsBlockTags.OVERWORLD_SUBSTRATE)
+        .add(DistantMoonsBlocks.MOSS_SLAB)
+        .add(DistantMoonsBlocks.MOSS_STAIRS)
+        .add(DistantMoonsBlocks.MOSS_WALL_SLAB)
+        .add(DistantMoonsBlocks.PALE_MOSS_SLAB)
+        .add(DistantMoonsBlocks.PALE_MOSS_STAIRS)
+        .add(DistantMoonsBlocks.PALE_MOSS_WALL_SLAB);
+    this.valueLookupBuilder(DistantMoonsBlockTags.SNIFFER_EGG_HATCH_BOOST)
+        .add(DistantMoonsBlocks.MOSS_SLAB)
+        .add(DistantMoonsBlocks.MOSS_STAIRS)
+        .add(DistantMoonsBlocks.MOSS_WALL_SLAB)
+        .add(DistantMoonsBlocks.PALE_MOSS_SLAB)
+        .add(DistantMoonsBlocks.PALE_MOSS_STAIRS)
+        .add(DistantMoonsBlocks.PALE_MOSS_WALL_SLAB);
     this.valueLookupBuilder(DistantMoonsBlockTags.UNDERWORLD_COMPASS_TARGET)
         .add(DistantMoonsBlocks.UNDERWORLD_CONFLUX);
 
+    //FABRIC TAG REDIRECTS
+
     //VANILLA TAG REDIRECTS
+    this.valueLookupBuilder(BlockTags.AZALEA_GROWS_ON).addTag(DistantMoonsBlockTags.SUPPORT_BLOCK_FOR_AZALEA_GROWTH);
     this.valueLookupBuilder(BlockTags.BARS).addTag(DistantMoonsBlockTags.BARS);
     this.valueLookupBuilder(BlockTags.CHAINS).addTag(DistantMoonsBlockTags.CHAIN);
     this.valueLookupBuilder(BlockTags.CLIMBABLE).addTag(DistantMoonsBlockTags.CLIMBABLE);
     this.valueLookupBuilder(BlockTags.DRAGON_IMMUNE).addTag(DistantMoonsBlockTags.IMMUNE_TO_DRAGON);
+    this.valueLookupBuilder(BlockTags.HUGE_BROWN_MUSHROOM_CAN_PLACE_ON).addTag(DistantMoonsBlockTags.SUPPORT_BLOCK_FOR_HUGE_BROWN_MUSHROOM_GROWTH);
+    this.valueLookupBuilder(BlockTags.HUGE_RED_MUSHROOM_CAN_PLACE_ON).addTag(DistantMoonsBlockTags.SUPPORT_BLOCK_FOR_HUGE_RED_MUSHROOM_GROWTH);
     this.valueLookupBuilder(BlockTags.MINEABLE_WITH_AXE).addTag(DistantMoonsBlockTags.MINING_TYPE_AXE);
     this.valueLookupBuilder(BlockTags.MINEABLE_WITH_HOE).addTag(DistantMoonsBlockTags.MINING_TYPE_HOE);
     this.valueLookupBuilder(BlockTags.MINEABLE_WITH_PICKAXE).addTag(DistantMoonsBlockTags.MINING_TYPE_PICKAXE);
@@ -616,6 +643,23 @@ public class DistantMoonsBlockTagProvider extends FabricTagsProvider.BlockTagsPr
     this.valueLookupBuilder(BlockTags.NEEDS_DIAMOND_TOOL).addTag(DistantMoonsBlockTags.MINING_TIER_DIAMOND);
     this.valueLookupBuilder(BlockTags.NEEDS_IRON_TOOL).addTag(DistantMoonsBlockTags.MINING_TIER_IRON);
     this.valueLookupBuilder(BlockTags.NEEDS_STONE_TOOL).addTag(DistantMoonsBlockTags.MINING_TIER_STONE);
+    this.valueLookupBuilder(BlockTags.SUBSTRATE_OVERWORLD).addTag(DistantMoonsBlockTags.OVERWORLD_SUBSTRATE);
+    this.valueLookupBuilder(BlockTags.SUPPORTS_AZALEA).addTag(DistantMoonsBlockTags.SUPPORT_BLOCK_FOR_AZALEA);
+    this.valueLookupBuilder(BlockTags.SUPPORTS_BAMBOO).addTag(DistantMoonsBlockTags.SUPPORT_BLOCK_FOR_BAMBOO);
+    this.valueLookupBuilder(BlockTags.SUPPORTS_BIG_DRIPLEAF).addTag(DistantMoonsBlockTags.SUPPORT_BLOCK_FOR_BIG_DRIPLEAF);
+    this.valueLookupBuilder(BlockTags.SUPPORTS_CRIMSON_FUNGUS).addTag(DistantMoonsBlockTags.SUPPORT_BLOCK_FOR_CRIMSON_FUNGUS);
+    this.valueLookupBuilder(BlockTags.SUPPORTS_CRIMSON_ROOTS).addTag(DistantMoonsBlockTags.SUPPORT_BLOCK_FOR_CRIMSON_ROOTS);
+    this.valueLookupBuilder(BlockTags.SUPPORTS_DRY_VEGETATION).addTag(DistantMoonsBlockTags.SUPPORT_BLOCK_FOR_DRY_VEGETATION);
+    this.valueLookupBuilder(BlockTags.SUPPORTS_MANGROVE_PROPAGULE).addTag(DistantMoonsBlockTags.SUPPORT_BLOCK_FOR_MANGROVE_PROPAGULE);
+    this.valueLookupBuilder(BlockTags.SUPPORTS_MELON_STEM_FRUIT).addTag(DistantMoonsBlockTags.SUPPORT_BLOCK_FOR_MELON_GROWTH);
+    this.valueLookupBuilder(BlockTags.SUPPORTS_NETHER_SPROUTS).addTag(DistantMoonsBlockTags.SUPPORT_BLOCK_FOR_NETHER_SPROUTS);
+    this.valueLookupBuilder(BlockTags.SUPPORTS_PUMPKIN_STEM_FRUIT).addTag(DistantMoonsBlockTags.SUPPORT_BLOCK_FOR_PUMPKIN_GROWTH);
+    this.valueLookupBuilder(BlockTags.SUPPORTS_SMALL_DRIPLEAF).addTag(DistantMoonsBlockTags.SUPPORT_BLOCK_FOR_SMALL_DRIPLEAF);
+    this.valueLookupBuilder(BlockTags.SUPPORTS_SUGAR_CANE).addTag(DistantMoonsBlockTags.SUPPORT_BLOCK_FOR_SUGAR_CANE);
+    this.valueLookupBuilder(BlockTags.SUPPORTS_VEGETATION).addTag(DistantMoonsBlockTags.SUPPORT_BLOCK_FOR_VEGETATION);
+    this.valueLookupBuilder(BlockTags.SUPPORTS_WARPED_FUNGUS).addTag(DistantMoonsBlockTags.SUPPORT_BLOCK_FOR_WARPED_FUNGUS);
+    this.valueLookupBuilder(BlockTags.SUPPORTS_WARPED_ROOTS).addTag(DistantMoonsBlockTags.SUPPORT_BLOCK_FOR_WARPED_ROOTS);
+    this.valueLookupBuilder(BlockTags.SUPPORTS_WITHER_ROSE).addTag(DistantMoonsBlockTags.SUPPORT_BLOCK_FOR_WITHER_ROSE);
     this.valueLookupBuilder(BlockTags.WITHER_IMMUNE).addTag(DistantMoonsBlockTags.IMMUNE_TO_WITHER);
     this.valueLookupBuilder(BlockTags.WALLS).addTag(DistantMoonsBlockTags.WALL);
   }

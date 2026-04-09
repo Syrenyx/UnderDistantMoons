@@ -140,8 +140,13 @@ public abstract class AbstractBalustradeBlock extends Block implements SimpleWat
       if (blockState.is(this.alwaysConnectsToVertically())) return true;
       if (blockState.is(this.balustradeType())) {
         if (this.canConnectToBalustradeCap()) return true;
-        EndCappedState centerShape = blockState.getValue(CENTER_SHAPE);
-        return direction == Direction.DOWN ? !centerShape.topCapped() : !centerShape.bottomCapped();
+        boolean bottom = direction != Direction.DOWN;
+        return !(
+            blockState.getValue(NORTH_SHAPE).capped(bottom)
+                || blockState.getValue(EAST_SHAPE).capped(bottom)
+                || blockState.getValue(SOUTH_SHAPE).capped(bottom)
+                || blockState.getValue(WEST_SHAPE).capped(bottom)
+        );
       }
     }
     else {
