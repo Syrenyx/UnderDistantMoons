@@ -3,8 +3,9 @@
   "package": "syrenyx.distantmoons.mixin.client",
   "compatibilityLevel": "JAVA_21",
   "client": [
-    "HandledScreenAccessor",
-    "EffectsInInventoryMixin"
+    "BlockTintSourcesMixin",
+    "EffectsInInventoryMixin",
+    "HandledScreenAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -135,10 +135,20 @@ public abstract class AbstractBalustradeBlock extends Block implements SimpleWat
   private boolean canConnectTo(BlockGetter level, BlockPos blockPos, Direction direction) {
     boolean vertical = direction.getAxis() == Direction.Axis.Y;
     BlockState blockState = level.getBlockState(blockPos.relative(direction));
-    if (blockState.is(vertical ? this.neverConnectsToVertically() : this.neverConnectsToHorizontally())) return false;
-    if (blockState.is(vertical ? this.alwaysConnectsToVertically() : this.alwaysConnectsToHorizontally())) return true;
-    if (!vertical && blockState.isFaceSturdy(level, blockPos.relative(direction), direction.getOpposite())) return true;
-    if (vertical && blockState.is(this.balustradeType())) return true;
+    if (vertical) {
+      if (blockState.is(this.neverConnectsToVertically())) return false;
+      if (blockState.is(this.alwaysConnectsToVertically())) return true;
+      if (blockState.is(this.balustradeType())) {
+        if (this.canConnectToBalustradeCap()) return true;
+        EndCappedState centerShape = blockState.getValue(CENTER_SHAPE);
+        return direction == Direction.DOWN ? !centerShape.topCapped() : !centerShape.bottomCapped();
+      }
+    }
+    else {
+      if (blockState.is(this.neverConnectsToHorizontally())) return false;
+      if (blockState.is(this.alwaysConnectsToHorizontally())) return true;
+      return blockState.isFaceSturdy(level, blockPos.relative(direction), direction.getOpposite());
+    }
     return false;
   }
 
@@ -167,6 +177,7 @@ public abstract class AbstractBalustradeBlock extends Block implements SimpleWat
   protected abstract TagKey<Block> balustradeType();
   protected abstract TagKey<Block> alwaysConnectsToHorizontally();
   protected abstract TagKey<Block> alwaysConnectsToVertically();
+  protected abstract boolean canConnectToBalustradeCap();
   protected abstract TagKey<Block> neverConnectsToHorizontally();
   protected abstract TagKey<Block> neverConnectsToVertically();
 

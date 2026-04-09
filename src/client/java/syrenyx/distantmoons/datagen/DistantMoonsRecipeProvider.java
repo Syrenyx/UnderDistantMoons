@@ -90,6 +90,7 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
         this.createSlabRecipes(Items.DARK_OAK_LOG, DistantMoonsBlocks.CUT_DARK_OAK_LOG, RecipeCategory.BUILDING_BLOCKS, "cut_log");
         this.createSlabRecipes(Items.DARK_OAK_WOOD, DistantMoonsBlocks.CUT_DARK_OAK_WOOD, RecipeCategory.BUILDING_BLOCKS, "cut_wood");
         this.createSlabRecipes(Items.DEEPSLATE, DistantMoonsBlocks.CUT_DEEPSLATE, RecipeCategory.BUILDING_BLOCKS, null);
+        this.createSlabRecipes(Items.DRIPSTONE_BLOCK, DistantMoonsBlocks.DRIPSTONE_SLAB, RecipeCategory.BUILDING_BLOCKS, null);
         this.createSlabRecipes(Items.END_STONE, DistantMoonsBlocks.END_STONE_SLAB, RecipeCategory.BUILDING_BLOCKS, null);
         this.createSlabRecipes(DistantMoonsBlocks.FIRE_BRICKS, DistantMoonsBlocks.FIRE_BRICK_SLAB, RecipeCategory.BUILDING_BLOCKS, null);
         this.createSlabRecipes(DistantMoonsBlocks.GRAY_PRISMARINE, DistantMoonsBlocks.GRAY_PRISMARINE_SLAB, RecipeCategory.BUILDING_BLOCKS, null);
@@ -256,6 +257,7 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
 
         //STAIRS CRAFTING
         this.createStairsRecipes(Items.CALCITE, DistantMoonsBlocks.CALCITE_STAIRS, null);
+        this.createStairsRecipes(Items.DRIPSTONE_BLOCK, DistantMoonsBlocks.DRIPSTONE_STAIRS, null);
         this.createStairsRecipes(Items.END_STONE, DistantMoonsBlocks.END_STONE_STAIRS, null);
         this.createStairsRecipes(DistantMoonsBlocks.FIRE_BRICKS, DistantMoonsBlocks.FIRE_BRICK_STAIRS, null);
         this.createStairsRecipes(DistantMoonsBlocks.GRAY_PRISMARINE, DistantMoonsBlocks.GRAY_PRISMARINE_STAIRS, null);
@@ -345,6 +347,7 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
         this.createWallSlabRecipes(Items.DEEPSLATE_BRICKS, DistantMoonsBlocks.DEEPSLATE_BRICK_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.DEEPSLATE_TILES, DistantMoonsBlocks.DEEPSLATE_TILE_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.DIORITE, DistantMoonsBlocks.DIORITE_WALL_SLAB, null);
+        this.createWallSlabRecipes(Items.DRIPSTONE_BLOCK, DistantMoonsBlocks.DRIPSTONE_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.END_STONE_BRICKS, DistantMoonsBlocks.END_STONE_BRICK_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.END_STONE, DistantMoonsBlocks.END_STONE_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.EXPOSED_CUT_COPPER, DistantMoonsBlocks.EXPOSED_CUT_COPPER_WALL_SLAB, "exposed_cut_copper_wall_slab");

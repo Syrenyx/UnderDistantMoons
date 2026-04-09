@@ -51,6 +51,11 @@ public class ThinBalustradeBlock extends AbstractBalustradeBlock {
   }
 
   @Override
+  protected boolean canConnectToBalustradeCap() {
+    return true;
+  }
+
+  @Override
   protected TagKey<Block> neverConnectsToHorizontally() {
     return DistantMoonsBlockTags.THIN_BALUSTRADE_NEVER_CONNECTS_TO_HORIZONTALLY;
   }

@@ -28,6 +28,7 @@ public class UnderDistantMoons implements ModInitializer {
     DistantMoonsBlockModifications.initialize();
     DistantMoonsBlocks.initialize();
     DistantMoonsCommands.initialize();
+    DistantMoonsCreativeModeTabs.initialize();
     DistantMoonsDataComponentTypes.initialize();
     DistantMoonsEnchantmentEffectComponents.initialize();
     DistantMoonsEnchantmentEntityEffects.initialize();
@@ -36,7 +37,6 @@ public class UnderDistantMoons implements ModInitializer {
     DistantMoonsEnvironmentAttributes.initialize();
     DistantMoonsEnvironmentModifications.initialize();
     DistantMoonsFeatures.initialize();
-    DistantMoonsItemGroups.initialize();
     DistantMoonsItemModifications.initialize();
     DistantMoonsItems.initialize();
     DistantMoonsLootConditions.initialize();

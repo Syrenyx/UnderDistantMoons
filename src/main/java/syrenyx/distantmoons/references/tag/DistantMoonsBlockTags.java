@@ -13,6 +13,8 @@ public abstract class DistantMoonsBlockTags {
   public static final TagKey<Block> BEAM_ALWAYS_CONNECTS_TO = keyOf("connection_target/beam/always");
   public static final TagKey<Block> BEAM_ALWAYS_CONNECTS_TO_HORIZONTALLY = keyOf("connection_target/beam/horizontal/always");
   public static final TagKey<Block> BEAM_NEVER_CONNECTS_TO = keyOf("connection_target/beam/never");
+  public static final TagKey<Block> BLOCK_TINT_PROVIDER_MOSS = keyOf("block_tint_provider/moss");
+  public static final TagKey<Block> BLOCK_TINT_PROVIDER_PALE_MOSS = keyOf("block_tint_provider/pale_moss");
   public static final TagKey<Block> BRICK_FENCE = keyOf("brick_fence");
   public static final TagKey<Block> BRICK_FENCE_ALWAYS_CONNECTS_TO = keyOf("connection_target/brick_fence/always");
   public static final TagKey<Block> BRICK_FENCE_NEVER_CONNECTS_TO = keyOf("connection_target/brick_fence/never");

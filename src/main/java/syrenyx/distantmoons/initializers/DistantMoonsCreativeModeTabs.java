@@ -9,7 +9,7 @@ import syrenyx.distantmoons.utility.ColorUtil;
 import java.util.List;
 import java.util.Map;
 
-public abstract class DistantMoonsItemGroups {
+public abstract class DistantMoonsCreativeModeTabs {
 
   static {
 
@@ -251,7 +251,10 @@ public abstract class DistantMoonsItemGroups {
     ));
     addToTab(CreativeModeTabs.BUILDING_BLOCKS, Items.TUFF_WALL, List.of(
         new ItemStackTemplate(DistantMoonsBlocks.TUFF_BALUSTRADE.asItem()),
-        new ItemStackTemplate(Items.DRIPSTONE_BLOCK)
+        new ItemStackTemplate(Items.DRIPSTONE_BLOCK),
+        new ItemStackTemplate(DistantMoonsBlocks.DRIPSTONE_STAIRS.asItem()),
+        new ItemStackTemplate(DistantMoonsBlocks.DRIPSTONE_SLAB.asItem()),
+        new ItemStackTemplate(DistantMoonsBlocks.DRIPSTONE_WALL_SLAB.asItem())
     ));
     addToTab(CreativeModeTabs.BUILDING_BLOCKS, Items.POLISHED_TUFF_SLAB, List.of(
         new ItemStackTemplate(DistantMoonsBlocks.POLISHED_TUFF_WALL_SLAB.asItem())
@@ -286,7 +289,15 @@ public abstract class DistantMoonsItemGroups {
         new ItemStackTemplate(DistantMoonsBlocks.SMOOTH_RED_SANDSTONE_BALUSTRADE.asItem())
     ));
     addToTab(CreativeModeTabs.BUILDING_BLOCKS, Items.CUT_RED_SANDSTONE_SLAB, List.of(
-        new ItemStackTemplate(DistantMoonsBlocks.CUT_RED_SANDSTONE_WALL_SLAB.asItem())
+        new ItemStackTemplate(DistantMoonsBlocks.CUT_RED_SANDSTONE_WALL_SLAB.asItem()),
+        new ItemStackTemplate(Items.MOSS_BLOCK),
+        new ItemStackTemplate(DistantMoonsBlocks.MOSS_STAIRS.asItem()),
+        new ItemStackTemplate(DistantMoonsBlocks.MOSS_SLAB.asItem()),
+        new ItemStackTemplate(DistantMoonsBlocks.MOSS_WALL_SLAB.asItem()),
+        new ItemStackTemplate(Items.PALE_MOSS_BLOCK),
+        new ItemStackTemplate(DistantMoonsBlocks.PALE_MOSS_STAIRS.asItem()),
+        new ItemStackTemplate(DistantMoonsBlocks.PALE_MOSS_SLAB.asItem()),
+        new ItemStackTemplate(DistantMoonsBlocks.PALE_MOSS_WALL_SLAB.asItem())
     ));
     addToTab(CreativeModeTabs.BUILDING_BLOCKS, Items.PRISMARINE_SLAB, List.of(
         new ItemStackTemplate(DistantMoonsBlocks.PRISMARINE_WALL_SLAB.asItem())
@@ -474,7 +485,7 @@ public abstract class DistantMoonsItemGroups {
     addToTab(CreativeModeTabs.COLORED_BLOCKS, Items.PINK_CONCRETE, DistantMoonsBlocks.DYED_CONCRETE_SLABS);
     addToTab(CreativeModeTabs.COLORED_BLOCKS, Items.PINK_CONCRETE, DistantMoonsBlocks.DYED_CONCRETE_STAIRS);
 
-    //NATURAL
+    //NATURAL BLOCKS
     addToTab(CreativeModeTabs.NATURAL_BLOCKS, Items.NETHER_QUARTZ_ORE, List.of(
         new ItemStackTemplate(DistantMoonsBlocks.NETHERRACK_DEEP_IRON_ORE.asItem()),
         new ItemStackTemplate(DistantMoonsBlocks.DEEPSLATE_DEEP_IRON_ORE.asItem()),
@@ -484,7 +495,7 @@ public abstract class DistantMoonsItemGroups {
         new ItemStackTemplate(DistantMoonsBlocks.RAW_DEEP_IRON_BLOCK.asItem())
     ));
 
-    //FUNCTIONAL
+    //FUNCTIONAL BLOCKS
     addToTab(CreativeModeTabs.FUNCTIONAL_BLOCKS, Items.SOUL_LANTERN, List.of(
         new ItemStackTemplate(DistantMoonsBlocks.UNDERWORLD_LANTERN.asItem())
     ));
@@ -536,9 +547,9 @@ public abstract class DistantMoonsItemGroups {
         new ItemStackTemplate(DistantMoonsBlocks.INFESTED_CRACKED_DEEPSLATE_TILES.asItem())
     ));
 
-    //REDSTONE
+    //REDSTONE BLOCKS
 
-    //TOOLS
+    //TOOLS AND UTILITIES
     addToTab(CreativeModeTabs.TOOLS_AND_UTILITIES, Items.IRON_HOE, List.of(
         new ItemStackTemplate(DistantMoonsItems.DEEP_IRON_SHOVEL),
         new ItemStackTemplate(DistantMoonsItems.DEEP_IRON_PICKAXE),
@@ -579,7 +590,7 @@ public abstract class DistantMoonsItemGroups {
         new ItemStackTemplate(DistantMoonsItems.DEEP_IRON_NAUTILUS_ARMOR)
     ));
 
-    //FOOD AND DRINK
+    //FOOD AND DRINKS
     addToTab(CreativeModeTabs.FOOD_AND_DRINKS, Items.MELON_SLICE, List.of(
         new ItemStackTemplate(Items.GLISTERING_MELON_SLICE)
     ));
@@ -650,7 +661,7 @@ public abstract class DistantMoonsItemGroups {
         new ItemStackTemplate(DistantMoonsBlocks.INFESTED_CRACKED_DEEPSLATE_TILES.asItem())
     ));
 
-    //OPERATOR
+    //OP BLOCKS
   }
 
   private static void addToTab(ResourceKey<CreativeModeTab> groupKey, Item anchor, List<ItemStackTemplate> itemStacks) {

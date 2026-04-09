@@ -167,6 +167,9 @@ public class de_de extends FabricLanguageProvider {
     builder.add(DistantMoonsBlocks.DEEPSLATE_TILE_WALL_SLAB, "Gestufte Tiefenschieferfliesenwand");
     builder.add(DistantMoonsBlocks.DIORITE_BALUSTRADE, "Dioritbalustrade");
     builder.add(DistantMoonsBlocks.DIORITE_WALL_SLAB, "Gestufte Dioritwand");
+    builder.add(DistantMoonsBlocks.DRIPSTONE_SLAB, "Tropfsteinstufe");
+    builder.add(DistantMoonsBlocks.DRIPSTONE_STAIRS, "Tropfsteintreppe");
+    builder.add(DistantMoonsBlocks.DRIPSTONE_WALL_SLAB, "Gestufte Tropfsteinwand");
     builder.add(DistantMoonsBlocks.END_STONE_SLAB, "Endsteinstufe");
     builder.add(DistantMoonsBlocks.END_STONE_STAIRS, "Endsteintreppe");
     builder.add(DistantMoonsBlocks.END_STONE_WALL_SLAB, "Gestufte Endsteinwand");
@@ -205,6 +208,9 @@ public class de_de extends FabricLanguageProvider {
     builder.add(DistantMoonsBlocks.MANGROVE_BEAM, "Mangrovenholzbalken");
     builder.add(DistantMoonsBlocks.MANGROVE_POLE, "Mangrovenholzpfosten");
     builder.add(DistantMoonsBlocks.MANGROVE_WALL_SLAB, "Gestufte Mangrovenholzwand");
+    builder.add(DistantMoonsBlocks.MOSS_SLAB, "Moosstufe");
+    builder.add(DistantMoonsBlocks.MOSS_STAIRS, "Moostreppe");
+    builder.add(DistantMoonsBlocks.MOSS_WALL_SLAB, "Gestufte Mooswand");
     builder.add(DistantMoonsBlocks.MOSSY_COBBLESTONE_WALL_SLAB, "Gestufte bemooste Bruchsteinwand");
     builder.add(DistantMoonsBlocks.MOSSY_STONE_BRICK_WALL_SLAB, "Gestufte bemooste Steinziegelwand");
     builder.add(DistantMoonsBlocks.MUD_BRICK_WALL_SLAB, "Gestufte Schlammziegelwand");
@@ -217,6 +223,9 @@ public class de_de extends FabricLanguageProvider {
     builder.add(DistantMoonsBlocks.OAK_BEAM, "Eichenholzbalken");
     builder.add(DistantMoonsBlocks.OAK_POLE, "Eichenholzpfosten");
     builder.add(DistantMoonsBlocks.OAK_WALL_SLAB, "Gestufte Eichenholzwand");
+    builder.add(DistantMoonsBlocks.PALE_MOSS_SLAB, "Blassmoosstufe");
+    builder.add(DistantMoonsBlocks.PALE_MOSS_STAIRS, "Blassmoostreppe");
+    builder.add(DistantMoonsBlocks.PALE_MOSS_WALL_SLAB, "Gestufte Blassmooswand");
     builder.add(DistantMoonsBlocks.PALE_OAK_BALUSTRADE, "Blasseichenholzbalustrade");
     builder.add(DistantMoonsBlocks.PALE_OAK_BEAM, "Blasseichenholzbalken");
     builder.add(DistantMoonsBlocks.PALE_OAK_POLE, "Blasseichenholzpfosten");

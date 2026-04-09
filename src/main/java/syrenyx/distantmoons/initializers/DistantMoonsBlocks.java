@@ -557,6 +557,24 @@ public abstract class DistantMoonsBlocks {
       BlockBehaviour.Properties.ofFullCopy(Blocks.DIORITE),
       new Item.Properties()
   );
+  public static final Block DRIPSTONE_SLAB = register(
+      "dripstone_slab",
+      SlabBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(Blocks.DRIPSTONE_BLOCK),
+      new Item.Properties()
+  );
+  public static final Block DRIPSTONE_STAIRS = register(
+      "dripstone_stairs",
+      SimplifiedStairsBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(Blocks.DRIPSTONE_BLOCK),
+      new Item.Properties()
+  );
+  public static final Block DRIPSTONE_WALL_SLAB = register(
+      "dripstone_wall_slab",
+      WallSlabBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(Blocks.DRIPSTONE_BLOCK),
+      new Item.Properties()
+  );
   public static final Block END_STONE_BRICK_WALL_SLAB = register(
       "end_stone_brick_wall_slab",
       WallSlabBlock::new,
@@ -816,6 +834,24 @@ public abstract class DistantMoonsBlocks {
       BlockBehaviour.Properties.ofFullCopy(Blocks.MANGROVE_PLANKS),
       new Item.Properties()
   );
+  public static final Block MOSS_SLAB = register(
+      "moss_slab",
+      SlabBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(Blocks.MOSS_BLOCK),
+      new Item.Properties()
+  );
+  public static final Block MOSS_STAIRS = register(
+      "moss_stairs",
+      SimplifiedStairsBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(Blocks.MOSS_BLOCK),
+      new Item.Properties()
+  );
+  public static final Block MOSS_WALL_SLAB = register(
+      "moss_wall_slab",
+      WallSlabBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(Blocks.MOSS_BLOCK),
+      new Item.Properties()
+  );
   public static final Block MOSSY_COBBLESTONE_WALL_SLAB = register(
       "mossy_cobblestone_wall_slab",
       WallSlabBlock::new,
@@ -888,6 +924,24 @@ public abstract class DistantMoonsBlocks {
       "oak_wall_slab",
       WallSlabBlock::new,
       BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS),
+      new Item.Properties()
+  );
+  public static final Block PALE_MOSS_SLAB = register(
+      "pale_moss_slab",
+      SlabBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(Blocks.MOSS_BLOCK),
+      new Item.Properties()
+  );
+  public static final Block PALE_MOSS_STAIRS = register(
+      "pale_moss_stairs",
+      SimplifiedStairsBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(Blocks.MOSS_BLOCK),
+      new Item.Properties()
+  );
+  public static final Block PALE_MOSS_WALL_SLAB = register(
+      "pale_moss_wall_slab",
+      WallSlabBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(Blocks.MOSS_BLOCK),
       new Item.Properties()
   );
   public static final Block PALE_OAK_BALUSTRADE = register(

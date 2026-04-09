@@ -128,6 +128,9 @@ public class en_us extends FabricLanguageProvider {
     builder.add(DistantMoonsBlocks.DEEPSLATE_TILE_WALL_SLAB, "Deepslate Tile Wall Slab");
     builder.add(DistantMoonsBlocks.DIORITE_BALUSTRADE, "Diorite Balustrade");
     builder.add(DistantMoonsBlocks.DIORITE_WALL_SLAB, "Diorite Wall Slab");
+    builder.add(DistantMoonsBlocks.DRIPSTONE_SLAB, "Dripstone Slab");
+    builder.add(DistantMoonsBlocks.DRIPSTONE_STAIRS, "Dripstone Stairs");
+    builder.add(DistantMoonsBlocks.DRIPSTONE_WALL_SLAB, "Dripstone Wall Slab");
     builder.add(DistantMoonsBlocks.END_STONE_BRICK_WALL_SLAB, "End Stone Brick Wall Slab");
     builder.add(DistantMoonsBlocks.END_STONE_SLAB, "End Stone Slab");
     builder.add(DistantMoonsBlocks.END_STONE_STAIRS, "End Stone Stairs");
@@ -166,6 +169,9 @@ public class en_us extends FabricLanguageProvider {
     builder.add(DistantMoonsBlocks.MANGROVE_BEAM, "Mangrove Beam");
     builder.add(DistantMoonsBlocks.MANGROVE_POLE, "Mangrove Pole");
     builder.add(DistantMoonsBlocks.MANGROVE_WALL_SLAB, "Mangrove Wall Slab");
+    builder.add(DistantMoonsBlocks.MOSS_SLAB, "Moss Slab");
+    builder.add(DistantMoonsBlocks.MOSS_STAIRS, "Moss Stairs");
+    builder.add(DistantMoonsBlocks.MOSS_WALL_SLAB, "Moss Wall Slab");
     builder.add(DistantMoonsBlocks.MOSSY_COBBLESTONE_WALL_SLAB, "Mossy Cobblestone Wall Slab");
     builder.add(DistantMoonsBlocks.MOSSY_STONE_BRICK_WALL_SLAB, "Mossy Stone Brick Wall Slab");
     builder.add(DistantMoonsBlocks.MUD_BRICK_WALL_SLAB, "Mud Brick Wall Slab");
@@ -178,6 +184,9 @@ public class en_us extends FabricLanguageProvider {
     builder.add(DistantMoonsBlocks.OAK_BEAM, "Oak Beam");
     builder.add(DistantMoonsBlocks.OAK_POLE, "Oak Pole");
     builder.add(DistantMoonsBlocks.OAK_WALL_SLAB, "Oak Wall Slab");
+    builder.add(DistantMoonsBlocks.PALE_MOSS_SLAB, "Pale Moss Slab");
+    builder.add(DistantMoonsBlocks.PALE_MOSS_STAIRS, "Pale Moss Stairs");
+    builder.add(DistantMoonsBlocks.PALE_MOSS_WALL_SLAB, "Pale Moss Wall Slab");
     builder.add(DistantMoonsBlocks.PALE_OAK_BALUSTRADE, "Pale Oak Balustrade");
     builder.add(DistantMoonsBlocks.PALE_OAK_BEAM, "Pale Oak Beam");
     builder.add(DistantMoonsBlocks.PALE_OAK_POLE, "Pale Oak Pole");

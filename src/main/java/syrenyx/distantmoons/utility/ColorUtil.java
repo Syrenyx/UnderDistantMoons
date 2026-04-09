@@ -1,10 +1,12 @@
 package syrenyx.distantmoons.utility;
 
+import java.awt.*;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.minecraft.util.ARGB;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -12,7 +14,10 @@ import net.minecraft.world.level.material.MapColor;
 
 public abstract class ColorUtil {
 
+  public static final int MOSS_COLOR = ARGB.opaque(8756797);
+  public static final int PALE_MOSS_COLOR = ARGB.opaque(7832178);
   public static final int UNTINTED = -1;
+
   public static final List<DyeColor> SORTED_DYE_COLORS = List.of(
       DyeColor.WHITE, DyeColor.LIGHT_GRAY, DyeColor.GRAY, DyeColor.BLACK,
       DyeColor.BROWN, DyeColor.RED, DyeColor.ORANGE, DyeColor.YELLOW,

@@ -84,14 +84,23 @@ public class DistantMoonsItemTagProvider extends FabricTagsProvider.ItemTagsProv
 
     //FUEL
     this.valueLookupBuilder(DistantMoonsItemTags.SMELTING_FUEL_WOOD_BLOCK).add(
+        DistantMoonsBlocks.ACACIA_BALUSTRADE.asItem(),
         DistantMoonsBlocks.ACACIA_BEAM.asItem(),
+        DistantMoonsBlocks.BIRCH_BALUSTRADE.asItem(),
         DistantMoonsBlocks.BIRCH_BEAM.asItem(),
+        DistantMoonsBlocks.CHERRY_BALUSTRADE.asItem(),
         DistantMoonsBlocks.CHERRY_BEAM.asItem(),
+        DistantMoonsBlocks.DARK_OAK_BALUSTRADE.asItem(),
         DistantMoonsBlocks.DARK_OAK_BEAM.asItem(),
+        DistantMoonsBlocks.JUNGLE_BALUSTRADE.asItem(),
         DistantMoonsBlocks.JUNGLE_BEAM.asItem(),
+        DistantMoonsBlocks.MANGROVE_BALUSTRADE.asItem(),
         DistantMoonsBlocks.MANGROVE_BEAM.asItem(),
+        DistantMoonsBlocks.OAK_BALUSTRADE.asItem(),
         DistantMoonsBlocks.OAK_BEAM.asItem(),
+        DistantMoonsBlocks.PALE_OAK_BALUSTRADE.asItem(),
         DistantMoonsBlocks.PALE_OAK_BEAM.asItem(),
+        DistantMoonsBlocks.SPRUCE_BALUSTRADE.asItem(),
         DistantMoonsBlocks.SPRUCE_BEAM.asItem()
     );
     this.valueLookupBuilder(DistantMoonsItemTags.SMELTING_FUEL_WOOD_HALF_BLOCK).add(

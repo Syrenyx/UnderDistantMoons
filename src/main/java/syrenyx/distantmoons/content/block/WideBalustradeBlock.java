@@ -50,6 +50,11 @@ public class WideBalustradeBlock extends AbstractBalustradeBlock {
   }
 
   @Override
+  protected boolean canConnectToBalustradeCap() {
+    return false;
+  }
+
+  @Override
   protected TagKey<Block> neverConnectsToHorizontally() {
     return DistantMoonsBlockTags.WIDE_BALUSTRADE_NEVER_CONNECTS_TO_HORIZONTALLY;
   }
