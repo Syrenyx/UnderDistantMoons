@@ -15,8 +15,8 @@ public abstract class FenceBlockMixin {
   @Inject(at = @At("HEAD"), cancellable = true, method = "connectsTo")
   private void distantMoons$connectsTo(
       BlockState state,
-      boolean neighborIsFullSquare,
-      Direction dir,
+      boolean faceSolid,
+      Direction direction,
       CallbackInfoReturnable<Boolean> callbackInfo
   ) {
     BlockState defaultState = ((FenceBlock) (Object) this).defaultBlockState();

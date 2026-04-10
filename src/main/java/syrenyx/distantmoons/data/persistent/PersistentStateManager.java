@@ -24,7 +24,7 @@ public class PersistentStateManager extends SavedData {
       .apply(instance, PersistentStateManager::new)
   );
   private static final SavedDataType<PersistentStateManager> TYPE = new SavedDataType<>(
-      UnderDistantMoons.MOD_ID,
+      UnderDistantMoons.identifierOf(UnderDistantMoons.MOD_ID),
       PersistentStateManager::new,
       CODEC,
       null

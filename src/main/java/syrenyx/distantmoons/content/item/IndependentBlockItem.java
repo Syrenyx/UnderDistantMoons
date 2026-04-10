@@ -145,11 +145,6 @@ public class IndependentBlockItem extends Item {
   @Override
   public void onDestroyed(ItemEntity entity) {
     ItemContainerContents containerComponent = entity.getItem().set(DataComponents.CONTAINER, ItemContainerContents.EMPTY);
-    if (containerComponent != null) ItemUtils.onContainerDestroyed(entity, containerComponent.nonEmptyItemsCopy());
-  }
-
-  @Override
-  public @NonNull FeatureFlagSet requiredFeatures() {
-    return this.block.requiredFeatures();
+    if (containerComponent != null) ItemUtils.onContainerDestroyed(entity, containerComponent.nonEmptyItemCopyStream());
   }
 }

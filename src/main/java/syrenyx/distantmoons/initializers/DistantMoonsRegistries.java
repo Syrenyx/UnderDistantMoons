@@ -13,10 +13,10 @@ import syrenyx.distantmoons.references.DistantMoonsRegistryKeys;
 
 public abstract class DistantMoonsRegistries {
 
-  public static final MappedRegistry<DataComponentType<?>> AFFLICTION_EFFECT_COMPONENT_REGISTRY = FabricRegistryBuilder.createSimple(DistantMoonsRegistryKeys.AFFLICTION_EFFECT_COMPONENT_REGISTRY_KEY).buildAndRegister();
-  public static final MappedRegistry<MapCodec<? extends AfflictionEntityEffect>> AFFLICTION_ENTITY_EFFECT_REGISTRY = FabricRegistryBuilder.createSimple(DistantMoonsRegistryKeys.AFFLICTION_ENTITY_EFFECT_REGISTRY_KEY).buildAndRegister();
-  public static final MappedRegistry<MapCodec<? extends AfflictionLocationBasedEffect>> AFFLICTION_LOCATION_BASED_EFFECT_REGISTRY = FabricRegistryBuilder.createSimple(DistantMoonsRegistryKeys.AFFLICTION_LOCATION_BASED_EFFECT_REGISTRY_KEY).buildAndRegister();
-  public static final MappedRegistry<MapCodec<? extends AfflictionValueEffect>> AFFLICTION_VALUE_EFFECT_REGISTRY = FabricRegistryBuilder.createSimple(DistantMoonsRegistryKeys.AFFLICTION_VALUE_EFFECT_REGISTRY_KEY).buildAndRegister();
+  public static final MappedRegistry<DataComponentType<?>> AFFLICTION_EFFECT_COMPONENT_REGISTRY = FabricRegistryBuilder.create(DistantMoonsRegistryKeys.AFFLICTION_EFFECT_COMPONENT_REGISTRY_KEY).buildAndRegister();
+  public static final MappedRegistry<MapCodec<? extends AfflictionEntityEffect>> AFFLICTION_ENTITY_EFFECT_REGISTRY = FabricRegistryBuilder.create(DistantMoonsRegistryKeys.AFFLICTION_ENTITY_EFFECT_REGISTRY_KEY).buildAndRegister();
+  public static final MappedRegistry<MapCodec<? extends AfflictionLocationBasedEffect>> AFFLICTION_LOCATION_BASED_EFFECT_REGISTRY = FabricRegistryBuilder.create(DistantMoonsRegistryKeys.AFFLICTION_LOCATION_BASED_EFFECT_REGISTRY_KEY).buildAndRegister();
+  public static final MappedRegistry<MapCodec<? extends AfflictionValueEffect>> AFFLICTION_VALUE_EFFECT_REGISTRY = FabricRegistryBuilder.create(DistantMoonsRegistryKeys.AFFLICTION_VALUE_EFFECT_REGISTRY_KEY).buildAndRegister();
 
   static {
     DynamicRegistries.registerSynced(DistantMoonsRegistryKeys.AFFLICTION_REGISTRY_KEY, Affliction.CODEC);

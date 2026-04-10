@@ -10,6 +10,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.IntProvider;
+import net.minecraft.util.valueproviders.IntProviders;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Block;
@@ -34,6 +35,7 @@ public class OreGeodeFeature extends Feature<OreGeodeFeature.Config> {
   public boolean place(FeaturePlaceContext<Config> context) {
     Config config = context.config();
     RandomSource random = context.random();
+    WorldGenLevel level = context.level();
     if (random.nextFloat() > config.generationChance) return false;
     BlockPos blockPos = context.origin();
     WorldGenLevel structureWorldAccess = context.level();
@@ -43,7 +45,7 @@ public class OreGeodeFeature extends Feature<OreGeodeFeature.Config> {
     int distributionPoint = config.distributionPoints.sample(random);
     WorldgenRandom chunkRandom = new WorldgenRandom(new LegacyRandomSource(structureWorldAccess.getSeed()));
     NormalNoise doublePerlinNoiseSampler = NormalNoise.create(chunkRandom, -4, 1.0);
-    double distributionDistance = (double) distributionPoint / config.outerWallDistance.getMaxValue();
+    double distributionDistance = (double) distributionPoint / config.outerWallDistance.maxInclusive();
     Config.LayerConfig layerConfig = config.layerConfig;
     double fillingThreshold = 1.0 / Math.sqrt(layerConfig.fillingSize);
     double innerLayerThreshold = 1.0 / Math.sqrt(layerConfig.innerLayerThreshold + distributionDistance);
@@ -64,9 +66,9 @@ public class OreGeodeFeature extends Feature<OreGeodeFeature.Config> {
       double inverseDistance = 0.0;
       for (Pair<BlockPos, Integer> pair : list) inverseDistance += Mth.invSqrt(blockPos3.distSqr(pair.getFirst()) + pair.getSecond()) + noiseValue;
       if (inverseDistance < outerLayerThreshold) continue;
-      if (inverseDistance >= fillingThreshold) this.safeSetBlock(structureWorldAccess, blockPos3, layerConfig.fillingProvider.getState(random, blockPos3), predicate);
-      else if (inverseDistance >= innerLayerThreshold) this.safeSetBlock(structureWorldAccess, blockPos3, layerConfig.innerLayerProvider.getState(random, blockPos3), predicate);
-      else if (inverseDistance >= outerLayerThreshold) this.safeSetBlock(structureWorldAccess, blockPos3, layerConfig.outerLayerProvider.getState(random, blockPos3), predicate);
+      if (inverseDistance >= fillingThreshold) this.safeSetBlock(structureWorldAccess, blockPos3, layerConfig.fillingProvider.getState(level, random, blockPos3), predicate);
+      else if (inverseDistance >= innerLayerThreshold) this.safeSetBlock(structureWorldAccess, blockPos3, layerConfig.innerLayerProvider.getState(level, random, blockPos3), predicate);
+      else if (inverseDistance >= outerLayerThreshold) this.safeSetBlock(structureWorldAccess, blockPos3, layerConfig.outerLayerProvider.getState(level, random, blockPos3), predicate);
     }
 
     return true;
@@ -87,9 +89,9 @@ public class OreGeodeFeature extends Feature<OreGeodeFeature.Config> {
     public static final Codec<Config> CODEC = RecordCodecBuilder.create(instance -> instance
         .group(
             LayerConfig.CODEC.fieldOf("layers").forGetter(Config::layerConfig),
-            IntProvider.codec(1, 20).optionalFieldOf("outer_wall_distance", UniformInt.of(4, 5)).forGetter(config -> config.outerWallDistance),
-            IntProvider.codec(1, 20).optionalFieldOf("distribution_points", UniformInt.of(3, 4)).forGetter(config -> config.distributionPoints),
-            IntProvider.codec(0, 10).optionalFieldOf("point_offset", UniformInt.of(1, 2)).forGetter(config -> config.pointOffset),
+            IntProviders.codec(1, 20).optionalFieldOf("outer_wall_distance", UniformInt.of(4, 5)).forGetter(config -> config.outerWallDistance),
+            IntProviders.codec(1, 20).optionalFieldOf("distribution_points", UniformInt.of(3, 4)).forGetter(config -> config.distributionPoints),
+            IntProviders.codec(0, 10).optionalFieldOf("point_offset", UniformInt.of(1, 2)).forGetter(config -> config.pointOffset),
             Codec.INT.optionalFieldOf("min_gen_offset", -16).forGetter(config -> config.minGenOffset),
             Codec.INT.optionalFieldOf("max_gen_offset", 16).forGetter(config -> config.maxGenOffset),
             Codec.doubleRange(0.0, 1.0).optionalFieldOf("noise_multiplier", 0.05).forGetter(config -> config.noiseMultiplier),

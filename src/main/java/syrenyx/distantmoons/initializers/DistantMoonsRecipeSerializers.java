@@ -9,7 +9,7 @@ import syrenyx.distantmoons.content.recipe.LargeBlastFurnaceRecipe;
 
 public abstract class DistantMoonsRecipeSerializers {
 
-  public static final RecipeSerializer<LargeBlastFurnaceRecipe> BLASTING_RECIPE = register("blasting", new LargeBlastFurnaceRecipe.Serializer());
+  public static final RecipeSerializer<LargeBlastFurnaceRecipe> BLASTING_RECIPE = register("blasting", LargeBlastFurnaceRecipe.SERIALIZER);
 
   private static <S extends RecipeSerializer<T>, T extends Recipe<?>> S register(String id, S serializer) {
     return Registry.register(BuiltInRegistries.RECIPE_SERIALIZER, UnderDistantMoons.identifierOf(id), serializer);

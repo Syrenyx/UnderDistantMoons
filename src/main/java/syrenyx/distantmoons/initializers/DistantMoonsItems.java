@@ -143,7 +143,7 @@ public abstract class DistantMoonsItems {
       "fire_brick",
       Item::new,
       new Item.Properties()
-          .component(DataComponents.DAMAGE_RESISTANT, new DamageResistant(DistantMoonsDamageTypeTags.IS_EXPLOSION_OR_FIRE))
+          .delayedComponent(DataComponents.DAMAGE_RESISTANT, context -> new DamageResistant(context.getOrThrow(DistantMoonsDamageTypeTags.IS_EXPLOSION_OR_FIRE)))
   );
   public static final Item IRON_ROD = register(
       "iron_rod",

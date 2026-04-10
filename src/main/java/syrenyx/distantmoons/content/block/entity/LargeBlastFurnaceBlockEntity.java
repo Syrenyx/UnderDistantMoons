@@ -401,7 +401,7 @@ public class LargeBlastFurnaceBlockEntity extends BaseContainerBlockEntity imple
           this.blastingSteps[slot]++;
           if (this.blastingSteps[slot] < this.requiredBlastingSteps[slot]) continue;
           this.blastingSteps[slot] = 0;
-          this.items.set(slot, recipe.value().assemble(recipeInput, this.level.registryAccess()));
+          this.items.set(slot, recipe.value().assemble(recipeInput));
         }
       }
     }

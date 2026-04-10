@@ -13,7 +13,7 @@ import net.minecraft.world.item.enchantment.effects.EnchantmentEntityEffect;
 public abstract class DistantMoonsEnchantmentEffectComponents {
 
   public static final DataComponentType<List<ConditionalEffect<EnchantmentEntityEffect>>> USED_ITEM = register(
-      "used_item", builder -> builder.persistent(ConditionalEffect.codec(EnchantmentEntityEffect.CODEC, DistantMoonsLootContextTypes.ENCHANTED_ITEM).listOf())
+      "used_item", builder -> builder.persistent(ConditionalEffect.codec(EnchantmentEntityEffect.CODEC).listOf())
   );
 
   private static <T> DataComponentType<T> register(String id, UnaryOperator<DataComponentType.Builder<T>> builderOperator) {

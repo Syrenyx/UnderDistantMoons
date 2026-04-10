@@ -70,12 +70,12 @@ public class WallSlabBlock extends Block implements SimpleWaterloggedBlock {
   }
 
   @Override
-  public boolean canPlaceLiquid(@Nullable LivingEntity filler, @NonNull BlockGetter world, @NonNull BlockPos pos, BlockState state, @NonNull Fluid fluid) {
+  public boolean canPlaceLiquid(@Nullable LivingEntity filler, @NonNull BlockGetter world, @NonNull BlockPos pos, @NonNull BlockState state, @NonNull Fluid fluid) {
     return state.getValue(SHAPE) != WallSlabShape.DOUBLE && SimpleWaterloggedBlock.super.canPlaceLiquid(filler, world, pos, state, fluid);
   }
 
   @Override
-  public boolean placeLiquid(@NonNull LevelAccessor world, @NonNull BlockPos pos, BlockState state, @NonNull FluidState fluidState) {
+  public boolean placeLiquid(@NonNull LevelAccessor world, @NonNull BlockPos pos, @NonNull BlockState state, @NonNull FluidState fluidState) {
     return state.getValue(SHAPE) != WallSlabShape.DOUBLE && SimpleWaterloggedBlock.super.placeLiquid(world, pos, state, fluidState);
   }
 
@@ -95,7 +95,7 @@ public class WallSlabBlock extends Block implements SimpleWaterloggedBlock {
   }
 
   @Override
-  protected @NonNull VoxelShape getShape(BlockState state, @NonNull BlockGetter world, @NonNull BlockPos pos, @NonNull CollisionContext context) {
+  protected @NonNull VoxelShape getShape(@NonNull BlockState state, @NonNull BlockGetter world, @NonNull BlockPos pos, @NonNull CollisionContext context) {
     return switch (state.getValue(SHAPE)) {
       case FLAT -> FLAT_SHAPES_BY_DIRECTION.get(state.getValue(FACING).getOpposite());
       case INNER_LEFT -> INNER_SHAPES_BY_DIRECTION.get(state.getValue(FACING).getOpposite());
@@ -185,18 +185,8 @@ public class WallSlabBlock extends Block implements SimpleWaterloggedBlock {
     WallSlabShape shape = state.getValue(SHAPE);
     return switch (mirror) {
       case NONE -> state;
-      case FRONT_BACK -> state.rotate(facing.getAxis() == Direction.Axis.X ? Rotation.CLOCKWISE_180 : Rotation.NONE).setValue(SHAPE, getMirrored(shape));
-      case LEFT_RIGHT -> state.rotate(facing.getAxis() == Direction.Axis.Z ? Rotation.CLOCKWISE_180 : Rotation.NONE).setValue(SHAPE, getMirrored(shape));
-    };
-  }
-
-  private static WallSlabShape getMirrored(WallSlabShape shape) {
-    return switch (shape) {
-      case INNER_LEFT -> WallSlabShape.INNER_RIGHT;
-      case INNER_RIGHT -> WallSlabShape.INNER_LEFT;
-      case OUTER_LEFT -> WallSlabShape.OUTER_RIGHT;
-      case OUTER_RIGHT -> WallSlabShape.OUTER_LEFT;
-      default -> shape;
+      case FRONT_BACK -> state.rotate(facing.getAxis() == Direction.Axis.X ? Rotation.CLOCKWISE_180 : Rotation.NONE).setValue(SHAPE, shape.mirror());
+      case LEFT_RIGHT -> state.rotate(facing.getAxis() == Direction.Axis.Z ? Rotation.CLOCKWISE_180 : Rotation.NONE).setValue(SHAPE, shape.mirror());
     };
   }
 }

@@ -14,7 +14,6 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
@@ -173,7 +172,7 @@ public class UnderworldConfluxBlock extends BaseEntityBlock implements Underworl
     for (Entity entity : serverLevel.getEntitiesOfClass(
         Entity.class,
         new AABB(blockPos.getX() + 2, blockPos.getY() + 2, blockPos.getZ() + 2, blockPos.getX() - 2, blockPos.getY() - 2, blockPos.getZ() - 2),
-        entity -> !entity.isPassenger() && !entity.getType().is(DistantMoonsEntityTypeTags.IGNORED_BY_UNDERWORLD_CONFLUX)
+        entity -> !entity.isPassenger() && !entity.is(DistantMoonsEntityTypeTags.IGNORED_BY_UNDERWORLD_CONFLUX)
     )) {
       entity.teleport(new TeleportTransition(
           dimensionLevel,
@@ -226,12 +225,5 @@ public class UnderworldConfluxBlock extends BaseEntityBlock implements Underworl
 
   public static MapColor mapColor(BlockState blockState) {
     return blockState.getValue(STATE).lit() ? MapColor.COLOR_ORANGE : MapColor.COLOR_BLACK;
-  }
-
-  public static int tintColor(BlockState blockState, BlockAndTintGetter level, BlockPos blockPos, int tintIndex) {
-    if (tintIndex != 1 || level == null || blockPos == null) return -1;
-    if (blockState.getValue(UnderworldConfluxBlock.STATE) == UnderworldConfluxState.UNLIT) return UnderworldBlock.UNLIT_COLOR;
-    var test = level.getBlockEntityRenderData(blockPos);
-    return level.getBlockEntityRenderData(blockPos) instanceof Integer color ? color : UnderworldBlock.DEFAULT_COLOR;
   }
 }

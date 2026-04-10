@@ -1,6 +1,6 @@
 package syrenyx.distantmoons.datagen;
 
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -13,12 +13,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.BlastingRecipe;
-import net.minecraft.world.item.crafting.CampfireCookingRecipe;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.SmeltingRecipe;
-import net.minecraft.world.item.crafting.SmokingRecipe;
+import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -38,7 +33,7 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
 
   public static final int DEFAULT_SMELTING_TIME = 200;
 
-  public DistantMoonsRecipeProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+  public DistantMoonsRecipeProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
     super(output, registriesFuture);
   }
 
@@ -87,6 +82,7 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
         this.createSlabRecipes(Items.BIRCH_LOG, DistantMoonsBlocks.CUT_BIRCH_LOG, RecipeCategory.BUILDING_BLOCKS, "cut_log");
         this.createSlabRecipes(Items.BIRCH_WOOD, DistantMoonsBlocks.CUT_BIRCH_WOOD, RecipeCategory.BUILDING_BLOCKS, "cut_wood");
         this.createSlabRecipes(Items.BONE_BLOCK, DistantMoonsBlocks.CUT_BONE_BLOCK, RecipeCategory.BUILDING_BLOCKS, null);
+        this.createSlabRecipes(Items.CALCITE, DistantMoonsBlocks.CALCITE_SLAB, RecipeCategory.BUILDING_BLOCKS, null);
         this.createSlabRecipes(Items.CHERRY_LOG, DistantMoonsBlocks.CUT_CHERRY_LOG, RecipeCategory.BUILDING_BLOCKS, "cut_log");
         this.createSlabRecipes(Items.CHERRY_WOOD, DistantMoonsBlocks.CUT_CHERRY_WOOD, RecipeCategory.BUILDING_BLOCKS, "cut_wood");
         this.createSlabRecipes(Items.CRIMSON_HYPHAE, DistantMoonsBlocks.CUT_CRIMSON_HYPHAE, RecipeCategory.BUILDING_BLOCKS, "cut_wood");
@@ -94,17 +90,21 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
         this.createSlabRecipes(Items.DARK_OAK_LOG, DistantMoonsBlocks.CUT_DARK_OAK_LOG, RecipeCategory.BUILDING_BLOCKS, "cut_log");
         this.createSlabRecipes(Items.DARK_OAK_WOOD, DistantMoonsBlocks.CUT_DARK_OAK_WOOD, RecipeCategory.BUILDING_BLOCKS, "cut_wood");
         this.createSlabRecipes(Items.DEEPSLATE, DistantMoonsBlocks.CUT_DEEPSLATE, RecipeCategory.BUILDING_BLOCKS, null);
+        this.createSlabRecipes(Items.DRIPSTONE_BLOCK, DistantMoonsBlocks.DRIPSTONE_SLAB, RecipeCategory.BUILDING_BLOCKS, null);
+        this.createSlabRecipes(Items.END_STONE, DistantMoonsBlocks.END_STONE_SLAB, RecipeCategory.BUILDING_BLOCKS, null);
         this.createSlabRecipes(DistantMoonsBlocks.FIRE_BRICKS, DistantMoonsBlocks.FIRE_BRICK_SLAB, RecipeCategory.BUILDING_BLOCKS, null);
         this.createSlabRecipes(DistantMoonsBlocks.GRAY_PRISMARINE, DistantMoonsBlocks.GRAY_PRISMARINE_SLAB, RecipeCategory.BUILDING_BLOCKS, null);
         this.createSlabRecipes(Items.JUNGLE_LOG, DistantMoonsBlocks.CUT_JUNGLE_LOG, RecipeCategory.BUILDING_BLOCKS, "cut_log");
         this.createSlabRecipes(Items.JUNGLE_WOOD, DistantMoonsBlocks.CUT_JUNGLE_WOOD, RecipeCategory.BUILDING_BLOCKS, "cut_wood");
         this.createSlabRecipes(Items.MANGROVE_LOG, DistantMoonsBlocks.CUT_MANGROVE_LOG, RecipeCategory.BUILDING_BLOCKS, "cut_log");
         this.createSlabRecipes(Items.MANGROVE_WOOD, DistantMoonsBlocks.CUT_MANGROVE_WOOD, RecipeCategory.BUILDING_BLOCKS, "cut_wood");
+        this.createSlabRecipes(Items.NETHERRACK, DistantMoonsBlocks.NETHERRACK_SLAB, RecipeCategory.BUILDING_BLOCKS, null);
         this.createSlabRecipes(Items.OAK_LOG, DistantMoonsBlocks.CUT_OAK_LOG, RecipeCategory.BUILDING_BLOCKS, "cut_log");
         this.createSlabRecipes(Items.OAK_WOOD, DistantMoonsBlocks.CUT_OAK_WOOD, RecipeCategory.BUILDING_BLOCKS, "cut_wood");
         this.createSlabRecipes(Items.PALE_OAK_LOG, DistantMoonsBlocks.CUT_PALE_OAK_LOG, RecipeCategory.BUILDING_BLOCKS, "cut_log");
         this.createSlabRecipes(Items.PALE_OAK_WOOD, DistantMoonsBlocks.CUT_PALE_OAK_WOOD, RecipeCategory.BUILDING_BLOCKS, "cut_wood");
         this.createSlabRecipes(Items.PURPUR_PILLAR, DistantMoonsBlocks.CUT_PURPUR_PILLAR, RecipeCategory.BUILDING_BLOCKS, null);
+        this.createSlabRecipes(Items.QUARTZ_BRICKS, DistantMoonsBlocks.QUARTZ_BRICK_SLAB, RecipeCategory.BUILDING_BLOCKS, null);
         this.createSlabRecipes(Items.QUARTZ_PILLAR, DistantMoonsBlocks.CUT_QUARTZ_PILLAR, RecipeCategory.BUILDING_BLOCKS, null);
         this.createSlabRecipes(Items.SPRUCE_LOG, DistantMoonsBlocks.CUT_SPRUCE_LOG, RecipeCategory.BUILDING_BLOCKS, "cut_log");
         this.createSlabRecipes(Items.SPRUCE_WOOD, DistantMoonsBlocks.CUT_SPRUCE_WOOD, RecipeCategory.BUILDING_BLOCKS, "cut_wood");
@@ -115,6 +115,7 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
         this.createSlabRecipes(DistantMoonsBlocks.PALE_PRISMARINE_TILES, DistantMoonsBlocks.PALE_PRISMARINE_TILE_SLAB, RecipeCategory.BUILDING_BLOCKS, null);
         this.createSlabRecipes(Items.POLISHED_BASALT, DistantMoonsBlocks.POLISHED_CUT_BASALT, RecipeCategory.BUILDING_BLOCKS, null);
         this.createSlabRecipes(DistantMoonsBlocks.PRISMARINE_TILES, DistantMoonsBlocks.PRISMARINE_TILE_SLAB, RecipeCategory.BUILDING_BLOCKS, null);
+        this.createSlabRecipes(Items.SMOOTH_BASALT, DistantMoonsBlocks.SMOOTH_BASALT_SLAB, RecipeCategory.BUILDING_BLOCKS, null);
         this.createSlabRecipes(Items.STRIPPED_ACACIA_LOG, DistantMoonsBlocks.STRIPPED_CUT_ACACIA_LOG, RecipeCategory.BUILDING_BLOCKS, "stripped_cut_log");
         this.createSlabRecipes(Items.STRIPPED_ACACIA_WOOD, DistantMoonsBlocks.STRIPPED_CUT_ACACIA_WOOD, RecipeCategory.BUILDING_BLOCKS, "stripped_cut_wood");
         this.createSlabRecipes(Items.STRIPPED_BAMBOO_BLOCK, DistantMoonsBlocks.STRIPPED_CUT_BAMBOO_BLOCK, RecipeCategory.BUILDING_BLOCKS, null);
@@ -255,12 +256,18 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
         ));
 
         //STAIRS CRAFTING
+        this.createStairsRecipes(Items.CALCITE, DistantMoonsBlocks.CALCITE_STAIRS, null);
+        this.createStairsRecipes(Items.DRIPSTONE_BLOCK, DistantMoonsBlocks.DRIPSTONE_STAIRS, null);
+        this.createStairsRecipes(Items.END_STONE, DistantMoonsBlocks.END_STONE_STAIRS, null);
         this.createStairsRecipes(DistantMoonsBlocks.FIRE_BRICKS, DistantMoonsBlocks.FIRE_BRICK_STAIRS, null);
         this.createStairsRecipes(DistantMoonsBlocks.GRAY_PRISMARINE, DistantMoonsBlocks.GRAY_PRISMARINE_STAIRS, null);
+        this.createStairsRecipes(Items.NETHERRACK, DistantMoonsBlocks.NETHERRACK_STAIRS, null);
         this.createStairsRecipes(DistantMoonsBlocks.PALE_PRISMARINE_BRICKS, DistantMoonsBlocks.PALE_PRISMARINE_BRICK_STAIRS, null);
         this.createStairsRecipes(DistantMoonsBlocks.PALE_PRISMARINE, DistantMoonsBlocks.PALE_PRISMARINE_STAIRS, null);
         this.createStairsRecipes(DistantMoonsBlocks.PALE_PRISMARINE_TILES, DistantMoonsBlocks.PALE_PRISMARINE_TILE_STAIRS, null);
         this.createStairsRecipes(DistantMoonsBlocks.PRISMARINE_TILES, DistantMoonsBlocks.PRISMARINE_TILE_STAIRS, null);
+        this.createStairsRecipes(Items.QUARTZ_BRICKS, DistantMoonsBlocks.QUARTZ_BRICK_STAIRS, null);
+        this.createStairsRecipes(Items.SMOOTH_BASALT, DistantMoonsBlocks.SMOOTH_BASALT_STAIRS, null);
         this.createStairsRecipes(Items.TERRACOTTA, DistantMoonsBlocks.TERRACOTTA_STAIRS, null);
 
         this.createStairsRecipes(Items.WHITE_CONCRETE, DistantMoonsBlocks.DYED_CONCRETE_STAIRS.get(DyeColor.WHITE), "concrete_stairs");
@@ -297,6 +304,24 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
         this.createStairsRecipes(Items.MAGENTA_TERRACOTTA, DistantMoonsBlocks.DYED_TERRACOTTA_STAIRS.get(DyeColor.MAGENTA), "terracotta_stairs");
         this.createStairsRecipes(Items.PINK_TERRACOTTA, DistantMoonsBlocks.DYED_TERRACOTTA_STAIRS.get(DyeColor.PINK), "terracotta_stairs");
 
+        //THIN BALUSTRADE CRAFTING
+        this.createThinBalustradeRecipes(Items.ACACIA_PLANKS, DistantMoonsBlocks.ACACIA_POLE, DistantMoonsBlocks.ACACIA_BEAM, DistantMoonsBlocks.ACACIA_BALUSTRADE, "plank_balustrade");
+        this.createThinBalustradeRecipes(Items.ANDESITE, DistantMoonsBlocks.ANDESITE_WALL_SLAB, Items.ANDESITE_SLAB, DistantMoonsBlocks.ANDESITE_BALUSTRADE, null);
+        this.createThinBalustradeRecipes(Items.BIRCH_PLANKS, DistantMoonsBlocks.BIRCH_POLE, DistantMoonsBlocks.BIRCH_BEAM, DistantMoonsBlocks.BIRCH_BALUSTRADE, "plank_balustrade");
+        this.createThinBalustradeRecipes(Items.CHERRY_PLANKS, DistantMoonsBlocks.CHERRY_POLE, DistantMoonsBlocks.CHERRY_BEAM, DistantMoonsBlocks.CHERRY_BALUSTRADE, "plank_balustrade");
+        this.createThinBalustradeRecipes(Items.CRIMSON_PLANKS, DistantMoonsBlocks.CRIMSON_POLE, DistantMoonsBlocks.CRIMSON_BEAM, DistantMoonsBlocks.CRIMSON_BALUSTRADE, "plank_balustrade");
+        this.createThinBalustradeRecipes(Items.DARK_OAK_PLANKS, DistantMoonsBlocks.DARK_OAK_POLE, DistantMoonsBlocks.DARK_OAK_BEAM, DistantMoonsBlocks.DARK_OAK_BALUSTRADE, "plank_balustrade");
+        this.createThinBalustradeRecipes(Items.DIORITE, DistantMoonsBlocks.DIORITE_WALL_SLAB, Items.DIORITE_SLAB, DistantMoonsBlocks.DIORITE_BALUSTRADE, null);
+        this.createThinBalustradeRecipes(Items.GRANITE, DistantMoonsBlocks.GRANITE_WALL_SLAB, Items.GRANITE_SLAB, DistantMoonsBlocks.GRANITE_BALUSTRADE, null);
+        this.createThinBalustradeRecipes(Items.JUNGLE_PLANKS, DistantMoonsBlocks.JUNGLE_POLE, DistantMoonsBlocks.JUNGLE_BEAM, DistantMoonsBlocks.JUNGLE_BALUSTRADE, "plank_balustrade");
+        this.createThinBalustradeRecipes(Items.MANGROVE_PLANKS, DistantMoonsBlocks.MANGROVE_POLE, DistantMoonsBlocks.MANGROVE_BEAM, DistantMoonsBlocks.MANGROVE_BALUSTRADE, "plank_balustrade");
+        this.createThinBalustradeRecipes(Items.OAK_PLANKS, DistantMoonsBlocks.OAK_POLE, DistantMoonsBlocks.OAK_BEAM, DistantMoonsBlocks.OAK_BALUSTRADE, "plank_balustrade");
+        this.createThinBalustradeRecipes(Items.PALE_OAK_PLANKS, DistantMoonsBlocks.PALE_OAK_POLE, DistantMoonsBlocks.PALE_OAK_BEAM, DistantMoonsBlocks.PALE_OAK_BALUSTRADE, "plank_balustrade");
+        this.createThinBalustradeRecipes(Items.SPRUCE_PLANKS, DistantMoonsBlocks.SPRUCE_POLE, DistantMoonsBlocks.SPRUCE_BEAM, DistantMoonsBlocks.SPRUCE_BALUSTRADE, "plank_balustrade");
+        this.createThinBalustradeRecipes(Items.STONE, DistantMoonsBlocks.STONE_WALL_SLAB, Items.STONE_SLAB, DistantMoonsBlocks.STONE_BALUSTRADE, null);
+        this.createThinBalustradeRecipes(Items.TUFF, DistantMoonsBlocks.TUFF_WALL_SLAB, Items.TUFF_SLAB, DistantMoonsBlocks.TUFF_BALUSTRADE, null);
+        this.createThinBalustradeRecipes(Items.WARPED_PLANKS, DistantMoonsBlocks.WARPED_POLE, DistantMoonsBlocks.WARPED_BEAM, DistantMoonsBlocks.WARPED_BALUSTRADE, "plank_balustrade");
+
         //WALL CRAFTING
         this.createWallRecipes(DistantMoonsBlocks.FIRE_BRICKS, DistantMoonsBlocks.FIRE_BRICK_WALL, null);
         this.createWallRecipes(DistantMoonsBlocks.PALE_PRISMARINE, DistantMoonsBlocks.PALE_PRISMARINE_WALL, null);
@@ -309,6 +334,7 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
         this.createWallSlabRecipes(Items.BIRCH_PLANKS, DistantMoonsBlocks.BIRCH_WALL_SLAB, "plank_wall_slab");
         this.createWallSlabRecipes(Items.BLACKSTONE, DistantMoonsBlocks.BLACKSTONE_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.BRICKS, DistantMoonsBlocks.BRICK_WALL_SLAB, null);
+        this.createWallSlabRecipes(Items.CALCITE, DistantMoonsBlocks.CALCITE_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.CHERRY_PLANKS, DistantMoonsBlocks.CHERRY_WALL_SLAB, "plank_wall_slab");
         this.createWallSlabRecipes(Items.COBBLED_DEEPSLATE, DistantMoonsBlocks.COBBLED_DEEPSLATE_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.COBBLESTONE, DistantMoonsBlocks.COBBLESTONE_WALL_SLAB, null);
@@ -321,7 +347,9 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
         this.createWallSlabRecipes(Items.DEEPSLATE_BRICKS, DistantMoonsBlocks.DEEPSLATE_BRICK_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.DEEPSLATE_TILES, DistantMoonsBlocks.DEEPSLATE_TILE_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.DIORITE, DistantMoonsBlocks.DIORITE_WALL_SLAB, null);
+        this.createWallSlabRecipes(Items.DRIPSTONE_BLOCK, DistantMoonsBlocks.DRIPSTONE_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.END_STONE_BRICKS, DistantMoonsBlocks.END_STONE_BRICK_WALL_SLAB, null);
+        this.createWallSlabRecipes(Items.END_STONE, DistantMoonsBlocks.END_STONE_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.EXPOSED_CUT_COPPER, DistantMoonsBlocks.EXPOSED_CUT_COPPER_WALL_SLAB, "exposed_cut_copper_wall_slab");
         this.createWallSlabRecipes(DistantMoonsBlocks.FIRE_BRICKS, DistantMoonsBlocks.FIRE_BRICK_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.GRANITE, DistantMoonsBlocks.GRANITE_WALL_SLAB, null);
@@ -332,6 +360,7 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
         this.createWallSlabRecipes(Items.MOSSY_STONE_BRICKS, DistantMoonsBlocks.MOSSY_STONE_BRICK_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.MUD_BRICKS, DistantMoonsBlocks.MUD_BRICK_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.NETHER_BRICKS, DistantMoonsBlocks.NETHER_BRICK_WALL_SLAB, null);
+        this.createWallSlabRecipes(Items.NETHERRACK, DistantMoonsBlocks.NETHERRACK_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.OAK_PLANKS, DistantMoonsBlocks.OAK_WALL_SLAB, "plank_wall_slab");
         this.createWallSlabRecipes(Items.OXIDIZED_CUT_COPPER, DistantMoonsBlocks.OXIDIZED_CUT_COPPER_WALL_SLAB, "oxidized_cut_copper_wall_slab");
         this.createWallSlabRecipes(Items.PALE_OAK_PLANKS, DistantMoonsBlocks.PALE_OAK_WALL_SLAB, "plank_wall_slab");
@@ -349,11 +378,13 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
         this.createWallSlabRecipes(DistantMoonsBlocks.PRISMARINE_TILES, DistantMoonsBlocks.PRISMARINE_TILE_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.PRISMARINE, DistantMoonsBlocks.PRISMARINE_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.PURPUR_BLOCK, DistantMoonsBlocks.PURPUR_WALL_SLAB, null);
+        this.createWallSlabRecipes(Items.QUARTZ_BRICKS, DistantMoonsBlocks.QUARTZ_BRICK_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.QUARTZ_BLOCK, DistantMoonsBlocks.QUARTZ_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.RED_NETHER_BRICKS, DistantMoonsBlocks.RED_NETHER_BRICK_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.RED_SANDSTONE, DistantMoonsBlocks.RED_SANDSTONE_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.RESIN_BRICKS, DistantMoonsBlocks.RESIN_BRICK_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.SANDSTONE, DistantMoonsBlocks.SANDSTONE_WALL_SLAB, null);
+        this.createWallSlabRecipes(Items.SMOOTH_BASALT, DistantMoonsBlocks.SMOOTH_BASALT_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.SMOOTH_QUARTZ, DistantMoonsBlocks.SMOOTH_QUARTZ_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.SMOOTH_RED_SANDSTONE, DistantMoonsBlocks.SMOOTH_RED_SANDSTONE_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.SMOOTH_SANDSTONE, DistantMoonsBlocks.SMOOTH_SANDSTONE_WALL_SLAB, null);
@@ -414,6 +445,10 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
         this.createWaxingRecipe(DistantMoonsBlocks.EXPOSED_IRON_BLOCK, DistantMoonsBlocks.WAXED_EXPOSED_IRON_BLOCK);
         this.createWaxingRecipe(DistantMoonsBlocks.WEATHERED_IRON_BLOCK, DistantMoonsBlocks.WAXED_WEATHERED_IRON_BLOCK);
         this.createWaxingRecipe(DistantMoonsBlocks.RUSTED_IRON_BLOCK, DistantMoonsBlocks.WAXED_RUSTED_IRON_BLOCK);
+
+        //WIDE BALUSTRADE CRAFTING
+        this.createWideBalustradeRecipes(Items.SMOOTH_RED_SANDSTONE, Items.SMOOTH_RED_SANDSTONE, Items.SMOOTH_RED_SANDSTONE_SLAB, DistantMoonsBlocks.SMOOTH_RED_SANDSTONE_BALUSTRADE, null);
+        this.createWideBalustradeRecipes(Items.SMOOTH_SANDSTONE, Items.SMOOTH_SANDSTONE, Items.SMOOTH_SANDSTONE_SLAB, DistantMoonsBlocks.SMOOTH_SANDSTONE_BALUSTRADE, null);
       }
 
       private void createBeamRecipes(ItemLike ingredient, ItemLike result, String group) {
@@ -438,15 +473,15 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
 
       private void createCookingRecipes(ItemLike ingredient, ItemLike result, float experience, int cookingTime) {
         SimpleCookingRecipeBuilder
-            .generic(Ingredient.of(ingredient), RecipeCategory.FOOD, result, experience, cookingTime, RecipeSerializer.SMELTING_RECIPE, SmeltingRecipe::new)
+            .smelting(Ingredient.of(ingredient), RecipeCategory.FOOD, CookingBookCategory.MISC, result, experience, cookingTime)
             .unlockedBy(getHasName(ingredient), this.has(ingredient))
             .save(this.output, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/smelting_" + getItemId(ingredient)));
         SimpleCookingRecipeBuilder
-            .generic(Ingredient.of(ingredient), RecipeCategory.FOOD, result, experience, cookingTime / 2, RecipeSerializer.SMOKING_RECIPE, SmokingRecipe::new)
+            .smoking(Ingredient.of(ingredient), RecipeCategory.FOOD, result, experience, cookingTime / 2)
             .unlockedBy(getHasName(ingredient), this.has(ingredient))
             .save(this.output, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/smoking_" + getItemId(ingredient)));
         SimpleCookingRecipeBuilder
-            .generic(Ingredient.of(ingredient), RecipeCategory.FOOD, result, experience, cookingTime * 3, RecipeSerializer.CAMPFIRE_COOKING_RECIPE, CampfireCookingRecipe::new)
+            .campfireCooking(Ingredient.of(ingredient), RecipeCategory.FOOD, result, experience, cookingTime * 3)
             .unlockedBy(getHasName(ingredient), this.has(ingredient))
             .save(this.output, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/campfire_cooking_" + getItemId(ingredient)));
       }
@@ -495,11 +530,11 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
 
       private void createMetalSmeltingRecipes(ItemLike ingredient, ItemLike result, float experience, int cookingTime) {
         SimpleCookingRecipeBuilder
-            .generic(Ingredient.of(ingredient), RecipeCategory.MISC, result, experience, cookingTime, RecipeSerializer.SMELTING_RECIPE, SmeltingRecipe::new)
+            .smelting(Ingredient.of(ingredient), RecipeCategory.MISC, CookingBookCategory.MISC, result, experience, cookingTime)
             .unlockedBy(getHasName(ingredient), this.has(ingredient))
             .save(this.output, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/smelting_" + getItemId(ingredient)));
         SimpleCookingRecipeBuilder
-            .generic(Ingredient.of(ingredient), RecipeCategory.MISC, result, experience, cookingTime / 2, RecipeSerializer.BLASTING_RECIPE, BlastingRecipe::new)
+            .blasting(Ingredient.of(ingredient), RecipeCategory.MISC, CookingBookCategory.MISC, result, experience, cookingTime / 2)
             .unlockedBy(getHasName(ingredient), this.has(ingredient))
             .save(this.output, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/blasting_" + getItemId(ingredient)));
       }
@@ -507,12 +542,12 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
       private void createOreSmeltingRecipes(List<ItemLike> ingredients, ItemLike result, float experience, int cookingTime) {
         for (ItemLike ingredient : ingredients) {
           SimpleCookingRecipeBuilder
-              .generic(Ingredient.of(ingredient), RecipeCategory.MISC, result, experience, cookingTime, RecipeSerializer.SMELTING_RECIPE, SmeltingRecipe::new)
+              .smelting(Ingredient.of(ingredient), RecipeCategory.MISC, CookingBookCategory.MISC, result, experience, cookingTime)
               .group(getItemId(result) + "_from_ore")
               .unlockedBy(getHasName(ingredient), this.has(ingredient))
               .save(this.output, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/smelting_" + getItemId(ingredient)));
           SimpleCookingRecipeBuilder
-              .generic(Ingredient.of(ingredient), RecipeCategory.MISC, result, experience, cookingTime / 2, RecipeSerializer.BLASTING_RECIPE, BlastingRecipe::new)
+              .blasting(Ingredient.of(ingredient), RecipeCategory.MISC, CookingBookCategory.MISC, result, experience, cookingTime / 2)
               .group(getItemId(result) + "_from_ore")
               .unlockedBy(getHasName(ingredient), this.has(ingredient))
               .save(this.output, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/blasting_" + getItemId(ingredient)));
@@ -611,7 +646,7 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
       private void createSmeltingRecipes(Map<ItemLike, ItemLike> itemMap) {
         for (ItemLike ingredient : itemMap.keySet()) {
           SimpleCookingRecipeBuilder
-              .generic(Ingredient.of(ingredient), RecipeCategory.BUILDING_BLOCKS, itemMap.get(ingredient), 0, DEFAULT_SMELTING_TIME, RecipeSerializer.SMELTING_RECIPE, SmeltingRecipe::new)
+              .smelting(Ingredient.of(ingredient), RecipeCategory.BUILDING_BLOCKS, CookingBookCategory.MISC, itemMap.get(ingredient), 0, DEFAULT_SMELTING_TIME)
               .unlockedBy(getHasName(ingredient), this.has(ingredient))
               .save(this.output, UnderDistantMoons.withPrefixedNamespace(getItemId(itemMap.get(ingredient)) + "/smelting"));
         }
@@ -632,9 +667,24 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
       }
 
       private void createStairsCuttingRecipe(ItemLike ingredient, ItemLike result) {
-        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ingredient), RecipeCategory.MISC, result)
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ingredient), RecipeCategory.MISC, result, 1)
             .unlockedBy(getHasName(ingredient), has(ingredient))
             .save(this.output, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/stonecutting"));
+      }
+
+      private void createThinBalustradeRecipes(ItemLike ingredientBase, ItemLike ingredientBaluster, ItemLike ingredientCap, ItemLike result, String group) {
+        this.createThinBalustradeCraftingRecipe(ingredientBase, ingredientBaluster, ingredientCap, result, group);
+        this.createWallCuttingRecipe(ingredientBase, result);
+      }
+
+      private void createThinBalustradeCraftingRecipe(ItemLike ingredientBase, ItemLike ingredientBaluster, ItemLike ingredientCap, ItemLike result, String group) {
+        this.shaped(RecipeCategory.MISC, result, 16)
+            .group(group)
+            .pattern("000").pattern("111").pattern("000")
+            .define('0', ingredientCap)
+            .define('1', ingredientBaluster)
+            .unlockedBy(getHasName(ingredientBase), has(ingredientBase))
+            .save(this.output, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/crafting"));
       }
 
       private void createWallRecipes(ItemLike ingredient, ItemLike result, @Nullable String group) {
@@ -652,7 +702,7 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
       }
 
       private void createWallCuttingRecipe(ItemLike ingredient, ItemLike result) {
-        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ingredient), RecipeCategory.MISC, result)
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ingredient), RecipeCategory.MISC, result, 1)
             .unlockedBy(getHasName(ingredient), has(ingredient))
             .save(this.output, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/stonecutting"));
       }
@@ -664,6 +714,21 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
             .requires(Items.HONEYCOMB)
             .unlockedBy(getHasName(ingredient), has(ingredient))
             .save(this.output, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/waxing"));
+      }
+
+      private void createWideBalustradeRecipes(ItemLike ingredientBase, ItemLike ingredientBaluster, ItemLike ingredientCap, ItemLike result, String group) {
+        this.createWideBalustradeCraftingRecipe(ingredientBase, ingredientBaluster, ingredientCap, result, group);
+        this.createWallCuttingRecipe(ingredientBase, result);
+      }
+
+      private void createWideBalustradeCraftingRecipe(ItemLike ingredientBase, ItemLike ingredientBaluster, ItemLike ingredientCap, ItemLike result, String group) {
+        this.shaped(RecipeCategory.MISC, result, 16)
+            .group(group)
+            .pattern("000").pattern(" 1 ").pattern("000")
+            .define('0', ingredientCap)
+            .define('1', ingredientBaluster)
+            .unlockedBy(getHasName(ingredientBase), has(ingredientBase))
+            .save(this.output, UnderDistantMoons.withPrefixedNamespace(getItemId(result) + "/crafting"));
       }
 
       private static String getItemId(ItemLike item) {

@@ -31,28 +31,28 @@ public abstract class WallBlockMixin {
   @Shadow @Final public static EnumProperty<WallSide> WEST;
 
   @Shadow
-  protected abstract boolean shouldRaisePost(BlockState state, BlockState aboveState, VoxelShape aboveShape);
+  protected abstract boolean shouldRaisePost(BlockState state, BlockState topNeighbour, VoxelShape aboveShape);
 
   @Inject(at = @At("RETURN"), cancellable = true, method = "updateShape(Lnet/minecraft/world/level/LevelReader;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;ZZZZ)Lnet/minecraft/world/level/block/state/BlockState;")
   private void distantMoons$updateShape(
-      LevelReader world,
+      LevelReader level,
       BlockState state,
-      BlockPos pos,
-      BlockState aboveState,
+      BlockPos topPos,
+      BlockState topNeighbour,
       boolean north, boolean east, boolean south, boolean west,
       CallbackInfoReturnable<BlockState> callbackInfo
   ) {
-    if (!(aboveState.getBlock() instanceof FixedLadderBlock)) return;
+    if (!(topNeighbour.getBlock() instanceof FixedLadderBlock)) return;
     BlockState currentState = callbackInfo.getReturnValue();
     currentState = currentState
-        .setValue(NORTH, currentState.getValue(NORTH) == WallSide.NONE ? WallSide.NONE : (FixedLadderBlock.blocksTop(aboveState, Direction.NORTH) ? WallSide.TALL : WallSide.LOW))
-        .setValue(EAST, currentState.getValue(EAST) == WallSide.NONE ? WallSide.NONE : (FixedLadderBlock.blocksTop(aboveState, Direction.EAST) ? WallSide.TALL : WallSide.LOW))
-        .setValue(SOUTH, currentState.getValue(SOUTH) == WallSide.NONE ? WallSide.NONE : (FixedLadderBlock.blocksTop(aboveState, Direction.SOUTH) ? WallSide.TALL : WallSide.LOW))
-        .setValue(WEST, currentState.getValue(WEST) == WallSide.NONE ? WallSide.NONE : (FixedLadderBlock.blocksTop(aboveState, Direction.WEST) ? WallSide.TALL : WallSide.LOW));
+        .setValue(NORTH, currentState.getValue(NORTH) == WallSide.NONE ? WallSide.NONE : (FixedLadderBlock.blocksTop(topNeighbour, Direction.NORTH) ? WallSide.TALL : WallSide.LOW))
+        .setValue(EAST, currentState.getValue(EAST) == WallSide.NONE ? WallSide.NONE : (FixedLadderBlock.blocksTop(topNeighbour, Direction.EAST) ? WallSide.TALL : WallSide.LOW))
+        .setValue(SOUTH, currentState.getValue(SOUTH) == WallSide.NONE ? WallSide.NONE : (FixedLadderBlock.blocksTop(topNeighbour, Direction.SOUTH) ? WallSide.TALL : WallSide.LOW))
+        .setValue(WEST, currentState.getValue(WEST) == WallSide.NONE ? WallSide.NONE : (FixedLadderBlock.blocksTop(topNeighbour, Direction.WEST) ? WallSide.TALL : WallSide.LOW));
     callbackInfo.setReturnValue(currentState
         .setValue(UP,
             shouldRaisePost(currentState, Blocks.AIR.defaultBlockState(), Shapes.empty())
-                || ((aboveState.getValue(FixedLadderBlock.LEFT_SHAPE) == FixedLadderSideShape.NONE) != (aboveState.getValue(FixedLadderBlock.RIGHT_SHAPE) == FixedLadderSideShape.NONE))
+                || ((topNeighbour.getValue(FixedLadderBlock.LEFT_SHAPE) == FixedLadderSideShape.NONE) != (topNeighbour.getValue(FixedLadderBlock.RIGHT_SHAPE) == FixedLadderSideShape.NONE))
                 || currentState.getValue(NORTH) != WallSide.TALL
                 && currentState.getValue(EAST) != WallSide.TALL
                 && currentState.getValue(SOUTH) != WallSide.TALL
@@ -64,12 +64,12 @@ public abstract class WallBlockMixin {
   @Inject(at = @At("HEAD"), cancellable = true, method = "connectsTo")
   private void distantMoons$connectsTo(
       BlockState state,
-      boolean faceFullSquare,
-      Direction side,
+      boolean faceSolid,
+      Direction direction,
       CallbackInfoReturnable<Boolean> callbackInfo
   ) {
     if (state.is(DistantMoonsBlockTags.WALL_NEVER_CONNECTS_TO)) callbackInfo.setReturnValue(false);
     else if (state.is(DistantMoonsBlockTags.WALL_ALWAYS_CONNECTS_TO)) callbackInfo.setReturnValue(true);
-    else if (state.getBlock() instanceof FixedLadderBlock) callbackInfo.setReturnValue(FixedLadderBlock.canWallConnect(state, side));
+    else if (state.getBlock() instanceof FixedLadderBlock) callbackInfo.setReturnValue(FixedLadderBlock.canWallConnect(state, direction));
   }
 }

@@ -1,7 +1,7 @@
 package syrenyx.distantmoons.datagen.tag;
 
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.DamageTypeTags;
@@ -11,9 +11,9 @@ import syrenyx.distantmoons.references.tag.DistantMoonsDamageTypeTags;
 
 import java.util.concurrent.CompletableFuture;
 
-public class DistantMoonsDamageTypeTagProvider extends FabricTagProvider<DamageType> {
+public class DistantMoonsDamageTypeTagProvider extends FabricTagsProvider<DamageType> {
 
-  public DistantMoonsDamageTypeTagProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+  public DistantMoonsDamageTypeTagProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
     super(output, Registries.DAMAGE_TYPE, registriesFuture);
   }
 

@@ -46,14 +46,14 @@ public abstract class IronBarsBlockMixin {
 
   @Inject(at = @At("HEAD"), cancellable = true, method = "skipRendering")
   private void distantMoons$skipRendering(
-      BlockState state, BlockState stateFrom, Direction direction, CallbackInfoReturnable<Boolean> callbackInfo
+      BlockState state, BlockState neighborState, Direction direction, CallbackInfoReturnable<Boolean> callbackInfo
   ) {
     if (!state.is(BlockTags.BARS)) return;
     if (
-        stateFrom.getBlock() instanceof FixedLadderBlock
-            || stateFrom.getBlock() instanceof SpikedFenceBlock
-            || stateFrom.getBlock() instanceof StairBlock
-            || stateFrom.getBlock() instanceof WallSlabBlock
+        neighborState.getBlock() instanceof FixedLadderBlock
+            || neighborState.getBlock() instanceof SpikedFenceBlock
+            || neighborState.getBlock() instanceof StairBlock
+            || neighborState.getBlock() instanceof WallSlabBlock
     ) callbackInfo.setReturnValue(true);
   }
 }

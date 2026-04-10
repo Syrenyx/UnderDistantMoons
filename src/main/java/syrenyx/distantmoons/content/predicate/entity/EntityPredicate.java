@@ -70,7 +70,7 @@ public record EntityPredicate(
 
   public boolean test(ServerLevel world, Vec3 pos, Entity entity) {
     if (entity == null) return false;
-    if (this.type.isPresent() && !this.type.get().matches(entity.getType())) return false;
+    if (this.type.isPresent() && !this.type.get().matches(entity.typeHolder())) return false;
     if (this.distance.isPresent() && (pos == null || !this.distance.get().matches(pos.x(), pos.y(), pos.z(), entity.getX(), entity.getY(), entity.getZ()))) return false;
     if (this.movement.isPresent()) {
       Vec3 vector = entity.getKnownMovement().scale(20.0F);
@@ -104,7 +104,7 @@ public record EntityPredicate(
     if (this.extension.checks.isPresent() && !this.extension.checks.get().test(entity, world, pos)) return false;
     if (this.extension.afflictions.isPresent() && !this.extension.afflictions.get().test(entity)) return false;
     if (this.extension.tags.isPresent()) {
-      Set<String> entityTags = entity.getTags();
+      Set<String> entityTags = entity.entityTags();
       for (List<String> tagList : this.extension.tags.get()) {
         if (Sets.intersection(entityTags, new HashSet<>(tagList)).isEmpty()) return false;
       }

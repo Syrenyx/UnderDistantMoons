@@ -14,13 +14,11 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntry;
-import net.minecraft.world.level.storage.loot.entries.LootPoolEntryType;
 import net.minecraft.world.level.storage.loot.entries.LootPoolSingletonContainer;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import org.jspecify.annotations.NonNull;
 import syrenyx.distantmoons.UnderDistantMoons;
-import syrenyx.distantmoons.initializers.DistantMoonsLootPoolEntryTypes;
 
 import java.util.Collections;
 import java.util.List;
@@ -49,11 +47,6 @@ public class RunFunctionEntry extends LootPoolSingletonContainer {
   }
 
   @Override
-  public @NonNull LootPoolEntryType getType() {
-    return DistantMoonsLootPoolEntryTypes.RUN_FUNCTION;
-  }
-
-  @Override
   public boolean expand(@NonNull LootContext context, @NonNull Consumer<LootPoolEntry> consumer) {
     if (!this.canRun(context)) return false;
     ServerLevel world = context.getLevel();
@@ -77,6 +70,11 @@ public class RunFunctionEntry extends LootPoolSingletonContainer {
             .withRotation(target != null ? target.getRotationVector() : minecraftServer.createCommandSourceStack().getRotation())
     );
     return true;
+  }
+
+  @Override
+  public @NonNull MapCodec<? extends LootPoolSingletonContainer> codec() {
+    return CODEC;
   }
 
   @Override

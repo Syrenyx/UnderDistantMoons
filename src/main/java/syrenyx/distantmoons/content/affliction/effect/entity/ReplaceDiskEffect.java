@@ -43,7 +43,7 @@ public record ReplaceDiskEffect(
   }
 
   @Override
-  public void apply(ServerLevel world, int stage, Entity target, Vec3 pos) {
+  public void apply(ServerLevel level, int stage, Entity target, Vec3 pos) {
     BlockPos blockPos = BlockPos.containing(pos).offset(this.offset);
     RandomSource random = target.getRandom();
     int radius = (int) this.radius.calculate(stage);
@@ -51,9 +51,9 @@ public record ReplaceDiskEffect(
     for (BlockPos blockPos2 : BlockPos.betweenClosed(blockPos.offset(-radius, 0, -radius), blockPos.offset(radius, Math.min(height - 1, 0), radius))) {
       if (
           blockPos2.distToCenterSqr(pos.x(), blockPos2.getY() + 0.5, pos.z()) < Mth.square(radius)
-              && this.predicate.map(predicate -> predicate.test(world, blockPos2)).orElse(true)
-              && world.setBlockAndUpdate(blockPos2, this.blockState.getState(random, blockPos2))
-      ) this.triggerGameEvent.ifPresent(gameEvent -> world.gameEvent(target, gameEvent, blockPos2));
+              && this.predicate.map(predicate -> predicate.test(level, blockPos2)).orElse(true)
+              && level.setBlockAndUpdate(blockPos2, this.blockState.getState(level, random, blockPos2))
+      ) this.triggerGameEvent.ifPresent(gameEvent -> level.gameEvent(target, gameEvent, blockPos2));
     }
   }
 }

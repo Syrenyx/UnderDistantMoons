@@ -1,7 +1,7 @@
 package syrenyx.distantmoons.datagen.tag;
 
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
@@ -14,9 +14,9 @@ import syrenyx.distantmoons.references.tag.DistantMoonsItemTags;
 
 import java.util.concurrent.CompletableFuture;
 
-public class DistantMoonsItemTagProvider extends FabricTagProvider.ItemTagProvider {
+public class DistantMoonsItemTagProvider extends FabricTagsProvider.ItemTagsProvider {
 
-  public DistantMoonsItemTagProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture, @Nullable BlockTagProvider blockTagProvider) {
+  public DistantMoonsItemTagProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture, @Nullable BlockTagsProvider blockTagProvider) {
     super(output, registriesFuture, blockTagProvider);
   }
 
@@ -84,14 +84,23 @@ public class DistantMoonsItemTagProvider extends FabricTagProvider.ItemTagProvid
 
     //FUEL
     this.valueLookupBuilder(DistantMoonsItemTags.SMELTING_FUEL_WOOD_BLOCK).add(
+        DistantMoonsBlocks.ACACIA_BALUSTRADE.asItem(),
         DistantMoonsBlocks.ACACIA_BEAM.asItem(),
+        DistantMoonsBlocks.BIRCH_BALUSTRADE.asItem(),
         DistantMoonsBlocks.BIRCH_BEAM.asItem(),
+        DistantMoonsBlocks.CHERRY_BALUSTRADE.asItem(),
         DistantMoonsBlocks.CHERRY_BEAM.asItem(),
+        DistantMoonsBlocks.DARK_OAK_BALUSTRADE.asItem(),
         DistantMoonsBlocks.DARK_OAK_BEAM.asItem(),
+        DistantMoonsBlocks.JUNGLE_BALUSTRADE.asItem(),
         DistantMoonsBlocks.JUNGLE_BEAM.asItem(),
+        DistantMoonsBlocks.MANGROVE_BALUSTRADE.asItem(),
         DistantMoonsBlocks.MANGROVE_BEAM.asItem(),
+        DistantMoonsBlocks.OAK_BALUSTRADE.asItem(),
         DistantMoonsBlocks.OAK_BEAM.asItem(),
+        DistantMoonsBlocks.PALE_OAK_BALUSTRADE.asItem(),
         DistantMoonsBlocks.PALE_OAK_BEAM.asItem(),
+        DistantMoonsBlocks.SPRUCE_BALUSTRADE.asItem(),
         DistantMoonsBlocks.SPRUCE_BEAM.asItem()
     );
     this.valueLookupBuilder(DistantMoonsItemTags.SMELTING_FUEL_WOOD_HALF_BLOCK).add(

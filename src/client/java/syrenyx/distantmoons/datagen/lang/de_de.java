@@ -1,6 +1,6 @@
 package syrenyx.distantmoons.datagen.lang;
 
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.world.item.DyeColor;
@@ -71,7 +71,7 @@ public class de_de extends FabricLanguageProvider {
       Map.entry(DyeColor.PINK, "Rosa")
   );
 
-  public de_de(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
+  public de_de(FabricPackOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
     super(dataOutput, "de_de", registryLookup);
   }
 
@@ -86,13 +86,16 @@ public class de_de extends FabricLanguageProvider {
 
     builder.add("affliction.progression_tooltip", "%s / %s");
 
+    builder.add(DistantMoonsBlocks.ACACIA_BALUSTRADE, "Akazienbalustrade");
     builder.add(DistantMoonsBlocks.ACACIA_BEAM, "Akazienholzbalken");
     builder.add(DistantMoonsBlocks.ACACIA_POLE, "Akazienholzpfosten");
     builder.add(DistantMoonsBlocks.ACACIA_WALL_SLAB, "Gestufte Akazienholzwand");
+    builder.add(DistantMoonsBlocks.ANDESITE_BALUSTRADE, "Andesitbalustrade");
     builder.add(DistantMoonsBlocks.ANDESITE_WALL_SLAB, "Gestufte Andesitwand");
     builder.add(DistantMoonsBlocks.BAMBOO_POLE, "Bambuspfosten");
     builder.add(DistantMoonsBlocks.BAMBOO_MOSAIC_WALL_SLAB, "Gestufte Bambusmosaikwand");
     builder.add(DistantMoonsBlocks.BAMBOO_WALL_SLAB, "Gestufte Bambuswand");
+    builder.add(DistantMoonsBlocks.BIRCH_BALUSTRADE, "Birkenbalustrade");
     builder.add(DistantMoonsBlocks.BIRCH_BEAM, "Birkenholzbalken");
     builder.add(DistantMoonsBlocks.BIRCH_POLE, "Birkenholzpfosten");
     builder.add(DistantMoonsBlocks.BIRCH_WALL_SLAB, "Gestufte Birkenholzwand");
@@ -101,13 +104,18 @@ public class de_de extends FabricLanguageProvider {
     builder.add(DistantMoonsBlocks.BLAST_FURNACE, "Hochofen");
     builder.add(DistantMoonsBlocks.BRICK_WALL_SLAB, "Gestufte Ziegelwand");
     builder.add(DistantMoonsBlocks.BROKEN_UNDERWORLD_ANCHOR, "Kaputter Unterweltanker");
+    builder.add(DistantMoonsBlocks.CALCITE_SLAB, "Kalzitstufe");
+    builder.add(DistantMoonsBlocks.CALCITE_STAIRS, "Kalzittreppe");
+    builder.add(DistantMoonsBlocks.CALCITE_WALL_SLAB, "Gestufte Kalzitwand");
     builder.add(DistantMoonsBlocks.CHARCOAL_BLOCK, "Holzkohleblock");
+    builder.add(DistantMoonsBlocks.CHERRY_BALUSTRADE, "Kirschholzbalustrade");
     builder.add(DistantMoonsBlocks.CHERRY_BEAM, "Kirschholzbalken");
     builder.add(DistantMoonsBlocks.CHERRY_POLE, "Kirschholzpfosten");
     builder.add(DistantMoonsBlocks.CHERRY_WALL_SLAB, "Gestufte Kirschholzwand");
     builder.add(DistantMoonsBlocks.COBBLED_DEEPSLATE_WALL_SLAB, "Gestufte Bruchtiefenschieferwand");
     builder.add(DistantMoonsBlocks.COBBLESTONE_WALL_SLAB, "Gestufte Bruchsteinwand");
     builder.add(DistantMoonsBlocks.COKE_BLOCK, "Koksblock");
+    builder.add(DistantMoonsBlocks.CRIMSON_BALUSTRADE, "Karmesinbalustrade");
     builder.add(DistantMoonsBlocks.CRIMSON_BEAM, "Karmesinbalken");
     builder.add(DistantMoonsBlocks.CRIMSON_POLE, "Karmesinpfosten");
     builder.add(DistantMoonsBlocks.CRIMSON_WALL_SLAB, "Gestufte Karmesinwand");
@@ -142,6 +150,7 @@ public class de_de extends FabricLanguageProvider {
     builder.add(DistantMoonsBlocks.CUT_SPRUCE_WOOD, "Geschnittenes Fichtenholz");
     builder.add(DistantMoonsBlocks.CUT_WARPED_HYPHAE, "Geschnittene Wirrhyphen");
     builder.add(DistantMoonsBlocks.CUT_WARPED_STEM, "Geschnittener Wirrstiel");
+    builder.add(DistantMoonsBlocks.DARK_OAK_BALUSTRADE, "Schwarzeichenholzbalustrade");
     builder.add(DistantMoonsBlocks.DARK_OAK_BEAM, "Schwarzeichenholzbalken");
     builder.add(DistantMoonsBlocks.DARK_OAK_POLE, "Schwarzeichenholzpfosten");
     builder.add(DistantMoonsBlocks.DARK_OAK_WALL_SLAB, "Gestufte Schwarzeichenholzwand");
@@ -156,7 +165,14 @@ public class de_de extends FabricLanguageProvider {
     builder.add(DistantMoonsBlocks.DEEPSLATE_BRICK_WALL_SLAB, "Gestufte Tiefenschieferziegelwand");
     builder.add(DistantMoonsBlocks.DEEPSLATE_DEEP_IRON_ORE, "Tiefenschiefer-Tiefeisenerz");
     builder.add(DistantMoonsBlocks.DEEPSLATE_TILE_WALL_SLAB, "Gestufte Tiefenschieferfliesenwand");
+    builder.add(DistantMoonsBlocks.DIORITE_BALUSTRADE, "Dioritbalustrade");
     builder.add(DistantMoonsBlocks.DIORITE_WALL_SLAB, "Gestufte Dioritwand");
+    builder.add(DistantMoonsBlocks.DRIPSTONE_SLAB, "Tropfsteinstufe");
+    builder.add(DistantMoonsBlocks.DRIPSTONE_STAIRS, "Tropfsteintreppe");
+    builder.add(DistantMoonsBlocks.DRIPSTONE_WALL_SLAB, "Gestufte Tropfsteinwand");
+    builder.add(DistantMoonsBlocks.END_STONE_SLAB, "Endsteinstufe");
+    builder.add(DistantMoonsBlocks.END_STONE_STAIRS, "Endsteintreppe");
+    builder.add(DistantMoonsBlocks.END_STONE_WALL_SLAB, "Gestufte Endsteinwand");
     builder.add(DistantMoonsBlocks.END_STONE_BRICK_WALL_SLAB, "Gestufte Endsteinziegelwand");
     builder.add(DistantMoonsBlocks.FIRE_BRICK_SLAB, "Feuerfestziegelstufe");
     builder.add(DistantMoonsBlocks.FIRE_BRICK_STAIRS, "Feuerfestziegeltreppe");
@@ -166,6 +182,7 @@ public class de_de extends FabricLanguageProvider {
     builder.add(DistantMoonsBlocks.FIXED_DEEP_IRON_LADDER, "Feste Tiefeisenleiter");
     builder.add(DistantMoonsBlocks.FIXED_IRON_LADDER, "Feste Eisenleiter");
     builder.add(DistantMoonsBlocks.FIXED_WROUGHT_IRON_LADDER, "Feste Schmiedeeisenleiter");
+    builder.add(DistantMoonsBlocks.GRANITE_BALUSTRADE, "Granitbalustrade");
     builder.add(DistantMoonsBlocks.GRANITE_WALL_SLAB, "Gestufte Granitwand");
     builder.add(DistantMoonsBlocks.GRAY_PRISMARINE, "Grauer Primsarin");
     builder.add(DistantMoonsBlocks.GRAY_PRISMARINE_SLAB, "Graue Prismarinstufe");
@@ -183,20 +200,33 @@ public class de_de extends FabricLanguageProvider {
     builder.add(DistantMoonsBlocks.IRON_BAR_DOOR, "Eisengittertür");
     builder.add(DistantMoonsBlocks.IRON_FENCE, "Eisenzaun");
     builder.add(DistantMoonsBlocks.IRON_LADDER, "Eisenleiter");
+    builder.add(DistantMoonsBlocks.JUNGLE_BALUSTRADE, "Tropenholzbalustrade");
     builder.add(DistantMoonsBlocks.JUNGLE_BEAM, "Tropenholzbalken");
     builder.add(DistantMoonsBlocks.JUNGLE_POLE, "Tropenholzpfosten");
     builder.add(DistantMoonsBlocks.JUNGLE_WALL_SLAB, "Gestufte Tropenholzwand");
+    builder.add(DistantMoonsBlocks.MANGROVE_BALUSTRADE, "Mangrovenholzbalustrade");
     builder.add(DistantMoonsBlocks.MANGROVE_BEAM, "Mangrovenholzbalken");
     builder.add(DistantMoonsBlocks.MANGROVE_POLE, "Mangrovenholzpfosten");
     builder.add(DistantMoonsBlocks.MANGROVE_WALL_SLAB, "Gestufte Mangrovenholzwand");
+    builder.add(DistantMoonsBlocks.MOSS_SLAB, "Moosstufe");
+    builder.add(DistantMoonsBlocks.MOSS_STAIRS, "Moostreppe");
+    builder.add(DistantMoonsBlocks.MOSS_WALL_SLAB, "Gestufte Mooswand");
     builder.add(DistantMoonsBlocks.MOSSY_COBBLESTONE_WALL_SLAB, "Gestufte bemooste Bruchsteinwand");
     builder.add(DistantMoonsBlocks.MOSSY_STONE_BRICK_WALL_SLAB, "Gestufte bemooste Steinziegelwand");
     builder.add(DistantMoonsBlocks.MUD_BRICK_WALL_SLAB, "Gestufte Schlammziegelwand");
     builder.add(DistantMoonsBlocks.NETHER_BRICK_WALL_SLAB, "Gestufte Netherziegelwand");
     builder.add(DistantMoonsBlocks.NETHERRACK_DEEP_IRON_ORE, "Nethertiefeisenerz");
+    builder.add(DistantMoonsBlocks.NETHERRACK_SLAB, "Netherrackstufe");
+    builder.add(DistantMoonsBlocks.NETHERRACK_STAIRS, "Netherracktreppe");
+    builder.add(DistantMoonsBlocks.NETHERRACK_WALL_SLAB, "Gestufte Netherrackwand");
+    builder.add(DistantMoonsBlocks.OAK_BALUSTRADE, "Eichenholzbalustrade");
     builder.add(DistantMoonsBlocks.OAK_BEAM, "Eichenholzbalken");
     builder.add(DistantMoonsBlocks.OAK_POLE, "Eichenholzpfosten");
     builder.add(DistantMoonsBlocks.OAK_WALL_SLAB, "Gestufte Eichenholzwand");
+    builder.add(DistantMoonsBlocks.PALE_MOSS_SLAB, "Blassmoosstufe");
+    builder.add(DistantMoonsBlocks.PALE_MOSS_STAIRS, "Blassmoostreppe");
+    builder.add(DistantMoonsBlocks.PALE_MOSS_WALL_SLAB, "Gestufte Blassmooswand");
+    builder.add(DistantMoonsBlocks.PALE_OAK_BALUSTRADE, "Blasseichenholzbalustrade");
     builder.add(DistantMoonsBlocks.PALE_OAK_BEAM, "Blasseichenholzbalken");
     builder.add(DistantMoonsBlocks.PALE_OAK_POLE, "Blasseichenholzpfosten");
     builder.add(DistantMoonsBlocks.PALE_OAK_WALL_SLAB, "Gestufte Blasseichenholzwand");
@@ -229,6 +259,9 @@ public class de_de extends FabricLanguageProvider {
     builder.add(DistantMoonsBlocks.PRISMARINE_TILES, "Prismarinfliesen");
     builder.add(DistantMoonsBlocks.PRISMARINE_WALL_SLAB, "Gestufte Prismarinwand");
     builder.add(DistantMoonsBlocks.PURPUR_WALL_SLAB, "Gestufte Purpurwand");
+    builder.add(DistantMoonsBlocks.QUARTZ_BRICK_SLAB, "Quarzziegelstufe");
+    builder.add(DistantMoonsBlocks.QUARTZ_BRICK_STAIRS, "Quarzziegeltreppe");
+    builder.add(DistantMoonsBlocks.QUARTZ_BRICK_WALL_SLAB, "Gestufte Quarzziegelwand");
     builder.add(DistantMoonsBlocks.QUARTZ_WALL_SLAB, "Gestufte Quarzwand");
     builder.add(DistantMoonsBlocks.RAW_DEEP_IRON_BLOCK, "Rohtiefeisenblock");
     builder.add(DistantMoonsBlocks.RED_NETHER_BRICK_WALL_SLAB, "Gestufte rote Netherziegelwand");
@@ -239,13 +272,20 @@ public class de_de extends FabricLanguageProvider {
     builder.add(DistantMoonsBlocks.RUBY_BLOCK, "Rubinblock");
     builder.add(DistantMoonsBlocks.SANDSTONE_WALL_SLAB, "Gestufte Sandsteinwand");
     builder.add(DistantMoonsBlocks.SAPPHIRE_BLOCK, "Saphirblock");
+    builder.add(DistantMoonsBlocks.SMOOTH_BASALT_SLAB, "Glatte Basaltstufe");
+    builder.add(DistantMoonsBlocks.SMOOTH_BASALT_STAIRS, "Glatte Basalttreppe");
+    builder.add(DistantMoonsBlocks.SMOOTH_BASALT_WALL_SLAB, "Gestufte glatte Basaltwand");
     builder.add(DistantMoonsBlocks.SMOOTH_QUARTZ_WALL_SLAB, "Gestufte glatte Quarzwand");
+    builder.add(DistantMoonsBlocks.SMOOTH_RED_SANDSTONE_BALUSTRADE, "Glatte rote Sandsteinbalustrade");
     builder.add(DistantMoonsBlocks.SMOOTH_RED_SANDSTONE_WALL_SLAB, "Gestufte glatte rote Sandsteinwand");
+    builder.add(DistantMoonsBlocks.SMOOTH_SANDSTONE_BALUSTRADE, "Glatte Sandsteinbalustrade");
     builder.add(DistantMoonsBlocks.SMOOTH_SANDSTONE_WALL_SLAB, "Gestufte glatte Sandsteinwand");
     builder.add(DistantMoonsBlocks.SMOOTH_STONE_WALL_SLAB, "Gestufte glatte Steinwand");
+    builder.add(DistantMoonsBlocks.SPRUCE_BALUSTRADE, "Fichtenholzbalustrade");
     builder.add(DistantMoonsBlocks.SPRUCE_BEAM, "Fichtenholzbalken");
     builder.add(DistantMoonsBlocks.SPRUCE_POLE, "Fichtenholzpfosten");
     builder.add(DistantMoonsBlocks.SPRUCE_WALL_SLAB, "Gestufte Fichtenholzwand");
+    builder.add(DistantMoonsBlocks.STONE_BALUSTRADE, "Steinbalustrade");
     builder.add(DistantMoonsBlocks.STONE_BRICK_WALL_SLAB, "Gestufte Steinziegelwand");
     builder.add(DistantMoonsBlocks.STONE_WALL_SLAB, "Gestufte Steinwand");
     builder.add(DistantMoonsBlocks.STRIPPED_CUT_ACACIA_LOG, "Entrindeter geschnittener Akazienstamm");
@@ -274,11 +314,13 @@ public class de_de extends FabricLanguageProvider {
     builder.add(DistantMoonsBlocks.TERRACOTTA_SLAB, "Keramikstufe");
     builder.add(DistantMoonsBlocks.TERRACOTTA_STAIRS, "Keramiktreppe");
     builder.add(DistantMoonsBlocks.TERRACOTTA_WALL_SLAB, "Gestufte Keramikwand");
+    builder.add(DistantMoonsBlocks.TUFF_BALUSTRADE, "Tuffbalustrade");
     builder.add(DistantMoonsBlocks.TUFF_BRICK_WALL_SLAB, "Gestufte Tuffziegelwand");
     builder.add(DistantMoonsBlocks.TUFF_WALL_SLAB, "Gestufte Tuffwand");
     builder.add(DistantMoonsBlocks.UNDERWORLD_ANCHOR, "Unterweltanker");
     builder.add(DistantMoonsBlocks.UNDERWORLD_CONFLUX, "Underworldkonflux");
     builder.add(DistantMoonsBlocks.UNDERWORLD_LANTERN, "Unterweltlaterne");
+    builder.add(DistantMoonsBlocks.WARPED_BALUSTRADE, "Wirrbalustrade");
     builder.add(DistantMoonsBlocks.WARPED_BEAM, "Wirrbalken");
     builder.add(DistantMoonsBlocks.WARPED_POLE, "Wirrpfosten");
     builder.add(DistantMoonsBlocks.WARPED_WALL_SLAB, "Gestufte Wirrwand");
@@ -289,11 +331,11 @@ public class de_de extends FabricLanguageProvider {
 
     helper.generateDyedBlockNames(DistantMoonsBlocks.DYED_CONCRETE_SLABS, "%c Betonstufe", FEMININE_COLOR_ADJECTIVES);
     helper.generateDyedBlockNames(DistantMoonsBlocks.DYED_CONCRETE_STAIRS, "%c Betontreppe", FEMININE_COLOR_ADJECTIVES);
-    helper.generateDyedBlockNames(DistantMoonsBlocks.DYED_CONCRETE_WALL_SLABS, "%c Gestufte Betonwand", FEMININE_COLOR_ADJECTIVES);
+    helper.generateDyedBlockNames(DistantMoonsBlocks.DYED_CONCRETE_WALL_SLABS, "%c gestufte Betonwand", FEMININE_COLOR_ADJECTIVES);
     helper.generateDyedBlockNames(DistantMoonsBlocks.DYED_PILLOWS, "%c Kissen", OBJECTIVE_COLOR_ADJECTIVES);
     helper.generateDyedBlockNames(DistantMoonsBlocks.DYED_TERRACOTTA_SLABS, "%c Keramikstufe", FEMININE_COLOR_ADJECTIVES);
     helper.generateDyedBlockNames(DistantMoonsBlocks.DYED_TERRACOTTA_STAIRS, "%c Keramiktreppe", FEMININE_COLOR_ADJECTIVES);
-    helper.generateDyedBlockNames(DistantMoonsBlocks.DYED_TERRACOTTA_WALL_SLABS, "%c Gestufte Keramikwand", FEMININE_COLOR_ADJECTIVES);
+    helper.generateDyedBlockNames(DistantMoonsBlocks.DYED_TERRACOTTA_WALL_SLABS, "%c gestufte Keramikwand", FEMININE_COLOR_ADJECTIVES);
 
     builder.add(DistantMoonsBlocks.CUT_COPPER_WALL_SLAB, "Gestufte geschnittene Kupferwand");
     builder.add(DistantMoonsBlocks.EXPOSED_CUT_COPPER_WALL_SLAB, "Angelaufene gestufte geschnittene Kupferwand");

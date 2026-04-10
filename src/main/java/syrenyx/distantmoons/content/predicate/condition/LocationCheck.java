@@ -4,7 +4,6 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import org.jspecify.annotations.NonNull;
-import syrenyx.distantmoons.initializers.DistantMoonsLootConditions;
 import syrenyx.distantmoons.content.predicate.location.LocationPredicate;
 
 import java.util.Optional;
@@ -15,7 +14,6 @@ import net.minecraft.util.context.ContextKey;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
-import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 import net.minecraft.world.phys.Vec3;
 
 public record LocationCheck(
@@ -40,11 +38,6 @@ public record LocationCheck(
   );
 
   @Override
-  public @NonNull LootItemConditionType getType() {
-    return DistantMoonsLootConditions.LOCATION_CHECK;
-  }
-
-  @Override
   public @NonNull Set<ContextKey<?>> getReferencedContextParams() {
     return Set.of(LootContextParams.ORIGIN);
   }
@@ -60,5 +53,10 @@ public record LocationCheck(
             location.z() + this.offset.getZ()
         )
     );
+  }
+
+  @Override
+  public @NonNull MapCodec<? extends LootItemCondition> codec() {
+    return CODEC;
   }
 }

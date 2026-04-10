@@ -93,39 +93,39 @@ public class SpikedFenceBlock extends Block implements SimpleWaterloggedBlock {
   }
 
   @Nullable @Override
-  public BlockState getStateForPlacement(BlockPlaceContext context) {
-    Level world = context.getLevel();
-    BlockPos pos = context.getClickedPos();
+  public BlockState getStateForPlacement(@NonNull BlockPlaceContext context) {
+    Level level = context.getLevel();
+    BlockPos blockPos = context.getClickedPos();
     return this.updateState(
-        world, pos,
-        this.defaultBlockState().setValue(WATERLOGGED, world.getFluidState(pos).getType() == Fluids.WATER)
+        level, blockPos,
+        this.defaultBlockState().setValue(WATERLOGGED, level.getFluidState(blockPos).getType() == Fluids.WATER)
     );
   }
 
   @Override
   protected @NonNull BlockState updateShape(
-      @NonNull BlockState state,
-      @NonNull LevelReader world,
+      @NonNull BlockState blockState,
+      @NonNull LevelReader level,
       ScheduledTickAccess tickView,
-      @NonNull BlockPos pos,
+      @NonNull BlockPos blockPos,
       @NonNull Direction direction,
       @NonNull BlockPos neighborPos,
       @NonNull BlockState neighborState,
       @NonNull RandomSource random
   ) {
-    tickView.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(world));
-    return this.updateState(world, pos, state);
+    tickView.scheduleTick(blockPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+    return this.updateState(level, blockPos, blockState);
   }
 
-  private BlockState updateState(BlockGetter world, BlockPos pos, BlockState state) {
-    BlockState topState = world.getBlockState(pos.above());
-    VoxelShape topFace = topState.getCollisionShape(world, pos.above()).getFaceShape(Direction.DOWN);
-    return state
+  private BlockState updateState(BlockGetter level, BlockPos blockPos, BlockState blockState) {
+    BlockState topState = level.getBlockState(blockPos.above());
+    VoxelShape topFace = topState.getCollisionShape(level, blockPos.above()).getFaceShape(Direction.DOWN);
+    return blockState
         .setValue(TOP, !blockedTop(Direction.UP, topFace, topState))
-        .setValue(NORTH, this.canConnectTo(world, pos, Direction.NORTH) ? (blockedTop(Direction.NORTH, topFace, topState) ? SpikedFenceShape.SIDE : SpikedFenceShape.TOP) : SpikedFenceShape.NONE)
-        .setValue(EAST, this.canConnectTo(world, pos, Direction.EAST) ? (blockedTop(Direction.EAST, topFace, topState) ? SpikedFenceShape.SIDE : SpikedFenceShape.TOP) : SpikedFenceShape.NONE)
-        .setValue(SOUTH, this.canConnectTo(world, pos, Direction.SOUTH) ? (blockedTop(Direction.SOUTH, topFace, topState) ? SpikedFenceShape.SIDE : SpikedFenceShape.TOP) : SpikedFenceShape.NONE)
-        .setValue(WEST, this.canConnectTo(world, pos, Direction.WEST) ? (blockedTop(Direction.WEST, topFace, topState) ? SpikedFenceShape.SIDE : SpikedFenceShape.TOP) : SpikedFenceShape.NONE);
+        .setValue(NORTH, this.canConnectTo(level, blockPos, Direction.NORTH) ? (blockedTop(Direction.NORTH, topFace, topState) ? SpikedFenceShape.SIDE : SpikedFenceShape.TOP) : SpikedFenceShape.NONE)
+        .setValue(EAST, this.canConnectTo(level, blockPos, Direction.EAST) ? (blockedTop(Direction.EAST, topFace, topState) ? SpikedFenceShape.SIDE : SpikedFenceShape.TOP) : SpikedFenceShape.NONE)
+        .setValue(SOUTH, this.canConnectTo(level, blockPos, Direction.SOUTH) ? (blockedTop(Direction.SOUTH, topFace, topState) ? SpikedFenceShape.SIDE : SpikedFenceShape.TOP) : SpikedFenceShape.NONE)
+        .setValue(WEST, this.canConnectTo(level, blockPos, Direction.WEST) ? (blockedTop(Direction.WEST, topFace, topState) ? SpikedFenceShape.SIDE : SpikedFenceShape.TOP) : SpikedFenceShape.NONE);
   }
 
   private static boolean blockedTop(Direction direction, VoxelShape topFace, BlockState topState) {
