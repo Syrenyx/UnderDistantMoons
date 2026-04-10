@@ -580,16 +580,33 @@ public class DistantMoonsBlockTagProvider extends FabricTagsProvider.BlockTagsPr
     this.valueLookupBuilder(DistantMoonsBlockTags.MINING_TYPE_SHOVEL);
 
     //SUPPORT BLOCKS
+    this.valueLookupBuilder(DistantMoonsBlockTags.SUPPORT_BLOCK_FOR_AZALEA);
+    this.valueLookupBuilder(DistantMoonsBlockTags.SUPPORT_BLOCK_FOR_AZALEA_GROWTH);
+    this.valueLookupBuilder(DistantMoonsBlockTags.SUPPORT_BLOCK_FOR_BAMBOO);
     this.valueLookupBuilder(DistantMoonsBlockTags.SUPPORT_BLOCK_FOR_BIG_DRIPLEAF)
         .add(DistantMoonsBlocks.MOSS_SLAB)
         .add(DistantMoonsBlocks.MOSS_STAIRS)
         .add(DistantMoonsBlocks.MOSS_WALL_SLAB);
+    this.valueLookupBuilder(DistantMoonsBlockTags.SUPPORT_BLOCK_FOR_CRIMSON_FUNGUS);
+    this.valueLookupBuilder(DistantMoonsBlockTags.SUPPORT_BLOCK_FOR_CRIMSON_ROOTS);
+    this.valueLookupBuilder(DistantMoonsBlockTags.SUPPORT_BLOCK_FOR_DRY_VEGETATION);
+    this.valueLookupBuilder(DistantMoonsBlockTags.SUPPORT_BLOCK_FOR_HUGE_BROWN_MUSHROOM_GROWTH);
+    this.valueLookupBuilder(DistantMoonsBlockTags.SUPPORT_BLOCK_FOR_HUGE_RED_MUSHROOM_GROWTH);
+    this.valueLookupBuilder(DistantMoonsBlockTags.SUPPORT_BLOCK_FOR_MANGROVE_PROPAGULE);
+    this.valueLookupBuilder(DistantMoonsBlockTags.SUPPORT_BLOCK_FOR_MELON_GROWTH);
+    this.valueLookupBuilder(DistantMoonsBlockTags.SUPPORT_BLOCK_FOR_NETHER_SPROUTS);
+    this.valueLookupBuilder(DistantMoonsBlockTags.SUPPORT_BLOCK_FOR_PUMPKIN_GROWTH);
     this.valueLookupBuilder(DistantMoonsBlockTags.SUPPORT_BLOCK_FOR_SITTING_SPOT)
         .addTag(DistantMoonsBlockTags.DYED_PILLOW);
     this.valueLookupBuilder(DistantMoonsBlockTags.SUPPORT_BLOCK_FOR_SMALL_DRIPLEAF)
         .add(DistantMoonsBlocks.MOSS_SLAB)
         .add(DistantMoonsBlocks.MOSS_STAIRS)
         .add(DistantMoonsBlocks.MOSS_WALL_SLAB);
+    this.valueLookupBuilder(DistantMoonsBlockTags.SUPPORT_BLOCK_FOR_SUGAR_CANE);
+    this.valueLookupBuilder(DistantMoonsBlockTags.SUPPORT_BLOCK_FOR_VEGETATION);
+    this.valueLookupBuilder(DistantMoonsBlockTags.SUPPORT_BLOCK_FOR_WARPED_FUNGUS);
+    this.valueLookupBuilder(DistantMoonsBlockTags.SUPPORT_BLOCK_FOR_WARPED_ROOTS);
+    this.valueLookupBuilder(DistantMoonsBlockTags.SUPPORT_BLOCK_FOR_WITHER_ROSE);
 
     //MISCELLANEOUS
     this.valueLookupBuilder(DistantMoonsBlockTags.CLIMBABLE)
