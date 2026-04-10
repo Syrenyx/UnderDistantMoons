@@ -315,6 +315,34 @@ public class DistantMoonsBlockTagProvider extends FabricTagsProvider.BlockTagsPr
     this.valueLookupBuilder(DistantMoonsBlockTags.IMMUNE_TO_DRAGON);
     this.valueLookupBuilder(DistantMoonsBlockTags.IMMUNE_TO_WITHER);
 
+    //INFINIBURN
+    this.valueLookupBuilder(DistantMoonsBlockTags.INFINIBURN_IN_THE_ABYSS)
+        .add(
+            Blocks.MAGMA_BLOCK,
+            Blocks.NETHERRACK,
+            DistantMoonsBlocks.NETHERRACK_SLAB,
+            DistantMoonsBlocks.NETHERRACK_STAIRS,
+            DistantMoonsBlocks.NETHERRACK_WALL_SLAB
+        );
+    this.valueLookupBuilder(DistantMoonsBlockTags.INFINIBURN_IN_THE_END)
+        .add(
+            DistantMoonsBlocks.NETHERRACK_SLAB,
+            DistantMoonsBlocks.NETHERRACK_STAIRS,
+            DistantMoonsBlocks.NETHERRACK_WALL_SLAB
+        );
+    this.valueLookupBuilder(DistantMoonsBlockTags.INFINIBURN_IN_THE_NETHER)
+        .add(
+            DistantMoonsBlocks.NETHERRACK_SLAB,
+            DistantMoonsBlocks.NETHERRACK_STAIRS,
+            DistantMoonsBlocks.NETHERRACK_WALL_SLAB
+        );
+    this.valueLookupBuilder(DistantMoonsBlockTags.INFINIBURN_IN_OVERWORLD)
+        .add(
+            DistantMoonsBlocks.NETHERRACK_SLAB,
+            DistantMoonsBlocks.NETHERRACK_STAIRS,
+            DistantMoonsBlocks.NETHERRACK_WALL_SLAB
+        );
+
     //MINING TOOL GROUPS
     this.valueLookupBuilder(DistantMoonsBlockTags.MINING_TIER_DIAMOND);
     this.valueLookupBuilder(DistantMoonsBlockTags.MINING_TIER_IRON)
@@ -653,6 +681,9 @@ public class DistantMoonsBlockTagProvider extends FabricTagsProvider.BlockTagsPr
     this.valueLookupBuilder(BlockTags.DRAGON_IMMUNE).addTag(DistantMoonsBlockTags.IMMUNE_TO_DRAGON);
     this.valueLookupBuilder(BlockTags.HUGE_BROWN_MUSHROOM_CAN_PLACE_ON).addTag(DistantMoonsBlockTags.SUPPORT_BLOCK_FOR_HUGE_BROWN_MUSHROOM_GROWTH);
     this.valueLookupBuilder(BlockTags.HUGE_RED_MUSHROOM_CAN_PLACE_ON).addTag(DistantMoonsBlockTags.SUPPORT_BLOCK_FOR_HUGE_RED_MUSHROOM_GROWTH);
+    this.valueLookupBuilder(BlockTags.INFINIBURN_END).addTag(DistantMoonsBlockTags.INFINIBURN_IN_THE_END);
+    this.valueLookupBuilder(BlockTags.INFINIBURN_NETHER).addTag(DistantMoonsBlockTags.INFINIBURN_IN_THE_NETHER);
+    this.valueLookupBuilder(BlockTags.INFINIBURN_OVERWORLD).addTag(DistantMoonsBlockTags.INFINIBURN_IN_OVERWORLD);
     this.valueLookupBuilder(BlockTags.MINEABLE_WITH_AXE).addTag(DistantMoonsBlockTags.MINING_TYPE_AXE);
     this.valueLookupBuilder(BlockTags.MINEABLE_WITH_HOE).addTag(DistantMoonsBlockTags.MINING_TYPE_HOE);
     this.valueLookupBuilder(BlockTags.MINEABLE_WITH_PICKAXE).addTag(DistantMoonsBlockTags.MINING_TYPE_PICKAXE);

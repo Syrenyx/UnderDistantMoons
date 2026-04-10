@@ -41,6 +41,10 @@ public abstract class DistantMoonsBlockTags {
   public static final TagKey<Block> GLASS_PANE_NEVER_CONNECTS_TO = keyOf("connection_target/glass_pane/never");
   public static final TagKey<Block> IMMUNE_TO_DRAGON = keyOf("immunity/ender_dragon");
   public static final TagKey<Block> IMMUNE_TO_WITHER = keyOf("immunity/wither");
+  public static final TagKey<Block> INFINIBURN_IN_THE_ABYSS = keyOf("infiniburn/the_abyss");
+  public static final TagKey<Block> INFINIBURN_IN_THE_END = keyOf("infiniburn/the_end");
+  public static final TagKey<Block> INFINIBURN_IN_THE_NETHER = keyOf("infiniburn/the_nether");
+  public static final TagKey<Block> INFINIBURN_IN_OVERWORLD = keyOf("infiniburn/overworld");
   public static final TagKey<Block> LEAVES_WITHOUT_LEAF_PARTICLES = keyOf("misc/leaves_without_leaf_particles");
   public static final TagKey<Block> METAL_BAR_DOOR = keyOf("metal_bar_door");
   public static final TagKey<Block> METAL_BAR_DOOR_NEVER_CONNECTS_TO = keyOf("connection_target/metal_bar_door/never");
