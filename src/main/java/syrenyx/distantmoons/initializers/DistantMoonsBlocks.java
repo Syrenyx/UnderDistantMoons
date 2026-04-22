@@ -36,6 +36,150 @@ import java.util.function.Function;
 public abstract class DistantMoonsBlocks {
 
   //SIMPLE BLOCKS
+  public static final Block ABYSS_TEAR_PLANKS = register(
+      "abyss_tear_planks",
+      Block::new,
+      BlockBehaviour.Properties.of()
+          .instrument(NoteBlockInstrument.BASS)
+          .lightLevel(_ -> 10)
+          .mapColor(MapColor.QUARTZ)
+          .sound(SoundType.WOOD)
+          .strength(2.0F, 3.0F),
+      new Item.Properties()
+  );
+  public static final Block ABYSS_TEAR_BALUSTRADE = register(
+      "abyss_tear_balustrade",
+      ThinBalustradeBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(ABYSS_TEAR_PLANKS),
+      new Item.Properties()
+  );
+  public static final Block ABYSS_TEAR_BEAM = register(
+      "abyss_tear_beam",
+      BeamBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(ABYSS_TEAR_PLANKS),
+      new Item.Properties()
+  );
+  public static final Block ABYSS_TEAR_BUBBLE = register(
+      "abyss_tear_bubble",
+      AbyssTearBubbleBlock::new,
+      BlockBehaviour.Properties.of()
+          .instabreak()
+          .isViewBlocking((_, _, _) -> false)
+          .mapColor(MapColor.WATER)
+          .noCollision()
+          .noLootTable()
+          .noTerrainParticles()
+          .pushReaction(PushReaction.DESTROY)
+          .replaceable()
+          .sound(SoundType.EMPTY)
+  );
+  public static final Block ABYSS_TEAR_BUTTON = register(
+      "abyss_tear_button",
+      properties -> new ButtonBlock(DistantMoonsBlockSetTypes.ABYSS_TEAR, DistantMoonsBlockSetTypes.WOODEN_BUTTON_PRESSED_DURATION, properties),
+      BlockBehaviour.Properties.ofFullCopy(ABYSS_TEAR_PLANKS),
+      new Item.Properties()
+  );
+  public static final Block ABYSS_TEAR_DOOR = register(
+      "abyss_tear_door",
+      properties -> new DoorBlock(DistantMoonsBlockSetTypes.ABYSS_TEAR, properties),
+      BlockBehaviour.Properties.ofFullCopy(ABYSS_TEAR_PLANKS),
+      new Item.Properties()
+  );
+  public static final Block ABYSS_TEAR_FENCE = register(
+      "abyss_tear_fence",
+      FenceBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(ABYSS_TEAR_PLANKS),
+      new Item.Properties()
+  );
+  public static final Block ABYSS_TEAR_FENCE_GATE = register(
+      "abyss_tear_fence_gate",
+      properties -> new FenceGateBlock(DistantMoonsWoodTypes.ABYSS_TEAR, properties),
+      BlockBehaviour.Properties.ofFullCopy(ABYSS_TEAR_PLANKS),
+      new Item.Properties()
+  );
+  public static final Block ABYSS_TEAR_HANGING_SIGN = register(
+      "abyss_tear_hanging_sign",
+      properties -> new CeilingHangingSignBlock(DistantMoonsWoodTypes.ABYSS_TEAR, properties),
+      BlockBehaviour.Properties.ofFullCopy(ABYSS_TEAR_PLANKS)
+  );
+  public static final Block ABYSS_TEAR_LOG = register(
+      "abyss_tear_log",
+      RotatedPillarBlock::new,
+      BlockBehaviour.Properties.of()
+          .instrument(NoteBlockInstrument.BASS)
+          .mapColor(state -> state.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? MapColor.QUARTZ : MapColor.TERRACOTTA_BLUE)
+          .sound(SoundType.WOOD)
+          .strength(2.0F),
+      new Item.Properties()
+  );
+  public static final Block ABYSS_TEAR_POLE = register(
+      "abyss_tear_pole",
+      PoleBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(ABYSS_TEAR_PLANKS),
+      new Item.Properties()
+  );
+  public static final Block ABYSS_TEAR_PRESSURE_PLATE = register(
+      "abyss_tear_pressure_plate",
+      properties -> new PressurePlateBlock(DistantMoonsBlockSetTypes.ABYSS_TEAR, properties),
+      BlockBehaviour.Properties.ofFullCopy(ABYSS_TEAR_PLANKS),
+      new Item.Properties()
+  );
+  public static final Block ABYSS_TEAR_SHELF = register(
+      "abyss_tear_shelf",
+      ShelfBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(ABYSS_TEAR_PLANKS),
+      new Item.Properties()
+  );
+  public static final Block ABYSS_TEAR_SIGN = register(
+      "abyss_tear_sign",
+      properties -> new StandingSignBlock(DistantMoonsWoodTypes.ABYSS_TEAR, properties),
+      BlockBehaviour.Properties.ofFullCopy(ABYSS_TEAR_PLANKS),
+      new Item.Properties()
+  );
+  public static final Block ABYSS_TEAR_SLAB = register(
+      "abyss_tear_slab",
+      SlabBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(ABYSS_TEAR_PLANKS),
+      new Item.Properties()
+  );
+  public static final Block ABYSS_TEAR_STAIRS = register(
+      "abyss_tear_stairs",
+      SimplifiedStairsBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(ABYSS_TEAR_PLANKS),
+      new Item.Properties()
+  );
+  public static final Block ABYSS_TEAR_TRAPDOOR = register(
+      "abyss_tear_trapdoor",
+      properties -> new TrapDoorBlock(DistantMoonsBlockSetTypes.ABYSS_TEAR, properties),
+      BlockBehaviour.Properties.ofFullCopy(ABYSS_TEAR_PLANKS),
+      new Item.Properties()
+  );
+  public static final Block ABYSS_TEAR_WALL_HANGING_SIGN = register(
+      "abyss_tear_wall_hanging_sign",
+      properties -> new WallHangingSignBlock(DistantMoonsWoodTypes.ABYSS_TEAR, properties),
+      BlockBehaviour.Properties.ofFullCopy(ABYSS_TEAR_PLANKS)
+  );
+  public static final Block ABYSS_TEAR_WALL_SLAB = register(
+      "abyss_tear_wall_slab",
+      WallSlabBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(ABYSS_TEAR_PLANKS),
+      new Item.Properties()
+  );
+  public static final Block ABYSS_TEAR_WOOD = register(
+      "abyss_tear_wood",
+      RotatedPillarBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(ABYSS_TEAR_LOG)
+          .mapColor(MapColor.TERRACOTTA_BLUE),
+      new Item.Properties()
+  );
+  public static final Block ABYSS_TEAR_BRANCH = register(
+      "abyss_tear_branch",
+      AbyssTearBranchBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(ABYSS_TEAR_WOOD)
+          .pushReaction(PushReaction.DESTROY)
+          .strength(1.5F),
+      new Item.Properties()
+  );
   public static final Block ACACIA_BALUSTRADE = register(
       "acacia_balustrade",
       ThinBalustradeBlock::new,
@@ -262,6 +406,18 @@ public abstract class DistantMoonsBlocks {
           .mapColor(MapColor.TERRACOTTA_WHITE),
       new Item.Properties()
           .fireResistant()
+  );
+  public static final Block CUT_ABYSS_TEAR_LOG = register(
+      "cut_abyss_tear_log",
+      PillarSlabBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(ABYSS_TEAR_LOG),
+      new Item.Properties()
+  );
+  public static final Block CUT_ABYSS_TEAR_WOOD = register(
+      "cut_abyss_tear_wood",
+      PillarSlabBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(ABYSS_TEAR_WOOD),
+      new Item.Properties()
   );
   public static final Block CUT_ACACIA_LOG = register(
       "cut_acacia_log",
@@ -1335,6 +1491,41 @@ public abstract class DistantMoonsBlocks {
       "stone_wall_slab",
       WallSlabBlock::new,
       BlockBehaviour.Properties.ofFullCopy(Blocks.STONE),
+      new Item.Properties()
+  );
+  public static final Block STRIPPED_ABYSS_TEAR_LOG = register(
+      "stripped_abyss_tear_log",
+      RotatedPillarBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(ABYSS_TEAR_LOG)
+          .lightLevel(_ -> 10)
+          .mapColor(MapColor.QUARTZ)
+          .sound(SoundType.NETHER_WOOD),
+      new Item.Properties()
+  );
+  public static final Block STRIPPED_ABYSS_TEAR_WOOD = register(
+      "stripped_abyss_tear_wood",
+      RotatedPillarBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(STRIPPED_ABYSS_TEAR_LOG),
+      new Item.Properties()
+  );
+  public static final Block STRIPPED_CUT_ABYSS_TEAR_LOG = register(
+      "stripped_cut_abyss_tear_log",
+      PillarSlabBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(STRIPPED_ABYSS_TEAR_LOG),
+      new Item.Properties()
+  );
+  public static final Block STRIPPED_CUT_ABYSS_TEAR_WOOD = register(
+      "stripped_cut_abyss_tear_wood",
+      PillarSlabBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(STRIPPED_ABYSS_TEAR_WOOD),
+      new Item.Properties()
+  );
+  public static final Block STRIPPED_ABYSS_TEAR_BRANCH = register(
+      "stripped_abyss_tear_branch",
+      AbyssTearBranchBlock::new,
+      BlockBehaviour.Properties.ofFullCopy(STRIPPED_CUT_ABYSS_TEAR_WOOD)
+          .pushReaction(PushReaction.DESTROY)
+          .strength(1.5F),
       new Item.Properties()
   );
   public static final Block STRIPPED_CUT_ACACIA_LOG = register(

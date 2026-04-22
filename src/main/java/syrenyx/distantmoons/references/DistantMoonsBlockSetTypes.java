@@ -1,25 +1,17 @@
 package syrenyx.distantmoons.references;
 
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.level.block.SoundType;
+import net.fabricmc.fabric.api.object.builder.v1.block.type.BlockSetTypeBuilder;
+import net.fabricmc.fabric.api.object.builder.v1.block.type.WoodTypeBuilder;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
+import net.minecraft.world.level.block.state.properties.WoodType;
+import syrenyx.distantmoons.UnderDistantMoons;
 
 public abstract class DistantMoonsBlockSetTypes {
 
-  public static final BlockSetType WROUGHT_IRON = new BlockSetType(
-      "wrought_iron",
-      true,
-      false,
-      false,
-      BlockSetType.PressurePlateSensitivity.EVERYTHING,
-      SoundType.IRON,
-      SoundEvents.IRON_DOOR_CLOSE,
-      SoundEvents.IRON_DOOR_OPEN,
-      SoundEvents.IRON_TRAPDOOR_CLOSE,
-      SoundEvents.IRON_TRAPDOOR_OPEN,
-      SoundEvents.METAL_PRESSURE_PLATE_CLICK_OFF,
-      SoundEvents.METAL_PRESSURE_PLATE_CLICK_ON,
-      SoundEvents.STONE_BUTTON_CLICK_OFF,
-      SoundEvents.STONE_BUTTON_CLICK_ON
-  );
+  public static final int WOODEN_BUTTON_PRESSED_DURATION = 30;
+  public static final BlockSetType ABYSS_TEAR = BlockSetTypeBuilder.copyOf(BlockSetType.OAK)
+      .build(UnderDistantMoons.identifierOf("abyss_tear"));
+  public static final BlockSetType WROUGHT_IRON = BlockSetTypeBuilder.copyOf(BlockSetType.IRON)
+      .openableByHand(true)
+      .build(UnderDistantMoons.identifierOf("wrought_iron"));
 }

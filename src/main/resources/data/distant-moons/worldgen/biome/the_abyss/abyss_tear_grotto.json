@@ -20,7 +20,7 @@
         "sound": "minecraft:music.nether.basalt_deltas"
       }
     },
-    "minecraft:visual/fog_color": "#1a051a"
+    "minecraft:visual/fog_color": "#1b4745"
   },
   "carvers": "minecraft:nether_cave",
   "downfall": 0.0,

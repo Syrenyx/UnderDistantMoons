@@ -47,6 +47,27 @@ public class en_us extends FabricLanguageProvider {
 
     builder.add("affliction.progression_tooltip", "%s / %s");
 
+    builder.add(DistantMoonsBlocks.ABYSS_TEAR_BALUSTRADE, "Abyss Tear Balustrade");
+    builder.add(DistantMoonsBlocks.ABYSS_TEAR_BEAM, "Abyss Tear Beam");
+    builder.add(DistantMoonsBlocks.ABYSS_TEAR_BRANCH, "Abyss Tear Branch");
+    builder.add(DistantMoonsBlocks.ABYSS_TEAR_BUBBLE, "Abyss Tear Bubble");
+    builder.add(DistantMoonsBlocks.ABYSS_TEAR_BUTTON, "Abyss Tear Button");
+    builder.add(DistantMoonsBlocks.ABYSS_TEAR_DOOR, "Abyss Tear Door");
+    builder.add(DistantMoonsBlocks.ABYSS_TEAR_FENCE, "Abyss Tear Fence");
+    builder.add(DistantMoonsBlocks.ABYSS_TEAR_FENCE_GATE, "Abyss Tear Fence Gate");
+    builder.add(DistantMoonsBlocks.ABYSS_TEAR_HANGING_SIGN, "Abyss Tear Hanging Sign");
+    builder.add(DistantMoonsBlocks.ABYSS_TEAR_LOG, "Abyss Tear Log");
+    builder.add(DistantMoonsBlocks.ABYSS_TEAR_PLANKS, "Abyss Tear Planks");
+    builder.add(DistantMoonsBlocks.ABYSS_TEAR_POLE, "Abyss Tear Pole");
+    builder.add(DistantMoonsBlocks.ABYSS_TEAR_PRESSURE_PLATE, "Abyss Tear Pressure Plate");
+    builder.add(DistantMoonsBlocks.ABYSS_TEAR_SHELF, "Abyss Tear Shelf");
+    builder.add(DistantMoonsBlocks.ABYSS_TEAR_SIGN, "Abyss Tear Sign");
+    builder.add(DistantMoonsBlocks.ABYSS_TEAR_SLAB, "Abyss Tear Slab");
+    builder.add(DistantMoonsBlocks.ABYSS_TEAR_STAIRS, "Abyss Tear Stairs");
+    builder.add(DistantMoonsBlocks.ABYSS_TEAR_TRAPDOOR, "Abyss Tear Trapdoor");
+    builder.add(DistantMoonsBlocks.ABYSS_TEAR_WALL_HANGING_SIGN, "Abyss Tear Wall Hanging Sign");
+    builder.add(DistantMoonsBlocks.ABYSS_TEAR_WALL_SLAB, "Abyss Tear Wall Slab");
+    builder.add(DistantMoonsBlocks.ABYSS_TEAR_WOOD, "Abyss Tear Wood");
     builder.add(DistantMoonsBlocks.ACACIA_BALUSTRADE, "Acacia Balustrade");
     builder.add(DistantMoonsBlocks.ACACIA_BEAM, "Acacia Beam");
     builder.add(DistantMoonsBlocks.ACACIA_POLE, "Acacia Pole");
@@ -81,6 +102,8 @@ public class en_us extends FabricLanguageProvider {
     builder.add(DistantMoonsBlocks.CRIMSON_POLE, "Crimson Pole");
     builder.add(DistantMoonsBlocks.CRIMSON_WALL_SLAB, "Crimson Wall Slab");
     builder.add(DistantMoonsBlocks.CRUDE_DEEP_IRON_BLOCK, "Block of Crude Deep Iron");
+    builder.add(DistantMoonsBlocks.CUT_ABYSS_TEAR_LOG, "Cut Abyss Tear Log");
+    builder.add(DistantMoonsBlocks.CUT_ABYSS_TEAR_WOOD, "Cut Abyss Tear Wood");
     builder.add(DistantMoonsBlocks.CUT_ACACIA_LOG, "Cut Acacia Log");
     builder.add(DistantMoonsBlocks.CUT_ACACIA_WOOD, "Cut Acacia Wood");
     builder.add(DistantMoonsBlocks.CUT_BAMBOO_BLOCK, "Cut Bamboo Block");
@@ -249,6 +272,11 @@ public class en_us extends FabricLanguageProvider {
     builder.add(DistantMoonsBlocks.STONE_BALUSTRADE, "Stone Balustrade");
     builder.add(DistantMoonsBlocks.STONE_BRICK_WALL_SLAB, "Stone Brick Wall Slab");
     builder.add(DistantMoonsBlocks.STONE_WALL_SLAB, "Stone Wall Slab");
+    builder.add(DistantMoonsBlocks.STRIPPED_ABYSS_TEAR_BRANCH, "Stripped Abyss Tear Branch");
+    builder.add(DistantMoonsBlocks.STRIPPED_ABYSS_TEAR_LOG, "Stripped Abyss Tear Log");
+    builder.add(DistantMoonsBlocks.STRIPPED_ABYSS_TEAR_WOOD, "Stripped Abyss Tear Wood");
+    builder.add(DistantMoonsBlocks.STRIPPED_CUT_ABYSS_TEAR_LOG, "Stripped Cut Abyss Tear Log");
+    builder.add(DistantMoonsBlocks.STRIPPED_CUT_ABYSS_TEAR_WOOD, "Stripped Cut Abyss Tear Wood");
     builder.add(DistantMoonsBlocks.STRIPPED_CUT_ACACIA_LOG, "Stripped Cut Acacia Log");
     builder.add(DistantMoonsBlocks.STRIPPED_CUT_ACACIA_WOOD, "Stripped Cut Acacia Wood");
     builder.add(DistantMoonsBlocks.STRIPPED_CUT_BAMBOO_BLOCK, "Stripped Cut Bamboo Block");
@@ -339,6 +367,8 @@ public class en_us extends FabricLanguageProvider {
     builder.add(DistantMoonsEntityTypes.SITTING_SPOT, "Sitting Spot");
 
     builder.add(DistantMoonsItems.ABYSS_KEYSTONE, "Abyss Keystone");
+    builder.add(DistantMoonsItems.ABYSS_TEAR_BUCKET, "Abyss Tear Bucket");
+    builder.add(DistantMoonsItems.ABYSS_TEAR_HANGING_SIGN, "Abyss Tear Hanging Sign");
     builder.add(DistantMoonsItems.COILED_ROPE_LADDER, "Coiled Rope Ladder");
     builder.add(DistantMoonsItems.COKE, "Coke");
     builder.add(DistantMoonsItems.COPPER_ROD, "Copper Rod");

@@ -179,6 +179,31 @@ public abstract class DistantMoonsCreativeModeTabs {
         new ItemStackTemplate(DistantMoonsBlocks.WARPED_POLE.asItem()),
         new ItemStackTemplate(DistantMoonsBlocks.WARPED_BALUSTRADE.asItem())
     ));
+    addToTab(CreativeModeTabs.BUILDING_BLOCKS, Items.WARPED_BUTTON, List.of(
+        new ItemStackTemplate(DistantMoonsBlocks.ABYSS_TEAR_LOG.asItem()),
+        new ItemStackTemplate(DistantMoonsBlocks.ABYSS_TEAR_WOOD.asItem()),
+        new ItemStackTemplate(DistantMoonsBlocks.CUT_ABYSS_TEAR_LOG.asItem()),
+        new ItemStackTemplate(DistantMoonsBlocks.CUT_ABYSS_TEAR_WOOD.asItem()),
+        new ItemStackTemplate(DistantMoonsBlocks.ABYSS_TEAR_BRANCH.asItem()),
+        new ItemStackTemplate(DistantMoonsBlocks.STRIPPED_ABYSS_TEAR_LOG.asItem()),
+        new ItemStackTemplate(DistantMoonsBlocks.STRIPPED_ABYSS_TEAR_WOOD.asItem()),
+        new ItemStackTemplate(DistantMoonsBlocks.STRIPPED_CUT_ABYSS_TEAR_LOG.asItem()),
+        new ItemStackTemplate(DistantMoonsBlocks.STRIPPED_CUT_ABYSS_TEAR_WOOD.asItem()),
+        new ItemStackTemplate(DistantMoonsBlocks.STRIPPED_ABYSS_TEAR_BRANCH.asItem()),
+        new ItemStackTemplate(DistantMoonsBlocks.ABYSS_TEAR_PLANKS.asItem()),
+        new ItemStackTemplate(DistantMoonsBlocks.ABYSS_TEAR_STAIRS.asItem()),
+        new ItemStackTemplate(DistantMoonsBlocks.ABYSS_TEAR_SLAB.asItem()),
+        new ItemStackTemplate(DistantMoonsBlocks.ABYSS_TEAR_WALL_SLAB.asItem()),
+        new ItemStackTemplate(DistantMoonsBlocks.ABYSS_TEAR_BEAM.asItem()),
+        new ItemStackTemplate(DistantMoonsBlocks.ABYSS_TEAR_POLE.asItem()),
+        new ItemStackTemplate(DistantMoonsBlocks.ABYSS_TEAR_BALUSTRADE.asItem()),
+        new ItemStackTemplate(DistantMoonsBlocks.ABYSS_TEAR_FENCE.asItem()),
+        new ItemStackTemplate(DistantMoonsBlocks.ABYSS_TEAR_FENCE_GATE.asItem()),
+        new ItemStackTemplate(DistantMoonsBlocks.ABYSS_TEAR_DOOR.asItem()),
+        new ItemStackTemplate(DistantMoonsBlocks.ABYSS_TEAR_TRAPDOOR.asItem()),
+        new ItemStackTemplate(DistantMoonsBlocks.ABYSS_TEAR_PRESSURE_PLATE.asItem()),
+        new ItemStackTemplate(DistantMoonsBlocks.ABYSS_TEAR_BUTTON.asItem())
+    ));
     addToTab(CreativeModeTabs.BUILDING_BLOCKS, Items.STONE_SLAB, List.of(
         new ItemStackTemplate(DistantMoonsBlocks.STONE_WALL_SLAB.asItem()),
         new ItemStackTemplate(DistantMoonsBlocks.STONE_BALUSTRADE.asItem())
@@ -494,6 +519,12 @@ public abstract class DistantMoonsCreativeModeTabs {
     addToTab(CreativeModeTabs.NATURAL_BLOCKS, Items.RAW_GOLD_BLOCK, List.of(
         new ItemStackTemplate(DistantMoonsBlocks.RAW_DEEP_IRON_BLOCK.asItem())
     ));
+    addToTab(CreativeModeTabs.NATURAL_BLOCKS, Items.WARPED_STEM, List.of(
+        new ItemStackTemplate(DistantMoonsBlocks.ABYSS_TEAR_LOG.asItem()),
+        new ItemStackTemplate(DistantMoonsBlocks.STRIPPED_ABYSS_TEAR_LOG.asItem()),
+        new ItemStackTemplate(DistantMoonsBlocks.ABYSS_TEAR_BRANCH.asItem()),
+        new ItemStackTemplate(DistantMoonsBlocks.STRIPPED_ABYSS_TEAR_BRANCH.asItem())
+    ));
 
     //FUNCTIONAL BLOCKS
     addToTab(CreativeModeTabs.FUNCTIONAL_BLOCKS, Items.SOUL_LANTERN, List.of(
@@ -507,6 +538,13 @@ public abstract class DistantMoonsCreativeModeTabs {
     ));
     addToTab(CreativeModeTabs.FUNCTIONAL_BLOCKS, Items.BLAST_FURNACE, List.of(
         new ItemStackTemplate(DistantMoonsBlocks.BLAST_FURNACE.asItem())
+    ));
+    addToTab(CreativeModeTabs.FUNCTIONAL_BLOCKS, Items.WARPED_SHELF, List.of(
+        new ItemStackTemplate(DistantMoonsBlocks.ABYSS_TEAR_SHELF.asItem())
+    ));
+    addToTab(CreativeModeTabs.FUNCTIONAL_BLOCKS, Items.WARPED_HANGING_SIGN, List.of(
+        new ItemStackTemplate(DistantMoonsBlocks.ABYSS_TEAR_SIGN.asItem()),
+        new ItemStackTemplate(DistantMoonsItems.ABYSS_TEAR_HANGING_SIGN)
     ));
     addToTab(CreativeModeTabs.FUNCTIONAL_BLOCKS, Items.LADDER, List.of(
         new ItemStackTemplate(DistantMoonsBlocks.IRON_LADDER.asItem()),
@@ -555,6 +593,9 @@ public abstract class DistantMoonsCreativeModeTabs {
         new ItemStackTemplate(DistantMoonsItems.DEEP_IRON_PICKAXE),
         new ItemStackTemplate(DistantMoonsItems.DEEP_IRON_AXE),
         new ItemStackTemplate(DistantMoonsItems.DEEP_IRON_HOE)
+    ));
+    addToTab(CreativeModeTabs.TOOLS_AND_UTILITIES, Items.POWDER_SNOW_BUCKET, List.of(
+        new ItemStackTemplate(DistantMoonsItems.ABYSS_TEAR_BUCKET)
     ));
     addToTab(CreativeModeTabs.TOOLS_AND_UTILITIES, Items.RECOVERY_COMPASS, List.of(
         new ItemStackTemplate(DistantMoonsItems.UNDERWORLD_COMPASS)

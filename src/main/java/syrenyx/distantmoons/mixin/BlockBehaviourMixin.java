@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import syrenyx.distantmoons.content.block.oxidization.BlockOxidizationManager;
 
 @Mixin(net.minecraft.world.level.block.state.BlockBehaviour.class)
-public abstract class BlockBehaviour {
+public abstract class BlockBehaviourMixin {
 
   @Inject(at = @At("HEAD"), cancellable = true, method = "isRandomlyTicking")
   private void distantMoons$isRandomlyTicking(BlockState state, CallbackInfoReturnable<Boolean> callbackInfo) {

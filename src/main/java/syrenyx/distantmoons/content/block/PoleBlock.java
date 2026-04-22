@@ -40,6 +40,7 @@ public class PoleBlock extends AbstractPoleBlock {
     if (state.is(DistantMoonsBlockTags.POLE_ALWAYS_CONNECTS_TO)) return true;
     Direction.Axis axis = direction.getAxis();
     if (axis != Direction.Axis.Y && state.is(DistantMoonsBlockTags.POLE_ALWAYS_CONNECTS_TO_HORIZONTALLY)) return true;
+    if (state.getBlock() instanceof AbstractBranchBlock && state.getValue(AbstractBranchBlock.ATTACHMENT).getAxis() != axis) return true;
     if (state.getBlock() instanceof AbstractPoleBlock && state.getValue(AXIS) != axis) return true;
     return false;
   }

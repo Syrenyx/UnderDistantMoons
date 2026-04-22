@@ -4,7 +4,7 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "AxeItemMixin",
-    "BlockBehaviour",
+    "BlockBehaviourMixin",
     "ChangeOverTimeBlockMixin",
     "EnchantmentHelperMixin",
     "FenceBlockMixin",
@@ -17,7 +17,8 @@
     "ProjectileMixin",
     "ServerPlayerMixin",
     "StairBlockMixin",
-    "WallBlockMixin"
+    "WallBlockMixin",
+    "WoodTypeAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

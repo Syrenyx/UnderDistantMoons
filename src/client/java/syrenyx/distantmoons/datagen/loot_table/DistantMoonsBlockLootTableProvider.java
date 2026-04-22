@@ -5,8 +5,10 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootSubProvider;
 import net.minecraft.advancements.criterion.StatePropertiesPredicate;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.DoorBlock;
 import net.minecraft.world.level.block.InfestedBlock;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.SlabType;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
@@ -35,6 +37,23 @@ public class DistantMoonsBlockLootTableProvider extends FabricBlockLootSubProvid
   public void generate() {
 
     //SIMPLE LOOT TABLES
+    this.dropSelf(DistantMoonsBlocks.ABYSS_TEAR_BALUSTRADE);
+    this.dropSelf(DistantMoonsBlocks.ABYSS_TEAR_BEAM);
+    this.dropSelf(DistantMoonsBlocks.ABYSS_TEAR_BRANCH);
+    this.dropSelf(DistantMoonsBlocks.ABYSS_TEAR_BUTTON);
+    this.dropSelf(DistantMoonsBlocks.ABYSS_TEAR_FENCE);
+    this.dropSelf(DistantMoonsBlocks.ABYSS_TEAR_FENCE_GATE);
+    this.dropSelf(DistantMoonsBlocks.ABYSS_TEAR_HANGING_SIGN);
+    this.dropSelf(DistantMoonsBlocks.ABYSS_TEAR_LOG);
+    this.dropSelf(DistantMoonsBlocks.ABYSS_TEAR_PLANKS);
+    this.dropSelf(DistantMoonsBlocks.ABYSS_TEAR_POLE);
+    this.dropSelf(DistantMoonsBlocks.ABYSS_TEAR_PRESSURE_PLATE);
+    this.dropSelf(DistantMoonsBlocks.ABYSS_TEAR_SHELF);
+    this.dropSelf(DistantMoonsBlocks.ABYSS_TEAR_SIGN);
+    this.dropSelf(DistantMoonsBlocks.ABYSS_TEAR_STAIRS);
+    this.dropSelf(DistantMoonsBlocks.ABYSS_TEAR_TRAPDOOR);
+    this.dropSelf(DistantMoonsBlocks.ABYSS_TEAR_WALL_HANGING_SIGN);
+    this.dropSelf(DistantMoonsBlocks.ABYSS_TEAR_WOOD);
     this.dropSelf(DistantMoonsBlocks.ACACIA_BALUSTRADE);
     this.dropSelf(DistantMoonsBlocks.ACACIA_BEAM);
     this.dropSelf(DistantMoonsBlocks.ACACIA_POLE);
@@ -112,6 +131,9 @@ public class DistantMoonsBlockLootTableProvider extends FabricBlockLootSubProvid
     this.dropSelf(DistantMoonsBlocks.SPRUCE_BEAM);
     this.dropSelf(DistantMoonsBlocks.SPRUCE_POLE);
     this.dropSelf(DistantMoonsBlocks.STONE_BALUSTRADE);
+    this.dropSelf(DistantMoonsBlocks.STRIPPED_ABYSS_TEAR_BRANCH);
+    this.dropSelf(DistantMoonsBlocks.STRIPPED_ABYSS_TEAR_LOG);
+    this.dropSelf(DistantMoonsBlocks.STRIPPED_ABYSS_TEAR_WOOD);
     this.dropSelf(DistantMoonsBlocks.TUFF_BALUSTRADE);
     this.dropSelf(DistantMoonsBlocks.UNDERWORLD_LANTERN);
     this.dropSelf(DistantMoonsBlocks.WARPED_BALUSTRADE);
@@ -129,6 +151,9 @@ public class DistantMoonsBlockLootTableProvider extends FabricBlockLootSubProvid
     DistantMoonsBlocks.DYED_CONCRETE_STAIRS.values().forEach(this::dropSelf);
     DistantMoonsBlocks.DYED_TERRACOTTA_STAIRS.values().forEach(this::dropSelf);
 
+    //DOOR LOOT TABLES
+    this.addDoorDrop(DistantMoonsBlocks.ABYSS_TEAR_DOOR);
+
     //LARGE BLAST FURNACE LOOT TABLES
     this.addLargeBlastFurnaceDrop(DistantMoonsBlocks.BLAST_FURNACE);
 
@@ -144,7 +169,10 @@ public class DistantMoonsBlockLootTableProvider extends FabricBlockLootSubProvid
     this.addInfestedBlockDrop(DistantMoonsBlocks.INFESTED_SMOOTH_STONE);
 
     //SLAB LOOT TABLES
+    this.addSlabDrop(DistantMoonsBlocks.ABYSS_TEAR_SLAB);
     this.addSlabDrop(DistantMoonsBlocks.CALCITE_SLAB);
+    this.addSlabDrop(DistantMoonsBlocks.CUT_ABYSS_TEAR_LOG);
+    this.addSlabDrop(DistantMoonsBlocks.CUT_ABYSS_TEAR_WOOD);
     this.addSlabDrop(DistantMoonsBlocks.CUT_ACACIA_LOG);
     this.addSlabDrop(DistantMoonsBlocks.CUT_ACACIA_WOOD);
     this.addSlabDrop(DistantMoonsBlocks.CUT_BAMBOO_BLOCK);
@@ -187,6 +215,8 @@ public class DistantMoonsBlockLootTableProvider extends FabricBlockLootSubProvid
     this.addSlabDrop(DistantMoonsBlocks.PRISMARINE_TILE_SLAB);
     this.addSlabDrop(DistantMoonsBlocks.QUARTZ_BRICK_SLAB);
     this.addSlabDrop(DistantMoonsBlocks.SMOOTH_BASALT_SLAB);
+    this.addSlabDrop(DistantMoonsBlocks.STRIPPED_CUT_ABYSS_TEAR_LOG);
+    this.addSlabDrop(DistantMoonsBlocks.STRIPPED_CUT_ABYSS_TEAR_WOOD);
     this.addSlabDrop(DistantMoonsBlocks.STRIPPED_CUT_ACACIA_LOG);
     this.addSlabDrop(DistantMoonsBlocks.STRIPPED_CUT_ACACIA_WOOD);
     this.addSlabDrop(DistantMoonsBlocks.STRIPPED_CUT_BAMBOO_BLOCK);
@@ -216,6 +246,7 @@ public class DistantMoonsBlockLootTableProvider extends FabricBlockLootSubProvid
     DistantMoonsBlocks.DYED_TERRACOTTA_SLABS.values().forEach(this::addSlabDrop);
 
     //WALL SLAB LOOT TABLES
+    this.addWallSlabDrop(DistantMoonsBlocks.ABYSS_TEAR_WALL_SLAB);
     this.addWallSlabDrop(DistantMoonsBlocks.ACACIA_WALL_SLAB);
     this.addWallSlabDrop(DistantMoonsBlocks.ANDESITE_WALL_SLAB);
     this.addWallSlabDrop(DistantMoonsBlocks.BAMBOO_MOSAIC_WALL_SLAB);
@@ -294,6 +325,18 @@ public class DistantMoonsBlockLootTableProvider extends FabricBlockLootSubProvid
 
     DistantMoonsBlocks.DYED_CONCRETE_WALL_SLABS.values().forEach(this::addWallSlabDrop);
     DistantMoonsBlocks.DYED_TERRACOTTA_WALL_SLABS.values().forEach(this::addWallSlabDrop);
+  }
+
+  private void addDoorDrop(Block block) {
+    this.add(block, LootTable.lootTable().withPool(LootPool.lootPool()
+        .setRolls(new ConstantValue(1.0F))
+        .add(LootItem.lootTableItem(block.asItem())
+            .apply(ApplyExplosionDecay.explosionDecay())
+        )
+        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties()
+            .hasProperty(DoorBlock.HALF, DoubleBlockHalf.LOWER)
+        ))
+    ));
   }
 
   private void addLargeBlastFurnaceDrop(Block block) {

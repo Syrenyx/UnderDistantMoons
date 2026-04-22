@@ -91,8 +91,8 @@ public abstract class AbstractBalustradeBlock extends Block implements SimpleWat
     return !blockState.getValue(WATERLOGGED);
   }
 
-  @Nullable @Override
-  public BlockState getStateForPlacement(@NonNull BlockPlaceContext context) {
+  @Override
+  public @Nullable BlockState getStateForPlacement(@NonNull BlockPlaceContext context) {
     Level level = context.getLevel();
     BlockPos blockPos = context.getClickedPos();
     return this.updateState(
@@ -200,7 +200,7 @@ public abstract class AbstractBalustradeBlock extends Block implements SimpleWat
   protected abstract VoxelShape getSideShape(BalustradeSideState state, Direction direction);
 
   @Override
-  protected @NonNull VoxelShape getCollisionShape(@NonNull BlockState blockState, @NonNull BlockGetter blockGetter, @NonNull BlockPos blockPos, @NonNull CollisionContext collisionContext) {
+  protected @NonNull VoxelShape getCollisionShape(@NonNull BlockState blockState, @NonNull BlockGetter level, @NonNull BlockPos blockPos, @NonNull CollisionContext collisionContext) {
     VoxelShape shape = this.getCenterCollisionShape();
     if (blockState.getValue(NORTH_SHAPE) != BalustradeSideState.NONE) shape = Shapes.or(shape, getSideCollisionShape(Direction.NORTH));
     if (blockState.getValue(EAST_SHAPE) != BalustradeSideState.NONE) shape = Shapes.or(shape, getSideCollisionShape(Direction.EAST));

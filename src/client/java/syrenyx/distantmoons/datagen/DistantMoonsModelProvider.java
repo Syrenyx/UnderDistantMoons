@@ -173,6 +173,7 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     this.blockGenerator = generator;
 
     //SIMPLE BLOCKS
+    registerSimpleBlock(DistantMoonsBlocks.ABYSS_TEAR_PLANKS, SIMPLE_BLOCK_TEXTURE_MAP);
     registerSimpleBlock(DistantMoonsBlocks.BLACKSTONE_DEEP_IRON_ORE, SIMPLE_BLOCK_TEXTURE_MAP);
     registerSimpleBlock(DistantMoonsBlocks.BROKEN_UNDERWORLD_ANCHOR, SIMPLE_BLOCK_TEXTURE_MAP);
     registerSimpleBlock(DistantMoonsBlocks.CHARCOAL_BLOCK, SIMPLE_BLOCK_TEXTURE_MAP);
@@ -216,6 +217,21 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     //BLAST FURNACES
     registerBlastFurnaceBlock(DistantMoonsBlocks.BLAST_FURNACE, BLAST_FURNACE_TEXTURE_MAP);
 
+    //BRANCHES
+    registerBranchBlock(DistantMoonsBlocks.ABYSS_TEAR_BRANCH, Map.of(
+        TextureSlot.END, UnderDistantMoons.withPrefixedNamespace("block/abyss_tear_branch/end"),
+        TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/abyss_tear_branch/side"),
+        TextureSlot.PARTICLE, UnderDistantMoons.withPrefixedNamespace("block/abyss_tear_log/side")
+    ), "thin_branch");
+    registerBranchBlock(DistantMoonsBlocks.STRIPPED_ABYSS_TEAR_BRANCH, Map.of(
+        TextureSlot.END, UnderDistantMoons.withPrefixedNamespace("block/stripped_abyss_tear_branch/end"),
+        TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/stripped_abyss_tear_branch/side"),
+        TextureSlot.PARTICLE, UnderDistantMoons.withPrefixedNamespace("block/stripped_abyss_tear_log/side")
+    ), "thin_branch");
+
+    //BUTTONS
+    registerButtonBlock(DistantMoonsBlocks.ABYSS_TEAR_BUTTON, Map.of(TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/abyss_tear_planks")));
+
     //CHAINS
     registerChainBlock(DistantMoonsBlocks.DEEP_IRON_CHAIN, CHAIN_TEXTURE_MAP);
 
@@ -230,10 +246,25 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
         Map.entry(DistantMoonsTextureSlot.TOP_RIGHT, UnderDistantMoons.withPrefixedNamespace("block/deep_iron_door/door/top_right"))
     ));
 
+    //EMPTY BLOCKS
+    registerEmptyBlock(DistantMoonsBlocks.ABYSS_TEAR_BUBBLE);
+
+    //EMPTY PARTICLE BLOCKS
+    registerEmptyParticleBlock(DistantMoonsBlocks.ABYSS_TEAR_SIGN, Map.of(TextureSlot.TEXTURE, UnderDistantMoons.withPrefixedNamespace("item/abyss_tear_sign"), TextureSlot.PARTICLE, UnderDistantMoons.withPrefixedNamespace("block/abyss_tear_planks")));
+
+    //FENCES - SIMPLE
+    registerSimpleFenceBlock(DistantMoonsBlocks.ABYSS_TEAR_FENCE, Map.of(TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/abyss_tear_planks")));
+
+    //FENCE GATES - SIMPLE
+    registerSimpleFenceGateBlock(DistantMoonsBlocks.ABYSS_TEAR_FENCE_GATE, Map.of(TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/abyss_tear_planks")));
+
     //FIXED LADDERS
     registerFixedLadderBlock(DistantMoonsBlocks.FIXED_DEEP_IRON_LADDER, FIXED_LADDER_TEXTURE_MAP);
     registerFixedLadderBlock(DistantMoonsBlocks.FIXED_IRON_LADDER, FIXED_LADDER_TEXTURE_MAP);
     registerFixedLadderBlock(DistantMoonsBlocks.FIXED_WROUGHT_IRON_LADDER, FIXED_LADDER_TEXTURE_MAP);
+
+    //HANGING SIGNS
+    registerHangingSignBlock(DistantMoonsBlocks.ABYSS_TEAR_HANGING_SIGN, DistantMoonsBlocks.ABYSS_TEAR_WALL_HANGING_SIGN, DistantMoonsItems.ABYSS_TEAR_HANGING_SIGN, Map.of(TextureSlot.TEXTURE, UnderDistantMoons.withPrefixedNamespace("item/abyss_tear_hanging_sign"), TextureSlot.PARTICLE, UnderDistantMoons.withPrefixedNamespace("block/stripped_abyss_tear_log/side")));
 
     //METAL BAR DOORS
     registerMetalBarDoorBlock(DistantMoonsBlocks.DEEP_IRON_BAR_DOOR, Map.ofEntries(
@@ -284,7 +315,16 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     registerMetalLadderBlock(DistantMoonsBlocks.IRON_LADDER, METAL_LADDER_TEXTURE_MAP);
     registerMetalLadderBlock(DistantMoonsBlocks.WROUGHT_IRON_LADDER, METAL_LADDER_TEXTURE_MAP);
 
+    //PILLARS - SIMPLE
+    registerSimplePillarBlock(DistantMoonsBlocks.ABYSS_TEAR_WOOD, Map.of(TextureSlot.END, UnderDistantMoons.withPrefixedNamespace("block/abyss_tear_log/side"), TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/abyss_tear_log/side")));
+    registerSimplePillarBlock(DistantMoonsBlocks.STRIPPED_ABYSS_TEAR_WOOD, Map.of(TextureSlot.END, UnderDistantMoons.withPrefixedNamespace("block/stripped_abyss_tear_log/side"), TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/stripped_abyss_tear_log/side")));
+
+    //PILLARS - HORIZONTAL
+    registerHorizontalPillarBlock(DistantMoonsBlocks.ABYSS_TEAR_LOG, Map.of(TextureSlot.END, UnderDistantMoons.withPrefixedNamespace("block/abyss_tear_log/end"), TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/abyss_tear_log/side")));
+    registerHorizontalPillarBlock(DistantMoonsBlocks.STRIPPED_ABYSS_TEAR_LOG, Map.of(TextureSlot.END, UnderDistantMoons.withPrefixedNamespace("block/stripped_abyss_tear_log/end"), TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/stripped_abyss_tear_log/side")));
+
     //PILLAR SLABS - SIMPLE
+    registerSimplePillarSlabBlock(DistantMoonsBlocks.CUT_ABYSS_TEAR_WOOD, Map.of(TextureSlot.END, UnderDistantMoons.withPrefixedNamespace("block/abyss_tear_log/side"), TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/abyss_tear_log/side")));
     registerSimplePillarSlabBlock(DistantMoonsBlocks.CUT_ACACIA_WOOD, Map.of(TextureSlot.END, "minecraft:block/acacia_log", TextureSlot.SIDE, "minecraft:block/acacia_log"));
     registerSimplePillarSlabBlock(DistantMoonsBlocks.CUT_BASALT, Map.of(TextureSlot.END, "minecraft:block/basalt_top", TextureSlot.SIDE, "minecraft:block/basalt_side"));
     registerSimplePillarSlabBlock(DistantMoonsBlocks.CUT_BIRCH_WOOD, Map.of(TextureSlot.END, "minecraft:block/birch_log", TextureSlot.SIDE, "minecraft:block/birch_log"));
@@ -299,7 +339,9 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     registerSimplePillarSlabBlock(DistantMoonsBlocks.CUT_PALE_OAK_WOOD, Map.of(TextureSlot.END, "minecraft:block/pale_oak_log", TextureSlot.SIDE, "minecraft:block/pale_oak_log"));
     registerSimplePillarSlabBlock(DistantMoonsBlocks.CUT_SPRUCE_WOOD, Map.of(TextureSlot.END, "minecraft:block/spruce_log", TextureSlot.SIDE, "minecraft:block/spruce_log"));
     registerSimplePillarSlabBlock(DistantMoonsBlocks.CUT_WARPED_HYPHAE, Map.of(TextureSlot.END, "minecraft:block/warped_stem", TextureSlot.SIDE, "minecraft:block/warped_stem"));
+    registerSimplePillarSlabBlock(DistantMoonsBlocks.CUT_WARPED_STEM, Map.of(TextureSlot.END, "minecraft:block/warped_stem_top", TextureSlot.SIDE, "minecraft:block/warped_stem"));
     registerSimplePillarSlabBlock(DistantMoonsBlocks.POLISHED_CUT_BASALT, Map.of(TextureSlot.END, "minecraft:block/polished_basalt_top", TextureSlot.SIDE, "minecraft:block/polished_basalt_side"));
+    registerSimplePillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_ABYSS_TEAR_WOOD, Map.of(TextureSlot.END, UnderDistantMoons.withPrefixedNamespace("block/stripped_abyss_tear_log/side"), TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/stripped_abyss_tear_log/side")));
     registerSimplePillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_ACACIA_WOOD, Map.of(TextureSlot.END, "minecraft:block/stripped_acacia_log", TextureSlot.SIDE, "minecraft:block/stripped_acacia_log"));
     registerSimplePillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_BIRCH_WOOD, Map.of(TextureSlot.END, "minecraft:block/stripped_birch_log", TextureSlot.SIDE, "minecraft:block/stripped_birch_log"));
     registerSimplePillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_CHERRY_WOOD, Map.of(TextureSlot.END, "minecraft:block/stripped_cherry_log", TextureSlot.SIDE, "minecraft:block/stripped_cherry_log"));
@@ -311,7 +353,6 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     registerSimplePillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_PALE_OAK_WOOD, Map.of(TextureSlot.END, "minecraft:block/stripped_pale_oak_log", TextureSlot.SIDE, "minecraft:block/stripped_pale_oak_log"));
     registerSimplePillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_SPRUCE_WOOD, Map.of(TextureSlot.END, "minecraft:block/stripped_spruce_log", TextureSlot.SIDE, "minecraft:block/stripped_spruce_log"));
     registerSimplePillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_WARPED_HYPHAE, Map.of(TextureSlot.END, "minecraft:block/stripped_warped_stem", TextureSlot.SIDE, "minecraft:block/stripped_warped_stem"));
-    registerSimplePillarSlabBlock(DistantMoonsBlocks.CUT_WARPED_STEM, Map.of(TextureSlot.END, "minecraft:block/warped_stem_top", TextureSlot.SIDE, "minecraft:block/warped_stem"));
 
     //PILLAR SLABS - AXIS
     registerAxisPillarSlabBlock(DistantMoonsBlocks.CUT_BAMBOO_BLOCK, Map.of(TextureSlot.END, "minecraft:block/bamboo_block_top", TextureSlot.SIDE, "minecraft:block/bamboo_block"));
@@ -320,6 +361,7 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     registerAxisPillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_CHERRY_LOG, Map.of(TextureSlot.END, "minecraft:block/stripped_cherry_log_top", TextureSlot.SIDE, "minecraft:block/stripped_cherry_log"));
 
     //PILLAR SLABS - HORIZONTAL
+    registerHorizontalPillarSlabBlock(DistantMoonsBlocks.CUT_ABYSS_TEAR_LOG, Map.of(TextureSlot.END, UnderDistantMoons.withPrefixedNamespace("block/abyss_tear_log/end"), TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/abyss_tear_log/side")));
     registerHorizontalPillarSlabBlock(DistantMoonsBlocks.CUT_ACACIA_LOG, Map.of(TextureSlot.END, "minecraft:block/acacia_log_top", TextureSlot.SIDE, "minecraft:block/acacia_log"));
     registerHorizontalPillarSlabBlock(DistantMoonsBlocks.CUT_BIRCH_LOG, Map.of(TextureSlot.END, "minecraft:block/birch_log_top", TextureSlot.SIDE, "minecraft:block/birch_log"));
     registerHorizontalPillarSlabBlock(DistantMoonsBlocks.CUT_DARK_OAK_LOG, Map.of(TextureSlot.END, "minecraft:block/dark_oak_log_top", TextureSlot.SIDE, "minecraft:block/dark_oak_log"));
@@ -331,6 +373,7 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     registerHorizontalPillarSlabBlock(DistantMoonsBlocks.CUT_PURPUR_PILLAR, Map.of(TextureSlot.END, "minecraft:block/purpur_pillar_top", TextureSlot.SIDE, "minecraft:block/purpur_pillar"));
     registerHorizontalPillarSlabBlock(DistantMoonsBlocks.CUT_QUARTZ_PILLAR, Map.of(TextureSlot.END, "minecraft:block/quartz_pillar_top", TextureSlot.SIDE, "minecraft:block/quartz_pillar"));
     registerHorizontalPillarSlabBlock(DistantMoonsBlocks.CUT_SPRUCE_LOG, Map.of(TextureSlot.END, "minecraft:block/spruce_log_top", TextureSlot.SIDE, "minecraft:block/spruce_log"));
+    registerHorizontalPillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_ABYSS_TEAR_LOG, Map.of(TextureSlot.END, UnderDistantMoons.withPrefixedNamespace("block/stripped_abyss_tear_log/end"), TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/stripped_abyss_tear_log/side")));
     registerHorizontalPillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_ACACIA_LOG, Map.of(TextureSlot.END, "minecraft:block/stripped_acacia_log_top", TextureSlot.SIDE, "minecraft:block/stripped_acacia_log"));
     registerHorizontalPillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_BIRCH_LOG, Map.of(TextureSlot.END, "minecraft:block/stripped_birch_log_top", TextureSlot.SIDE, "minecraft:block/stripped_birch_log"));
     registerHorizontalPillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_CRIMSON_STEM, Map.of(TextureSlot.END, "minecraft:block/stripped_crimson_stem_top", TextureSlot.SIDE, "minecraft:block/stripped_crimson_stem"));
@@ -343,6 +386,7 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     registerHorizontalPillarSlabBlock(DistantMoonsBlocks.STRIPPED_CUT_WARPED_STEM, Map.of(TextureSlot.END, "minecraft:block/stripped_warped_stem_top", TextureSlot.SIDE, "minecraft:block/stripped_warped_stem"));
 
     //POLES - BEAM
+    registerPoleBlock(DistantMoonsBlocks.ABYSS_TEAR_BEAM, POLE_TEXTURE_MAP, "beam");
     registerPoleBlock(DistantMoonsBlocks.ACACIA_BEAM, POLE_TEXTURE_MAP, "beam");
     registerPoleBlock(DistantMoonsBlocks.BIRCH_BEAM, POLE_TEXTURE_MAP, "beam");
     registerPoleBlock(DistantMoonsBlocks.CHERRY_BEAM, POLE_TEXTURE_MAP, "beam");
@@ -356,6 +400,7 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     registerPoleBlock(DistantMoonsBlocks.WARPED_BEAM, POLE_TEXTURE_MAP, "beam");
 
     //POLES - POLE
+    registerPoleBlock(DistantMoonsBlocks.ABYSS_TEAR_POLE, POLE_TEXTURE_MAP, "pole");
     registerPoleBlock(DistantMoonsBlocks.ACACIA_POLE, POLE_TEXTURE_MAP, "pole");
     registerPoleBlock(DistantMoonsBlocks.BAMBOO_POLE, POLE_TEXTURE_MAP, "pole");
     registerPoleBlock(DistantMoonsBlocks.BIRCH_POLE, POLE_TEXTURE_MAP, "pole");
@@ -372,7 +417,14 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     //ROPE LADDERS
     registerRopeLadderBlock(DistantMoonsBlocks.ROPE_LADDER, ROPE_LADDER_TEXTURE_MAP);
 
+    //PRESSURE PLATES
+    registerPressurePlateBlock(DistantMoonsBlocks.ABYSS_TEAR_PRESSURE_PLATE, Map.of(TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/abyss_tear_planks")));
+
+    //SHELVES
+    registerShelfBlock(DistantMoonsBlocks.ABYSS_TEAR_SHELF, Map.of(TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/abyss_tear_shelf"), TextureSlot.PARTICLE, UnderDistantMoons.withPrefixedNamespace("block/stripped_abyss_tear_log/side")));
+
     //SLABS - SIMPLE
+    registerSimpleSlabBlock(DistantMoonsBlocks.ABYSS_TEAR_SLAB, Map.of(TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/abyss_tear_planks")));
     registerSimpleSlabBlock(DistantMoonsBlocks.CALCITE_SLAB, Map.of(TextureSlot.SIDE, "minecraft:block/calcite"));
     registerSimpleSlabBlock(DistantMoonsBlocks.DRIPSTONE_SLAB, Map.of(TextureSlot.SIDE, "minecraft:block/dripstone_block"));
     registerSimpleSlabBlock(DistantMoonsBlocks.END_STONE_SLAB, Map.of(TextureSlot.SIDE, "minecraft:block/end_stone"));
@@ -398,6 +450,7 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     registerSpikedFenceBlock(DistantMoonsBlocks.WROUGHT_IRON_FENCE, SPIKED_FENCE_TEXTURE_MAP);
 
     //STAIRS - SIMPLE
+    registerSimpleStairsBlock(DistantMoonsBlocks.ABYSS_TEAR_STAIRS, Map.of(TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/abyss_tear_planks")));
     registerSimpleStairsBlock(DistantMoonsBlocks.CALCITE_STAIRS, Map.of(TextureSlot.SIDE, "minecraft:block/calcite"));
     registerSimpleStairsBlock(DistantMoonsBlocks.DRIPSTONE_STAIRS, Map.of(TextureSlot.SIDE, "minecraft:block/dripstone_block"));
     registerSimpleStairsBlock(DistantMoonsBlocks.END_STONE_STAIRS, Map.of(TextureSlot.SIDE, "minecraft:block/end_stone"));
@@ -424,6 +477,7 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     registerSimpleThinBalustradeBlock(DistantMoonsBlocks.TUFF_BALUSTRADE, Map.of(TextureSlot.SIDE, "minecraft:block/tuff"));
 
     //THIN BALUSTRADES - COMPLEX
+    registerComplexThinBalustradeBlock(DistantMoonsBlocks.ABYSS_TEAR_BALUSTRADE, THIN_BALUSTRADE_TEXTURE_MAP);
     registerComplexThinBalustradeBlock(DistantMoonsBlocks.ACACIA_BALUSTRADE, THIN_BALUSTRADE_TEXTURE_MAP);
     registerComplexThinBalustradeBlock(DistantMoonsBlocks.BIRCH_BALUSTRADE, THIN_BALUSTRADE_TEXTURE_MAP);
     registerComplexThinBalustradeBlock(DistantMoonsBlocks.CHERRY_BALUSTRADE, THIN_BALUSTRADE_TEXTURE_MAP);
@@ -437,10 +491,7 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     registerComplexThinBalustradeBlock(DistantMoonsBlocks.WARPED_BALUSTRADE, THIN_BALUSTRADE_TEXTURE_MAP);
 
     //TRAPDOORS
-    registerTrapdoorBlock(DistantMoonsBlocks.DEEP_IRON_TRAPDOOR, false, Map.of(
-        TextureSlot.END, UnderDistantMoons.withPrefixedNamespace("block/deep_iron_door/trapdoor"),
-        TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/deep_iron_door/end")
-    ));
+    registerTrapdoorBlock(DistantMoonsBlocks.DEEP_IRON_TRAPDOOR, false, Map.of(TextureSlot.END, UnderDistantMoons.withPrefixedNamespace("block/deep_iron_door/trapdoor"), TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/deep_iron_door/end")));
 
     //SIMPLE UNDERWORLD BLOCKS
     registerSimpleUnderworldBlock(DistantMoonsBlocks.UNDERWORLD_ANCHOR, LIGHTABLE_BLOCK_TEXTURE_MAP);
@@ -456,6 +507,7 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     registerSimpleWallBlock(DistantMoonsBlocks.PALE_PRISMARINE_WALL, Map.of(TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/pale_prismarine")));
 
     //WALL SLABS - SIMPLE
+    registerSimpleWallSlabBlock(DistantMoonsBlocks.ABYSS_TEAR_WALL_SLAB, Map.of(TextureSlot.SIDE, UnderDistantMoons.withPrefixedNamespace("block/abyss_tear_planks")));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.ACACIA_WALL_SLAB, Map.of(TextureSlot.SIDE, "minecraft:block/acacia_planks"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.ANDESITE_WALL_SLAB, Map.of(TextureSlot.SIDE, "minecraft:block/andesite"));
     registerSimpleWallSlabBlock(DistantMoonsBlocks.BAMBOO_MOSAIC_WALL_SLAB, Map.of(TextureSlot.SIDE, "minecraft:block/bamboo_mosaic"));
@@ -562,6 +614,7 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     this.itemGenerator = generator;
 
     //SIMPLE ITEMS
+    registerSimpleItem(DistantMoonsItems.ABYSS_TEAR_BUCKET, "simple_item", SIMPLE_ITEM_TEXTURE_MAP);
     registerSimpleItem(DistantMoonsItems.ABYSS_KEYSTONE, "simple_item", DIMENSION_KEYSTONE_TEXTURE_MAP);
     registerSimpleItem(DistantMoonsItems.COILED_ROPE_LADDER, "simple_item", SIMPLE_ITEM_TEXTURE_MAP);
     registerSimpleItem(DistantMoonsItems.COKE, "simple_item", SIMPLE_ITEM_TEXTURE_MAP);
@@ -748,6 +801,63 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModelUtils.plainModel(inventoryModel));
   }
 
+  private void registerBranchBlock(Block block, Map<TextureSlot, String> rawTextureMap, String parentType) {
+    Map<TextureSlot, String> textureMap = Map.of(TextureSlot.END, rawTextureMap.get(TextureSlot.END), TextureSlot.SIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE));
+    MultiVariant variantHorizontal = createWeightedVariant(createObjectModel(block, parentType + "/horizontal", "/horizontal", textureMap));
+    MultiVariant variantHorizontalExtended = createWeightedVariant(createObjectModel(block, parentType + "/horizontal_extended", "/horizontal_extended", textureMap));
+    MultiVariant variantVertical = createWeightedVariant(createObjectModel(block, parentType + "/vertical", "/vertical", textureMap));
+    MultiVariant variantVerticalExtended = createWeightedVariant(createObjectModel(block, parentType + "/vertical_extended", "/vertical_extended", textureMap));
+    this.blockGenerator.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(PropertyDispatch
+        .initial(AbstractBranchBlock.EXTENDED, AbstractBranchBlock.ATTACHMENT)
+        .select(false, Direction.NORTH, variantHorizontal)
+        .select(false, Direction.EAST, variantHorizontal.with(ROTATE_Y_90))
+        .select(false, Direction.SOUTH, variantHorizontal.with(ROTATE_Y_180))
+        .select(false, Direction.WEST, variantHorizontal.with(ROTATE_Y_270))
+        .select(false, Direction.DOWN, variantVertical)
+        .select(true, Direction.NORTH, variantHorizontalExtended)
+        .select(true, Direction.EAST, variantHorizontalExtended.with(ROTATE_Y_90))
+        .select(true, Direction.SOUTH, variantHorizontalExtended.with(ROTATE_Y_180))
+        .select(true, Direction.WEST, variantHorizontalExtended.with(ROTATE_Y_270))
+        .select(true, Direction.DOWN, variantVerticalExtended)
+    ));
+    this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModelUtils.plainModel(getFirstEntryOf(variantHorizontal)));
+  }
+
+  private void registerButtonBlock(Block block, Map<TextureSlot, String> rawTextureMap) {
+    Map<TextureSlot, String> textureMap = Map.of(TextureSlot.SIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.SIDE));
+    MultiVariant variantPressed = createWeightedVariant(createObjectModel(block, "button/pressed", "/pressed", textureMap));
+    MultiVariant variantUnpressed = createWeightedVariant(createObjectModel(block, "button/unpressed", "/unpressed", textureMap));
+    this.blockGenerator.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(PropertyDispatch
+        .initial(ButtonBlock.POWERED, ButtonBlock.FACE, ButtonBlock.FACING)
+        .select(false, AttachFace.FLOOR, Direction.NORTH, variantUnpressed)
+        .select(false, AttachFace.FLOOR, Direction.EAST, variantUnpressed.with(ROTATE_Y_90))
+        .select(false, AttachFace.FLOOR, Direction.SOUTH, variantUnpressed.with(ROTATE_Y_180))
+        .select(false, AttachFace.FLOOR, Direction.WEST, variantUnpressed.with(ROTATE_Y_270))
+        .select(false, AttachFace.WALL, Direction.NORTH, variantUnpressed.with(ROTATE_X_270).with(ROTATE_Y_180))
+        .select(false, AttachFace.WALL, Direction.EAST, variantUnpressed.with(ROTATE_X_270).with(ROTATE_Y_270))
+        .select(false, AttachFace.WALL, Direction.SOUTH, variantUnpressed.with(ROTATE_X_270))
+        .select(false, AttachFace.WALL, Direction.WEST, variantUnpressed.with(ROTATE_X_270).with(ROTATE_Y_90))
+        .select(false, AttachFace.CEILING, Direction.NORTH, variantUnpressed.with(ROTATE_X_180).with(ROTATE_Y_180))
+        .select(false, AttachFace.CEILING, Direction.EAST, variantUnpressed.with(ROTATE_X_180).with(ROTATE_Y_270))
+        .select(false, AttachFace.CEILING, Direction.SOUTH, variantUnpressed.with(ROTATE_X_180))
+        .select(false, AttachFace.CEILING, Direction.WEST, variantUnpressed.with(ROTATE_X_180).with(ROTATE_Y_90))
+        .select(true, AttachFace.FLOOR, Direction.NORTH, variantPressed)
+        .select(true, AttachFace.FLOOR, Direction.EAST, variantPressed.with(ROTATE_Y_90))
+        .select(true, AttachFace.FLOOR, Direction.SOUTH, variantPressed.with(ROTATE_Y_180))
+        .select(true, AttachFace.FLOOR, Direction.WEST, variantPressed.with(ROTATE_Y_270))
+        .select(true, AttachFace.WALL, Direction.NORTH, variantPressed.with(ROTATE_X_270).with(ROTATE_Y_180))
+        .select(true, AttachFace.WALL, Direction.EAST, variantPressed.with(ROTATE_X_270).with(ROTATE_Y_270))
+        .select(true, AttachFace.WALL, Direction.SOUTH, variantPressed.with(ROTATE_X_270))
+        .select(true, AttachFace.WALL, Direction.WEST, variantPressed.with(ROTATE_X_270).with(ROTATE_Y_90))
+        .select(true, AttachFace.CEILING, Direction.NORTH, variantPressed.with(ROTATE_X_180).with(ROTATE_Y_180))
+        .select(true, AttachFace.CEILING, Direction.EAST, variantPressed.with(ROTATE_X_180).with(ROTATE_Y_270))
+        .select(true, AttachFace.CEILING, Direction.SOUTH, variantPressed.with(ROTATE_X_180))
+        .select(true, AttachFace.CEILING, Direction.WEST, variantPressed.with(ROTATE_X_180).with(ROTATE_Y_90))
+    ));
+    Identifier inventoryModel = createObjectModel(block, "button/item", "/item", textureMap);
+    this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModelUtils.plainModel(inventoryModel));
+  }
+
   private void registerChainBlock(Block block, Map<TextureSlot, String> rawTextureMap) {
     Map<TextureSlot, String> textureMapBlock = Map.of(TextureSlot.SIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.SIDE));
     Map<TextureSlot, String> textureMapItem = Map.of(TextureSlot.TEXTURE, rawTextureMap.get(TextureSlot.TEXTURE), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.TEXTURE));
@@ -811,6 +921,62 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModelUtils.plainModel(inventoryModel));
   }
 
+  private void registerEmptyBlock(Block block) {
+    MultiVariant variant = createWeightedVariant(createObjectModel(block, "air", null, Map.of()));
+    this.blockGenerator.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, variant));
+  }
+
+  private void registerEmptyParticleBlock(Block block, Map<TextureSlot, String> rawTextureMap) {
+    MultiVariant variant = createWeightedVariant(createObjectModel(block, "air", null, Map.of(TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE))));
+    this.blockGenerator.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, variant));
+    if (!rawTextureMap.containsKey(TextureSlot.TEXTURE)) return;
+    Identifier inventoryModel = createObjectModel(block, "simple_item", "/item", Map.of(TextureSlot.TEXTURE, rawTextureMap.get(TextureSlot.TEXTURE), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.TEXTURE)));
+    this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModelUtils.plainModel(inventoryModel));
+  }
+
+  private void registerSimpleFenceBlock(Block block, Map<TextureSlot, String> rawTextureMap) {
+    Map<TextureSlot, String> textureMap = Map.of(TextureSlot.SIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.SIDE));
+    MultiVariant variantPost = createWeightedVariant(createObjectModel(block, "fence/simple/post", "/post", textureMap));
+    MultiVariant variantSide = createWeightedVariant(createObjectModel(block, "fence/simple/side", "/side", textureMap));
+    this.blockGenerator.blockStateOutput.accept(MultiPartGenerator.multiPart(block)
+        .with(variantPost)
+        .with(new ConditionBuilder().term(FenceBlock.NORTH, true), variantSide)
+        .with(new ConditionBuilder().term(FenceBlock.EAST, true), variantSide.with(ROTATE_Y_90).with(UV_LOCK))
+        .with(new ConditionBuilder().term(FenceBlock.SOUTH, true), variantSide.with(ROTATE_Y_180).with(UV_LOCK))
+        .with(new ConditionBuilder().term(FenceBlock.WEST, true), variantSide.with(ROTATE_Y_270).with(UV_LOCK))
+    );
+    Identifier inventoryModel = createObjectModel(block, "fence/simple/item", "/item", textureMap);
+    this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModelUtils.plainModel(inventoryModel));
+  }
+
+  private void registerSimpleFenceGateBlock(Block block, Map<TextureSlot, String> rawTextureMap) {
+    Map<TextureSlot, String> textureMap = Map.of(TextureSlot.SIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.SIDE));
+    MultiVariant variantDefaultClosed = createWeightedVariant(createObjectModel(block, "fence_gate/simple/default/closed", "/default/closed", textureMap));
+    MultiVariant variantDefaultOpen = createWeightedVariant(createObjectModel(block, "fence_gate/simple/default/open", "/default/open", textureMap));
+    MultiVariant variantRaisedClosed = createWeightedVariant(createObjectModel(block, "fence_gate/simple/raised/closed", "/raised/closed", textureMap));
+    MultiVariant variantRaisedOpen = createWeightedVariant(createObjectModel(block, "fence_gate/simple/raised/open", "/raised/open", textureMap));
+    this.blockGenerator.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(PropertyDispatch
+        .initial(FenceGateBlock.FACING, FenceGateBlock.IN_WALL, FenceGateBlock.OPEN)
+        .select(Direction.NORTH, false, false, variantDefaultClosed)
+        .select(Direction.NORTH, false, true, variantDefaultOpen)
+        .select(Direction.NORTH, true, false, variantRaisedClosed)
+        .select(Direction.NORTH, true, true, variantRaisedOpen)
+        .select(Direction.EAST, false, false, variantDefaultClosed.with(ROTATE_Y_90).with(UV_LOCK))
+        .select(Direction.EAST, false, true, variantDefaultOpen.with(ROTATE_Y_90).with(UV_LOCK))
+        .select(Direction.EAST, true, false, variantRaisedClosed.with(ROTATE_Y_90).with(UV_LOCK))
+        .select(Direction.EAST, true, true, variantRaisedOpen.with(ROTATE_Y_90).with(UV_LOCK))
+        .select(Direction.SOUTH, false, false, variantDefaultClosed.with(ROTATE_Y_180).with(UV_LOCK))
+        .select(Direction.SOUTH, false, true, variantDefaultOpen.with(ROTATE_Y_180).with(UV_LOCK))
+        .select(Direction.SOUTH, true, false, variantRaisedClosed.with(ROTATE_Y_180).with(UV_LOCK))
+        .select(Direction.SOUTH, true, true, variantRaisedOpen.with(ROTATE_Y_180).with(UV_LOCK))
+        .select(Direction.WEST, false, false, variantDefaultClosed.with(ROTATE_Y_270).with(UV_LOCK))
+        .select(Direction.WEST, false, true, variantDefaultOpen.with(ROTATE_Y_270).with(UV_LOCK))
+        .select(Direction.WEST, true, false, variantRaisedClosed.with(ROTATE_Y_270).with(UV_LOCK))
+        .select(Direction.WEST, true, true, variantRaisedOpen.with(ROTATE_Y_270).with(UV_LOCK))
+    ));
+    this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModelUtils.plainModel(getFirstEntryOf(variantDefaultClosed)));
+  }
+
   private void registerFixedLadderBlock(Block block, Map<TextureSlot, String> rawTextureMap) {
     Map<TextureSlot, String> textureMapCenter = Map.of(TextureSlot.BOTTOM, rawTextureMap.get(TextureSlot.BOTTOM), TextureSlot.FRONT, rawTextureMap.get(TextureSlot.FRONT), TextureSlot.SIDE, rawTextureMap.get(DistantMoonsTextureSlot.CENTER), TextureSlot.TOP, rawTextureMap.get(TextureSlot.TOP), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE));
     Map<TextureSlot, String> textureMapCenterCaps = Map.of(TextureSlot.END, rawTextureMap.get(TextureSlot.END), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE));
@@ -843,6 +1009,16 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
         ), variantCenterCaps)
     );
     this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModelUtils.plainModel(getFirstEntryOf(variantCenter)));
+  }
+
+  private void registerHangingSignBlock(Block ceilingBlock, Block wallBlock, Item item, Map<TextureSlot, String> rawTextureMap) {
+    Map<TextureSlot, String> textureMapBlock = Map.of(TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE));
+    Map<TextureSlot, String> textureMapItem = Map.of(TextureSlot.TEXTURE, rawTextureMap.get(TextureSlot.TEXTURE), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.TEXTURE));
+    MultiVariant variantCeiling = createWeightedVariant(createObjectModel(ceilingBlock, "air", "/block", textureMapBlock));
+    MultiVariant variantWall = createWeightedVariant(createObjectModel(wallBlock, "air", null, textureMapBlock));
+    this.blockGenerator.blockStateOutput.accept(MultiVariantGenerator.dispatch(ceilingBlock, variantCeiling));
+    this.blockGenerator.blockStateOutput.accept(MultiVariantGenerator.dispatch(wallBlock, variantWall));
+    this.blockGenerator.itemModelOutput.accept(item, ItemModelUtils.plainModel(createObjectModel(item, "simple_item", "/item", textureMapItem)));
   }
 
   private void registerMetalBarDoorBlock(Block block, Map<TextureSlot, String> rawTextureMap) {
@@ -949,6 +1125,45 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModelUtils.plainModel(inventoryModel));
   }
 
+  private void registerSimplePillarBlock(Block block, Map<TextureSlot, String> rawTextureMap) {
+    Map<TextureSlot, String> textureMap = Map.of(TextureSlot.END, rawTextureMap.get(TextureSlot.END), TextureSlot.SIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.SIDE));
+    MultiVariant variant = createWeightedVariant(createObjectModel(block, "pillar/vertical", null, textureMap));
+    this.blockGenerator.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(PropertyDispatch
+        .initial(PillarSlabBlock.AXIS)
+        .select(Direction.Axis.X, variant.with(ROTATE_X_90).with(ROTATE_Y_90))
+        .select(Direction.Axis.Y, variant)
+        .select(Direction.Axis.Z, variant.with(ROTATE_X_90))
+    ));
+    this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModelUtils.plainModel(getFirstEntryOf(variant)));
+  }
+
+  private void registerAxisPillarBlock(Block block, Map<TextureSlot, String> rawTextureMap) {
+    Map<TextureSlot, String> textureMap = Map.of(TextureSlot.END, rawTextureMap.get(TextureSlot.END), TextureSlot.SIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.SIDE));
+    MultiVariant variantX = createWeightedVariant(createObjectModel(block, "pillar/axis_x", "/x", textureMap));
+    MultiVariant variantY = createWeightedVariant(createObjectModel(block, "pillar/vertical", "/y", textureMap));
+    MultiVariant variantZ = createWeightedVariant(createObjectModel(block, "pillar/axis_z", "/z", textureMap));
+    this.blockGenerator.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(PropertyDispatch
+        .initial(PillarSlabBlock.AXIS)
+        .select(Direction.Axis.X, variantX)
+        .select(Direction.Axis.Y, variantY)
+        .select(Direction.Axis.Z, variantZ)
+    ));
+    this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModelUtils.plainModel(getFirstEntryOf(variantY)));
+  }
+
+  private void registerHorizontalPillarBlock(Block block, Map<TextureSlot, String> rawTextureMap) {
+    Map<TextureSlot, String> textureMap = Map.of(TextureSlot.END, rawTextureMap.get(TextureSlot.END), TextureSlot.SIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.SIDE));
+    MultiVariant variantHorizontal = createWeightedVariant(createObjectModel(block, "pillar/horizontal", "/horizontal", textureMap));
+    MultiVariant variantVertical = createWeightedVariant(createObjectModel(block, "pillar/vertical", "/vertical", textureMap));
+    this.blockGenerator.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(PropertyDispatch
+        .initial(PillarSlabBlock.AXIS)
+        .select(Direction.Axis.X, variantHorizontal.with(ROTATE_X_90).with(ROTATE_Y_90))
+        .select(Direction.Axis.Y, variantVertical)
+        .select(Direction.Axis.Z, variantHorizontal.with(ROTATE_X_90))
+    ));
+    this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModelUtils.plainModel(getFirstEntryOf(variantVertical)));
+  }
+
   private void registerSimplePillarSlabBlock(Block block, Map<TextureSlot, String> rawTextureMap) {
     Map<TextureSlot, String> textureMap = Map.of(TextureSlot.END, rawTextureMap.get(TextureSlot.END), TextureSlot.SIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.SIDE));
     MultiVariant variantBottom = createWeightedVariant(createObjectModel(block, "slab/pillar/vertical/bottom", "/bottom_vertical", textureMap));
@@ -1042,6 +1257,18 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModelUtils.plainModel(getFirstEntryOf(variantCenterY)));
   }
 
+  private void registerPressurePlateBlock(Block block, Map<TextureSlot, String> rawTextureMap) {
+    Map<TextureSlot, String> textureMap = Map.of(TextureSlot.SIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.SIDE));
+    MultiVariant variantPressed = createWeightedVariant(createObjectModel(block, "pressure_plate/pressed", "/pressed", textureMap));
+    MultiVariant variantUnpressed = createWeightedVariant(createObjectModel(block, "pressure_plate/unpressed", "/unpressed", textureMap));
+    this.blockGenerator.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(PropertyDispatch
+        .initial(PressurePlateBlock.POWERED)
+        .select(false, variantUnpressed)
+        .select(true, variantPressed)
+    ));
+    this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModelUtils.plainModel(getFirstEntryOf(variantUnpressed)));
+  }
+
   private void registerRopeLadderBlock(Block block, Map<TextureSlot, String> rawTextureMap) {
     Map<TextureSlot, String> textureMapBottom = Map.of(TextureSlot.BOTTOM, rawTextureMap.get(DistantMoonsTextureSlot.ENDS), TextureSlot.END, rawTextureMap.get(TextureSlot.END), TextureSlot.SIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.TOP, rawTextureMap.get(DistantMoonsTextureSlot.MIDDLE), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE));
     Map<TextureSlot, String> textureMapInnerEnds = Map.of(TextureSlot.BOTTOM, rawTextureMap.get(DistantMoonsTextureSlot.ENDS), TextureSlot.END, rawTextureMap.get(TextureSlot.END), TextureSlot.SIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.TOP, rawTextureMap.get(DistantMoonsTextureSlot.CEILING), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE));
@@ -1086,6 +1313,44 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
         .select(RopeLadderDirection.Z, true, true, variantInnerEnds)
     ));
     Identifier inventoryModel = createObjectModel(block, "simple_item", "/item", textureMapItem);
+    this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModelUtils.plainModel(inventoryModel));
+  }
+
+  private void registerShelfBlock(Block block, Map<TextureSlot, String> rawTextureMap) {
+    Map<TextureSlot, String> textureMap = Map.of(TextureSlot.SIDE, rawTextureMap.get(TextureSlot.SIDE), TextureSlot.PARTICLE, rawTextureMap.get(TextureSlot.PARTICLE));
+    MultiVariant variantBase = createWeightedVariant(createObjectModel(block, "shelf/base", "/base", textureMap));
+    MultiVariant variantCenter = createWeightedVariant(createObjectModel(block, "shelf/center", "/center", textureMap));
+    MultiVariant variantLeft = createWeightedVariant(createObjectModel(block, "shelf/left", "/left", textureMap));
+    MultiVariant variantRight = createWeightedVariant(createObjectModel(block, "shelf/right", "/right", textureMap));
+    MultiVariant variantUnconnected = createWeightedVariant(createObjectModel(block, "shelf/unconnected", "/unconnected", textureMap));
+    MultiVariant variantUnpowered = createWeightedVariant(createObjectModel(block, "shelf/unpowered", "/unpowered", textureMap));
+    this.blockGenerator.blockStateOutput.accept(MultiPartGenerator.multiPart(block)
+        .with(new ConditionBuilder().term(ShelfBlock.FACING, Direction.NORTH), variantBase)
+        .with(new ConditionBuilder().term(ShelfBlock.FACING, Direction.EAST), variantBase.with(ROTATE_Y_90))
+        .with(new ConditionBuilder().term(ShelfBlock.FACING, Direction.SOUTH), variantBase.with(ROTATE_Y_180))
+        .with(new ConditionBuilder().term(ShelfBlock.FACING, Direction.WEST), variantBase.with(ROTATE_Y_270))
+        .with(new CombinedCondition(CombinedCondition.Operation.AND, List.of(new ConditionBuilder().term(ShelfBlock.FACING, Direction.NORTH).build(), new ConditionBuilder().term(ShelfBlock.POWERED, false).build())), variantUnpowered)
+        .with(new CombinedCondition(CombinedCondition.Operation.AND, List.of(new ConditionBuilder().term(ShelfBlock.FACING, Direction.EAST).build(), new ConditionBuilder().term(ShelfBlock.POWERED, false).build())), variantUnpowered.with(ROTATE_Y_90))
+        .with(new CombinedCondition(CombinedCondition.Operation.AND, List.of(new ConditionBuilder().term(ShelfBlock.FACING, Direction.SOUTH).build(), new ConditionBuilder().term(ShelfBlock.POWERED, false).build())), variantUnpowered.with(ROTATE_Y_180))
+        .with(new CombinedCondition(CombinedCondition.Operation.AND, List.of(new ConditionBuilder().term(ShelfBlock.FACING, Direction.WEST).build(), new ConditionBuilder().term(ShelfBlock.POWERED, false).build())), variantUnpowered.with(ROTATE_Y_270))
+        .with(new CombinedCondition(CombinedCondition.Operation.AND, List.of(new ConditionBuilder().term(ShelfBlock.FACING, Direction.NORTH).build(), new ConditionBuilder().term(ShelfBlock.POWERED, true).build(), new ConditionBuilder().term(ShelfBlock.SIDE_CHAIN_PART, SideChainPart.CENTER).build())), variantCenter)
+        .with(new CombinedCondition(CombinedCondition.Operation.AND, List.of(new ConditionBuilder().term(ShelfBlock.FACING, Direction.EAST).build(), new ConditionBuilder().term(ShelfBlock.POWERED, true).build(), new ConditionBuilder().term(ShelfBlock.SIDE_CHAIN_PART, SideChainPart.CENTER).build())), variantCenter.with(ROTATE_Y_90))
+        .with(new CombinedCondition(CombinedCondition.Operation.AND, List.of(new ConditionBuilder().term(ShelfBlock.FACING, Direction.SOUTH).build(), new ConditionBuilder().term(ShelfBlock.POWERED, true).build(), new ConditionBuilder().term(ShelfBlock.SIDE_CHAIN_PART, SideChainPart.CENTER).build())), variantCenter.with(ROTATE_Y_180))
+        .with(new CombinedCondition(CombinedCondition.Operation.AND, List.of(new ConditionBuilder().term(ShelfBlock.FACING, Direction.WEST).build(), new ConditionBuilder().term(ShelfBlock.POWERED, true).build(), new ConditionBuilder().term(ShelfBlock.SIDE_CHAIN_PART, SideChainPart.CENTER).build())), variantCenter.with(ROTATE_Y_270))
+        .with(new CombinedCondition(CombinedCondition.Operation.AND, List.of(new ConditionBuilder().term(ShelfBlock.FACING, Direction.NORTH).build(), new ConditionBuilder().term(ShelfBlock.POWERED, true).build(), new ConditionBuilder().term(ShelfBlock.SIDE_CHAIN_PART, SideChainPart.LEFT).build())), variantLeft)
+        .with(new CombinedCondition(CombinedCondition.Operation.AND, List.of(new ConditionBuilder().term(ShelfBlock.FACING, Direction.EAST).build(), new ConditionBuilder().term(ShelfBlock.POWERED, true).build(), new ConditionBuilder().term(ShelfBlock.SIDE_CHAIN_PART, SideChainPart.LEFT).build())), variantLeft.with(ROTATE_Y_90))
+        .with(new CombinedCondition(CombinedCondition.Operation.AND, List.of(new ConditionBuilder().term(ShelfBlock.FACING, Direction.SOUTH).build(), new ConditionBuilder().term(ShelfBlock.POWERED, true).build(), new ConditionBuilder().term(ShelfBlock.SIDE_CHAIN_PART, SideChainPart.LEFT).build())), variantLeft.with(ROTATE_Y_180))
+        .with(new CombinedCondition(CombinedCondition.Operation.AND, List.of(new ConditionBuilder().term(ShelfBlock.FACING, Direction.WEST).build(), new ConditionBuilder().term(ShelfBlock.POWERED, true).build(), new ConditionBuilder().term(ShelfBlock.SIDE_CHAIN_PART, SideChainPart.LEFT).build())), variantLeft.with(ROTATE_Y_270))
+        .with(new CombinedCondition(CombinedCondition.Operation.AND, List.of(new ConditionBuilder().term(ShelfBlock.FACING, Direction.NORTH).build(), new ConditionBuilder().term(ShelfBlock.POWERED, true).build(), new ConditionBuilder().term(ShelfBlock.SIDE_CHAIN_PART, SideChainPart.RIGHT).build())), variantRight)
+        .with(new CombinedCondition(CombinedCondition.Operation.AND, List.of(new ConditionBuilder().term(ShelfBlock.FACING, Direction.EAST).build(), new ConditionBuilder().term(ShelfBlock.POWERED, true).build(), new ConditionBuilder().term(ShelfBlock.SIDE_CHAIN_PART, SideChainPart.RIGHT).build())), variantRight.with(ROTATE_Y_90))
+        .with(new CombinedCondition(CombinedCondition.Operation.AND, List.of(new ConditionBuilder().term(ShelfBlock.FACING, Direction.SOUTH).build(), new ConditionBuilder().term(ShelfBlock.POWERED, true).build(), new ConditionBuilder().term(ShelfBlock.SIDE_CHAIN_PART, SideChainPart.RIGHT).build())), variantRight.with(ROTATE_Y_180))
+        .with(new CombinedCondition(CombinedCondition.Operation.AND, List.of(new ConditionBuilder().term(ShelfBlock.FACING, Direction.WEST).build(), new ConditionBuilder().term(ShelfBlock.POWERED, true).build(), new ConditionBuilder().term(ShelfBlock.SIDE_CHAIN_PART, SideChainPart.RIGHT).build())), variantRight.with(ROTATE_Y_270))
+        .with(new CombinedCondition(CombinedCondition.Operation.AND, List.of(new ConditionBuilder().term(ShelfBlock.FACING, Direction.NORTH).build(), new ConditionBuilder().term(ShelfBlock.POWERED, true).build(), new ConditionBuilder().term(ShelfBlock.SIDE_CHAIN_PART, SideChainPart.UNCONNECTED).build())), variantUnconnected)
+        .with(new CombinedCondition(CombinedCondition.Operation.AND, List.of(new ConditionBuilder().term(ShelfBlock.FACING, Direction.EAST).build(), new ConditionBuilder().term(ShelfBlock.POWERED, true).build(), new ConditionBuilder().term(ShelfBlock.SIDE_CHAIN_PART, SideChainPart.UNCONNECTED).build())), variantUnconnected.with(ROTATE_Y_90))
+        .with(new CombinedCondition(CombinedCondition.Operation.AND, List.of(new ConditionBuilder().term(ShelfBlock.FACING, Direction.SOUTH).build(), new ConditionBuilder().term(ShelfBlock.POWERED, true).build(), new ConditionBuilder().term(ShelfBlock.SIDE_CHAIN_PART, SideChainPart.UNCONNECTED).build())), variantUnconnected.with(ROTATE_Y_180))
+        .with(new CombinedCondition(CombinedCondition.Operation.AND, List.of(new ConditionBuilder().term(ShelfBlock.FACING, Direction.WEST).build(), new ConditionBuilder().term(ShelfBlock.POWERED, true).build(), new ConditionBuilder().term(ShelfBlock.SIDE_CHAIN_PART, SideChainPart.UNCONNECTED).build())), variantUnconnected.with(ROTATE_Y_270))
+    );
+    Identifier inventoryModel = createObjectModel(block, "shelf/item", "/item", textureMap);
     this.blockGenerator.itemModelOutput.accept(block.asItem(), ItemModelUtils.plainModel(inventoryModel));
   }
 
@@ -1620,7 +1885,7 @@ public class DistantMoonsModelProvider extends FabricModelProvider {
     return model.create(
         getObjectModelPath(item, variant == null ? "" : variant),
         createTextureMapWithKeys(item, rawTextureMap),
-        this.itemGenerator.modelOutput
+        this.itemGenerator != null ? this.itemGenerator.modelOutput : this.blockGenerator.modelOutput
     );
   }
 

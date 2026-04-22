@@ -86,7 +86,28 @@ public class de_de extends FabricLanguageProvider {
 
     builder.add("affliction.progression_tooltip", "%s / %s");
 
-    builder.add(DistantMoonsBlocks.ACACIA_BALUSTRADE, "Akazienbalustrade");
+    builder.add(DistantMoonsBlocks.ABYSS_TEAR_BALUSTRADE, "Abgrundtränenholzbalustrade");
+    builder.add(DistantMoonsBlocks.ABYSS_TEAR_BEAM, "Abgrundtränenholzbalken");
+    builder.add(DistantMoonsBlocks.ABYSS_TEAR_BRANCH, "Abgrundtränenast");
+    builder.add(DistantMoonsBlocks.ABYSS_TEAR_BUBBLE, "Abgrundtränenblase");
+    builder.add(DistantMoonsBlocks.ABYSS_TEAR_BUTTON, "Abgrundtränenholzknopf");
+    builder.add(DistantMoonsBlocks.ABYSS_TEAR_DOOR, "Abgrundtränenholztür");
+    builder.add(DistantMoonsBlocks.ABYSS_TEAR_FENCE, "Abgrundtränenholzzaun");
+    builder.add(DistantMoonsBlocks.ABYSS_TEAR_FENCE_GATE, "Abgrundtränenholzzauntor");
+    builder.add(DistantMoonsBlocks.ABYSS_TEAR_HANGING_SIGN, "Abgrundtränenholzhängeschild");
+    builder.add(DistantMoonsBlocks.ABYSS_TEAR_LOG, "Abgrundtränenstamm");
+    builder.add(DistantMoonsBlocks.ABYSS_TEAR_PLANKS, "Abgrundtränenholzbretter");
+    builder.add(DistantMoonsBlocks.ABYSS_TEAR_POLE, "Abgrundtränenholzpfosten");
+    builder.add(DistantMoonsBlocks.ABYSS_TEAR_PRESSURE_PLATE, "Abgrundtränenholzdruckplatte");
+    builder.add(DistantMoonsBlocks.ABYSS_TEAR_SHELF, "Abgrundtränenholzregal");
+    builder.add(DistantMoonsBlocks.ABYSS_TEAR_SIGN, "Abgrundtränenholzschild");
+    builder.add(DistantMoonsBlocks.ABYSS_TEAR_SLAB, "Abgrundtränenholzstufe");
+    builder.add(DistantMoonsBlocks.ABYSS_TEAR_STAIRS, "Abgrundtränenholztreppe");
+    builder.add(DistantMoonsBlocks.ABYSS_TEAR_TRAPDOOR, "Abgrundtränenholzfalltür");
+    builder.add(DistantMoonsBlocks.ABYSS_TEAR_WALL_HANGING_SIGN, "Abgrundtränenholzwandhängeschild");
+    builder.add(DistantMoonsBlocks.ABYSS_TEAR_WALL_SLAB, "Gestufte Abgrundtränenholzwand");
+    builder.add(DistantMoonsBlocks.ABYSS_TEAR_WOOD, "Abgrundtränenholz");
+    builder.add(DistantMoonsBlocks.ACACIA_BALUSTRADE, "Akazienholzbalustrade");
     builder.add(DistantMoonsBlocks.ACACIA_BEAM, "Akazienholzbalken");
     builder.add(DistantMoonsBlocks.ACACIA_POLE, "Akazienholzpfosten");
     builder.add(DistantMoonsBlocks.ACACIA_WALL_SLAB, "Gestufte Akazienholzwand");
@@ -95,7 +116,7 @@ public class de_de extends FabricLanguageProvider {
     builder.add(DistantMoonsBlocks.BAMBOO_POLE, "Bambuspfosten");
     builder.add(DistantMoonsBlocks.BAMBOO_MOSAIC_WALL_SLAB, "Gestufte Bambusmosaikwand");
     builder.add(DistantMoonsBlocks.BAMBOO_WALL_SLAB, "Gestufte Bambuswand");
-    builder.add(DistantMoonsBlocks.BIRCH_BALUSTRADE, "Birkenbalustrade");
+    builder.add(DistantMoonsBlocks.BIRCH_BALUSTRADE, "Birkenholzbalustrade");
     builder.add(DistantMoonsBlocks.BIRCH_BEAM, "Birkenholzbalken");
     builder.add(DistantMoonsBlocks.BIRCH_POLE, "Birkenholzpfosten");
     builder.add(DistantMoonsBlocks.BIRCH_WALL_SLAB, "Gestufte Birkenholzwand");
@@ -120,6 +141,8 @@ public class de_de extends FabricLanguageProvider {
     builder.add(DistantMoonsBlocks.CRIMSON_POLE, "Karmesinpfosten");
     builder.add(DistantMoonsBlocks.CRIMSON_WALL_SLAB, "Gestufte Karmesinwand");
     builder.add(DistantMoonsBlocks.CRUDE_DEEP_IRON_BLOCK, "Grober Tiefeisenblock");
+    builder.add(DistantMoonsBlocks.CUT_ABYSS_TEAR_LOG, "Geschnittener Abgrundtränenstamm");
+    builder.add(DistantMoonsBlocks.CUT_ABYSS_TEAR_WOOD, "Geschnittenes Abgrundtränenholz");
     builder.add(DistantMoonsBlocks.CUT_ACACIA_LOG, "Geschnittener Akazienstamm");
     builder.add(DistantMoonsBlocks.CUT_ACACIA_WOOD, "Geschnittenes Akazienholz");
     builder.add(DistantMoonsBlocks.CUT_BAMBOO_BLOCK, "Geschnittener Bambusblock");
@@ -288,6 +311,11 @@ public class de_de extends FabricLanguageProvider {
     builder.add(DistantMoonsBlocks.STONE_BALUSTRADE, "Steinbalustrade");
     builder.add(DistantMoonsBlocks.STONE_BRICK_WALL_SLAB, "Gestufte Steinziegelwand");
     builder.add(DistantMoonsBlocks.STONE_WALL_SLAB, "Gestufte Steinwand");
+    builder.add(DistantMoonsBlocks.STRIPPED_ABYSS_TEAR_BRANCH, "Entrindeter Abgrundtränenast");
+    builder.add(DistantMoonsBlocks.STRIPPED_ABYSS_TEAR_LOG, "Entrindeter Abgrundtränenstamm");
+    builder.add(DistantMoonsBlocks.STRIPPED_ABYSS_TEAR_WOOD, "Entrindetes Abgrundtränenholz");
+    builder.add(DistantMoonsBlocks.STRIPPED_CUT_ABYSS_TEAR_LOG, "Entrindeter geschnittener Abgrundtränenstamm");
+    builder.add(DistantMoonsBlocks.STRIPPED_CUT_ABYSS_TEAR_WOOD, "Entrindetes geschnittenes Abgrundtränenholz");
     builder.add(DistantMoonsBlocks.STRIPPED_CUT_ACACIA_LOG, "Entrindeter geschnittener Akazienstamm");
     builder.add(DistantMoonsBlocks.STRIPPED_CUT_ACACIA_WOOD, "Entrindetes geschnittenes Akazienholz");
     builder.add(DistantMoonsBlocks.STRIPPED_CUT_BAMBOO_BLOCK, "Geschälter geschnittener Bambusblock");
@@ -318,7 +346,7 @@ public class de_de extends FabricLanguageProvider {
     builder.add(DistantMoonsBlocks.TUFF_BRICK_WALL_SLAB, "Gestufte Tuffziegelwand");
     builder.add(DistantMoonsBlocks.TUFF_WALL_SLAB, "Gestufte Tuffwand");
     builder.add(DistantMoonsBlocks.UNDERWORLD_ANCHOR, "Unterweltanker");
-    builder.add(DistantMoonsBlocks.UNDERWORLD_CONFLUX, "Underworldkonflux");
+    builder.add(DistantMoonsBlocks.UNDERWORLD_CONFLUX, "Unterweltkonflux");
     builder.add(DistantMoonsBlocks.UNDERWORLD_LANTERN, "Unterweltlaterne");
     builder.add(DistantMoonsBlocks.WARPED_BALUSTRADE, "Wirrbalustrade");
     builder.add(DistantMoonsBlocks.WARPED_BEAM, "Wirrbalken");
@@ -378,6 +406,8 @@ public class de_de extends FabricLanguageProvider {
     builder.add(DistantMoonsEntityTypes.SITTING_SPOT, "Sitzplatz");
 
     builder.add(DistantMoonsItems.ABYSS_KEYSTONE, "Abgrund-Schlüsselstein");
+    builder.add(DistantMoonsItems.ABYSS_TEAR_BUCKET, "Abgrundträneneimer");
+    builder.add(DistantMoonsItems.ABYSS_TEAR_HANGING_SIGN, "Abgrundtränenholzhängeschild");
     builder.add(DistantMoonsItems.COILED_ROPE_LADDER, "Aufgerollte Strickleiter");
     builder.add(DistantMoonsItems.COKE, "Koks");
     builder.add(DistantMoonsItems.COPPER_ROD, "Kupferstange");

@@ -29,7 +29,7 @@ public class ThinBalustradeBlock extends AbstractBalustradeBlock {
   private static final Map<Direction, VoxelShape> TOP_CAPPED_SIDE_SHAPES_BY_DIRECTION = VoxelShapeUtil.createHorizontalDirectionShapeMap(Shapes.or(UNCAPPED_SIDE_SHAPE, TOP_CAP_SIDE_SHAPE));
 
   private static final VoxelShape CENTER_COLLISION_SHAPE = Block.box(5.0, 0.0, 5.0, 11.0, 24.0, 11.0);
-  private static final Map<Direction, VoxelShape> SIDE_COLLISION_SHAPES_BY_DIRECTION = VoxelShapeUtil.createHorizontalDirectionShapeMap(Block.box(5.0, 0.0, 0.0, 11.0, 24.0, 4.0));
+  private static final Map<Direction, VoxelShape> SIDE_COLLISION_SHAPES_BY_DIRECTION = VoxelShapeUtil.createHorizontalDirectionShapeMap(Block.box(5.0, 0.0, 0.0, 11.0, 24.0, 5.0));
 
   public ThinBalustradeBlock(Properties properties) {
     super(properties);

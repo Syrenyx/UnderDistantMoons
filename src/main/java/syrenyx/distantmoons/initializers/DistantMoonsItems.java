@@ -5,12 +5,9 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.AxeItem;
-import net.minecraft.world.item.HoeItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ShovelItem;
-import net.minecraft.world.item.ToolMaterial;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.Consumable;
 import net.minecraft.world.item.component.Consumables;
 import net.minecraft.world.item.component.DamageResistant;
@@ -33,6 +30,19 @@ public abstract class DistantMoonsItems {
           .component(DistantMoonsDataComponentTypes.DIMENSION_KEYSTONE, new DimensionKeystoneComponent(Level.NETHER.identifier(), DimensionKeystoneComponent.ABYSS_COLOR, UnderDistantMoons.identifierOf("underworld_conflux_keystone/abyss")))
           .fireResistant()
           .stacksTo(1)
+  );
+  public static final Item ABYSS_TEAR_BUCKET = register(
+      "abyss_tear_bucket",
+      properties -> new SolidBucketItem(DistantMoonsBlocks.ABYSS_TEAR_BUBBLE, SoundEvents.BUCKET_EMPTY, properties),
+      new Item.Properties()
+          .stacksTo(1)
+          .useItemDescriptionPrefix()
+  );
+  public static final Item ABYSS_TEAR_HANGING_SIGN = register(
+      "abyss_tear_hanging_sign",
+      properties -> new HangingSignItem(DistantMoonsBlocks.ABYSS_TEAR_HANGING_SIGN, DistantMoonsBlocks.ABYSS_TEAR_WALL_HANGING_SIGN, properties),
+      new Item.Properties()
+          .stacksTo(16)
   );
   public static final Item COILED_ROPE_LADDER = register(
       "coiled_rope_ladder",

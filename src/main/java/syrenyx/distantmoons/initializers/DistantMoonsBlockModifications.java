@@ -5,6 +5,11 @@ import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 public abstract class DistantMoonsBlockModifications {
 
   static {
+    StrippableBlockRegistry.registerCopyState(DistantMoonsBlocks.ABYSS_TEAR_BRANCH, DistantMoonsBlocks.STRIPPED_ABYSS_TEAR_BRANCH);
+    StrippableBlockRegistry.registerCopyState(DistantMoonsBlocks.ABYSS_TEAR_LOG, DistantMoonsBlocks.STRIPPED_ABYSS_TEAR_LOG);
+    StrippableBlockRegistry.registerCopyState(DistantMoonsBlocks.ABYSS_TEAR_WOOD, DistantMoonsBlocks.STRIPPED_ABYSS_TEAR_WOOD);
+    StrippableBlockRegistry.registerCopyState(DistantMoonsBlocks.CUT_ABYSS_TEAR_LOG, DistantMoonsBlocks.STRIPPED_CUT_ABYSS_TEAR_LOG);
+    StrippableBlockRegistry.registerCopyState(DistantMoonsBlocks.CUT_ABYSS_TEAR_WOOD, DistantMoonsBlocks.STRIPPED_CUT_ABYSS_TEAR_WOOD);
     StrippableBlockRegistry.registerCopyState(DistantMoonsBlocks.CUT_ACACIA_LOG, DistantMoonsBlocks.STRIPPED_CUT_ACACIA_LOG);
     StrippableBlockRegistry.registerCopyState(DistantMoonsBlocks.CUT_ACACIA_WOOD, DistantMoonsBlocks.STRIPPED_CUT_ACACIA_WOOD);
     StrippableBlockRegistry.registerCopyState(DistantMoonsBlocks.CUT_BAMBOO_BLOCK, DistantMoonsBlocks.STRIPPED_CUT_BAMBOO_BLOCK);

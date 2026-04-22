@@ -75,6 +75,8 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
         this.createDyeingRecipes(DistantMoonsBlocks.DYED_TERRACOTTA_WALL_SLABS, DistantMoonsBlocks.TERRACOTTA_WALL_SLAB, false);
 
         //SLAB CRAFTING
+        this.createSlabRecipes(DistantMoonsBlocks.ABYSS_TEAR_LOG, DistantMoonsBlocks.CUT_ABYSS_TEAR_LOG, RecipeCategory.BUILDING_BLOCKS, "cut_log");
+        this.createSlabRecipes(DistantMoonsBlocks.ABYSS_TEAR_WOOD, DistantMoonsBlocks.CUT_ABYSS_TEAR_WOOD, RecipeCategory.BUILDING_BLOCKS, "cut_wood");
         this.createSlabRecipes(Items.ACACIA_LOG, DistantMoonsBlocks.CUT_ACACIA_LOG, RecipeCategory.BUILDING_BLOCKS, "cut_log");
         this.createSlabRecipes(Items.ACACIA_WOOD, DistantMoonsBlocks.CUT_ACACIA_WOOD, RecipeCategory.BUILDING_BLOCKS, "cut_wood");
         this.createSlabRecipes(Items.BAMBOO_BLOCK, DistantMoonsBlocks.CUT_BAMBOO_BLOCK, RecipeCategory.BUILDING_BLOCKS, null);
@@ -116,6 +118,8 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
         this.createSlabRecipes(Items.POLISHED_BASALT, DistantMoonsBlocks.POLISHED_CUT_BASALT, RecipeCategory.BUILDING_BLOCKS, null);
         this.createSlabRecipes(DistantMoonsBlocks.PRISMARINE_TILES, DistantMoonsBlocks.PRISMARINE_TILE_SLAB, RecipeCategory.BUILDING_BLOCKS, null);
         this.createSlabRecipes(Items.SMOOTH_BASALT, DistantMoonsBlocks.SMOOTH_BASALT_SLAB, RecipeCategory.BUILDING_BLOCKS, null);
+        this.createSlabRecipes(DistantMoonsBlocks.STRIPPED_ABYSS_TEAR_LOG, DistantMoonsBlocks.STRIPPED_CUT_ABYSS_TEAR_LOG, RecipeCategory.BUILDING_BLOCKS, "stripped_cut_log");
+        this.createSlabRecipes(DistantMoonsBlocks.STRIPPED_ABYSS_TEAR_WOOD, DistantMoonsBlocks.STRIPPED_CUT_ABYSS_TEAR_WOOD, RecipeCategory.BUILDING_BLOCKS, "stripped_cut_wood");
         this.createSlabRecipes(Items.STRIPPED_ACACIA_LOG, DistantMoonsBlocks.STRIPPED_CUT_ACACIA_LOG, RecipeCategory.BUILDING_BLOCKS, "stripped_cut_log");
         this.createSlabRecipes(Items.STRIPPED_ACACIA_WOOD, DistantMoonsBlocks.STRIPPED_CUT_ACACIA_WOOD, RecipeCategory.BUILDING_BLOCKS, "stripped_cut_wood");
         this.createSlabRecipes(Items.STRIPPED_BAMBOO_BLOCK, DistantMoonsBlocks.STRIPPED_CUT_BAMBOO_BLOCK, RecipeCategory.BUILDING_BLOCKS, null);
@@ -219,6 +223,7 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
         );
 
         //POLE CRAFTING
+        this.createPoleRecipes(DistantMoonsBlocks.ABYSS_TEAR_SLAB, DistantMoonsBlocks.ABYSS_TEAR_POLE, "wooden_pole");
         this.createPoleRecipes(Items.ACACIA_SLAB, DistantMoonsBlocks.ACACIA_POLE, "wooden_pole");
         this.createPoleRecipes(Items.BAMBOO_SLAB, DistantMoonsBlocks.BAMBOO_POLE, "wooden_pole");
         this.createPoleRecipes(Items.BIRCH_SLAB, DistantMoonsBlocks.BIRCH_POLE, "wooden_pole");
@@ -256,6 +261,7 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
         ));
 
         //STAIRS CRAFTING
+        this.createStairsRecipes(DistantMoonsBlocks.ABYSS_TEAR_PLANKS, DistantMoonsBlocks.ABYSS_TEAR_STAIRS, "wooden_stairs");
         this.createStairsRecipes(Items.CALCITE, DistantMoonsBlocks.CALCITE_STAIRS, null);
         this.createStairsRecipes(Items.DRIPSTONE_BLOCK, DistantMoonsBlocks.DRIPSTONE_STAIRS, null);
         this.createStairsRecipes(Items.END_STONE, DistantMoonsBlocks.END_STONE_STAIRS, null);
@@ -305,44 +311,45 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
         this.createStairsRecipes(Items.PINK_TERRACOTTA, DistantMoonsBlocks.DYED_TERRACOTTA_STAIRS.get(DyeColor.PINK), "terracotta_stairs");
 
         //THIN BALUSTRADE CRAFTING
-        this.createThinBalustradeRecipes(Items.ACACIA_PLANKS, DistantMoonsBlocks.ACACIA_POLE, DistantMoonsBlocks.ACACIA_BEAM, DistantMoonsBlocks.ACACIA_BALUSTRADE, "plank_balustrade");
+        this.createThinBalustradeRecipes(Items.ACACIA_PLANKS, DistantMoonsBlocks.ACACIA_POLE, DistantMoonsBlocks.ACACIA_BEAM, DistantMoonsBlocks.ACACIA_BALUSTRADE, "wooden_balustrade");
         this.createThinBalustradeRecipes(Items.ANDESITE, DistantMoonsBlocks.ANDESITE_WALL_SLAB, Items.ANDESITE_SLAB, DistantMoonsBlocks.ANDESITE_BALUSTRADE, null);
-        this.createThinBalustradeRecipes(Items.BIRCH_PLANKS, DistantMoonsBlocks.BIRCH_POLE, DistantMoonsBlocks.BIRCH_BEAM, DistantMoonsBlocks.BIRCH_BALUSTRADE, "plank_balustrade");
-        this.createThinBalustradeRecipes(Items.CHERRY_PLANKS, DistantMoonsBlocks.CHERRY_POLE, DistantMoonsBlocks.CHERRY_BEAM, DistantMoonsBlocks.CHERRY_BALUSTRADE, "plank_balustrade");
-        this.createThinBalustradeRecipes(Items.CRIMSON_PLANKS, DistantMoonsBlocks.CRIMSON_POLE, DistantMoonsBlocks.CRIMSON_BEAM, DistantMoonsBlocks.CRIMSON_BALUSTRADE, "plank_balustrade");
-        this.createThinBalustradeRecipes(Items.DARK_OAK_PLANKS, DistantMoonsBlocks.DARK_OAK_POLE, DistantMoonsBlocks.DARK_OAK_BEAM, DistantMoonsBlocks.DARK_OAK_BALUSTRADE, "plank_balustrade");
+        this.createThinBalustradeRecipes(Items.BIRCH_PLANKS, DistantMoonsBlocks.BIRCH_POLE, DistantMoonsBlocks.BIRCH_BEAM, DistantMoonsBlocks.BIRCH_BALUSTRADE, "wooden_balustrade");
+        this.createThinBalustradeRecipes(Items.CHERRY_PLANKS, DistantMoonsBlocks.CHERRY_POLE, DistantMoonsBlocks.CHERRY_BEAM, DistantMoonsBlocks.CHERRY_BALUSTRADE, "wooden_balustrade");
+        this.createThinBalustradeRecipes(Items.CRIMSON_PLANKS, DistantMoonsBlocks.CRIMSON_POLE, DistantMoonsBlocks.CRIMSON_BEAM, DistantMoonsBlocks.CRIMSON_BALUSTRADE, "wooden_balustrade");
+        this.createThinBalustradeRecipes(Items.DARK_OAK_PLANKS, DistantMoonsBlocks.DARK_OAK_POLE, DistantMoonsBlocks.DARK_OAK_BEAM, DistantMoonsBlocks.DARK_OAK_BALUSTRADE, "wooden_balustrade");
         this.createThinBalustradeRecipes(Items.DIORITE, DistantMoonsBlocks.DIORITE_WALL_SLAB, Items.DIORITE_SLAB, DistantMoonsBlocks.DIORITE_BALUSTRADE, null);
         this.createThinBalustradeRecipes(Items.GRANITE, DistantMoonsBlocks.GRANITE_WALL_SLAB, Items.GRANITE_SLAB, DistantMoonsBlocks.GRANITE_BALUSTRADE, null);
-        this.createThinBalustradeRecipes(Items.JUNGLE_PLANKS, DistantMoonsBlocks.JUNGLE_POLE, DistantMoonsBlocks.JUNGLE_BEAM, DistantMoonsBlocks.JUNGLE_BALUSTRADE, "plank_balustrade");
-        this.createThinBalustradeRecipes(Items.MANGROVE_PLANKS, DistantMoonsBlocks.MANGROVE_POLE, DistantMoonsBlocks.MANGROVE_BEAM, DistantMoonsBlocks.MANGROVE_BALUSTRADE, "plank_balustrade");
-        this.createThinBalustradeRecipes(Items.OAK_PLANKS, DistantMoonsBlocks.OAK_POLE, DistantMoonsBlocks.OAK_BEAM, DistantMoonsBlocks.OAK_BALUSTRADE, "plank_balustrade");
-        this.createThinBalustradeRecipes(Items.PALE_OAK_PLANKS, DistantMoonsBlocks.PALE_OAK_POLE, DistantMoonsBlocks.PALE_OAK_BEAM, DistantMoonsBlocks.PALE_OAK_BALUSTRADE, "plank_balustrade");
-        this.createThinBalustradeRecipes(Items.SPRUCE_PLANKS, DistantMoonsBlocks.SPRUCE_POLE, DistantMoonsBlocks.SPRUCE_BEAM, DistantMoonsBlocks.SPRUCE_BALUSTRADE, "plank_balustrade");
+        this.createThinBalustradeRecipes(Items.JUNGLE_PLANKS, DistantMoonsBlocks.JUNGLE_POLE, DistantMoonsBlocks.JUNGLE_BEAM, DistantMoonsBlocks.JUNGLE_BALUSTRADE, "wooden_balustrade");
+        this.createThinBalustradeRecipes(Items.MANGROVE_PLANKS, DistantMoonsBlocks.MANGROVE_POLE, DistantMoonsBlocks.MANGROVE_BEAM, DistantMoonsBlocks.MANGROVE_BALUSTRADE, "wooden_balustrade");
+        this.createThinBalustradeRecipes(Items.OAK_PLANKS, DistantMoonsBlocks.OAK_POLE, DistantMoonsBlocks.OAK_BEAM, DistantMoonsBlocks.OAK_BALUSTRADE, "wooden_balustrade");
+        this.createThinBalustradeRecipes(Items.PALE_OAK_PLANKS, DistantMoonsBlocks.PALE_OAK_POLE, DistantMoonsBlocks.PALE_OAK_BEAM, DistantMoonsBlocks.PALE_OAK_BALUSTRADE, "wooden_balustrade");
+        this.createThinBalustradeRecipes(Items.SPRUCE_PLANKS, DistantMoonsBlocks.SPRUCE_POLE, DistantMoonsBlocks.SPRUCE_BEAM, DistantMoonsBlocks.SPRUCE_BALUSTRADE, "wooden_balustrade");
         this.createThinBalustradeRecipes(Items.STONE, DistantMoonsBlocks.STONE_WALL_SLAB, Items.STONE_SLAB, DistantMoonsBlocks.STONE_BALUSTRADE, null);
         this.createThinBalustradeRecipes(Items.TUFF, DistantMoonsBlocks.TUFF_WALL_SLAB, Items.TUFF_SLAB, DistantMoonsBlocks.TUFF_BALUSTRADE, null);
-        this.createThinBalustradeRecipes(Items.WARPED_PLANKS, DistantMoonsBlocks.WARPED_POLE, DistantMoonsBlocks.WARPED_BEAM, DistantMoonsBlocks.WARPED_BALUSTRADE, "plank_balustrade");
+        this.createThinBalustradeRecipes(Items.WARPED_PLANKS, DistantMoonsBlocks.WARPED_POLE, DistantMoonsBlocks.WARPED_BEAM, DistantMoonsBlocks.WARPED_BALUSTRADE, "wooden_balustrade");
 
         //WALL CRAFTING
         this.createWallRecipes(DistantMoonsBlocks.FIRE_BRICKS, DistantMoonsBlocks.FIRE_BRICK_WALL, null);
         this.createWallRecipes(DistantMoonsBlocks.PALE_PRISMARINE, DistantMoonsBlocks.PALE_PRISMARINE_WALL, null);
 
         //WALL SLAB CRAFTING
-        this.createWallSlabRecipes(Items.ACACIA_PLANKS, DistantMoonsBlocks.ACACIA_WALL_SLAB, "plank_wall_slab");
+        this.createWallSlabRecipes(DistantMoonsBlocks.ABYSS_TEAR_PLANKS, DistantMoonsBlocks.ABYSS_TEAR_WALL_SLAB, "wooden_wall_slab");
+        this.createWallSlabRecipes(Items.ACACIA_PLANKS, DistantMoonsBlocks.ACACIA_WALL_SLAB, "wooden_wall_slab");
         this.createWallSlabRecipes(Items.ANDESITE, DistantMoonsBlocks.ANDESITE_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.BAMBOO_MOSAIC, DistantMoonsBlocks.BAMBOO_MOSAIC_WALL_SLAB, null);
-        this.createWallSlabRecipes(Items.BAMBOO_PLANKS, DistantMoonsBlocks.BAMBOO_WALL_SLAB, "plank_wall_slab");
-        this.createWallSlabRecipes(Items.BIRCH_PLANKS, DistantMoonsBlocks.BIRCH_WALL_SLAB, "plank_wall_slab");
+        this.createWallSlabRecipes(Items.BAMBOO_PLANKS, DistantMoonsBlocks.BAMBOO_WALL_SLAB, "wooden_wall_slab");
+        this.createWallSlabRecipes(Items.BIRCH_PLANKS, DistantMoonsBlocks.BIRCH_WALL_SLAB, "wooden_wall_slab");
         this.createWallSlabRecipes(Items.BLACKSTONE, DistantMoonsBlocks.BLACKSTONE_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.BRICKS, DistantMoonsBlocks.BRICK_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.CALCITE, DistantMoonsBlocks.CALCITE_WALL_SLAB, null);
-        this.createWallSlabRecipes(Items.CHERRY_PLANKS, DistantMoonsBlocks.CHERRY_WALL_SLAB, "plank_wall_slab");
+        this.createWallSlabRecipes(Items.CHERRY_PLANKS, DistantMoonsBlocks.CHERRY_WALL_SLAB, "wooden_wall_slab");
         this.createWallSlabRecipes(Items.COBBLED_DEEPSLATE, DistantMoonsBlocks.COBBLED_DEEPSLATE_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.COBBLESTONE, DistantMoonsBlocks.COBBLESTONE_WALL_SLAB, null);
-        this.createWallSlabRecipes(Items.CRIMSON_PLANKS, DistantMoonsBlocks.CRIMSON_WALL_SLAB, "plank_wall_slab");
+        this.createWallSlabRecipes(Items.CRIMSON_PLANKS, DistantMoonsBlocks.CRIMSON_WALL_SLAB, "wooden_wall_slab");
         this.createWallSlabRecipes(Items.CUT_COPPER, DistantMoonsBlocks.CUT_COPPER_WALL_SLAB, "cut_copper_wall_slab");
         this.createWallSlabRecipes(Items.CUT_RED_SANDSTONE, DistantMoonsBlocks.CUT_RED_SANDSTONE_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.CUT_SANDSTONE, DistantMoonsBlocks.CUT_SANDSTONE_WALL_SLAB, null);
-        this.createWallSlabRecipes(Items.DARK_OAK_PLANKS, DistantMoonsBlocks.DARK_OAK_WALL_SLAB, "plank_wall_slab");
+        this.createWallSlabRecipes(Items.DARK_OAK_PLANKS, DistantMoonsBlocks.DARK_OAK_WALL_SLAB, "wooden_wall_slab");
         this.createWallSlabRecipes(Items.DARK_PRISMARINE, DistantMoonsBlocks.DARK_PRISMARINE_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.DEEPSLATE_BRICKS, DistantMoonsBlocks.DEEPSLATE_BRICK_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.DEEPSLATE_TILES, DistantMoonsBlocks.DEEPSLATE_TILE_WALL_SLAB, null);
@@ -354,16 +361,16 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
         this.createWallSlabRecipes(DistantMoonsBlocks.FIRE_BRICKS, DistantMoonsBlocks.FIRE_BRICK_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.GRANITE, DistantMoonsBlocks.GRANITE_WALL_SLAB, null);
         this.createWallSlabRecipes(DistantMoonsBlocks.GRAY_PRISMARINE, DistantMoonsBlocks.GRAY_PRISMARINE_WALL_SLAB, null);
-        this.createWallSlabRecipes(Items.JUNGLE_PLANKS, DistantMoonsBlocks.JUNGLE_WALL_SLAB, "plank_wall_slab");
-        this.createWallSlabRecipes(Items.MANGROVE_PLANKS, DistantMoonsBlocks.MANGROVE_WALL_SLAB, "plank_wall_slab");
+        this.createWallSlabRecipes(Items.JUNGLE_PLANKS, DistantMoonsBlocks.JUNGLE_WALL_SLAB, "wooden_wall_slab");
+        this.createWallSlabRecipes(Items.MANGROVE_PLANKS, DistantMoonsBlocks.MANGROVE_WALL_SLAB, "wooden_wall_slab");
         this.createWallSlabRecipes(Items.MOSSY_COBBLESTONE, DistantMoonsBlocks.MOSSY_COBBLESTONE_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.MOSSY_STONE_BRICKS, DistantMoonsBlocks.MOSSY_STONE_BRICK_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.MUD_BRICKS, DistantMoonsBlocks.MUD_BRICK_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.NETHER_BRICKS, DistantMoonsBlocks.NETHER_BRICK_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.NETHERRACK, DistantMoonsBlocks.NETHERRACK_WALL_SLAB, null);
-        this.createWallSlabRecipes(Items.OAK_PLANKS, DistantMoonsBlocks.OAK_WALL_SLAB, "plank_wall_slab");
+        this.createWallSlabRecipes(Items.OAK_PLANKS, DistantMoonsBlocks.OAK_WALL_SLAB, "wooden_wall_slab");
         this.createWallSlabRecipes(Items.OXIDIZED_CUT_COPPER, DistantMoonsBlocks.OXIDIZED_CUT_COPPER_WALL_SLAB, "oxidized_cut_copper_wall_slab");
-        this.createWallSlabRecipes(Items.PALE_OAK_PLANKS, DistantMoonsBlocks.PALE_OAK_WALL_SLAB, "plank_wall_slab");
+        this.createWallSlabRecipes(Items.PALE_OAK_PLANKS, DistantMoonsBlocks.PALE_OAK_WALL_SLAB, "wooden_wall_slab");
         this.createWallSlabRecipes(DistantMoonsBlocks.PALE_PRISMARINE_BRICKS, DistantMoonsBlocks.PALE_PRISMARINE_BRICK_WALL_SLAB, null);
         this.createWallSlabRecipes(DistantMoonsBlocks.PALE_PRISMARINE_TILES, DistantMoonsBlocks.PALE_PRISMARINE_TILE_WALL_SLAB, null);
         this.createWallSlabRecipes(DistantMoonsBlocks.PALE_PRISMARINE, DistantMoonsBlocks.PALE_PRISMARINE_WALL_SLAB, null);
@@ -389,13 +396,13 @@ public class DistantMoonsRecipeProvider extends FabricRecipeProvider {
         this.createWallSlabRecipes(Items.SMOOTH_RED_SANDSTONE, DistantMoonsBlocks.SMOOTH_RED_SANDSTONE_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.SMOOTH_SANDSTONE, DistantMoonsBlocks.SMOOTH_SANDSTONE_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.SMOOTH_STONE, DistantMoonsBlocks.SMOOTH_STONE_WALL_SLAB, null);
-        this.createWallSlabRecipes(Items.SPRUCE_PLANKS, DistantMoonsBlocks.SPRUCE_WALL_SLAB, "plank_wall_slab");
+        this.createWallSlabRecipes(Items.SPRUCE_PLANKS, DistantMoonsBlocks.SPRUCE_WALL_SLAB, "wooden_wall_slab");
         this.createWallSlabRecipes(Items.STONE_BRICKS, DistantMoonsBlocks.STONE_BRICK_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.STONE, DistantMoonsBlocks.STONE_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.TERRACOTTA, DistantMoonsBlocks.TERRACOTTA_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.TUFF_BRICKS, DistantMoonsBlocks.TUFF_BRICK_WALL_SLAB, null);
         this.createWallSlabRecipes(Items.TUFF, DistantMoonsBlocks.TUFF_WALL_SLAB, null);
-        this.createWallSlabRecipes(Items.WARPED_PLANKS, DistantMoonsBlocks.WARPED_WALL_SLAB, "plank_wall_slab");
+        this.createWallSlabRecipes(Items.WARPED_PLANKS, DistantMoonsBlocks.WARPED_WALL_SLAB, "wooden_wall_slab");
         this.createWallSlabRecipes(Items.WAXED_CUT_COPPER, DistantMoonsBlocks.WAXED_CUT_COPPER_WALL_SLAB, "waxed_cut_copper_wall_slab");
         this.createWallSlabRecipes(Items.WAXED_EXPOSED_CUT_COPPER, DistantMoonsBlocks.WAXED_EXPOSED_CUT_COPPER_WALL_SLAB, "waxed_exposed_cut_copper_wall_slab");
         this.createWallSlabRecipes(Items.WAXED_OXIDIZED_CUT_COPPER, DistantMoonsBlocks.WAXED_OXIDIZED_CUT_COPPER_WALL_SLAB, "waxed_oxidized_cut_copper_wall_slab");

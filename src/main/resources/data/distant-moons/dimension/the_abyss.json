@@ -7,14 +7,15 @@
       "type": "minecraft:multi_noise",
       "biomes": [
         {
-          "biome": "distant-moos:the_abyss/abyssal_hollows",
+          "biome": "distant-moons:the_abyss/abyssal_hollows",
           "parameters": {
-            "continentalness": "0.0",
-            "erosion": "0.0",
-            "humidity": "0.0",
-            "temperature": "0.0",
-            "weirdness": "0.0",
-            "depth": "-0.2"
+            "continentalness": 0.0,
+            "depth": -0.2,
+            "erosion": 0.0,
+            "humidity": 0.0,
+            "temperature": 0.0,
+            "weirdness": 0.0,
+            "offset": 0
           }
         }
       ]

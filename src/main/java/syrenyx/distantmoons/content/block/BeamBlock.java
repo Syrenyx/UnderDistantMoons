@@ -40,6 +40,7 @@ public class BeamBlock extends AbstractPoleBlock {
     if (state.is(DistantMoonsBlockTags.BEAM_NEVER_CONNECTS_TO)) return false;
     if (state.is(DistantMoonsBlockTags.BEAM_ALWAYS_CONNECTS_TO)) return true;
     Direction.Axis axis = direction.getAxis();
+    if (state.getBlock() instanceof AbstractBranchBlock && state.getValue(AbstractBranchBlock.ATTACHMENT).getAxis() != axis) return true;
     if (state.getBlock() instanceof BeamBlock && state.getValue(AXIS) != axis) return true;
     if (axis != Direction.Axis.Y && state.getBlock() instanceof WallBlock && state.getValue(WallBlock.UP)) return true;
     return false;

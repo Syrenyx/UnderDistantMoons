@@ -1,5 +1,6 @@
 package syrenyx.distantmoons.references;
 
+import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
@@ -9,6 +10,7 @@ public abstract class DistantMoonsBlockStateProperties {
 
   //BOOLEAN PROPERTIES
   public static final BooleanProperty DOUBLE = BooleanProperty.create("double");
+  public static final BooleanProperty EXTENDED = BooleanProperty.create("extended");
   public static final BooleanProperty LEFT_CAPPED = BooleanProperty.create("left_capped");
   public static final BooleanProperty MIRRORED = BooleanProperty.create("mirrored");
   public static final BooleanProperty RIGHT_CAPPED = BooleanProperty.create("right_capped");
@@ -16,11 +18,12 @@ public abstract class DistantMoonsBlockStateProperties {
   public static final BooleanProperty TOP = BooleanProperty.create("top");
 
   //ENUM PROPERTIES
-  public static final EnumProperty<EndCappedState> CENTER_CAPPED_STATE = EnumProperty.create("center", EndCappedState.class);
+  public static final EnumProperty<Direction> BRANCH_ATTACHMENT = EnumProperty.create("attached", Direction.class, Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST, Direction.DOWN);
   public static final EnumProperty<BalustradeSideState> BALUSTRADE_STATE_NORTH = EnumProperty.create("north", BalustradeSideState.class);
   public static final EnumProperty<BalustradeSideState> BALUSTRADE_STATE_EAST = EnumProperty.create("east", BalustradeSideState.class);
   public static final EnumProperty<BalustradeSideState> BALUSTRADE_STATE_SOUTH = EnumProperty.create("south", BalustradeSideState.class);
   public static final EnumProperty<BalustradeSideState> BALUSTRADE_STATE_WEST = EnumProperty.create("west", BalustradeSideState.class);
+  public static final EnumProperty<EndCappedState> CENTER_CAPPED_STATE = EnumProperty.create("center", EndCappedState.class);
   public static final EnumProperty<BlockCorner> CORNER = EnumProperty.create("corner", BlockCorner.class);
   public static final EnumProperty<FixedLadderSideShape> FIXED_LADDER_LEFT_SHAPE = EnumProperty.create("left_shape", FixedLadderSideShape.class);
   public static final EnumProperty<FixedLadderSideShape> FIXED_LADDER_RIGHT_SHAPE = EnumProperty.create("right_shape", FixedLadderSideShape.class);

@@ -1,4 +1,5 @@
 {
+  "parent": "distant-moons:display/block",
   "elements": [
     {
       "from": [8, 0, 0],

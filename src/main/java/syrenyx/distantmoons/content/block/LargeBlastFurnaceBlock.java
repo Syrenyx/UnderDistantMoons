@@ -174,6 +174,7 @@ public class LargeBlastFurnaceBlock extends BaseEntityBlock {
 
   @Override
   public void animateTick(@NonNull BlockState blockState, @NonNull Level level, @NonNull BlockPos blockPos, @NonNull RandomSource randomSource) {
+    super.animateTick(blockState, level, blockPos, randomSource);
     if (blockState.getValue(CORNER) != BlockCorner.TOP_NORTH_EAST || blockState.getValue(HEAT) == MIN_HEAT) return;
     Vec3 center = getCenter(blockPos, blockState);
     if (randomSource.nextFloat() < 0.1F) level.playLocalSound(

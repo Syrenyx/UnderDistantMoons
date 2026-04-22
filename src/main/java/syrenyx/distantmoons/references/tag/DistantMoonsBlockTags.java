@@ -45,6 +45,7 @@ public abstract class DistantMoonsBlockTags {
   public static final TagKey<Block> INFINIBURN_IN_THE_END = keyOf("infiniburn/the_end");
   public static final TagKey<Block> INFINIBURN_IN_THE_NETHER = keyOf("infiniburn/the_nether");
   public static final TagKey<Block> INFINIBURN_IN_OVERWORLD = keyOf("infiniburn/overworld");
+  public static final TagKey<Block> INFINIBURN_UNIVERSAL = keyOf("infiniburn/universal");
   public static final TagKey<Block> LEAVES_WITHOUT_LEAF_PARTICLES = keyOf("misc/leaves_without_leaf_particles");
   public static final TagKey<Block> METAL_BAR_DOOR = keyOf("metal_bar_door");
   public static final TagKey<Block> METAL_BAR_DOOR_NEVER_CONNECTS_TO = keyOf("connection_target/metal_bar_door/never");
@@ -63,6 +64,7 @@ public abstract class DistantMoonsBlockTags {
   public static final TagKey<Block> POLE_ALWAYS_CONNECTS_TO = keyOf("connection_target/pole/always");
   public static final TagKey<Block> POLE_ALWAYS_CONNECTS_TO_HORIZONTALLY = keyOf("connection_target/pole/horizontal/always");
   public static final TagKey<Block> POLE_NEVER_CONNECTS_TO = keyOf("connection_target/pole/never");
+  public static final TagKey<Block> SHELF = keyOf("shelf");
   public static final TagKey<Block> SNIFFER_EGG_HATCH_BOOST = keyOf("misc/sniffer_egg_hatch_boost");
   public static final TagKey<Block> SPIKED_FENCE = keyOf("spiked_fence");
   public static final TagKey<Block> SPIKED_FENCE_ALWAYS_CONNECTS_TO = keyOf("connection_target/spiked_fence/always");
@@ -93,6 +95,11 @@ public abstract class DistantMoonsBlockTags {
   public static final TagKey<Block> THIN_BALUSTRADE_ALWAYS_CONNECTS_TO_VERTICALLY = keyOf("connection_target/thin_balustrade/vertical/always");
   public static final TagKey<Block> THIN_BALUSTRADE_NEVER_CONNECTS_TO_HORIZONTALLY = keyOf("connection_target/thin_balustrade/horizontal/never");
   public static final TagKey<Block> THIN_BALUSTRADE_NEVER_CONNECTS_TO_VERTICALLY = keyOf("connection_target/thin_balustrade/vertical/never");
+  public static final TagKey<Block> THIN_BRANCH = keyOf("thin_branch");
+  public static final TagKey<Block> THIN_BRANCH_ALWAYS_CONNECTS_TO = keyOf("connection_target/thin_branch/connects/always");
+  public static final TagKey<Block> THIN_BRANCH_NEVER_CONNECTS_TO = keyOf("connection_target/thin_branch/connects/never");
+  public static final TagKey<Block> THIN_BRANCH_EXTENDS_TO_HORIZONTALLY = keyOf("connection_target/thin_branch/extends/horizontal");
+  public static final TagKey<Block> THIN_BRANCH_EXTENDS_TO_VERTICALLY = keyOf("connection_target/thin_branch/extends/vertical");
   public static final TagKey<Block> UNDERWORLD_COMPASS_TARGET = keyOf("misc/underworld_compass_target");
   public static final TagKey<Block> WALL = keyOf("wall");
   public static final TagKey<Block> WALL_ALWAYS_CONNECTS_TO = keyOf("connection_target/wall/always");
